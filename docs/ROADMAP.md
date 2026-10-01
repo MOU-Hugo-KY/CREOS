@@ -45,7 +45,12 @@
    Ajuster `"scale"` si le modèle est plus grand ou plus petit.
 3. Lancer `tests/run_tests.gd` : il vérifie que chaque animation existe dans le modèle.
 
-## Étape 2 — Boucle de progression
+## 🎯 Étape 2 — Port-Franc et boucle de progression
+- [x] Hub **Port-Franc** (scène de démarrage) : place au soleil couchant, maisons en blocs, port,
+      Autel des Reliques (cristal), Tour de Morvath au loin, héros qui se promènent ;
+      bâtiments cliquables et menus épurés (icônes pixel art), musique de ville
+- [x] Table des chasses → combat ; « Retour au port » à la fin du combat
+- [ ] Écrans des autres bâtiments (pour l'instant : « bientôt disponible »)
 - [ ] Sauvegarde locale (`user://save.json`) : or, héros possédés, niveaux
 - [ ] Niveaux et XP des héros, formule de stats par niveau
 - [ ] Carte de la région (Brumenoire : 6 donjons + boss) avec étoiles

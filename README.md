@@ -7,7 +7,8 @@ RPG mobile de **collection de héros** en 3D (équipe de 4 héros, éléments, d
 raids entre joueurs), inspiré de l'esprit de *Dungeon Boss* (2015), avec un univers entièrement
 original.
 
-![Prototype](docs/capture-prototype.png)
+![Port-Franc](docs/capture-hub.png)
+![Combat](docs/capture-prototype.png)
 
 - 📖 Univers et règles : [`docs/GDD.md`](docs/GDD.md)
 - 🗺️ Feuille de route : [`docs/ROADMAP.md`](docs/ROADMAP.md)

@@ -7,6 +7,7 @@ extends SceneTree
 ##   --auto              active le mode Auto
 ##   --speed=2           accélère le combat
 ##   --end               attend l'écran de fin et le capture en dernier
+##   --scene=res://scenes/hub/hub.tscn   capture une autre scène (défaut : le combat)
 
 var shots: Array[int] = [200]
 var out := "res://docs/capture-prototype.png"
@@ -15,6 +16,7 @@ var frames := 0
 var taken := 0
 var end_frame := -1
 var scene: Node
+var scene_path := "res://scenes/battle/battle.tscn"
 
 
 func _initialize() -> void:
@@ -33,9 +35,12 @@ func _initialize() -> void:
 			speed = float(arg.trim_prefix("--speed="))
 		elif arg == "--end":
 			wait_end = true
-	scene = load("res://scenes/battle/battle.tscn").instantiate()
+		elif arg.begins_with("--scene="):
+			scene_path = arg.trim_prefix("--scene=")
+	scene = load(scene_path).instantiate()
 	root.add_child(scene)
-	scene.set_auto(auto)
+	if scene.has_method("set_auto"):
+		scene.set_auto(auto)
 	Engine.time_scale = speed
 
 
@@ -43,7 +48,7 @@ func _process(_delta: float) -> bool:
 	frames += 1
 	if frames in shots:
 		_save()
-	if wait_end and end_frame < 0 and scene.hud.end_screen.visible:
+	if wait_end and end_frame < 0 and "end_screen" in scene.hud and scene.hud.end_screen.visible:
 		end_frame = frames + 150  # laisse le temps aux étoiles d'apparaître
 	if end_frame > 0 and frames == end_frame:
 		_save()

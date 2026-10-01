@@ -5,6 +5,8 @@ var heroes: Dictionary = {}
 var monsters: Dictionary = {}
 var dungeons: Dictionary = {}
 var regions: Dictionary = {}
+var hub: Dictionary = {}
+var player_start: Dictionary = {}
 
 
 func _ready() -> void:
@@ -16,6 +18,8 @@ func reload() -> void:
 	monsters = load_json("res://data/monsters.json")
 	dungeons = load_json("res://data/dungeons.json")
 	regions = load_json("res://data/regions.json")
+	hub = load_json("res://data/hub.json")
+	player_start = load_json("res://data/player_start.json")
 
 
 static func load_json(path: String) -> Dictionary:

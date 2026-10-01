@@ -47,6 +47,9 @@ func _ready() -> void:
 			_end_turn())
 	hud.speed_toggled.connect(func(fast: bool) -> void: Engine.time_scale = 2.0 if fast else 1.0)
 	hud.restart_requested.connect(func() -> void: start_battle(randi()))
+	hud.hub_requested.connect(func() -> void:
+		Engine.time_scale = 1.0
+		get_tree().change_scene_to_file("res://scenes/hub/hub.tscn"))
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 	start_battle(randi())
 

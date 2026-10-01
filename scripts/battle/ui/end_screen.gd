@@ -3,6 +3,7 @@ extends Control
 ## Écran de fin de combat : titre, étoiles (0 à 3), butin et bilan de chaque héros.
 
 signal restart_pressed
+signal continue_pressed
 signal sound(sfx_name: String)
 
 const REWARD_NAMES := {
@@ -98,10 +99,9 @@ func _ready() -> void:
 	_restart.pressed.connect(func() -> void: restart_pressed.emit())
 	buttons.add_child(_restart)
 	_next = Button.new()
-	_next.text = "Continuer"
+	_next.text = "Retour au port"
 	_next.custom_minimum_size = Vector2(260, 76)
-	_next.disabled = true
-	_next.tooltip_text = "La carte de la région arrive à l'Étape 2."
+	_next.pressed.connect(func() -> void: continue_pressed.emit())
 	buttons.add_child(_next)
 
 

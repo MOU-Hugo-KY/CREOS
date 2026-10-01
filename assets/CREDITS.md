@@ -7,9 +7,15 @@ peste, Moine des éclairs, Chevalier possédé (en réserve, pas encore jouable)
 d'armes corrigées » : les armes suivent les os `held_weapon_L` / `held_weapon_R`. Chaque dossier garde le `integration.json` d'origine (clips, instants
 d'impact) et un `apercu.png`.
 
-## Icônes d'attaque (`assets/ui/attacks/`)
+## Icônes (`assets/ui/attacks/`, `assets/ui/hub/`)
 
-Dessinées pour CREOS par `tools/make_attack_icons.py` (pixel art 32 × 32, créé par nous).
+Dessinées pour CREOS par `tools/make_attack_icons.py` et `tools/make_ui_icons.py` (pixel art
+32 × 32, créé par nous).
+
+## Décor de Port-Franc
+
+Maisons, port, fontaine et tour construits par code en blocs (`scripts/hub/`), créés par nous ;
+quelques accessoires KayKit (tonneaux, caisses, table, bannières, torches).
 
 ## Monstres et décor
 
@@ -34,6 +40,7 @@ CC0 = domaine public : utilisation libre, même commerciale. Créditer reste une
 | `sfx/wave_start`, `music/victory`, `music/defeat` | Music Jingles | Kenney | CC0 | https://kenney.nl/assets/music-jingles |
 | `music/battle_loop.ogg` | Determined Pursuit (epic orchestra loop) | Emma_MA | CC0 | https://opengameart.org/content/determined-pursuit-epic-orchestra-loop |
 | `music/boss_loop.ogg` | Dark Shrine Loop | qubodup | CC0 | https://opengameart.org/content/dark-shrine-loop |
+| `music/town_loop.ogg` | Town Theme RPG | cynicmusic | CC0 | https://opengameart.org/content/town-theme-rpg |
 
 Les fichiers ont été renommés pour le jeu (le nom d'origine est dans le pack). `battle_loop.ogg` a été
 converti de WAV en OGG (ffmpeg, qualité 4).

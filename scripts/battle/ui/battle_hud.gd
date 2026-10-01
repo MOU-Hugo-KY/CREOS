@@ -8,6 +8,7 @@ signal attack_requested(uid: int, slot: int)
 signal auto_toggled(on: bool)
 signal speed_toggled(fast: bool)
 signal restart_requested
+signal hub_requested
 signal ui_sound(sfx_name: String)
 
 var camera: Camera3D
@@ -60,6 +61,9 @@ func _ready() -> void:
 		ui_sound.emit("ui_click")
 		restart_requested.emit())
 	end_screen.sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	end_screen.continue_pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		hub_requested.emit())
 	_root.add_child(end_screen)
 
 

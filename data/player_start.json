@@ -1,0 +1,11 @@
+{
+  "name": "Hugo",
+  "lodge": "Loge de Hugo",
+  "level": 1,
+  "xp": 0,
+  "xp_next": 100,
+  "gold": 500,
+  "gems": 50,
+  "energy": 60,
+  "energy_max": 60
+}

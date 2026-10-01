@@ -46,7 +46,7 @@ def line(d, pts, color, width=1):
     d.line(pts, fill=color, width=width)
 
 
-def finish(img, name):
+def finish(img, name, out=None):
     """Ajoute un contour sombre d'un pixel, agrandit et enregistre."""
     a = np.array(img)
     alpha = a[:, :, 3] > 0
@@ -55,9 +55,10 @@ def finish(img, name):
         grown |= np.roll(np.roll(alpha, dx, axis=1), dy, axis=0)
     outline = grown & ~alpha
     a[outline] = OUTLINE
-    out = Image.fromarray(a).resize((N * SCALE, N * SCALE), Image.NEAREST)
-    os.makedirs(OUT, exist_ok=True)
-    out.save(os.path.join(OUT, name + ".png"))
+    big = Image.fromarray(a).resize((N * SCALE, N * SCALE), Image.NEAREST)
+    folder = out or OUT
+    os.makedirs(folder, exist_ok=True)
+    big.save(os.path.join(folder, name + ".png"))
     print("icône :", name)
 
 

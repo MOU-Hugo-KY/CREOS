@@ -22,6 +22,9 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   `heal`, `shield`, `status`, `death`, `wave_start`, `victory`, `defeat`).
   **Tour par tour** : quand la jauge d'un héros est pleine (hors Auto), le moteur se fige
   (`awaiting_uid`) jusqu'à `request_attack(uid, slot)`.
+- `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage) : décor en blocs (`port_franc.gd`,
+  `blocks.gd`), bâtiments cliquables, héros qui se promènent, interface. Bâtiments, boutons et
+  actions décrits dans `data/hub.json` ; profil de départ dans `data/player_start.json`.
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
   `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),
   `battle_fx.gd` (effets), `battle_audio.gd` (sons), `ui/` (interface et écran de fin).
@@ -45,12 +48,14 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 godot --headless --path . --import                              # (ré)importer les assets
 godot --headless --path . --script res://tests/run_tests.gd     # tests du moteur de combat
 godot --headless --path . --script res://tests/smoke_battle.gd  # la scène de combat va jusqu'au bout
+godot --headless --path . --script res://tests/smoke_hub.gd     # le hub se charge et mène au combat
 godot --path .                                                  # lancer le jeu
 godot --path . --resolution 1280x720 --script res://tools/screenshot.gd  # capture -> docs/
+#   options après `--` : --scene=res://scenes/hub/hub.tscn --shots=200,600 --auto --end --out=…
 ```
 Sous Windows, `godot` = le chemin de l'exécutable installé par `tools/setup-windows.ps1`.
 
-**Avant chaque commit** : lance les deux tests ci-dessus, ils doivent passer.
+**Avant chaque commit** : lance les trois tests ci-dessus, ils doivent passer.
 Si tu changes l'équilibrage (stats, formules), regarde la ligne « victoires : X/20 » des tests.
 
 ## Outils MCP prévus (installés par `tools/setup-*.ps1|sh`)
