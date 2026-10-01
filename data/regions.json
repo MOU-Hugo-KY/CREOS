@@ -1,0 +1,9 @@
+{
+  "port_franc":  { "name": "Port-Franc",            "order": 0, "element": null,      "hub": true },
+  "sylvecroc":   { "name": "Forêt de Sylvecroc",    "order": 1, "element": "nature",  "boss": "Grondebête, ours-titan corrompu" },
+  "brumenoire":  { "name": "Marais de Brumenoire",  "order": 2, "element": "ombre",   "boss": "Vel'Zareth la Liche" },
+  "sel_brise":   { "name": "Côtes de Sel-Brisé",    "order": 3, "element": "eau",     "boss": "Mère-Abysse, kraken" },
+  "cendrefer":   { "name": "Pics de Cendrefer",     "order": 4, "element": "feu",     "boss": "Ignorak, golem de lave" },
+  "drakonis":    { "name": "Île des Dragons",       "order": 5, "element": null,      "boss": "Aethryss, dragonne ancestrale" },
+  "citadelle":   { "name": "Citadelle de Morvath",  "order": 6, "element": "ombre",   "boss": "Morvath, le Mage Noir" }
+}

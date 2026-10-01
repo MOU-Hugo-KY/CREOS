@@ -1,0 +1,111 @@
+{
+  "brannoc": {
+    "name": "Brannoc le Roc",
+    "class": "gardien",
+    "element": "nature",
+    "family": "chasseurs",
+    "rarity": 3,
+    "range": "melee",
+    "attack_kind": "physical",
+    "model": "res://assets/kaykit/adventurers/Characters/Knight.glb",
+    "anim": { "attack": "1H_Melee_Attack_Chop", "skill": "Block_Attack" },
+    "stats": { "hp": 1400, "atk": 70, "def": 90, "res": 50, "spd": 85, "crit": 0.05 },
+    "skill": {
+      "id": "rempart",
+      "name": "Rempart",
+      "description": "Provoque tous les ennemis pendant 6 s et donne un bouclier à l'équipe.",
+      "target": "all_allies",
+      "effects": [
+        { "type": "taunt", "duration": 6.0, "self_only": true },
+        { "type": "shield", "power": 0.6 }
+      ]
+    }
+  },
+  "kaela": {
+    "name": "Kaëla Croc-Vif",
+    "class": "lame",
+    "element": "feu",
+    "family": "chasseurs",
+    "rarity": 3,
+    "range": "melee",
+    "attack_kind": "physical",
+    "model": "res://assets/kaykit/adventurers/Characters/Barbarian.glb",
+    "anim": { "attack": "2H_Melee_Attack_Chop", "skill": "2H_Melee_Attack_Spin" },
+    "stats": { "hp": 1000, "atk": 135, "def": 50, "res": 30, "spd": 105, "crit": 0.2 },
+    "skill": {
+      "id": "tourbillon",
+      "name": "Tourbillon ardent",
+      "description": "Frappe tous les ennemis et les fait brûler pendant 4 s.",
+      "target": "all_enemies",
+      "effects": [
+        { "type": "damage", "power": 1.3, "kind": "physical" },
+        { "type": "dot", "power": 0.25, "duration": 4.0 }
+      ]
+    }
+  },
+  "ysolde": {
+    "name": "Ysolde des Marées",
+    "class": "arcaniste",
+    "element": "eau",
+    "family": "sylvains",
+    "rarity": 3,
+    "range": "ranged",
+    "attack_kind": "magic",
+    "model": "res://assets/kaykit/adventurers/Characters/Mage.glb",
+    "anim": { "attack": "Spellcast_Shoot", "skill": "Spellcast_Long" },
+    "stats": { "hp": 850, "atk": 125, "def": 30, "res": 70, "spd": 95, "crit": 0.1 },
+    "skill": {
+      "id": "deferlante",
+      "name": "Déferlante",
+      "description": "Une vague frappe tous les ennemis et les étourdit 1,5 s.",
+      "target": "all_enemies",
+      "effects": [
+        { "type": "damage", "power": 1.6, "kind": "magic" },
+        { "type": "stun", "duration": 1.5 }
+      ]
+    }
+  },
+  "fennir": {
+    "name": "Fennir l'Ombre",
+    "class": "traqueur",
+    "element": "ombre",
+    "family": "chasseurs",
+    "rarity": 3,
+    "range": "ranged",
+    "attack_kind": "physical",
+    "model": "res://assets/kaykit/adventurers/Characters/Rogue_Hooded.glb",
+    "anim": { "attack": "1H_Ranged_Shoot", "skill": "Throw" },
+    "stats": { "hp": 900, "atk": 120, "def": 40, "res": 40, "spd": 115, "crit": 0.25 },
+    "skill": {
+      "id": "tir_fatal",
+      "name": "Tir fatal",
+      "description": "Énorme tir sur l'ennemi le plus faible.",
+      "target": "lowest_hp_enemy",
+      "effects": [
+        { "type": "damage", "power": 3.2, "kind": "physical" }
+      ]
+    }
+  },
+  "aubeline": {
+    "name": "Sœur Aubeline",
+    "class": "mystique",
+    "element": "lumiere",
+    "family": "chasseurs",
+    "rarity": 3,
+    "range": "ranged",
+    "attack_kind": "magic",
+    "model": "res://assets/kaykit/adventurers/Characters/Rogue.glb",
+    "anim": { "attack": "Spellcast_Shoot", "skill": "Spellcast_Raise" },
+    "stats": { "hp": 950, "atk": 80, "def": 40, "res": 80, "spd": 100, "crit": 0.05 },
+    "skill": {
+      "id": "aube_sacree",
+      "name": "Aube sacrée",
+      "description": "Soigne toute l'équipe et retire les brûlures.",
+      "target": "all_allies",
+      "effects": [
+        { "type": "heal", "power": 1.8 },
+        { "type": "cleanse" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "brumenoire_1": {
+    "name": "Brumenoire — Le Gué des Noyés",
+    "region": "brumenoire",
+    "corruption": 0.4,
+    "waves": [
+      ["squelette_serviteur", "squelette_serviteur", "squelette_rodeur"],
+      ["squelette_guerrier", "acolyte_noir", "squelette_rodeur"],
+      ["squelette_guerrier", "vel_zareth", "acolyte_noir"]
+    ],
+    "rewards": { "gold": 250, "xp": 120, "essence_ombre": 3 }
+  }
+}

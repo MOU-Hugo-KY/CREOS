@@ -1,0 +1,10 @@
+# Godot
+.godot/
+*.import.tmp
+export_presets.cfg
+build/
+*.apk
+*.aab
+# Système
+.DS_Store
+Thumbs.db
