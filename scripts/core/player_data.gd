@@ -17,6 +17,7 @@ var _start: Dictionary = {}
 var _config: Dictionary = {}
 var _dungeons: Dictionary = {}
 var quests_config: Dictionary = {}  # data/quests.json
+var known_heroes: Array = []  # héros existant dans le jeu (les anciens sont retirés de la sauvegarde)
 var debug_day := ""  # tests : impose la date du jour ("" = la vraie date)
 
 
@@ -36,6 +37,7 @@ func _autoconfigure() -> void:
 		gd.reload()
 	configure(gd.player_start, gd.progression, gd.dungeons)
 	quests_config = gd.quests
+	known_heroes = gd.heroes.keys()
 
 
 func configure(start: Dictionary, config: Dictionary, dungeons: Dictionary) -> void:
@@ -71,10 +73,18 @@ func load_game() -> void:
 		return
 	state = _start.duplicate(true)
 	state.merge(parsed, true)
+	# Héros retirés du jeu (changement de direction artistique) : on les enlève de la sauvegarde.
+	if not known_heroes.is_empty():
+		for id: String in state.heroes.keys():
+			if id not in known_heroes:
+				state.heroes.erase(id)
+		state.team = state.get("team", []).filter(func(id: String) -> bool: return id in known_heroes)
 	# Nouveaux héros ajoutés au jeu depuis la dernière sauvegarde.
 	for id: String in _start.get("heroes", {}):
 		if not state.heroes.has(id):
 			state.heroes[id] = _start.heroes[id].duplicate()
+	if state.team.is_empty():
+		state.team = _start.get("team", []).duplicate()
 	update_energy()
 
 

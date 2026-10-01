@@ -2,12 +2,29 @@
   "name": "Autel des Reliques",
   "description": "Réveille un chasseur endormi dans les reliques. Tous les héros s'obtiennent en jouant.",
   "currencies": {
-    "fragments_relique": { "name": "Fragments de Relique", "cost": 10 },
-    "gems": { "name": "Gemmes", "cost": 120 }
+    "fragments_relique": {
+      "name": "Fragments de Relique",
+      "cost": 10
+    },
+    "gems": {
+      "name": "Gemmes",
+      "cost": 120
+    }
   },
-  "rarity_weights": { "3": 80, "4": 17, "5": 3 },
+  "rarity_weights": {
+    "3": 80,
+    "4": 17,
+    "5": 3
+  },
   "pity_every": 10,
   "pity_min_rarity": 4,
-  "first_summon": "malgrave",
-  "duplicate_shards": { "1": 5, "2": 8, "3": 10, "4": 25, "5": 50, "6": 100 }
+  "first_summon": "",
+  "duplicate_shards": {
+    "1": 5,
+    "2": 8,
+    "3": 10,
+    "4": 25,
+    "5": 50,
+    "6": 100
+  }
 }

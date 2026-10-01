@@ -17,8 +17,13 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   capture appellent `PlayerData.use_memory_only()` pour ne jamais toucher la vraie sauvegarde.
 - Autoload `GameSettings` (`scripts/core/game_settings.gd`) : volumes Général / Musique / Effets
   (bus audio du même nom), enregistrés dans `user://settings.cfg`. Bouton SON en jeu.
-- Héros : **nos modèles chibi** dans `assets/heroes/` (7 clips chacun : `Idle`, `Walk`, `Hit`,
-  `Death`, `Attack_01…03`). Monstres et décor : packs **KayKit (CC0)** dans `assets/kaykit/`.
+- Héros : **dessins 2D animés en marionnettes** (style « fantasy occulte » encrée, comme Cult of the
+  Lamb) dans `assets/heroes2d/<id>/` : pièces PNG (head, body, arm_front, arm_back, cape),
+  `fiche.png` (dessin complet, sert au portrait) et `puppet.json` (pivots, points d'accroche,
+  `pixel_size`, cadrage du portrait). `scripts/battle/puppet_2d.gd` (`Puppet2D`) les assemble et
+  anime tout par code ; le champ `"anim"` d'une attaque est un mouvement : punch, kick, slam, spin,
+  cast, cast_sky, throw, slash, stab, shoot, pull. Héros actuels : Corbin, Aegis, Brume, Orage.
+  Monstres et décor : packs **KayKit (CC0)** dans `assets/kaykit/`.
 
 ## Architecture (à respecter)
 - `scripts/combat/` = **logique pure** (RefCounted, aucun nœud, aucun affichage), **déterministe**

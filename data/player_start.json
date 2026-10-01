@@ -8,15 +8,15 @@
   "energy": 60,
   "energy_max": 60,
   "heroes": {
-    "torvald": {
+    "corbin": {
       "level": 1,
       "xp": 0
     },
-    "kaito": {
+    "aegis": {
       "level": 1,
       "xp": 0
     },
-    "vesprin": {
+    "brume": {
       "level": 1,
       "xp": 0
     },
@@ -26,9 +26,9 @@
     }
   },
   "team": [
-    "torvald",
-    "kaito",
-    "vesprin",
+    "corbin",
+    "aegis",
+    "brume",
     "orage"
   ],
   "items": {

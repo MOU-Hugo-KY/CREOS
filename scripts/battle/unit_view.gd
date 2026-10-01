@@ -29,6 +29,8 @@ var shown_hp := 0.0  # PV affichés (mis à jour à l'instant de l'impact, pas a
 var hp_seq := -1  # numéro du dernier événement qui a mis à jour shown_hp
 
 var _anim_player: AnimationPlayer
+var _puppet: Puppet2D  # personnage dessiné en 2D (si "puppet" dans ses données)
+var _next_hit_time := 0.4
 var _anims: Dictionary = DEFAULT_ANIMS.duplicate()
 var _flash_mat: ShaderMaterial
 var _dead := false
@@ -47,6 +49,14 @@ func setup(p_unit: BattleUnit, p_data: Dictionary) -> void:
 	home_position = position
 	_anims.merge(data.get("anims", {}), true)
 	model_scale = data.get("scale", 1.0)
+	if data.has("puppet"):
+		_puppet = Puppet2D.new()
+		add_child(_puppet)
+		_puppet.setup(data.puppet)
+		_puppet.set_facing(1.0 if unit.team == 0 else -1.0)
+		model_scale = _puppet.height / 2.4
+		_play(_anims.idle, true)
+		return
 	var scene: PackedScene = load(data.get("model", ""))
 	if scene:
 		var model := scene.instantiate()
@@ -79,6 +89,7 @@ func play_attack(anim_name: String, hit_time: float, dash_to: Variant = null) ->
 	if _dead:
 		return hit_time
 	var delay := hit_time
+	_next_hit_time = hit_time
 	var length := _anim_length(anim_name)
 	if dash_to is Vector3:
 		var target: Vector3 = dash_to
@@ -173,7 +184,9 @@ func play_hit(color := Color.WHITE) -> void:
 		var tw := create_tween()
 		tw.tween_property(self, "position", home_position + away, 0.06)
 		tw.tween_property(self, "position", home_position, 0.18)
-	if _anim_player and not _anim_player.current_animation.begins_with("Spell") and not _is_attacking():
+	if _puppet and not _puppet.is_attacking():
+		_puppet.play("hit")
+	elif _anim_player and not _anim_player.current_animation.begins_with("Spell") and not _is_attacking():
 		_play(_anims.hit if randf() < 0.5 or not _has("Hit_B") else "Hit_B")
 
 
@@ -199,6 +212,9 @@ func play_cheer() -> void:
 
 ## Éclat lumineux sur tout le modèle (coup reçu, soin, bouclier…).
 func flash(color: Color, strength := 0.8) -> void:
+	if _puppet:
+		_puppet.flash(color, strength)
+		return
 	if _flash_mat == null:
 		return
 	_flash_mat.set_shader_parameter("flash_color", color)
@@ -247,21 +263,31 @@ func _kill_move() -> void:
 
 
 func _is_attacking() -> bool:
+	if _puppet:
+		return _puppet.is_attacking()
 	var cur := _anim_player.current_animation
 	return cur.contains("Attack") or cur.contains("Shoot") or cur == "Throw" or cur.begins_with("Block") or cur.begins_with("Spell")
 
 
 func _has(anim_name: String) -> bool:
+	if _puppet:
+		return true
 	return _anim_player != null and _anim_player.has_animation(anim_name)
 
 
 func _anim_length(anim_name: String) -> float:
+	if _puppet:
+		return _puppet.length(anim_name, _next_hit_time)
 	if not _has(anim_name):
 		return 0.8
 	return _anim_player.get_animation(anim_name).length
 
 
 func _play(anim_name: String, loop := false) -> void:
+	if _puppet:
+		# Une attaque finie revient d'elle-même au repos (géré par la marionnette).
+		_puppet.play(anim_name, _next_hit_time)
+		return
 	if not _has(anim_name):
 		return
 	_anim_player.play(anim_name, 0.12)

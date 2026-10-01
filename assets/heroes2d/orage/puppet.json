@@ -1,0 +1,13 @@
+{
+  "name": "Orage",
+  "pixel_size": 0.002,
+  "height": 2.3,
+  "shadow": 0.9,
+  "portrait": [230, 40, 600],
+  "parts": {
+    "body": { "file": "body.png", "pivot": [325, 690], "z": 0 },
+    "arm_back": { "file": "arm_back.png", "pivot": [52, 46], "parent": "body", "at": [205, 144], "z": -1, "rest": 10 },
+    "head": { "file": "head.png", "pivot": [420, 495], "parent": "body", "at": [347, 62], "z": 2 },
+    "arm_front": { "file": "arm_front.png", "pivot": [33, 46], "parent": "body", "at": [490, 150], "z": 3, "rest": -25 }
+  }
+}

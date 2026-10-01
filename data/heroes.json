@@ -1,156 +1,233 @@
 {
-  "torvald": {
-    "name": "Torvald Barbe-Rouge",
-    "class": "gardien",
-    "element": "feu",
-    "family": "chasseurs",
-    "rarity": 3,
-    "range": "melee",
-    "attack_kind": "physical",
-    "model": "res://assets/heroes/barbare/Barbare_Anime.glb",
-    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
-    "portrait": { "y": 1.9, "dist": 3.2 },
-    "stats": { "hp": 1500, "atk": 80, "def": 85, "res": 50, "spd": 85, "crit": 0.05 },
-    "attacks": [
-      {
-        "id": "coup_de_hache",
-        "name": "Coup de hache",
-        "description": "Un grand coup de hache sur l'ennemi le plus proche.",
-        "anim": "Attack_01_Coup_de_Hache",
-        "hit_time": 0.53,
-        "target": "single_enemy",
-        "effects": [{ "type": "damage", "power": 1.0 }]
-      },
-      {
-        "id": "tourbillon_furieux",
-        "name": "Tourbillon furieux",
-        "description": "Tourne sur lui-même, frappe deux fois tous les ennemis et les provoque 5 s.",
-        "anim": "Attack_02_Tourbillon_Furieux",
-        "hit_times": [0.7, 1.2],
-        "cooldown": 9.0,
-        "target": "all_enemies",
-        "fx": "whirlwind",
-        "effects": [
-          { "type": "taunt", "duration": 5.0, "self_only": true },
-          { "type": "damage", "power": 0.4 },
-          { "type": "damage", "power": 0.4 }
-        ]
-      },
-      {
-        "id": "ecrasement_berserk",
-        "name": "Écrasement berserk",
-        "description": "Frappe le sol : dégâts et étourdissement 1,5 s sur tous les ennemis, et un bouclier pour Torvald.",
-        "anim": "Attack_03_Ecrasement_Berserk",
-        "hit_time": 1.09,
-        "energy": 100,
-        "target": "all_enemies",
-        "fx": "ground_slam",
-        "effects": [
-          { "type": "damage", "power": 1.1 },
-          { "type": "stun", "duration": 1.5 },
-          { "type": "shield", "power": 1.2, "self_only": true }
-        ]
-      }
-    ]
-  },
-  "kaito": {
-    "name": "Kaïto le Ronin",
+  "corbin": {
+    "name": "Corbin le Corbeau",
     "class": "lame",
-    "element": "eau",
+    "element": "ombre",
     "family": "chasseurs",
     "rarity": 3,
     "range": "melee",
     "attack_kind": "physical",
-    "model": "res://assets/heroes/ronin/Ronin_Anime.glb",
-    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
-    "portrait": { "y": 1.9, "dist": 3.2 },
-    "stats": { "hp": 1050, "atk": 130, "def": 50, "res": 35, "spd": 110, "crit": 0.2 },
+    "description": "Chasseur de l'ombre au masque de corbeau. Il frappe vite et achève les plus faibles.",
+    "puppet": "res://assets/heroes2d/corbin/",
+    "stats": {
+      "hp": 1050,
+      "atk": 130,
+      "def": 50,
+      "res": 35,
+      "spd": 110,
+      "crit": 0.2
+    },
     "attacks": [
       {
-        "id": "double_entaille",
-        "name": "Double entaille",
-        "description": "Un coup de katana puis un coup de wakizashi.",
-        "anim": "Attack_01_Double_Entaille",
-        "hit_times": [0.38, 0.68],
+        "id": "entaille_du_corbeau",
+        "name": "Entaille du corbeau",
+        "description": "Deux coups de serpe rapides sur un ennemi.",
+        "anim": "slash",
+        "hit_times": [
+          0.38,
+          0.62
+        ],
         "target": "single_enemy",
         "effects": [
-          { "type": "damage", "power": 0.55 },
-          { "type": "damage", "power": 0.55 }
+          {
+            "type": "damage",
+            "power": 0.55
+          },
+          {
+            "type": "damage",
+            "power": 0.55
+          }
         ]
       },
       {
-        "id": "coupe_tournoyante",
-        "name": "Coupe tournoyante",
-        "description": "Une coupe circulaire qui touche tous les ennemis.",
-        "anim": "Attack_02_Coupe_Tournoyante",
+        "id": "danse_des_lames",
+        "name": "Danse des lames",
+        "description": "Tourbillonne au milieu des ennemis et les entaille tous.",
+        "anim": "spin",
         "hit_time": 0.6,
-        "cooldown": 7.0,
+        "cooldown": 8.0,
         "target": "all_enemies",
         "fx": "whirlwind",
-        "effects": [{ "type": "damage", "power": 0.9 }]
+        "effects": [
+          {
+            "type": "damage",
+            "power": 0.75
+          }
+        ]
       },
       {
-        "id": "frappe_plongeante",
-        "name": "Frappe plongeante",
-        "description": "Bondit sur l'ennemi le plus affaibli et l'achève avec ses deux lames.",
-        "anim": "Attack_03_Frappe_Plongeante",
-        "hit_time": 0.92,
+        "id": "pique_du_corbeau",
+        "name": "Pique du corbeau",
+        "description": "Fond sur l'ennemi le plus affaibli et l'achève d'un coup de bec d'acier.",
+        "anim": "stab",
+        "hit_time": 0.55,
         "energy": 100,
         "target": "lowest_hp_enemy",
         "fx": "ground_slam",
-        "effects": [{ "type": "damage", "power": 3.0 }]
+        "effects": [
+          {
+            "type": "damage",
+            "power": 2.6
+          }
+        ]
       }
     ]
   },
-  "vesprin": {
-    "name": "Docteur Vesprin",
-    "class": "traqueur",
-    "element": "nature",
+  "aegis": {
+    "name": "Aegis le Rempart",
+    "class": "gardien",
+    "element": "lumiere",
+    "family": "chasseurs",
+    "rarity": 3,
+    "range": "melee",
+    "attack_kind": "physical",
+    "description": "Gardien au bouclier solaire. Il attire les coups et protège ses compagnons.",
+    "puppet": "res://assets/heroes2d/aegis/",
+    "stats": {
+      "hp": 1500,
+      "atk": 80,
+      "def": 85,
+      "res": 55,
+      "spd": 85,
+      "crit": 0.05
+    },
+    "attacks": [
+      {
+        "id": "marteau_du_rempart",
+        "name": "Marteau du rempart",
+        "description": "Un lourd coup de marteau sur un ennemi.",
+        "anim": "slam",
+        "hit_time": 0.5,
+        "target": "single_enemy",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.0
+          }
+        ]
+      },
+      {
+        "id": "bouclier_solaire",
+        "name": "Bouclier solaire",
+        "description": "Lève son bouclier : provoque les ennemis 5 s et protège toute l'équipe.",
+        "anim": "cast",
+        "hit_time": 0.5,
+        "cooldown": 10.0,
+        "dash": false,
+        "target": "all_allies",
+        "effects": [
+          {
+            "type": "taunt",
+            "duration": 5.0,
+            "self_only": true
+          },
+          {
+            "type": "shield",
+            "power": 0.35
+          }
+        ]
+      },
+      {
+        "id": "impact_du_bastion",
+        "name": "Impact du bastion",
+        "description": "Écrase le sol : dégâts et étourdissement 1,5 s sur tous les ennemis, et un bouclier pour Aegis.",
+        "anim": "slam",
+        "hit_time": 0.9,
+        "energy": 100,
+        "target": "all_enemies",
+        "fx": "ground_slam",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.1
+          },
+          {
+            "type": "stun",
+            "duration": 1.5
+          },
+          {
+            "type": "shield",
+            "power": 1.2,
+            "self_only": true
+          }
+        ]
+      }
+    ]
+  },
+  "brume": {
+    "name": "Brume des Marées",
+    "class": "arcaniste",
+    "element": "eau",
     "family": "chasseurs",
     "rarity": 3,
     "range": "ranged",
     "attack_kind": "magic",
-    "model": "res://assets/heroes/alchimiste/Alchimiste_Anime.glb",
-    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
-    "portrait": { "y": 1.9, "dist": 3.2 },
-    "stats": { "hp": 900, "atk": 115, "def": 35, "res": 60, "spd": 100, "crit": 0.1 },
+    "description": "Sorcière des marées. Elle soigne ses alliés et noie ses ennemis dans la brume.",
+    "puppet": "res://assets/heroes2d/brume/",
+    "stats": {
+      "hp": 900,
+      "atk": 115,
+      "def": 35,
+      "res": 65,
+      "spd": 100,
+      "crit": 0.1
+    },
     "attacks": [
       {
-        "id": "fiole_explosive",
-        "name": "Fiole explosive",
-        "description": "Lance une fiole qui explose sur un ennemi.",
-        "anim": "Attack_01_Fiole_Explosive",
-        "hit_time": 0.72,
+        "id": "eclat_lunaire",
+        "name": "Éclat lunaire",
+        "description": "Lance un éclat d'eau glacée sur un ennemi.",
+        "anim": "cast",
+        "hit_time": 0.55,
+        "dash": false,
         "target": "single_enemy",
         "fx": "vial",
-        "effects": [{ "type": "damage", "power": 1.0 }]
-      },
-      {
-        "id": "flaque_toxique",
-        "name": "Flaque toxique",
-        "description": "Pulvérise une flaque de poison sous un ennemi : il s'empoisonne pendant 4 s.",
-        "anim": "Attack_02_Flaque_Toxique",
-        "hit_time": 0.68,
-        "cooldown": 8.0,
-        "target": "single_enemy",
-        "fx": "poison_pool",
         "effects": [
-          { "type": "damage", "power": 0.5 },
-          { "type": "dot", "power": 0.45, "duration": 4.0 }
+          {
+            "type": "damage",
+            "power": 1.0
+          }
         ]
       },
       {
-        "id": "explosion_reservoir",
-        "name": "Explosion du réservoir",
-        "description": "Vide son réservoir dans une explosion de poison : tous les ennemis s'empoisonnent 5 s.",
-        "anim": "Attack_03_Explosion_Reservoir",
-        "hit_time": 1.05,
+        "id": "maree_apaisante",
+        "name": "Marée apaisante",
+        "description": "Une vague douce soigne toute l'équipe et lave poisons et étourdissements.",
+        "anim": "cast_sky",
+        "hit_time": 0.6,
+        "cooldown": 10.0,
+        "dash": false,
+        "target": "all_allies",
+        "effects": [
+          {
+            "type": "heal",
+            "power": 0.7
+          },
+          {
+            "type": "cleanse"
+          }
+        ]
+      },
+      {
+        "id": "malediction_de_brume",
+        "name": "Malédiction de brume",
+        "description": "Une brume maudite blesse tous les ennemis et les ronge pendant 5 s.",
+        "anim": "cast_sky",
+        "hit_time": 0.9,
         "energy": 100,
+        "dash": false,
         "target": "all_enemies",
         "fx": "poison_burst",
         "effects": [
-          { "type": "damage", "power": 1.1 },
-          { "type": "dot", "power": 0.3, "duration": 5.0 }
+          {
+            "type": "damage",
+            "power": 1.0
+          },
+          {
+            "type": "dot",
+            "power": 0.3,
+            "duration": 5.0
+          }
         ]
       }
     ]
@@ -163,103 +240,72 @@
     "rarity": 3,
     "range": "melee",
     "attack_kind": "magic",
-    "model": "res://assets/heroes/moine/Moine_Eclairs_Anime.glb",
-    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
-    "portrait": { "y": 1.9, "dist": 3.2 },
-    "stats": { "hp": 1000, "atk": 115, "def": 45, "res": 70, "spd": 105, "crit": 0.1 },
+    "description": "Moine des éclairs, encapuchonné de blanc. Ses poings frappent comme la foudre.",
+    "puppet": "res://assets/heroes2d/orage/",
+    "stats": {
+      "hp": 1000,
+      "atk": 115,
+      "def": 45,
+      "res": 70,
+      "spd": 105,
+      "crit": 0.1
+    },
     "attacks": [
       {
         "id": "paume_foudroyante",
         "name": "Paume foudroyante",
-        "description": "Un coup de paume chargé d'éclairs.",
-        "anim": "Attack_01_Paume_Foudroyante",
+        "description": "Un coup de poing chargé d'éclairs.",
+        "anim": "punch",
         "hit_time": 0.41,
         "target": "single_enemy",
         "fx": "lightning_hit",
-        "effects": [{ "type": "damage", "power": 1.0 }]
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.0
+          }
+        ]
       },
       {
         "id": "pas_du_tonnerre",
         "name": "Pas du tonnerre",
         "description": "Fonce comme l'éclair et donne un coup de pied qui étourdit 1 s.",
-        "anim": "Attack_02_Pas_Du_Tonnerre",
-        "hit_time": 0.55,
+        "anim": "kick",
+        "hit_time": 0.5,
         "cooldown": 7.0,
         "target": "single_enemy",
         "fx": "lightning_hit",
         "effects": [
-          { "type": "damage", "power": 1.4 },
-          { "type": "stun", "duration": 1.0 }
+          {
+            "type": "damage",
+            "power": 1.4
+          },
+          {
+            "type": "stun",
+            "duration": 1.0
+          }
         ]
       },
       {
         "id": "sentence_celeste",
         "name": "Sentence céleste",
         "description": "La foudre tombe sur un ennemi puis se propage à tous les autres.",
-        "anim": "Attack_03_Sentence_Celeste",
-        "hit_time": 1.04,
+        "anim": "cast_sky",
+        "hit_time": 0.9,
         "energy": 100,
         "dash": false,
         "target": "single_enemy",
         "fx": "sky_lightning",
         "effects": [
-          { "type": "damage", "power": 2.0 },
-          { "type": "damage", "power": 0.8, "target": "all_enemies" }
-        ]
-      }
-    ]
-  },
-  "malgrave": {
-    "name": "Sire Malgrave",
-    "class": "gardien",
-    "element": "ombre",
-    "family": "revenants",
-    "rarity": 4,
-    "range": "melee",
-    "attack_kind": "physical",
-    "model": "res://assets/heroes/chevalier/Chevalier_Possede_Anime.glb",
-    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
-    "portrait": { "y": 1.95, "dist": 3.4 },
-    "stats": { "hp": 1350, "atk": 95, "def": 75, "res": 70, "spd": 90, "crit": 0.08 },
-    "attacks": [
-      {
-        "id": "masse_maudite",
-        "name": "Masse maudite",
-        "description": "Un coup de masse chargé de magie sombre.",
-        "anim": "Attack_01_Masse_Maudite",
-        "hit_time": 0.64,
-        "target": "single_enemy",
-        "effects": [{ "type": "damage", "power": 1.0 }]
-      },
-      {
-        "id": "chaines_spectrales",
-        "name": "Chaînes spectrales",
-        "description": "Lance ses chaînes sur l'ennemi le plus affaibli, l'attire et l'étourdit 1,5 s.",
-        "anim": "Attack_02_Chaines_Spectrales",
-        "hit_time": 0.82,
-        "cooldown": 8.0,
-        "dash": false,
-        "target": "lowest_hp_enemy",
-        "fx": "chain_pull",
-        "effects": [
-          { "type": "damage", "power": 1.1 },
-          { "type": "stun", "duration": 1.5 }
-        ]
-      },
-      {
-        "id": "onde_du_tombeau",
-        "name": "Onde du tombeau",
-        "description": "Frappe le sol : une onde spectrale blesse et maudit tous les ennemis, et le protège.",
-        "anim": "Attack_03_Onde_Du_Tombeau",
-        "hit_time": 1.08,
-        "energy": 100,
-        "dash": false,
-        "target": "all_enemies",
-        "fx": "ground_slam",
-        "effects": [
-          { "type": "damage", "power": 1.1 },
-          { "type": "dot", "power": 0.25, "duration": 4.0 },
-          { "type": "shield", "power": 1.0, "self_only": true }
+          {
+            "type": "damage",
+            "power": 2.0
+          },
+          {
+            "type": "damage",
+            "power": 0.8,
+            "target": "all_enemies"
+          }
         ]
       }
     ]

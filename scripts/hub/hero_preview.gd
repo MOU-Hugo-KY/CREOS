@@ -5,6 +5,8 @@ extends SubViewport
 
 var _pivot: Node3D
 var _model: Node3D
+var _puppet: Puppet2D
+var _hero: Dictionary = {}
 var _anim: AnimationPlayer
 var _idle := "Idle"
 var _disc_mat: StandardMaterial3D
@@ -66,6 +68,7 @@ func clear_hero() -> void:
 	if _model:
 		_model.queue_free()
 	_model = null
+	_puppet = null
 	_anim = null
 
 
@@ -76,6 +79,13 @@ func show_hero(hero: Dictionary) -> void:
 	_disc_mat.emission = color
 	_rim.light_color = color
 	_pivot.rotation.y = deg_to_rad(-20)
+	_hero = hero
+	if hero.has("puppet"):
+		_puppet = Puppet2D.new()
+		_pivot.add_child(_puppet)
+		_puppet.setup(hero.puppet)
+		_model = _puppet
+		return
 	var scene: PackedScene = load(hero.get("model", ""))
 	if scene == null:
 		return
@@ -88,6 +98,13 @@ func show_hero(hero: Dictionary) -> void:
 
 
 func play(anim_name: String) -> void:
+	if _puppet:
+		var hit := 0.45
+		for a: Dictionary in _hero.get("attacks", []):
+			if a.get("anim", "") == anim_name:
+				hit = float(a.get("hit_time", a.get("hit_times", [0.45])[0]))
+		_puppet.play(anim_name, hit)
+		return
 	if _anim == null or not _anim.has_animation(anim_name):
 		return
 	_anim.play(anim_name, 0.15)

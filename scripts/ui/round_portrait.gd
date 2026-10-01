@@ -51,6 +51,8 @@ func set_grey(on: bool) -> void:
 ## Haut de l'image d'aperçu (la tête et le buste), découpé en carré.
 ## (Une vraie image découpée, pas une AtlasTexture : le masque rond du shader a besoin d'UV de 0 à 1.)
 static func portrait_texture(hero: Dictionary) -> Texture2D:
+	if hero.has("puppet"):
+		return _puppet_portrait(String(hero.puppet))
 	var path: String = String(hero.get("model", "")).get_base_dir() + "/apercu.png"
 	if _cache.has(path):
 		return _cache[path]
@@ -61,4 +63,19 @@ static func portrait_texture(hero: Dictionary) -> Texture2D:
 	var crop := img.get_region(Rect2i(int(w * 0.24), int(w * 0.1), int(w * 0.52), int(w * 0.52)))
 	var tex := ImageTexture.create_from_image(crop)
 	_cache[path] = tex
+	return tex
+
+
+## Héros dessinés en 2D : la tête découpée dans leur fiche (`portrait` = [x, y, côté] dans puppet.json).
+static func _puppet_portrait(folder: String) -> Texture2D:
+	if _cache.has(folder):
+		return _cache[folder]
+	var cfg: Variant = JSON.parse_string(FileAccess.get_file_as_string(folder.path_join("puppet.json")))
+	var fiche := folder.path_join("fiche.png")
+	if not (cfg is Dictionary) or not ResourceLoader.exists(fiche):
+		return null
+	var r: Array = cfg.get("portrait", [200, 40, 600])
+	var img: Image = (load(fiche) as Texture2D).get_image()
+	var tex := ImageTexture.create_from_image(img.get_region(Rect2i(int(r[0]), int(r[1]), int(r[2]), int(r[2]))))
+	_cache[folder] = tex
 	return tex

@@ -1,0 +1,13 @@
+{
+  "name": "Corbin",
+  "pixel_size": 0.0024,
+  "height": 2.3,
+  "shadow": 0.85,
+  "portrait": [200, 40, 620],
+  "parts": {
+    "body": { "file": "body.png", "pivot": [290, 572], "z": 0 },
+    "cape": { "file": "cape.png", "pivot": [458, 30], "parent": "body", "at": [200, 62], "z": -1 },
+    "head": { "file": "head.png", "pivot": [320, 380], "parent": "body", "at": [275, 45], "z": 2 },
+    "arm_front": { "file": "arm_front.png", "pivot": [46, 28], "parent": "body", "at": [337, 112], "z": 3, "rest": 0 }
+  }
+}

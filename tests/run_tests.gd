@@ -39,7 +39,7 @@ func _data() -> Node:
 
 
 func _team(gd: Node) -> Array:
-	return ["torvald", "kaito", "vesprin", "orage"].map(func(id: String) -> Dictionary: return gd.hero(id))
+	return ["corbin", "aegis", "brume", "orage"].map(func(id: String) -> Dictionary: return gd.hero(id))
 
 
 func test_elements() -> void:
@@ -177,9 +177,17 @@ func test_data_is_valid() -> void:
 		var attacks: Array = d.get("attacks", [])
 		if id in gd.heroes and attacks.size() != 3:
 			problems.append("%s : %d attaque(s) au lieu de 3" % [id, attacks.size()])
-		var anim_player := _anim_player(d.get("model", ""))
-		if anim_player == null:
-			problems.append("%s : modèle introuvable" % id)
+		var anim_player: AnimationPlayer = null
+		if d.has("puppet"):
+			if not FileAccess.file_exists(String(d.puppet).path_join("puppet.json")):
+				problems.append("%s : marionnette introuvable" % id)
+			for a: Dictionary in attacks:
+				if Puppet2D.normalize(a.get("anim", "")) != a.get("anim", ""):
+					problems.append("%s/%s : mouvement de marionnette inconnu %s" % [id, a.get("id"), a.get("anim")])
+		else:
+			anim_player = _anim_player(d.get("model", ""))
+			if anim_player == null:
+				problems.append("%s : modèle introuvable" % id)
 		for a: Dictionary in attacks:
 			for fx: Dictionary in a.get("effects", []):
 				if fx.has("target") and fx.target not in targets:
@@ -207,7 +215,7 @@ func test_progression() -> void:
 	check(r.level == 2 and r.xp == 5 and r.gained_levels == 1, "passage au niveau 2 avec le reste d'XP")
 	var big := Progression.add_xp(29, 0, 999999, curve, 30)
 	check(big.level == 30 and big.xp == 0, "niveau maximum respecté")
-	var base: Dictionary = gd.hero("kaito").stats
+	var base: Dictionary = gd.hero("corbin").stats
 	var s5 := Progression.stats_at_level(base, 5, cfg.stat_growth)
 	check(s5.hp > base.hp and s5.atk > base.atk and s5.spd == base.spd, "les stats montent avec le niveau (sauf la vitesse)")
 	var split := Progression.split_rewards({"gold": 250, "xp": 120, "essence_ombre": 3}, cfg)
@@ -226,14 +234,14 @@ func test_save() -> void:
 	var gold0: int = pd.gold()
 	var energy0: int = pd.energy()
 	check(pd.team().size() == 4, "équipe de départ de 4 héros")
-	check(not pd.toggle_team("malgrave"), "pas de héros non possédé dans l'équipe")
-	pd.state.heroes["malgrave"] = {"level": 1, "xp": 0}
-	check(not pd.toggle_team("malgrave"), "pas de 5e héros dans l'équipe")
-	check(pd.toggle_team("orage") and pd.toggle_team("malgrave") and pd.in_team("malgrave"), "remplacer un héros de l'équipe")
+	check(not pd.toggle_team("recrue"), "pas de héros non possédé dans l'équipe")
+	pd.state.heroes["recrue"] = {"level": 1, "xp": 0}
+	check(not pd.toggle_team("recrue"), "pas de 5e héros dans l'équipe")
+	check(pd.toggle_team("orage") and pd.toggle_team("recrue") and pd.in_team("recrue"), "remplacer un héros de l'équipe")
 	check(pd.start_hunt("brumenoire_1") and pd.energy() == energy0 - pd.hunt_cost("brumenoire_1"), "une chasse coûte de l'énergie")
 	var res: Dictionary = pd.finish_hunt("brumenoire_1", true, 3, {"gold": 250, "xp": 120, "essence_ombre": 3}, pd.team())
 	check(pd.gold() == gold0 + 250 and pd.item_count("essence_ombre") == 3, "victoire : or et essences gagnés")
-	check(pd.hero_level("kaito") == 2 and res.heroes.kaito.gained_levels == 1, "victoire : les héros gagnent de l'XP et des niveaux")
+	check(pd.hero_level("corbin") == 2 and res.heroes.corbin.gained_levels == 1, "victoire : les héros gagnent de l'XP et des niveaux")
 	check(pd.best_stars("brumenoire_1") == 3, "meilleures étoiles retenues")
 	var lost: Dictionary = pd.finish_hunt("brumenoire_1", false, 0, {}, pd.team())
 	check(lost.gold == 0 and pd.gold() == gold0 + 250, "défaite : rien de gagné")
@@ -263,9 +271,13 @@ func test_summon() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 11
 	var frag0: int = pd.item_count("fragments_relique")
-	check(not pd.owned_heroes().has("malgrave"), "Sire Malgrave n'est pas possédé au départ")
-	var first: Dictionary = pd.summon("fragments_relique", cfg, gd.heroes, rng)
-	check(first.get("id") == "malgrave" and first.new and pd.owned_heroes().has("malgrave"),
+	# Un héros pas encore possédé, ajouté pour le test (le jeu n'en a pas d'autre pour l'instant).
+	var test_pool: Dictionary = gd.heroes.duplicate(true)
+	test_pool["recrue"] = {"name": "Recrue", "rarity": 4}
+	cfg = cfg.duplicate(true)
+	cfg.first_summon = "recrue"
+	var first: Dictionary = pd.summon("fragments_relique", cfg, test_pool, rng)
+	check(first.get("id") == "recrue" and first.new and pd.owned_heroes().has("recrue"),
 		"la première invocation réveille un nouveau héros")
 	check(pd.item_count("fragments_relique") == frag0 - pd.summon_cost("fragments_relique", cfg), "les fragments sont dépensés")
 	var again: Dictionary = pd.summon("fragments_relique", cfg, gd.heroes, rng)
@@ -274,7 +286,7 @@ func test_summon() -> void:
 	pd.state.items["fragments_relique"] = 0
 	check(pd.summon("fragments_relique", cfg, gd.heroes, rng).is_empty(), "pas d'invocation sans fragments")
 	# Garantie : au moins un héros Légendaire (rareté 4+) sur `pity_every` invocations.
-	var pool: Dictionary = gd.heroes
+	var pool: Dictionary = test_pool
 	var every := int(cfg.pity_every)
 	var ok := true
 	var pity := 0
@@ -326,7 +338,7 @@ func test_quests() -> void:
 	check(pd.stat("hunts_won") == 3 and pd.stat("days_played") == 2, "statistiques du profil")
 	check(not pd.rename("Hu", "Loge") and pd.rename("Hugo", "Loge des Braves") and pd.player_name() == "Hugo",
 		"renommer le joueur (3 à 16 lettres)")
-	pd.set_avatar("kaito")
-	check(pd.avatar() == "kaito", "choisir le héros du profil")
+	pd.set_avatar("brume")
+	check(pd.avatar() == "brume", "choisir le héros du profil")
 	gd.free()
 	pd.free()
