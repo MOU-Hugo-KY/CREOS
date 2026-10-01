@@ -27,8 +27,9 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   `heal`, `shield`, `status`, `death`, `wave_start`, `victory`, `defeat`).
   **Tour par tour** : quand la jauge d'un héros est pleine (hors Auto), le moteur se fige
   (`awaiting_uid`) jusqu'à `request_attack(uid, slot)`.
-- `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage) : décor en blocs (`port_franc.gd`,
-  `blocks.gd`), bâtiments cliquables, héros qui se promènent, interface. Bâtiments, boutons et
+- `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage) : `port_franc.gd` place nos modèles
+  GLB de `assets/hub/` (en mètres, origine au sol, façade +Z ; tailles dans `manifest.json`),
+  bâtiments cliquables, héros qui se promènent, interface, Loge des héros. Bâtiments, boutons et
   actions décrits dans `data/hub.json` ; profil de départ dans `data/player_start.json`.
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
   `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),

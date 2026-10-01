@@ -4,7 +4,7 @@ extends Node3D
 
 const BATTLE_SCENE := "res://scenes/battle/battle.tscn"
 const CAMERA_POS := Vector3(0, 12.5, 19.5)
-const CAMERA_LOOK := Vector3(0, 2.2, -9.0)
+const CAMERA_LOOK := Vector3(0, 4.3, -9.0)
 const PAN_LIMIT := 7.0
 const DRAG_THRESHOLD := 12.0
 

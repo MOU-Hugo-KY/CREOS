@@ -12,10 +12,13 @@ d'impact) et un `apercu.png`.
 Dessinées pour CREOS par `tools/make_attack_icons.py` et `tools/make_ui_icons.py` (pixel art
 32 × 32, créé par nous).
 
-## Décor de Port-Franc
+## Décor de Port-Franc (`assets/hub/`)
 
-Maisons, port, fontaine et tour construits par code en blocs (`scripts/hub/`), créés par nous ;
-quelques accessoires KayKit (tonneaux, caisses, table, bannières, torches).
+15 modèles GLB originaux créés pour CREOS (fournis par Hugo) : Loge des héros, Ma loge, 3 maisons,
+Marché, Table des chasses, Autel des Reliques (nœud `Cristal` animé par le jeu), Tour de Morvath
+(40 m), ponton, bateau, lampadaire, arbre, tonneau, caisses. `manifest.json` donne les tailles ;
+aperçus dans `apercus/`. Le sol (dalles KayKit), la mer, les remparts et les montagnes sont
+ajoutés par `scripts/hub/port_franc.gd`.
 
 ## Monstres et décor
 

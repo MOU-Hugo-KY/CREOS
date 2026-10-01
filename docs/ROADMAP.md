@@ -50,6 +50,8 @@
       Autel des Reliques (cristal), Tour de Morvath au loin, héros qui se promènent ;
       bâtiments cliquables et menus épurés (icônes pixel art), musique de ville
 - [x] Table des chasses → combat ; « Retour au port » à la fin du combat
+- [x] Nos 15 modèles de Port-Franc (maisons, marché, autel, tour de 40 m, port…) à la place des
+      bâtiments en blocs
 - [x] **Loge des héros** : liste des héros, héros en 3D qui tourne (on peut voir ses 3 attaques),
       stats à son niveau, attaques avec icônes, choix de l'équipe de chasse (4 max)
 - [x] **Sire Malgrave** (Chevalier possédé) jouable : chaînes spectrales qui attirent, onde du tombeau
