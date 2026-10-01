@@ -14,6 +14,8 @@ signal building_clicked(building_id: String)
 const HUB := "res://assets/hub/"
 # Lot 1 du générateur Blender (bâtiments détaillés, textures cuites) : prioritaire s'il existe.
 const HUB_LOT1 := "res://assets/hub/lot1/"
+# Pack « Port-Franc hybride » (décor pour personnages 2D) : Lanterne des serments, Échoppe des masques.
+const HUB_HYBRIDE := "res://assets/hub/hybride/GLB/"
 # Lot 2 : sol de la place, terrasses, escaliers, remparts, quai et végétation (repère du monde).
 const HUB_LOT2 := "res://assets/hub/lot2/"
 const KIT := "res://assets/kaykit/dungeon/Assets/"  # dalles de la place
@@ -32,7 +34,8 @@ const BUILDINGS := [
 	["ma_loge", "Ma_Loge", Vector3(8.5, 0, -11.0), -14.0, Vector3(6.2, 5.6, 4.6), 6.6],
 	["marche", "Marche", Vector3(-10.0, 0, -0.5), 62.0, Vector3(4.2, 3.6, 2.4), 4.6],
 	["table_des_chasses", "Table_Des_Chasses", Vector3(8.8, 0, 0.8), -58.0, Vector3(4.2, 3.9, 3.0), 4.9],
-	["autel", "Autel_Des_Reliques", Vector3(0, 0, -3.0), 0.0, Vector3(5.0, 3.2, 5.0), 4.4],
+	["autel", "Lanterne_Des_Serments", Vector3(0, 0, -3.0), 0.0, Vector3(5.0, 4.6, 5.0), 5.6],
+	["echoppe_masques", "Echoppe_Des_Masques", Vector3(-4.4, 0, -1.4), 24.0, Vector3(4.4, 3.4, 2.6), 2.9],
 ]
 
 # Décor : [modèle, position, rotation Y, échelle]
@@ -181,7 +184,7 @@ func _build_environment() -> void:
 	e.background_mode = Environment.BG_SKY
 	e.sky = sky
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.4, 0.5, 0.78)  # ombres bleutées, contraste avec le soleil doré
+	e.ambient_light_color = Color(0.46, 0.5, 0.68)  # ombres bleutées, contraste avec le soleil doré
 	e.ambient_light_energy = 0.48
 	e.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	e.tonemap_exposure = 0.92
@@ -192,7 +195,7 @@ func _build_environment() -> void:
 	e.glow_bloom = 0.04
 	e.glow_hdr_threshold = 1.15
 	e.fog_enabled = true
-	e.fog_light_color = Color(0.62, 0.62, 0.76)
+	e.fog_light_color = Color(0.78, 0.7, 0.66)
 	e.fog_density = 0.0016
 	e.fog_sky_affect = 0.1
 	e.adjustment_enabled = true
@@ -380,7 +383,9 @@ func _build_building(id: String, model: String, pos: Vector3, yaw: float, click:
 	var node := _place(root, model, Vector3.ZERO, 0.0)
 	if id == "autel" and node:
 		# Seul le nœud « Cristal » tourne et flotte ; la fontaine reste fixe.
-		_crystal = node.find_child("Cristal", true, false) as Node3D
+		_crystal = node.find_child("Coeur", true, false) as Node3D
+		if _crystal == null:
+			_crystal = node.find_child("Cristal", true, false) as Node3D
 		if _crystal:
 			_crystal_y = _crystal.position.y
 		var light := OmniLight3D.new()
@@ -566,7 +571,11 @@ func _register(b: HubBuilding, id: String, click_size: Vector3, label_height: fl
 func _place(parent: Node3D, model: String, pos: Vector3, yaw: float) -> Node3D:
 	var path := HUB_LOT1 + model + ".glb"
 	var lot1 := ResourceLoader.exists(path)
+	var hybride := false
 	if not lot1:
+		path = HUB_HYBRIDE + model + ".glb"
+		hybride = ResourceLoader.exists(path)
+	if not lot1 and not hybride:
 		path = HUB + model + ".glb"
 	if not ResourceLoader.exists(path):
 		push_warning("Modèle du hub introuvable : " + path)
@@ -577,7 +586,7 @@ func _place(parent: Node3D, model: String, pos: Vector3, yaw: float) -> Node3D:
 	parent.add_child(n)
 	if lot1:
 		_apply_lot1_materials(n)
-	else:
+	elif not hybride:
 		_clean(n)
 	_attach_life(n)
 	return n

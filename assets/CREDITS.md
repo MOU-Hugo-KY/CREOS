@@ -61,3 +61,10 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 | Dossier | Police | Auteur | Licence | Source |
 |---|---|---|---|---|
 | `fonts/Fredoka.ttf` | Fredoka (variable) | The Fredoka Project Authors | SIL OFL 1.1 (`fonts/OFL.txt`) | https://github.com/google/fonts/tree/main/ofl/fredoka |
+
+## Créés pour CREOS
+
+| Dossier | Contenu |
+|---|---|
+| `heroes2d/` | Héros dessinés en 2D (Corbin, Aegis, Brume, Orage), générés pour CREOS avec l'outil d'images de ChatGPT |
+| `hub/hybride/` | Pack « Port-Franc hybride » (Lanterne des serments, Échoppe des masques…), généré par script pour CREOS |

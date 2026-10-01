@@ -1,6 +1,6 @@
 {
-  "name": "Autel des Reliques",
-  "description": "Réveille un chasseur endormi dans les reliques. Tous les héros s'obtiennent en jouant.",
+  "name": "Lanterne des Serments",
+  "description": "Prête serment sous la grande lanterne : un chasseur endormi s'avance dans la lumière. Tous les héros s'obtiennent en jouant.",
   "currencies": {
     "fragments_relique": {
       "name": "Fragments de Relique",
