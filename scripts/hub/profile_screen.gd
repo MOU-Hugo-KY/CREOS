@@ -32,7 +32,7 @@ const BADGES := [
 
 
 func _init() -> void:
-	setup("Profil du chasseur", Vector2(1260, 800), Color("2f5aa8"))
+	setup("Profil du chasseur", Vector2(1260, 800), Color("505e75"))
 
 
 func _ready() -> void:
@@ -84,7 +84,7 @@ func _ready() -> void:
 	_lodge_label = UiKit.label("", 22, UiKit.TEXT_SOFT)
 	_lodge_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_view_box.add_child(_lodge_label)
-	_xp_bar = UiKit.progress(Color("4f8fe6"), 24)
+	_xp_bar = UiKit.progress(Color("63c8be"), 24)
 	_view_box.add_child(_xp_bar)
 	_xp_label = UiKit.label("", 18, UiKit.TEXT_SOFT)
 	_xp_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -157,7 +157,7 @@ func refresh() -> void:
 	if avatar != "":
 		holder.add_child(RoundPortrait.new().setup(GameData.hero(avatar), 220, 0.06))
 	var lvl := PanelContainer.new()
-	var lsb := UiKit.box(Color("f8c443"), UiKit.INK, 32, 4)
+	var lsb := UiKit.box(Color("c6a66c"), UiKit.INK, 32, 4)
 	lsb.border_width_bottom = 8
 	lsb.content_margin_left = 14
 	lsb.content_margin_right = 14
@@ -246,7 +246,7 @@ func _badge(index: int) -> Control:
 	col.tooltip_text = "%s : %s" % [info[0], info[1]]
 	col.mouse_filter = Control.MOUSE_FILTER_PASS
 	var medal := PanelContainer.new()
-	var sb := UiKit.box(Color("f8c443") if on else Color("cfc6b8"), UiKit.INK if on else Color("9b9286"), 40, 4)
+	var sb := UiKit.box(Color("c6a66c") if on else Color("cfc6b8"), UiKit.INK if on else Color("9b9286"), 40, 4)
 	sb.border_width_bottom = 8
 	sb.set_content_margin_all(10)
 	medal.add_theme_stylebox_override("panel", sb)

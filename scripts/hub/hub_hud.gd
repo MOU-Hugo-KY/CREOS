@@ -26,7 +26,7 @@ var _avatar_holder: Control
 var _avatar_id := ""
 var _side_buttons: Dictionary = {}  # id -> IconButton
 var _values: Dictionary = {}  # "or" / "gemmes" / "energie" -> Label
-var lodge: HeroLodge
+var lodge: HeroesScreen
 var altar: SummonAltar
 var profile: ProfileScreen
 var quests: QuestsScreen
@@ -45,7 +45,7 @@ func _ready() -> void:
 	_build_side("side_right", false)
 	_build_toast()
 	_build_title()
-	lodge = HeroLodge.new()
+	lodge = HeroesScreen.new()
 	lodge.visible = false
 	lodge.closed.connect(close_lodge)
 	lodge.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
@@ -196,7 +196,7 @@ func _build_profile() -> void:
 	_avatar_holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(_avatar_holder)
 	var lvl := PanelContainer.new()
-	var lsb := UiKit.box(Color("f8c443"), UiKit.INK, 18, 3)
+	var lsb := UiKit.box(Color("c6a66c"), UiKit.INK, 18, 3)
 	lsb.border_width_bottom = 5
 	lsb.content_margin_left = 8
 	lsb.content_margin_right = 8
@@ -215,7 +215,7 @@ func _build_profile() -> void:
 	col.add_child(_name_label)
 	_lodge_label = UiKit.label("", 18, Color(1, 0.93, 0.8), 5, UiKit.INK)
 	col.add_child(_lodge_label)
-	_xp_bar = UiKit.progress(Color("4f8fe6"), 12)
+	_xp_bar = UiKit.progress(Color("63c8be"), 12)
 	_xp_bar.custom_minimum_size.x = 200
 	col.add_child(_xp_bar)
 

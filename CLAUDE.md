@@ -44,10 +44,12 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   profiter de ses 76 animations, plus 3 attaques animées par héros. Le brief complet pour
   ChatGPT/Blender est dans `docs/pour_chatgpt/PROMPT_BLENDER_COMPLET.md`. En attendant, les
   héros en pixels et le hub actuel restent en place.
-- **Interface** : `scripts/ui/ui_kit.gd` (`UiKit`) = le style commun (police Fredoka, parchemin
-  cerclé de bois, boutons en relief, barres, pastilles) ; `UiWindow` = fenêtre de jeu avec ruban
-  de titre et croix. Tout nouvel écran les utilise. Écrans du hub : Profil (clic sur le profil en
-  haut à gauche), Primes du jour (`QuestsScreen`, règles pures dans `scripts/core/quests.gd`,
+- **Interface** : `scripts/ui/ui_kit.gd` (`UiKit`) = le style commun, d'après la maquette
+  `docs/maquette_interfaces/` (ivoire #eee4cd cerclé d'encre #29262e avec ombre dure, bordeaux
+  #793b49, laiton #c6a66c, ardoise #505e75, turquoise #63c8be ; police Fredoka ; boutons en relief) ; `UiWindow` = fenêtre de jeu avec ruban
+  de titre et croix. Tout nouvel écran les utilise. Écrans du hub : Loge des héros (`HeroesScreen` :
+  collection filtrable, fiche avec Force, amélioration contre de l'or, étoiles/évolution avec les
+  fragments du héros, règles dans `Progression`), Profil (clic sur le profil en haut à gauche), Primes du jour (`QuestsScreen`, règles pures dans `scripts/core/quests.gd`,
   données dans `data/quests.json`, événements notés par `PlayerData.record_event()`), Loge,
   Autel des Reliques (invocations, `data/summon.json`).
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.

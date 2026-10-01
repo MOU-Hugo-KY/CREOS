@@ -19,6 +19,7 @@ func _initialize() -> void:
 	test_save()
 	test_summon()
 	test_quests()
+	test_hero_upgrades()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -342,3 +343,26 @@ func test_quests() -> void:
 	check(pd.avatar() == "brume", "choisir le héros du profil")
 	gd.free()
 	pd.free()
+
+
+func test_hero_upgrades() -> void:
+	print("Amélioration et évolution des héros")
+	var gd := _data()
+	var pd: Node = PlayerDataScript.new()
+	pd.configure(gd.player_start, gd.progression, gd.dungeons)
+	pd.use_memory_only()
+	var gold0: int = pd.gold()
+	var cost: int = pd.hero_level_up_cost("aegis")
+	check(pd.level_up_hero("aegis") and pd.hero_level("aegis") == 2 and pd.gold() == gold0 - cost, "améliorer un héros coûte de l'or et donne un niveau")
+	pd.state.gold = 0
+	check(not pd.level_up_hero("aegis"), "pas d'amélioration sans or")
+	check(pd.hero_stars("aegis") == 1 and not pd.evolve_hero("aegis"), "pas d'évolution sans fragments")
+	pd.state.hero_shards = {"aegis": pd.hero_star_cost("aegis")}
+	check(pd.evolve_hero("aegis") and pd.hero_stars("aegis") == 2 and pd.hero_shards("aegis") == 0, "évolution : une étoile contre les fragments")
+	var h: Dictionary = gd.hero("aegis")
+	var s1 := Progression.hero_stats(h, 1, 1, gd.progression)
+	var s2 := Progression.hero_stats(h, 1, 2, gd.progression)
+	check(s2.hp > s1.hp and s2.spd == s1.spd and Progression.power(s2) > Progression.power(s1), "une étoile renforce le héros (pas sa vitesse)")
+	check(Progression.star_cost(6, gd.progression) == -1, "pas plus de 6 étoiles")
+	pd.free()
+	gd.free()

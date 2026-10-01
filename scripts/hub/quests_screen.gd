@@ -19,14 +19,14 @@ var _list: VBoxContainer
 
 
 func _init() -> void:
-	setup(GameData.quests.get("title", "Primes du jour"), Vector2(1260, 840), Color("b8462e"))
+	setup(GameData.quests.get("title", "Primes du jour"), Vector2(1260, 840), Color("793b49"))
 
 
 func _ready() -> void:
 	super._ready()
 	# Points d'activité et coffres
 	var top := PanelContainer.new()
-	top.add_theme_stylebox_override("panel", UiKit.card(Color("d9a441")))
+	top.add_theme_stylebox_override("panel", UiKit.card(Color("c6a66c")))
 	content.add_child(top)
 	var tv := VBoxContainer.new()
 	tv.add_theme_constant_override("separation", 6)
@@ -42,7 +42,7 @@ func _ready() -> void:
 	_chest_row = Control.new()
 	_chest_row.custom_minimum_size = Vector2(0, 104)
 	tv.add_child(_chest_row)
-	_points_bar = UiKit.progress(Color("f0b43c"), 26)
+	_points_bar = UiKit.progress(Color("c6a66c"), 26)
 	_points_bar.set_anchors_and_offsets_preset(Control.PRESET_CENTER_LEFT, Control.PRESET_MODE_KEEP_HEIGHT)
 	_points_bar.anchor_right = 1.0
 	_points_bar.offset_left = 10
@@ -150,7 +150,7 @@ func _quest_card(daily: Dictionary, q: Dictionary) -> Control:
 	var claimed := Quests.is_claimed(daily, q)
 	var ready := Quests.can_claim(daily, q)
 	var card := PanelContainer.new()
-	card.add_theme_stylebox_override("panel", UiKit.card(Color("6cc04a") if ready else Color.TRANSPARENT))
+	card.add_theme_stylebox_override("panel", UiKit.card(Color("63c8be") if ready else Color.TRANSPARENT))
 	if claimed or not available:
 		card.modulate = Color(1, 1, 1, 0.6)
 	var h := HBoxContainer.new()
@@ -158,7 +158,7 @@ func _quest_card(daily: Dictionary, q: Dictionary) -> Control:
 	card.add_child(h)
 	# Icône dans un médaillon
 	var medal := PanelContainer.new()
-	var mb := UiKit.box(Color("2f5aa8") if available else Color("8c857c"), UiKit.INK, 34, 3)
+	var mb := UiKit.box(Color("505e75") if available else Color("8c857c"), UiKit.INK, 34, 3)
 	mb.set_content_margin_all(6)
 	medal.add_theme_stylebox_override("panel", mb)
 	medal.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -177,7 +177,7 @@ func _quest_card(daily: Dictionary, q: Dictionary) -> Control:
 	prow.add_theme_constant_override("separation", 10)
 	col.add_child(prow)
 	var target := int(q.get("target", 1))
-	var bar := UiKit.progress(Color("6cc04a") if available else Color("a9a39a"), 18)
+	var bar := UiKit.progress(Color("63c8be") if available else Color("a9a39a"), 18)
 	bar.custom_minimum_size.x = 300
 	bar.max_value = target
 	bar.value = target if claimed else Quests.progress(daily, q)
@@ -189,11 +189,11 @@ func _quest_card(daily: Dictionary, q: Dictionary) -> Control:
 	rewards.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	h.add_child(rewards)
 	var pts := PanelContainer.new()
-	var psb := UiKit.box(Color("2f5aa8"), Color("1d3a75"), 14, 2)
+	var psb := UiKit.box(Color("505e75"), Color("2c3445"), 14, 2)
 	psb.content_margin_left = 10
 	psb.content_margin_right = 10
 	pts.add_theme_stylebox_override("panel", psb)
-	pts.add_child(UiKit.label("+%d pts" % int(q.get("points", 0)), 18, UiKit.WHITE, 4, Color("1d3a75")))
+	pts.add_child(UiKit.label("+%d pts" % int(q.get("points", 0)), 18, UiKit.WHITE, 4, Color("2c3445")))
 	rewards.add_child(pts)
 	var r: Dictionary = q.get("rewards", {})
 	for key: String in r:

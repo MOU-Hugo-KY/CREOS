@@ -7,13 +7,13 @@ signal closed
 
 var content: VBoxContainer
 var window_size := Vector2(1240, 820)
-var ribbon_color := Color("2f5aa8")
+var ribbon_color := Color("793b49")
 
 var _title_text := ""
 var _frame: PanelContainer
 
 
-func setup(p_title: String, p_size := Vector2(1240, 820), p_ribbon := Color("2f5aa8")) -> UiWindow:
+func setup(p_title: String, p_size := Vector2(1240, 820), p_ribbon := Color("793b49")) -> UiWindow:
 	_title_text = p_title
 	window_size = p_size
 	ribbon_color = p_ribbon

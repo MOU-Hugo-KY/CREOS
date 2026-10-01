@@ -74,7 +74,8 @@ func start_battle(rng_seed: int) -> void:
 	# Équipe choisie dans la Loge, avec les stats de chaque héros à son niveau.
 	team_ids = PlayerData.team()
 	var team_data: Array = team_ids.map(func(id: String) -> Dictionary:
-		return Progression.hero_for_battle(GameData.hero(id), PlayerData.hero_level(id), GameData.progression))
+		return Progression.hero_for_battle(GameData.hero(id), PlayerData.hero_level(id), GameData.progression,
+			PlayerData.hero_stars(id)))
 	engine.setup(team_data, GameData.dungeon_waves(dungeon_id), rng_seed)
 	engine.auto_mode = was_auto
 	hud.set_auto(was_auto)

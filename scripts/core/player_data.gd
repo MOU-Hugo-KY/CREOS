@@ -261,6 +261,47 @@ func hero_level(id: String) -> int:
 	return int(state.get("heroes", {}).get(id, {}).get("level", 1))
 
 
+func hero_stars(id: String) -> int:
+	return int(state.get("heroes", {}).get(id, {}).get("stars", _config.get("stars", {}).get("start", 1)))
+
+
+func hero_level_up_cost(id: String) -> int:
+	return Progression.level_up_cost(hero_level(id), _config)
+
+
+## Fait monter un héros d'un niveau contre de l'or (pas au-delà du niveau maximum).
+func level_up_hero(id: String) -> bool:
+	if not state.heroes.has(id) or hero_level(id) >= int(_config.get("max_level", 30)):
+		return false
+	var cost := hero_level_up_cost(id)
+	if gold() < cost:
+		return false
+	state.gold = gold() - cost
+	state.heroes[id].level = hero_level(id) + 1
+	state.heroes[id].xp = 0
+	record_event("hero_level_up")
+	save_game()
+	changed.emit()
+	return true
+
+
+## Fragments du héros pour gagner une étoile (-1 = déjà au maximum).
+func hero_star_cost(id: String) -> int:
+	return Progression.star_cost(hero_stars(id), _config)
+
+
+## Évolution : une étoile de plus contre des fragments du héros.
+func evolve_hero(id: String) -> bool:
+	var cost := hero_star_cost(id)
+	if not state.heroes.has(id) or cost < 0 or hero_shards(id) < cost:
+		return false
+	state.hero_shards[id] = hero_shards(id) - cost
+	state.heroes[id].stars = hero_stars(id) + 1
+	save_game()
+	changed.emit()
+	return true
+
+
 func hero_xp(id: String) -> int:
 	return int(state.get("heroes", {}).get(id, {}).get("xp", 0))
 

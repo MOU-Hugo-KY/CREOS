@@ -2,34 +2,37 @@ class_name UiKit
 extends RefCounted
 ## Kit d'interface de CREOS : le même langage visuel partout (hub, écrans, combat).
 ##
-## Style « cosy fantasy » assorti aux modèles 3D : formes rondes et épaisses, parchemin crème
-## cerclé de bois sombre, boutons en relief (une tranche plus foncée en dessous, qui s'écrase
-## quand on appuie), police Fredoka, textes blancs à contour sombre sur la couleur.
+## Style « fantasy occulte encrée », assorti aux héros dessinés : ivoire cerclé d'encre noire
+## avec une ombre dure en dessous (comme un dessin), bordeaux, laiton, ardoise et magie turquoise.
+## Boutons en relief (une tranche plus foncée en dessous, qui s'écrase quand on appuie),
+## police Fredoka, textes clairs à contour d'encre sur la couleur.
 
 const FONT := preload("res://assets/fonts/Fredoka_SemiBold.tres")
 const FONT_BOLD := preload("res://assets/fonts/Fredoka_Bold.tres")
 
 # Bois et parchemin
-const INK := Color("3b2416")  # contours et texte sur parchemin
-const WOOD := Color("6b4128")
-const WOOD_LIGHT := Color("9a6440")
-const PARCHMENT := Color("f7ebd0")
-const PARCHMENT_DARK := Color("e6d2a8")
-const NIGHT := Color("1d2238")  # panneaux sombres (hors parchemin)
-const SHADOW := Color(0, 0, 0, 0.35)
-const TEXT_ON_PARCHMENT := Color("4a2f1d")
-const TEXT_SOFT := Color("8a6a4c")
-const WHITE := Color("fffaf0")
+const INK := Color("29262e")  # encre : contours et texte sur l'ivoire
+const WOOD := Color("793b49")  # bordeaux (titres de section, accents)
+const WOOD_LIGHT := Color("c6a66c")  # laiton (bordures des cartes)
+const PARCHMENT := Color("eee4cd")  # ivoire
+const PARCHMENT_DARK := Color("d3c4a6")
+const NIGHT := Color("34323c")  # panneaux sombres
+const SLATE := Color("505e75")
+const TEAL := Color("63c8be")  # magie
+const SHADOW := Color(0.05, 0.05, 0.08, 0.9)
+const TEXT_ON_PARCHMENT := Color("29262e")
+const TEXT_SOFT := Color("6e6452")
+const WHITE := Color("f6efdf")
 
 # Couleurs de boutons : [dessus, tranche]
 const BUTTONS := {
-	"green": [Color("6cc04a"), Color("3d7d2a")],
-	"gold": [Color("f8c443"), Color("b77f17")],
-	"blue": [Color("4f8fe6"), Color("2c5aa8")],
-	"red": [Color("e8574a"), Color("a12f25")],
-	"purple": [Color("9b6ce0"), Color("5f3d9e")],
-	"wood": [Color("a86f45"), Color("6b4128")],
-	"grey": [Color("a9a39a"), Color("6f6a63")],
+	"green": [Color("3fa79c"), Color("1f5f59")],  # turquoise : récupérer, valider
+	"gold": [Color("c6a66c"), Color("7d6436")],  # laiton
+	"blue": [Color("505e75"), Color("2c3445")],  # ardoise : y aller, naviguer
+	"red": [Color("793b49"), Color("3f1d26")],  # bordeaux : action principale, fermer
+	"purple": [Color("6d4f8c"), Color("3a2950")],
+	"wood": [Color("8a7a5e"), Color("4d4334")],
+	"grey": [Color("a39b8b"), Color("6a6356")],
 }
 const DEPTH := 7  # épaisseur de la tranche des boutons, en pixels
 
@@ -50,16 +53,20 @@ static func box(bg: Color, border := Color.TRANSPARENT, radius := 18, border_wid
 
 
 ## Parchemin cerclé de bois : le fond des fenêtres et des cartes.
-static func parchment(radius := 22, border := 5) -> StyleBoxFlat:
-	var sb := box(PARCHMENT, INK, radius, border, 10, Vector2(0, 8))
+static func parchment(radius := 18, border := 4) -> StyleBoxFlat:
+	var sb := box(PARCHMENT, INK, radius, border, 0)
+	sb.border_width_bottom = border + 8  # ombre dure, comme un dessin encré
+	sb.shadow_color = Color(0, 0, 0, 0.35)
+	sb.shadow_size = 18
+	sb.shadow_offset = Vector2(0, 10)
 	sb.set_content_margin_all(18)
 	return sb
 
 
 ## Carte claire posée sur le parchemin (une quête, une statistique…).
 static func card(highlight := Color.TRANSPARENT) -> StyleBoxFlat:
-	var sb := box(Color("fff7e6"), WOOD_LIGHT if highlight.a == 0.0 else highlight, 16, 3, 0)
-	sb.border_width_bottom = 6
+	var sb := box(Color("f6efdf"), INK if highlight.a == 0.0 else highlight, 12, 2, 0)
+	sb.border_width_bottom = 5
 	sb.set_content_margin_all(12)
 	return sb
 
@@ -142,7 +149,7 @@ static func title(text: String, size := 40, color := WHITE) -> Label:
 
 
 ## Barre de progression arrondie. Mettre à jour avec `bar.value`.
-static func progress(color := Color("6cc04a"), height := 22.0, show_text := false) -> ProgressBar:
+static func progress(color := Color("63c8be"), height := 22.0, show_text := false) -> ProgressBar:
 	var p := ProgressBar.new()
 	p.custom_minimum_size = Vector2(0, height)
 	p.show_percentage = show_text
@@ -223,7 +230,7 @@ static func theme() -> Theme:
 	var edit := box(Color("fffaf0"), WOOD_LIGHT, 12, 3)
 	edit.set_content_margin_all(10)
 	t.set_stylebox("normal", "LineEdit", edit)
-	var edit_focus := box(Color("fffaf0"), Color("f8c443"), 12, 3)
+	var edit_focus := box(Color("fffaf0"), Color("c6a66c"), 12, 3)
 	edit_focus.set_content_margin_all(10)
 	t.set_stylebox("focus", "LineEdit", edit_focus)
 	t.set_color("font_color", "LineEdit", TEXT_ON_PARCHMENT)
