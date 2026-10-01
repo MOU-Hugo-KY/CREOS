@@ -12,6 +12,14 @@ d'impact) et un `apercu.png`.
 Dessinées pour CREOS par `tools/make_attack_icons.py` et `tools/make_ui_icons.py` (pixel art
 32 × 32, créé par nous).
 
+## Port-Franc, lot 1 du générateur Blender (`assets/hub/lot1/`)
+
+11 bâtiments générés par `tools/blender/port_franc_lot1/build_port_franc.py` (script écrit pour
+CREOS, lancé avec Blender 5.2) : Loge des héros, Ma loge, Marché, Table des chasses, Autel des
+Reliques, et 6 maisons à thème (boulangerie, forge, taverne, pêcheur, herboriste, cartographe).
+Textures cuites par Cycles dans un atlas partagé (`textures/`, BaseColor, Normal, ORM) ; les GLB
+sont livrés sans leurs images (`tools/blender/strip_glb_images.py`), le jeu applique l'atlas.
+
 ## Décor de Port-Franc (`assets/hub/`)
 
 15 modèles GLB originaux créés pour CREOS (fournis par Hugo) : Loge des héros, Ma loge, 3 maisons,

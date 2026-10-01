@@ -1,0 +1,388 @@
+{
+  "lot": 1,
+  "generator": "build_port_franc.py",
+  "blender_version": "5.2.2 LTS",
+  "config": {
+    "seed": 731,
+    "vegetation_density": 1.0,
+    "texture_size": 2048,
+    "bake_samples": 32,
+    "render_samples": 48,
+    "lod_ratio": 0.62,
+    "output_folder": "Port_Franc_Lot1_Genere"
+  },
+  "maps": [
+    "BaseColor",
+    "Normal",
+    "ORM"
+  ],
+  "assets": [
+    {
+      "triangles": 3309,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Drapeau_Chasseurs",
+        "Fumee_Loge_Des_Heros",
+        "Lumiere_Loge_Des_Heros",
+        "Structure",
+        "Loge_Des_Heros"
+      ],
+      "embedded_images": 3,
+      "bytes": 5704336,
+      "file": "GLB/Loge_Des_Heros.glb",
+      "lod1_file": "LOD/Loge_Des_Heros_LOD1.glb",
+      "lod1_triangles": 1997,
+      "dimensions": [
+        7.9372,
+        8.6,
+        5.6
+      ],
+      "base_footprint": [
+        7,
+        4.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "heroes"
+    },
+    {
+      "triangles": 2789,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Drapeau_Joueur",
+        "Fumee_Ma_Loge",
+        "Lumiere_Ma_Loge",
+        "Structure",
+        "Ma_Loge"
+      ],
+      "embedded_images": 3,
+      "bytes": 5660196,
+      "file": "GLB/Ma_Loge.glb",
+      "lod1_file": "LOD/Ma_Loge_LOD1.glb",
+      "lod1_triangles": 1679,
+      "dimensions": [
+        6.9372,
+        5.75,
+        5.6
+      ],
+      "base_footprint": [
+        6,
+        4.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "player"
+    },
+    {
+      "triangles": 903,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Drapeau_Marche",
+        "Lumiere_Marche",
+        "Structure",
+        "Marche"
+      ],
+      "embedded_images": 3,
+      "bytes": 5493280,
+      "file": "GLB/Marche.glb",
+      "lod1_file": "LOD/Marche_LOD1.glb",
+      "lod1_triangles": 559,
+      "dimensions": [
+        4.0,
+        3.824,
+        2.15
+      ],
+      "base_footprint": [
+        4,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "market"
+    },
+    {
+      "triangles": 495,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Drapeau_Chasses",
+        "Lumiere_Chasses",
+        "Structure",
+        "Table_Des_Chasses"
+      ],
+      "embedded_images": 3,
+      "bytes": 5457756,
+      "file": "GLB/Table_Des_Chasses.glb",
+      "lod1_file": "LOD/Table_Des_Chasses_LOD1.glb",
+      "lod1_triangles": 307,
+      "dimensions": [
+        4.0725,
+        4.149,
+        3.0
+      ],
+      "base_footprint": [
+        4,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "hunts"
+    },
+    {
+      "triangles": 940,
+      "materials": [
+        "Emissif_Cristaux",
+        "Atlas_Batiments"
+      ],
+      "nodes": [
+        "Cristal",
+        "Lumiere_Reliques",
+        "Structure",
+        "Autel_Des_Reliques"
+      ],
+      "embedded_images": 3,
+      "bytes": 5484304,
+      "file": "GLB/Autel_Des_Reliques.glb",
+      "lod1_file": "LOD/Autel_Des_Reliques_LOD1.glb",
+      "lod1_triangles": 590,
+      "dimensions": [
+        5.0,
+        3.09,
+        5.0
+      ],
+      "base_footprint": [
+        5,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "altar"
+    },
+    {
+      "triangles": 3322,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Fumee_Maison_Boulangerie",
+        "Lumiere_Maison_Boulangerie",
+        "Structure",
+        "Maison_Boulangerie"
+      ],
+      "embedded_images": 3,
+      "bytes": 5703404,
+      "file": "GLB/Maison_Boulangerie.glb",
+      "lod1_file": "LOD/Maison_Boulangerie_LOD1.glb",
+      "lod1_triangles": 2002,
+      "dimensions": [
+        5.4372,
+        8.6,
+        5.095
+      ],
+      "base_footprint": [
+        4.5,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "bakery"
+    },
+    {
+      "triangles": 2834,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Fumee_Maison_Forge",
+        "Lumiere_Maison_Forge",
+        "Structure",
+        "Maison_Forge"
+      ],
+      "embedded_images": 3,
+      "bytes": 5663460,
+      "file": "GLB/Maison_Forge.glb",
+      "lod1_file": "LOD/Maison_Forge_LOD1.glb",
+      "lod1_triangles": 1702,
+      "dimensions": [
+        5.4372,
+        5.75,
+        5.15
+      ],
+      "base_footprint": [
+        4.5,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "forge"
+    },
+    {
+      "triangles": 3318,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Fumee_Maison_Taverne",
+        "Lumiere_Maison_Taverne",
+        "Structure",
+        "Maison_Taverne"
+      ],
+      "embedded_images": 3,
+      "bytes": 5692216,
+      "file": "GLB/Maison_Taverne.glb",
+      "lod1_file": "LOD/Maison_Taverne_LOD1.glb",
+      "lod1_triangles": 2002,
+      "dimensions": [
+        5.4372,
+        5.75,
+        5.045
+      ],
+      "base_footprint": [
+        4.5,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "tavern"
+    },
+    {
+      "triangles": 3590,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Fumee_Maison_Pecheur",
+        "Lumiere_Maison_Pecheur",
+        "Structure",
+        "Maison_Pecheur"
+      ],
+      "embedded_images": 3,
+      "bytes": 5723228,
+      "file": "GLB/Maison_Pecheur.glb",
+      "lod1_file": "LOD/Maison_Pecheur_LOD1.glb",
+      "lod1_triangles": 2156,
+      "dimensions": [
+        5.4372,
+        8.6,
+        5.045
+      ],
+      "base_footprint": [
+        4.5,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "fisher"
+    },
+    {
+      "triangles": 3354,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Fumee_Maison_Herboriste",
+        "Lumiere_Maison_Herboriste",
+        "Structure",
+        "Maison_Herboriste"
+      ],
+      "embedded_images": 3,
+      "bytes": 5711892,
+      "file": "GLB/Maison_Herboriste.glb",
+      "lod1_file": "LOD/Maison_Herboriste_LOD1.glb",
+      "lod1_triangles": 2041,
+      "dimensions": [
+        5.4372,
+        5.75,
+        5.045
+      ],
+      "base_footprint": [
+        4.5,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "herbalist"
+    },
+    {
+      "triangles": 2782,
+      "materials": [
+        "Atlas_Batiments",
+        "Emissif_Fenetres"
+      ],
+      "nodes": [
+        "Fumee_Maison_Cartographe",
+        "Lumiere_Maison_Cartographe",
+        "Structure",
+        "Maison_Cartographe"
+      ],
+      "embedded_images": 3,
+      "bytes": 5657992,
+      "file": "GLB/Maison_Cartographe.glb",
+      "lod1_file": "LOD/Maison_Cartographe_LOD1.glb",
+      "lod1_triangles": 1670,
+      "dimensions": [
+        5.4372,
+        5.75,
+        5.045
+      ],
+      "base_footprint": [
+        4.5,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "cartographer"
+    }
+  ],
+  "total_triangles_lot1": 27636,
+  "remaining_visible_budget": 52364
+}

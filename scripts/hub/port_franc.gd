@@ -12,6 +12,8 @@ extends Node3D
 signal building_clicked(building_id: String)
 
 const HUB := "res://assets/hub/"
+# Lot 1 du générateur Blender (bâtiments détaillés, textures cuites) : prioritaire s'il existe.
+const HUB_LOT1 := "res://assets/hub/lot1/"
 const KIT := "res://assets/kaykit/dungeon/Assets/"  # dalles de la place
 const RELIC := Color(0.72, 0.42, 1.0)
 const GRASS := Color(0.42, 0.58, 0.3)
@@ -33,25 +35,25 @@ const BUILDINGS := [
 
 # Décor : [modèle, position, rotation Y, échelle]
 const DECOR := [
-	# Côté gauche de la place (encadre l'image)
-	["Maison_Toit_Rouge", Vector3(-16.5, 0, -4.0), 80.0, 1.05],
-	["Maison_Toit_Vert", Vector3(-17.0, 0, 3.5), 95.0, 1.0],
-	["Maison_Toit_Orange", Vector3(-15.5, 0, -12.5), 45.0, 1.0],
+	# Côté gauche de la place (encadre l'image) : les maisons à thème du lot 1
+	["Maison_Taverne", Vector3(-16.5, 0, -4.0), 80.0, 1.0],
+	["Maison_Boulangerie", Vector3(-17.0, 0, 3.5), 95.0, 1.0],
+	["Maison_Forge", Vector3(-15.5, 0, -12.5), 45.0, 1.0],
 	# Côté droit, avant le port
-	["Maison_Toit_Vert", Vector3(16.0, 0, -12.0), -40.0, 1.0],
+	["Maison_Pecheur", Vector3(16.0, 0, -12.0), -40.0, 1.0],
 	# Première terrasse
-	["Maison_Toit_Orange", Vector3(-19.0, TERRACE_1, -21.0), 10.0, 1.1],
+	["Maison_Herboriste", Vector3(-19.0, TERRACE_1, -21.0), 10.0, 1.0],
 	["Maison_Toit_Rouge", Vector3(-11.0, TERRACE_1, -21.5), 0.0, 1.0],
-	["Maison_Toit_Vert", Vector3(-4.6, TERRACE_1, -22.5), -4.0, 0.95],
+	["Maison_Cartographe", Vector3(-4.6, TERRACE_1, -22.5), -4.0, 1.0],
 	["Maison_Toit_Rouge", Vector3(5.0, TERRACE_1, -22.0), 6.0, 1.05],
-	["Maison_Toit_Orange", Vector3(11.5, TERRACE_1, -21.5), -6.0, 1.0],
+	["Maison_Taverne", Vector3(11.5, TERRACE_1, -21.5), -6.0, 1.0],
 	["Maison_Toit_Vert", Vector3(18.5, TERRACE_1, -20.0), -18.0, 1.1],
 	# Deuxième terrasse (plus haut, plus loin)
 	["Maison_Toit_Vert", Vector3(-15.0, TERRACE_2, -33.0), 8.0, 1.15],
-	["Maison_Toit_Orange", Vector3(-7.0, TERRACE_2, -34.0), 0.0, 1.1],
+	["Maison_Boulangerie", Vector3(-7.0, TERRACE_2, -34.0), 0.0, 1.05],
 	["Loge_Des_Heros", Vector3(1.0, TERRACE_2, -35.0), 0.0, 1.0],
-	["Maison_Toit_Rouge", Vector3(9.0, TERRACE_2, -33.5), -5.0, 1.1],
-	["Maison_Toit_Vert", Vector3(16.0, TERRACE_2, -32.0), -12.0, 1.0],
+	["Maison_Herboriste", Vector3(9.0, TERRACE_2, -33.5), -5.0, 1.05],
+	["Maison_Toit_Orange", Vector3(16.0, TERRACE_2, -32.0), -12.0, 1.0],
 	# Arbres, tonneaux, caisses
 	["Arbre", Vector3(-21.0, 0, -8.0), 10.0, 1.2], ["Arbre", Vector3(-13.0, 0, 6.5), 60.0, 1.0],
 	["Arbre", Vector3(-1.0, TERRACE_1, -18.5), 0.0, 0.9], ["Arbre", Vector3(-23.0, TERRACE_1, -17.5), 130.0, 1.2],
@@ -74,9 +76,11 @@ var _boat: Node3D
 var _gulls: Array[Node3D] = []
 var _clouds: Array[Node3D] = []
 var _lights: Array[OmniLight3D] = []
+var _flags: Array[Node3D] = []
 var _time := 0.0
 
 static var _clean_cache: Dictionary = {}  # texture -> texture lissée
+static var _lot1_materials: Dictionary = {}  # nom du matériau glTF -> matériau partagé
 
 
 func _ready() -> void:
@@ -115,6 +119,9 @@ func _process(delta: float) -> void:
 		g.rotation.y = -a
 		g.get_child(0).rotation.z = sin(_time * 8.0 + i) * 0.5
 		g.get_child(1).rotation.z = -sin(_time * 8.0 + i) * 0.5
+	for i in _flags.size():
+		_flags[i].rotation.y = sin(_time * 2.3 + i) * 0.18
+		_flags[i].rotation.x = sin(_time * 3.1 + i * 0.7) * 0.06
 	for c in _clouds:
 		c.position.x += delta * 1.5
 		if c.position.x > 260.0:
@@ -407,9 +414,13 @@ func _register(b: HubBuilding, id: String, click_size: Vector3, label_height: fl
 	buildings[id] = b
 
 
-## Place un modèle de `assets/hub/` (nom sans extension), avec ses textures lissées.
+## Place un modèle (nom sans extension) : version du lot 1 si elle existe, sinon `assets/hub/`.
+## Les anciens modèles en pixels ont leurs textures lissées en aplats.
 func _place(parent: Node3D, model: String, pos: Vector3, yaw: float) -> Node3D:
-	var path := HUB + model + ".glb"
+	var path := HUB_LOT1 + model + ".glb"
+	var lot1 := ResourceLoader.exists(path)
+	if not lot1:
+		path = HUB + model + ".glb"
 	if not ResourceLoader.exists(path):
 		push_warning("Modèle du hub introuvable : " + path)
 		return null
@@ -417,8 +428,112 @@ func _place(parent: Node3D, model: String, pos: Vector3, yaw: float) -> Node3D:
 	n.position = pos
 	n.rotation_degrees.y = yaw
 	parent.add_child(n)
-	_clean(n)
+	if lot1:
+		_apply_lot1_materials(n)
+	else:
+		_clean(n)
+	_attach_life(n)
 	return n
+
+
+## Les GLB du lot 1 n'embarquent pas leurs textures (les 11 partagent le même atlas) :
+## on leur donne les 3 matériaux partagés, créés une seule fois à partir de lot1/textures/.
+func _apply_lot1_materials(n: Node) -> void:
+	for mesh: MeshInstance3D in n.find_children("*", "MeshInstance3D", true, false):
+		for i in mesh.mesh.get_surface_count():
+			var m := mesh.mesh.surface_get_material(i)
+			var key := String(m.resource_name) if m else "Atlas_Batiments"
+			mesh.set_surface_override_material(i, lot1_material(key))
+
+
+static func lot1_material(key: String) -> StandardMaterial3D:
+	if _lot1_materials.has(key):
+		return _lot1_materials[key]
+	var dir := HUB_LOT1 + "textures/Atlas_Batiments_"
+	var m := StandardMaterial3D.new()
+	m.resource_name = key
+	m.albedo_texture = load(dir + "BaseColor.png")
+	m.normal_enabled = true
+	m.normal_texture = load(dir + "Normal.png")
+	var orm: Texture2D = load(dir + "ORM.png")
+	m.ao_enabled = true
+	m.ao_texture = orm
+	m.ao_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_RED
+	m.ao_light_affect = 0.6
+	m.roughness_texture = orm
+	m.roughness_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_GREEN
+	m.metallic_texture = orm
+	m.metallic_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_BLUE
+	m.metallic = 1.0
+	m.roughness = 1.0
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	if key == "Emissif_Fenetres":
+		m.emission_enabled = true
+		m.emission = Color(1.0, 0.62, 0.22)
+		m.emission_energy_multiplier = 2.4
+	elif key == "Emissif_Cristaux":
+		m.emission_enabled = true
+		m.emission = Color(0.6, 0.25, 1.0)
+		m.emission_energy_multiplier = 3.0
+	_lot1_materials[key] = m
+	return m
+
+
+## Points d'attache des modèles du lot 1 : fumée (Fumee_*), lumière (Lumiere_*), drapeaux (Drapeau_*).
+func _attach_life(n: Node3D) -> void:
+	for child in n.find_children("*", "Node3D", true, false):
+		var node_name := String(child.name)
+		if node_name.begins_with("Fumee_"):
+			_smoke(child as Node3D)
+		elif node_name.begins_with("Lumiere_") and node_name != "Lumiere_Reliques":
+			var l := OmniLight3D.new()
+			l.light_color = Color(1.0, 0.72, 0.42)
+			l.light_energy = 0.9
+			l.omni_range = 3.5
+			(child as Node3D).add_child(l)
+		elif node_name.begins_with("Drapeau_"):
+			_flags.append(child as Node3D)
+
+
+func _smoke(parent: Node3D) -> void:
+	var p := GPUParticles3D.new()
+	p.amount = 8
+	p.lifetime = 4.0
+	p.preprocess = 4.0
+	p.visibility_aabb = AABB(Vector3(-4, -1, -4), Vector3(8, 10, 8))
+	var pm := ParticleProcessMaterial.new()
+	pm.direction = Vector3(0.3, 1, 0)
+	pm.spread = 12.0
+	pm.initial_velocity_min = 0.5
+	pm.initial_velocity_max = 0.8
+	pm.gravity = Vector3(0.15, 0.1, 0)
+	pm.scale_min = 0.8
+	pm.scale_max = 1.5
+	var curve := Curve.new()
+	curve.add_point(Vector2(0, 0.3))
+	curve.add_point(Vector2(1, 1))
+	var sc := CurveTexture.new()
+	sc.curve = curve
+	pm.scale_curve = sc
+	var fade := Gradient.new()
+	fade.set_color(0, Color(1, 1, 1, 0.45))
+	fade.set_color(1, Color(1, 1, 1, 0))
+	var ft := GradientTexture1D.new()
+	ft.gradient = fade
+	pm.color_ramp = ft
+	p.process_material = pm
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.8, 0.8)
+	var m := StandardMaterial3D.new()
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	m.vertex_color_use_as_albedo = true
+	m.albedo_color = Color(0.88, 0.85, 0.82)
+	m.albedo_texture = MarshLevel.soft_dot_texture()
+	quad.material = m
+	p.draw_pass_1 = quad
+	parent.add_child(p)
 
 
 ## Remplace la texture pixel (grille 4 × 4 de cases bruitées) par des aplats de couleur.
@@ -426,7 +541,8 @@ func _clean(node: Node) -> void:
 	for mesh: MeshInstance3D in node.find_children("*", "MeshInstance3D", true, false):
 		for i in mesh.mesh.get_surface_count():
 			var m := mesh.get_active_material(i) as StandardMaterial3D
-			if m == null or m.albedo_texture == null:
+			# Seules les petites textures pixel (128 px) sont lissées ; les textures cuites du lot 1 restent.
+			if m == null or m.albedo_texture == null or m.albedo_texture.get_width() > 256:
 				continue
 			var copy := m.duplicate() as StandardMaterial3D
 			copy.albedo_texture = clean_texture(m.albedo_texture)

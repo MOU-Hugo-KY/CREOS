@@ -1,0 +1,528 @@
+{
+  "coordinates": "Godot Y-up, metres, façade +Z",
+  "lot": 1,
+  "objects": [
+    {
+      "name": "Loge_Des_Heros",
+      "file": "GLB/Loge_Des_Heros.glb",
+      "lod1_file": "LOD/Loge_Des_Heros_LOD1.glb",
+      "position": [
+        -8.5,
+        0,
+        -11
+      ],
+      "rotation_degrees": [
+        0,
+        14,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Fumee_Loge_Des_Heros",
+          "local_position": [
+            -2.03,
+            8.7,
+            -0.9
+          ]
+        },
+        {
+          "name": "Lumiere_Loge_Des_Heros",
+          "local_position": [
+            3.01,
+            2.75,
+            2.75
+          ]
+        },
+        {
+          "name": "Drapeau_Chasseurs",
+          "local_position": [
+            2.94,
+            4.7,
+            2.9299999999999997
+          ]
+        }
+      ],
+      "click_box": {
+        "space": "local",
+        "center": [
+          0.0,
+          4.3,
+          0.20999999999999996
+        ],
+        "size": [
+          7.9372,
+          8.6,
+          5.6
+        ],
+        "shape": "BoxShape3D",
+        "purpose": "clicking only, not navigation collision"
+      }
+    },
+    {
+      "name": "Ma_Loge",
+      "file": "GLB/Ma_Loge.glb",
+      "lod1_file": "LOD/Ma_Loge_LOD1.glb",
+      "position": [
+        8.5,
+        0,
+        -11
+      ],
+      "rotation_degrees": [
+        0,
+        -14,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Fumee_Ma_Loge",
+          "local_position": [
+            -1.7399999999999998,
+            5.85,
+            -0.9
+          ]
+        },
+        {
+          "name": "Lumiere_Ma_Loge",
+          "local_position": [
+            2.58,
+            2.75,
+            2.75
+          ]
+        },
+        {
+          "name": "Drapeau_Joueur",
+          "local_position": [
+            2.2199999999999998,
+            3.95,
+            2.9299999999999997
+          ]
+        }
+      ],
+      "click_box": {
+        "space": "local",
+        "center": [
+          0.0,
+          2.8749999999999996,
+          0.20999999999999996
+        ],
+        "size": [
+          6.9372,
+          5.75,
+          5.6
+        ],
+        "shape": "BoxShape3D",
+        "purpose": "clicking only, not navigation collision"
+      }
+    },
+    {
+      "name": "Marche",
+      "file": "GLB/Marche.glb",
+      "lod1_file": "LOD/Marche_LOD1.glb",
+      "position": [
+        -10,
+        0,
+        -0.5
+      ],
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Drapeau_Marche",
+          "local_position": [
+            0,
+            3.45,
+            -0.5
+          ]
+        },
+        {
+          "name": "Lumiere_Marche",
+          "local_position": [
+            1.82,
+            2.22,
+            1.1099999999999999
+          ]
+        }
+      ],
+      "click_box": {
+        "space": "local",
+        "center": [
+          0.0,
+          1.91198557158515,
+          0.07500000000000007
+        ],
+        "size": [
+          4.0,
+          3.824,
+          2.15
+        ],
+        "shape": "BoxShape3D",
+        "purpose": "clicking only, not navigation collision"
+      }
+    },
+    {
+      "name": "Table_Des_Chasses",
+      "file": "GLB/Table_Des_Chasses.glb",
+      "lod1_file": "LOD/Table_Des_Chasses_LOD1.glb",
+      "position": [
+        8.8,
+        0,
+        0.8
+      ],
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Drapeau_Chasses",
+          "local_position": [
+            1.65,
+            3.55,
+            -0.97
+          ]
+        },
+        {
+          "name": "Lumiere_Chasses",
+          "local_position": [
+            -1.6,
+            3.15,
+            -0.48
+          ]
+        }
+      ],
+      "click_box": {
+        "space": "local",
+        "center": [
+          0.03624999999999989,
+          2.0744855715851496,
+          0.0
+        ],
+        "size": [
+          4.0725,
+          4.149,
+          3.0
+        ],
+        "shape": "BoxShape3D",
+        "purpose": "clicking only, not navigation collision"
+      }
+    },
+    {
+      "name": "Autel_Des_Reliques",
+      "file": "GLB/Autel_Des_Reliques.glb",
+      "lod1_file": "LOD/Autel_Des_Reliques_LOD1.glb",
+      "position": [
+        0,
+        0,
+        -3
+      ],
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Cristal",
+          "local_position": [
+            0,
+            2.28,
+            0
+          ]
+        },
+        {
+          "name": "Lumiere_Reliques",
+          "local_position": [
+            0,
+            2.28,
+            0
+          ]
+        }
+      ],
+      "click_box": {
+        "space": "local",
+        "center": [
+          0.0,
+          1.545,
+          0.0
+        ],
+        "size": [
+          5.0,
+          3.09,
+          5.0
+        ],
+        "shape": "BoxShape3D",
+        "purpose": "clicking only, not navigation collision"
+      }
+    },
+    {
+      "name": "Maison_Boulangerie",
+      "file": "GLB/Maison_Boulangerie.glb",
+      "lod1_file": "LOD/Maison_Boulangerie_LOD1.glb",
+      "position": [
+        -17,
+        0,
+        -7
+      ],
+      "rotation_degrees": [
+        0,
+        20,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Fumee_Maison_Boulangerie",
+          "local_position": [
+            -1.305,
+            8.7,
+            -0.8
+          ]
+        },
+        {
+          "name": "Lumiere_Maison_Boulangerie",
+          "local_position": [
+            1.935,
+            2.75,
+            2.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Maison_Forge",
+      "file": "GLB/Maison_Forge.glb",
+      "lod1_file": "LOD/Maison_Forge_LOD1.glb",
+      "position": [
+        -17,
+        2.4,
+        -21
+      ],
+      "rotation_degrees": [
+        0,
+        18,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Fumee_Maison_Forge",
+          "local_position": [
+            -1.305,
+            5.85,
+            -0.8
+          ]
+        },
+        {
+          "name": "Lumiere_Maison_Forge",
+          "local_position": [
+            1.935,
+            2.75,
+            2.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Maison_Taverne",
+      "file": "GLB/Maison_Taverne.glb",
+      "lod1_file": "LOD/Maison_Taverne_LOD1.glb",
+      "position": [
+        -8,
+        2.4,
+        -23
+      ],
+      "rotation_degrees": [
+        0,
+        8,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Fumee_Maison_Taverne",
+          "local_position": [
+            -1.305,
+            5.85,
+            -0.8
+          ]
+        },
+        {
+          "name": "Lumiere_Maison_Taverne",
+          "local_position": [
+            1.935,
+            2.75,
+            2.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Maison_Pecheur",
+      "file": "GLB/Maison_Pecheur.glb",
+      "lod1_file": "LOD/Maison_Pecheur_LOD1.glb",
+      "position": [
+        16,
+        2.4,
+        -23
+      ],
+      "rotation_degrees": [
+        0,
+        -18,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Fumee_Maison_Pecheur",
+          "local_position": [
+            -1.305,
+            8.7,
+            -0.8
+          ]
+        },
+        {
+          "name": "Lumiere_Maison_Pecheur",
+          "local_position": [
+            1.935,
+            2.75,
+            2.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Maison_Herboriste",
+      "file": "GLB/Maison_Herboriste.glb",
+      "lod1_file": "LOD/Maison_Herboriste_LOD1.glb",
+      "position": [
+        8,
+        4.8,
+        -34
+      ],
+      "rotation_degrees": [
+        0,
+        -8,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Fumee_Maison_Herboriste",
+          "local_position": [
+            -1.305,
+            5.85,
+            -0.8
+          ]
+        },
+        {
+          "name": "Lumiere_Maison_Herboriste",
+          "local_position": [
+            1.935,
+            2.75,
+            2.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Maison_Cartographe",
+      "file": "GLB/Maison_Cartographe.glb",
+      "lod1_file": "LOD/Maison_Cartographe_LOD1.glb",
+      "position": [
+        -8,
+        4.8,
+        -34
+      ],
+      "rotation_degrees": [
+        0,
+        8,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Fumee_Maison_Cartographe",
+          "local_position": [
+            -1.305,
+            5.85,
+            -0.8
+          ]
+        },
+        {
+          "name": "Lumiere_Maison_Cartographe",
+          "local_position": [
+            1.935,
+            2.75,
+            2.5
+          ]
+        }
+      ]
+    }
+  ],
+  "camera": {
+    "position": [
+      0,
+      11,
+      21
+    ],
+    "target": [
+      0,
+      5,
+      -10
+    ],
+    "vertical_fov_degrees": 42
+  }
+}

@@ -56,6 +56,9 @@
       place fermée façon village, ville en terrasses, lumière dorée + contre-jour bleu, halo,
       vignette, poussières, nuages, mouettes ; **le continent à l'horizon** (Sylvecroc,
       Brumenoire, citadelle et Tour de Morvath, Cendrefer, Drakonis, Sel-Brisé)
+- [x] Lot 1 du générateur Blender : 11 bâtiments détaillés (volets, enseignes, jardinières,
+      lanternes, tuiles), textures cuites partagées, fumée des cheminées, drapeaux qui ondulent
+- [ ] Lots 2 à 4 du générateur Blender : sol et végétation, eau et accessoires, horizon
 - [x] **Loge des héros** : liste des héros, héros en 3D qui tourne (on peut voir ses 3 attaques),
       stats à son niveau, attaques avec icônes, choix de l'équipe de chasse (4 max)
 - [x] **Sire Malgrave** (Chevalier possédé) jouable : chaînes spectrales qui attirent, onde du tombeau
