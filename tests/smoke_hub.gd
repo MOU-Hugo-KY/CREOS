@@ -30,6 +30,10 @@ func _process(_delta: float) -> bool:
 				ok = false
 		print("bâtiments : ", ids.size(), "  héros sur la place : ", hub.wanderers.size())
 		hub._do_action("campaign", "table_des_chasses")
+		if not hub.hud.hunt_prep.visible:
+			printerr("ÉCHEC : l'écran « Préparer la chasse » ne s'ouvre pas")
+			ok = false
+		hub.start_hunt(hub.hud.hunt_prep.dungeon_id)
 	if frames == 30:
 		var scene_name: String = String(current_scene.name) if current_scene else "aucune"
 		print("scène après « Chasses » : ", scene_name)

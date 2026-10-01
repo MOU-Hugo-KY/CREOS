@@ -83,8 +83,12 @@ func load_game() -> void:
 	for id: String in _start.get("heroes", {}):
 		if not state.heroes.has(id):
 			state.heroes[id] = _start.heroes[id].duplicate()
-	if state.team.is_empty():
-		state.team = _start.get("team", []).duplicate()
+	# Équipe incomplète (héros retirés du jeu) : on la complète avec les héros possédés.
+	for id: String in state.heroes:
+		if state.team.size() >= TEAM_SIZE:
+			break
+		if id not in state.team:
+			state.team.append(id)
 	update_energy()
 
 

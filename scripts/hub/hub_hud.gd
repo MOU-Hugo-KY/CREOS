@@ -30,6 +30,7 @@ var lodge: HeroesScreen
 var altar: SummonAltar
 var profile: ProfileScreen
 var quests: QuestsScreen
+var hunt_prep: HuntPrepScreen
 
 
 func _ready() -> void:
@@ -64,6 +65,10 @@ func _ready() -> void:
 	quests.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
 	quests.go_to.connect(func(act: String) -> void: action.emit(act, ACTION_TARGETS.get(act, "")))
 	_root.add_child(quests)
+	hunt_prep = HuntPrepScreen.new()
+	hunt_prep.closed.connect(func() -> void: _set_menus_visible(true))
+	hunt_prep.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	_root.add_child(hunt_prep)
 	PlayerData.changed.connect(refresh)
 	refresh()
 	var timer := Timer.new()
@@ -117,6 +122,11 @@ func open_profile() -> void:
 	profile.open()
 
 
+func open_hunt_prep(dungeon_id: String) -> void:
+	_set_menus_visible(false)
+	hunt_prep.open_for(dungeon_id)
+
+
 func open_quests() -> void:
 	_set_menus_visible(false)
 	quests.open()
@@ -136,7 +146,7 @@ func close_altar() -> void:
 func _set_menus_visible(on: bool) -> void:
 	screen_opened.emit(not on)
 	for c in _root.get_children():
-		if c not in [lodge, altar, profile, quests, _toast]:
+		if c not in [lodge, altar, profile, quests, hunt_prep, _toast]:
 			c.visible = on
 	if on and _sound_panel:
 		_sound_panel.visible = _sound_button.button_pressed

@@ -52,6 +52,7 @@ func _ready() -> void:
 	hud.action.connect(_do_action)
 	hud.screen_opened.connect(func(open: bool) -> void: town.set_labels_visible(not open))
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
+	hud.hunt_prep.start_requested.connect(start_hunt)
 
 
 ## Bords de l'écran légèrement assombris et chauds : cadre l'image et attire l'œil au centre.
@@ -115,11 +116,8 @@ func _on_building_clicked(id: String) -> void:
 func _do_action(action_name: String, id: String) -> void:
 	match action_name:
 		"campaign":
-			var hunt: String = GameData.hub.get("first_hunt", "brumenoire_1")
-			if PlayerData.start_hunt(hunt):
-				go_to_battle()
-			else:
-				hud.toast("Pas assez d'énergie : il en faut %d (tu as %d)." % [PlayerData.hunt_cost(hunt), PlayerData.energy()])
+			# D'abord l'écran « Préparer la chasse » (choix de l'équipe), puis le combat.
+			hud.open_hunt_prep(GameData.hub.get("first_hunt", "brumenoire_1"))
 		"heroes":
 			hud.open_lodge()
 		"altar":
@@ -129,6 +127,13 @@ func _do_action(action_name: String, id: String) -> void:
 		_:
 			var name := _name_of(id)
 			hud.toast("%s — bientôt disponible !" % name)
+
+
+func start_hunt(hunt: String) -> void:
+	if PlayerData.start_hunt(hunt):
+		go_to_battle()
+	else:
+		hud.toast("Pas assez d'énergie : il en faut %d (tu as %d)." % [PlayerData.hunt_cost(hunt), PlayerData.energy()])
 
 
 func go_to_battle() -> void:

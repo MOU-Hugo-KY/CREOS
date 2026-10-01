@@ -214,7 +214,7 @@ func refresh() -> void:
 		var pc := CenterContainer.new()
 		pc.add_child(RoundPortrait.new().setup(hero, 104))
 		col.add_child(pc)
-		var n := UiKit.label(String(hero.name).get_slice(" ", 0), 20, UiKit.TEXT_ON_PARCHMENT)
+		var n := UiKit.label(String(hero.get("short", hero.name)), 20, UiKit.TEXT_ON_PARCHMENT)
 		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		col.add_child(n)
 		var l := UiKit.label("Niv. %d" % PlayerData.hero_level(id), 17, UiKit.TEXT_SOFT)

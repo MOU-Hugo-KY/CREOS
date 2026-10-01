@@ -1,6 +1,7 @@
 {
   "corbin": {
     "name": "Corbin le Corbeau",
+    "short": "Corbin",
     "class": "lame",
     "element": "ombre",
     "family": "chasseurs",
@@ -75,6 +76,7 @@
   },
   "aegis": {
     "name": "Aegis le Rempart",
+    "short": "Aegis",
     "class": "gardien",
     "element": "lumiere",
     "family": "chasseurs",
@@ -156,6 +158,7 @@
   },
   "brume": {
     "name": "Brume des Marées",
+    "short": "Brume",
     "class": "arcaniste",
     "element": "eau",
     "family": "chasseurs",
@@ -234,6 +237,7 @@
   },
   "orage": {
     "name": "Frère Orage",
+    "short": "Orage",
     "class": "arcaniste",
     "element": "lumiere",
     "family": "chasseurs",
