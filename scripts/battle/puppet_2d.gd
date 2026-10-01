@@ -142,6 +142,12 @@ func _add_shadow(size: float) -> void:
 	add_child(s)
 
 
+## Ordre de dessin de toute la marionnette (décor 2D trié à la main).
+func set_render_priority(p: int) -> void:
+	for m in _mats:
+		m.render_priority = p
+
+
 func set_facing(dir: float) -> void:
 	facing = 1.0 if dir >= 0.0 else -1.0
 

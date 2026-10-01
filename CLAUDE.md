@@ -56,6 +56,12 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   fragments du héros, règles dans `Progression`), Profil (clic sur le profil en haut à gauche), Primes du jour (`QuestsScreen`, règles pures dans `scripts/core/quests.gd`,
   données dans `data/quests.json`, événements notés par `PlayerData.record_event()`), Loge,
   Autel des Reliques (invocations, `data/summon.json`).
+- **Port-Franc en 2D** (`scripts/hub/port_franc_2d.gd`, images dans `assets/hub2d/port/`) : un
+  « théâtre » de calques posés à différentes distances de la caméra (parallaxe en glissant),
+  bâtiments cliquables avec leur image de survol, animations en planches de sprites
+  (`Nom_8f_10fps.png`), héros marionnettes qui se promènent. Ordre de dessin explicite
+  (`render_priority`) : fond < place < objets triés par leur point au sol < premier plan.
+  L'ancien port 3D (`port_franc.gd`) ne sert plus que si ces images sont absentes.
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
   `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),
   `battle_fx.gd` (effets), `battle_audio.gd` (sons), `ui/` (interface et écran de fin).

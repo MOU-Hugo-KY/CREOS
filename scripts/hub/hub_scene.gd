@@ -10,7 +10,10 @@ const CAMERA_LOOK := Vector3(0, 5.0, -10.0)
 const PAN_LIMIT := 7.0
 const DRAG_THRESHOLD := 12.0
 
-var town: PortFranc
+var town: Node3D  # PortFranc2D (décor dessiné) ou PortFranc (ancien décor 3D)
+var _cam_pos := CAMERA_POS
+var _cam_look := CAMERA_LOOK
+var _pan_limit := PAN_LIMIT
 var hud: HubHud
 var audio: BattleAudio
 var camera: Camera3D
@@ -25,18 +28,26 @@ var _drag_moved := false
 
 func _ready() -> void:
 	Engine.time_scale = 1.0
-	town = PortFranc.new()
+	if ResourceLoader.exists(PortFranc2D.DIR + "Port_Place.png"):
+		town = PortFranc2D.new()
+	else:
+		town = PortFranc.new()
 	add_child(town)
 	town.building_clicked.connect(_on_building_clicked)
 
 	camera = Camera3D.new()
 	camera.fov = 42
+	if town is PortFranc2D:
+		_cam_pos = town.camera_pos
+		_cam_look = town.camera_look
+		_pan_limit = town.pan_limit
+		camera.fov = PortFranc2D.FOV
 	add_child(camera)
 	_add_vignette()
 	_update_camera()
 
 	var i := 0
-	for id: String in PlayerData.owned_heroes():
+	for id: String in ([] if town is PortFranc2D else PlayerData.owned_heroes()):
 		var w := Wanderer.new()
 		add_child(w)
 		w.setup(GameData.hero(id), 100 + i)
@@ -96,13 +107,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		if mm.position.distance_to(_drag_start) > DRAG_THRESHOLD:
 			_drag_moved = true
 		if _drag_moved:
-			_pan_target = clampf(_pan_target - mm.relative.x * 0.02, -PAN_LIMIT, PAN_LIMIT)
+			_pan_target = clampf(_pan_target - mm.relative.x * 0.02, -_pan_limit, _pan_limit)
 
 
 func _update_camera() -> void:
 	var off := Vector3(_pan, 0, 0)
-	camera.position = CAMERA_POS + off
-	camera.look_at(CAMERA_LOOK + off, Vector3.UP)
+	camera.position = _cam_pos + off
+	camera.look_at(_cam_look + off, Vector3.UP)
 
 
 func _on_building_clicked(id: String) -> void:

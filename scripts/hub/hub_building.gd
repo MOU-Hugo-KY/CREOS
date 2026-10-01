@@ -4,6 +4,7 @@ extends Node3D
 ## et léger rebond quand on le survole ou le touche.
 
 signal clicked(building_id: String)
+signal hovered(on: bool)
 
 var building_id := ""
 var label_height := 6.0
@@ -41,7 +42,7 @@ func setup(p_id: String, display_name: String, size: Vector3, p_label_height: fl
 	_label.no_depth_test = true
 	_label.fixed_size = true
 	_label.pixel_size = 0.0008
-	_label.render_priority = 5
+	_label.render_priority = 127
 	_label.position = Vector3(0, label_height, 0)
 	add_child(_label)
 
@@ -51,6 +52,11 @@ func _on_input(_camera: Node, event: InputEvent, _pos: Vector3, _normal: Vector3
 	if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
 		bounce()
 		clicked.emit(building_id)
+
+
+func set_label_size(font_size: int) -> void:
+	_label.font_size = font_size
+	_label.outline_size = maxi(6, font_size / 4)
 
 
 func set_label_visible(on: bool) -> void:
@@ -66,5 +72,6 @@ func bounce() -> void:
 
 func _set_hover(on: bool) -> void:
 	_hover = on
+	hovered.emit(on)
 	_label.modulate = Color(1.0, 0.85, 0.35) if on else Color(1.0, 0.93, 0.75)
 	_label.outline_size = 16 if on else 12
