@@ -86,6 +86,14 @@ const DECOR_LOT2 := [
 const LAMPS := [Vector3(-4.5, 0, 2.5), Vector3(4.5, 0, 2.5), Vector3(-5.5, 0, -7.5), Vector3(5.5, 0, -7.5),
 	Vector3(-2.6, TERRACE_1, -17.0), Vector3(2.6, TERRACE_1, -17.0)]
 
+# Guirlandes de fanions au-dessus de la place : [départ, arrivée] (en haut des lampadaires)
+const BUNTING := [
+	[Vector3(-5.5, 3.5, -7.5), Vector3(5.5, 3.5, -7.5)],
+	[Vector3(-4.5, 3.5, 2.5), Vector3(-5.5, 3.5, -7.5)],
+	[Vector3(4.5, 3.5, 2.5), Vector3(5.5, 3.5, -7.5)],
+]
+const BUNTING_COLORS := [Color(0.85, 0.25, 0.22), Color(0.95, 0.75, 0.25), Color(0.25, 0.45, 0.8), Color(0.95, 0.92, 0.85)]
+
 var buildings: Dictionary = {}  # id -> HubBuilding
 var backdrop: ContinentBackdrop
 var _crystal: Node3D
@@ -95,6 +103,7 @@ var _gulls: Array[Node3D] = []
 var _clouds: Array[Node3D] = []
 var _lights: Array[OmniLight3D] = []
 var _flags: Array[Node3D] = []
+var _pennants: Array[Node3D] = []
 var _time := 0.0
 
 static var _clean_cache: Dictionary = {}  # texture -> texture lissée
@@ -121,6 +130,8 @@ func _ready() -> void:
 			n.scale = Vector3.ONE * float(d[3])
 	for p: Vector3 in LAMPS:
 		_build_lamp(p)
+	for line: Array in BUNTING:
+		_build_bunting(line[0], line[1])
 	_build_tower()
 	_build_life()
 
@@ -145,6 +156,8 @@ func _process(delta: float) -> void:
 	for i in _flags.size():
 		_flags[i].rotation.y = sin(_time * 2.3 + i) * 0.18
 		_flags[i].rotation.x = sin(_time * 3.1 + i * 0.7) * 0.06
+	for i in _pennants.size():
+		_pennants[i].rotation.x = sin(_time * 2.6 + i * 0.9) * 0.35
 	for c in _clouds:
 		c.position.x += delta * 1.5
 		if c.position.x > 260.0:
@@ -168,8 +181,8 @@ func _build_environment() -> void:
 	e.background_mode = Environment.BG_SKY
 	e.sky = sky
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.42, 0.5, 0.72)
-	e.ambient_light_energy = 0.42
+	e.ambient_light_color = Color(0.4, 0.5, 0.78)  # ombres bleutées, contraste avec le soleil doré
+	e.ambient_light_energy = 0.48
 	e.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	e.tonemap_exposure = 0.92
 	e.tonemap_white = 1.6
@@ -179,8 +192,8 @@ func _build_environment() -> void:
 	e.glow_bloom = 0.04
 	e.glow_hdr_threshold = 1.15
 	e.fog_enabled = true
-	e.fog_light_color = Color(0.55, 0.58, 0.75)
-	e.fog_density = 0.0024
+	e.fog_light_color = Color(0.62, 0.62, 0.76)
+	e.fog_density = 0.0016
 	e.fog_sky_affect = 0.1
 	e.adjustment_enabled = true
 	e.adjustment_saturation = 1.2
@@ -194,7 +207,7 @@ func _build_environment() -> void:
 	var sun := DirectionalLight3D.new()
 	sun.rotation_degrees = Vector3(-24, 48, 0)
 	sun.light_color = Color(1.0, 0.76, 0.52)
-	sun.light_energy = 1.55
+	sun.light_energy = 1.75
 	sun.shadow_enabled = true
 	sun.shadow_blur = 1.6
 	sun.directional_shadow_max_distance = 70.0
@@ -263,6 +276,30 @@ func _build_terraces() -> void:
 
 
 
+var _water_mat: ShaderMaterial
+
+
+## Eau animée partagée par la mer et le canal (reflets dorés du couchant).
+func _water_material() -> ShaderMaterial:
+	if _water_mat:
+		return _water_mat
+	_water_mat = ShaderMaterial.new()
+	var shader := Shader.new()
+	shader.code = MarshLevel.WATER_SHADER
+	_water_mat.shader = shader
+	_water_mat.set_shader_parameter("deep_color", Color(0.05, 0.2, 0.34))
+	_water_mat.set_shader_parameter("shallow_color", Color(0.14, 0.45, 0.55))
+	_water_mat.set_shader_parameter("glint_color", Color(1.0, 0.78, 0.5))
+	var noise := FastNoiseLite.new()
+	noise.frequency = 0.012
+	var noise_tex := NoiseTexture2D.new()
+	noise_tex.seamless = true
+	noise_tex.noise = noise
+	noise_tex.generate_mipmaps = true
+	_water_mat.set_shader_parameter("noise_tex", noise_tex)
+	return _water_mat
+
+
 func _build_harbor(with_quay: bool) -> void:
 	var water := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
@@ -270,21 +307,7 @@ func _build_harbor(with_quay: bool) -> void:
 	plane.subdivide_width = 60
 	plane.subdivide_depth = 100
 	water.mesh = plane
-	var mat := ShaderMaterial.new()
-	var shader := Shader.new()
-	shader.code = MarshLevel.WATER_SHADER
-	mat.shader = shader
-	mat.set_shader_parameter("deep_color", Color(0.05, 0.2, 0.34))
-	mat.set_shader_parameter("shallow_color", Color(0.14, 0.45, 0.55))
-	mat.set_shader_parameter("glint_color", Color(1.0, 0.78, 0.5))
-	var noise := FastNoiseLite.new()
-	noise.frequency = 0.012
-	var noise_tex := NoiseTexture2D.new()
-	noise_tex.seamless = true
-	noise_tex.noise = noise
-	noise_tex.generate_mipmaps = true
-	mat.set_shader_parameter("noise_tex", noise_tex)
-	water.material_override = mat
+	water.material_override = _water_material()
 	water.position = Vector3(134, SEA_LEVEL, -120)
 	add_child(water)
 	if with_quay:
@@ -308,8 +331,9 @@ func _build_lot2() -> void:
 	var canal := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(1.8, 60)
+	plane.subdivide_depth = 30
 	canal.mesh = plane
-	canal.material_override = Blocks.mat(Color(0.12, 0.38, 0.48), 0.1, 0.0)
+	canal.material_override = _water_material()
 	canal.position = Vector3(12.5, -0.25, -14)
 	add_child(canal)
 
@@ -389,6 +413,7 @@ func _build_tower() -> void:
 	light.position.y = 38.0
 	root.add_child(light)
 	_register(root, "tour", Vector3(14, 40, 12), 24.0)
+	root.set_label_visible(false)  # trop près du titre : la Tour a déjà son bouton à droite
 
 
 func _build_lamp(pos: Vector3) -> void:
@@ -400,6 +425,49 @@ func _build_lamp(pos: Vector3) -> void:
 	light.position = pos + Vector3(0, 3.6, 0)
 	add_child(light)
 	_lights.append(light)
+
+
+## Une corde qui pend entre deux points, avec des fanions colorés qui flottent au vent.
+func _build_bunting(a: Vector3, b: Vector3) -> void:
+	var rope := Blocks.mat(Color(0.3, 0.24, 0.18), 0.0, 0.0)
+	var length := a.distance_to(b)
+	var count := int(length / 0.55)
+	var sag := 0.08 * length
+	var prev := a
+	var flag_mats: Array[StandardMaterial3D] = []
+	for c: Color in BUNTING_COLORS:
+		var m := Blocks.mat(c, 0.0, 0.0)
+		m.cull_mode = BaseMaterial3D.CULL_DISABLED
+		flag_mats.append(m)
+	for i in range(1, count + 1):
+		var t := float(i) / count
+		var p := a.lerp(b, t) - Vector3(0, sag * 4.0 * t * (1.0 - t), 0)
+		var seg := MeshInstance3D.new()
+		var cyl := CylinderMesh.new()
+		cyl.top_radius = 0.015
+		cyl.bottom_radius = 0.015
+		cyl.height = prev.distance_to(p)
+		cyl.radial_segments = 4
+		seg.mesh = cyl
+		seg.material_override = rope
+		add_child(seg)
+		seg.look_at_from_position((prev + p) / 2.0, p, Vector3.UP if absf((p - prev).normalized().y) < 0.99 else Vector3.RIGHT)
+		seg.rotate_object_local(Vector3.RIGHT, PI / 2.0)
+		if i < count:
+			var pivot := Node3D.new()
+			add_child(pivot)
+			pivot.look_at_from_position(p, p + (b - a).cross(Vector3.UP), Vector3.UP)
+			var flag := MeshInstance3D.new()
+			var prism := PrismMesh.new()
+			prism.size = Vector3(0.34, 0.42, 0.01)
+			flag.mesh = prism
+			flag.material_override = flag_mats[i % flag_mats.size()]
+			flag.rotation.z = PI  # pointe vers le bas
+			flag.position.y = -0.21
+			flag.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			pivot.add_child(flag)
+			_pennants.append(pivot)
+		prev = p
 
 
 # --- Vie : poussières dorées, nuages, mouettes -----------------------------------
@@ -483,7 +551,7 @@ func _sparkles(parent: Node3D, pos: Vector3, color: Color, amount: int, radius: 
 ## Cache les noms des bâtiments (quand un écran plein est ouvert par-dessus).
 func set_labels_visible(on: bool) -> void:
 	for id: String in buildings:
-		buildings[id].set_label_visible(on)
+		buildings[id].set_label_visible(on and id != "tour")
 
 
 func _register(b: HubBuilding, id: String, click_size: Vector3, label_height: float) -> void:
