@@ -13,6 +13,14 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 - Assets 3D du prototype : packs **KayKit (CC0)** dans `assets/kaykit/` (personnages avec 76 à 95
   animations : `Idle`, `Hit_A`, `Death_A`, `Spellcast_Shoot`, `1H_Melee_Attack_Chop`…).
 
+## Style visuel : « 3D low-poly pixel art »
+- Les scènes jouables passent par `PixelStage` (`scripts/core/pixel_stage.gd`) : rendu 3D en basse
+  résolution (`pixel_size`, 4 par défaut), agrandi sans flou. L'interface (CanvasLayer nommé `HUD`)
+  est sortie du rendu basse résolution pour rester nette.
+- Tout modèle 3D ajouté doit passer par `PixelStyle.apply(node)` (toon, textures sans lissage, contour).
+- Caméra **orthographique**. Pas de MSAA, pas de flou, pas de bloom baveux.
+- Pour vérifier le rendu : `tools/screenshot.gd` (image) ou `tools/record_frames.gd` puis ffmpeg (GIF).
+
 ## Architecture (à respecter)
 - `scripts/combat/` = **logique pure** (RefCounted, aucun nœud, aucun affichage), **déterministe**
   avec une graine aléatoire. `BattleEngine.step(delta)` fait avancer le combat ;
@@ -30,7 +38,7 @@ godot --headless --path . --import                              # (ré)importer 
 godot --headless --path . --script res://tests/run_tests.gd     # tests du moteur de combat
 godot --headless --path . --script res://tests/smoke_battle.gd  # la scène de combat va jusqu'au bout
 godot --path .                                                  # lancer le jeu
-godot --path . --resolution 1280x720 --script res://tools/screenshot.gd  # capture -> docs/
+godot --path . --resolution 1280x720 --script res://tools/screenshot.gd -- res://scenes/pixel_battle.tscn  # capture -> docs/
 ```
 Sous Windows, `godot` = le chemin de l'exécutable installé par `tools/setup-windows.ps1`.
 

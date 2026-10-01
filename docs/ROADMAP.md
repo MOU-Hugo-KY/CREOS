@@ -8,8 +8,12 @@
 - [x] Premier donjon jouable : *Brumenoire — Le Gué des Noyés* (3 vagues + Vel'Zareth la Liche)
 - [x] 5 héros de départ en données (`data/heroes.json`)
 - [x] Scripts d'installation pour PC (Godot, MCP Godot, MCP Blender)
+- [x] Style « 3D low-poly pixel art » (rendu basse résolution, toon, contours, caméra orthographique)
+- [x] Vitrine des héros et monstres (`scenes/pixel_showcase.tscn`)
 
-![Prototype](capture-prototype.png)
+![Combat](combat-pixel.gif)
+
+![Vitrine](vitrine-pixel.gif)
 
 ## 🎯 Étape 1 — Combat qui « claque » (prochaine session)
 - [ ] Choisir l'équipement visible de chaque héros : les modèles KayKit contiennent déjà toutes
@@ -24,7 +28,15 @@
 - [ ] Écran de fin : étoiles (0 à 3 selon les héros survivants), butin
 - [ ] Sons (packs CC0, par exemple Kenney)
 
+## Étape 1 bis — Style pixel art (affiner)
+- [ ] Police pixel (CC0, par exemple de Kenney) pour l'interface et les dégâts
+- [ ] Palette de couleurs limitée par région (shader de quantification sur le PixelStage)
+- [ ] Éviter le « scintillement » des pixels quand la caméra bouge (caler la caméra sur la grille de pixels)
+- [ ] Particules et effets en gros pixels
+
 ## Étape 2 — Boucle de progression
+- [ ] **Portail d'invocation** (GDD §6 bis) : parchemins, taux, garantie de 10, compteur de pitié,
+      bannière de départ, Éclats et Boutique du Chasseur (logique pure + tests des taux)
 - [ ] Sauvegarde locale (`user://save.json`) : or, héros possédés, niveaux
 - [ ] Niveaux et XP des héros, formule de stats par niveau
 - [ ] Carte de la région (Brumenoire : 6 donjons + boss) avec étoiles

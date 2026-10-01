@@ -167,9 +167,50 @@ Règles pour CREOS :
 
 ---
 
+## 6 bis. Invocations (gacha généreux)
+
+Le **Portail des Reliques** invoque des héros au hasard, mais **le jeu gratuit doit en donner
+beaucoup** : tout le monde doit avoir sa chance.
+
+**Monnaies d'invocation**
+- **Parchemins d'invocation** : 1 parchemin = 1 invocation. On les gagne **en grande quantité** en
+  jouant : premier passage de chaque donjon de l'histoire, 3 étoiles, boss de région, quêtes du
+  jour, connexion, événements.
+- **Éclats de Relique** : convertis automatiquement quand on obtient un héros en double. Ils servent
+  à faire monter ses étoiles **ou** à acheter le héros de son choix dans la **Boutique du Chasseur**.
+
+**Taux (invocation standard)**
+
+| Rareté | Taux |
+|---|---|
+| Rare | 70 % |
+| Épique | 24 % |
+| Légendaire | 5 % |
+| Mythique | 1 % |
+| Relique Ancienne | uniquement par événements et quêtes d'histoire, **jamais** par achat |
+
+**Protections pour les joueurs**
+- **Garantie** : 10 invocations d'affilée = au moins 1 Épique.
+- **Compteur de pitié visible** : au plus tard la 50e invocation donne un Légendaire, la 150e un
+  Mythique. Le compteur ne se remet pas à zéro quand on change de bannière.
+- **Bannière de départ** : les 10 premières invocations sont à moitié prix et garantissent un
+  Légendaire au choix parmi 3.
+- **Objectif chiffré** : un joueur gratuit qui joue l'histoire doit pouvoir faire environ
+  **100 invocations au cours du premier chapitre**.
+- Tous les héros des bannières reviennent ensuite **dans la Boutique du Chasseur** (en Éclats), donc
+  rien n'est raté pour toujours.
+
+---
+
 ## 7. Direction artistique
 
-- **Low-poly stylisé « chibi »** (têtes un peu grosses, couleurs vives), proche de Dungeon Boss.
+- **Style « 3D low-poly pixel art »** : de vrais modèles 3D low-poly « chibi », rendus en **basse
+  résolution** (1 gros pixel = 4 pixels d'écran) puis agrandis **sans flou**, avec un éclairage en
+  **aplats nets** (toon), un **contour sombre** de 1 pixel et une caméra **orthographique**.
+  Résultat : on dirait du pixel art, mais ça tourne, s'anime et se déplace comme de la 3D.
+  Implémentation : `scripts/core/pixel_stage.gd` (rendu basse résolution) et
+  `scripts/core/pixel_style.gd` (matériaux). Réglage : `pixel_size` dans `scenes/pixel_battle.tscn`.
+  Captures : `docs/vitrine-pixel.gif`, `docs/combat-pixel.gif`.
 - Prototype : packs **KayKit (CC0)** déjà dans `assets/kaykit/`.
 - Ensuite : nos propres héros, à partir de dessins ou de descriptions → image IA → modèle 3D
   (Higgsfield `generate_3d`, Hunyuan3D, ou modélisation dans Blender via mcp-for-blender).

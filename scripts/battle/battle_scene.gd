@@ -12,8 +12,9 @@ const PROPS := {
 	"res://assets/kaykit/dungeon/Assets/barrel_large.gltf.glb": [Vector3(-9, 0, -3.5)],
 	"res://assets/kaykit/dungeon/Assets/rubble_large.gltf.glb": [Vector3(9.5, 0, -4)],
 }
-const HERO_SPOTS := [Vector3(-2.5, 0, 0.0), Vector3(-4.2, 0, -2.0), Vector3(-4.2, 0, 2.0), Vector3(-6.0, 0, 0.0)]
-const ENEMY_SPOTS := [Vector3(2.5, 0, 0.0), Vector3(4.2, 0, -2.0), Vector3(4.2, 0, 2.0), Vector3(6.0, 0, 0.0)]
+const FLOOR_TINT := Color(0.42, 0.5, 0.45)  # dalles du marais de Brumenoire
+const HERO_SPOTS := [Vector3(-2.2, 0, 0.3), Vector3(-4.0, 0, -2.6), Vector3(-4.6, 0, 2.6), Vector3(-6.4, 0, 0.0)]
+const ENEMY_SPOTS := [Vector3(2.2, 0, 0.3), Vector3(4.0, 0, -2.6), Vector3(4.6, 0, 2.6), Vector3(6.4, 0, 0.0)]
 
 var engine := BattleEngine.new()
 var views: Dictionary = {}  # uid -> UnitView
@@ -126,26 +127,30 @@ func _build_world() -> void:
 	var env := WorldEnvironment.new()
 	var e := Environment.new()
 	e.background_mode = Environment.BG_COLOR
-	e.background_color = Color(0.09, 0.08, 0.12)
+	e.background_color = Color(0.07, 0.09, 0.1)
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.55, 0.5, 0.7)
-	e.ambient_light_energy = 0.6
-	e.fog_enabled = true
-	e.fog_light_color = Color(0.25, 0.3, 0.3)
-	e.fog_density = 0.02
+	e.ambient_light_color = Color(0.45, 0.5, 0.75)
+	e.ambient_light_energy = 0.35
+	e.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	e.adjustment_enabled = true
+	e.adjustment_saturation = 1.15
+	e.adjustment_contrast = 1.05
 	env.environment = e
 	add_child(env)
 
 	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-55, -30, 0)
-	sun.light_energy = 1.2
+	sun.rotation_degrees = Vector3(-50, -35, 0)
+	sun.light_color = Color(1.0, 0.92, 0.8)
+	sun.light_energy = 0.9
 	sun.shadow_enabled = true
 	add_child(sun)
 
 	var cam := Camera3D.new()
-	cam.position = Vector3(0, 9.5, 13.5)
-	cam.rotation_degrees = Vector3(-30, 0, 0)
-	cam.fov = 50
+	# Caméra orthographique : pas de perspective, rendu net façon pixel art.
+	cam.projection = Camera3D.PROJECTION_ORTHOGONAL
+	cam.size = 12.5
+	cam.position = Vector3(0, 10, 14)
+	cam.rotation_degrees = Vector3(-35, 0, 0)
 	add_child(cam)
 
 	var tile: PackedScene = load(FLOOR_TILE)
@@ -155,6 +160,7 @@ func _build_world() -> void:
 				var t := tile.instantiate() as Node3D
 				t.position = Vector3(x * 4 + 2, 0, z * 4 + 2)
 				add_child(t)
+				PixelStyle.apply(t, false, FLOOR_TINT)
 	for path in PROPS:
 		var scene: PackedScene = load(path)
 		if scene == null:
@@ -163,6 +169,7 @@ func _build_world() -> void:
 			var prop := scene.instantiate() as Node3D
 			prop.position = p
 			add_child(prop)
+			PixelStyle.apply(prop)
 
 	_units_root = Node3D.new()
 	_units_root.name = "Units"
@@ -173,6 +180,7 @@ func _build_world() -> void:
 
 func _build_hud() -> void:
 	_hud = CanvasLayer.new()
+	_hud.name = "HUD"  # PixelStage la déplace hors du rendu basse résolution
 	add_child(_hud)
 
 	_banner = Label.new()
