@@ -42,6 +42,7 @@ var facing := 1.0
 var pixel_size := 0.002
 var height := 2.4  # hauteur approximative du personnage, en mètres
 var state := "idle"
+var hover := 0.0  # lévitation (en mètres) : les créatures qui flottent, comme la Liche
 
 var _flip: Node3D
 var _rig: Node3D
@@ -88,6 +89,7 @@ func setup(p_folder: String) -> Puppet2D:
 			_add_part(name, p, parts.get(parent_name, {}))
 			pending.erase(name)
 	height = float(cfg.get("height", 2.4))
+	hover = float(cfg.get("float", 0.0))
 	play("idle")
 	return self
 
@@ -222,6 +224,8 @@ func _process(delta: float) -> void:
 			_pose_cheer()
 		_:
 			_pose_attack()
+	if hover > 0.0 and state != "death":
+		_rig.position.y += hover + sin(_time * 1.7) * hover * 0.3
 	if state in MOVES or state == "hit":
 		if _state_time >= _length:
 			play("idle")

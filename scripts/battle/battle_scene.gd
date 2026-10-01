@@ -8,7 +8,7 @@ extends Node3D
 const HUB_SCENE := "res://scenes/hub/hub.tscn"
 const HERO_SPOTS := [Vector3(-2.6, 0, 0.6), Vector3(-4.4, 0, -1.6), Vector3(-4.6, 0, 2.6), Vector3(-6.6, 0, 0.4)]
 const ENEMY_SPOTS := [Vector3(2.6, 0, 0.6), Vector3(4.4, 0, -1.6), Vector3(4.6, 0, 2.6), Vector3(6.6, 0, 0.4)]
-const BOSS_SPOT := Vector3(5.2, 0, 0.0)
+const BOSS_SPOT := Vector3(6.3, 0, 0.9)  # au fond à droite : le boss domine sans cacher ses sbires
 const HERO_YAW := 62.0  # de trois quarts vers la caméra (90 = profil pur)
 const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague (apparition des ennemis)
 const END_DELAY := 1.4
@@ -509,9 +509,12 @@ func _spawn_wave() -> void:
 			v.queue_free()
 			views.erase(uid)
 			hud.remove_overhead(uid)
-	for i in engine.enemies.size():
-		var e := engine.enemies[i]
-		var spot: Vector3 = BOSS_SPOT if e.is_boss else ENEMY_SPOTS[i % ENEMY_SPOTS.size()]
+	var k := 0
+	for e in engine.enemies:
+		var spot: Vector3 = BOSS_SPOT
+		if not e.is_boss:
+			spot = ENEMY_SPOTS[k % ENEMY_SPOTS.size()]
+			k += 1
 		_spawn(e, GameData.monster(e.def_id), spot, -HERO_YAW)
 
 

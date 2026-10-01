@@ -23,7 +23,11 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   `pixel_size`, cadrage du portrait). `scripts/battle/puppet_2d.gd` (`Puppet2D`) les assemble et
   anime tout par code ; le champ `"anim"` d'une attaque est un mouvement : punch, kick, slam, spin,
   cast, cast_sky, throw, slash, stab, shoot, pull. Héros actuels : Corbin, Aegis, Brume, Orage.
-  Monstres et décor : packs **KayKit (CC0)** dans `assets/kaykit/`.
+  Ennemis du marais (`assets/monsters2d/`) et marchand de masques (`assets/npcs2d/`) : même
+  système (`"puppet"` dans `monsters.json`, dessinés tournés vers la droite ; `"float"` = lévitation).
+  `python tools/compose_puppet.py <dossier> [hauteur_m] [sortie.png]` recolle les pièces pour
+  vérifier les points d'attache et donne le `pixel_size`. Décor : packs **KayKit (CC0)** dans
+  `assets/kaykit/`.
 
 ## Architecture (à respecter)
 - `scripts/combat/` = **logique pure** (RefCounted, aucun nœud, aucun affichage), **déterministe**

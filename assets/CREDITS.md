@@ -67,4 +67,5 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 | Dossier | Contenu |
 |---|---|
 | `heroes2d/` | Héros dessinés en 2D (Corbin, Aegis, Brume, Orage), générés pour CREOS avec l'outil d'images de ChatGPT |
+| `monsters2d/`, `npcs2d/` | Ennemis de Brumenoire et marchand de masques dessinés en 2D, générés pour CREOS avec l'outil d'images de ChatGPT |
 | `hub/hybride/` | Pack « Port-Franc hybride » (Lanterne des serments, Échoppe des masques…), généré par script pour CREOS |

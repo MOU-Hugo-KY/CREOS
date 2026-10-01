@@ -1,0 +1,46 @@
+{
+  "parts": {
+    "body": {
+      "file": "body.png",
+      "pivot": [
+        500,
+        705
+      ],
+      "z": 0
+    },
+    "head": {
+      "file": "head.png",
+      "pivot": [
+        430,
+        560
+      ],
+      "parent": "body",
+      "at": [
+        560,
+        60
+      ],
+      "z": 2
+    },
+    "arm_front": {
+      "file": "arm_front.png",
+      "pivot": [
+        40,
+        100
+      ],
+      "parent": "body",
+      "at": [
+        640,
+        170
+      ],
+      "z": 3
+    }
+  },
+  "pixel_size": 0.00187,
+  "shadow": 0.9,
+  "portrait": [
+    260,
+    60,
+    560
+  ],
+  "height": 2.25
+}

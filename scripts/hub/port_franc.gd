@@ -403,6 +403,12 @@ func _build_building(id: String, model: String, pos: Vector3, yaw: float, click:
 		light.omni_range = 6.0
 		light.position = Vector3(0, 2.2, 3.2)
 		root.add_child(light)
+	if id == "echoppe_masques":
+		# Le marchand de masques, dessiné en 2D, attend devant son échoppe.
+		var merchant := Puppet2D.new()
+		root.add_child(merchant)
+		merchant.setup("res://assets/npcs2d/marchand_masques/")
+		merchant.position = Vector3(2.7, 0, -0.4)
 	_register(root, id, click, label_h)
 
 

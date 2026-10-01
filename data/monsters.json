@@ -6,10 +6,22 @@
     "family": "revenants",
     "range": "melee",
     "attack_kind": "physical",
-    "model": "res://assets/kaykit/skeletons/Characters/Skeleton_Minion.glb",
-    "stats": { "hp": 500, "atk": 55, "def": 30, "res": 20, "spd": 90, "crit": 0.05 },
+    "stats": {
+      "hp": 500,
+      "atk": 55,
+      "def": 30,
+      "res": 20,
+      "spd": 90,
+      "crit": 0.05
+    },
+    "puppet": "res://assets/monsters2d/serviteur/",
     "attacks": [
-      { "id": "griffe", "name": "Griffe", "anim": "Unarmed_Melee_Attack_Punch_A", "hit_time": 0.3 }
+      {
+        "id": "griffe",
+        "name": "Griffe",
+        "anim": "slash",
+        "hit_time": 0.3
+      }
     ]
   },
   "squelette_guerrier": {
@@ -19,10 +31,22 @@
     "family": "revenants",
     "range": "melee",
     "attack_kind": "physical",
-    "model": "res://assets/kaykit/skeletons/Characters/Skeleton_Warrior.glb",
-    "stats": { "hp": 800, "atk": 60, "def": 60, "res": 30, "spd": 80, "crit": 0.05 },
+    "stats": {
+      "hp": 800,
+      "atk": 60,
+      "def": 60,
+      "res": 30,
+      "spd": 80,
+      "crit": 0.05
+    },
+    "puppet": "res://assets/monsters2d/guerrier/",
     "attacks": [
-      { "id": "taille_rouillee", "name": "Taille rouillée", "anim": "1H_Melee_Attack_Chop", "hit_time": 0.4 }
+      {
+        "id": "taille_rouillee",
+        "name": "Taille rouillée",
+        "anim": "slam",
+        "hit_time": 0.4
+      }
     ]
   },
   "squelette_rodeur": {
@@ -32,10 +56,22 @@
     "family": "revenants",
     "range": "ranged",
     "attack_kind": "physical",
-    "model": "res://assets/kaykit/skeletons/Characters/Skeleton_Rogue.glb",
-    "stats": { "hp": 520, "atk": 70, "def": 25, "res": 25, "spd": 105, "crit": 0.15 },
+    "stats": {
+      "hp": 520,
+      "atk": 70,
+      "def": 25,
+      "res": 25,
+      "spd": 105,
+      "crit": 0.15
+    },
+    "puppet": "res://assets/monsters2d/rodeur/",
     "attacks": [
-      { "id": "lame_lancee", "name": "Lame lancée", "anim": "Throw", "hit_time": 0.4 }
+      {
+        "id": "lame_lancee",
+        "name": "Lame lancée",
+        "anim": "throw",
+        "hit_time": 0.4
+      }
     ]
   },
   "acolyte_noir": {
@@ -45,10 +81,22 @@
     "family": "revenants",
     "range": "ranged",
     "attack_kind": "magic",
-    "model": "res://assets/kaykit/skeletons/Characters/Skeleton_Mage.glb",
-    "stats": { "hp": 600, "atk": 90, "def": 20, "res": 50, "spd": 95, "crit": 0.05 },
+    "stats": {
+      "hp": 600,
+      "atk": 90,
+      "def": 20,
+      "res": 50,
+      "spd": 95,
+      "crit": 0.05
+    },
+    "puppet": "res://assets/monsters2d/acolyte/",
     "attacks": [
-      { "id": "trait_d_ombre", "name": "Trait d'ombre", "anim": "Spellcast_Shoot", "hit_time": 0.45 }
+      {
+        "id": "trait_d_ombre",
+        "name": "Trait d'ombre",
+        "anim": "cast",
+        "hit_time": 0.45
+      }
     ]
   },
   "vel_zareth": {
@@ -59,35 +107,60 @@
     "range": "ranged",
     "attack_kind": "magic",
     "boss": true,
-    "scale": 1.8,
-    "model": "res://assets/kaykit/skeletons/Characters/Skeleton_Mage.glb",
-    "stats": { "hp": 4800, "atk": 102, "def": 45, "res": 70, "spd": 95, "crit": 0.1 },
+    "stats": {
+      "hp": 4800,
+      "atk": 102,
+      "def": 45,
+      "res": 70,
+      "spd": 95,
+      "crit": 0.1
+    },
+    "puppet": "res://assets/monsters2d/vel_zareth/",
     "attacks": [
-      { "id": "rayon_d_ombre", "name": "Rayon d'ombre", "anim": "Spellcast_Shoot", "hit_time": 0.45 },
+      {
+        "id": "rayon_d_ombre",
+        "name": "Rayon d'ombre",
+        "anim": "cast",
+        "hit_time": 0.45
+      },
       {
         "id": "toucher_glacial",
         "name": "Toucher glacial",
         "description": "Gèle le chasseur le plus affaibli pendant 1,5 s.",
-        "anim": "Spellcast_Raise",
+        "anim": "cast_sky",
         "hit_time": 0.5,
         "cooldown": 8.0,
         "target": "lowest_hp_enemy",
         "effects": [
-          { "type": "damage", "power": 1.3 },
-          { "type": "stun", "duration": 1.5 }
+          {
+            "type": "damage",
+            "power": 1.3
+          },
+          {
+            "type": "stun",
+            "duration": 1.5
+          }
         ]
       },
       {
         "id": "nova_necrotique",
         "name": "Nova nécrotique",
         "description": "Explosion d'ombre sur toute l'équipe, qui pourrit pendant 5 s.",
-        "anim": "Spellcast_Summon",
+        "anim": "cast_sky",
         "hit_time": 0.9,
         "energy": 100,
         "target": "all_enemies",
         "effects": [
-          { "type": "damage", "power": 1.15, "kind": "magic" },
-          { "type": "dot", "power": 0.25, "duration": 5.0 }
+          {
+            "type": "damage",
+            "power": 1.15,
+            "kind": "magic"
+          },
+          {
+            "type": "dot",
+            "power": 0.25,
+            "duration": 5.0
+          }
         ]
       }
     ]

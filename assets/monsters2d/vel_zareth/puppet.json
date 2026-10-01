@@ -1,0 +1,10 @@
+{
+  "pixel_size": 0.00254,
+  "height": 3.7,
+  "float": 0.35,
+  "shadow": 1.5,
+  "portrait": [430, 120, 700],
+  "parts": {
+    "body": { "file": "fiche.png", "pivot": [768, 1496], "z": 0 }
+  }
+}
