@@ -52,6 +52,10 @@
 - [x] Table des chasses → combat ; « Retour au port » à la fin du combat
 - [x] Nos 15 modèles de Port-Franc (maisons, marché, autel, tour de 40 m, port…) à la place des
       bâtiments en blocs
+- [x] Direction artistique du hub : décor « propre » (aplats, facettes) contre héros en pixels ;
+      place fermée façon village, ville en terrasses, lumière dorée + contre-jour bleu, halo,
+      vignette, poussières, nuages, mouettes ; **le continent à l'horizon** (Sylvecroc,
+      Brumenoire, citadelle et Tour de Morvath, Cendrefer, Drakonis, Sel-Brisé)
 - [x] **Loge des héros** : liste des héros, héros en 3D qui tourne (on peut voir ses 3 attaques),
       stats à son niveau, attaques avec icônes, choix de l'équipe de chasse (4 max)
 - [x] **Sire Malgrave** (Chevalier possédé) jouable : chaînes spectrales qui attirent, onde du tombeau

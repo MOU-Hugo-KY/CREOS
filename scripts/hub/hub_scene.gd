@@ -3,8 +3,10 @@ extends Node3D
 ## l'interface et la navigation (la Table des chasses lance le combat).
 
 const BATTLE_SCENE := "res://scenes/battle/battle.tscn"
-const CAMERA_POS := Vector3(0, 12.5, 19.5)
-const CAMERA_LOOK := Vector3(0, 4.3, -9.0)
+# Caméra façon village de Dungeon Boss : la place au premier plan, la ville en terrasses au fond
+# et l'horizon (le continent) juste au-dessus des toits.
+const CAMERA_POS := Vector3(0, 11.0, 21.0)
+const CAMERA_LOOK := Vector3(0, 5.0, -10.0)
 const PAN_LIMIT := 7.0
 const DRAG_THRESHOLD := 12.0
 
@@ -28,8 +30,9 @@ func _ready() -> void:
 	town.building_clicked.connect(_on_building_clicked)
 
 	camera = Camera3D.new()
-	camera.fov = 46
+	camera.fov = 42
 	add_child(camera)
+	_add_vignette()
 	_update_camera()
 
 	var i := 0
@@ -49,6 +52,29 @@ func _ready() -> void:
 	hud.action.connect(_do_action)
 	hud.screen_opened.connect(func(open: bool) -> void: town.set_labels_visible(not open))
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
+
+
+## Bords de l'écran légèrement assombris et chauds : cadre l'image et attire l'œil au centre.
+func _add_vignette() -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = 0
+	add_child(layer)
+	var rect := ColorRect.new()
+	rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var sh := Shader.new()
+	sh.code = """
+shader_type canvas_item;
+void fragment() {
+	vec2 d = (UV - 0.5) * vec2(1.0, 0.8);
+	float v = smoothstep(0.35, 0.85, length(d));
+	COLOR = vec4(0.12, 0.06, 0.08, v * 0.55);
+}
+"""
+	var mat := ShaderMaterial.new()
+	mat.shader = sh
+	rect.material = mat
+	layer.add_child(rect)
 
 
 func _process(delta: float) -> void:

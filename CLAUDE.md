@@ -29,7 +29,9 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   (`awaiting_uid`) jusqu'à `request_attack(uid, slot)`.
 - `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage) : `port_franc.gd` place nos modèles
   GLB de `assets/hub/` (en mètres, origine au sol, façade +Z ; tailles dans `manifest.json`),
-  bâtiments cliquables, héros qui se promènent, interface, Loge des héros. Bâtiments, boutons et
+  bâtiments cliquables, héros qui se promènent, interface, Loge des héros. Direction artistique :
+  **héros en pixels, décor propre** (les textures pixel des bâtiments sont lissées en aplats au
+  chargement) ; le continent à l'horizon est dans `continent_backdrop.gd`. Bâtiments, boutons et
   actions décrits dans `data/hub.json` ; profil de départ dans `data/player_start.json`.
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
   `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),
