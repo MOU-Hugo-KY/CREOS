@@ -11,18 +11,33 @@
 
 ![Prototype](capture-prototype.png)
 
-## 🎯 Étape 1 — Combat qui « claque » (prochaine session)
-- [ ] Choisir l'équipement visible de chaque héros : les modèles KayKit contiennent déjà toutes
-      leurs variantes d'armes et de boucliers (`1H_Sword`, `2H_Sword`, `Round_Shield`…). Ajouter
-      `"show": [...]` dans le JSON et masquer le reste. Les armes en plus se mettent sur les os
-      `handslot.r` / `handslot.l` (`BoneAttachment3D`).
-- [ ] Les héros de corps-à-corps **avancent** vers leur cible pour frapper, puis reviennent
-- [ ] Projectiles pour les attaques à distance (flèche, boule magique colorée selon l'élément)
-- [ ] Effets visuels de compétence (particules GPU) et petit tremblement de caméra sur les coups critiques
-- [ ] Vraie interface : portraits ronds, barre de PV et d'énergie, couleur de l'élément, bouton
-      Auto et vitesse ×2
-- [ ] Écran de fin : étoiles (0 à 3 selon les héros survivants), butin
-- [ ] Sons (packs CC0, par exemple Kenney)
+## 🎯 Étape 1 — Combat qui « claque » (en cours)
+- [x] **3 attaques par héros** (`"attacks"` dans le JSON) : ① attaque de base automatique
+      (jauge de vitesse), ② attaque à recharge (`"cooldown"` en secondes), ③ ultime (`"energy"`).
+      Chaque attaque a son animation (`"anim"`) et son instant d'impact (`"hit_time"`).
+- [x] Décor du 1er donjon *Le Gué des Noyés* : île de boue, eau animée, brume, feux follets,
+      ruines englouties, torches qui vacillent, clair de lune
+- [x] Les héros de corps-à-corps **avancent** vers leur cible pour frapper, puis reviennent
+- [x] Projectiles pour les attaques à distance (boule colorée selon l'élément)
+- [x] Effets visuels (particules GPU, ondes de choc, éclats sur les modèles) et tremblement de
+      caméra sur les coups critiques et les ultimes
+- [x] Vraie interface : portraits ronds, PV, énergie, 3 boutons d'attaque par héros, couleur de
+      l'élément, barres au-dessus des têtes, barre du boss, bouton Auto et vitesse ×2
+- [x] Écran de fin : étoiles (3 = personne n'est tombé, 2 = un héros tombé, 1 sinon), butin,
+      bilan par héros
+- [x] Sons et musiques (packs CC0 Kenney + OpenGameArt, voir `assets/CREDITS.md`)
+- [ ] Remplacer les modèles KayKit par nos héros chibi (Ronin et Barbare reçus, les autres à
+      venir) : voir « Brancher un nouveau modèle » ci-dessous
+- [ ] Choisir l'équipement visible de chaque héros KayKit (les modèles contiennent toutes leurs
+      armes) — inutile si on passe vite à nos propres modèles
+- [ ] Animations « touché », « mort » et « course » pour nos modèles chibi (absentes du pack)
+
+### Brancher un nouveau modèle (ex. `Ronin_Anime.glb`)
+1. Copier le `.glb` dans `assets/heroes/` et noter la source dans `assets/CREDITS.md`.
+2. Dans `data/heroes.json`, mettre `"model"` vers ce fichier et, pour chaque attaque, `"anim"` =
+   nom exact du clip (ex. `Attack_01_Double_Entaille`) et `"hit_time"` = instant de frappe
+   (ex. `0.38`). Ajuster `"scale"` si le modèle est plus grand ou plus petit.
+3. Lancer `tests/run_tests.gd` : il vérifie que chaque animation existe dans le modèle.
 
 ## Étape 2 — Boucle de progression
 - [ ] Sauvegarde locale (`user://save.json`) : or, héros possédés, niveaux

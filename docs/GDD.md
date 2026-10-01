@@ -130,8 +130,13 @@ Les fiches complètes (stats et compétences) sont dans `data/heroes.json`.
 - **4 héros contre des vagues de monstres** (2 ou 3 vagues), **puis un boss**.
 - **Temps réel avec jauge d'action** : chaque unité a une **Vitesse**. Sa jauge se remplit en continu,
   et quand elle est pleine, l'unité fait son **attaque de base** automatiquement.
-- **Compétence spéciale** : chaque héros a une jauge d'**énergie**. Une fois pleine, le joueur
-  **touche le portrait** du héros pour lancer sa compétence (ou mode **Auto**).
+- **3 attaques par héros** (chacune avec son bouton sous le portrait) :
+  1. **Attaque de base** : automatique, part quand la jauge d'action est pleine.
+  2. **Attaque à recharge** : le joueur la déclenche ; ensuite elle se recharge (6 à 10 s).
+  3. **Ultime** : coûte toute la jauge d'**énergie** (gagnée en attaquant et en recevant des coups).
+  En mode **Auto**, l'IA lance l'ultime dès qu'elle est prête, sinon l'attaque à recharge.
+  Les monstres ont 1 attaque ; les boss en ont 3 comme les héros.
+- **Étoiles** : 3 si aucun héros n'est tombé, 2 si un seul est tombé, 1 sinon.
 - **Ciblage** : les Gardiens avec Provocation attirent les attaques. Sinon, la cible est choisie
   selon la compétence (le plus faible, le plus proche, toute l'équipe…).
 - **Traits défensifs** : *Cuirasse* (réduit les dégâts physiques), *Garde-mystique* (réduit les

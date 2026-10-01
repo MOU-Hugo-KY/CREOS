@@ -8,18 +8,44 @@
     "range": "melee",
     "attack_kind": "physical",
     "model": "res://assets/kaykit/adventurers/Characters/Knight.glb",
-    "anim": { "attack": "1H_Melee_Attack_Chop", "skill": "Block_Attack" },
     "stats": { "hp": 1400, "atk": 70, "def": 90, "res": 50, "spd": 85, "crit": 0.05 },
-    "skill": {
-      "id": "rempart",
-      "name": "Rempart",
-      "description": "Provoque tous les ennemis pendant 6 s et donne un bouclier à l'équipe.",
-      "target": "all_allies",
-      "effects": [
-        { "type": "taunt", "duration": 6.0, "self_only": true },
-        { "type": "shield", "power": 0.6 }
-      ]
-    }
+    "attacks": [
+      {
+        "id": "taille",
+        "name": "Taille",
+        "description": "Un coup d'épée sur l'ennemi le plus proche.",
+        "anim": "1H_Melee_Attack_Chop",
+        "hit_time": 0.4,
+        "target": "single_enemy",
+        "effects": [{ "type": "damage", "power": 1.0 }]
+      },
+      {
+        "id": "coup_de_garde",
+        "name": "Coup de garde",
+        "description": "Frappe avec le bouclier et étourdit la cible 1,5 s.",
+        "anim": "Block_Attack",
+        "hit_time": 0.35,
+        "cooldown": 8.0,
+        "target": "single_enemy",
+        "effects": [
+          { "type": "damage", "power": 1.1 },
+          { "type": "stun", "duration": 1.5 }
+        ]
+      },
+      {
+        "id": "rempart",
+        "name": "Rempart",
+        "description": "Provoque tous les ennemis pendant 6 s et donne un bouclier à l'équipe.",
+        "anim": "Block",
+        "hit_time": 0.3,
+        "energy": 100,
+        "target": "all_allies",
+        "effects": [
+          { "type": "taunt", "duration": 6.0, "self_only": true },
+          { "type": "shield", "power": 0.6 }
+        ]
+      }
+    ]
   },
   "kaela": {
     "name": "Kaëla Croc-Vif",
@@ -30,18 +56,44 @@
     "range": "melee",
     "attack_kind": "physical",
     "model": "res://assets/kaykit/adventurers/Characters/Barbarian.glb",
-    "anim": { "attack": "2H_Melee_Attack_Chop", "skill": "2H_Melee_Attack_Spin" },
     "stats": { "hp": 1000, "atk": 135, "def": 50, "res": 30, "spd": 105, "crit": 0.2 },
-    "skill": {
-      "id": "tourbillon",
-      "name": "Tourbillon ardent",
-      "description": "Frappe tous les ennemis et les fait brûler pendant 4 s.",
-      "target": "all_enemies",
-      "effects": [
-        { "type": "damage", "power": 1.3, "kind": "physical" },
-        { "type": "dot", "power": 0.25, "duration": 4.0 }
-      ]
-    }
+    "attacks": [
+      {
+        "id": "fendoir",
+        "name": "Fendoir",
+        "description": "Un coup de hache sur l'ennemi le plus proche.",
+        "anim": "2H_Melee_Attack_Chop",
+        "hit_time": 0.45,
+        "target": "single_enemy",
+        "effects": [{ "type": "damage", "power": 1.0 }]
+      },
+      {
+        "id": "entaille_brulante",
+        "name": "Entaille brûlante",
+        "description": "Grosse entaille qui fait brûler la cible pendant 3 s.",
+        "anim": "2H_Melee_Attack_Slice",
+        "hit_time": 0.4,
+        "cooldown": 7.0,
+        "target": "single_enemy",
+        "effects": [
+          { "type": "damage", "power": 1.5 },
+          { "type": "dot", "power": 0.2, "duration": 3.0 }
+        ]
+      },
+      {
+        "id": "tourbillon",
+        "name": "Tourbillon ardent",
+        "description": "Frappe tous les ennemis et les fait brûler pendant 4 s.",
+        "anim": "2H_Melee_Attack_Spin",
+        "hit_time": 0.5,
+        "energy": 100,
+        "target": "all_enemies",
+        "effects": [
+          { "type": "damage", "power": 1.3 },
+          { "type": "dot", "power": 0.25, "duration": 4.0 }
+        ]
+      }
+    ]
   },
   "ysolde": {
     "name": "Ysolde des Marées",
@@ -52,18 +104,41 @@
     "range": "ranged",
     "attack_kind": "magic",
     "model": "res://assets/kaykit/adventurers/Characters/Mage.glb",
-    "anim": { "attack": "Spellcast_Shoot", "skill": "Spellcast_Long" },
     "stats": { "hp": 850, "atk": 125, "def": 30, "res": 70, "spd": 95, "crit": 0.1 },
-    "skill": {
-      "id": "deferlante",
-      "name": "Déferlante",
-      "description": "Une vague frappe tous les ennemis et les étourdit 1,5 s.",
-      "target": "all_enemies",
-      "effects": [
-        { "type": "damage", "power": 1.6, "kind": "magic" },
-        { "type": "stun", "duration": 1.5 }
-      ]
-    }
+    "attacks": [
+      {
+        "id": "trait_d_ecume",
+        "name": "Trait d'écume",
+        "description": "Un jet d'eau magique sur un ennemi.",
+        "anim": "Spellcast_Shoot",
+        "hit_time": 0.45,
+        "target": "single_enemy",
+        "effects": [{ "type": "damage", "power": 1.0 }]
+      },
+      {
+        "id": "lame_de_maree",
+        "name": "Lame de marée",
+        "description": "Achève l'ennemi le plus affaibli avec une lame d'eau.",
+        "anim": "Spellcast_Raise",
+        "hit_time": 0.5,
+        "cooldown": 8.0,
+        "target": "lowest_hp_enemy",
+        "effects": [{ "type": "damage", "power": 1.8 }]
+      },
+      {
+        "id": "deferlante",
+        "name": "Déferlante",
+        "description": "Une vague frappe tous les ennemis et les étourdit 1,5 s.",
+        "anim": "Spellcast_Long",
+        "hit_time": 0.8,
+        "energy": 100,
+        "target": "all_enemies",
+        "effects": [
+          { "type": "damage", "power": 1.6 },
+          { "type": "stun", "duration": 1.5 }
+        ]
+      }
+    ]
   },
   "fennir": {
     "name": "Fennir l'Ombre",
@@ -74,17 +149,41 @@
     "range": "ranged",
     "attack_kind": "physical",
     "model": "res://assets/kaykit/adventurers/Characters/Rogue_Hooded.glb",
-    "anim": { "attack": "1H_Ranged_Shoot", "skill": "Throw" },
     "stats": { "hp": 900, "atk": 120, "def": 40, "res": 40, "spd": 115, "crit": 0.25 },
-    "skill": {
-      "id": "tir_fatal",
-      "name": "Tir fatal",
-      "description": "Énorme tir sur l'ennemi le plus faible.",
-      "target": "lowest_hp_enemy",
-      "effects": [
-        { "type": "damage", "power": 3.2, "kind": "physical" }
-      ]
-    }
+    "attacks": [
+      {
+        "id": "carreau",
+        "name": "Carreau",
+        "description": "Un tir d'arbalète sur un ennemi.",
+        "anim": "1H_Ranged_Shoot",
+        "hit_time": 0.35,
+        "target": "single_enemy",
+        "effects": [{ "type": "damage", "power": 1.0 }]
+      },
+      {
+        "id": "dague_empoisonnee",
+        "name": "Dague empoisonnée",
+        "description": "Lance une dague qui empoisonne la cible pendant 5 s.",
+        "anim": "Throw",
+        "hit_time": 0.4,
+        "cooldown": 7.0,
+        "target": "single_enemy",
+        "effects": [
+          { "type": "damage", "power": 1.1 },
+          { "type": "dot", "power": 0.3, "duration": 5.0 }
+        ]
+      },
+      {
+        "id": "tir_fatal",
+        "name": "Tir fatal",
+        "description": "Énorme tir sur l'ennemi le plus faible.",
+        "anim": "1H_Ranged_Shooting",
+        "hit_time": 0.5,
+        "energy": 100,
+        "target": "lowest_hp_enemy",
+        "effects": [{ "type": "damage", "power": 3.2 }]
+      }
+    ]
   },
   "aubeline": {
     "name": "Sœur Aubeline",
@@ -95,17 +194,40 @@
     "range": "ranged",
     "attack_kind": "magic",
     "model": "res://assets/kaykit/adventurers/Characters/Rogue.glb",
-    "anim": { "attack": "Spellcast_Shoot", "skill": "Spellcast_Raise" },
     "stats": { "hp": 950, "atk": 80, "def": 40, "res": 80, "spd": 100, "crit": 0.05 },
-    "skill": {
-      "id": "aube_sacree",
-      "name": "Aube sacrée",
-      "description": "Soigne toute l'équipe et retire les brûlures.",
-      "target": "all_allies",
-      "effects": [
-        { "type": "heal", "power": 1.8 },
-        { "type": "cleanse" }
-      ]
-    }
+    "attacks": [
+      {
+        "id": "eclat_d_aube",
+        "name": "Éclat d'aube",
+        "description": "Un rayon de lumière sur un ennemi.",
+        "anim": "Spellcast_Shoot",
+        "hit_time": 0.45,
+        "target": "single_enemy",
+        "effects": [{ "type": "damage", "power": 1.0 }]
+      },
+      {
+        "id": "priere",
+        "name": "Prière",
+        "description": "Soigne l'allié le plus blessé.",
+        "anim": "Spellcast_Raise",
+        "hit_time": 0.5,
+        "cooldown": 9.0,
+        "target": "lowest_hp_ally",
+        "effects": [{ "type": "heal", "power": 1.6 }]
+      },
+      {
+        "id": "aube_sacree",
+        "name": "Aube sacrée",
+        "description": "Soigne toute l'équipe et retire les brûlures.",
+        "anim": "Spellcast_Long",
+        "hit_time": 0.8,
+        "energy": 100,
+        "target": "all_allies",
+        "effects": [
+          { "type": "heal", "power": 1.8 },
+          { "type": "cleanse" }
+        ]
+      }
+    ]
   }
 }

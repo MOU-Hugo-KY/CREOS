@@ -46,3 +46,14 @@ func dungeon_waves(id: String) -> Array:
 	for wave: Array in dungeons[id]["waves"]:
 		waves.append(wave.map(func(mid: String) -> Dictionary: return monster(mid)))
 	return waves
+
+
+func dungeon(id: String) -> Dictionary:
+	return dungeons.get(id, {})
+
+
+## Butin d'un donjon selon les étoiles obtenues (rien en cas de défaite).
+func dungeon_rewards(id: String, stars: int) -> Dictionary:
+	if stars <= 0:
+		return {}
+	return dungeon(id).get("rewards", {}).duplicate()

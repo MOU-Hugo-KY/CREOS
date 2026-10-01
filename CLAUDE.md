@@ -16,12 +16,18 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 ## Architecture (à respecter)
 - `scripts/combat/` = **logique pure** (RefCounted, aucun nœud, aucun affichage), **déterministe**
   avec une graine aléatoire. `BattleEngine.step(delta)` fait avancer le combat ;
-  `drain_events()` renvoie les événements (`attack`, `skill`, `damage`, `heal`, `death`, `wave_start`,
-  `victory`, `defeat`…).
+  `drain_events()` renvoie les événements (`attack` avec son `slot` 0/1/2, `damage`, `heal`,
+  `shield`, `status`, `death`, `wave_start`, `victory`, `defeat`).
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
+  `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),
+  `battle_fx.gd` (effets), `battle_audio.gd` (sons), `ui/` (interface et écran de fin).
+  Le moteur applique les dégâts tout de suite ; l'affichage les montre à l'instant `hit_time`.
 - **Les données vont dans `data/*.json`** (héros, monstres, donjons, régions), pas dans le code.
   Un nouveau héros = une entrée JSON (+ un modèle 3D), sans toucher au moteur si ses effets existent.
-- Effets de compétence supportés : `damage`, `heal`, `shield`, `taunt`, `stun`, `dot`, `cleanse`.
+- **3 attaques par héros** dans `"attacks"` : [0] base (auto), [1] à recharge (`"cooldown"`),
+  [2] ultime (`"energy"`). Chaque attaque : `id`, `name`, `description`, `anim`, `hit_time`,
+  `target`, `effects`. Les monstres peuvent n'en avoir qu'une (sans `effects` = dégâts ×1).
+- Effets d'attaque supportés : `damage`, `heal`, `shield`, `taunt`, `stun`, `dot`, `cleanse`.
   Cibles : `single_enemy`, `all_enemies`, `lowest_hp_enemy`, `all_allies`, `lowest_hp_ally`, `self`.
 
 ## Commandes
