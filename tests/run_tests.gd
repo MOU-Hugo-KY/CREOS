@@ -34,7 +34,7 @@ func _data() -> Node:
 
 
 func _team(gd: Node) -> Array:
-	return ["brannoc", "kaela", "ysolde", "aubeline"].map(func(id: String) -> Dictionary: return gd.hero(id))
+	return ["torvald", "kaito", "vesprin", "orage"].map(func(id: String) -> Dictionary: return gd.hero(id))
 
 
 func test_elements() -> void:
@@ -96,24 +96,24 @@ func test_special_attacks() -> void:
 	var gd := _data()
 	var e := BattleEngine.new()
 	e.setup(_team(gd), gd.dungeon_waves("brumenoire_1"), 7)
-	var kaela := e.heroes[1]
-	check(kaela.attacks.size() == 3, "un héros a 3 attaques")
-	check(not e.request_attack(kaela.uid, BattleUnit.SLOT_BASIC), "l'attaque de base ne se demande pas")
-	check(not e.request_attack(kaela.uid, BattleUnit.SLOT_ULTIMATE), "ultime refusée sans énergie")
-	kaela.energy = BattleUnit.ENERGY_MAX
-	check(e.request_attack(kaela.uid, BattleUnit.SLOT_ULTIMATE), "ultime acceptée avec énergie pleine")
+	var kaito := e.heroes[1]
+	check(kaito.attacks.size() == 3, "un héros a 3 attaques")
+	check(not e.request_attack(kaito.uid, BattleUnit.SLOT_BASIC), "l'attaque de base ne se demande pas")
+	check(not e.request_attack(kaito.uid, BattleUnit.SLOT_ULTIMATE), "ultime refusée sans énergie")
+	kaito.energy = BattleUnit.ENERGY_MAX
+	check(e.request_attack(kaito.uid, BattleUnit.SLOT_ULTIMATE), "ultime acceptée avec énergie pleine")
 	e.step(0.05)
 	var cast := e.drain_events().any(func(ev: Dictionary) -> bool:
-		return ev.type == "attack" and ev.src == kaela.uid and ev.slot == BattleUnit.SLOT_ULTIMATE)
+		return ev.type == "attack" and ev.src == kaito.uid and ev.slot == BattleUnit.SLOT_ULTIMATE)
 	check(cast, "l'ultime est lancée au pas suivant")
-	check(kaela.energy < BattleUnit.ENERGY_MAX, "l'énergie est consommée")
+	check(kaito.energy < BattleUnit.ENERGY_MAX, "l'énergie est consommée")
 
-	check(not e.request_attack(kaela.uid, BattleUnit.SLOT_COOLDOWN), "attaque à recharge pas prête au début")
-	kaela.cooldowns[BattleUnit.SLOT_COOLDOWN] = 0.0
-	check(e.request_attack(kaela.uid, BattleUnit.SLOT_COOLDOWN), "attaque à recharge prête après la recharge")
+	check(not e.request_attack(kaito.uid, BattleUnit.SLOT_COOLDOWN), "attaque à recharge pas prête au début")
+	kaito.cooldowns[BattleUnit.SLOT_COOLDOWN] = 0.0
+	check(e.request_attack(kaito.uid, BattleUnit.SLOT_COOLDOWN), "attaque à recharge prête après la recharge")
 	e.step(0.05)
-	check(kaela.cooldowns[BattleUnit.SLOT_COOLDOWN] > 0.0, "la recharge repart après usage")
-	check(kaela.energy_cost(BattleUnit.SLOT_COOLDOWN) == 0.0, "l'attaque à recharge ne coûte pas d'énergie")
+	check(kaito.cooldowns[BattleUnit.SLOT_COOLDOWN] > 0.0, "la recharge repart après usage")
+	check(kaito.energy_cost(BattleUnit.SLOT_COOLDOWN) == 0.0, "l'attaque à recharge ne coûte pas d'énergie")
 	gd.free()
 
 
@@ -136,6 +136,9 @@ func test_data_is_valid() -> void:
 		if anim_player == null:
 			problems.append("%s : modèle introuvable" % id)
 		for a: Dictionary in attacks:
+			for fx: Dictionary in a.get("effects", []):
+				if fx.has("target") and fx.target not in targets:
+					problems.append("%s/%s : cible d'effet inconnue %s" % [id, a.get("id"), fx.target])
 			if a.get("target", "single_enemy") not in targets:
 				problems.append("%s/%s : cible inconnue %s" % [id, a.get("id"), a.get("target")])
 			for fx: Dictionary in a.get("effects", []):

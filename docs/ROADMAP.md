@@ -26,17 +26,19 @@
 - [x] Écran de fin : étoiles (3 = personne n'est tombé, 2 = un héros tombé, 1 sinon), butin,
       bilan par héros
 - [x] Sons et musiques (packs CC0 Kenney + OpenGameArt, voir `assets/CREDITS.md`)
-- [ ] Remplacer les modèles KayKit par nos héros chibi (Ronin et Barbare reçus, les autres à
-      venir) : voir « Brancher un nouveau modèle » ci-dessous
-- [ ] Choisir l'équipement visible de chaque héros KayKit (les modèles contiennent toutes leurs
-      armes) — inutile si on passe vite à nos propres modèles
-- [ ] Animations « touché », « mort » et « course » pour nos modèles chibi (absentes du pack)
+- [x] Équipe de départ remplacée par nos 4 héros chibi (Barbare, Ronin, Alchimiste, Moine),
+      chacun avec 7 animations (repos, marche, touché, mort, 3 attaques) et ses effets
+      (éclairs, poison, tourbillon, impact au sol)
+- [ ] Ajouter un soigneur / soutien (classe Mystique) à la collection
 
 ### Brancher un nouveau modèle (ex. `Ronin_Anime.glb`)
 1. Copier le `.glb` dans `assets/heroes/` et noter la source dans `assets/CREDITS.md`.
-2. Dans `data/heroes.json`, mettre `"model"` vers ce fichier et, pour chaque attaque, `"anim"` =
-   nom exact du clip (ex. `Attack_01_Double_Entaille`) et `"hit_time"` = instant de frappe
-   (ex. `0.38`). Ajuster `"scale"` si le modèle est plus grand ou plus petit.
+2. Dans `data/heroes.json`, mettre `"model"` vers ce fichier, `"anims"` (repos, course, touché,
+   mort) et, pour chaque attaque, `"anim"` = nom exact du clip (ex. `Attack_01_Double_Entaille`)
+   et `"hit_time"` = instant de frappe (ex. `0.38`), ou `"hit_times"` pour plusieurs coups.
+   `"fx"` choisit l'effet visuel (`vial`, `poison_pool`, `poison_burst`, `lightning_hit`,
+   `sky_lightning`, `whirlwind`, `ground_slam`). `"portrait"` règle le cadrage du portrait.
+   Ajuster `"scale"` si le modèle est plus grand ou plus petit.
 3. Lancer `tests/run_tests.gd` : il vérifie que chaque animation existe dans le modèle.
 
 ## Étape 2 — Boucle de progression
@@ -57,7 +59,8 @@
 - [ ] Charte graphique (palette, proportions chibi)
 - [ ] Pipeline : dessin ou description → image (Higgsfield) → modèle 3D (`generate_3d` ou Hunyuan3D)
       → nettoyage, rig et animations dans Blender (MCP) → `.glb` dans `assets/heroes/`
-- [ ] Remplacer les 5 modèles KayKit des héros de départ
+- [x] Remplacer les modèles KayKit des héros de départ (4 héros chibi)
+- [ ] Remplacer les monstres KayKit (squelettes, Liche) par nos modèles
 
 ## Étape 5 — En ligne
 - [ ] Serveur Nakama (comptes, sauvegarde cloud)

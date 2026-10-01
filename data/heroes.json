@@ -1,231 +1,210 @@
 {
-  "brannoc": {
-    "name": "Brannoc le Roc",
+  "torvald": {
+    "name": "Torvald Barbe-Rouge",
     "class": "gardien",
-    "element": "nature",
-    "family": "chasseurs",
-    "rarity": 3,
-    "range": "melee",
-    "attack_kind": "physical",
-    "model": "res://assets/kaykit/adventurers/Characters/Knight.glb",
-    "stats": { "hp": 1400, "atk": 70, "def": 90, "res": 50, "spd": 85, "crit": 0.05 },
-    "attacks": [
-      {
-        "id": "taille",
-        "name": "Taille",
-        "description": "Un coup d'épée sur l'ennemi le plus proche.",
-        "anim": "1H_Melee_Attack_Chop",
-        "hit_time": 0.4,
-        "target": "single_enemy",
-        "effects": [{ "type": "damage", "power": 1.0 }]
-      },
-      {
-        "id": "coup_de_garde",
-        "name": "Coup de garde",
-        "description": "Frappe avec le bouclier et étourdit la cible 1,5 s.",
-        "anim": "Block_Attack",
-        "hit_time": 0.35,
-        "cooldown": 8.0,
-        "target": "single_enemy",
-        "effects": [
-          { "type": "damage", "power": 1.1 },
-          { "type": "stun", "duration": 1.5 }
-        ]
-      },
-      {
-        "id": "rempart",
-        "name": "Rempart",
-        "description": "Provoque tous les ennemis pendant 6 s et donne un bouclier à l'équipe.",
-        "anim": "Block",
-        "hit_time": 0.3,
-        "energy": 100,
-        "target": "all_allies",
-        "effects": [
-          { "type": "taunt", "duration": 6.0, "self_only": true },
-          { "type": "shield", "power": 0.6 }
-        ]
-      }
-    ]
-  },
-  "kaela": {
-    "name": "Kaëla Croc-Vif",
-    "class": "lame",
     "element": "feu",
     "family": "chasseurs",
     "rarity": 3,
     "range": "melee",
     "attack_kind": "physical",
-    "model": "res://assets/kaykit/adventurers/Characters/Barbarian.glb",
-    "stats": { "hp": 1000, "atk": 135, "def": 50, "res": 30, "spd": 105, "crit": 0.2 },
+    "model": "res://assets/heroes/barbare/Barbare_Anime.glb",
+    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
+    "portrait": { "y": 1.9, "dist": 3.2 },
+    "stats": { "hp": 1500, "atk": 80, "def": 85, "res": 50, "spd": 85, "crit": 0.05 },
     "attacks": [
       {
-        "id": "fendoir",
-        "name": "Fendoir",
-        "description": "Un coup de hache sur l'ennemi le plus proche.",
-        "anim": "2H_Melee_Attack_Chop",
-        "hit_time": 0.45,
+        "id": "coup_de_hache",
+        "name": "Coup de hache",
+        "description": "Un grand coup de hache sur l'ennemi le plus proche.",
+        "anim": "Attack_01_Coup_de_Hache",
+        "hit_time": 0.53,
         "target": "single_enemy",
         "effects": [{ "type": "damage", "power": 1.0 }]
       },
       {
-        "id": "entaille_brulante",
-        "name": "Entaille brûlante",
-        "description": "Grosse entaille qui fait brûler la cible pendant 3 s.",
-        "anim": "2H_Melee_Attack_Slice",
-        "hit_time": 0.4,
-        "cooldown": 7.0,
-        "target": "single_enemy",
+        "id": "tourbillon_furieux",
+        "name": "Tourbillon furieux",
+        "description": "Tourne sur lui-même, frappe deux fois tous les ennemis et les provoque 5 s.",
+        "anim": "Attack_02_Tourbillon_Furieux",
+        "hit_times": [0.7, 1.2],
+        "cooldown": 9.0,
+        "target": "all_enemies",
+        "fx": "whirlwind",
         "effects": [
-          { "type": "damage", "power": 1.5 },
-          { "type": "dot", "power": 0.2, "duration": 3.0 }
+          { "type": "taunt", "duration": 5.0, "self_only": true },
+          { "type": "damage", "power": 0.4 },
+          { "type": "damage", "power": 0.4 }
         ]
       },
       {
-        "id": "tourbillon",
-        "name": "Tourbillon ardent",
-        "description": "Frappe tous les ennemis et les fait brûler pendant 4 s.",
-        "anim": "2H_Melee_Attack_Spin",
-        "hit_time": 0.5,
+        "id": "ecrasement_berserk",
+        "name": "Écrasement berserk",
+        "description": "Frappe le sol : dégâts et étourdissement 1,5 s sur tous les ennemis, et un bouclier pour Torvald.",
+        "anim": "Attack_03_Ecrasement_Berserk",
+        "hit_time": 1.09,
         "energy": 100,
         "target": "all_enemies",
+        "fx": "ground_slam",
         "effects": [
-          { "type": "damage", "power": 1.3 },
-          { "type": "dot", "power": 0.25, "duration": 4.0 }
+          { "type": "damage", "power": 1.1 },
+          { "type": "stun", "duration": 1.5 },
+          { "type": "shield", "power": 1.2, "self_only": true }
         ]
       }
     ]
   },
-  "ysolde": {
-    "name": "Ysolde des Marées",
-    "class": "arcaniste",
+  "kaito": {
+    "name": "Kaïto le Ronin",
+    "class": "lame",
     "element": "eau",
-    "family": "sylvains",
+    "family": "chasseurs",
     "rarity": 3,
-    "range": "ranged",
-    "attack_kind": "magic",
-    "model": "res://assets/kaykit/adventurers/Characters/Mage.glb",
-    "stats": { "hp": 850, "atk": 125, "def": 30, "res": 70, "spd": 95, "crit": 0.1 },
+    "range": "melee",
+    "attack_kind": "physical",
+    "model": "res://assets/heroes/ronin/Ronin_Anime.glb",
+    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
+    "portrait": { "y": 1.9, "dist": 3.2 },
+    "stats": { "hp": 1050, "atk": 130, "def": 50, "res": 35, "spd": 110, "crit": 0.2 },
     "attacks": [
       {
-        "id": "trait_d_ecume",
-        "name": "Trait d'écume",
-        "description": "Un jet d'eau magique sur un ennemi.",
-        "anim": "Spellcast_Shoot",
-        "hit_time": 0.45,
+        "id": "double_entaille",
+        "name": "Double entaille",
+        "description": "Un coup de katana puis un coup de wakizashi.",
+        "anim": "Attack_01_Double_Entaille",
+        "hit_times": [0.38, 0.68],
         "target": "single_enemy",
-        "effects": [{ "type": "damage", "power": 1.0 }]
-      },
-      {
-        "id": "lame_de_maree",
-        "name": "Lame de marée",
-        "description": "Achève l'ennemi le plus affaibli avec une lame d'eau.",
-        "anim": "Spellcast_Raise",
-        "hit_time": 0.5,
-        "cooldown": 8.0,
-        "target": "lowest_hp_enemy",
-        "effects": [{ "type": "damage", "power": 1.8 }]
-      },
-      {
-        "id": "deferlante",
-        "name": "Déferlante",
-        "description": "Une vague frappe tous les ennemis et les étourdit 1,5 s.",
-        "anim": "Spellcast_Long",
-        "hit_time": 0.8,
-        "energy": 100,
-        "target": "all_enemies",
         "effects": [
-          { "type": "damage", "power": 1.6 },
-          { "type": "stun", "duration": 1.5 }
+          { "type": "damage", "power": 0.55 },
+          { "type": "damage", "power": 0.55 }
         ]
+      },
+      {
+        "id": "coupe_tournoyante",
+        "name": "Coupe tournoyante",
+        "description": "Une coupe circulaire qui touche tous les ennemis.",
+        "anim": "Attack_02_Coupe_Tournoyante",
+        "hit_time": 0.6,
+        "cooldown": 7.0,
+        "target": "all_enemies",
+        "fx": "whirlwind",
+        "effects": [{ "type": "damage", "power": 0.9 }]
+      },
+      {
+        "id": "frappe_plongeante",
+        "name": "Frappe plongeante",
+        "description": "Bondit sur l'ennemi le plus affaibli et l'achève avec ses deux lames.",
+        "anim": "Attack_03_Frappe_Plongeante",
+        "hit_time": 0.92,
+        "energy": 100,
+        "target": "lowest_hp_enemy",
+        "fx": "ground_slam",
+        "effects": [{ "type": "damage", "power": 3.0 }]
       }
     ]
   },
-  "fennir": {
-    "name": "Fennir l'Ombre",
+  "vesprin": {
+    "name": "Docteur Vesprin",
     "class": "traqueur",
-    "element": "ombre",
+    "element": "nature",
     "family": "chasseurs",
     "rarity": 3,
     "range": "ranged",
-    "attack_kind": "physical",
-    "model": "res://assets/kaykit/adventurers/Characters/Rogue_Hooded.glb",
-    "stats": { "hp": 900, "atk": 120, "def": 40, "res": 40, "spd": 115, "crit": 0.25 },
+    "attack_kind": "magic",
+    "model": "res://assets/heroes/alchimiste/Alchimiste_Anime.glb",
+    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
+    "portrait": { "y": 1.9, "dist": 3.2 },
+    "stats": { "hp": 900, "atk": 115, "def": 35, "res": 60, "spd": 100, "crit": 0.1 },
     "attacks": [
       {
-        "id": "carreau",
-        "name": "Carreau",
-        "description": "Un tir d'arbalète sur un ennemi.",
-        "anim": "1H_Ranged_Shoot",
-        "hit_time": 0.35,
+        "id": "fiole_explosive",
+        "name": "Fiole explosive",
+        "description": "Lance une fiole qui explose sur un ennemi.",
+        "anim": "Attack_01_Fiole_Explosive",
+        "hit_time": 0.72,
         "target": "single_enemy",
+        "fx": "vial",
         "effects": [{ "type": "damage", "power": 1.0 }]
       },
       {
-        "id": "dague_empoisonnee",
-        "name": "Dague empoisonnée",
-        "description": "Lance une dague qui empoisonne la cible pendant 5 s.",
-        "anim": "Throw",
-        "hit_time": 0.4,
-        "cooldown": 7.0,
+        "id": "flaque_toxique",
+        "name": "Flaque toxique",
+        "description": "Pulvérise une flaque de poison sous un ennemi : il s'empoisonne pendant 4 s.",
+        "anim": "Attack_02_Flaque_Toxique",
+        "hit_time": 0.68,
+        "cooldown": 8.0,
         "target": "single_enemy",
+        "fx": "poison_pool",
+        "effects": [
+          { "type": "damage", "power": 0.5 },
+          { "type": "dot", "power": 0.45, "duration": 4.0 }
+        ]
+      },
+      {
+        "id": "explosion_reservoir",
+        "name": "Explosion du réservoir",
+        "description": "Vide son réservoir dans une explosion de poison : tous les ennemis s'empoisonnent 5 s.",
+        "anim": "Attack_03_Explosion_Reservoir",
+        "hit_time": 1.05,
+        "energy": 100,
+        "target": "all_enemies",
+        "fx": "poison_burst",
         "effects": [
           { "type": "damage", "power": 1.1 },
           { "type": "dot", "power": 0.3, "duration": 5.0 }
         ]
-      },
-      {
-        "id": "tir_fatal",
-        "name": "Tir fatal",
-        "description": "Énorme tir sur l'ennemi le plus faible.",
-        "anim": "1H_Ranged_Shooting",
-        "hit_time": 0.5,
-        "energy": 100,
-        "target": "lowest_hp_enemy",
-        "effects": [{ "type": "damage", "power": 3.2 }]
       }
     ]
   },
-  "aubeline": {
-    "name": "Sœur Aubeline",
-    "class": "mystique",
+  "orage": {
+    "name": "Frère Orage",
+    "class": "arcaniste",
     "element": "lumiere",
     "family": "chasseurs",
     "rarity": 3,
-    "range": "ranged",
+    "range": "melee",
     "attack_kind": "magic",
-    "model": "res://assets/kaykit/adventurers/Characters/Rogue.glb",
-    "stats": { "hp": 950, "atk": 80, "def": 40, "res": 80, "spd": 100, "crit": 0.05 },
+    "model": "res://assets/heroes/moine/Moine_Eclairs_Anime.glb",
+    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
+    "portrait": { "y": 1.9, "dist": 3.2 },
+    "stats": { "hp": 1000, "atk": 115, "def": 45, "res": 70, "spd": 105, "crit": 0.1 },
     "attacks": [
       {
-        "id": "eclat_d_aube",
-        "name": "Éclat d'aube",
-        "description": "Un rayon de lumière sur un ennemi.",
-        "anim": "Spellcast_Shoot",
-        "hit_time": 0.45,
+        "id": "paume_foudroyante",
+        "name": "Paume foudroyante",
+        "description": "Un coup de paume chargé d'éclairs.",
+        "anim": "Attack_01_Paume_Foudroyante",
+        "hit_time": 0.41,
         "target": "single_enemy",
+        "fx": "lightning_hit",
         "effects": [{ "type": "damage", "power": 1.0 }]
       },
       {
-        "id": "priere",
-        "name": "Prière",
-        "description": "Soigne l'allié le plus blessé.",
-        "anim": "Spellcast_Raise",
-        "hit_time": 0.5,
-        "cooldown": 9.0,
-        "target": "lowest_hp_ally",
-        "effects": [{ "type": "heal", "power": 1.6 }]
+        "id": "pas_du_tonnerre",
+        "name": "Pas du tonnerre",
+        "description": "Fonce comme l'éclair et donne un coup de pied qui étourdit 1 s.",
+        "anim": "Attack_02_Pas_Du_Tonnerre",
+        "hit_time": 0.55,
+        "cooldown": 7.0,
+        "target": "single_enemy",
+        "fx": "lightning_hit",
+        "effects": [
+          { "type": "damage", "power": 1.4 },
+          { "type": "stun", "duration": 1.0 }
+        ]
       },
       {
-        "id": "aube_sacree",
-        "name": "Aube sacrée",
-        "description": "Soigne toute l'équipe et retire les brûlures.",
-        "anim": "Spellcast_Long",
-        "hit_time": 0.8,
+        "id": "sentence_celeste",
+        "name": "Sentence céleste",
+        "description": "La foudre tombe sur un ennemi puis se propage à tous les autres.",
+        "anim": "Attack_03_Sentence_Celeste",
+        "hit_time": 1.04,
         "energy": 100,
-        "target": "all_allies",
+        "dash": false,
+        "target": "single_enemy",
+        "fx": "sky_lightning",
         "effects": [
-          { "type": "heal", "power": 1.8 },
-          { "type": "cleanse" }
+          { "type": "damage", "power": 2.0 },
+          { "type": "damage", "power": 0.8, "target": "all_enemies" }
         ]
       }
     ]

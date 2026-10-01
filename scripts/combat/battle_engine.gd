@@ -292,19 +292,32 @@ func _use_attack(caster: BattleUnit, slot: int) -> void:
 	caster.energy -= caster.energy_cost(slot)
 	caster.cooldowns[slot] = float(atk_data.get("cooldown", 0.0))
 	var targets := _attack_targets(caster, atk_data.get("target", "single_enemy"))
-	_emit({
-		"type": "attack", "src": caster.uid, "slot": slot, "attack_id": atk_data.get("id", ""),
-		"name": atk_data.get("name", ""), "anim": atk_data.get("anim", ""),
-		"hit_time": float(atk_data.get("hit_time", DEFAULT_HIT_TIME)),
-		"targets": targets.map(func(t: BattleUnit) -> int: return t.uid),
-	})
 	var effects: Array = atk_data.get("effects", [{"type": "damage", "power": 1.0}])
+	# Chaque effet touche les cibles de l'attaque, sauf s'il a sa propre `"target"` ou `"self_only"`.
+	var per_effect: Array = []
+	var shown: Array[BattleUnit] = targets.duplicate()
 	for effect: Dictionary in effects:
-		var power: float = effect.get("power", 1.0)
 		var effect_targets: Array[BattleUnit] = targets
 		if effect.get("self_only", false):
 			effect_targets = [caster]
-		for t in effect_targets:
+		elif effect.has("target"):
+			effect_targets = _attack_targets(caster, effect.target)
+			for t in effect_targets:
+				if t not in shown:
+					shown.append(t)
+		per_effect.append(effect_targets)
+	var hit_time := float(atk_data.get("hit_time", DEFAULT_HIT_TIME))
+	_emit({
+		"type": "attack", "src": caster.uid, "slot": slot, "attack_id": atk_data.get("id", ""),
+		"name": atk_data.get("name", ""), "anim": atk_data.get("anim", ""),
+		"hit_time": float(atk_data.get("hit_times", [hit_time])[0]),
+		"hit_times": atk_data.get("hit_times", [hit_time]),
+		"targets": shown.map(func(t: BattleUnit) -> int: return t.uid),
+	})
+	for i in effects.size():
+		var effect: Dictionary = effects[i]
+		var power: float = effect.get("power", 1.0)
+		for t: BattleUnit in per_effect[i]:
 			if not t.is_alive():
 				continue
 			match effect.get("type", ""):

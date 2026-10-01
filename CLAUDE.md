@@ -10,8 +10,8 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 ## Stack
 - **Godot 4.7** (GDScript, rendu « Mobile »), paysage 1920×1080, cible Android/iOS.
 - Autoload `GameData` (`scripts/core/game_data.gd`) charge `data/*.json`.
-- Assets 3D du prototype : packs **KayKit (CC0)** dans `assets/kaykit/` (personnages avec 76 à 95
-  animations : `Idle`, `Hit_A`, `Death_A`, `Spellcast_Shoot`, `1H_Melee_Attack_Chop`…).
+- Héros : **nos modèles chibi** dans `assets/heroes/` (7 clips chacun : `Idle`, `Walk`, `Hit`,
+  `Death`, `Attack_01…03`). Monstres et décor : packs **KayKit (CC0)** dans `assets/kaykit/`.
 
 ## Architecture (à respecter)
 - `scripts/combat/` = **logique pure** (RefCounted, aucun nœud, aucun affichage), **déterministe**
@@ -27,6 +27,10 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 - **3 attaques par héros** dans `"attacks"` : [0] base (auto), [1] à recharge (`"cooldown"`),
   [2] ultime (`"energy"`). Chaque attaque : `id`, `name`, `description`, `anim`, `hit_time`,
   `target`, `effects`. Les monstres peuvent n'en avoir qu'une (sans `effects` = dégâts ×1).
+  Options : `hit_times` (plusieurs coups), `fx` (effet visuel), `dash: false` (ne court pas).
+  Un effet peut avoir sa propre `target` (ex. foudre qui se propage à `all_enemies`).
+- Héros : nos modèles chibi dans `assets/heroes/<nom>/` (`.glb` + `integration.json` d'origine).
+  `"anims"` donne les noms des clips repos/course/touché/mort, `"portrait"` le cadrage.
 - Effets d'attaque supportés : `damage`, `heal`, `shield`, `taunt`, `stun`, `dot`, `cleanse`.
   Cibles : `single_enemy`, `all_enemies`, `lowest_hp_enemy`, `all_allies`, `lowest_hp_ally`, `self`.
 

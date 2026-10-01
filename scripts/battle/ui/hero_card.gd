@@ -181,11 +181,14 @@ func _make_portrait_texture(data: Dictionary) -> Texture2D:
 		if ap and ap.has_animation("Idle"):
 			ap.get_animation("Idle").loop_mode = Animation.LOOP_LINEAR
 			ap.play("Idle")
+	# Cadrage : `"portrait": {"y": hauteur des yeux, "dist": distance}` dans le JSON du héros.
+	var framing: Dictionary = data.get("portrait", {})
+	var eye_y: float = framing.get("y", 1.45)
+	var dist: float = framing.get("dist", 2.0)
 	var cam := Camera3D.new()
-	cam.position = Vector3(0.35, 1.75, 2.0)
 	cam.fov = 34
 	vp.add_child(cam)
-	cam.look_at_from_position(cam.position, Vector3(0, 1.45, 0))
+	cam.look_at_from_position(Vector3(dist * 0.18, eye_y + 0.3, dist), Vector3(0, eye_y, 0))
 	var light := DirectionalLight3D.new()
 	light.rotation_degrees = Vector3(-35, 30, 0)
 	light.light_energy = 1.4

@@ -3,12 +3,10 @@ extends Node3D
 ## Affichage 3D d'une BattleUnit : modèle, animations, déplacements, éclats, nombres flottants.
 ## Ne contient aucune règle de jeu : la scène lui dit quoi jouer à partir des événements du moteur.
 
-const ANIM_IDLE := "Idle"
-const ANIM_HITS := ["Hit_A", "Hit_B"]
-const ANIM_DEATH := "Death_A"
-const ANIM_CHEER := "Cheer"
+# Noms d'animations par défaut (modèles KayKit). Un modèle peut les changer avec
+# `"anims": {"idle": …, "hit": …, "death": …, "run": …}` dans son JSON.
+const DEFAULT_ANIMS := {"idle": "Idle", "hit": "Hit_A", "death": "Death_A", "run": "Running_A", "cheer": "Cheer"}
 const ANIM_SPAWN := "Spawn_Ground_Skeletons"
-const ANIM_RUN := "Running_A"
 const DASH_TIME := 0.22
 const MELEE_REACH := 1.5
 
@@ -31,6 +29,7 @@ var shown_hp := 0.0  # PV affichés (mis à jour à l'instant de l'impact, pas a
 var hp_seq := -1  # numéro du dernier événement qui a mis à jour shown_hp
 
 var _anim_player: AnimationPlayer
+var _anims: Dictionary = DEFAULT_ANIMS.duplicate()
 var _flash_mat: ShaderMaterial
 var _dead := false
 var _move_tween: Tween
@@ -44,6 +43,7 @@ func setup(p_unit: BattleUnit, p_data: Dictionary) -> void:
 	data = p_data
 	shown_hp = unit.hp
 	home_position = position
+	_anims.merge(data.get("anims", {}), true)
 	model_scale = data.get("scale", 1.0)
 	var scene: PackedScene = load(data.get("model", ""))
 	if scene:
@@ -55,7 +55,7 @@ func setup(p_unit: BattleUnit, p_data: Dictionary) -> void:
 	if unit.team == 1 and _has(ANIM_SPAWN):
 		_play(ANIM_SPAWN)
 	else:
-		_play(ANIM_IDLE, true)
+		_play(_anims.idle, true)
 
 
 ## Point au-dessus de la tête (pour la barre de vie de l'interface).
@@ -89,8 +89,8 @@ func play_attack(anim_name: String, hit_time: float, dash_to: Variant = null) ->
 		_move_tween.tween_callback(func() -> void: _play(anim_name))
 		_move_tween.tween_interval(maxf(length, hit_time + 0.2))
 		_move_tween.tween_property(self, "position", home_position, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
-		if _has(ANIM_RUN):
-			_play(ANIM_RUN)
+		if _has(_anims.run):
+			_play(_anims.run)
 		delay += DASH_TIME
 	else:
 		_play(anim_name)
@@ -108,14 +108,14 @@ func play_hit(color := Color.WHITE) -> void:
 		tw.tween_property(self, "position", home_position + away, 0.06)
 		tw.tween_property(self, "position", home_position, 0.18)
 	if _anim_player and not _anim_player.current_animation.begins_with("Spell") and not _is_attacking():
-		_play(ANIM_HITS[randi() % ANIM_HITS.size()])
+		_play(_anims.hit if randf() < 0.5 or not _has("Hit_B") else "Hit_B")
 
 
 func play_death() -> void:
 	_dead = true
 	_kill_move()
 	position = home_position
-	_play(ANIM_DEATH)
+	_play(_anims.death)
 	if unit.team == 1:
 		# Les ennemis s'enfoncent dans le marais.
 		var tw := create_tween()
@@ -126,7 +126,7 @@ func play_death() -> void:
 
 func play_cheer() -> void:
 	if not _dead:
-		_play(ANIM_CHEER if _has(ANIM_CHEER) else ANIM_IDLE, true)
+		_play(_anims.cheer if _has(_anims.cheer) else _anims.idle, true)
 
 
 ## Éclat lumineux sur tout le modèle (coup reçu, soin, bouclier…).
@@ -180,7 +180,7 @@ func _kill_move() -> void:
 
 func _is_attacking() -> bool:
 	var cur := _anim_player.current_animation
-	return cur.contains("Attack") or cur.contains("Shoot") or cur == "Throw" or cur.begins_with("Block")
+	return cur.contains("Attack") or cur.contains("Shoot") or cur == "Throw" or cur.begins_with("Block") or cur.begins_with("Spell")
 
 
 func _has(anim_name: String) -> bool:
@@ -200,5 +200,5 @@ func _play(anim_name: String, loop := false) -> void:
 	if loop:
 		_anim_player.get_animation(anim_name).loop_mode = Animation.LOOP_LINEAR
 	elif not _dead:
-		_anim_player.queue(ANIM_IDLE)
-		_anim_player.get_animation(ANIM_IDLE).loop_mode = Animation.LOOP_LINEAR
+		_anim_player.queue(_anims.idle)
+		_anim_player.get_animation(_anims.idle).loop_mode = Animation.LOOP_LINEAR

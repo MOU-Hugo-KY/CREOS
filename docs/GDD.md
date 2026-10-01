@@ -111,15 +111,19 @@ Chaque région a une **jauge de Corruption** (0 à 100 %).
 - **Runes** gravées sur l'équipement (4 emplacements),
 - **Relique** : un seul emplacement, objet unique et puissant (rareté Légendaire et au-dessus).
 
-### 3.6 Héros de départ (prototype : modèles KayKit en attendant les nôtres)
+### 3.6 Héros de départ (nos propres modèles chibi, dans `assets/heroes/`)
 
-| Héros | Classe | Élément | Famille | Modèle du proto |
-|---|---|---|---|---|
-| **Brannoc le Roc** | Gardien | Nature | Chasseurs | Knight |
-| **Kaëla Croc-Vif** | Lame | Feu | Chasseurs | Barbarian |
-| **Ysolde des Marées** | Arcaniste | Eau | Sylvains | Mage |
-| **Fennir l'Ombre** | Traqueur | Ombre | Chasseurs | Rogue_Hooded |
-| **Sœur Aubeline** | Mystique | Lumière | Chasseurs | Rogue |
+| Héros | Classe | Élément | Famille | Modèle | Attaques (① base · ② recharge · ③ ultime) |
+|---|---|---|---|---|---|
+| **Torvald Barbe-Rouge** | Gardien | Feu | Chasseurs | Barbare | Coup de hache · Tourbillon furieux (provocation) · Écrasement berserk (étourdit, bouclier) |
+| **Kaïto le Ronin** | Lame | Eau | Chasseurs | Ronin | Double entaille · Coupe tournoyante (zone) · Frappe plongeante (achève le plus faible) |
+| **Docteur Vesprin** | Traqueur | Nature | Chasseurs | Alchimiste de la peste | Fiole explosive · Flaque toxique (poison) · Explosion du réservoir (poison de zone) |
+| **Frère Orage** | Arcaniste | Lumière | Chasseurs | Moine des éclairs | Paume foudroyante · Pas du tonnerre (étourdit) · Sentence céleste (foudre en chaîne) |
+
+> L'équipe n'a pas de soigneur : elle tient grâce aux boucliers et provocations de Torvald et
+> aux étourdissements. Les anciens héros du prototype (Brannoc, Kaëla, Ysolde, Fennir, Aubeline,
+> modèles KayKit) ont été retirés ; leurs fiches restent dans l'historique Git si on veut les
+> refaire avec nos propres modèles.
 
 Les fiches complètes (stats et compétences) sont dans `data/heroes.json`.
 

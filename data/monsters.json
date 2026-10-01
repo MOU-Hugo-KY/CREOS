@@ -61,7 +61,7 @@
     "boss": true,
     "scale": 1.8,
     "model": "res://assets/kaykit/skeletons/Characters/Skeleton_Mage.glb",
-    "stats": { "hp": 4800, "atk": 160, "def": 45, "res": 70, "spd": 95, "crit": 0.1 },
+    "stats": { "hp": 4800, "atk": 102, "def": 45, "res": 70, "spd": 95, "crit": 0.1 },
     "attacks": [
       { "id": "rayon_d_ombre", "name": "Rayon d'ombre", "anim": "Spellcast_Shoot", "hit_time": 0.45 },
       {
@@ -86,7 +86,7 @@
         "energy": 100,
         "target": "all_enemies",
         "effects": [
-          { "type": "damage", "power": 1.8, "kind": "magic" },
+          { "type": "damage", "power": 1.15, "kind": "magic" },
           { "type": "dot", "power": 0.25, "duration": 5.0 }
         ]
       }

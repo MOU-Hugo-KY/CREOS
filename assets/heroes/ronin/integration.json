@@ -1,0 +1,249 @@
+{
+  "models": [
+    {
+      "name": "Ronin",
+      "triangles": 2512,
+      "vertices": 7536,
+      "bones": 16,
+      "animation_clips": [
+        {
+          "name": "Idle",
+          "duration_seconds": 2.0,
+          "loop": true,
+          "events": []
+        },
+        {
+          "name": "Attack_01_Double_Entaille",
+          "duration_seconds": 1.05,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.38,
+              "type": "hit",
+              "weapon": "katana_R"
+            },
+            {
+              "time": 0.68,
+              "type": "hit",
+              "weapon": "wakizashi_L"
+            }
+          ]
+        },
+        {
+          "name": "Attack_02_Coupe_Tournoyante",
+          "duration_seconds": 1.35,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.46,
+              "type": "aoe_start"
+            },
+            {
+              "time": 0.94,
+              "type": "aoe_end"
+            }
+          ]
+        },
+        {
+          "name": "Attack_03_Frappe_Plongeante",
+          "duration_seconds": 1.65,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.92,
+              "type": "impact",
+              "weapon": "both_swords"
+            }
+          ]
+        },
+        {
+          "name": "Walk",
+          "duration_seconds": 1,
+          "loop": true,
+          "events": [
+            {
+              "time": 0.25,
+              "type": "footstep",
+              "foot": "R"
+            },
+            {
+              "time": 0.75,
+              "type": "footstep",
+              "foot": "L"
+            }
+          ]
+        },
+        {
+          "name": "Hit",
+          "duration_seconds": 0.6,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.1,
+              "type": "hit_recoil_peak"
+            }
+          ]
+        },
+        {
+          "name": "Death",
+          "duration_seconds": 1.15,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.82,
+              "type": "body_fall_impact"
+            },
+            {
+              "time": 1.15,
+              "type": "death_pose_hold"
+            }
+          ]
+        }
+      ],
+      "bounds_min": [
+        -0.84,
+        0.0,
+        -0.387
+      ],
+      "bounds_max": [
+        0.84,
+        2.6,
+        0.485
+      ],
+      "forward": "+Z",
+      "up": "+Y",
+      "texture": "Pixel_Atlas_128.png",
+      "rig": "skeletal rigid weights; one joint per vertex",
+      "combat_mapping": {
+        "idle": "Idle",
+        "walk": "Walk",
+        "hit": "Hit",
+        "death": "Death",
+        "normal_attack": "Attack_01_Double_Entaille",
+        "skill_1": "Attack_02_Coupe_Tournoyante",
+        "skill_2": "Attack_03_Frappe_Plongeante"
+      }
+    },
+    {
+      "name": "Barbare",
+      "triangles": 2178,
+      "vertices": 6534,
+      "bones": 16,
+      "animation_clips": [
+        {
+          "name": "Idle",
+          "duration_seconds": 2.0,
+          "loop": true,
+          "events": []
+        },
+        {
+          "name": "Attack_01_Coup_de_Hache",
+          "duration_seconds": 1.2,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.53,
+              "type": "hit",
+              "weapon": "battleaxe_R"
+            }
+          ]
+        },
+        {
+          "name": "Attack_02_Tourbillon_Furieux",
+          "duration_seconds": 1.65,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.46,
+              "type": "aoe_start"
+            },
+            {
+              "time": 1.42,
+              "type": "aoe_end"
+            }
+          ]
+        },
+        {
+          "name": "Attack_03_Ecrasement_Berserk",
+          "duration_seconds": 1.85,
+          "loop": false,
+          "events": [
+            {
+              "time": 1.09,
+              "type": "ground_slam",
+              "weapon": "both_axes"
+            }
+          ]
+        },
+        {
+          "name": "Walk",
+          "duration_seconds": 1,
+          "loop": true,
+          "events": [
+            {
+              "time": 0.25,
+              "type": "footstep",
+              "foot": "R"
+            },
+            {
+              "time": 0.75,
+              "type": "footstep",
+              "foot": "L"
+            }
+          ]
+        },
+        {
+          "name": "Hit",
+          "duration_seconds": 0.6,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.1,
+              "type": "hit_recoil_peak"
+            }
+          ]
+        },
+        {
+          "name": "Death",
+          "duration_seconds": 1.15,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.82,
+              "type": "body_fall_impact"
+            },
+            {
+              "time": 1.15,
+              "type": "death_pose_hold"
+            }
+          ]
+        }
+      ],
+      "bounds_min": [
+        -1.04,
+        0.0,
+        -0.32
+      ],
+      "bounds_max": [
+        1.18,
+        2.59,
+        0.4615
+      ],
+      "forward": "+Z",
+      "up": "+Y",
+      "texture": "Pixel_Atlas_128.png",
+      "rig": "skeletal rigid weights; one joint per vertex",
+      "combat_mapping": {
+        "idle": "Idle",
+        "walk": "Walk",
+        "hit": "Hit",
+        "death": "Death",
+        "normal_attack": "Attack_01_Coup_de_Hache",
+        "skill_1": "Attack_02_Tourbillon_Furieux",
+        "skill_2": "Attack_03_Ecrasement_Berserk"
+      }
+    }
+  ],
+  "units": "one game unit; visual height approximately 2.6",
+  "version": 1
+}

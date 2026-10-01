@@ -6,10 +6,11 @@ extends Node3D
 ## l'impact dans l'animation (`hit_time` de l'attaque, + la course pour le corps-à-corps).
 
 const DUNGEON_ID := "brumenoire_1"
-const TEAM := ["brannoc", "kaela", "ysolde", "aubeline"]
+const TEAM := ["torvald", "kaito", "vesprin", "orage"]
 const HERO_SPOTS := [Vector3(-2.6, 0, 0.6), Vector3(-4.4, 0, -1.6), Vector3(-4.6, 0, 2.6), Vector3(-6.6, 0, 0.4)]
 const ENEMY_SPOTS := [Vector3(2.6, 0, 0.6), Vector3(4.4, 0, -1.6), Vector3(4.6, 0, 2.6), Vector3(6.6, 0, 0.4)]
 const BOSS_SPOT := Vector3(5.2, 0, 0.0)
+const HERO_YAW := 62.0  # de trois quarts vers la caméra (90 = profil pur)
 const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague (apparition des ennemis)
 const END_DELAY := 1.4
 
@@ -64,7 +65,7 @@ func start_battle(rng_seed: int) -> void:
 	hud.set_auto(was_auto)
 	for i in engine.heroes.size():
 		var h := engine.heroes[i]
-		_spawn(h, team_data[i], HERO_SPOTS[i], 90.0)
+		_spawn(h, team_data[i], HERO_SPOTS[i], HERO_YAW)
 		_hero_stats[h.uid] = {"damage": 0.0, "healing": 0.0}
 	hud.setup_heroes(engine.heroes, views, unit_data)
 	audio.play_music("battle_loop")
@@ -96,20 +97,45 @@ func _on_attack_requested(uid: int, slot: int) -> void:
 # --- Événements du moteur -> affichage ----------------------------------------
 
 func _handle_events() -> void:
-	var delay := 0.0
+	# Attaque en cours : décalage (course) + instants d'impact. Le k-ième coup reçu par une cible
+	# s'affiche au k-ième instant (`hit_times`), le reste (états, mort) après son dernier coup.
+	var offset := 0.0
+	var times: Array = [0.0]
+	var hits_per_dst: Dictionary = {}
+	var last_time: Dictionary = {}
+	var max_time := 0.0
 	for ev in engine.drain_events():
 		_event_seq += 1
 		ev["seq"] = _event_seq
 		match ev.type:
 			"wave_start":
-				delay = 0.0
+				offset = 0.0
+				times = [0.0]
+				hits_per_dst.clear()
+				last_time.clear()
 				_on_wave_start(ev)
 			"attack":
-				delay = _on_attack(ev)
+				var delay := _on_attack(ev)
+				times = ev.hit_times
+				offset = delay - float(times[0])
+				hits_per_dst.clear()
+				last_time.clear()
 			_:
-				# Dégâts, soins, morts… : montrés à l'instant de l'impact de l'attaque en cours.
+				var t := 0.0
+				if ev.get("dot", false):
+					t = 0.0
+				elif ev.type == "damage":
+					var k: int = hits_per_dst.get(ev.dst, 0)
+					hits_per_dst[ev.dst] = k + 1
+					t = offset + float(times[mini(k, times.size() - 1)])
+					last_time[ev.dst] = maxf(last_time.get(ev.dst, 0.0), t)
+				elif ev.has("dst"):
+					t = last_time.get(ev.dst, offset + float(times[0]))
+				else:
+					t = max_time  # victoire / défaite : après le dernier coup
+				max_time = maxf(max_time, t)
 				var event: Dictionary = ev
-				_schedule(0.0 if ev.get("dot", false) else delay, func() -> void: _on_impact(event))
+				_schedule(t, func() -> void: _on_impact(event))
 
 
 func _on_wave_start(ev: Dictionary) -> void:
@@ -125,11 +151,12 @@ func _on_wave_start(ev: Dictionary) -> void:
 	_hold = INTRO_HOLD
 
 
-## Lance l'animation d'attaque et ses effets. Renvoie le délai avant l'impact.
+## Lance l'animation d'attaque et ses effets. Renvoie le délai avant le premier impact.
 func _on_attack(ev: Dictionary) -> float:
 	var v: UnitView = views.get(ev.src)
 	if v == null:
 		return 0.0
+	var atk_data: Dictionary = v.unit.attacks[ev.slot]
 	var targets: Array[UnitView] = []
 	for uid: int in ev.targets:
 		if views.has(uid):
@@ -138,36 +165,21 @@ func _on_attack(ev: Dictionary) -> float:
 	var melee := offensive and v.unit.range_type == "melee"
 	var color := Palette.element_color(v.unit.element)
 	var dash_to: Variant = null
-	if melee and not targets.is_empty():
+	if melee and atk_data.get("dash", true) and not targets.is_empty():
 		dash_to = targets[0].home_position
 	var delay := v.play_attack(ev.anim, ev.hit_time, dash_to)
+	var hit_offsets: Array = ev.hit_times.map(func(h: float) -> float: return delay - float(ev.hit_time) + h)
 
 	# Sons de départ.
 	if melee:
-		_schedule(maxf(0.0, delay - 0.15), func() -> void: _sfx("swing", -2.0))
+		for h: float in hit_offsets:
+			_schedule(maxf(0.0, h - 0.15), func() -> void: _sfx("swing", -2.0))
 	elif v.unit.attack_kind == "magic" or not offensive:
 		_sfx("magic_cast", -8.0)
 	else:
 		_schedule(maxf(0.0, delay - 0.3), func() -> void: _sfx("throw", -3.0))
 
-	# Projectile (une cible à distance) ou explosion de zone (plusieurs cibles).
-	if offensive and not melee:
-		if targets.size() == 1:
-			var travel := minf(0.3, delay)
-			var from := v.chest_position() + Vector3(0, 0.3, 0)
-			var tgt := targets[0]
-			_schedule(delay - travel, func() -> void:
-				fx.projectile(from, tgt.chest_position(), color, travel)
-				if v.unit.attack_kind == "magic":
-					_sfx("magic_shot", -10.0))
-		else:
-			_schedule(delay, func() -> void:
-				for t in targets:
-					fx.burst(t.chest_position(), color, true))
-	if not offensive:
-		_schedule(delay, func() -> void:
-			for t in targets:
-				fx.aura(t.global_position, Palette.HEAL if v.unit.attacks[ev.slot].get("effects", [{}])[0].get("type") == "heal" else Palette.SHIELD))
+	_play_attack_fx(v, atk_data.get("fx", ""), targets, offensive, melee, color, delay, hit_offsets, atk_data)
 
 	match int(ev.slot):
 		BattleUnit.SLOT_COOLDOWN:
@@ -177,15 +189,84 @@ func _on_attack(ev: Dictionary) -> float:
 			fx.aura(v.global_position, color)
 			fx.ring(v.global_position, color, 2.5)
 			_sfx("ui_ready", -4.0)
-			_schedule(delay, func() -> void:
-				if offensive:
+			if offensive:
+				_schedule(delay, func() -> void:
 					fx.shake(0.7)
-					_sfx("ultimate_impact", 0.0)
-					var center := Vector3.ZERO
-					for t in targets:
-						center += t.global_position
-					fx.ring(center / maxf(1, targets.size()), color, 5.0))
+					_sfx("ultimate_impact", 0.0))
 	return delay
+
+
+## Effets visuels d'une attaque. `fx` vient du JSON de l'attaque (sinon : effet par défaut).
+func _play_attack_fx(v: UnitView, fx_name: String, targets: Array[UnitView], offensive: bool, melee: bool,
+		color: Color, delay: float, hit_offsets: Array, atk_data: Dictionary) -> void:
+	match fx_name:
+		"vial":
+			# Fiole lancée en cloche, qui éclate en petit nuage.
+			if targets.is_empty():
+				return
+			var tgt := targets[0]
+			var travel := minf(0.3, delay)
+			_schedule(delay - travel, func() -> void:
+				fx.projectile(v.chest_position() + Vector3(0, 0.5, 0), tgt.chest_position(), color, travel, 0.25)
+				_sfx("throw", -4.0))
+			_schedule(delay, func() -> void:
+				fx.cloud(tgt.global_position, Color(color, 0.5), 1.5))
+		"poison_pool":
+			var duration := 4.0
+			for e: Dictionary in atk_data.get("effects", []):
+				if e.get("type") == "dot":
+					duration = e.get("duration", duration)
+			_schedule(delay, func() -> void:
+				for t in targets:
+					fx.pool(t.global_position, color, duration)
+				_sfx("magic_shot", -8.0))
+		"poison_burst":
+			_schedule(delay, func() -> void:
+				fx.cloud(v.global_position, Color(color, 0.6), 3.0)
+				fx.ring(v.global_position, color, 7.0)
+				for t in targets:
+					fx.cloud(t.global_position, Color(color, 0.45), 1.6))
+		"lightning_hit":
+			for h: float in hit_offsets:
+				_schedule(h, func() -> void:
+					for t in targets:
+						fx.lightning(v.chest_position(), t.chest_position(), color, 5)
+					_sfx("magic_shot", -6.0))
+		"sky_lightning":
+			_schedule(delay, func() -> void:
+				if not targets.is_empty():
+					fx.sky_lightning(targets[0].global_position, color))
+			_schedule(delay + 0.12, func() -> void:
+				for i in range(1, targets.size()):
+					fx.lightning(targets[0].chest_position(), targets[i].chest_position(), color, 7)
+					fx.burst(targets[i].chest_position(), color, false))
+		"whirlwind":
+			for h: float in hit_offsets:
+				_schedule(h, func() -> void: fx.ring(v.global_position, color, 3.2))
+		"ground_slam":
+			_schedule(delay, func() -> void:
+				fx.ring(v.global_position, color, 6.0)
+				fx.cloud(v.global_position, Color(0.45, 0.4, 0.33, 0.5), 2.0)
+				fx.shake(0.6))
+		_:
+			# Par défaut : boule magique (une cible à distance) ou éclats sur chaque cible (zone).
+			if offensive and not melee:
+				if targets.size() == 1:
+					var travel := minf(0.3, delay)
+					var tgt := targets[0]
+					_schedule(delay - travel, func() -> void:
+						fx.projectile(v.chest_position() + Vector3(0, 0.3, 0), tgt.chest_position(), color, travel)
+						if v.unit.attack_kind == "magic":
+							_sfx("magic_shot", -10.0))
+				else:
+					_schedule(delay, func() -> void:
+						for t in targets:
+							fx.burst(t.chest_position(), color, true))
+	if not offensive:
+		var is_heal: bool = atk_data.get("effects", [{}])[0].get("type") == "heal"
+		_schedule(delay, func() -> void:
+			for t in targets:
+				fx.aura(t.global_position, Palette.HEAL if is_heal else Palette.SHIELD))
 
 
 func _on_impact(ev: Dictionary) -> void:
@@ -327,7 +408,7 @@ func _spawn_wave() -> void:
 	for i in engine.enemies.size():
 		var e := engine.enemies[i]
 		var spot: Vector3 = BOSS_SPOT if e.is_boss else ENEMY_SPOTS[i % ENEMY_SPOTS.size()]
-		_spawn(e, GameData.monster(e.def_id), spot, -90.0)
+		_spawn(e, GameData.monster(e.def_id), spot, -HERO_YAW)
 
 
 func _spawn(u: BattleUnit, data: Dictionary, pos: Vector3, yaw_deg: float) -> void:

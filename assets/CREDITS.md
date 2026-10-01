@@ -1,5 +1,13 @@
 # Crédits des assets
 
+## Héros (`assets/heroes/`)
+
+Modèles 3D chibi originaux créés pour CREOS (fournis par Hugo) : Barbare, Ronin, Alchimiste de la
+peste, Moine des éclairs. Chaque dossier garde le `integration.json` d'origine (clips, instants
+d'impact) et un `apercu.png`.
+
+## Monstres et décor
+
 | Dossier | Pack | Auteur | Licence | Source |
 |---|---|---|---|---|
 | `kaykit/dungeon` | KayKit Dungeon Remastered 1.0 | Kay Lousberg | CC0 | https://github.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0 |

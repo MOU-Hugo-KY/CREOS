@@ -26,14 +26,14 @@ func _ready() -> void:
 	tooltip_text = description
 	_title_label = Label.new()
 	_title_label.text = title
-	_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_title_label.add_theme_font_size_override("font_size", 19)
+	_title_label.add_theme_font_size_override("font_size", 16 if title.length() <= 18 else 14)
 	_title_label.add_theme_constant_override("line_spacing", -4)
 	_title_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_title_label.offset_left = 6
-	_title_label.offset_right = -6
+	_title_label.offset_left = 3
+	_title_label.offset_right = -3
 	_title_label.offset_top = 14
 	_title_label.offset_bottom = -4
 	_title_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
