@@ -94,6 +94,13 @@ func attack_ready(index: int) -> bool:
 	return cooldowns[index] <= 0.0 and energy >= energy_cost(index)
 
 
+## Vrai si l'unité peut lancer l'attaque `index` à son tour (l'attaque de base l'est toujours).
+func can_use(index: int) -> bool:
+	if index == SLOT_BASIC:
+		return has_attack(index) and is_alive() and stun_time <= 0.0
+	return attack_ready(index)
+
+
 func uses_energy() -> bool:
 	for i in attacks.size():
 		if energy_cost(i) > 0.0:

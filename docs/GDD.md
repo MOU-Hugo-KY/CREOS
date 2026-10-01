@@ -132,13 +132,17 @@ Les fiches complètes (stats et compétences) sont dans `data/heroes.json`.
 ## 4. Combat (repris de Dungeon Boss, adapté)
 
 - **4 héros contre des vagues de monstres** (2 ou 3 vagues), **puis un boss**.
-- **Temps réel avec jauge d'action** : chaque unité a une **Vitesse**. Sa jauge se remplit en continu,
-  et quand elle est pleine, l'unité fait son **attaque de base** automatiquement.
-- **3 attaques par héros** (chacune avec son bouton sous le portrait) :
-  1. **Attaque de base** : automatique, part quand la jauge d'action est pleine.
-  2. **Attaque à recharge** : le joueur la déclenche ; ensuite elle se recharge (6 à 10 s).
+- **Tour par tour à jauges** : chaque unité a une **Vitesse**. Sa jauge se remplit en continu ;
+  quand celle d'un **héros** est pleine, le combat se fige et ses **3 attaques** apparaissent en
+  petites icônes en bas de l'écran : le joueur en choisit une. Les ennemis jouent seuls.
+- **3 attaques par héros** (une icône chacune, visibles seulement à son tour) :
+  1. **Attaque de base** : toujours disponible.
+  2. **Attaque à recharge** : ensuite elle se recharge (6 à 10 s).
   3. **Ultime** : coûte toute la jauge d'**énergie** (gagnée en attaquant et en recevant des coups).
-  En mode **Auto**, l'IA lance l'ultime dès qu'elle est prête, sinon l'attaque à recharge.
+  En mode **Auto**, l'IA choisit l'ultime dès qu'elle est prête, sinon l'attaque à recharge,
+  sinon l'attaque de base.
+- **Interface épurée** : pas de panneau en bas ; seulement des barres fines (vie, énergie) au-dessus
+  des personnages, la vague, Auto et ×2. Une flèche et un anneau doré montrent le héros qui joue.
   Les monstres ont 1 attaque ; les boss en ont 3 comme les héros.
 - **Étoiles** : 3 si aucun héros n'est tombé, 2 si un seul est tombé, 1 sinon.
 - **Ciblage** : les Gardiens avec Provocation attirent les attaques. Sinon, la cible est choisie

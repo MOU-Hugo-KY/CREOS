@@ -21,8 +21,10 @@
 - [x] Projectiles pour les attaques à distance (boule colorée selon l'élément)
 - [x] Effets visuels (particules GPU, ondes de choc, éclats sur les modèles) et tremblement de
       caméra sur les coups critiques et les ultimes
-- [x] Vraie interface : portraits ronds, PV, énergie, 3 boutons d'attaque par héros, couleur de
-      l'élément, barres au-dessus des têtes, barre du boss, bouton Auto et vitesse ×2
+- [x] Interface épurée : barres fines au-dessus des têtes (vie + énergie), barre du boss fine,
+      vague, Auto et ×2 ; plus de panneau en bas
+- [x] Tour par tour : au tour d'un héros, le combat se fige et ses 3 attaques apparaissent en
+      petites icônes pixel art (touches 1, 2, 3 au clavier)
 - [x] Écran de fin : étoiles (3 = personne n'est tombé, 2 = un héros tombé, 1 sinon), butin,
       bilan par héros
 - [x] Sons et musiques (packs CC0 Kenney + OpenGameArt, voir `assets/CREDITS.md`)

@@ -34,6 +34,7 @@ var _flash_mat: ShaderMaterial
 var _dead := false
 var _move_tween: Tween
 var _flash_tween: Tween
+var _highlight: MeshInstance3D
 
 static var _flash_shader: Shader
 
@@ -95,6 +96,30 @@ func play_attack(anim_name: String, hit_time: float, dash_to: Variant = null) ->
 	else:
 		_play(anim_name)
 	return delay
+
+
+## Anneau doré au sol sous le héros dont c'est le tour.
+func set_highlight(on: bool) -> void:
+	if on and _highlight == null:
+		_highlight = MeshInstance3D.new()
+		var torus := TorusMesh.new()
+		torus.inner_radius = 0.75
+		torus.outer_radius = 0.95
+		torus.rings = 40
+		_highlight.mesh = torus
+		var mat := StandardMaterial3D.new()
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.albedo_color = Palette.GOLD
+		mat.emission_enabled = true
+		mat.emission = Palette.GOLD
+		mat.emission_energy_multiplier = 1.5
+		_highlight.material_override = mat
+		_highlight.scale = Vector3(1, 0.06, 1) * maxf(1.0, model_scale)
+		_highlight.position.y = 0.05
+		_highlight.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		add_child(_highlight)
+	if _highlight:
+		_highlight.visible = on
 
 
 func play_hit(color := Color.WHITE) -> void:

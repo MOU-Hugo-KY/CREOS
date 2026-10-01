@@ -41,7 +41,10 @@ func _ready() -> void:
 	hud.camera = camera
 	add_child(hud)
 	hud.attack_requested.connect(_on_attack_requested)
-	hud.auto_toggled.connect(func(on: bool) -> void: engine.auto_mode = on)
+	hud.auto_toggled.connect(func(on: bool) -> void:
+		engine.auto_mode = on
+		if on:
+			_end_turn())
 	hud.speed_toggled.connect(func(fast: bool) -> void: Engine.time_scale = 2.0 if fast else 1.0)
 	hud.restart_requested.connect(func() -> void: start_battle(randi()))
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
@@ -56,7 +59,7 @@ func start_battle(rng_seed: int) -> void:
 	_pending.clear()
 	_hero_stats.clear()
 	_ended = false
-	hud.clear_overheads()
+	hud.reset()
 	var was_auto := engine.auto_mode
 	engine = BattleEngine.new()
 	var team_data: Array = TEAM.map(func(id: String) -> Dictionary: return GameData.hero(id))
@@ -67,7 +70,6 @@ func start_battle(rng_seed: int) -> void:
 		var h := engine.heroes[i]
 		_spawn(h, team_data[i], HERO_SPOTS[i], HERO_YAW)
 		_hero_stats[h.uid] = {"damage": 0.0, "healing": 0.0}
-	hud.setup_heroes(engine.heroes, views, unit_data)
 	audio.play_music("battle_loop")
 	_handle_events()
 
@@ -86,12 +88,39 @@ func _process(delta: float) -> void:
 		engine.step(delta)
 		_handle_events()
 	_run_pending()
-	hud.refresh()
+	hud.refresh(delta)
 
 
 func _on_attack_requested(uid: int, slot: int) -> void:
 	if engine.request_attack(uid, slot):
 		audio.play("ui_click", -6.0, 0.0)
+		_end_turn(slot)
+		_handle_events()
+
+
+## Clavier : 1, 2, 3 choisissent l'attaque du héros dont c'est le tour.
+func _unhandled_input(event: InputEvent) -> void:
+	var key := event as InputEventKey
+	if key == null or not key.pressed or key.echo or engine.awaiting_uid == -1:
+		return
+	var slot := key.keycode - KEY_1
+	if slot >= 0 and slot <= 2:
+		_on_attack_requested(engine.awaiting_uid, slot)
+
+
+func _begin_turn(uid: int) -> void:
+	var v: UnitView = views.get(uid)
+	if v == null:
+		return
+	v.set_highlight(true)
+	hud.begin_turn(v.unit)
+	_sfx("ui_ready", -10.0)
+
+
+func _end_turn(slot := -1) -> void:
+	for uid in views:
+		views[uid].set_highlight(false)
+	hud.end_turn(slot)
 
 
 # --- Événements du moteur -> affichage ----------------------------------------
@@ -114,6 +143,8 @@ func _handle_events() -> void:
 				hits_per_dst.clear()
 				last_time.clear()
 				_on_wave_start(ev)
+			"turn":
+				_begin_turn(ev.src)
 			"attack":
 				var delay := _on_attack(ev)
 				times = ev.hit_times
@@ -342,6 +373,7 @@ func _end_battle(won: bool) -> void:
 	if _ended:
 		return
 	_ended = true
+	_end_turn()
 	if won:
 		for uid in views:
 			var v: UnitView = views[uid]

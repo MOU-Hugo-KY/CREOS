@@ -92,29 +92,56 @@ func test_starter_team_beats_first_dungeon() -> void:
 
 
 func test_special_attacks() -> void:
-	print("Attaques spéciales")
+	print("Tour par tour et attaques")
 	var gd := _data()
 	var e := BattleEngine.new()
 	e.setup(_team(gd), gd.dungeon_waves("brumenoire_1"), 7)
-	var kaito := e.heroes[1]
-	check(kaito.attacks.size() == 3, "un héros a 3 attaques")
-	check(not e.request_attack(kaito.uid, BattleUnit.SLOT_BASIC), "l'attaque de base ne se demande pas")
-	check(not e.request_attack(kaito.uid, BattleUnit.SLOT_ULTIMATE), "ultime refusée sans énergie")
-	kaito.energy = BattleUnit.ENERGY_MAX
-	check(e.request_attack(kaito.uid, BattleUnit.SLOT_ULTIMATE), "ultime acceptée avec énergie pleine")
-	e.step(0.05)
-	var cast := e.drain_events().any(func(ev: Dictionary) -> bool:
-		return ev.type == "attack" and ev.src == kaito.uid and ev.slot == BattleUnit.SLOT_ULTIMATE)
-	check(cast, "l'ultime est lancée au pas suivant")
-	check(kaito.energy < BattleUnit.ENERGY_MAX, "l'énergie est consommée")
+	check(e.heroes[1].attacks.size() == 3, "un héros a 3 attaques")
+	var hero := _wait_turn(e)
+	check(hero != null, "le combat attend le choix du joueur quand la jauge d'un héros est pleine")
+	if hero == null:
+		gd.free()
+		return
+	var frozen_time := e.time
+	e.step(0.5)
+	check(is_equal_approx(e.time, frozen_time), "le combat est figé pendant le choix")
+	var other := e.heroes[0] if e.heroes[0] != hero else e.heroes[1]
+	check(not e.request_attack(other.uid, BattleUnit.SLOT_BASIC), "un autre héros ne peut pas jouer")
+	check(not e.request_attack(hero.uid, BattleUnit.SLOT_ULTIMATE), "ultime refusée sans énergie")
+	check(not e.request_attack(hero.uid, BattleUnit.SLOT_COOLDOWN), "attaque à recharge pas prête au début")
+	check(e.request_attack(hero.uid, BattleUnit.SLOT_BASIC), "attaque de base acceptée")
+	var basic := e.drain_events().any(func(ev: Dictionary) -> bool:
+		return ev.type == "attack" and ev.src == hero.uid and ev.slot == BattleUnit.SLOT_BASIC)
+	check(basic and e.awaiting_uid == -1, "l'attaque part et le combat reprend")
 
-	check(not e.request_attack(kaito.uid, BattleUnit.SLOT_COOLDOWN), "attaque à recharge pas prête au début")
-	kaito.cooldowns[BattleUnit.SLOT_COOLDOWN] = 0.0
-	check(e.request_attack(kaito.uid, BattleUnit.SLOT_COOLDOWN), "attaque à recharge prête après la recharge")
+	hero = _wait_turn(e)
+	hero.energy = BattleUnit.ENERGY_MAX
+	check(e.request_attack(hero.uid, BattleUnit.SLOT_ULTIMATE), "ultime acceptée avec énergie pleine")
+	check(hero.energy < BattleUnit.ENERGY_MAX, "l'énergie est consommée")
+
+	hero = _wait_turn(e)
+	hero.cooldowns[BattleUnit.SLOT_COOLDOWN] = 0.0
+	check(e.request_attack(hero.uid, BattleUnit.SLOT_COOLDOWN), "attaque à recharge prête après la recharge")
+	check(hero.cooldowns[BattleUnit.SLOT_COOLDOWN] > 0.0, "la recharge repart après usage")
+	check(hero.energy_cost(BattleUnit.SLOT_COOLDOWN) == 0.0, "l'attaque à recharge ne coûte pas d'énergie")
+
+	hero = _wait_turn(e)
+	e.auto_mode = true
 	e.step(0.05)
-	check(kaito.cooldowns[BattleUnit.SLOT_COOLDOWN] > 0.0, "la recharge repart après usage")
-	check(kaito.energy_cost(BattleUnit.SLOT_COOLDOWN) == 0.0, "l'attaque à recharge ne coûte pas d'énergie")
+	check(e.awaiting_uid != hero.uid, "activer Auto joue le tour en attente")
 	gd.free()
+
+
+## Fait avancer le combat jusqu'au tour d'un héros ; renvoie ce héros (ou null).
+func _wait_turn(e: BattleEngine) -> BattleUnit:
+	for i in 2000:
+		if e.awaiting_uid != -1:
+			return e.get_unit(e.awaiting_uid)
+		if e.finished:
+			return null
+		e.step(0.05)
+		e.drain_events()
+	return null
 
 
 ## Vérifie les fichiers JSON : 3 attaques par héros, cibles et effets connus, animations présentes.

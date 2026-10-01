@@ -6,6 +6,10 @@ Modèles 3D chibi originaux créés pour CREOS (fournis par Hugo) : Barbare, Ron
 peste, Moine des éclairs. Chaque dossier garde le `integration.json` d'origine (clips, instants
 d'impact) et un `apercu.png`.
 
+## Icônes d'attaque (`assets/ui/attacks/`)
+
+Dessinées pour CREOS par `tools/make_attack_icons.py` (pixel art 32 × 32, créé par nous).
+
 ## Monstres et décor
 
 | Dossier | Pack | Auteur | Licence | Source |

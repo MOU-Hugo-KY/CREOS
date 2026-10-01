@@ -16,15 +16,19 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 ## Architecture (à respecter)
 - `scripts/combat/` = **logique pure** (RefCounted, aucun nœud, aucun affichage), **déterministe**
   avec une graine aléatoire. `BattleEngine.step(delta)` fait avancer le combat ;
-  `drain_events()` renvoie les événements (`attack` avec son `slot` 0/1/2, `damage`, `heal`,
-  `shield`, `status`, `death`, `wave_start`, `victory`, `defeat`).
+  `drain_events()` renvoie les événements (`turn`, `attack` avec son `slot` 0/1/2, `damage`,
+  `heal`, `shield`, `status`, `death`, `wave_start`, `victory`, `defeat`).
+  **Tour par tour** : quand la jauge d'un héros est pleine (hors Auto), le moteur se fige
+  (`awaiting_uid`) jusqu'à `request_attack(uid, slot)`.
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
   `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),
   `battle_fx.gd` (effets), `battle_audio.gd` (sons), `ui/` (interface et écran de fin).
   Le moteur applique les dégâts tout de suite ; l'affichage les montre à l'instant `hit_time`.
 - **Les données vont dans `data/*.json`** (héros, monstres, donjons, régions), pas dans le code.
   Un nouveau héros = une entrée JSON (+ un modèle 3D), sans toucher au moteur si ses effets existent.
-- **3 attaques par héros** dans `"attacks"` : [0] base (auto), [1] à recharge (`"cooldown"`),
+- Icônes d'attaque : `assets/ui/attacks/<id>.png`, dessinées par `python tools/make_attack_icons.py`
+  (une fonction par attaque ; en ajouter une pour chaque nouvelle attaque de héros).
+- **3 attaques par héros** dans `"attacks"` : [0] base, [1] à recharge (`"cooldown"`),
   [2] ultime (`"energy"`). Chaque attaque : `id`, `name`, `description`, `anim`, `hit_time`,
   `target`, `effects`. Les monstres peuvent n'en avoir qu'une (sans `effects` = dégâts ×1).
   Options : `hit_times` (plusieurs coups), `fx` (effet visuel), `dash: false` (ne court pas).

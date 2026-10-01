@@ -5,8 +5,14 @@ extends RefCounted
 ## Logique pure et déterministe (graine aléatoire). Aucun nœud, aucun affichage :
 ## l'affichage appelle `step(delta)` puis lit les événements avec `drain_events()`.
 ##
+## Tour par tour à jauges : la jauge de chaque unité se remplit selon sa vitesse. Quand celle
+## d'un héros est pleine (hors mode Auto), le combat se fige (`awaiting_uid`) jusqu'à ce que le
+## joueur choisisse une de ses 3 attaques avec `request_attack()`. Les ennemis et le mode Auto
+## choisissent seuls.
+##
 ## Événements produits (Dictionary avec une clé "type") :
 ##   wave_start {index, count}
+##   turn       {src}                        au tour de ce héros de choisir son attaque
 ##   attack     {src, slot, attack_id, name, anim, hit_time, targets}
 ##              slot 0 = attaque de base, 1 = attaque à recharge, 2 = ultime
 ##   damage     {src, dst, amount, crit, elem_mult, hp, dot}   dot = brûlure/poison
@@ -40,7 +46,7 @@ var time := 0.0
 var _rng := RandomNumberGenerator.new()
 var _next_uid := 1
 var _events: Array[Dictionary] = []
-var _attack_queue: Array[Vector2i] = []  # (uid, slot) demandés par le joueur ou l'IA
+var awaiting_uid := -1  # héros qui attend le choix du joueur (-1 = personne)
 var _wave_timer := 0.0
 
 
@@ -57,6 +63,7 @@ func setup(heroes_data: Array, waves_data: Array, rng_seed: int = 0) -> void:
 	finished = false
 	won = false
 	time = 0.0
+	awaiting_uid = -1
 	_start_next_wave()
 
 
@@ -74,12 +81,14 @@ func get_unit(uid: int) -> BattleUnit:
 	return null
 
 
-## Le joueur touche le bouton d'attaque `slot` (1 ou 2) d'un héros : elle part dès que possible.
+## Le joueur choisit l'attaque `slot` (0, 1 ou 2) du héros dont c'est le tour.
 func request_attack(uid: int, slot: int) -> bool:
 	var u := get_unit(uid)
-	if u == null or u.team != 0 or not u.attack_ready(slot):
+	if u == null or uid != awaiting_uid or not u.can_use(slot):
 		return false
-	_queue_attack(u, slot)
+	awaiting_uid = -1
+	_use_attack(u, slot)
+	_check_end()
 	return true
 
 
@@ -93,6 +102,15 @@ func drain_events() -> Array[Dictionary]:
 func step(delta: float) -> void:
 	if finished:
 		return
+	if awaiting_uid != -1:
+		# Combat figé : on attend le choix du joueur (sauf si le mode Auto vient d'être activé).
+		if not auto_mode:
+			return
+		var waiting := get_unit(awaiting_uid)
+		awaiting_uid = -1
+		_use_attack(waiting, _ai_choice(waiting))
+		if _check_end():
+			return
 	time += delta
 
 	if _wave_timer > 0.0:
@@ -108,26 +126,18 @@ func step(delta: float) -> void:
 	if _check_end():
 		return
 
-	# Attaques spéciales demandées par le joueur, ou choisies par l'IA (ennemis et mode Auto).
-	for u in all_units():
-		if u.team == 1 or auto_mode:
-			_auto_choose(u)
-	while not _attack_queue.is_empty():
-		var req: Vector2i = _attack_queue.pop_front()
-		var caster := get_unit(req.x)
-		if caster and caster.attack_ready(req.y):
-			_use_attack(caster, req.y)
-			if _check_end():
-				return
-
-	# Jauges d'action -> attaques de base.
+	# Jauges d'action : une unité dont la jauge est pleine joue son tour.
 	for u in all_units():
 		if not u.is_alive() or u.stun_time > 0.0:
 			continue
 		u.gauge += u.spd * GAUGE_RATE * delta
 		if u.gauge >= BattleUnit.GAUGE_MAX:
 			u.gauge -= BattleUnit.GAUGE_MAX
-			_use_attack(u, BattleUnit.SLOT_BASIC)
+			if u.team == 0 and not auto_mode:
+				awaiting_uid = u.uid
+				_emit({"type": "turn", "src": u.uid})
+				return
+			_use_attack(u, _ai_choice(u))
 			if _check_end():
 				return
 
@@ -223,18 +233,12 @@ func _tick_statuses(u: BattleUnit, delta: float) -> void:
 			dot.acc = 0.0
 
 
-func _queue_attack(u: BattleUnit, slot: int) -> void:
-	var req := Vector2i(u.uid, slot)
-	if req not in _attack_queue:
-		_attack_queue.append(req)
-
-
-## IA simple : l'ultime dès qu'elle est prête, sinon l'attaque à recharge.
-func _auto_choose(u: BattleUnit) -> void:
+## IA simple : l'ultime dès qu'elle est prête, sinon l'attaque à recharge, sinon l'attaque de base.
+func _ai_choice(u: BattleUnit) -> int:
 	for slot in [BattleUnit.SLOT_ULTIMATE, BattleUnit.SLOT_COOLDOWN]:
 		if u.attack_ready(slot):
-			_queue_attack(u, slot)
-			return
+			return slot
+	return BattleUnit.SLOT_BASIC
 
 
 func _pick_basic_target(src: BattleUnit, foes: Array[BattleUnit]) -> BattleUnit:
@@ -344,7 +348,7 @@ func _use_attack(caster: BattleUnit, slot: int) -> void:
 				"cleanse":
 					t.dots.clear()
 					t.stun_time = 0.0
-	if slot == BattleUnit.SLOT_BASIC:
+	if slot != BattleUnit.SLOT_ULTIMATE:
 		caster.add_energy(ENERGY_ON_ATTACK)
 
 
