@@ -23,10 +23,6 @@
     "orage": {
       "level": 1,
       "xp": 0
-    },
-    "malgrave": {
-      "level": 1,
-      "xp": 0
     }
   },
   "team": [
@@ -35,6 +31,8 @@
     "vesprin",
     "orage"
   ],
-  "items": {},
+  "items": {
+    "fragments_relique": 20
+  },
   "dungeons": {}
 }

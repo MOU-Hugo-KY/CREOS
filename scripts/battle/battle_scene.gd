@@ -110,14 +110,46 @@ func _on_attack_requested(uid: int, slot: int) -> void:
 		_handle_events()
 
 
+## Toucher (ou cliquer) un ennemi le désigne comme cible de l'équipe.
 ## Clavier : 1, 2, 3 choisissent l'attaque du héros dont c'est le tour.
 func _unhandled_input(event: InputEvent) -> void:
+	var click := event as InputEventMouseButton
+	if click and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
+		var enemy := _enemy_at(click.position)
+		if enemy and engine.set_focus(enemy.unit.uid):
+			audio.play("ui_click", -8.0, 0.0)
+			_handle_events()
+			get_viewport().set_input_as_handled()
+		return
 	var key := event as InputEventKey
 	if key == null or not key.pressed or key.echo or engine.awaiting_uid == -1:
 		return
 	var slot := key.keycode - KEY_1
 	if slot >= 0 and slot <= 2:
 		_on_attack_requested(engine.awaiting_uid, slot)
+
+
+## Ennemi vivant le plus proche du point touché à l'écran (rayon généreux pour le doigt).
+func _enemy_at(screen_pos: Vector2) -> UnitView:
+	var radius := 110.0 * get_viewport().get_visible_rect().size.y / 1080.0
+	var best: UnitView = null
+	var best_d := radius
+	for uid in views:
+		var v: UnitView = views[uid]
+		if v.unit.team != 1 or v.is_dead() or camera.is_position_behind(v.chest_position()):
+			continue
+		var d := camera.unproject_position(v.chest_position()).distance_to(screen_pos)
+		if d < best_d:
+			best_d = d
+			best = v
+	return best
+
+
+func _show_focus(target_uid: int) -> void:
+	for uid in views:
+		var v: UnitView = views[uid]
+		if v.unit.team == 1:
+			v.set_target_mark(uid == target_uid)
 
 
 func _begin_turn(uid: int) -> void:
@@ -157,6 +189,8 @@ func _handle_events() -> void:
 				_on_wave_start(ev)
 			"turn":
 				_begin_turn(ev.src)
+			"focus":
+				_show_focus(ev.target)
 			"attack":
 				var delay := _on_attack(ev)
 				times = ev.hit_times

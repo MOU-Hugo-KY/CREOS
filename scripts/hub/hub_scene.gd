@@ -122,6 +122,8 @@ func _do_action(action_name: String, id: String) -> void:
 				hud.toast("Pas assez d'énergie : il en faut %d (tu as %d)." % [PlayerData.hunt_cost(hunt), PlayerData.energy()])
 		"heroes":
 			hud.open_lodge()
+		"altar":
+			hud.open_altar()
 		_:
 			var name := _name_of(id)
 			hud.toast("%s — bientôt disponible !" % name)

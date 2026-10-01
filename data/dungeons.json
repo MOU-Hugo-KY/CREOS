@@ -23,7 +23,8 @@
     "rewards": {
       "gold": 250,
       "xp": 120,
-      "essence_ombre": 3
+      "essence_ombre": 3,
+      "fragments_relique": 4
     },
     "energy_cost": 6
   }

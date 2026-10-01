@@ -17,6 +17,7 @@ func _initialize() -> void:
 	test_data_is_valid()
 	test_progression()
 	test_save()
+	test_summon()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -129,6 +130,19 @@ func test_special_attacks() -> void:
 	check(hero.energy_cost(BattleUnit.SLOT_COOLDOWN) == 0.0, "l'attaque à recharge ne coûte pas d'énergie")
 
 	hero = _wait_turn(e)
+	var foe := e.enemies[e.enemies.size() - 1]
+	check(e.set_focus(foe.uid), "le joueur peut cibler un ennemi")
+	check(not e.set_focus(hero.uid), "on ne peut pas cibler un allié")
+	e.drain_events()
+	e.request_attack(hero.uid, BattleUnit.SLOT_BASIC)
+	var hit_focus := e.drain_events().any(func(ev: Dictionary) -> bool:
+		return ev.type == "attack" and ev.src == hero.uid and ev.targets == [foe.uid])
+	check(hit_focus or hero.attacks[0].get("target", "single_enemy") != "single_enemy",
+		"l'attaque à cible unique frappe l'ennemi ciblé")
+	e.set_focus(foe.uid)
+	check(e.focus_uid == -1, "toucher encore le même ennemi enlève la cible")
+
+	hero = _wait_turn(e)
 	e.auto_mode = true
 	e.step(0.05)
 	check(e.awaiting_uid != hero.uid, "activer Auto joue le tour en attente")
@@ -211,6 +225,8 @@ func test_save() -> void:
 	var gold0: int = pd.gold()
 	var energy0: int = pd.energy()
 	check(pd.team().size() == 4, "équipe de départ de 4 héros")
+	check(not pd.toggle_team("malgrave"), "pas de héros non possédé dans l'équipe")
+	pd.state.heroes["malgrave"] = {"level": 1, "xp": 0}
 	check(not pd.toggle_team("malgrave"), "pas de 5e héros dans l'équipe")
 	check(pd.toggle_team("orage") and pd.toggle_team("malgrave") and pd.in_team("malgrave"), "remplacer un héros de l'équipe")
 	check(pd.start_hunt("brumenoire_1") and pd.energy() == energy0 - pd.hunt_cost("brumenoire_1"), "une chasse coûte de l'énergie")
@@ -234,3 +250,42 @@ func _anim_player(model_path: String) -> AnimationPlayer:
 	var player: AnimationPlayer = model.find_child("AnimationPlayer", true, false)
 	model.queue_free()
 	return player
+
+
+func test_summon() -> void:
+	print("Autel des Reliques (invocations)")
+	var gd := _data()
+	var cfg: Dictionary = gd.summon
+	var pd: Node = PlayerDataScript.new()
+	pd.configure(gd.player_start, gd.progression, gd.dungeons)
+	pd.use_memory_only()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 11
+	var frag0: int = pd.item_count("fragments_relique")
+	check(not pd.owned_heroes().has("malgrave"), "Sire Malgrave n'est pas possédé au départ")
+	var first: Dictionary = pd.summon("fragments_relique", cfg, gd.heroes, rng)
+	check(first.get("id") == "malgrave" and first.new and pd.owned_heroes().has("malgrave"),
+		"la première invocation réveille un nouveau héros")
+	check(pd.item_count("fragments_relique") == frag0 - pd.summon_cost("fragments_relique", cfg), "les fragments sont dépensés")
+	var again: Dictionary = pd.summon("fragments_relique", cfg, gd.heroes, rng)
+	check(not again.new and again.shards > 0 and pd.hero_shards(again.id) == again.shards,
+		"un héros déjà possédé donne des fragments de ce héros")
+	pd.state.items["fragments_relique"] = 0
+	check(pd.summon("fragments_relique", cfg, gd.heroes, rng).is_empty(), "pas d'invocation sans fragments")
+	# Garantie : au moins un héros Légendaire (rareté 4+) sur `pity_every` invocations.
+	var pool: Dictionary = gd.heroes
+	var every := int(cfg.pity_every)
+	var ok := true
+	var pity := 0
+	for i in 300:
+		var r := Summon.roll(pool, cfg, 1 + i, pity, rng)
+		pity = 0 if r.rarity >= int(cfg.pity_min_rarity) else pity + 1
+		ok = ok and pity < every
+	check(ok, "garantie : un Légendaire au moins toutes les %d invocations" % every)
+	var odds := Summon.odds(pool, cfg)
+	var total := 0.0
+	for k in odds:
+		total += odds[k]
+	check(is_equal_approx(total, 100.0), "les taux affichés font 100 %")
+	gd.free()
+	pd.free()

@@ -20,6 +20,7 @@ var _lodge_label: Label
 var _xp_bar: StatBar
 var _values: Dictionary = {}  # "or" / "gemmes" / "energie" -> Label
 var lodge: HeroLodge
+var altar: SummonAltar
 
 
 func _ready() -> void:
@@ -40,6 +41,11 @@ func _ready() -> void:
 	lodge.closed.connect(close_lodge)
 	lodge.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
 	_root.add_child(lodge)
+	altar = SummonAltar.new()
+	altar.visible = false
+	altar.closed.connect(close_altar)
+	altar.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	_root.add_child(altar)
 	PlayerData.changed.connect(refresh)
 	refresh()
 	var timer := Timer.new()
@@ -71,11 +77,21 @@ func close_lodge() -> void:
 	_set_menus_visible(true)
 
 
+func open_altar() -> void:
+	_set_menus_visible(false)
+	altar.open()
+
+
+func close_altar() -> void:
+	altar.visible = false
+	_set_menus_visible(true)
+
+
 ## Cache les menus du port pendant qu'un écran plein (comme la Loge) est ouvert.
 func _set_menus_visible(on: bool) -> void:
 	screen_opened.emit(not on)
 	for c in _root.get_children():
-		if c != lodge and c != _toast:
+		if c != lodge and c != altar and c != _toast:
 			c.visible = on
 	if on and _sound_panel:
 		_sound_panel.visible = _sound_button.button_pressed

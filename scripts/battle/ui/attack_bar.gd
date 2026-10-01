@@ -30,6 +30,13 @@ func _ready() -> void:
 	_title.add_theme_font_size_override("font_size", 22)
 	_title.add_theme_constant_override("outline_size", 8)
 	v.add_child(_title)
+	var hint := Label.new()
+	hint.text = "Touche un ennemi pour le viser"
+	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hint.add_theme_font_size_override("font_size", 15)
+	hint.add_theme_constant_override("outline_size", 6)
+	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.75))
+	v.add_child(hint)
 	_row = HBoxContainer.new()
 	_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	_row.add_theme_constant_override("separation", 30)

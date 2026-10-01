@@ -62,11 +62,15 @@ func _process(delta: float) -> void:
 	_pivot.rotation.y += delta * 0.35
 
 
-func show_hero(hero: Dictionary) -> void:
+func clear_hero() -> void:
 	if _model:
 		_model.queue_free()
 	_model = null
 	_anim = null
+
+
+func show_hero(hero: Dictionary) -> void:
+	clear_hero()
 	_idle = hero.get("anims", {}).get("idle", "Idle")
 	var color := Palette.element_color(hero.get("element", ""))
 	_disc_mat.emission = color

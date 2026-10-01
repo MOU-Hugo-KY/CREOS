@@ -13,6 +13,7 @@ extends RefCounted
 ## Événements produits (Dictionary avec une clé "type") :
 ##   wave_start {index, count}
 ##   turn       {src}                        au tour de ce héros de choisir son attaque
+##   focus      {target}  (ennemi ciblé par le joueur, -1 = aucun)
 ##   attack     {src, slot, attack_id, name, anim, hit_time, targets}
 ##              slot 0 = attaque de base, 1 = attaque à recharge, 2 = ultime
 ##   damage     {src, dst, amount, crit, elem_mult, hp, dot}   dot = brûlure/poison
@@ -47,6 +48,7 @@ var _rng := RandomNumberGenerator.new()
 var _next_uid := 1
 var _events: Array[Dictionary] = []
 var awaiting_uid := -1  # héros qui attend le choix du joueur (-1 = personne)
+var focus_uid := -1  # ennemi ciblé par le joueur (-1 = choix automatique)
 var _wave_timer := 0.0
 
 
@@ -64,6 +66,7 @@ func setup(heroes_data: Array, waves_data: Array, rng_seed: int = 0) -> void:
 	won = false
 	time = 0.0
 	awaiting_uid = -1
+	focus_uid = -1
 	_start_next_wave()
 
 
@@ -89,6 +92,17 @@ func request_attack(uid: int, slot: int) -> bool:
 	awaiting_uid = -1
 	_use_attack(u, slot)
 	_check_end()
+	return true
+
+
+## Le joueur désigne l'ennemi que ses héros frappent (attaques sur une seule cible).
+## Toucher à nouveau le même ennemi enlève la cible. Une provocation reste prioritaire.
+func set_focus(uid: int) -> bool:
+	var u := get_unit(uid)
+	if u == null or u.team != 1 or not u.is_alive():
+		return false
+	focus_uid = -1 if focus_uid == uid else uid
+	_emit({"type": "focus", "target": focus_uid})
 	return true
 
 
@@ -181,6 +195,7 @@ func _start_next_wave() -> void:
 		enemies.append(BattleUnit.from_data(_take_uid(), d.get("id", ""), d, 1, i))
 	for h in heroes:
 		h.gauge = 0.0
+	focus_uid = -1
 	_emit({"type": "wave_start", "index": wave_index, "count": waves.size()})
 
 
@@ -245,6 +260,10 @@ func _pick_basic_target(src: BattleUnit, foes: Array[BattleUnit]) -> BattleUnit:
 	for f in foes:
 		if f.taunt_time > 0.0:
 			return f
+	if src.team == 0 and focus_uid != -1:
+		for f in foes:
+			if f.uid == focus_uid:
+				return f
 	if src.range_type == "melee":
 		# Corps-à-corps : frappe l'ennemi le plus en avant.
 		var front := foes[0]

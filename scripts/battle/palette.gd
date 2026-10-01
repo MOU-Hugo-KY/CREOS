@@ -3,6 +3,7 @@ extends RefCounted
 ## Couleurs et thème de l'interface de combat (affichage seulement).
 
 const GOLD := Color(1.0, 0.8, 0.35)
+const TARGET := Color(1.0, 0.27, 0.22)  # ennemi ciblé par le joueur
 const GOLD_DARK := Color(0.55, 0.4, 0.15)
 const PANEL := Color(0.07, 0.08, 0.1, 0.88)
 const PANEL_LIGHT := Color(0.16, 0.17, 0.2, 0.95)

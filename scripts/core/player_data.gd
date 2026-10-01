@@ -146,6 +146,60 @@ func item_count(item: String) -> int:
 	return int(state.get("items", {}).get(item, 0))
 
 
+## Fragments d'un héros (gagnés quand on invoque un héros déjà possédé ; serviront aux étoiles).
+func hero_shards(id: String) -> int:
+	return int(state.get("hero_shards", {}).get(id, 0))
+
+
+## Prix d'une invocation avec `currency` ("fragments_relique" ou "gems").
+func summon_cost(currency: String, config: Dictionary) -> int:
+	return int(config.get("currencies", {}).get(currency, {}).get("cost", 0))
+
+
+func summon_balance(currency: String) -> int:
+	return gems() if currency == "gems" else item_count(currency)
+
+
+func can_summon(currency: String, config: Dictionary) -> bool:
+	var cost := summon_cost(currency, config)
+	return cost > 0 and summon_balance(currency) >= cost
+
+
+## Invoque un héros de `pool` (heroes.json). Renvoie {id, rarity, new, shards}, ou {} si
+## le joueur n'a pas de quoi payer. Un héros déjà possédé donne des fragments de ce héros.
+func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomNumberGenerator) -> Dictionary:
+	if not can_summon(currency, config):
+		return {}
+	var count := int(state.get("summon_count", 0))
+	var pity := int(state.get("summon_pity", 0))
+	var r := Summon.roll(pool, config, count, pity, rng)
+	if r.id == "":
+		return {}
+	var cost := summon_cost(currency, config)
+	if currency == "gems":
+		state.gems = gems() - cost
+	else:
+		state.items[currency] = item_count(currency) - cost
+	state.summon_count = count + 1
+	state.summon_pity = 0 if r.rarity >= int(config.get("pity_min_rarity", 4)) else pity + 1
+	var result := {"id": r.id, "rarity": r.rarity, "new": not state.heroes.has(r.id), "shards": 0}
+	if result.new:
+		state.heroes[r.id] = {"level": 1, "xp": 0}
+	else:
+		result.shards = int(config.get("duplicate_shards", {}).get(str(r.rarity), 10))
+		if not state.has("hero_shards"):
+			state.hero_shards = {}
+		state.hero_shards[r.id] = hero_shards(r.id) + result.shards
+	save_game()
+	changed.emit()
+	return result
+
+
+## Invocations restantes avant le Légendaire garanti.
+func summons_to_pity(config: Dictionary) -> int:
+	return int(config.get("pity_every", 10)) - int(state.get("summon_pity", 0))
+
+
 func hunt_cost(dungeon_id: String) -> int:
 	return int(_dungeons.get(dungeon_id, {}).get("energy_cost", 0))
 

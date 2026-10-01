@@ -1,6 +1,6 @@
 extends SceneTree
 ## Test de fumée du hub : Port-Franc se charge, ses bâtiments sont là, et la Table des chasses
-## mène au combat. Lancer : godot --headless --path . --script res://tests/smoke_hub.gd
+## mène au combat ; l'Autel des Reliques s'ouvre. Lancer : godot --headless --path . --script res://tests/smoke_hub.gd
 
 var hub: Node
 var frames := 0
@@ -16,6 +16,12 @@ func _initialize() -> void:
 
 func _process(_delta: float) -> bool:
 	frames += 1
+	if frames == 3:
+		hub._do_action("altar", "autel")
+		if not hub.hud.altar.visible:
+			printerr("ÉCHEC : l'Autel des Reliques ne s'ouvre pas")
+			ok = false
+		hub.hud.close_altar()
 	if frames == 5:
 		var ids: Array = hub.town.buildings.keys()
 		for id: String in root.get_node("GameData").hub.get("buildings", {}):

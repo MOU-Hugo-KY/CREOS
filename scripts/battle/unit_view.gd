@@ -35,6 +35,7 @@ var _dead := false
 var _move_tween: Tween
 var _flash_tween: Tween
 var _highlight: MeshInstance3D
+var _target_mark: Node3D
 
 static var _flash_shader: Shader
 
@@ -122,6 +123,46 @@ func set_highlight(on: bool) -> void:
 		_highlight.visible = on
 
 
+## Cible choisie par le joueur : anneau rouge au sol et flèche qui flotte au-dessus de la tête.
+func set_target_mark(on: bool) -> void:
+	if on and _target_mark == null:
+		_target_mark = Node3D.new()
+		add_child(_target_mark)
+		var mat := StandardMaterial3D.new()
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.albedo_color = Palette.TARGET
+		mat.no_depth_test = true
+		mat.render_priority = 2
+		var ring := MeshInstance3D.new()
+		var torus := TorusMesh.new()
+		torus.inner_radius = 0.8
+		torus.outer_radius = 0.95
+		torus.rings = 40
+		ring.mesh = torus
+		ring.material_override = mat
+		ring.scale = Vector3(1, 0.06, 1) * maxf(1.0, model_scale)
+		ring.position.y = 0.06
+		ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		_target_mark.add_child(ring)
+		var arrow := MeshInstance3D.new()
+		var cone := CylinderMesh.new()
+		cone.top_radius = 0.22
+		cone.bottom_radius = 0.0
+		cone.height = 0.4
+		cone.radial_segments = 4
+		arrow.mesh = cone
+		arrow.material_override = mat
+		arrow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		var top := 3.55 * model_scale
+		arrow.position.y = top
+		_target_mark.add_child(arrow)
+		var tw := arrow.create_tween().set_loops()
+		tw.tween_property(arrow, "position:y", top + 0.25, 0.45).set_trans(Tween.TRANS_SINE)
+		tw.tween_property(arrow, "position:y", top, 0.45).set_trans(Tween.TRANS_SINE)
+	if _target_mark:
+		_target_mark.visible = on and not _dead
+
+
 func play_hit(color := Color.WHITE) -> void:
 	flash(color, 0.6)
 	if _dead:
@@ -137,6 +178,8 @@ func play_hit(color := Color.WHITE) -> void:
 
 
 func play_death() -> void:
+	if _target_mark:
+		_target_mark.visible = false
 	_dead = true
 	_kill_move()
 	position = home_position
