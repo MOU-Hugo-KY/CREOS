@@ -33,6 +33,12 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   **héros en pixels, décor propre** (les textures pixel des bâtiments sont lissées en aplats au
   chargement) ; le continent à l'horizon est dans `continent_backdrop.gd`. Bâtiments, boutons et
   actions décrits dans `data/hub.json` ; profil de départ dans `data/player_start.json`.
+- **Direction artistique (octobre 2026)** : tout le jeu passe dans **le style des personnages KayKit**
+  (formes trapues et arrondies, biseaux, couleurs en aplats d'une palette partagée, pas de
+  texture détaillée). Les héros seront refaits sur le **squelette KayKit** (mêmes 41 os) pour
+  profiter de ses 76 animations, plus 3 attaques animées par héros. Le brief complet pour
+  ChatGPT/Blender est dans `docs/pour_chatgpt/PROMPT_BLENDER_COMPLET.md`. En attendant, les
+  héros en pixels et le hub actuel restent en place.
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
   `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),
   `battle_fx.gd` (effets), `battle_audio.gd` (sons), `ui/` (interface et écran de fin).
