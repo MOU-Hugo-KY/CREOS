@@ -39,6 +39,12 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   profiter de ses 76 animations, plus 3 attaques animées par héros. Le brief complet pour
   ChatGPT/Blender est dans `docs/pour_chatgpt/PROMPT_BLENDER_COMPLET.md`. En attendant, les
   héros en pixels et le hub actuel restent en place.
+- **Interface** : `scripts/ui/ui_kit.gd` (`UiKit`) = le style commun (police Fredoka, parchemin
+  cerclé de bois, boutons en relief, barres, pastilles) ; `UiWindow` = fenêtre de jeu avec ruban
+  de titre et croix. Tout nouvel écran les utilise. Écrans du hub : Profil (clic sur le profil en
+  haut à gauche), Primes du jour (`QuestsScreen`, règles pures dans `scripts/core/quests.gd`,
+  données dans `data/quests.json`, événements notés par `PlayerData.record_event()`), Loge,
+  Autel des Reliques (invocations, `data/summon.json`).
 - `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
   `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),
   `battle_fx.gd` (effets), `battle_audio.gd` (sons), `ui/` (interface et écran de fin).

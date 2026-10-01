@@ -192,6 +192,8 @@ func _handle_events() -> void:
 			"focus":
 				_show_focus(ev.target)
 			"attack":
+				if ev.slot == BattleUnit.SLOT_ULTIMATE and engine.get_unit(ev.src).team == 0:
+					PlayerData.record_event("ultimate")  # prime du jour « Pleine puissance »
 				var delay := _on_attack(ev)
 				times = ev.hit_times
 				offset = delay - float(times[0])

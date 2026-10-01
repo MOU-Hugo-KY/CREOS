@@ -8,6 +8,9 @@ signal ui_sound(sfx_name: String)
 signal screen_opened(open: bool)  # un écran plein (Loge…) s'ouvre ou se ferme
 
 const ICON_DIR := "res://assets/ui/hub/"
+# Bouton « Y aller » des primes : action -> bâtiment ou bouton concerné
+const ACTION_TARGETS := {"campaign": "table_des_chasses", "altar": "autel", "heroes": "loge_des_heros",
+	"shop": "marche", "guild": "guilde", "tower": "tour"}
 
 var _root: Control
 var _toast: Label
@@ -17,10 +20,16 @@ var _sound_panel: SoundPanel
 var _title: Label
 var _level_label: Label
 var _lodge_label: Label
-var _xp_bar: StatBar
+var _xp_bar: ProgressBar
+var _name_label: Label
+var _avatar_holder: Control
+var _avatar_id := ""
+var _side_buttons: Dictionary = {}  # id -> IconButton
 var _values: Dictionary = {}  # "or" / "gemmes" / "energie" -> Label
 var lodge: HeroLodge
 var altar: SummonAltar
+var profile: ProfileScreen
+var quests: QuestsScreen
 
 
 func _ready() -> void:
@@ -46,6 +55,15 @@ func _ready() -> void:
 	altar.closed.connect(close_altar)
 	altar.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
 	_root.add_child(altar)
+	profile = ProfileScreen.new()
+	profile.closed.connect(func() -> void: _set_menus_visible(true))
+	profile.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	_root.add_child(profile)
+	quests = QuestsScreen.new()
+	quests.closed.connect(func() -> void: _set_menus_visible(true))
+	quests.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	quests.go_to.connect(func(act: String) -> void: action.emit(act, ACTION_TARGETS.get(act, "")))
+	_root.add_child(quests)
 	PlayerData.changed.connect(refresh)
 	refresh()
 	var timer := Timer.new()
@@ -58,8 +76,25 @@ func _ready() -> void:
 ## Met à jour le profil et les ressources depuis la sauvegarde.
 func refresh() -> void:
 	_level_label.text = str(PlayerData.level())
-	_lodge_label.text = String(PlayerData.state.get("lodge", "Ma loge"))
-	_xp_bar.set_values(float(PlayerData.xp()) / maxf(1.0, PlayerData.xp_to_next()))
+	_name_label.text = PlayerData.player_name()
+	_lodge_label.text = PlayerData.lodge_name()
+	_xp_bar.max_value = maxf(1.0, PlayerData.xp_to_next())
+	_xp_bar.value = PlayerData.xp()
+	if PlayerData.avatar() != _avatar_id:
+		_avatar_id = PlayerData.avatar()
+		for c in _avatar_holder.get_children():
+			if c is RoundPortrait:
+				c.queue_free()
+		if _avatar_id != "":
+			var p := RoundPortrait.new().setup(GameData.hero(_avatar_id), 84, 0.08)
+			_avatar_holder.add_child(p)
+			_avatar_holder.move_child(p, 0)
+	if _side_buttons.has("primes"):
+		var n := PlayerData.claimable_quests()
+		var b: IconButton = _side_buttons.primes
+		if b.badge != n:
+			b.badge = n
+			b.queue_redraw()
 	_values["or"].text = _fmt(PlayerData.gold()) + "  "
 	_values["gemmes"].text = str(PlayerData.gems()) + "  "
 	_values["energie"].text = "%d/%d  " % [PlayerData.energy(), PlayerData.energy_max()]
@@ -77,6 +112,16 @@ func close_lodge() -> void:
 	_set_menus_visible(true)
 
 
+func open_profile() -> void:
+	_set_menus_visible(false)
+	profile.open()
+
+
+func open_quests() -> void:
+	_set_menus_visible(false)
+	quests.open()
+
+
 func open_altar() -> void:
 	_set_menus_visible(false)
 	altar.open()
@@ -91,7 +136,7 @@ func close_altar() -> void:
 func _set_menus_visible(on: bool) -> void:
 	screen_opened.emit(not on)
 	for c in _root.get_children():
-		if c != lodge and c != altar and c != _toast:
+		if c not in [lodge, altar, profile, quests, _toast]:
 			c.visible = on
 	if on and _sound_panel:
 		_sound_panel.visible = _sound_button.button_pressed
@@ -124,33 +169,54 @@ func _label(size: int, outline := 7) -> Label:
 	return l
 
 
+## Profil en haut à gauche : héros fétiche, niveau, nom, loge et XP. Un clic ouvre le profil.
 func _build_profile() -> void:
+	var panel := PanelContainer.new()
+	var sb := UiKit.pill()
+	sb.content_margin_left = 6
+	sb.content_margin_right = 20
+	sb.set_corner_radius_all(48)
+	panel.add_theme_stylebox_override("panel", sb)
+	panel.position = Vector2(22, 16)
+	panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	panel.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	panel.tooltip_text = "Voir mon profil"
+	panel.gui_input.connect(func(e: InputEvent) -> void:
+		var mb := e as InputEventMouseButton
+		if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
+			ui_sound.emit("ui_click")
+			open_profile())
+	_root.add_child(panel)
 	var box := HBoxContainer.new()
-	box.position = Vector2(26, 20)
 	box.add_theme_constant_override("separation", 12)
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_root.add_child(box)
-	# Pastille de niveau
-	var lvl := Panel.new()
-	lvl.custom_minimum_size = Vector2(62, 62)
-	lvl.add_theme_stylebox_override("panel", Palette.stylebox(Palette.GOLD_DARK, Palette.GOLD, 31, 3))
+	panel.add_child(box)
+	_avatar_holder = Control.new()
+	_avatar_holder.custom_minimum_size = Vector2(84, 84)
+	_avatar_holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(_avatar_holder)
+	var lvl := PanelContainer.new()
+	var lsb := UiKit.box(Color("f8c443"), UiKit.INK, 18, 3)
+	lsb.border_width_bottom = 5
+	lsb.content_margin_left = 8
+	lsb.content_margin_right = 8
+	lvl.add_theme_stylebox_override("panel", lsb)
+	lvl.position = Vector2(-4, 52)
 	lvl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	box.add_child(lvl)
-	var n := _label(28, 6)
-	_level_label = n
-	n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	n.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	n.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	lvl.add_child(n)
+	_avatar_holder.add_child(lvl)
+	_level_label = UiKit.title("1", 24)
+	lvl.add_child(_level_label)
 	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 2)
+	col.add_theme_constant_override("separation", 0)
+	col.alignment = BoxContainer.ALIGNMENT_CENTER
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(col)
-	_lodge_label = _label(26)
+	_name_label = UiKit.title("", 28)
+	col.add_child(_name_label)
+	_lodge_label = UiKit.label("", 18, Color(1, 0.93, 0.8), 5, UiKit.INK)
 	col.add_child(_lodge_label)
-	_xp_bar = StatBar.new()
-	_xp_bar.fill_color = Palette.GOLD
-	_xp_bar.custom_minimum_size = Vector2(190, 9)
+	_xp_bar = UiKit.progress(Color("4f8fe6"), 12)
+	_xp_bar.custom_minimum_size.x = 200
 	col.add_child(_xp_bar)
 
 
@@ -179,7 +245,7 @@ func _build_resources() -> void:
 
 func _pill(icon_name: String, value: String) -> Control:
 	var p := PanelContainer.new()
-	p.add_theme_stylebox_override("panel", Palette.stylebox(Color(0, 0, 0, 0.45), Color(1, 1, 1, 0.12), 24, 2))
+	p.add_theme_stylebox_override("panel", UiKit.pill())
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var h := HBoxContainer.new()
 	h.add_theme_constant_override("separation", 6)
@@ -190,8 +256,7 @@ func _pill(icon_name: String, value: String) -> Control:
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.custom_minimum_size = Vector2(44, 44)
 	h.add_child(icon)
-	var l := _label(24, 6)
-	l.text = value + "  "
+	var l := UiKit.title(value + "  ", 24)
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	h.add_child(l)
 	_values[icon_name] = l
@@ -234,6 +299,7 @@ func _build_side(key: String, left: bool) -> void:
 		var b := IconButton.new().setup(_icon(item.get("icon", "")), item.get("name", ""), 34.0)
 		var act: String = item.get("action", "")
 		var id: String = item.get("id", "")
+		_side_buttons[id] = b
 		b.pressed.connect(func() -> void:
 			ui_sound.emit("ui_click")
 			action.emit(act, id))

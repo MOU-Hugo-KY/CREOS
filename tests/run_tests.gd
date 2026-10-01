@@ -18,6 +18,7 @@ func _initialize() -> void:
 	test_progression()
 	test_save()
 	test_summon()
+	test_quests()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -287,5 +288,45 @@ func test_summon() -> void:
 	for k in odds:
 		total += odds[k]
 	check(is_equal_approx(total, 100.0), "les taux affichés font 100 %")
+	gd.free()
+	pd.free()
+
+
+func test_quests() -> void:
+	print("Primes du jour et profil")
+	var gd := _data()
+	var pd: Node = PlayerDataScript.new()
+	pd.configure(gd.player_start, gd.progression, gd.dungeons)
+	pd.quests_config = gd.quests
+	pd.use_memory_only()
+	pd.debug_day = "2026-10-01"
+	check(Quests.can_claim(pd.daily(), pd.quest("connexion")), "la connexion du jour compte tout de suite")
+	var gold0: int = pd.gold()
+	var r: Dictionary = pd.claim_quest("connexion")
+	check(r.get("gold", 0) == 100 and pd.gold() == gold0 + 100, "récupérer une prime donne sa récompense")
+	check(pd.claim_quest("connexion").is_empty(), "une prime ne se récupère qu'une fois")
+	check(pd.claim_quest("chasses").is_empty(), "une prime pas finie ne se récupère pas")
+	for i in 3:
+		pd.start_hunt("brumenoire_1")
+		pd.finish_hunt("brumenoire_1", true, 3, gd.dungeon_rewards("brumenoire_1", 3), pd.team())
+	check(not pd.claim_quest("chasses").is_empty() and not pd.claim_quest("trois_etoiles").is_empty(),
+		"3 chasses gagnées (avec 3 étoiles) remplissent leurs primes")
+	check(pd.daily().progress.get("energy_spent", 0) == 3 * pd.hunt_cost("brumenoire_1"), "l'énergie dépensée est comptée")
+	check(not pd.open_chest(0).is_empty(), "le premier coffre s'ouvre avec assez de points")
+	check(pd.open_chest(3).is_empty(), "le dernier coffre reste fermé sans assez de points")
+	pd.record_event("guild_help")
+	check(not Quests.can_claim(pd.daily(), pd.quest("guilde")), "une prime « bientôt disponible » ne se récupère pas")
+	var available := 0
+	for q: Dictionary in gd.quests.quests:
+		if Quests.is_available(q):
+			available += int(q.points)
+	check(available >= int(gd.quests.chests[-1].points), "tous les coffres sont atteignables avec les primes disponibles")
+	pd.debug_day = "2026-10-02"
+	check(pd.daily().claimed.is_empty() and Quests.can_claim(pd.daily(), pd.quest("connexion")), "nouvelles primes le lendemain")
+	check(pd.stat("hunts_won") == 3 and pd.stat("days_played") == 2, "statistiques du profil")
+	check(not pd.rename("Hu", "Loge") and pd.rename("Hugo", "Loge des Braves") and pd.player_name() == "Hugo",
+		"renommer le joueur (3 à 16 lettres)")
+	pd.set_avatar("kaito")
+	check(pd.avatar() == "kaito", "choisir le héros du profil")
 	gd.free()
 	pd.free()

@@ -1,0 +1,21 @@
+{
+  "title": "Primes du jour",
+  "quests": [
+    { "id": "connexion", "name": "Bonjour, chasseur !", "description": "Passer au port aujourd'hui.", "event": "login", "target": 1, "points": 10, "rewards": { "gold": 100 }, "action": "" },
+    { "id": "chasses", "name": "Trois chasses", "description": "Gagner 3 chasses.", "event": "hunt_win", "target": 3, "points": 20, "rewards": { "gold": 300, "fragments_relique": 3 }, "action": "campaign" },
+    { "id": "trois_etoiles", "name": "Sans une égratignure", "description": "Gagner une chasse avec 3 étoiles.", "event": "three_stars", "target": 1, "points": 15, "rewards": { "gems": 10 }, "action": "campaign" },
+    { "id": "ultimes", "name": "Pleine puissance", "description": "Lancer 5 attaques ultimes.", "event": "ultimate", "target": 5, "points": 15, "rewards": { "gold": 200 }, "action": "campaign" },
+    { "id": "energie", "name": "Infatigable", "description": "Dépenser 30 points d'énergie.", "event": "energy_spent", "target": 30, "points": 15, "rewards": { "fragments_relique": 2 }, "action": "campaign" },
+    { "id": "invocation", "name": "L'appel des reliques", "description": "Faire une invocation à l'Autel.", "event": "summon", "target": 1, "points": 10, "rewards": { "gold": 150 }, "action": "altar" },
+    { "id": "entrainement", "name": "Entraînement", "description": "Faire monter un héros de niveau.", "event": "hero_level_up", "target": 1, "points": 15, "rewards": { "gems": 5 }, "action": "heroes" },
+    { "id": "marche", "name": "Bonnes affaires", "description": "Acheter un objet au Marché.", "event": "shop_buy", "target": 1, "points": 10, "rewards": { "gold": 100 }, "action": "shop", "available": false },
+    { "id": "guilde", "name": "Entraide", "description": "Aider un membre de ta guilde.", "event": "guild_help", "target": 1, "points": 10, "rewards": { "gems": 5 }, "action": "guild", "available": false },
+    { "id": "tour", "name": "Toujours plus haut", "description": "Franchir un étage de la Tour de Morvath.", "event": "tower_floor", "target": 1, "points": 10, "rewards": { "fragments_relique": 2 }, "action": "tower", "available": false }
+  ],
+  "chests": [
+    { "points": 20, "rewards": { "gold": 200 } },
+    { "points": 50, "rewards": { "fragments_relique": 5 } },
+    { "points": 80, "rewards": { "gems": 20 } },
+    { "points": 100, "rewards": { "fragments_relique": 10, "gems": 20 } }
+  ]
+}

@@ -55,3 +55,9 @@ CC0 = domaine public : utilisation libre, même commerciale. Créditer reste une
 
 Les fichiers ont été renommés pour le jeu (le nom d'origine est dans le pack). `battle_loop.ogg` a été
 converti de WAV en OGG (ffmpeg, qualité 4).
+
+## Police
+
+| Dossier | Police | Auteur | Licence | Source |
+|---|---|---|---|---|
+| `fonts/Fredoka.ttf` | Fredoka (variable) | The Fredoka Project Authors | SIL OFL 1.1 (`fonts/OFL.txt`) | https://github.com/google/fonts/tree/main/ofl/fredoka |

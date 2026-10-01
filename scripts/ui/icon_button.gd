@@ -61,15 +61,19 @@ func _gui_input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	var c := Vector2(custom_minimum_size.x / 2.0, radius + 4.0)
-	draw_circle(c + Vector2(0, 4), radius, Color(0, 0, 0, 0.35))
-	draw_circle(c, radius, Color(0.07, 0.07, 0.1, 0.82))
-	draw_circle(c, radius * 0.84, Color(accent.darkened(0.7), 0.6))
+	# Médaillon en relief : ombre, tranche de bois, disque bleu nuit, reflet en haut.
+	draw_circle(c + Vector2(0, 6), radius, Color(0, 0, 0, 0.3))
+	draw_circle(c + Vector2(0, 4), radius, UiKit.INK)
+	draw_circle(c, radius, UiKit.WOOD)
+	draw_circle(c, radius - 4.0, Color("2d3554"))
+	draw_circle(c - Vector2(0, radius * 0.18), radius * 0.72, Color(1, 1, 1, 0.06))
 	if icon:
 		var s := radius * 1.45
 		draw_texture_rect(icon, Rect2(c - Vector2(s, s) / 2.0, Vector2(s, s)), false)
-	draw_arc(c, radius, 0, TAU, 64, accent.lightened(0.2) if _hover else Color(1, 1, 1, 0.22), 4.0 if _hover else 3.0, true)
+	draw_arc(c, radius - 2.0, 0, TAU, 64, accent.lightened(0.2) if _hover else Color("c8925a"), 4.0 if _hover else 3.0, true)
 	if badge > 0:
 		var b := c + Vector2(radius * 0.72, -radius * 0.72)
-		draw_circle(b, 13, Color(0.85, 0.15, 0.15))
+		draw_circle(b, 15, Color.WHITE)
+		draw_circle(b, 12.5, Color("e8443a"))
 		var font := get_theme_default_font()
 		draw_string(font, b + Vector2(-5 if badge < 10 else -9, 6), str(badge), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.WHITE)

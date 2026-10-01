@@ -124,6 +124,8 @@ func _do_action(action_name: String, id: String) -> void:
 			hud.open_lodge()
 		"altar":
 			hud.open_altar()
+		"quests":
+			hud.open_quests()
 		_:
 			var name := _name_of(id)
 			hud.toast("%s — bientôt disponible !" % name)

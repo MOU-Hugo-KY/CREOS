@@ -16,6 +16,8 @@ var persist := true  # false = rien n'est écrit sur le disque (tests, captures)
 var _start: Dictionary = {}
 var _config: Dictionary = {}
 var _dungeons: Dictionary = {}
+var quests_config: Dictionary = {}  # data/quests.json
+var debug_day := ""  # tests : impose la date du jour ("" = la vraie date)
 
 
 func _ready() -> void:
@@ -33,6 +35,7 @@ func _autoconfigure() -> void:
 	if gd.player_start.is_empty():
 		gd.reload()
 	configure(gd.player_start, gd.progression, gd.dungeons)
+	quests_config = gd.quests
 
 
 func configure(start: Dictionary, config: Dictionary, dungeons: Dictionary) -> void:
@@ -81,6 +84,132 @@ func save_game() -> void:
 	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if f:
 		f.store_string(JSON.stringify(state, "  "))
+
+
+# --- Profil et statistiques ------------------------------------------------------
+
+func player_name() -> String:
+	return String(state.get("name", "Chasseur"))
+
+
+func lodge_name() -> String:
+	return String(state.get("lodge", "Ma loge"))
+
+
+## Renomme le joueur et sa loge (textes nettoyés, 3 à 16 caractères).
+func rename(new_name: String, new_lodge: String) -> bool:
+	var n := new_name.strip_edges()
+	var l := new_lodge.strip_edges()
+	if n.length() < 3 or n.length() > 16 or l.length() < 3 or l.length() > 24:
+		return false
+	state.name = n
+	state.lodge = l
+	save_game()
+	changed.emit()
+	return true
+
+
+## Héros affiché sur le profil (par défaut, le premier de l'équipe).
+func avatar() -> String:
+	var a := String(state.get("avatar", ""))
+	if state.get("heroes", {}).has(a):
+		return a
+	var t := team()
+	return t[0] if not t.is_empty() else ""
+
+
+func set_avatar(id: String) -> void:
+	if state.heroes.has(id):
+		state.avatar = id
+		save_game()
+		changed.emit()
+
+
+func stat(key: String) -> int:
+	return int(state.get("stats", {}).get(key, 0))
+
+
+func _add_stat(key: String, amount := 1) -> void:
+	if not state.has("stats"):
+		state.stats = {}
+	state.stats[key] = stat(key) + amount
+
+
+func total_stars() -> int:
+	var n := 0
+	for id: String in state.get("dungeons", {}):
+		n += best_stars(id)
+	return n
+
+
+# --- Primes du jour --------------------------------------------------------------
+
+func today() -> String:
+	return debug_day if debug_day != "" else Time.get_date_string_from_system()
+
+
+## Le suivi des primes du jour (remis à zéro chaque jour ; compte la connexion).
+func daily() -> Dictionary:
+	var before := String(state.get("daily", {}).get("day", ""))
+	state.daily = Quests.refresh(state.get("daily", {}), today())
+	if before != today():
+		Quests.record(state.daily, "login")
+		_add_stat("days_played")
+		save_game()
+	return state.daily
+
+
+## Note un événement de jeu pour les primes (« hunt_win », « ultimate », « summon »…).
+func record_event(event: String, amount := 1) -> void:
+	Quests.record(daily(), event, amount)
+
+
+func quest(id: String) -> Dictionary:
+	for q: Dictionary in quests_config.get("quests", []):
+		if q.get("id") == id:
+			return q
+	return {}
+
+
+func claimable_quests() -> int:
+	return Quests.claimable_count(daily(), quests_config)
+
+
+## Récupère la récompense d'une prime terminée. Renvoie les récompenses ({} si impossible).
+func claim_quest(id: String) -> Dictionary:
+	var q := quest(id)
+	if q.is_empty() or not Quests.can_claim(daily(), q):
+		return {}
+	state.daily.claimed.append(id)
+	return _grant(q.get("rewards", {}))
+
+
+func open_chest(index: int) -> Dictionary:
+	if not Quests.can_open_chest(daily(), quests_config, index):
+		return {}
+	state.daily.chests.append(index)
+	return _grant(quests_config.chests[index].get("rewards", {}))
+
+
+## Donne des récompenses : or, gemmes, énergie (peut dépasser le maximum), objets.
+func _grant(rewards: Dictionary) -> Dictionary:
+	for key: String in rewards:
+		var n := int(rewards[key])
+		match key:
+			"gold":
+				state.gold = gold() + n
+				_add_stat("gold_earned", n)
+			"gems":
+				state.gems = gems() + n
+			"energy":
+				state.energy = energy() + n
+			_:
+				if not state.has("items"):
+					state.items = {}
+				state.items[key] = item_count(key) + n
+	save_game()
+	changed.emit()
+	return rewards
 
 
 # --- Lecture ---------------------------------------------------------------------
@@ -181,6 +310,7 @@ func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomN
 	else:
 		state.items[currency] = item_count(currency) - cost
 	state.summon_count = count + 1
+	record_event("summon")
 	state.summon_pity = 0 if r.rarity >= int(config.get("pity_min_rarity", 4)) else pity + 1
 	var result := {"id": r.id, "rarity": r.rarity, "new": not state.heroes.has(r.id), "shards": 0}
 	if result.new:
@@ -235,6 +365,8 @@ func start_hunt(dungeon_id: String) -> bool:
 		return false
 	var was_full := energy() >= energy_max()
 	state["energy"] = energy() - hunt_cost(dungeon_id)
+	record_event("energy_spent", hunt_cost(dungeon_id))
+	_add_stat("hunts_played")
 	if was_full:
 		state["energy_time"] = Time.get_unix_time_from_system()
 	current_dungeon = dungeon_id
@@ -259,6 +391,8 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 		var r := Progression.add_xp(int(h.level), int(h.xp), split.hero_xp, _config.get("hero_xp", {}), max_level)
 		h.level = r.level
 		h.xp = r.xp
+		if r.gained_levels > 0:
+			record_event("hero_level_up", r.gained_levels)
 		result.heroes[id] = {"xp": split.hero_xp, "level": r.level, "gained_levels": r.gained_levels}
 	var p := Progression.add_xp(level(), xp(), split.player_xp, _config.get("player_xp", {}), max_level)
 	state.level = p.level
@@ -269,8 +403,13 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 		if key == "gold":
 			state.gold = gold() + int(split.loot.gold)
 			result.gold = int(split.loot.gold)
+			_add_stat("gold_earned", result.gold)
 		else:
 			state.items[key] = item_count(key) + int(split.loot[key])
+	record_event("hunt_win")
+	_add_stat("hunts_won")
+	if stars >= 3:
+		record_event("three_stars")
 	if stars > best_stars(dungeon_id):
 		state.dungeons[dungeon_id] = {"stars": stars}
 		result.best_stars = true
