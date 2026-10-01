@@ -28,6 +28,8 @@ var _banner: Label
 var _banner_sub: Label
 var _callout: Label
 var _turn_uid := -1
+var _sound_button: Button
+var _sound_panel: SoundPanel
 
 
 func _ready() -> void:
@@ -190,6 +192,24 @@ func _build_header() -> void:
 		ui_sound.emit("ui_toggle")
 		speed_toggled.emit(on))
 	right.add_child(_speed_button)
+	_sound_button = _round_button("SON")
+	_sound_button.toggled.connect(_toggle_sound_panel)
+	right.add_child(_sound_button)
+
+
+func _toggle_sound_panel(on: bool) -> void:
+	ui_sound.emit("ui_toggle")
+	if on and _sound_panel == null:
+		_sound_panel = SoundPanel.new()
+		_sound_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+		_sound_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+		_sound_panel.offset_right = -24
+		_sound_panel.offset_top = 84
+		_sound_panel.closed.connect(func() -> void: _sound_button.button_pressed = false)
+		_sound_panel.test_sound.connect(func() -> void: ui_sound.emit("hit"))
+		_root.add_child(_sound_panel)
+	if _sound_panel:
+		_sound_panel.visible = on
 
 
 func _round_button(text: String) -> Button:

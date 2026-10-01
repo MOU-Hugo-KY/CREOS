@@ -28,6 +28,8 @@
 - [x] Écran de fin : étoiles (3 = personne n'est tombé, 2 = un héros tombé, 1 sinon), butin,
       bilan par héros
 - [x] Sons et musiques (packs CC0 Kenney + OpenGameArt, voir `assets/CREDITS.md`)
+- [x] Réglages du son (bouton SON : Général, Musique, Effets, couper), mémorisés ; volumes de
+      départ bas, musique qui monte en fondu, sons trop forts atténués
 - [x] Équipe de départ remplacée par nos 4 héros chibi (Barbare, Ronin, Alchimiste, Moine),
       chacun avec 7 animations (repos, marche, touché, mort, 3 attaques) et ses effets
       (éclairs, poison, tourbillon, impact au sol)

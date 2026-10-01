@@ -10,6 +10,8 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 ## Stack
 - **Godot 4.7** (GDScript, rendu « Mobile »), paysage 1920×1080, cible Android/iOS.
 - Autoload `GameData` (`scripts/core/game_data.gd`) charge `data/*.json`.
+- Autoload `GameSettings` (`scripts/core/game_settings.gd`) : volumes Général / Musique / Effets
+  (bus audio du même nom), enregistrés dans `user://settings.cfg`. Bouton SON en jeu.
 - Héros : **nos modèles chibi** dans `assets/heroes/` (7 clips chacun : `Idle`, `Walk`, `Hit`,
   `Death`, `Attack_01…03`). Monstres et décor : packs **KayKit (CC0)** dans `assets/kaykit/`.
 

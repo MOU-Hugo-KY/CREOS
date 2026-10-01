@@ -13,6 +13,7 @@ config/features=PackedStringArray("4.7", "Mobile")
 [autoload]
 
 GameData="*res://scripts/core/game_data.gd"
+GameSettings="*res://scripts/core/game_settings.gd"
 
 [display]
 
