@@ -3,7 +3,8 @@
 ## Héros (`assets/heroes/`)
 
 Modèles 3D chibi originaux créés pour CREOS (fournis par Hugo) : Barbare, Ronin, Alchimiste de la
-peste, Moine des éclairs. Chaque dossier garde le `integration.json` d'origine (clips, instants
+peste, Moine des éclairs, Chevalier possédé (en réserve, pas encore jouable). Version « prises
+d'armes corrigées » : les armes suivent les os `held_weapon_L` / `held_weapon_R`. Chaque dossier garde le `integration.json` d'origine (clips, instants
 d'impact) et un `apercu.png`.
 
 ## Icônes d'attaque (`assets/ui/attacks/`)

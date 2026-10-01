@@ -153,36 +153,8 @@
         "skill_1": "Attack_02_Pas_Du_Tonnerre",
         "skill_2": "Attack_03_Sentence_Celeste"
       },
-      "sockets": [
-        {
-          "name": "fist_R",
-          "joint": "hand_R",
-          "offset": [
-            0,
-            -0.11,
-            0.11
-          ]
-        },
-        {
-          "name": "fist_L",
-          "joint": "hand_L",
-          "offset": [
-            0,
-            -0.11,
-            0.11
-          ]
-        },
-        {
-          "name": "foot_R",
-          "joint": "foot_R",
-          "offset": [
-            0,
-            -0.03,
-            0.28
-          ]
-        }
-      ]
+      "weapon_grips": []
     }
   ],
-  "version": 1
+  "version": 2
 }

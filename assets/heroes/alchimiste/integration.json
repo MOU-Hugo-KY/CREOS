@@ -2,9 +2,9 @@
   "models": [
     {
       "name": "Alchimiste",
-      "triangles": 2500,
-      "vertices": 7500,
-      "bones": 17,
+      "triangles": 2724,
+      "vertices": 8172,
+      "bones": 19,
       "animation_clips": [
         {
           "name": "Idle",
@@ -22,11 +22,11 @@
               "type": "spawn_projectile",
               "weapon": "vial_launcher_R",
               "projectile": "explosive_vial",
-              "socket_joint": "hand_R",
+              "socket_joint": "held_weapon_R",
               "socket_offset": [
                 0,
-                0.07,
-                0.72
+                0.1,
+                0.612
               ]
             }
           ]
@@ -40,11 +40,11 @@
               "time": 0.45,
               "type": "spray_start",
               "weapon": "sprayer_L",
-              "socket_joint": "hand_L",
+              "socket_joint": "held_weapon_L",
               "socket_offset": [
                 0,
-                0.11,
-                0.56
+                0.1,
+                0.33
               ]
             },
             {
@@ -152,37 +152,41 @@
         "skill_1": "Attack_02_Flaque_Toxique",
         "skill_2": "Attack_03_Explosion_Reservoir"
       },
-      "sockets": [
+      "weapon_grips": [
         {
-          "name": "launcher_muzzle",
-          "joint": "hand_R",
-          "offset": [
+          "hand": "hand_R",
+          "weapon_joint": "held_weapon_R",
+          "grip_world": [
+            0.69,
+            0.96,
+            0.06
+          ],
+          "rest_pose": "grip",
+          "weapon_vertices": 612,
+          "grip_offset_in_hand": [
             0,
-            0.07,
-            0.72
+            -0.03,
+            0
           ]
         },
         {
-          "name": "sprayer_nozzle",
-          "joint": "hand_L",
-          "offset": [
+          "hand": "hand_L",
+          "weapon_joint": "held_weapon_L",
+          "grip_world": [
+            -0.69,
+            0.96,
+            0.06
+          ],
+          "rest_pose": "grip",
+          "weapon_vertices": 276,
+          "grip_offset_in_hand": [
             0,
-            0.11,
-            0.56
-          ]
-        },
-        {
-          "name": "reservoir_valve",
-          "joint": "reservoir",
-          "offset": [
-            0,
-            0.65,
+            -0.03,
             0
           ]
         }
       ]
     }
   ],
-  "units": "game units; height approximately 2.7",
-  "version": 1
+  "version": 2
 }
