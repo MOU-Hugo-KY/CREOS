@@ -14,6 +14,8 @@ signal building_clicked(building_id: String)
 const HUB := "res://assets/hub/"
 # Lot 1 du générateur Blender (bâtiments détaillés, textures cuites) : prioritaire s'il existe.
 const HUB_LOT1 := "res://assets/hub/lot1/"
+# Lot 2 : sol de la place, terrasses, escaliers, remparts, quai et végétation (repère du monde).
+const HUB_LOT2 := "res://assets/hub/lot2/"
 const KIT := "res://assets/kaykit/dungeon/Assets/"  # dalles de la place
 const RELIC := Color(0.72, 0.42, 1.0)
 const GRASS := Color(0.42, 0.58, 0.3)
@@ -65,6 +67,22 @@ const DECOR := [
 	["Caisses", Vector3(-12.8, 0, -2.6), 70.0, 1.0],
 ]
 
+# Avec le lot 2, les maisons suivent son plan (terrain et verdure sont faits pour lui),
+# plus quelques maisons en plus pour fermer les côtés de la place.
+const DECOR_LOT2 := [
+	["Maison_Boulangerie", Vector3(-17.0, 0, -7.0), 20.0, 1.0],
+	["Maison_Forge", Vector3(-17.0, TERRACE_1, -21.0), 18.0, 1.0],
+	["Maison_Taverne", Vector3(-8.0, TERRACE_1, -23.0), 8.0, 1.0],
+	["Maison_Pecheur", Vector3(16.0, TERRACE_1, -23.0), -18.0, 1.0],
+	["Maison_Herboriste", Vector3(8.0, TERRACE_2, -34.0), -8.0, 1.0],
+	["Maison_Cartographe", Vector3(-8.0, TERRACE_2, -34.0), 8.0, 1.0],
+	["Maison_Taverne", Vector3(-17.5, 0, 2.0), 80.0, 1.0],
+	["Maison_Cartographe", Vector3(8.0, TERRACE_1, -23.0), -8.0, 1.0],
+	["Tonneau", Vector3(-5.2, 0, -12.6), 0.0, 1.0], ["Tonneau", Vector3(-4.3, 0, -12.2), 30.0, 1.0],
+	["Tonneau", Vector3(-12.6, 0, 1.8), 15.0, 1.0],
+	["Caisses", Vector3(5.2, 0, -13.2), 10.0, 1.0], ["Caisses", Vector3(-12.8, 0, -2.6), 70.0, 1.0],
+]
+
 const LAMPS := [Vector3(-4.5, 0, 2.5), Vector3(4.5, 0, 2.5), Vector3(-5.5, 0, -7.5), Vector3(5.5, 0, -7.5),
 	Vector3(-2.6, TERRACE_1, -17.0), Vector3(2.6, TERRACE_1, -17.0)]
 
@@ -81,18 +99,23 @@ var _time := 0.0
 
 static var _clean_cache: Dictionary = {}  # texture -> texture lissée
 static var _lot1_materials: Dictionary = {}  # nom du matériau glTF -> matériau partagé
+static var _lot2_materials: Dictionary = {}
 
 
 func _ready() -> void:
 	_build_environment()
-	_build_ground()
-	_build_terraces()
-	_build_harbor()
+	var lot2 := ResourceLoader.exists(HUB_LOT2 + "Decor_Place.glb")
+	_build_ground(not lot2)
+	if lot2:
+		_build_lot2()
+	else:
+		_build_terraces()
+	_build_harbor(not lot2)
 	backdrop = ContinentBackdrop.new()
 	add_child(backdrop)
 	for b: Array in BUILDINGS:
 		_build_building(b[0], b[1], b[2], b[3], b[4], b[5])
-	for d: Array in DECOR:
+	for d: Array in (DECOR_LOT2 if lot2 else DECOR):
 		var n := _place(self, d[0], d[1], d[2])
 		if n:
 			n.scale = Vector3.ONE * float(d[3])
@@ -186,7 +209,7 @@ func _build_environment() -> void:
 
 # --- Sol, terrasses, port ---------------------------------------------------------
 
-func _build_ground() -> void:
+func _build_ground(with_tiles: bool) -> void:
 	var grass := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(500, 400)
@@ -194,6 +217,8 @@ func _build_ground() -> void:
 	grass.material_override = Blocks.mat(GRASS, 0.0, 0.0)
 	grass.position = Vector3(-236, -0.06, -180)
 	add_child(grass)
+	if not with_tiles:
+		return
 	var tile_scene: PackedScene = load(KIT + "floor_tile_large.gltf.glb")
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 3
@@ -238,7 +263,7 @@ func _build_terraces() -> void:
 
 
 
-func _build_harbor() -> void:
+func _build_harbor(with_quay: bool) -> void:
 	var water := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(240, 360)
@@ -262,9 +287,63 @@ func _build_harbor() -> void:
 	water.material_override = mat
 	water.position = Vector3(134, SEA_LEVEL, -120)
 	add_child(water)
-	Blocks.box(self, Vector3(1.5, 1.0, 46), Vector3(14.2, -0.45, -9), Blocks.mat(STONE, 0.0, 0.0))
+	if with_quay:
+		Blocks.box(self, Vector3(1.5, 1.0, 46), Vector3(14.2, -0.45, -9), Blocks.mat(STONE, 0.0, 0.0))
 	_place(self, "Ponton_Bois", Vector3(19.0, -DOCK_SURFACE + 0.02, 1.2), 90.0)
 	_boat = _place(self, "Bateau_De_Peche", Vector3(21.8, SEA_LEVEL - 0.45, -5.2), 20.0)
+
+
+## Lot 2 : déjà en coordonnées du monde, on le pose en (0,0,0) sans le déplacer.
+func _build_lot2() -> void:
+	for model in ["Decor_Place", "Vegetation"]:
+		var n := (load(HUB_LOT2 + model + ".glb") as PackedScene).instantiate() as Node3D
+		add_child(n)
+		for mesh: MeshInstance3D in n.find_children("*", "MeshInstance3D", true, false):
+			for i in mesh.mesh.get_surface_count():
+				var m := mesh.mesh.surface_get_material(i)
+				var shared := lot2_material(String(m.resource_name) if m else "")
+				if shared:
+					mesh.set_surface_override_material(i, shared)
+	# Le lit du canal (x = 12,5) attend l'eau du lot 3 : en attendant, une bande d'eau calme.
+	var canal := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(1.8, 60)
+	canal.mesh = plane
+	canal.material_override = Blocks.mat(Color(0.12, 0.38, 0.48), 0.1, 0.0)
+	canal.position = Vector3(12.5, -0.25, -14)
+	add_child(canal)
+
+
+static func lot2_material(key: String) -> Material:
+	if _lot2_materials.has(key):
+		return _lot2_materials[key]
+	var m: Material = null
+	if key.begins_with("Atlas_Sol_"):
+		# Case de l'atlas du sol : pavés en haut à gauche, pierre en haut à droite, terre, herbe.
+		var offsets := {"paving": Vector2(0, 0.5), "stone": Vector2(0.5, 0.5),
+			"dirt": Vector2(0, 0), "grass": Vector2(0.5, 0)}
+		m = _atlas_shader("sol_atlas", "Sol")
+		(m as ShaderMaterial).set_shader_parameter("tile_offset", offsets.get(key.trim_prefix("Atlas_Sol_"), Vector2.ZERO))
+	elif key.begins_with("Atlas_Vegetation_"):
+		m = _atlas_shader("vegetation_atlas", "Vegetation")
+	elif key == "Fer_Accessoires":
+		m = Blocks.mat(Color(0.16, 0.18, 0.19), 0.0, 0.0)
+	_lot2_materials[key] = m
+	return m
+
+
+static func _atlas_shader(shader: String, family: String) -> ShaderMaterial:
+	var cache_key := "_shader_" + family
+	if _lot2_materials.has(cache_key):
+		return _lot2_materials[cache_key].duplicate() if family == "Sol" else _lot2_materials[cache_key]
+	var m := ShaderMaterial.new()
+	m.shader = load(HUB_LOT2 + shader + ".gdshader")
+	var dir := HUB_LOT2 + "textures/Atlas_" + family + "_"
+	m.set_shader_parameter("atlas_color", load(dir + "BaseColor.png"))
+	m.set_shader_parameter("atlas_normal", load(dir + "Normal.png"))
+	m.set_shader_parameter("atlas_orm", load(dir + "ORM.png"))
+	_lot2_materials[cache_key] = m
+	return m.duplicate() if family == "Sol" else m
 
 
 # --- Bâtiments ------------------------------------------------------------------
@@ -470,7 +549,7 @@ static func lot1_material(key: String) -> StandardMaterial3D:
 	if key == "Emissif_Fenetres":
 		m.emission_enabled = true
 		m.emission = Color(1.0, 0.62, 0.22)
-		m.emission_energy_multiplier = 2.4
+		m.emission_energy_multiplier = 1.3
 	elif key == "Emissif_Cristaux":
 		m.emission_enabled = true
 		m.emission = Color(0.6, 0.25, 1.0)

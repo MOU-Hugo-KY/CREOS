@@ -1,11 +1,13 @@
 {
-  "coordinates": "Godot Y-up, metres, façade +Z",
-  "lot": 1,
+  "revision": "lots_1v2_2",
+  "units": "metres",
+  "up": "+Y",
+  "front": "+Z",
   "objects": [
     {
       "name": "Loge_Des_Heros",
       "file": "GLB/Loge_Des_Heros.glb",
-      "lod1_file": "LOD/Loge_Des_Heros_LOD1.glb",
+      "space": "local",
       "position": [
         -8.5,
         0,
@@ -58,15 +60,13 @@
           7.9372,
           8.6,
           5.6
-        ],
-        "shape": "BoxShape3D",
-        "purpose": "clicking only, not navigation collision"
+        ]
       }
     },
     {
       "name": "Ma_Loge",
       "file": "GLB/Ma_Loge.glb",
-      "lod1_file": "LOD/Ma_Loge_LOD1.glb",
+      "space": "local",
       "position": [
         8.5,
         0,
@@ -119,15 +119,13 @@
           6.9372,
           5.75,
           5.6
-        ],
-        "shape": "BoxShape3D",
-        "purpose": "clicking only, not navigation collision"
+        ]
       }
     },
     {
       "name": "Marche",
       "file": "GLB/Marche.glb",
-      "lod1_file": "LOD/Marche_LOD1.glb",
+      "space": "local",
       "position": [
         -10,
         0,
@@ -172,15 +170,13 @@
           4.0,
           3.824,
           2.15
-        ],
-        "shape": "BoxShape3D",
-        "purpose": "clicking only, not navigation collision"
+        ]
       }
     },
     {
       "name": "Table_Des_Chasses",
       "file": "GLB/Table_Des_Chasses.glb",
-      "lod1_file": "LOD/Table_Des_Chasses_LOD1.glb",
+      "space": "local",
       "position": [
         8.8,
         0,
@@ -225,15 +221,13 @@
           4.0725,
           4.149,
           3.0
-        ],
-        "shape": "BoxShape3D",
-        "purpose": "clicking only, not navigation collision"
+        ]
       }
     },
     {
       "name": "Autel_Des_Reliques",
       "file": "GLB/Autel_Des_Reliques.glb",
-      "lod1_file": "LOD/Autel_Des_Reliques_LOD1.glb",
+      "space": "local",
       "position": [
         0,
         0,
@@ -278,15 +272,13 @@
           5.0,
           3.09,
           5.0
-        ],
-        "shape": "BoxShape3D",
-        "purpose": "clicking only, not navigation collision"
+        ]
       }
     },
     {
       "name": "Maison_Boulangerie",
       "file": "GLB/Maison_Boulangerie.glb",
-      "lod1_file": "LOD/Maison_Boulangerie_LOD1.glb",
+      "space": "local",
       "position": [
         -17,
         0,
@@ -324,7 +316,7 @@
     {
       "name": "Maison_Forge",
       "file": "GLB/Maison_Forge.glb",
-      "lod1_file": "LOD/Maison_Forge_LOD1.glb",
+      "space": "local",
       "position": [
         -17,
         2.4,
@@ -362,7 +354,7 @@
     {
       "name": "Maison_Taverne",
       "file": "GLB/Maison_Taverne.glb",
-      "lod1_file": "LOD/Maison_Taverne_LOD1.glb",
+      "space": "local",
       "position": [
         -8,
         2.4,
@@ -400,7 +392,7 @@
     {
       "name": "Maison_Pecheur",
       "file": "GLB/Maison_Pecheur.glb",
-      "lod1_file": "LOD/Maison_Pecheur_LOD1.glb",
+      "space": "local",
       "position": [
         16,
         2.4,
@@ -438,7 +430,7 @@
     {
       "name": "Maison_Herboriste",
       "file": "GLB/Maison_Herboriste.glb",
-      "lod1_file": "LOD/Maison_Herboriste_LOD1.glb",
+      "space": "local",
       "position": [
         8,
         4.8,
@@ -476,7 +468,7 @@
     {
       "name": "Maison_Cartographe",
       "file": "GLB/Maison_Cartographe.glb",
-      "lod1_file": "LOD/Maison_Cartographe_LOD1.glb",
+      "space": "local",
       "position": [
         -8,
         4.8,
@@ -510,6 +502,138 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Decor_Place",
+      "file": "GLB/Decor_Place.glb",
+      "space": "world",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Sol_Place",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Terrasses",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Escaliers",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Canal_Lit_Sec",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Quai_Pierre",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Remparts",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Vegetation",
+      "file": "GLB/Vegetation.glb",
+      "space": "world",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "special_nodes": [
+        {
+          "name": "Vegetation_Troncs",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Vegetation_Feuillage",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Vegetation_Buissons",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Vegetation_Herbe",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Vegetation_Fleurs",
+          "local_position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
     }
   ],
   "camera": {
@@ -524,5 +648,10 @@
       -10
     ],
     "vertical_fov_degrees": 42
+  },
+  "reserved_canal": {
+    "center_x": 12.5,
+    "width": 1.8,
+    "water_and_bridges": "lot 3"
   }
 }

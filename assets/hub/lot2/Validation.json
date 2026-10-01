@@ -1,0 +1,40 @@
+{
+  "geometry": "passed",
+  "cycles_bake": "completed",
+  "images_in_glb": 0,
+  "ao_zero_pixels_on_used_uv": 0,
+  "uv_packing_diagnostics": {
+    "Batiments": {
+      "occupied_percent": 11.96,
+      "overlapping_interior_pixels": 0,
+      "resolution": 2048,
+      "ao_raw_min_on_uv": 0.0,
+      "ao_min_on_uv": 0.2199999988079071,
+      "ao_max_on_uv": 1.0,
+      "ao_mean_on_uv": 0.4173091948032379,
+      "ao_zero_pixels_on_uv": 0
+    },
+    "Sol": {
+      "occupied_percent": 92.25,
+      "overlapping_interior_pixels": 0,
+      "resolution": 2048,
+      "ao_raw_min_on_uv": 1.0,
+      "ao_min_on_uv": 1.0,
+      "ao_max_on_uv": 1.0,
+      "ao_mean_on_uv": 1.0,
+      "ao_zero_pixels_on_uv": 0
+    },
+    "Vegetation": {
+      "occupied_percent": 92.15,
+      "overlapping_interior_pixels": 0,
+      "resolution": 1024,
+      "ao_raw_min_on_uv": 0.0,
+      "ao_min_on_uv": 0.2199999988079071,
+      "ao_max_on_uv": 1.0,
+      "ao_mean_on_uv": 0.7759581208229065,
+      "ao_zero_pixels_on_uv": 0
+    }
+  },
+  "blender_export": "completed",
+  "godot_import": "not_tested"
+}

@@ -1,24 +1,22 @@
 {
-  "lot": 1,
-  "generator": "build_port_franc.py",
+  "revision": "lots_1v2_2",
   "blender_version": "5.2.2 LTS",
   "config": {
     "seed": 731,
     "vegetation_density": 1.0,
     "texture_size": 2048,
+    "vegetation_texture_size": 1024,
+    "ground_texture_size": 2048,
+    "ao_floor": 0.22,
     "bake_samples": 32,
     "render_samples": 48,
     "lod_ratio": 0.62,
-    "output_folder": "Port_Franc_Lot1_Genere"
+    "output_folder": "Port_Franc_1v2_2_Genere"
   },
-  "maps": [
-    "BaseColor",
-    "Normal",
-    "ORM"
-  ],
+  "texture_policy": "shared PNGs only; no images or image bytes in GLB",
   "assets": [
     {
-      "triangles": 3309,
+      "triangles": 4525,
       "materials": [
         "Atlas_Batiments",
         "Emissif_Fenetres"
@@ -30,29 +28,26 @@
         "Structure",
         "Loge_Des_Heros"
       ],
-      "embedded_images": 3,
-      "bytes": 5704336,
+      "embedded_images": 0,
+      "bytes": 400468,
       "file": "GLB/Loge_Des_Heros.glb",
-      "lod1_file": "LOD/Loge_Des_Heros_LOD1.glb",
-      "lod1_triangles": 1997,
       "dimensions": [
         7.9372,
         8.6,
         5.6
       ],
-      "base_footprint": [
-        7,
-        4.5
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "heroes"
+      "theme": "heroes",
+      "lod1_file": "LOD/Loge_Des_Heros_LOD1.glb",
+      "lod1_triangles": 2741
     },
     {
-      "triangles": 2789,
+      "triangles": 3541,
       "materials": [
         "Atlas_Batiments",
         "Emissif_Fenetres"
@@ -64,26 +59,23 @@
         "Structure",
         "Ma_Loge"
       ],
-      "embedded_images": 3,
-      "bytes": 5660196,
+      "embedded_images": 0,
+      "bytes": 315132,
       "file": "GLB/Ma_Loge.glb",
-      "lod1_file": "LOD/Ma_Loge_LOD1.glb",
-      "lod1_triangles": 1679,
       "dimensions": [
         6.9372,
         5.75,
         5.6
       ],
-      "base_footprint": [
-        6,
-        4.5
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "player"
+      "theme": "player",
+      "lod1_file": "LOD/Ma_Loge_LOD1.glb",
+      "lod1_triangles": 2141
     },
     {
       "triangles": 903,
@@ -97,26 +89,23 @@
         "Structure",
         "Marche"
       ],
-      "embedded_images": 3,
-      "bytes": 5493280,
+      "embedded_images": 0,
+      "bytes": 84164,
       "file": "GLB/Marche.glb",
-      "lod1_file": "LOD/Marche_LOD1.glb",
-      "lod1_triangles": 559,
       "dimensions": [
         4.0,
         3.824,
         2.15
       ],
-      "base_footprint": [
-        4,
-        2
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "market"
+      "theme": "market",
+      "lod1_file": "LOD/Marche_LOD1.glb",
+      "lod1_triangles": 559
     },
     {
       "triangles": 495,
@@ -130,26 +119,23 @@
         "Structure",
         "Table_Des_Chasses"
       ],
-      "embedded_images": 3,
-      "bytes": 5457756,
+      "embedded_images": 0,
+      "bytes": 48640,
       "file": "GLB/Table_Des_Chasses.glb",
-      "lod1_file": "LOD/Table_Des_Chasses_LOD1.glb",
-      "lod1_triangles": 307,
       "dimensions": [
         4.0725,
         4.149,
         3.0
       ],
-      "base_footprint": [
-        4,
-        3
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "hunts"
+      "theme": "hunts",
+      "lod1_file": "LOD/Table_Des_Chasses_LOD1.glb",
+      "lod1_triangles": 307
     },
     {
       "triangles": 940,
@@ -163,29 +149,26 @@
         "Structure",
         "Autel_Des_Reliques"
       ],
-      "embedded_images": 3,
-      "bytes": 5484304,
+      "embedded_images": 0,
+      "bytes": 76464,
       "file": "GLB/Autel_Des_Reliques.glb",
-      "lod1_file": "LOD/Autel_Des_Reliques_LOD1.glb",
-      "lod1_triangles": 590,
       "dimensions": [
         5.0,
         3.09,
         5.0
       ],
-      "base_footprint": [
-        5,
-        5
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "altar"
+      "theme": "altar",
+      "lod1_file": "LOD/Autel_Des_Reliques_LOD1.glb",
+      "lod1_triangles": 590
     },
     {
-      "triangles": 3322,
+      "triangles": 4538,
       "materials": [
         "Atlas_Batiments",
         "Emissif_Fenetres"
@@ -196,29 +179,26 @@
         "Structure",
         "Maison_Boulangerie"
       ],
-      "embedded_images": 3,
-      "bytes": 5703404,
+      "embedded_images": 0,
+      "bytes": 399780,
       "file": "GLB/Maison_Boulangerie.glb",
-      "lod1_file": "LOD/Maison_Boulangerie_LOD1.glb",
-      "lod1_triangles": 2002,
       "dimensions": [
         5.4372,
         8.6,
         5.095
       ],
-      "base_footprint": [
-        4.5,
-        4
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "bakery"
+      "theme": "bakery",
+      "lod1_file": "LOD/Maison_Boulangerie_LOD1.glb",
+      "lod1_triangles": 2746
     },
     {
-      "triangles": 2834,
+      "triangles": 3586,
       "materials": [
         "Atlas_Batiments",
         "Emissif_Fenetres"
@@ -229,29 +209,26 @@
         "Structure",
         "Maison_Forge"
       ],
-      "embedded_images": 3,
-      "bytes": 5663460,
+      "embedded_images": 0,
+      "bytes": 318576,
       "file": "GLB/Maison_Forge.glb",
-      "lod1_file": "LOD/Maison_Forge_LOD1.glb",
-      "lod1_triangles": 1702,
       "dimensions": [
         5.4372,
         5.75,
         5.15
       ],
-      "base_footprint": [
-        4.5,
-        4
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "forge"
+      "theme": "forge",
+      "lod1_file": "LOD/Maison_Forge_LOD1.glb",
+      "lod1_triangles": 2164
     },
     {
-      "triangles": 3318,
+      "triangles": 4070,
       "materials": [
         "Atlas_Batiments",
         "Emissif_Fenetres"
@@ -262,29 +239,26 @@
         "Structure",
         "Maison_Taverne"
       ],
-      "embedded_images": 3,
-      "bytes": 5692216,
+      "embedded_images": 0,
+      "bytes": 347332,
       "file": "GLB/Maison_Taverne.glb",
-      "lod1_file": "LOD/Maison_Taverne_LOD1.glb",
-      "lod1_triangles": 2002,
       "dimensions": [
         5.4372,
         5.75,
         5.045
       ],
-      "base_footprint": [
-        4.5,
-        4
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "tavern"
+      "theme": "tavern",
+      "lod1_file": "LOD/Maison_Taverne_LOD1.glb",
+      "lod1_triangles": 2460
     },
     {
-      "triangles": 3590,
+      "triangles": 4806,
       "materials": [
         "Atlas_Batiments",
         "Emissif_Fenetres"
@@ -295,29 +269,26 @@
         "Structure",
         "Maison_Pecheur"
       ],
-      "embedded_images": 3,
-      "bytes": 5723228,
+      "embedded_images": 0,
+      "bytes": 419604,
       "file": "GLB/Maison_Pecheur.glb",
-      "lod1_file": "LOD/Maison_Pecheur_LOD1.glb",
-      "lod1_triangles": 2156,
       "dimensions": [
         5.4372,
         8.6,
         5.045
       ],
-      "base_footprint": [
-        4.5,
-        4
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "fisher"
+      "theme": "fisher",
+      "lod1_file": "LOD/Maison_Pecheur_LOD1.glb",
+      "lod1_triangles": 2902
     },
     {
-      "triangles": 3354,
+      "triangles": 4106,
       "materials": [
         "Atlas_Batiments",
         "Emissif_Fenetres"
@@ -328,29 +299,26 @@
         "Structure",
         "Maison_Herboriste"
       ],
-      "embedded_images": 3,
-      "bytes": 5711892,
+      "embedded_images": 0,
+      "bytes": 367012,
       "file": "GLB/Maison_Herboriste.glb",
-      "lod1_file": "LOD/Maison_Herboriste_LOD1.glb",
-      "lod1_triangles": 2041,
       "dimensions": [
         5.4372,
         5.75,
         5.045
       ],
-      "base_footprint": [
-        4.5,
-        4
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "herbalist"
+      "theme": "herbalist",
+      "lod1_file": "LOD/Maison_Herboriste_LOD1.glb",
+      "lod1_triangles": 2468
     },
     {
-      "triangles": 2782,
+      "triangles": 3534,
       "materials": [
         "Atlas_Batiments",
         "Emissif_Fenetres"
@@ -361,28 +329,123 @@
         "Structure",
         "Maison_Cartographe"
       ],
-      "embedded_images": 3,
-      "bytes": 5657992,
+      "embedded_images": 0,
+      "bytes": 313108,
       "file": "GLB/Maison_Cartographe.glb",
-      "lod1_file": "LOD/Maison_Cartographe_LOD1.glb",
-      "lod1_triangles": 1670,
       "dimensions": [
         5.4372,
         5.75,
         5.045
       ],
-      "base_footprint": [
-        4.5,
-        4
-      ],
+      "space": "local",
       "origin": [
         0,
         0,
         0
       ],
-      "theme": "cartographer"
+      "theme": "cartographer",
+      "lod1_file": "LOD/Maison_Cartographe_LOD1.glb",
+      "lod1_triangles": 2132
+    },
+    {
+      "triangles": 3914,
+      "materials": [
+        "Atlas_Sol_stone",
+        "Atlas_Sol_paving",
+        "Fer_Accessoires",
+        "Atlas_Sol_dirt",
+        "Atlas_Sol_grass"
+      ],
+      "nodes": [
+        "Canal_Lit_Sec",
+        "Escaliers",
+        "Quai_Pierre",
+        "Remparts",
+        "Sol_Place",
+        "Terrasses",
+        "Decor_Place"
+      ],
+      "embedded_images": 0,
+      "bytes": 390884,
+      "file": "GLB/Decor_Place.glb",
+      "dimensions": [
+        42.54,
+        9.45,
+        54.27
+      ],
+      "space": "world",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "terrain_world"
+    },
+    {
+      "triangles": 5800,
+      "materials": [
+        "Atlas_Vegetation_leaves",
+        "Atlas_Vegetation_flower_card",
+        "Atlas_Vegetation_grass_card",
+        "Atlas_Vegetation_bark"
+      ],
+      "nodes": [
+        "Vegetation_Buissons",
+        "Vegetation_Feuillage",
+        "Vegetation_Fleurs",
+        "Vegetation_Herbe",
+        "Vegetation_Troncs",
+        "Vegetation"
+      ],
+      "embedded_images": 0,
+      "bytes": 843416,
+      "file": "GLB/Vegetation.glb",
+      "dimensions": [
+        41.4186,
+        11.4951,
+        47.1309
+      ],
+      "space": "world",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "theme": "vegetation_world"
     }
   ],
-  "total_triangles_lot1": 27636,
-  "remaining_visible_budget": 52364
+  "atlas_diagnostics": {
+    "Batiments": {
+      "occupied_percent": 11.96,
+      "overlapping_interior_pixels": 0,
+      "resolution": 2048,
+      "ao_raw_min_on_uv": 0.0,
+      "ao_min_on_uv": 0.2199999988079071,
+      "ao_max_on_uv": 1.0,
+      "ao_mean_on_uv": 0.4173091948032379,
+      "ao_zero_pixels_on_uv": 0
+    },
+    "Sol": {
+      "occupied_percent": 92.25,
+      "overlapping_interior_pixels": 0,
+      "resolution": 2048,
+      "ao_raw_min_on_uv": 1.0,
+      "ao_min_on_uv": 1.0,
+      "ao_max_on_uv": 1.0,
+      "ao_mean_on_uv": 1.0,
+      "ao_zero_pixels_on_uv": 0
+    },
+    "Vegetation": {
+      "occupied_percent": 92.15,
+      "overlapping_interior_pixels": 0,
+      "resolution": 1024,
+      "ao_raw_min_on_uv": 0.0,
+      "ao_min_on_uv": 0.2199999988079071,
+      "ao_max_on_uv": 1.0,
+      "ao_mean_on_uv": 0.7759581208229065,
+      "ao_zero_pixels_on_uv": 0
+    }
+  },
+  "total_visible_triangles": 44758,
+  "budget_remaining": 35242
 }
