@@ -50,11 +50,15 @@
       Autel des Reliques (cristal), Tour de Morvath au loin, héros qui se promènent ;
       bâtiments cliquables et menus épurés (icônes pixel art), musique de ville
 - [x] Table des chasses → combat ; « Retour au port » à la fin du combat
-- [ ] Écrans des autres bâtiments (pour l'instant : « bientôt disponible »)
-- [ ] Sauvegarde locale (`user://save.json`) : or, héros possédés, niveaux
-- [ ] Niveaux et XP des héros, formule de stats par niveau
+- [x] **Loge des héros** : liste des héros, héros en 3D qui tourne (on peut voir ses 3 attaques),
+      stats à son niveau, attaques avec icônes, choix de l'équipe de chasse (4 max)
+- [x] **Sire Malgrave** (Chevalier possédé) jouable : chaînes spectrales qui attirent, onde du tombeau
+- [x] **Sauvegarde** (`user://save.json`) : or, gemmes, énergie (recharge 1 / 5 min), niveau de la
+      loge, niveaux et XP des héros, équipe, butin, meilleures étoiles par donjon
+- [x] **Progression** : XP par victoire, niveaux (max 30), stats qui montent avec le niveau ;
+      une chasse coûte 6 énergie ; l'écran de fin montre l'XP et les niveaux gagnés
+- [ ] Écrans des autres bâtiments (Marché, Autel, Ma loge, Primes…)
 - [ ] Carte de la région (Brumenoire : 6 donjons + boss) avec étoiles
-- [ ] Écran d'équipe : choisir 4 héros parmi la collection
 - [ ] 10 héros de plus (2 par élément), compétences variées
 
 ## Étape 3 — Profondeur

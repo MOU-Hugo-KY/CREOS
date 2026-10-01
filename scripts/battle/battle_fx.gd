@@ -147,6 +147,43 @@ func lightning(from: Vector3, to: Vector3, color: Color, segments := 8, thicknes
 	tw.tween_callback(bolt.queue_free)
 
 
+## Chaîne spectrale : se déroule de `from` vers la cible, reste `hold` secondes, puis revient.
+func chain(from: Vector3, to_node: Node3D, color: Color, extend := 0.3, hold := 0.5) -> void:
+	var links := 14
+	var root := Node3D.new()
+	add_child(root)
+	var steel := _bolt_material(Color(0.75, 0.75, 0.82))
+	steel.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
+	var glow := _bolt_material(color)
+	var parts: Array[MeshInstance3D] = []
+	for i in links:
+		var link := MeshInstance3D.new()
+		var b := BoxMesh.new()
+		b.size = Vector3(0.12, 0.12, 0.22) if i % 2 == 0 else Vector3(0.05, 0.16, 0.22)
+		link.mesh = b
+		link.material_override = steel if i % 3 != 0 else glow
+		link.visible = false
+		root.add_child(link)
+		parts.append(link)
+	var place := func(t: float) -> void:
+		if not is_instance_valid(to_node):
+			return
+		var to := to_node.global_position + Vector3(0, 1.1, 0)
+		for i in links:
+			var k := float(i) / (links - 1)
+			var link := parts[i]
+			link.visible = k <= t
+			link.global_position = from.lerp(to, k * t)
+			if from.distance_to(to) > 0.01:
+				link.look_at(link.global_position + (to - from), Vector3.UP)
+			link.rotate_object_local(Vector3.FORWARD, i * 1.2)
+	var tw := create_tween()
+	tw.tween_method(place, 0.0, 1.0, extend)
+	tw.tween_interval(hold)
+	tw.tween_method(place, 1.0, 0.0, 0.25)
+	tw.tween_callback(root.queue_free)
+
+
 ## La foudre tombe du ciel sur une position.
 func sky_lightning(at: Vector3, color: Color) -> void:
 	lightning(at + Vector3(randf_range(-1, 1), 9.0, randf_range(-1, 1)), at, color, 12, 0.12)

@@ -37,6 +37,7 @@ func _initialize() -> void:
 			wait_end = true
 		elif arg.begins_with("--scene="):
 			scene_path = arg.trim_prefix("--scene=")
+	root.get_node("PlayerData").use_memory_only()  # ne touche pas à la vraie sauvegarde
 	scene = load(scene_path).instantiate()
 	root.add_child(scene)
 	if scene.has_method("set_auto"):

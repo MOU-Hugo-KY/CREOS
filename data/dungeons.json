@@ -4,10 +4,27 @@
     "region": "brumenoire",
     "corruption": 0.4,
     "waves": [
-      ["squelette_serviteur", "squelette_serviteur", "squelette_rodeur"],
-      ["squelette_guerrier", "acolyte_noir", "squelette_rodeur"],
-      ["squelette_guerrier", "vel_zareth", "acolyte_noir"]
+      [
+        "squelette_serviteur",
+        "squelette_serviteur",
+        "squelette_rodeur"
+      ],
+      [
+        "squelette_guerrier",
+        "acolyte_noir",
+        "squelette_rodeur"
+      ],
+      [
+        "squelette_guerrier",
+        "vel_zareth",
+        "acolyte_noir"
+      ]
     ],
-    "rewards": { "gold": 250, "xp": 120, "essence_ombre": 3 }
+    "rewards": {
+      "gold": 250,
+      "xp": 120,
+      "essence_ombre": 3
+    },
+    "energy_cost": 6
   }
 }

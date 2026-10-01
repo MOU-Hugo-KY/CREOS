@@ -208,5 +208,60 @@
         ]
       }
     ]
+  },
+  "malgrave": {
+    "name": "Sire Malgrave",
+    "class": "gardien",
+    "element": "ombre",
+    "family": "revenants",
+    "rarity": 4,
+    "range": "melee",
+    "attack_kind": "physical",
+    "model": "res://assets/heroes/chevalier/Chevalier_Possede_Anime.glb",
+    "anims": { "idle": "Idle", "run": "Walk", "hit": "Hit", "death": "Death" },
+    "portrait": { "y": 1.95, "dist": 3.4 },
+    "stats": { "hp": 1350, "atk": 95, "def": 75, "res": 70, "spd": 90, "crit": 0.08 },
+    "attacks": [
+      {
+        "id": "masse_maudite",
+        "name": "Masse maudite",
+        "description": "Un coup de masse chargé de magie sombre.",
+        "anim": "Attack_01_Masse_Maudite",
+        "hit_time": 0.64,
+        "target": "single_enemy",
+        "effects": [{ "type": "damage", "power": 1.0 }]
+      },
+      {
+        "id": "chaines_spectrales",
+        "name": "Chaînes spectrales",
+        "description": "Lance ses chaînes sur l'ennemi le plus affaibli, l'attire et l'étourdit 1,5 s.",
+        "anim": "Attack_02_Chaines_Spectrales",
+        "hit_time": 0.82,
+        "cooldown": 8.0,
+        "dash": false,
+        "target": "lowest_hp_enemy",
+        "fx": "chain_pull",
+        "effects": [
+          { "type": "damage", "power": 1.1 },
+          { "type": "stun", "duration": 1.5 }
+        ]
+      },
+      {
+        "id": "onde_du_tombeau",
+        "name": "Onde du tombeau",
+        "description": "Frappe le sol : une onde spectrale blesse et maudit tous les ennemis, et le protège.",
+        "anim": "Attack_03_Onde_Du_Tombeau",
+        "hit_time": 1.08,
+        "energy": 100,
+        "dash": false,
+        "target": "all_enemies",
+        "fx": "ground_slam",
+        "effects": [
+          { "type": "damage", "power": 1.1 },
+          { "type": "dot", "power": 0.25, "duration": 4.0 },
+          { "type": "shield", "power": 1.0, "self_only": true }
+        ]
+      }
+    ]
   }
 }

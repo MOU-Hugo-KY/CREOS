@@ -9,7 +9,7 @@ var fill_color := Palette.HP_HERO
 var text := ""
 var font_size := 18
 
-var _trail := 1.0
+var _trail := -1.0  # -1 = pas encore de valeur (pas de traînée au premier affichage)
 
 
 func _init() -> void:
@@ -18,7 +18,7 @@ func _init() -> void:
 
 func set_values(p_ratio: float, p_shield := 0.0, p_text := "") -> void:
 	p_ratio = clampf(p_ratio, 0.0, 1.0)
-	if p_ratio > _trail:
+	if _trail < 0.0 or p_ratio > _trail:
 		_trail = p_ratio
 	ratio = p_ratio
 	shield_ratio = clampf(p_shield, 0.0, 1.0)

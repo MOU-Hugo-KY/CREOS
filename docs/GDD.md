@@ -119,6 +119,7 @@ Chaque région a une **jauge de Corruption** (0 à 100 %).
 | **Kaïto le Ronin** | Lame | Eau | Chasseurs | Ronin | Double entaille · Coupe tournoyante (zone) · Frappe plongeante (achève le plus faible) |
 | **Docteur Vesprin** | Traqueur | Nature | Chasseurs | Alchimiste de la peste | Fiole explosive · Flaque toxique (poison) · Explosion du réservoir (poison de zone) |
 | **Frère Orage** | Arcaniste | Lumière | Chasseurs | Moine des éclairs | Paume foudroyante · Pas du tonnerre (étourdit) · Sentence céleste (foudre en chaîne) |
+| **Sire Malgrave** | Gardien | Ombre | Revenants | Chevalier possédé (Légendaire) | Masse maudite · Chaînes spectrales (attire, étourdit) · Onde du tombeau (malédiction de zone, bouclier) |
 
 > L'équipe n'a pas de soigneur : elle tient grâce aux boucliers et provocations de Torvald et
 > aux étourdissements. Les anciens héros du prototype (Brannoc, Kaëla, Ysolde, Fennir, Aubeline,

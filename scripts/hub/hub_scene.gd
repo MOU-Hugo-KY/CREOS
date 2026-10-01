@@ -33,7 +33,7 @@ func _ready() -> void:
 	_update_camera()
 
 	var i := 0
-	for id: String in GameData.heroes:
+	for id: String in PlayerData.owned_heroes():
 		var w := Wanderer.new()
 		add_child(w)
 		w.setup(GameData.hero(id), 100 + i)
@@ -47,6 +47,7 @@ func _ready() -> void:
 	hud = HubHud.new()
 	add_child(hud)
 	hud.action.connect(_do_action)
+	hud.screen_opened.connect(func(open: bool) -> void: town.set_labels_visible(not open))
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 
 
@@ -88,7 +89,13 @@ func _on_building_clicked(id: String) -> void:
 func _do_action(action_name: String, id: String) -> void:
 	match action_name:
 		"campaign":
-			go_to_battle()
+			var hunt: String = GameData.hub.get("first_hunt", "brumenoire_1")
+			if PlayerData.start_hunt(hunt):
+				go_to_battle()
+			else:
+				hud.toast("Pas assez d'énergie : il en faut %d (tu as %d)." % [PlayerData.hunt_cost(hunt), PlayerData.energy()])
+		"heroes":
+			hud.open_lodge()
 		_:
 			var name := _name_of(id)
 			hud.toast("%s — bientôt disponible !" % name)

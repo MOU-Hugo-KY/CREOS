@@ -5,8 +5,7 @@ extends Node3D
 ## Le moteur applique les dégâts tout de suite ; l'affichage, lui, les montre à l'instant de
 ## l'impact dans l'animation (`hit_time` de l'attaque, + la course pour le corps-à-corps).
 
-const DUNGEON_ID := "brumenoire_1"
-const TEAM := ["torvald", "kaito", "vesprin", "orage"]
+const HUB_SCENE := "res://scenes/hub/hub.tscn"
 const HERO_SPOTS := [Vector3(-2.6, 0, 0.6), Vector3(-4.4, 0, -1.6), Vector3(-4.6, 0, 2.6), Vector3(-6.6, 0, 0.4)]
 const ENEMY_SPOTS := [Vector3(2.6, 0, 0.6), Vector3(4.4, 0, -1.6), Vector3(4.6, 0, 2.6), Vector3(6.6, 0, 0.4)]
 const BOSS_SPOT := Vector3(5.2, 0, 0.0)
@@ -15,6 +14,8 @@ const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague (appariti
 const END_DELAY := 1.4
 
 var engine := BattleEngine.new()
+var dungeon_id := ""  # donjon choisi au hub (PlayerData.current_dungeon)
+var team_ids: Array = []  # équipe de chasse (PlayerData.team())
 var views: Dictionary = {}  # uid -> UnitView
 var unit_data: Dictionary = {}  # uid -> Dictionary
 
@@ -46,10 +47,15 @@ func _ready() -> void:
 		if on:
 			_end_turn())
 	hud.speed_toggled.connect(func(fast: bool) -> void: Engine.time_scale = 2.0 if fast else 1.0)
-	hud.restart_requested.connect(func() -> void: start_battle(randi()))
+	hud.restart_requested.connect(func() -> void:
+		if PlayerData.start_hunt(dungeon_id):
+			start_battle(randi()))
 	hud.hub_requested.connect(func() -> void:
 		Engine.time_scale = 1.0
-		get_tree().change_scene_to_file("res://scenes/hub/hub.tscn"))
+		get_tree().change_scene_to_file(HUB_SCENE))
+	dungeon_id = PlayerData.current_dungeon
+	if dungeon_id == "":
+		dungeon_id = GameData.hub.get("first_hunt", "brumenoire_1")
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 	start_battle(randi())
 
@@ -65,8 +71,11 @@ func start_battle(rng_seed: int) -> void:
 	hud.reset()
 	var was_auto := engine.auto_mode
 	engine = BattleEngine.new()
-	var team_data: Array = TEAM.map(func(id: String) -> Dictionary: return GameData.hero(id))
-	engine.setup(team_data, GameData.dungeon_waves(DUNGEON_ID), rng_seed)
+	# Équipe choisie dans la Loge, avec les stats de chaque héros à son niveau.
+	team_ids = PlayerData.team()
+	var team_data: Array = team_ids.map(func(id: String) -> Dictionary:
+		return Progression.hero_for_battle(GameData.hero(id), PlayerData.hero_level(id), GameData.progression))
+	engine.setup(team_data, GameData.dungeon_waves(dungeon_id), rng_seed)
 	engine.auto_mode = was_auto
 	hud.set_auto(was_auto)
 	for i in engine.heroes.size():
@@ -274,6 +283,21 @@ func _play_attack_fx(v: UnitView, fx_name: String, targets: Array[UnitView], off
 				for i in range(1, targets.size()):
 					fx.lightning(targets[0].chest_position(), targets[i].chest_position(), color, 7)
 					fx.burst(targets[i].chest_position(), color, false))
+		"chain_pull":
+			# Chaînes lancées vers la cible, qui est attirée vers le chevalier à l'impact.
+			var launch := maxf(0.0, delay - 0.38)
+			for t in targets:
+				_schedule(launch, func() -> void:
+					fx.chain(v.chest_position() + Vector3(0, 0.2, 0), t, color, 0.35, 0.45)
+					_sfx("throw", -2.0))
+				_schedule(delay, func() -> void:
+					if t.is_dead():
+						return
+					var pull := (v.global_position - t.global_position).normalized() * 1.4
+					var tw := t.create_tween()
+					tw.tween_property(t, "position", t.home_position + pull, 0.15)
+					tw.tween_interval(0.25)
+					tw.tween_property(t, "position", t.home_position, 0.3))
 		"whirlwind":
 			for h: float in hit_offsets:
 				_schedule(h, func() -> void: fx.ring(v.global_position, color, 3.2))
@@ -385,17 +409,25 @@ func _end_battle(won: bool) -> void:
 	hud.banner("VICTOIRE !" if won else "DÉFAITE…", "", 0.8)
 	audio.stop_music(0.4)
 	var stars := engine.stars()
-	var rewards := GameData.dungeon_rewards(DUNGEON_ID, stars)
+	var rewards := GameData.dungeon_rewards(dungeon_id, stars)
+	# Le butin et l'XP sont enregistrés dans la sauvegarde.
+	var result := PlayerData.finish_hunt(dungeon_id, won, stars, rewards, team_ids)
 	var stats: Array = []
-	for h in engine.heroes:
+	for i in engine.heroes.size():
+		var h := engine.heroes[i]
+		var progress: Dictionary = result.heroes.get(team_ids[i], {})
 		stats.append({
 			"name": h.display_name, "element": h.element, "alive": h.is_alive(),
 			"damage": _hero_stats[h.uid].damage, "healing": _hero_stats[h.uid].healing,
+			"level": progress.get("level", PlayerData.hero_level(team_ids[i])),
+			"xp": progress.get("xp", 0), "level_up": progress.get("gained_levels", 0) > 0,
 		})
-	var dungeon_name: String = GameData.dungeon(DUNGEON_ID).get("name", "")
+	var dungeon_name: String = GameData.dungeon(dungeon_id).get("name", "")
+	var replay := {"cost": PlayerData.hunt_cost(dungeon_id), "possible": PlayerData.can_start_hunt(dungeon_id),
+		"energy": PlayerData.energy(), "player_level_up": result.player_level_up, "player_level": PlayerData.level()}
 	_schedule(END_DELAY, func() -> void:
 		audio.play_music("victory" if won else "defeat", false)
-		hud.show_end(won, stars, rewards, stats, dungeon_name))
+		hud.show_end(won, stars, rewards, stats, dungeon_name, replay))
 
 
 # --- Outils -------------------------------------------------------------------

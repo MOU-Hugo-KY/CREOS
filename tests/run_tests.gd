@@ -3,6 +3,7 @@ extends SceneTree
 ## Lancer : godot --headless --path . --script res://tests/run_tests.gd
 
 const GameDataScript := preload("res://scripts/core/game_data.gd")
+const PlayerDataScript := preload("res://scripts/core/player_data.gd")
 
 var _failures := 0
 var _checks := 0
@@ -14,6 +15,8 @@ func _initialize() -> void:
 	test_starter_team_beats_first_dungeon()
 	test_special_attacks()
 	test_data_is_valid()
+	test_progression()
+	test_save()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -176,6 +179,50 @@ func test_data_is_valid() -> void:
 	for p in problems:
 		printerr("    ", p)
 	check(problems.is_empty(), "héros et monstres valides (attaques, cibles, effets, animations)")
+	gd.free()
+
+
+func test_progression() -> void:
+	print("Progression")
+	var gd := _data()
+	var cfg: Dictionary = gd.progression
+	var curve: Dictionary = cfg.hero_xp
+	check(Progression.xp_to_next(curve, 2) > Progression.xp_to_next(curve, 1), "il faut plus d'XP à chaque niveau")
+	var r := Progression.add_xp(1, 0, Progression.xp_to_next(curve, 1) + 5, curve, 30)
+	check(r.level == 2 and r.xp == 5 and r.gained_levels == 1, "passage au niveau 2 avec le reste d'XP")
+	var big := Progression.add_xp(29, 0, 999999, curve, 30)
+	check(big.level == 30 and big.xp == 0, "niveau maximum respecté")
+	var base: Dictionary = gd.hero("kaito").stats
+	var s5 := Progression.stats_at_level(base, 5, cfg.stat_growth)
+	check(s5.hp > base.hp and s5.atk > base.atk and s5.spd == base.spd, "les stats montent avec le niveau (sauf la vitesse)")
+	var split := Progression.split_rewards({"gold": 250, "xp": 120, "essence_ombre": 3}, cfg)
+	check(split.hero_xp == 120 and split.loot.gold == 250 and not split.loot.has("xp"), "partage du butin")
+	var e := Progression.regen_energy(10, 60, 1000.0, 1000.0 + 300 * 3 + 10, 300.0)
+	check(e.energy == 13 and is_equal_approx(e.last_time, 1900.0), "l'énergie remonte de 1 toutes les 5 min")
+	gd.free()
+
+
+func test_save() -> void:
+	print("Sauvegarde")
+	var gd := _data()
+	var pd: Node = PlayerDataScript.new()
+	pd.configure(gd.player_start, gd.progression, gd.dungeons)
+	pd.use_memory_only()
+	var gold0: int = pd.gold()
+	var energy0: int = pd.energy()
+	check(pd.team().size() == 4, "équipe de départ de 4 héros")
+	check(not pd.toggle_team("malgrave"), "pas de 5e héros dans l'équipe")
+	check(pd.toggle_team("orage") and pd.toggle_team("malgrave") and pd.in_team("malgrave"), "remplacer un héros de l'équipe")
+	check(pd.start_hunt("brumenoire_1") and pd.energy() == energy0 - pd.hunt_cost("brumenoire_1"), "une chasse coûte de l'énergie")
+	var res: Dictionary = pd.finish_hunt("brumenoire_1", true, 3, {"gold": 250, "xp": 120, "essence_ombre": 3}, pd.team())
+	check(pd.gold() == gold0 + 250 and pd.item_count("essence_ombre") == 3, "victoire : or et essences gagnés")
+	check(pd.hero_level("kaito") == 2 and res.heroes.kaito.gained_levels == 1, "victoire : les héros gagnent de l'XP et des niveaux")
+	check(pd.best_stars("brumenoire_1") == 3, "meilleures étoiles retenues")
+	var lost: Dictionary = pd.finish_hunt("brumenoire_1", false, 0, {}, pd.team())
+	check(lost.gold == 0 and pd.gold() == gold0 + 250, "défaite : rien de gagné")
+	pd.state.energy = 0
+	check(not pd.start_hunt("brumenoire_1"), "pas de chasse sans énergie")
+	pd.free()
 	gd.free()
 
 

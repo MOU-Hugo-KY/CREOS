@@ -29,6 +29,21 @@ const ELEMENT_NAMES := {
 }
 
 
+const CLASS_NAMES := {
+	"gardien": "Gardien", "lame": "Lame", "arcaniste": "Arcaniste", "traqueur": "Traqueur", "mystique": "Mystique",
+}
+
+# Rareté (GDD §3.4) : nom et couleur.
+const RARITIES := {
+	1: ["Commun", Color(0.7, 0.7, 0.72)],
+	2: ["Rare", Color(0.35, 0.6, 1.0)],
+	3: ["Épique", Color(0.72, 0.42, 1.0)],
+	4: ["Légendaire", Color(1.0, 0.78, 0.3)],
+	5: ["Mythique", Color(1.0, 0.35, 0.3)],
+	6: ["Relique Ancienne", Color(0.95, 0.95, 1.0)],
+}
+
+
 static func element_color(element: String) -> Color:
 	return ELEMENT_COLORS.get(element, Color(0.8, 0.8, 0.8))
 

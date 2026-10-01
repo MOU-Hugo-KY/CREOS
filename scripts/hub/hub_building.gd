@@ -53,6 +53,10 @@ func _on_input(_camera: Node, event: InputEvent, _pos: Vector3, _normal: Vector3
 		clicked.emit(building_id)
 
 
+func set_label_visible(on: bool) -> void:
+	_label.visible = on
+
+
 func bounce() -> void:
 	var tw := create_tween()
 	tw.tween_property(self, "scale", _base_scale * Vector3(1.04, 0.95, 1.04), 0.07)

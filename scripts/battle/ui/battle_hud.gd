@@ -158,9 +158,9 @@ func callout(attack_name: String, _caster_name: String, color: Color, _from_left
 	tw.chain().tween_property(_callout, "modulate:a", 0.0, 0.3)
 
 
-func show_end(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, dungeon_name: String) -> void:
+func show_end(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, dungeon_name: String, replay := {}) -> void:
 	end_turn()
-	end_screen.show_result(won, stars, rewards, hero_stats, dungeon_name)
+	end_screen.show_result(won, stars, rewards, hero_stats, dungeon_name, replay)
 
 
 # --- Construction ---------------------------------------------------------------

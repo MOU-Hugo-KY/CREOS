@@ -95,7 +95,7 @@ func _ready() -> void:
 	v.add_child(buttons)
 	_restart = Button.new()
 	_restart.text = "Rejouer"
-	_restart.custom_minimum_size = Vector2(260, 76)
+	_restart.custom_minimum_size = Vector2(320, 76)
 	_restart.pressed.connect(func() -> void: restart_pressed.emit())
 	buttons.add_child(_restart)
 	_next = Button.new()
@@ -105,8 +105,9 @@ func _ready() -> void:
 	buttons.add_child(_next)
 
 
-## hero_stats : Array de {name, element, alive, damage, healing}
-func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, dungeon_name: String) -> void:
+## hero_stats : Array de {name, element, alive, damage, healing, level, xp, level_up}
+## replay : {cost, possible, energy, player_level_up, player_level}
+func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, dungeon_name: String, replay := {}) -> void:
 	_title.text = "VICTOIRE !" if won else "DÉFAITE…"
 	_title.add_theme_color_override("font_color", Palette.GOLD if won else Color(0.85, 0.35, 0.35))
 	_subtitle.text = dungeon_name + ("  ·  Brumenoire recule…" if won else "  ·  Morvath gagne du terrain.")
@@ -115,6 +116,12 @@ func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, 
 		c.queue_free()
 	if rewards.is_empty():
 		_rewards_box.add_child(_reward_row("Aucun butin", "", Palette.TEXT_DIM))
+	if replay.get("player_level_up", false):
+		_rewards_box.add_child(_reward_row("Ta loge passe au niveau %d !" % int(replay.player_level), "", Palette.GOLD))
+	var cost: int = replay.get("cost", 0)
+	_restart.text = "Rejouer" if cost <= 0 else "Rejouer (%d énergie)" % cost
+	_restart.disabled = not replay.get("possible", true)
+	_restart.tooltip_text = "" if not _restart.disabled else "Pas assez d'énergie (%d)." % int(replay.get("energy", 0))
 	for key: String in rewards:
 		_rewards_box.add_child(_reward_row(REWARD_NAMES.get(key, key.capitalize()), "+%d" % int(rewards[key]),
 			REWARD_COLORS.get(key, Color(0.8, 0.6, 1.0))))
@@ -195,6 +202,18 @@ func _hero_tile(h: Dictionary, mvp: bool) -> Control:
 	name_label.add_theme_font_size_override("font_size", 20)
 	name_label.clip_text = true
 	v.add_child(name_label)
+	if h.has("level"):
+		var lvl := Label.new()
+		lvl.text = "Niv. %d" % int(h.level) + ("   +%d XP" % int(h.xp) if int(h.get("xp", 0)) > 0 else "")
+		lvl.add_theme_font_size_override("font_size", 17)
+		lvl.add_theme_color_override("font_color", Color(0.6, 0.85, 1.0))
+		v.add_child(lvl)
+	if h.get("level_up", false):
+		var up := Label.new()
+		up.text = "NIVEAU SUPÉRIEUR !"
+		up.add_theme_font_size_override("font_size", 16)
+		up.add_theme_color_override("font_color", Palette.GOLD)
+		v.add_child(up)
 	var dmg := Label.new()
 	dmg.text = "Dégâts : %d" % int(h.damage)
 	dmg.add_theme_font_size_override("font_size", 18)

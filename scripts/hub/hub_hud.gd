@@ -5,6 +5,7 @@ extends CanvasLayer
 
 signal action(action_name: String, id: String)
 signal ui_sound(sfx_name: String)
+signal screen_opened(open: bool)  # un écran plein (Loge…) s'ouvre ou se ferme
 
 const ICON_DIR := "res://assets/ui/hub/"
 
@@ -14,6 +15,11 @@ var _toast_tween: Tween
 var _sound_button: Button
 var _sound_panel: SoundPanel
 var _title: Label
+var _level_label: Label
+var _lodge_label: Label
+var _xp_bar: StatBar
+var _values: Dictionary = {}  # "or" / "gemmes" / "energie" -> Label
+var lodge: HeroLodge
 
 
 func _ready() -> void:
@@ -22,13 +28,57 @@ func _ready() -> void:
 	_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_root)
-	_build_profile(GameData.player_start)
-	_build_resources(GameData.player_start)
+	_build_profile()
+	_build_resources()
 	_build_main_buttons()
 	_build_side("side_left", true)
 	_build_side("side_right", false)
 	_build_toast()
 	_build_title()
+	lodge = HeroLodge.new()
+	lodge.visible = false
+	lodge.closed.connect(close_lodge)
+	lodge.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	_root.add_child(lodge)
+	PlayerData.changed.connect(refresh)
+	refresh()
+	var timer := Timer.new()
+	timer.wait_time = 1.0
+	timer.autostart = true
+	timer.timeout.connect(refresh)
+	add_child(timer)
+
+
+## Met à jour le profil et les ressources depuis la sauvegarde.
+func refresh() -> void:
+	_level_label.text = str(PlayerData.level())
+	_lodge_label.text = String(PlayerData.state.get("lodge", "Ma loge"))
+	_xp_bar.set_values(float(PlayerData.xp()) / maxf(1.0, PlayerData.xp_to_next()))
+	_values["or"].text = _fmt(PlayerData.gold()) + "  "
+	_values["gemmes"].text = str(PlayerData.gems()) + "  "
+	_values["energie"].text = "%d/%d  " % [PlayerData.energy(), PlayerData.energy_max()]
+	var next := PlayerData.seconds_to_next_energy()
+	_values["energie"].get_parent().get_parent().tooltip_text = "Énergie pleine" if next <= 0 else 		"+1 énergie dans %d min %02d s" % [next / 60, next % 60]
+
+
+func open_lodge() -> void:
+	_set_menus_visible(false)
+	lodge.open()
+
+
+func close_lodge() -> void:
+	lodge.visible = false
+	_set_menus_visible(true)
+
+
+## Cache les menus du port pendant qu'un écran plein (comme la Loge) est ouvert.
+func _set_menus_visible(on: bool) -> void:
+	screen_opened.emit(not on)
+	for c in _root.get_children():
+		if c != lodge and c != _toast:
+			c.visible = on
+	if on and _sound_panel:
+		_sound_panel.visible = _sound_button.button_pressed
 
 
 ## Petit message en bas de l'écran (« Bientôt : … »).
@@ -58,7 +108,7 @@ func _label(size: int, outline := 7) -> Label:
 	return l
 
 
-func _build_profile(p: Dictionary) -> void:
+func _build_profile() -> void:
 	var box := HBoxContainer.new()
 	box.position = Vector2(26, 20)
 	box.add_theme_constant_override("separation", 12)
@@ -71,7 +121,7 @@ func _build_profile(p: Dictionary) -> void:
 	lvl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(lvl)
 	var n := _label(28, 6)
-	n.text = str(int(p.get("level", 1)))
+	_level_label = n
 	n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	n.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	n.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -80,17 +130,15 @@ func _build_profile(p: Dictionary) -> void:
 	col.add_theme_constant_override("separation", 2)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(col)
-	var name_label := _label(26)
-	name_label.text = p.get("lodge", p.get("name", "Chasseur"))
-	col.add_child(name_label)
-	var xp := StatBar.new()
-	xp.fill_color = Palette.GOLD
-	xp.custom_minimum_size = Vector2(190, 9)
-	xp.set_values(float(p.get("xp", 0)) / maxf(1.0, float(p.get("xp_next", 100))))
-	col.add_child(xp)
+	_lodge_label = _label(26)
+	col.add_child(_lodge_label)
+	_xp_bar = StatBar.new()
+	_xp_bar.fill_color = Palette.GOLD
+	_xp_bar.custom_minimum_size = Vector2(190, 9)
+	col.add_child(_xp_bar)
 
 
-func _build_resources(p: Dictionary) -> void:
+func _build_resources() -> void:
 	var row := HBoxContainer.new()
 	row.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	row.grow_horizontal = Control.GROW_DIRECTION_BEGIN
@@ -98,9 +146,8 @@ func _build_resources(p: Dictionary) -> void:
 	row.offset_top = 22
 	row.add_theme_constant_override("separation", 12)
 	_root.add_child(row)
-	var energy := "%d/%d" % [int(p.get("energy", 0)), int(p.get("energy_max", 0))]
-	for r: Array in [["or", _fmt(int(p.get("gold", 0)))], ["gemmes", str(int(p.get("gems", 0)))], ["energie", energy]]:
-		row.add_child(_pill(r[0], r[1]))
+	for r in ["or", "gemmes", "energie"]:
+		row.add_child(_pill(r, ""))
 	_sound_button = Button.new()
 	_sound_button.text = "SON"
 	_sound_button.toggle_mode = true
@@ -131,6 +178,8 @@ func _pill(icon_name: String, value: String) -> Control:
 	l.text = value + "  "
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	h.add_child(l)
+	_values[icon_name] = l
+	p.mouse_filter = Control.MOUSE_FILTER_PASS
 	return p
 
 

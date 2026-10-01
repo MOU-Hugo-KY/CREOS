@@ -7,6 +7,7 @@ var frames := 0
 
 
 func _initialize() -> void:
+	root.get_node("PlayerData").use_memory_only()  # ne touche pas à la vraie sauvegarde
 	scene = load("res://scenes/battle/battle.tscn").instantiate()
 	root.add_child(scene)
 	if scene.get_script() == null or not "engine" in scene:

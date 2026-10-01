@@ -3,9 +3,38 @@
   "lodge": "Loge de Hugo",
   "level": 1,
   "xp": 0,
-  "xp_next": 100,
   "gold": 500,
   "gems": 50,
   "energy": 60,
-  "energy_max": 60
+  "energy_max": 60,
+  "heroes": {
+    "torvald": {
+      "level": 1,
+      "xp": 0
+    },
+    "kaito": {
+      "level": 1,
+      "xp": 0
+    },
+    "vesprin": {
+      "level": 1,
+      "xp": 0
+    },
+    "orage": {
+      "level": 1,
+      "xp": 0
+    },
+    "malgrave": {
+      "level": 1,
+      "xp": 0
+    }
+  },
+  "team": [
+    "torvald",
+    "kaito",
+    "vesprin",
+    "orage"
+  ],
+  "items": {},
+  "dungeons": {}
 }

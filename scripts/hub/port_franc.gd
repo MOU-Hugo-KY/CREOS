@@ -475,6 +475,12 @@ func _sparkles(parent: Node3D, pos: Vector3, color: Color) -> void:
 	parent.add_child(p)
 
 
+## Cache les noms des bâtiments (quand un écran plein est ouvert par-dessus).
+func set_labels_visible(on: bool) -> void:
+	for id: String in buildings:
+		buildings[id].set_label_visible(on)
+
+
 func _register(b: HubBuilding, id: String, click_size: Vector3, label_height: float) -> void:
 	var info: Dictionary = GameData.hub.get("buildings", {}).get(id, {})
 	b.setup(id, info.get("name", id), click_size, label_height)

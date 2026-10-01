@@ -246,9 +246,56 @@ def sentence_celeste():
     finish(img, "sentence_celeste")
 
 
+# --- Sire Malgrave (Chevalier possédé, ombre) ------------------------------------------
+
+SPECTRE = (190, 110, 255, 255)
+SPECTRE_LIGHT = (240, 210, 255, 255)
+ARMOR = (70, 66, 82, 255)
+
+
+def masse_maudite():
+    img, d = canvas()
+    line(d, [(7, 27), (18, 13)], WOOD, 2)
+    d.ellipse([15, 4, 27, 16], fill=ARMOR)
+    for x, y in ((21, 2), (28, 10), (21, 17), (13, 9)):
+        d.point((x, y), STEEL)
+    d.ellipse([18, 7, 24, 13], fill=SPECTRE)
+    d.point((20, 9), SPECTRE_LIGHT)
+    for x, y in ((10, 12), (26, 20), (12, 5)):
+        d.point((x, y), SPECTRE)
+    finish(img, "masse_maudite")
+
+
+def chaines_spectrales():
+    img, d = canvas()
+    for i in range(6):
+        cx, cy = 5 + i * 4, 25 - i * 4
+        if i % 2 == 0:
+            d.ellipse([cx - 2, cy - 1, cx + 2, cy + 1], outline=STEEL)
+        else:
+            d.ellipse([cx - 1, cy - 2, cx + 1, cy + 2], outline=STEEL_DARK)
+    arc_pts = [(6, 27), (10, 22), (16, 17), (22, 11), (27, 5)]
+    line(d, arc_pts, SPECTRE, 1)
+    d.polygon([(25, 3), (30, 3), (30, 8)], fill=SPECTRE_LIGHT)
+    finish(img, "chaines_spectrales")
+
+
+def onde_du_tombeau():
+    img, d = canvas()
+    arc(d, 16, 24, 14, 180, 360, SPECTRE, 2)
+    arc(d, 16, 24, 9, 180, 360, SPECTRE_LIGHT, 1)
+    d.rectangle([12, 10, 20, 24], fill=ARMOR)
+    d.pieslice([12, 6, 20, 14], 180, 360, fill=ARMOR)
+    d.rectangle([15, 13, 17, 19], fill=SPECTRE)
+    d.rectangle([13, 15, 19, 16], fill=SPECTRE)
+    d.rectangle([3, 25, 28, 27], fill=WOOD_DARK)
+    finish(img, "onde_du_tombeau")
+
+
 if __name__ == "__main__":
     for fn in (coup_de_hache, tourbillon_furieux, ecrasement_berserk,
                double_entaille, coupe_tournoyante, frappe_plongeante,
                fiole_explosive, flaque_toxique, explosion_reservoir,
-               paume_foudroyante, pas_du_tonnerre, sentence_celeste):
+               paume_foudroyante, pas_du_tonnerre, sentence_celeste,
+               masse_maudite, chaines_spectrales, onde_du_tombeau):
         fn()

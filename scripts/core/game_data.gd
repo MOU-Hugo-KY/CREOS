@@ -7,6 +7,7 @@ var dungeons: Dictionary = {}
 var regions: Dictionary = {}
 var hub: Dictionary = {}
 var player_start: Dictionary = {}
+var progression: Dictionary = {}
 
 
 func _ready() -> void:
@@ -20,6 +21,7 @@ func reload() -> void:
 	regions = load_json("res://data/regions.json")
 	hub = load_json("res://data/hub.json")
 	player_start = load_json("res://data/player_start.json")
+	progression = load_json("res://data/progression.json")
 
 
 static func load_json(path: String) -> Dictionary:

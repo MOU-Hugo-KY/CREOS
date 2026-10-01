@@ -8,6 +8,7 @@ var ok := true
 
 
 func _initialize() -> void:
+	root.get_node("PlayerData").use_memory_only()  # ne touche pas à la vraie sauvegarde
 	hub = load("res://scenes/hub/hub.tscn").instantiate()
 	root.add_child(hub)
 	current_scene = hub
