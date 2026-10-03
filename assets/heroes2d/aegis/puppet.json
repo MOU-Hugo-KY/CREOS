@@ -1,0 +1,12 @@
+{
+  "name": "Aegis",
+  "pixel_size": 0.0019,
+  "height": 2.4,
+  "shadow": 1.05,
+  "portrait": [200, 30, 640],
+  "parts": {
+    "body": { "file": "body.png", "pivot": [615, 750], "z": 0 },
+    "head": { "file": "head.png", "pivot": [250, 560], "parent": "body", "at": [593, 72], "z": 2 },
+    "arm_front": { "file": "arm_front.png", "pivot": [45, 35], "parent": "body", "at": [747, 145], "z": 3, "rest": 0 }
+  }
+}

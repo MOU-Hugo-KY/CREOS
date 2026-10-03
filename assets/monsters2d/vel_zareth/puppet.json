@@ -1,0 +1,14 @@
+{
+  "pixel_size": 0.00295,
+  "height": 3.7,
+  "float": 0.35,
+  "shadow": 1.5,
+  "portrait": [430, 120, 700],
+  "parts": {
+    "body": { "file": "body.png", "pivot": [584, 466], "z": -1 },
+    "torso": { "file": "torso.png", "pivot": [490, 470], "parent": "body", "at": [584, 60], "z": 0 },
+    "head": { "file": "head.png", "pivot": [484, 430], "parent": "torso", "at": [495, 50], "z": 2 },
+    "arm_front": { "file": "arm_front.png", "pivot": [205, 516], "parent": "torso", "at": [800, 330], "z": 3 },
+    "phylactere": { "file": "phylactere.png", "pivot": [156, 190], "parent": "torso", "at": [470, 250], "z": 4 }
+  }
+}

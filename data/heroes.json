@@ -1,111 +1,317 @@
 {
-  "brannoc": {
-    "name": "Brannoc le Roc",
-    "class": "gardien",
-    "element": "nature",
-    "family": "chasseurs",
-    "rarity": 3,
-    "range": "melee",
-    "attack_kind": "physical",
-    "model": "res://assets/kaykit/adventurers/Characters/Knight.glb",
-    "anim": { "attack": "1H_Melee_Attack_Chop", "skill": "Block_Attack" },
-    "stats": { "hp": 1400, "atk": 70, "def": 90, "res": 50, "spd": 85, "crit": 0.05 },
-    "skill": {
-      "id": "rempart",
-      "name": "Rempart",
-      "description": "Provoque tous les ennemis pendant 6 s et donne un bouclier à l'équipe.",
-      "target": "all_allies",
-      "effects": [
-        { "type": "taunt", "duration": 6.0, "self_only": true },
-        { "type": "shield", "power": 0.6 }
-      ]
-    }
-  },
-  "kaela": {
-    "name": "Kaëla Croc-Vif",
+  "corbin": {
+    "name": "Corbin le Corbeau",
+    "short": "Corbin",
     "class": "lame",
-    "element": "feu",
-    "family": "chasseurs",
-    "rarity": 3,
-    "range": "melee",
-    "attack_kind": "physical",
-    "model": "res://assets/kaykit/adventurers/Characters/Barbarian.glb",
-    "anim": { "attack": "2H_Melee_Attack_Chop", "skill": "2H_Melee_Attack_Spin" },
-    "stats": { "hp": 1000, "atk": 135, "def": 50, "res": 30, "spd": 105, "crit": 0.2 },
-    "skill": {
-      "id": "tourbillon",
-      "name": "Tourbillon ardent",
-      "description": "Frappe tous les ennemis et les fait brûler pendant 4 s.",
-      "target": "all_enemies",
-      "effects": [
-        { "type": "damage", "power": 1.3, "kind": "physical" },
-        { "type": "dot", "power": 0.25, "duration": 4.0 }
-      ]
-    }
-  },
-  "ysolde": {
-    "name": "Ysolde des Marées",
-    "class": "arcaniste",
-    "element": "eau",
-    "family": "sylvains",
-    "rarity": 3,
-    "range": "ranged",
-    "attack_kind": "magic",
-    "model": "res://assets/kaykit/adventurers/Characters/Mage.glb",
-    "anim": { "attack": "Spellcast_Shoot", "skill": "Spellcast_Long" },
-    "stats": { "hp": 850, "atk": 125, "def": 30, "res": 70, "spd": 95, "crit": 0.1 },
-    "skill": {
-      "id": "deferlante",
-      "name": "Déferlante",
-      "description": "Une vague frappe tous les ennemis et les étourdit 1,5 s.",
-      "target": "all_enemies",
-      "effects": [
-        { "type": "damage", "power": 1.6, "kind": "magic" },
-        { "type": "stun", "duration": 1.5 }
-      ]
-    }
-  },
-  "fennir": {
-    "name": "Fennir l'Ombre",
-    "class": "traqueur",
     "element": "ombre",
     "family": "chasseurs",
     "rarity": 3,
-    "range": "ranged",
+    "range": "melee",
     "attack_kind": "physical",
-    "model": "res://assets/kaykit/adventurers/Characters/Rogue_Hooded.glb",
-    "anim": { "attack": "1H_Ranged_Shoot", "skill": "Throw" },
-    "stats": { "hp": 900, "atk": 120, "def": 40, "res": 40, "spd": 115, "crit": 0.25 },
-    "skill": {
-      "id": "tir_fatal",
-      "name": "Tir fatal",
-      "description": "Énorme tir sur l'ennemi le plus faible.",
-      "target": "lowest_hp_enemy",
-      "effects": [
-        { "type": "damage", "power": 3.2, "kind": "physical" }
-      ]
-    }
+    "description": "Chasseur de l'ombre au masque de corbeau. Il frappe vite et achève les plus faibles.",
+    "puppet": "res://assets/heroes2d/corbin/",
+    "stats": {
+      "hp": 1050,
+      "atk": 130,
+      "def": 50,
+      "res": 35,
+      "spd": 110,
+      "crit": 0.2
+    },
+    "attacks": [
+      {
+        "id": "entaille_du_corbeau",
+        "name": "Entaille du corbeau",
+        "description": "Deux coups de serpe rapides sur un ennemi.",
+        "anim": "slash",
+        "hit_times": [
+          0.38,
+          0.62
+        ],
+        "target": "single_enemy",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 0.55
+          },
+          {
+            "type": "damage",
+            "power": 0.55
+          }
+        ]
+      },
+      {
+        "id": "danse_des_lames",
+        "name": "Danse des lames",
+        "description": "Tourbillonne au milieu des ennemis et les entaille tous.",
+        "anim": "spin",
+        "hit_time": 0.6,
+        "cooldown": 8.0,
+        "target": "all_enemies",
+        "fx": "whirlwind",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 0.75
+          }
+        ]
+      },
+      {
+        "id": "pique_du_corbeau",
+        "name": "Pique du corbeau",
+        "description": "Fond sur l'ennemi le plus affaibli et l'achève d'un coup de bec d'acier.",
+        "anim": "stab",
+        "hit_time": 0.55,
+        "energy": 100,
+        "target": "lowest_hp_enemy",
+        "fx": "ground_slam",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 2.6
+          }
+        ]
+      }
+    ]
   },
-  "aubeline": {
-    "name": "Sœur Aubeline",
-    "class": "mystique",
+  "aegis": {
+    "name": "Aegis le Rempart",
+    "short": "Aegis",
+    "class": "gardien",
     "element": "lumiere",
+    "family": "chasseurs",
+    "rarity": 3,
+    "range": "melee",
+    "attack_kind": "physical",
+    "description": "Gardien au bouclier solaire. Il attire les coups et protège ses compagnons.",
+    "puppet": "res://assets/heroes2d/aegis/",
+    "stats": {
+      "hp": 1500,
+      "atk": 80,
+      "def": 85,
+      "res": 55,
+      "spd": 85,
+      "crit": 0.05
+    },
+    "attacks": [
+      {
+        "id": "marteau_du_rempart",
+        "name": "Marteau du rempart",
+        "description": "Un lourd coup de marteau sur un ennemi.",
+        "anim": "slam",
+        "hit_time": 0.5,
+        "target": "single_enemy",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.0
+          }
+        ]
+      },
+      {
+        "id": "bouclier_solaire",
+        "name": "Bouclier solaire",
+        "description": "Lève son bouclier : provoque les ennemis 5 s et protège toute l'équipe.",
+        "anim": "cast",
+        "hit_time": 0.5,
+        "cooldown": 10.0,
+        "dash": false,
+        "target": "all_allies",
+        "effects": [
+          {
+            "type": "taunt",
+            "duration": 5.0,
+            "self_only": true
+          },
+          {
+            "type": "shield",
+            "power": 0.35
+          }
+        ]
+      },
+      {
+        "id": "impact_du_bastion",
+        "name": "Impact du bastion",
+        "description": "Écrase le sol : dégâts et étourdissement 1,5 s sur tous les ennemis, et un bouclier pour Aegis.",
+        "anim": "slam",
+        "hit_time": 0.9,
+        "energy": 100,
+        "target": "all_enemies",
+        "fx": "ground_slam",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.1
+          },
+          {
+            "type": "stun",
+            "duration": 1.5
+          },
+          {
+            "type": "shield",
+            "power": 1.2,
+            "self_only": true
+          }
+        ]
+      }
+    ]
+  },
+  "brume": {
+    "name": "Brume des Marées",
+    "short": "Brume",
+    "class": "arcaniste",
+    "element": "eau",
     "family": "chasseurs",
     "rarity": 3,
     "range": "ranged",
     "attack_kind": "magic",
-    "model": "res://assets/kaykit/adventurers/Characters/Rogue.glb",
-    "anim": { "attack": "Spellcast_Shoot", "skill": "Spellcast_Raise" },
-    "stats": { "hp": 950, "atk": 80, "def": 40, "res": 80, "spd": 100, "crit": 0.05 },
-    "skill": {
-      "id": "aube_sacree",
-      "name": "Aube sacrée",
-      "description": "Soigne toute l'équipe et retire les brûlures.",
-      "target": "all_allies",
-      "effects": [
-        { "type": "heal", "power": 1.8 },
-        { "type": "cleanse" }
-      ]
-    }
+    "description": "Sorcière des marées. Elle soigne ses alliés et noie ses ennemis dans la brume.",
+    "puppet": "res://assets/heroes2d/brume/",
+    "stats": {
+      "hp": 900,
+      "atk": 115,
+      "def": 35,
+      "res": 65,
+      "spd": 100,
+      "crit": 0.1
+    },
+    "attacks": [
+      {
+        "id": "eclat_lunaire",
+        "name": "Éclat lunaire",
+        "description": "Lance un éclat d'eau glacée sur un ennemi.",
+        "anim": "cast",
+        "hit_time": 0.55,
+        "dash": false,
+        "target": "single_enemy",
+        "fx": "vial",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.0
+          }
+        ]
+      },
+      {
+        "id": "maree_apaisante",
+        "name": "Marée apaisante",
+        "description": "Une vague douce soigne toute l'équipe et lave poisons et étourdissements.",
+        "anim": "cast_sky",
+        "hit_time": 0.6,
+        "cooldown": 10.0,
+        "dash": false,
+        "target": "all_allies",
+        "effects": [
+          {
+            "type": "heal",
+            "power": 0.7
+          },
+          {
+            "type": "cleanse"
+          }
+        ]
+      },
+      {
+        "id": "malediction_de_brume",
+        "name": "Malédiction de brume",
+        "description": "Une brume maudite blesse tous les ennemis et les ronge pendant 5 s.",
+        "anim": "cast_sky",
+        "hit_time": 0.9,
+        "energy": 100,
+        "dash": false,
+        "target": "all_enemies",
+        "fx": "poison_burst",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.0
+          },
+          {
+            "type": "dot",
+            "power": 0.3,
+            "duration": 5.0
+          }
+        ]
+      }
+    ]
+  },
+  "orage": {
+    "name": "Frère Orage",
+    "short": "Orage",
+    "class": "arcaniste",
+    "element": "lumiere",
+    "family": "chasseurs",
+    "rarity": 3,
+    "range": "melee",
+    "attack_kind": "magic",
+    "description": "Moine des éclairs, encapuchonné de blanc. Ses poings frappent comme la foudre.",
+    "puppet": "res://assets/heroes2d/orage/",
+    "stats": {
+      "hp": 1000,
+      "atk": 115,
+      "def": 45,
+      "res": 70,
+      "spd": 105,
+      "crit": 0.1
+    },
+    "attacks": [
+      {
+        "id": "paume_foudroyante",
+        "name": "Paume foudroyante",
+        "description": "Un coup de poing chargé d'éclairs.",
+        "anim": "punch",
+        "hit_time": 0.41,
+        "target": "single_enemy",
+        "fx": "lightning_hit",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.0
+          }
+        ]
+      },
+      {
+        "id": "pas_du_tonnerre",
+        "name": "Pas du tonnerre",
+        "description": "Fonce comme l'éclair et donne un coup de pied qui étourdit 1 s.",
+        "anim": "kick",
+        "hit_time": 0.5,
+        "cooldown": 7.0,
+        "target": "single_enemy",
+        "fx": "lightning_hit",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1.4
+          },
+          {
+            "type": "stun",
+            "duration": 1.0
+          }
+        ]
+      },
+      {
+        "id": "sentence_celeste",
+        "name": "Sentence céleste",
+        "description": "La foudre tombe sur un ennemi puis se propage à tous les autres.",
+        "anim": "cast_sky",
+        "hit_time": 0.9,
+        "energy": 100,
+        "dash": false,
+        "target": "single_enemy",
+        "fx": "sky_lightning",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 2.0
+          },
+          {
+            "type": "damage",
+            "power": 0.8,
+            "target": "all_enemies"
+          }
+        ]
+      }
+    ]
   }
 }

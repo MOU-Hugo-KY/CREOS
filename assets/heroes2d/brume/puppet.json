@@ -1,0 +1,13 @@
+{
+  "name": "Brume",
+  "pixel_size": 0.00225,
+  "height": 2.3,
+  "shadow": 0.9,
+  "portrait": [190, 30, 640],
+  "parts": {
+    "body": { "file": "body.png", "pivot": [300, 605], "z": 0 },
+    "cape": { "file": "cape.png", "pivot": [578, 30], "parent": "body", "at": [180, 60], "z": -1 },
+    "head": { "file": "head.png", "pivot": [380, 460], "parent": "body", "at": [320, 45], "z": 2 },
+    "arm_front": { "file": "arm_front.png", "pivot": [25, 440], "parent": "body", "at": [431, 156], "z": 3, "rest": 0 }
+  }
+}

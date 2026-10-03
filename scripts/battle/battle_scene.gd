@@ -1,35 +1,62 @@
 extends Node3D
-## Scène de combat jouable : relie le BattleEngine (logique) à l'affichage 3D et à l'interface.
-## Tout est construit par code pour rester simple à modifier par Claude ou à la main.
+## Scène de combat jouable : relie le BattleEngine (logique) à l'affichage 3D, aux sons et à
+## l'interface. Tout est construit par code pour rester simple à modifier par Claude ou à la main.
+##
+## Le moteur applique les dégâts tout de suite ; l'affichage, lui, les montre à l'instant de
+## l'impact dans l'animation (`hit_time` de l'attaque, + la course pour le corps-à-corps).
 
-const DUNGEON_ID := "brumenoire_1"
-const TEAM := ["brannoc", "kaela", "ysolde", "aubeline"]
-const FLOOR_TILE := "res://assets/kaykit/dungeon/Assets/floor_tile_large.gltf.glb"
-const PROPS := {
-	"res://assets/kaykit/dungeon/Assets/torch_lit.gltf.glb": [Vector3(-4, 0, -5), Vector3(4, 0, -5)],
-	"res://assets/kaykit/dungeon/Assets/pillar_decorated.gltf.glb": [Vector3(-8, 0, -6), Vector3(8, 0, -6)],
-	"res://assets/kaykit/dungeon/Assets/chest_gold.glb": [Vector3(0, 0, -6)],
-	"res://assets/kaykit/dungeon/Assets/barrel_large.gltf.glb": [Vector3(-9, 0, -3.5)],
-	"res://assets/kaykit/dungeon/Assets/rubble_large.gltf.glb": [Vector3(9.5, 0, -4)],
-}
-const HERO_SPOTS := [Vector3(-2.5, 0, 0.0), Vector3(-4.2, 0, -2.0), Vector3(-4.2, 0, 2.0), Vector3(-6.0, 0, 0.0)]
-const ENEMY_SPOTS := [Vector3(2.5, 0, 0.0), Vector3(4.2, 0, -2.0), Vector3(4.2, 0, 2.0), Vector3(6.0, 0, 0.0)]
+const HUB_SCENE := "res://scenes/hub/hub.tscn"
+const HERO_SPOTS := [Vector3(-2.6, 0, 0.6), Vector3(-4.4, 0, -1.6), Vector3(-4.6, 0, 2.6), Vector3(-6.6, 0, 0.4)]
+const ENEMY_SPOTS := [Vector3(2.6, 0, 0.6), Vector3(4.4, 0, -1.6), Vector3(4.6, 0, 2.6), Vector3(6.6, 0, 0.4)]
+const BOSS_SPOT := Vector3(6.3, 0, 0.9)  # au fond à droite : le boss domine sans cacher ses sbires
+const HERO_YAW := 62.0  # de trois quarts vers la caméra (90 = profil pur)
+const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague (apparition des ennemis)
+const END_DELAY := 1.4
 
 var engine := BattleEngine.new()
+var dungeon_id := ""  # donjon choisi au hub (PlayerData.current_dungeon)
+var team_ids: Array = []  # équipe de chasse (PlayerData.team())
 var views: Dictionary = {}  # uid -> UnitView
 var unit_data: Dictionary = {}  # uid -> Dictionary
 
+var hud: BattleHud
+var fx: BattleFx
+var audio: BattleAudio
+var camera: Camera3D
+
 var _units_root: Node3D
-var _hud: CanvasLayer
-var _hero_buttons: Dictionary = {}  # uid -> Button
-var _banner: Label
-var _auto_button: CheckButton
-var _restart_button: Button
+var _pending: Array = []  # [{t, fn}] événements à afficher plus tard (instant d'impact)
+var _clock := 0.0
+var _hold := 0.0
+var _hero_stats: Dictionary = {}  # uid -> {damage, healing}
+var _last_sound: Dictionary = {}  # nom -> heure (évite 4 fois le même son au même instant)
+var _ended := false
+var _event_seq := 0
 
 
 func _ready() -> void:
 	_build_world()
-	_build_hud()
+	audio = BattleAudio.new()
+	add_child(audio)
+	hud = BattleHud.new()
+	hud.camera = camera
+	add_child(hud)
+	hud.attack_requested.connect(_on_attack_requested)
+	hud.auto_toggled.connect(func(on: bool) -> void:
+		engine.auto_mode = on
+		if on:
+			_end_turn())
+	hud.speed_toggled.connect(func(fast: bool) -> void: Engine.time_scale = 2.0 if fast else 1.0)
+	hud.restart_requested.connect(func() -> void:
+		if PlayerData.start_hunt(dungeon_id):
+			start_battle(randi()))
+	hud.hub_requested.connect(func() -> void:
+		Engine.time_scale = 1.0
+		get_tree().change_scene_to_file(HUB_SCENE))
+	dungeon_id = PlayerData.current_dungeon
+	if dungeon_id == "":
+		dungeon_id = GameData.hub.get("first_hunt", "brumenoire_1")
+	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 	start_battle(randi())
 
 
@@ -38,65 +65,441 @@ func start_battle(rng_seed: int) -> void:
 		c.queue_free()
 	views.clear()
 	unit_data.clear()
+	_pending.clear()
+	_hero_stats.clear()
+	_ended = false
+	hud.reset()
+	var was_auto := engine.auto_mode
 	engine = BattleEngine.new()
-	var team_data: Array = TEAM.map(func(id: String) -> Dictionary: return GameData.hero(id))
-	engine.setup(team_data, GameData.dungeon_waves(DUNGEON_ID), rng_seed)
-	engine.auto_mode = _auto_button.button_pressed
+	# Équipe choisie dans la Loge, avec les stats de chaque héros à son niveau.
+	team_ids = PlayerData.team()
+	var team_data: Array = team_ids.map(func(id: String) -> Dictionary:
+		return Progression.hero_for_battle(GameData.hero(id), PlayerData.hero_level(id), GameData.progression,
+			PlayerData.hero_stars(id)))
+	engine.setup(team_data, GameData.dungeon_waves(dungeon_id), rng_seed)
+	engine.auto_mode = was_auto
+	hud.set_auto(was_auto)
 	for i in engine.heroes.size():
-		_spawn(engine.heroes[i], team_data[i], HERO_SPOTS[i], 90.0)
-	_rebuild_hero_buttons()
-	_restart_button.visible = false
+		var h := engine.heroes[i]
+		_spawn(h, team_data[i], HERO_SPOTS[i], HERO_YAW)
+		_hero_stats[h.uid] = {"damage": 0.0, "healing": 0.0}
+	audio.play_music("battle_loop")
 	_handle_events()
+
+
+func set_auto(on: bool) -> void:
+	engine.auto_mode = on
+	if hud:
+		hud.set_auto(on)
 
 
 func _process(delta: float) -> void:
-	engine.step(delta)
-	_handle_events()
+	_clock += delta
+	if _hold > 0.0:
+		_hold -= delta
+	else:
+		engine.step(delta)
+		_handle_events()
+	_run_pending()
+	hud.refresh(delta)
+
+
+func _on_attack_requested(uid: int, slot: int) -> void:
+	if engine.request_attack(uid, slot):
+		audio.play("ui_click", -6.0, 0.0)
+		_end_turn(slot)
+		_handle_events()
+
+
+## Toucher (ou cliquer) un ennemi le désigne comme cible de l'équipe.
+## Clavier : 1, 2, 3 choisissent l'attaque du héros dont c'est le tour.
+func _unhandled_input(event: InputEvent) -> void:
+	var click := event as InputEventMouseButton
+	if click and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
+		var enemy := _enemy_at(click.position)
+		if enemy and engine.set_focus(enemy.unit.uid):
+			audio.play("ui_click", -8.0, 0.0)
+			_handle_events()
+			get_viewport().set_input_as_handled()
+		return
+	var key := event as InputEventKey
+	if key == null or not key.pressed or key.echo or engine.awaiting_uid == -1:
+		return
+	var slot := key.keycode - KEY_1
+	if slot >= 0 and slot <= 2:
+		_on_attack_requested(engine.awaiting_uid, slot)
+
+
+## Ennemi vivant le plus proche du point touché à l'écran (rayon généreux pour le doigt).
+func _enemy_at(screen_pos: Vector2) -> UnitView:
+	var radius := 110.0 * get_viewport().get_visible_rect().size.y / 1080.0
+	var best: UnitView = null
+	var best_d := radius
 	for uid in views:
-		views[uid].refresh()
-	_refresh_hero_buttons()
+		var v: UnitView = views[uid]
+		if v.unit.team != 1 or v.is_dead() or camera.is_position_behind(v.chest_position()):
+			continue
+		var d := camera.unproject_position(v.chest_position()).distance_to(screen_pos)
+		if d < best_d:
+			best_d = d
+			best = v
+	return best
+
+
+func _show_focus(target_uid: int) -> void:
+	for uid in views:
+		var v: UnitView = views[uid]
+		if v.unit.team == 1:
+			v.set_target_mark(uid == target_uid)
+
+
+func _begin_turn(uid: int) -> void:
+	var v: UnitView = views.get(uid)
+	if v == null:
+		return
+	v.set_highlight(true)
+	hud.begin_turn(v.unit)
+	_sfx("ui_ready", -10.0)
+
+
+func _end_turn(slot := -1) -> void:
+	for uid in views:
+		views[uid].set_highlight(false)
+	hud.end_turn(slot)
 
 
 # --- Événements du moteur -> affichage ----------------------------------------
 
 func _handle_events() -> void:
+	# Attaque en cours : décalage (course) + instants d'impact. Le k-ième coup reçu par une cible
+	# s'affiche au k-ième instant (`hit_times`), le reste (états, mort) après son dernier coup.
+	var offset := 0.0
+	var times: Array = [0.0]
+	var hits_per_dst: Dictionary = {}
+	var last_time: Dictionary = {}
+	var max_time := 0.0
 	for ev in engine.drain_events():
+		_event_seq += 1
+		ev["seq"] = _event_seq
 		match ev.type:
 			"wave_start":
-				_spawn_wave()
-				_show_banner("Vague %d / %d" % [ev.index + 1, ev.count])
+				offset = 0.0
+				times = [0.0]
+				hits_per_dst.clear()
+				last_time.clear()
+				_on_wave_start(ev)
+			"turn":
+				_begin_turn(ev.src)
+			"focus":
+				_show_focus(ev.target)
 			"attack":
-				_view(ev.src, func(v: UnitView) -> void: v.play_attack())
-			"skill":
-				_view(ev.src, func(v: UnitView) -> void:
-					v.play_skill()
-					v.popup(ev.name, Color.GOLD, true))
-			"damage":
-				_view(ev.dst, func(v: UnitView) -> void:
-					v.play_hit()
-					var color := Color.ORANGE if ev.crit else Color.WHITE
-					if ev.elem_mult > 1.0:
-						color = Color(1, 0.3, 0.2)
-					elif ev.elem_mult < 1.0:
-						color = Color(0.6, 0.6, 0.7)
-					v.popup(str(int(ev.amount)) + ("!" if ev.crit else ""), color, ev.crit))
-			"heal":
-				_view(ev.dst, func(v: UnitView) -> void: v.popup("+" + str(int(ev.amount)), Color.LIME_GREEN))
-			"shield":
-				_view(ev.dst, func(v: UnitView) -> void: v.popup("Bouclier", Color.SKY_BLUE))
-			"death":
-				_view(ev.dst, func(v: UnitView) -> void: v.play_death())
-			"victory":
-				_show_banner("VICTOIRE ! Brumenoire recule…", 0.0)
-				_restart_button.visible = true
-			"defeat":
-				_show_banner("Défaite… Morvath gagne du terrain.", 0.0)
-				_restart_button.visible = true
+				if ev.slot == BattleUnit.SLOT_ULTIMATE and engine.get_unit(ev.src).team == 0:
+					PlayerData.record_event("ultimate")  # prime du jour « Pleine puissance »
+				var delay := _on_attack(ev)
+				times = ev.hit_times
+				offset = delay - float(times[0])
+				hits_per_dst.clear()
+				last_time.clear()
+			_:
+				var t := 0.0
+				if ev.get("dot", false):
+					t = 0.0
+				elif ev.type == "damage":
+					var k: int = hits_per_dst.get(ev.dst, 0)
+					hits_per_dst[ev.dst] = k + 1
+					t = offset + float(times[mini(k, times.size() - 1)])
+					last_time[ev.dst] = maxf(last_time.get(ev.dst, 0.0), t)
+				elif ev.has("dst"):
+					t = last_time.get(ev.dst, offset + float(times[0]))
+				else:
+					t = max_time  # victoire / défaite : après le dernier coup
+				max_time = maxf(max_time, t)
+				var event: Dictionary = ev
+				_schedule(t, func() -> void: _on_impact(event))
 
 
-func _view(uid: int, fn: Callable) -> void:
-	if views.has(uid):
-		fn.call(views[uid])
+func _on_wave_start(ev: Dictionary) -> void:
+	_spawn_wave()
+	hud.set_wave(ev.index, ev.count)
+	var has_boss := engine.enemies.any(func(u: BattleUnit) -> bool: return u.is_boss)
+	var sub := "Le boss arrive !" if has_boss else ""
+	hud.banner("Vague %d / %d" % [ev.index + 1, ev.count], sub)
+	audio.play("wave_start", -3.0, 0.0)
+	if has_boss:
+		audio.play_music("boss_loop")
+		fx.shake(0.5)
+	_hold = INTRO_HOLD
+
+
+## Lance l'animation d'attaque et ses effets. Renvoie le délai avant le premier impact.
+func _on_attack(ev: Dictionary) -> float:
+	var v: UnitView = views.get(ev.src)
+	if v == null:
+		return 0.0
+	var atk_data: Dictionary = v.unit.attacks[ev.slot]
+	var targets: Array[UnitView] = []
+	for uid: int in ev.targets:
+		if views.has(uid):
+			targets.append(views[uid])
+	var offensive := targets.any(func(t: UnitView) -> bool: return t.unit.team != v.unit.team)
+	var melee := offensive and v.unit.range_type == "melee"
+	var color := Palette.element_color(v.unit.element)
+	var dash_to: Variant = null
+	if melee and atk_data.get("dash", true) and not targets.is_empty():
+		dash_to = targets[0].home_position
+	var delay := v.play_attack(ev.anim, ev.hit_time, dash_to)
+	var hit_offsets: Array = ev.hit_times.map(func(h: float) -> float: return delay - float(ev.hit_time) + h)
+
+	# Sons de départ.
+	if melee:
+		for h: float in hit_offsets:
+			_schedule(maxf(0.0, h - 0.15), func() -> void: _sfx("swing", -2.0))
+	elif v.unit.attack_kind == "magic" or not offensive:
+		_sfx("magic_cast", -8.0)
+	else:
+		_schedule(maxf(0.0, delay - 0.3), func() -> void: _sfx("throw", -3.0))
+
+	_play_attack_fx(v, atk_data.get("fx", ""), targets, offensive, melee, color, delay, hit_offsets, atk_data)
+
+	match int(ev.slot):
+		BattleUnit.SLOT_COOLDOWN:
+			v.popup(ev.name, Palette.COOLDOWN.lightened(0.3), false, 2.9)
+		BattleUnit.SLOT_ULTIMATE:
+			hud.callout(ev.name, v.unit.display_name, color, v.unit.team == 0)
+			fx.aura(v.global_position, color)
+			fx.ring(v.global_position, color, 2.5)
+			_sfx("ui_ready", -4.0)
+			if offensive:
+				_schedule(delay, func() -> void:
+					fx.shake(0.7)
+					_sfx("ultimate_impact", 0.0))
+	return delay
+
+
+## Effets visuels d'une attaque. `fx` vient du JSON de l'attaque (sinon : effet par défaut).
+func _play_attack_fx(v: UnitView, fx_name: String, targets: Array[UnitView], offensive: bool, melee: bool,
+		color: Color, delay: float, hit_offsets: Array, atk_data: Dictionary) -> void:
+	match fx_name:
+		"vial":
+			# Fiole lancée en cloche, qui éclate en petit nuage.
+			if targets.is_empty():
+				return
+			var tgt := targets[0]
+			var travel := minf(0.3, delay)
+			_schedule(delay - travel, func() -> void:
+				fx.projectile(v.chest_position() + Vector3(0, 0.5, 0), tgt.chest_position(), color, travel, 0.25)
+				_sfx("throw", -4.0))
+			_schedule(delay, func() -> void:
+				fx.cloud(tgt.global_position, Color(color, 0.5), 1.5))
+		"poison_pool":
+			var duration := 4.0
+			for e: Dictionary in atk_data.get("effects", []):
+				if e.get("type") == "dot":
+					duration = e.get("duration", duration)
+			_schedule(delay, func() -> void:
+				for t in targets:
+					fx.pool(t.global_position, color, duration)
+				_sfx("magic_shot", -8.0))
+		"poison_burst":
+			_schedule(delay, func() -> void:
+				fx.cloud(v.global_position, Color(color, 0.6), 3.0)
+				fx.ring(v.global_position, color, 7.0)
+				for t in targets:
+					fx.cloud(t.global_position, Color(color, 0.45), 1.6))
+		"lightning_hit":
+			for h: float in hit_offsets:
+				_schedule(h, func() -> void:
+					for t in targets:
+						fx.lightning(v.chest_position(), t.chest_position(), color, 5)
+					_sfx("magic_shot", -6.0))
+		"sky_lightning":
+			_schedule(delay, func() -> void:
+				if not targets.is_empty():
+					fx.sky_lightning(targets[0].global_position, color))
+			_schedule(delay + 0.12, func() -> void:
+				for i in range(1, targets.size()):
+					fx.lightning(targets[0].chest_position(), targets[i].chest_position(), color, 7)
+					fx.burst(targets[i].chest_position(), color, false))
+		"chain_pull":
+			# Chaînes lancées vers la cible, qui est attirée vers le chevalier à l'impact.
+			var launch := maxf(0.0, delay - 0.38)
+			for t in targets:
+				_schedule(launch, func() -> void:
+					fx.chain(v.chest_position() + Vector3(0, 0.2, 0), t, color, 0.35, 0.45)
+					_sfx("throw", -2.0))
+				_schedule(delay, func() -> void:
+					if t.is_dead():
+						return
+					var pull := (v.global_position - t.global_position).normalized() * 1.4
+					var tw := t.create_tween()
+					tw.tween_property(t, "position", t.home_position + pull, 0.15)
+					tw.tween_interval(0.25)
+					tw.tween_property(t, "position", t.home_position, 0.3))
+		"whirlwind":
+			for h: float in hit_offsets:
+				_schedule(h, func() -> void: fx.ring(v.global_position, color, 3.2))
+		"ground_slam":
+			_schedule(delay, func() -> void:
+				fx.ring(v.global_position, color, 6.0)
+				fx.cloud(v.global_position, Color(0.45, 0.4, 0.33, 0.5), 2.0)
+				fx.shake(0.6))
+		_:
+			# Par défaut : boule magique (une cible à distance) ou éclats sur chaque cible (zone).
+			if offensive and not melee:
+				if targets.size() == 1:
+					var travel := minf(0.3, delay)
+					var tgt := targets[0]
+					_schedule(delay - travel, func() -> void:
+						fx.projectile(v.chest_position() + Vector3(0, 0.3, 0), tgt.chest_position(), color, travel)
+						if v.unit.attack_kind == "magic":
+							_sfx("magic_shot", -10.0))
+				else:
+					_schedule(delay, func() -> void:
+						for t in targets:
+							fx.burst(t.chest_position(), color, true))
+	if not offensive:
+		var is_heal: bool = atk_data.get("effects", [{}])[0].get("type") == "heal"
+		_schedule(delay, func() -> void:
+			for t in targets:
+				fx.aura(t.global_position, Palette.HEAL if is_heal else Palette.SHIELD))
+
+
+func _on_impact(ev: Dictionary) -> void:
+	match ev.type:
+		"damage":
+			var t: UnitView = views.get(ev.dst)
+			if t == null:
+				return
+			_set_shown_hp(t, ev)
+			var src: UnitView = views.get(ev.src)
+			var color := Palette.element_color(src.unit.element) if src else Color.WHITE
+			if ev.get("dot", false):
+				t.popup(str(int(ev.amount)), Color(0.75, 0.55, 1.0), false, 1.6)
+				t.flash(Color(0.6, 0.3, 0.9), 0.35)
+			else:
+				t.play_hit(color.lightened(0.4))
+				fx.burst(t.chest_position(), color, ev.crit)
+				var txt := str(int(ev.amount)) + ("!" if ev.crit else "")
+				if int(ev.amount) <= 0:
+					txt = "Absorbé"
+				var popup_color := Color.WHITE
+				if ev.crit:
+					popup_color = Palette.GOLD
+				elif ev.elem_mult > 1.0:
+					popup_color = Color(1, 0.45, 0.3)
+				elif ev.elem_mult < 1.0:
+					popup_color = Color(0.65, 0.65, 0.72)
+				t.popup(txt, popup_color, ev.crit)
+				if ev.crit:
+					fx.shake(0.35)
+					_sfx("hit_heavy", -1.0)
+				else:
+					_sfx("hit", -4.0)
+			if src and _hero_stats.has(src.unit.uid):
+				_hero_stats[src.unit.uid].damage += ev.amount
+		"heal":
+			var t: UnitView = views.get(ev.dst)
+			if t == null:
+				return
+			_set_shown_hp(t, ev)
+			t.popup("+" + str(int(ev.amount)), Palette.HEAL)
+			t.flash(Palette.HEAL, 0.5)
+			_sfx("heal", -6.0)
+			if _hero_stats.has(ev.src):
+				_hero_stats[ev.src].healing += ev.amount
+		"shield":
+			var t: UnitView = views.get(ev.dst)
+			if t:
+				t.popup("Bouclier", Palette.SHIELD)
+				t.flash(Palette.SHIELD, 0.5)
+				_sfx("shield", -6.0)
+		"status":
+			var t: UnitView = views.get(ev.dst)
+			if t:
+				var labels := {"stun": "Étourdi !", "taunt": "Provocation !", "dot": ""}
+				var text: String = labels.get(ev.status, "")
+				if text != "":
+					t.popup(text, Palette.GOLD, false, 3.0)
+		"death":
+			var t: UnitView = views.get(ev.dst)
+			if t:
+				t.shown_hp = 0.0
+				t.hp_seq = ev.seq
+				t.play_death()
+				_sfx("death", -2.0)
+		"victory":
+			_end_battle(true)
+		"defeat":
+			_end_battle(false)
+
+
+func _end_battle(won: bool) -> void:
+	if _ended:
+		return
+	_ended = true
+	_end_turn()
+	if won:
+		for uid in views:
+			var v: UnitView = views[uid]
+			if v.unit.team == 0:
+				v.play_cheer()
+	hud.banner("VICTOIRE !" if won else "DÉFAITE…", "", 0.8)
+	audio.stop_music(0.4)
+	var stars := engine.stars()
+	var rewards := GameData.dungeon_rewards(dungeon_id, stars)
+	# Le butin et l'XP sont enregistrés dans la sauvegarde.
+	var result := PlayerData.finish_hunt(dungeon_id, won, stars, rewards, team_ids)
+	var stats: Array = []
+	for i in engine.heroes.size():
+		var h := engine.heroes[i]
+		var progress: Dictionary = result.heroes.get(team_ids[i], {})
+		stats.append({
+			"name": h.display_name, "element": h.element, "alive": h.is_alive(),
+			"damage": _hero_stats[h.uid].damage, "healing": _hero_stats[h.uid].healing,
+			"level": progress.get("level", PlayerData.hero_level(team_ids[i])),
+			"xp": progress.get("xp", 0), "level_up": progress.get("gained_levels", 0) > 0,
+		})
+	var dungeon_name: String = GameData.dungeon(dungeon_id).get("name", "")
+	var replay := {"cost": PlayerData.hunt_cost(dungeon_id), "possible": PlayerData.can_start_hunt(dungeon_id),
+		"energy": PlayerData.energy(), "player_level_up": result.player_level_up, "player_level": PlayerData.level()}
+	_schedule(END_DELAY, func() -> void:
+		audio.play_music("victory" if won else "defeat", false)
+		hud.show_end(won, stars, rewards, stats, dungeon_name, replay))
+
+
+# --- Outils -------------------------------------------------------------------
+
+## Les impacts sont affichés en différé : on ignore un ancien événement qui arriverait après
+## un plus récent (sinon un mort pourrait « reprendre » des PV).
+func _set_shown_hp(v: UnitView, ev: Dictionary) -> void:
+	if ev.seq > v.hp_seq and not v.is_dead():
+		v.shown_hp = ev.hp
+		v.hp_seq = ev.seq
+
+func _schedule(delay: float, fn: Callable) -> void:
+	if delay <= 0.0:
+		fn.call()
+	else:
+		_pending.append({"t": _clock + delay, "fn": fn})
+
+
+func _run_pending() -> void:
+	if _pending.is_empty():
+		return
+	var due: Array = []
+	var keep: Array = []
+	for p: Dictionary in _pending:
+		(due if p.t <= _clock else keep).append(p)
+	_pending = keep
+	for p: Dictionary in due:
+		p.fn.call()
+
+
+func _sfx(sfx_name: String, volume_db := 0.0) -> void:
+	if _clock - float(_last_sound.get(sfx_name, -1.0)) < 0.06:
+		return
+	_last_sound[sfx_name] = _clock
+	audio.play(sfx_name, volume_db)
 
 
 func _spawn_wave() -> void:
@@ -105,9 +508,14 @@ func _spawn_wave() -> void:
 		if v.unit.team == 1:
 			v.queue_free()
 			views.erase(uid)
-	for i in engine.enemies.size():
-		var e := engine.enemies[i]
-		_spawn(e, GameData.monster(e.def_id), ENEMY_SPOTS[i % ENEMY_SPOTS.size()], -90.0)
+			hud.remove_overhead(uid)
+	var k := 0
+	for e in engine.enemies:
+		var spot: Vector3 = BOSS_SPOT
+		if not e.is_boss:
+			spot = ENEMY_SPOTS[k % ENEMY_SPOTS.size()]
+			k += 1
+		_spawn(e, GameData.monster(e.def_id), spot, -HERO_YAW)
 
 
 func _spawn(u: BattleUnit, data: Dictionary, pos: Vector3, yaw_deg: float) -> void:
@@ -118,131 +526,24 @@ func _spawn(u: BattleUnit, data: Dictionary, pos: Vector3, yaw_deg: float) -> vo
 	v.setup(u, data)
 	views[u.uid] = v
 	unit_data[u.uid] = data
+	hud.add_overhead(v)
 
 
 # --- Monde 3D ----------------------------------------------------------------
 
 func _build_world() -> void:
-	var env := WorldEnvironment.new()
-	var e := Environment.new()
-	e.background_mode = Environment.BG_COLOR
-	e.background_color = Color(0.09, 0.08, 0.12)
-	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.55, 0.5, 0.7)
-	e.ambient_light_energy = 0.6
-	e.fog_enabled = true
-	e.fog_light_color = Color(0.25, 0.3, 0.3)
-	e.fog_density = 0.02
-	env.environment = e
-	add_child(env)
+	add_child(MarshLevel.new())
 
-	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-55, -30, 0)
-	sun.light_energy = 1.2
-	sun.shadow_enabled = true
-	add_child(sun)
+	camera = Camera3D.new()
+	camera.position = Vector3(0, 8.6, 13.2)
+	camera.rotation_degrees = Vector3(-27, 0, 0)
+	camera.fov = 48
+	add_child(camera)
 
-	var cam := Camera3D.new()
-	cam.position = Vector3(0, 9.5, 13.5)
-	cam.rotation_degrees = Vector3(-30, 0, 0)
-	cam.fov = 50
-	add_child(cam)
-
-	var tile: PackedScene = load(FLOOR_TILE)
-	if tile:
-		for x in range(-4, 4):
-			for z in range(-3, 3):
-				var t := tile.instantiate() as Node3D
-				t.position = Vector3(x * 4 + 2, 0, z * 4 + 2)
-				add_child(t)
-	for path in PROPS:
-		var scene: PackedScene = load(path)
-		if scene == null:
-			continue
-		for p: Vector3 in PROPS[path]:
-			var prop := scene.instantiate() as Node3D
-			prop.position = p
-			add_child(prop)
+	fx = BattleFx.new()
+	add_child(fx)
+	fx.setup(camera)
 
 	_units_root = Node3D.new()
 	_units_root.name = "Units"
 	add_child(_units_root)
-
-
-# --- Interface ---------------------------------------------------------------
-
-func _build_hud() -> void:
-	_hud = CanvasLayer.new()
-	add_child(_hud)
-
-	_banner = Label.new()
-	_banner.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-	_banner.position.y = 40
-	_banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_banner.add_theme_font_size_override("font_size", 56)
-	_banner.add_theme_constant_override("outline_size", 14)
-	_banner.add_theme_color_override("font_outline_color", Color.BLACK)
-	_hud.add_child(_banner)
-
-	var bar := HBoxContainer.new()
-	bar.name = "HeroBar"
-	bar.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
-	bar.offset_top = -190
-	bar.offset_bottom = -24
-	bar.alignment = BoxContainer.ALIGNMENT_CENTER
-	bar.add_theme_constant_override("separation", 16)
-	_hud.add_child(bar)
-
-	_auto_button = CheckButton.new()
-	_auto_button.text = "Auto"
-	_auto_button.add_theme_font_size_override("font_size", 36)
-	_auto_button.position = Vector2(30, 30)
-	_auto_button.toggled.connect(func(on: bool) -> void: engine.auto_mode = on)
-	_hud.add_child(_auto_button)
-
-	_restart_button = Button.new()
-	_restart_button.text = "Rejouer"
-	_restart_button.add_theme_font_size_override("font_size", 40)
-	_restart_button.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	_restart_button.visible = false
-	_restart_button.pressed.connect(func() -> void: start_battle(randi()))
-	_hud.add_child(_restart_button)
-
-
-func _rebuild_hero_buttons() -> void:
-	var bar: HBoxContainer = _hud.get_node("HeroBar")
-	for c in bar.get_children():
-		c.queue_free()
-	_hero_buttons.clear()
-	for h in engine.heroes:
-		var b := Button.new()
-		b.custom_minimum_size = Vector2(300, 150)
-		b.add_theme_font_size_override("font_size", 28)
-		var uid := h.uid
-		b.pressed.connect(func() -> void: engine.request_skill(uid))
-		bar.add_child(b)
-		_hero_buttons[uid] = b
-	_refresh_hero_buttons()
-
-
-func _refresh_hero_buttons() -> void:
-	for uid in _hero_buttons:
-		var u := engine.get_unit(uid)
-		var b: Button = _hero_buttons[uid]
-		var hp_pct := int(100.0 * u.hp / u.max_hp)
-		var en_pct := int(u.energy)
-		b.text = "%s\nPV %d%%   Énergie %d%%\n%s" % [
-			u.display_name, hp_pct, en_pct,
-			("▶ " + u.skill.get("name", "")) if u.skill_ready() else u.skill.get("name", ""),
-		]
-		b.disabled = not u.skill_ready()
-		b.modulate = Color(1, 1, 1) if u.is_alive() else Color(0.4, 0.4, 0.4)
-
-
-func _show_banner(text: String, duration := 2.0) -> void:
-	_banner.text = text
-	_banner.modulate.a = 1.0
-	if duration > 0.0:
-		var tw := create_tween()
-		tw.tween_interval(duration)
-		tw.tween_property(_banner, "modulate:a", 0.0, 0.5)

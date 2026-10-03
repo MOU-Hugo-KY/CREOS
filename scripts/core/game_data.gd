@@ -5,6 +5,11 @@ var heroes: Dictionary = {}
 var monsters: Dictionary = {}
 var dungeons: Dictionary = {}
 var regions: Dictionary = {}
+var hub: Dictionary = {}
+var player_start: Dictionary = {}
+var progression: Dictionary = {}
+var summon: Dictionary = {}
+var quests: Dictionary = {}
 
 
 func _ready() -> void:
@@ -16,6 +21,11 @@ func reload() -> void:
 	monsters = load_json("res://data/monsters.json")
 	dungeons = load_json("res://data/dungeons.json")
 	regions = load_json("res://data/regions.json")
+	hub = load_json("res://data/hub.json")
+	player_start = load_json("res://data/player_start.json")
+	progression = load_json("res://data/progression.json")
+	summon = load_json("res://data/summon.json")
+	quests = load_json("res://data/quests.json")
 
 
 static func load_json(path: String) -> Dictionary:
@@ -46,3 +56,14 @@ func dungeon_waves(id: String) -> Array:
 	for wave: Array in dungeons[id]["waves"]:
 		waves.append(wave.map(func(mid: String) -> Dictionary: return monster(mid)))
 	return waves
+
+
+func dungeon(id: String) -> Dictionary:
+	return dungeons.get(id, {})
+
+
+## Butin d'un donjon selon les étoiles obtenues (rien en cas de défaite).
+func dungeon_rewards(id: String, stars: int) -> Dictionary:
+	if stars <= 0:
+		return {}
+	return dungeon(id).get("rewards", {}).duplicate()

@@ -1,0 +1,38 @@
+{
+  "name": "Hugo",
+  "lodge": "Loge de Hugo",
+  "level": 1,
+  "xp": 0,
+  "gold": 500,
+  "gems": 50,
+  "energy": 60,
+  "energy_max": 60,
+  "heroes": {
+    "corbin": {
+      "level": 1,
+      "xp": 0
+    },
+    "aegis": {
+      "level": 1,
+      "xp": 0
+    },
+    "brume": {
+      "level": 1,
+      "xp": 0
+    },
+    "orage": {
+      "level": 1,
+      "xp": 0
+    }
+  },
+  "team": [
+    "corbin",
+    "aegis",
+    "brume",
+    "orage"
+  ],
+  "items": {
+    "fragments_relique": 20
+  },
+  "dungeons": {}
+}

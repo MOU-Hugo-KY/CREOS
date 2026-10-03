@@ -1,0 +1,182 @@
+{
+  "models": [
+    {
+      "name": "Chevalier_Possede",
+      "triangles": 3550,
+      "vertices": 10650,
+      "bones": 46,
+      "animation_clips": [
+        {
+          "name": "Idle",
+          "duration_seconds": 2,
+          "loop": true,
+          "events": []
+        },
+        {
+          "name": "Attack_01_Masse_Maudite",
+          "duration_seconds": 1.35,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.64,
+              "type": "hit",
+              "weapon": "mace_R",
+              "damage_kind": "physical"
+            }
+          ]
+        },
+        {
+          "name": "Attack_02_Chaines_Spectrales",
+          "duration_seconds": 1.65,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.44,
+              "type": "chain_launch",
+              "socket_joint": "held_weapon_L",
+              "socket_offset": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "time": 0.82,
+              "type": "pull_target",
+              "damage_kind": "spectral"
+            },
+            {
+              "time": 1.1,
+              "type": "chain_retract_end"
+            }
+          ]
+        },
+        {
+          "name": "Attack_03_Onde_Du_Tombeau",
+          "duration_seconds": 1.95,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.45,
+              "type": "spectral_charge_start"
+            },
+            {
+              "time": 1.08,
+              "type": "ground_slam",
+              "weapon": "mace_R"
+            },
+            {
+              "time": 1.08,
+              "type": "spectral_shockwave",
+              "radius_game_units": 1.6
+            },
+            {
+              "time": 1.4,
+              "type": "spectral_charge_end"
+            }
+          ]
+        },
+        {
+          "name": "Walk",
+          "duration_seconds": 1,
+          "loop": true,
+          "events": [
+            {
+              "time": 0.25,
+              "type": "footstep",
+              "foot": "R"
+            },
+            {
+              "time": 0.75,
+              "type": "footstep",
+              "foot": "L"
+            }
+          ]
+        },
+        {
+          "name": "Hit",
+          "duration_seconds": 0.6,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.1,
+              "type": "hit_recoil_peak"
+            }
+          ]
+        },
+        {
+          "name": "Death",
+          "duration_seconds": 1.15,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.82,
+              "type": "body_fall_impact"
+            },
+            {
+              "time": 1.15,
+              "type": "death_pose_hold"
+            }
+          ]
+        }
+      ],
+      "bounds_min": [
+        -1.340809409526479,
+        0.04632594252007863,
+        -0.32
+      ],
+      "bounds_max": [
+        1.3408882366587571,
+        2.64,
+        0.8267569144172715
+      ],
+      "forward": "+Z",
+      "up": "+Y",
+      "texture": "Pixel_Atlas_128.png",
+      "rig": "skeletal rigid weights; one joint per vertex",
+      "combat_mapping": {
+        "idle": "Idle",
+        "walk": "Walk",
+        "hit": "Hit",
+        "death": "Death",
+        "normal_attack": "Attack_01_Masse_Maudite",
+        "skill_1": "Attack_02_Chaines_Spectrales",
+        "skill_2": "Attack_03_Onde_Du_Tombeau"
+      },
+      "magic_material": "Fluide_Violet_Emissif; alpha 0.82; native emission",
+      "flying_plates": [
+        "cuirasse_eclat_L",
+        "cuirasse_eclat_R",
+        "fragment_ventral",
+        "casque_suspendu",
+        "epauliere_volante_L",
+        "bracelet_fragment_L",
+        "tasset_fragment_L",
+        "greve_volante_L",
+        "soleret_suspendu_L",
+        "epauliere_volante_R",
+        "bracelet_fragment_R",
+        "tasset_fragment_R",
+        "greve_volante_R",
+        "soleret_suspendu_R"
+      ],
+      "magic_flow_trails": [
+        "fuite_casque",
+        "fuite_pectorale_L",
+        "fuite_pectorale_R",
+        "vortex_ascendant",
+        "fuite_epaule_L",
+        "panache_exterieur_L",
+        "fuite_poignet_L",
+        "fuite_cuisse_L",
+        "volute_sol_L",
+        "fuite_epaule_R",
+        "panache_exterieur_R",
+        "fuite_poignet_R",
+        "fuite_cuisse_R",
+        "volute_sol_R"
+      ]
+    }
+  ],
+  "version": 3
+}

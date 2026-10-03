@@ -1,0 +1,193 @@
+{
+  "canvas": [
+    3840,
+    1080
+  ],
+  "status": "placement indicatif, raccords à ajuster dans Godot",
+  "objects": [
+    {
+      "file": "Port_Ciel.png",
+      "x": 0,
+      "y": 0,
+      "layer": 0,
+      "click": null,
+      "anchor": "top_left"
+    },
+    {
+      "file": "Port_Horizon.png",
+      "x": 0,
+      "y": 0,
+      "layer": 10,
+      "click": null,
+      "anchor": "top_left"
+    },
+    {
+      "file": "Port_Ville_Fond.png",
+      "x": 0,
+      "y": 0,
+      "layer": 20,
+      "click": null,
+      "anchor": "top_left"
+    },
+    {
+      "file": "Port_Place.png",
+      "x": 0,
+      "y": 0,
+      "layer": 30,
+      "click": null,
+      "anchor": "top_left"
+    },
+    {
+      "file": "Port_Premier_Plan.png",
+      "x": 0,
+      "y": 0,
+      "layer": 40,
+      "click": null,
+      "anchor": "top_left"
+    },
+    {
+      "file": "Loge_Des_Heros.png",
+      "x": 1550,
+      "y": 620,
+      "layer": 35,
+      "click": "Loge_Des_Heros",
+      "display_size": [
+        750,
+        750
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.8818359375
+      ],
+      "survol": "Loge_Des_Heros_Survol.png"
+    },
+    {
+      "file": "Ma_Loge.png",
+      "x": 2500,
+      "y": 620,
+      "layer": 35,
+      "click": "Ma_Loge",
+      "display_size": [
+        650,
+        650
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.923828125
+      ],
+      "survol": "Ma_Loge_Survol.png"
+    },
+    {
+      "file": "Marche.png",
+      "x": 420,
+      "y": 880,
+      "layer": 35,
+      "click": "Marche",
+      "display_size": [
+        600,
+        500
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.974609375
+      ],
+      "survol": "Marche_Survol.png"
+    },
+    {
+      "file": "Table_Des_Chasses.png",
+      "x": 2850,
+      "y": 920,
+      "layer": 35,
+      "click": "Table_Des_Chasses",
+      "display_size": [
+        560,
+        520
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.9990234375
+      ],
+      "survol": "Table_Des_Chasses_Survol.png"
+    },
+    {
+      "file": "Echoppe_Des_Masques.png",
+      "x": 1400,
+      "y": 890,
+      "layer": 35,
+      "click": "Echoppe_Des_Masques",
+      "display_size": [
+        480,
+        480
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.970703125
+      ],
+      "survol": "Echoppe_Des_Masques_Survol.png"
+    },
+    {
+      "file": "Lanterne_Des_Serments.png",
+      "x": 1000,
+      "y": 900,
+      "layer": 35,
+      "click": "Lanterne_Des_Serments",
+      "display_size": [
+        500,
+        600
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.966796875
+      ],
+      "survol": "Lanterne_Des_Serments_Survol.png"
+    },
+    {
+      "file": "Lanterne_Coeur.png",
+      "x": 1000,
+      "y": 600,
+      "layer": 35,
+      "click": null,
+      "display_size": [
+        110,
+        220
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.814453125
+      ],
+      "survol": null
+    },
+    {
+      "file": "Tour_De_Morvath.png",
+      "x": 2630,
+      "y": 340,
+      "layer": 15,
+      "click": "Tour_De_Morvath",
+      "display_size": [
+        130,
+        300
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.974609375
+      ],
+      "survol": "Tour_De_Morvath_Survol.png"
+    },
+    {
+      "file": "Bateau_De_Peche.png",
+      "x": 3500,
+      "y": 950,
+      "layer": 35,
+      "click": null,
+      "display_size": [
+        430,
+        430
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.9697265625
+      ],
+      "survol": null
+    }
+  ]
+}

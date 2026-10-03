@@ -7,12 +7,14 @@ config_version=5
 config/name="CREOS"
 config/description="RPG mobile de chasseurs de héros sur la terre sauvage de CREOS."
 config/version="0.1.0"
-run/main_scene="res://scenes/battle/battle.tscn"
+run/main_scene="res://scenes/hub/hub.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 
 [autoload]
 
 GameData="*res://scripts/core/game_data.gd"
+GameSettings="*res://scripts/core/game_settings.gd"
+PlayerData="*res://scripts/core/player_data.gd"
 
 [display]
 
@@ -23,6 +25,10 @@ window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=0
+
+[gui]
+
+theme/custom_font="res://assets/fonts/Fredoka_SemiBold.tres"
 
 [input_devices]
 

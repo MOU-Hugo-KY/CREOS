@@ -1,0 +1,713 @@
+{
+  "town": "Port-Franc",
+  "version": 1,
+  "style": "chibi low poly blocks; 128 pixel atlas nearest; flat normals; warm colors",
+  "assets": [
+    {
+      "file": "Loge_Des_Heros.glb",
+      "name": "Loge_Des_Heros",
+      "description": "Timber-framed coastal house; warm windows, front door +Z",
+      "triangles": 1710,
+      "vertices": 5130,
+      "bounds_min": [
+        -3.5950870891672895,
+        0.0,
+        -2.265
+      ],
+      "bounds_max": [
+        3.5950870891672895,
+        8.365,
+        2.3475
+      ],
+      "dimensions_m": [
+        7.190174178334579,
+        8.365,
+        4.612500000000001
+      ],
+      "base_footprint_m": [
+        7,
+        4.5
+      ],
+      "ground_bounds_min": [
+        -3.5,
+        0.0,
+        -2.25
+      ],
+      "ground_bounds_max": [
+        3.5,
+        0.0,
+        2.25
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Ma_Loge.glb",
+      "name": "Ma_Loge",
+      "description": "Timber-framed coastal house; warm windows, front door +Z",
+      "triangles": 1086,
+      "vertices": 3258,
+      "bounds_min": [
+        -3.0944616142819408,
+        0.0,
+        -2.265
+      ],
+      "bounds_max": [
+        3.0944616142819408,
+        5.615,
+        2.285
+      ],
+      "dimensions_m": [
+        6.1889232285638816,
+        5.615,
+        4.550000000000001
+      ],
+      "base_footprint_m": [
+        6,
+        4.5
+      ],
+      "ground_bounds_min": [
+        -3.0,
+        0.0,
+        -2.25
+      ],
+      "ground_bounds_max": [
+        3.0,
+        0.0,
+        2.25
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Maison_Toit_Vert.glb",
+      "name": "Maison_Toit_Vert",
+      "description": "Timber-framed coastal house; warm windows, front door +Z",
+      "triangles": 1070,
+      "vertices": 3210,
+      "bounds_min": [
+        -2.3464149490346324,
+        0.0,
+        -2.015
+      ],
+      "bounds_max": [
+        2.3464149490346324,
+        5.615,
+        2.035
+      ],
+      "dimensions_m": [
+        4.692829898069265,
+        5.615,
+        4.050000000000001
+      ],
+      "base_footprint_m": [
+        4.5,
+        4
+      ],
+      "ground_bounds_min": [
+        -2.25,
+        0.0,
+        -2.0
+      ],
+      "ground_bounds_max": [
+        2.25,
+        0.0,
+        2.0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Maison_Toit_Orange.glb",
+      "name": "Maison_Toit_Orange",
+      "description": "Timber-framed coastal house; warm windows, front door +Z",
+      "triangles": 1118,
+      "vertices": 3354,
+      "bounds_min": [
+        -2.3464149490346324,
+        0.0,
+        -2.015
+      ],
+      "bounds_max": [
+        2.3464149490346324,
+        5.615,
+        2.095
+      ],
+      "dimensions_m": [
+        4.692829898069265,
+        5.615,
+        4.11
+      ],
+      "base_footprint_m": [
+        4.5,
+        4
+      ],
+      "ground_bounds_min": [
+        -2.25,
+        0.0,
+        -2.0
+      ],
+      "ground_bounds_max": [
+        2.25,
+        0.0,
+        2.0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Maison_Toit_Rouge.glb",
+      "name": "Maison_Toit_Rouge",
+      "description": "Timber-framed coastal house; warm windows, front door +Z",
+      "triangles": 1106,
+      "vertices": 3318,
+      "bounds_min": [
+        -2.3471334058403315,
+        0.0,
+        -2.015
+      ],
+      "bounds_max": [
+        2.3471334058403315,
+        6.065,
+        2.2400448856985595
+      ],
+      "dimensions_m": [
+        4.694266811680663,
+        6.065,
+        4.25504488569856
+      ],
+      "base_footprint_m": [
+        4.5,
+        4
+      ],
+      "ground_bounds_min": [
+        -2.25,
+        0.0,
+        -2.0
+      ],
+      "ground_bounds_max": [
+        2.25,
+        0.0,
+        2.0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Marche.glb",
+      "name": "Marche",
+      "description": "Striped canopy, baskets, fruit and merchant counter",
+      "triangles": 604,
+      "vertices": 1812,
+      "bounds_min": [
+        -2.1025,
+        0.0,
+        -1.1627926755635196
+      ],
+      "bounds_max": [
+        2.0975,
+        3.54604286073154,
+        1.1775
+      ],
+      "dimensions_m": [
+        4.2,
+        3.54604286073154,
+        2.3402926755635196
+      ],
+      "base_footprint_m": [
+        4,
+        2
+      ],
+      "ground_bounds_min": [
+        -2.0,
+        0.0,
+        -1.0
+      ],
+      "ground_bounds_max": [
+        2.0,
+        0.0,
+        1.0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Table_Des_Chasses.glb",
+      "name": "Table_Des_Chasses",
+      "description": "Map table, bounty board and flag",
+      "triangles": 476,
+      "vertices": 1428,
+      "bounds_min": [
+        -2.0,
+        0.0,
+        -1.5
+      ],
+      "bounds_max": [
+        2.15,
+        3.9,
+        1.5
+      ],
+      "dimensions_m": [
+        4.15,
+        3.9,
+        3.0
+      ],
+      "base_footprint_m": [
+        4,
+        3
+      ],
+      "ground_bounds_min": [
+        -2.0,
+        0.0,
+        -1.5
+      ],
+      "ground_bounds_max": [
+        2.0,
+        0.0,
+        1.5
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Autel_Des_Reliques.glb",
+      "name": "Autel_Des_Reliques",
+      "description": "Round stone fountain, four runic columns, independent Crystal node",
+      "triangles": 1068,
+      "vertices": 3204,
+      "bounds_min": [
+        -2.5,
+        0.0,
+        -2.5
+      ],
+      "bounds_max": [
+        2.5,
+        3.18,
+        2.5
+      ],
+      "dimensions_m": [
+        5.0,
+        3.18,
+        5.0
+      ],
+      "base_footprint_m": [
+        5,
+        5
+      ],
+      "ground_bounds_min": [
+        -2.5,
+        0.0,
+        -2.5
+      ],
+      "ground_bounds_max": [
+        2.5,
+        0.0,
+        2.5
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure",
+        "Cristal"
+      ]
+    },
+    {
+      "file": "Tour_De_Morvath.glb",
+      "name": "Tour_De_Morvath",
+      "description": "Black and violet landmark, 40 meters high",
+      "triangles": 738,
+      "vertices": 2214,
+      "bounds_min": [
+        -7.0,
+        0.0,
+        -6.0
+      ],
+      "bounds_max": [
+        7.0,
+        40.0,
+        6.0
+      ],
+      "dimensions_m": [
+        14.0,
+        40.0,
+        12.0
+      ],
+      "base_footprint_m": [
+        14,
+        12
+      ],
+      "ground_bounds_min": [
+        -7.0,
+        0.0,
+        -6.0
+      ],
+      "ground_bounds_max": [
+        7.0,
+        0.0,
+        6.0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Ponton_Bois.glb",
+      "name": "Ponton_Bois",
+      "description": "Wood dock; walking surface Y=0.97 m, outward end +Z",
+      "triangles": 592,
+      "vertices": 1776,
+      "bounds_min": [
+        -1.5,
+        0.0,
+        -4.0
+      ],
+      "bounds_max": [
+        1.5,
+        1.34,
+        4.0
+      ],
+      "dimensions_m": [
+        3.0,
+        1.34,
+        8.0
+      ],
+      "base_footprint_m": [
+        3,
+        8
+      ],
+      "ground_bounds_min": [
+        -1.38,
+        0.0,
+        -3.612583302491977
+      ],
+      "ground_bounds_max": [
+        1.38,
+        0.0,
+        3.612583302491977
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Bateau_De_Peche.glb",
+      "name": "Bateau_De_Peche",
+      "description": "Small coastal fishing sailboat; bow +Z",
+      "triangles": 428,
+      "vertices": 1284,
+      "bounds_min": [
+        -1.62,
+        0.0,
+        -3.070375733761283
+      ],
+      "bounds_max": [
+        1.62,
+        6.25,
+        3.0630883856532414
+      ],
+      "dimensions_m": [
+        3.24,
+        6.25,
+        6.1334641194145245
+      ],
+      "base_footprint_m": [
+        2.5,
+        6
+      ],
+      "ground_bounds_min": [
+        -0.625,
+        0.0,
+        -2.4899999999999998
+      ],
+      "ground_bounds_max": [
+        0.625,
+        0.0,
+        2.4899999999999998
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Lampadaire.glb",
+      "name": "Lampadaire",
+      "description": "Warm emissive harbor lantern",
+      "triangles": 142,
+      "vertices": 426,
+      "bounds_min": [
+        -0.4,
+        0.0,
+        -0.4
+      ],
+      "bounds_max": [
+        0.4,
+        4.11,
+        0.4
+      ],
+      "dimensions_m": [
+        0.8,
+        4.11,
+        0.8
+      ],
+      "base_footprint_m": [
+        0.55,
+        0.55
+      ],
+      "ground_bounds_min": [
+        -0.275,
+        0.0,
+        -0.275
+      ],
+      "ground_bounds_max": [
+        0.275,
+        0.0,
+        0.275
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Arbre.glb",
+      "name": "Arbre",
+      "description": "Blocky coastal tree, warm green foliage",
+      "triangles": 172,
+      "vertices": 516,
+      "bounds_min": [
+        -1.2449999999999999,
+        0.0,
+        -0.95
+      ],
+      "bounds_max": [
+        1.075,
+        4.165,
+        1.0312435565298215
+      ],
+      "dimensions_m": [
+        2.32,
+        4.165,
+        1.9812435565298214
+      ],
+      "base_footprint_m": [
+        0.6,
+        0.6
+      ],
+      "ground_bounds_min": [
+        -0.3,
+        0.0,
+        -0.2598076211353316
+      ],
+      "ground_bounds_max": [
+        0.3,
+        0.0,
+        0.25980762113533157
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Tonneau.glb",
+      "name": "Tonneau",
+      "description": "Eight-sided timber barrel",
+      "triangles": 200,
+      "vertices": 600,
+      "bounds_min": [
+        -0.446,
+        0.0,
+        -0.446
+      ],
+      "bounds_max": [
+        0.446,
+        1.3355,
+        0.446
+      ],
+      "dimensions_m": [
+        0.892,
+        1.3355,
+        0.892
+      ],
+      "base_footprint_m": [
+        0.9,
+        0.9
+      ],
+      "ground_bounds_min": [
+        -0.35,
+        0.0,
+        -0.35
+      ],
+      "ground_bounds_max": [
+        0.35,
+        0.0,
+        0.35
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    },
+    {
+      "file": "Caisses.glb",
+      "name": "Caisses",
+      "description": "Three wooden crates; two on ground and one stacked",
+      "triangles": 264,
+      "vertices": 792,
+      "bounds_min": [
+        -1.055,
+        0.0,
+        -0.5
+      ],
+      "bounds_max": [
+        1.055,
+        2.0,
+        0.5650000000000001
+      ],
+      "dimensions_m": [
+        2.11,
+        2.0,
+        1.065
+      ],
+      "base_footprint_m": [
+        2.12,
+        1.02
+      ],
+      "ground_bounds_min": [
+        -1.05,
+        0.0,
+        -0.5
+      ],
+      "ground_bounds_max": [
+        1.05,
+        0.0,
+        0.5
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "meters_per_unit": 1,
+      "root_translation": [
+        0,
+        0,
+        0
+      ],
+      "nodes": [
+        "Structure"
+      ]
+    }
+  ]
+}

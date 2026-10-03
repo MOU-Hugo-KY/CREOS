@@ -5,11 +5,18 @@ extends RefCounted
 ## Logique pure et déterministe (graine aléatoire). Aucun nœud, aucun affichage :
 ## l'affichage appelle `step(delta)` puis lit les événements avec `drain_events()`.
 ##
+## Tour par tour à jauges : la jauge de chaque unité se remplit selon sa vitesse. Quand celle
+## d'un héros est pleine (hors mode Auto), le combat se fige (`awaiting_uid`) jusqu'à ce que le
+## joueur choisisse une de ses 3 attaques avec `request_attack()`. Les ennemis et le mode Auto
+## choisissent seuls.
+##
 ## Événements produits (Dictionary avec une clé "type") :
 ##   wave_start {index, count}
-##   attack     {src, targets}             attaque de base qui démarre
-##   skill      {src, skill_id, name, targets}
-##   damage     {src, dst, amount, crit, elem_mult, hp}
+##   turn       {src}                        au tour de ce héros de choisir son attaque
+##   focus      {target}  (ennemi ciblé par le joueur, -1 = aucun)
+##   attack     {src, slot, attack_id, name, anim, hit_time, targets}
+##              slot 0 = attaque de base, 1 = attaque à recharge, 2 = ultime
+##   damage     {src, dst, amount, crit, elem_mult, hp, dot}   dot = brûlure/poison
 ##   heal       {src, dst, amount, hp}
 ##   shield     {dst, amount}
 ##   status     {dst, status, duration}   taunt / stun / dot
@@ -25,6 +32,8 @@ const ENERGY_ON_HIT := 8.0
 const CRIT_MULT := 1.5
 const VARIANCE := 0.05
 const WAVE_DELAY := 1.2
+const DOT_TICK := 1.0
+const DEFAULT_HIT_TIME := 0.35  # instant d'impact dans l'animation (pour l'affichage)
 
 var heroes: Array[BattleUnit] = []
 var enemies: Array[BattleUnit] = []
@@ -38,7 +47,8 @@ var time := 0.0
 var _rng := RandomNumberGenerator.new()
 var _next_uid := 1
 var _events: Array[Dictionary] = []
-var _skill_queue: Array[int] = []
+var awaiting_uid := -1  # héros qui attend le choix du joueur (-1 = personne)
+var focus_uid := -1  # ennemi ciblé par le joueur (-1 = choix automatique)
 var _wave_timer := 0.0
 
 
@@ -55,6 +65,8 @@ func setup(heroes_data: Array, waves_data: Array, rng_seed: int = 0) -> void:
 	finished = false
 	won = false
 	time = 0.0
+	awaiting_uid = -1
+	focus_uid = -1
 	_start_next_wave()
 
 
@@ -72,13 +84,25 @@ func get_unit(uid: int) -> BattleUnit:
 	return null
 
 
-## Le joueur touche le portrait d'un héros : sa compétence part dès que possible.
-func request_skill(uid: int) -> bool:
+## Le joueur choisit l'attaque `slot` (0, 1 ou 2) du héros dont c'est le tour.
+func request_attack(uid: int, slot: int) -> bool:
 	var u := get_unit(uid)
-	if u == null or u.team != 0 or not u.skill_ready():
+	if u == null or uid != awaiting_uid or not u.can_use(slot):
 		return false
-	if uid not in _skill_queue:
-		_skill_queue.append(uid)
+	awaiting_uid = -1
+	_use_attack(u, slot)
+	_check_end()
+	return true
+
+
+## Le joueur désigne l'ennemi que ses héros frappent (attaques sur une seule cible).
+## Toucher à nouveau le même ennemi enlève la cible. Une provocation reste prioritaire.
+func set_focus(uid: int) -> bool:
+	var u := get_unit(uid)
+	if u == null or u.team != 1 or not u.is_alive():
+		return false
+	focus_uid = -1 if focus_uid == uid else uid
+	_emit({"type": "focus", "target": focus_uid})
 	return true
 
 
@@ -92,6 +116,15 @@ func drain_events() -> Array[Dictionary]:
 func step(delta: float) -> void:
 	if finished:
 		return
+	if awaiting_uid != -1:
+		# Combat figé : on attend le choix du joueur (sauf si le mode Auto vient d'être activé).
+		if not auto_mode:
+			return
+		var waiting := get_unit(awaiting_uid)
+		awaiting_uid = -1
+		_use_attack(waiting, _ai_choice(waiting))
+		if _check_end():
+			return
 	time += delta
 
 	if _wave_timer > 0.0:
@@ -102,34 +135,35 @@ func step(delta: float) -> void:
 
 	for u in all_units():
 		if u.is_alive():
+			u.tick_cooldowns(delta)
 			_tick_statuses(u, delta)
 	if _check_end():
 		return
 
-	# Compétences demandées par le joueur (ou automatiques).
-	for u in heroes:
-		if auto_mode and u.skill_ready() and u.uid not in _skill_queue:
-			_skill_queue.append(u.uid)
-	for u in enemies:
-		if u.skill_ready():
-			_skill_queue.append(u.uid)
-	while not _skill_queue.is_empty():
-		var caster := get_unit(_skill_queue.pop_front())
-		if caster and caster.skill_ready():
-			_cast_skill(caster)
-			if _check_end():
-				return
-
-	# Jauges d'action -> attaques de base.
+	# Jauges d'action : une unité dont la jauge est pleine joue son tour.
 	for u in all_units():
 		if not u.is_alive() or u.stun_time > 0.0:
 			continue
 		u.gauge += u.spd * GAUGE_RATE * delta
 		if u.gauge >= BattleUnit.GAUGE_MAX:
 			u.gauge -= BattleUnit.GAUGE_MAX
-			_basic_attack(u)
+			if u.team == 0 and not auto_mode:
+				awaiting_uid = u.uid
+				_emit({"type": "turn", "src": u.uid})
+				return
+			_use_attack(u, _ai_choice(u))
 			if _check_end():
 				return
+
+
+## Étoiles gagnées (0 à 3) : 3 si aucun héros n'est tombé, 2 si un seul est tombé, sinon 1.
+func stars() -> int:
+	if not won:
+		return 0
+	var fallen := heroes.size() - _alive(heroes).size()
+	if fallen == 0:
+		return 3
+	return 2 if fallen == 1 else 1
 
 
 ## Simule un combat complet sans affichage (pour les tests et l'équilibrage).
@@ -161,6 +195,7 @@ func _start_next_wave() -> void:
 		enemies.append(BattleUnit.from_data(_take_uid(), d.get("id", ""), d, 1, i))
 	for h in heroes:
 		h.gauge = 0.0
+	focus_uid = -1
 	_emit({"type": "wave_start", "index": wave_index, "count": waves.size()})
 
 
@@ -200,28 +235,35 @@ func _foes_of(u: BattleUnit) -> Array[BattleUnit]:
 func _tick_statuses(u: BattleUnit, delta: float) -> void:
 	u.taunt_time = maxf(0.0, u.taunt_time - delta)
 	u.stun_time = maxf(0.0, u.stun_time - delta)
+	# Les dégâts sur la durée tombent une fois par seconde (et le reste à la fin).
 	for dot in u.dots.duplicate():
-		var dmg: float = dot.dps * minf(delta, dot.time)
+		var step_time := minf(delta, dot.time)
 		dot.time -= delta
-		if dot.time <= 0.0:
+		dot.acc = dot.get("acc", 0.0) + step_time
+		var ended: bool = dot.time <= 0.0
+		if ended:
 			u.dots.erase(dot)
-		_apply_damage(get_unit(dot.src), u, dmg, false, 1.0)
+		if dot.acc >= DOT_TICK or ended:
+			_apply_damage(get_unit(dot.src), u, dot.dps * dot.acc, false, 1.0, true)
+			dot.acc = 0.0
 
 
-func _basic_attack(src: BattleUnit) -> void:
-	var foes := _foes_of(src)
-	if foes.is_empty():
-		return
-	var target := _pick_basic_target(src, foes)
-	_emit({"type": "attack", "src": src.uid, "targets": [target.uid]})
-	_hit(src, target, 1.0, src.attack_kind)
-	src.add_energy(ENERGY_ON_ATTACK)
+## IA simple : l'ultime dès qu'elle est prête, sinon l'attaque à recharge, sinon l'attaque de base.
+func _ai_choice(u: BattleUnit) -> int:
+	for slot in [BattleUnit.SLOT_ULTIMATE, BattleUnit.SLOT_COOLDOWN]:
+		if u.attack_ready(slot):
+			return slot
+	return BattleUnit.SLOT_BASIC
 
 
 func _pick_basic_target(src: BattleUnit, foes: Array[BattleUnit]) -> BattleUnit:
 	for f in foes:
 		if f.taunt_time > 0.0:
 			return f
+	if src.team == 0 and focus_uid != -1:
+		for f in foes:
+			if f.uid == focus_uid:
+				return f
 	if src.range_type == "melee":
 		# Corps-à-corps : frappe l'ennemi le plus en avant.
 		var front := foes[0]
@@ -232,7 +274,7 @@ func _pick_basic_target(src: BattleUnit, foes: Array[BattleUnit]) -> BattleUnit:
 	return foes[_rng.randi_range(0, foes.size() - 1)]
 
 
-func _skill_targets(caster: BattleUnit, target_type: String) -> Array[BattleUnit]:
+func _attack_targets(caster: BattleUnit, target_type: String) -> Array[BattleUnit]:
 	var foes := _foes_of(caster)
 	var allies := _allies_of(caster)
 	match target_type:
@@ -266,20 +308,39 @@ func _lowest(units: Array[BattleUnit]) -> Array[BattleUnit]:
 	return out
 
 
-func _cast_skill(caster: BattleUnit) -> void:
-	caster.energy = 0.0
-	var sk := caster.skill
-	var targets := _skill_targets(caster, sk.get("target", "single_enemy"))
-	_emit({
-		"type": "skill", "src": caster.uid, "skill_id": sk.get("id", ""),
-		"name": sk.get("name", ""), "targets": targets.map(func(t: BattleUnit) -> int: return t.uid),
-	})
-	for effect: Dictionary in sk.get("effects", []):
-		var power: float = effect.get("power", 1.0)
+func _use_attack(caster: BattleUnit, slot: int) -> void:
+	if not caster.has_attack(slot) or _foes_of(caster).is_empty():
+		return
+	var atk_data: Dictionary = caster.attacks[slot]
+	caster.energy -= caster.energy_cost(slot)
+	caster.cooldowns[slot] = float(atk_data.get("cooldown", 0.0))
+	var targets := _attack_targets(caster, atk_data.get("target", "single_enemy"))
+	var effects: Array = atk_data.get("effects", [{"type": "damage", "power": 1.0}])
+	# Chaque effet touche les cibles de l'attaque, sauf s'il a sa propre `"target"` ou `"self_only"`.
+	var per_effect: Array = []
+	var shown: Array[BattleUnit] = targets.duplicate()
+	for effect: Dictionary in effects:
 		var effect_targets: Array[BattleUnit] = targets
 		if effect.get("self_only", false):
 			effect_targets = [caster]
-		for t in effect_targets:
+		elif effect.has("target"):
+			effect_targets = _attack_targets(caster, effect.target)
+			for t in effect_targets:
+				if t not in shown:
+					shown.append(t)
+		per_effect.append(effect_targets)
+	var hit_time := float(atk_data.get("hit_time", DEFAULT_HIT_TIME))
+	_emit({
+		"type": "attack", "src": caster.uid, "slot": slot, "attack_id": atk_data.get("id", ""),
+		"name": atk_data.get("name", ""), "anim": atk_data.get("anim", ""),
+		"hit_time": float(atk_data.get("hit_times", [hit_time])[0]),
+		"hit_times": atk_data.get("hit_times", [hit_time]),
+		"targets": shown.map(func(t: BattleUnit) -> int: return t.uid),
+	})
+	for i in effects.size():
+		var effect: Dictionary = effects[i]
+		var power: float = effect.get("power", 1.0)
+		for t: BattleUnit in per_effect[i]:
 			if not t.is_alive():
 				continue
 			match effect.get("type", ""):
@@ -306,6 +367,8 @@ func _cast_skill(caster: BattleUnit) -> void:
 				"cleanse":
 					t.dots.clear()
 					t.stun_time = 0.0
+	if slot != BattleUnit.SLOT_ULTIMATE:
+		caster.add_energy(ENERGY_ON_ATTACK)
 
 
 func _hit(src: BattleUnit, dst: BattleUnit, power: float, kind: String) -> void:
@@ -318,7 +381,7 @@ func _hit(src: BattleUnit, dst: BattleUnit, power: float, kind: String) -> void:
 	_apply_damage(src, dst, dmg, is_crit, elem)
 
 
-func _apply_damage(src: BattleUnit, dst: BattleUnit, dmg: float, is_crit: bool, elem: float) -> void:
+func _apply_damage(src: BattleUnit, dst: BattleUnit, dmg: float, is_crit: bool, elem: float, is_dot := false) -> void:
 	if not dst.is_alive():
 		return
 	if dst.shield > 0.0:
@@ -329,7 +392,7 @@ func _apply_damage(src: BattleUnit, dst: BattleUnit, dmg: float, is_crit: bool, 
 	dst.add_energy(ENERGY_ON_HIT)
 	_emit({
 		"type": "damage", "src": src.uid if src else -1, "dst": dst.uid,
-		"amount": dmg, "crit": is_crit, "elem_mult": elem, "hp": dst.hp,
+		"amount": dmg, "crit": is_crit, "elem_mult": elem, "hp": dst.hp, "dot": is_dot,
 	})
 	if not dst.is_alive():
 		dst.dots.clear()

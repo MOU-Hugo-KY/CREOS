@@ -1,0 +1,160 @@
+{
+  "models": [
+    {
+      "name": "Moine_Eclairs",
+      "triangles": 2032,
+      "vertices": 6096,
+      "bones": 16,
+      "animation_clips": [
+        {
+          "name": "Idle",
+          "duration_seconds": 2,
+          "loop": true,
+          "events": []
+        },
+        {
+          "name": "Attack_01_Paume_Foudroyante",
+          "duration_seconds": 1.05,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.41,
+              "type": "hit",
+              "weapon": "fist_R",
+              "damage_kind": "lightning"
+            },
+            {
+              "time": 0.41,
+              "type": "spawn_lightning_bolt",
+              "socket_joint": "hand_R",
+              "socket_offset": [
+                0,
+                -0.11,
+                0.11
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Attack_02_Pas_Du_Tonnerre",
+          "duration_seconds": 1.45,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.2,
+              "type": "lightning_dash_start"
+            },
+            {
+              "time": 0.33,
+              "type": "lightning_dash_end"
+            },
+            {
+              "time": 0.45,
+              "type": "aoe_start",
+              "weapon": "foot_R",
+              "damage_kind": "lightning"
+            },
+            {
+              "time": 0.68,
+              "type": "aoe_end"
+            }
+          ]
+        },
+        {
+          "name": "Attack_03_Sentence_Celeste",
+          "duration_seconds": 1.9,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.35,
+              "type": "lightning_charge_start",
+              "socket_joint": "hand_R"
+            },
+            {
+              "time": 1.04,
+              "type": "target_lightning_strike",
+              "damage_kind": "lightning"
+            },
+            {
+              "time": 1.16,
+              "type": "chain_lightning",
+              "max_secondary_targets": 3
+            },
+            {
+              "time": 1.26,
+              "type": "lightning_charge_end"
+            }
+          ]
+        },
+        {
+          "name": "Walk",
+          "duration_seconds": 1,
+          "loop": true,
+          "events": [
+            {
+              "time": 0.25,
+              "type": "footstep",
+              "foot": "R"
+            },
+            {
+              "time": 0.75,
+              "type": "footstep",
+              "foot": "L"
+            }
+          ]
+        },
+        {
+          "name": "Hit",
+          "duration_seconds": 0.6,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.1,
+              "type": "hit_recoil_peak"
+            }
+          ]
+        },
+        {
+          "name": "Death",
+          "duration_seconds": 1.15,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.82,
+              "type": "body_fall_impact"
+            },
+            {
+              "time": 1.15,
+              "type": "death_pose_hold"
+            }
+          ]
+        }
+      ],
+      "bounds_min": [
+        -0.8500000000000001,
+        0.0,
+        -0.43724999999999997
+      ],
+      "bounds_max": [
+        0.8500000000000001,
+        2.4499999999999997,
+        0.483
+      ],
+      "forward": "+Z",
+      "up": "+Y",
+      "texture": "Pixel_Atlas_128.png",
+      "rig": "skeletal rigid weights; one joint per vertex",
+      "combat_mapping": {
+        "idle": "Idle",
+        "walk": "Walk",
+        "hit": "Hit",
+        "death": "Death",
+        "normal_attack": "Attack_01_Paume_Foudroyante",
+        "skill_1": "Attack_02_Pas_Du_Tonnerre",
+        "skill_2": "Attack_03_Sentence_Celeste"
+      },
+      "weapon_grips": []
+    }
+  ],
+  "version": 2
+}

@@ -1,9 +1,17 @@
 class_name BattleUnit
 extends RefCounted
 ## Une unité en combat (héros ou monstre). Logique pure, aucun affichage.
+##
+## Chaque unité a jusqu'à 3 attaques (`attacks` dans le JSON) :
+##   [0] attaque de base : part toute seule quand la jauge d'action est pleine ;
+##   [1] attaque à recharge : `"cooldown"` en secondes ;
+##   [2] attaque ultime : coûte `"energy"` (100 par défaut si pas de recharge).
 
 const GAUGE_MAX := 1000.0
 const ENERGY_MAX := 100.0
+const SLOT_BASIC := 0
+const SLOT_COOLDOWN := 1
+const SLOT_ULTIMATE := 2
 
 var uid: int
 var def_id: String
@@ -15,7 +23,8 @@ var unit_class: String
 var range_type: String
 var attack_kind: String
 var is_boss := false
-var skill: Dictionary = {}
+var attacks: Array[Dictionary] = []
+var cooldowns: Array[float] = []  # temps restant avant de pouvoir relancer chaque attaque
 
 var max_hp: float
 var hp: float
@@ -30,7 +39,7 @@ var energy := 0.0
 var shield := 0.0
 var taunt_time := 0.0
 var stun_time := 0.0
-var dots: Array = []  # [{dps, time, src}]
+var dots: Array = []  # [{dps, time, src, acc}]
 
 
 static func from_data(p_uid: int, p_def_id: String, data: Dictionary, p_team: int, p_slot: int) -> BattleUnit:
@@ -45,7 +54,10 @@ static func from_data(p_uid: int, p_def_id: String, data: Dictionary, p_team: in
 	u.range_type = data.get("range", "melee")
 	u.attack_kind = data.get("attack_kind", "physical")
 	u.is_boss = data.get("boss", false)
-	u.skill = data.get("skill", {})
+	for a: Dictionary in data.get("attacks", []):
+		u.attacks.append(a)
+		# Une attaque à recharge n'est pas disponible dès le début du combat.
+		u.cooldowns.append(float(a.get("cooldown", 0.0)))
 	var s: Dictionary = data.get("stats", {})
 	u.max_hp = s.get("hp", 100)
 	u.hp = u.max_hp
@@ -61,14 +73,46 @@ func is_alive() -> bool:
 	return hp > 0.0
 
 
-func has_skill() -> bool:
-	return not skill.is_empty()
+func has_attack(index: int) -> bool:
+	return index >= 0 and index < attacks.size()
 
 
-func skill_ready() -> bool:
-	return has_skill() and energy >= ENERGY_MAX and stun_time <= 0.0 and is_alive()
+## Énergie nécessaire pour l'attaque `index` (0 pour l'attaque de base et les attaques à recharge).
+func energy_cost(index: int) -> float:
+	if not has_attack(index) or index == SLOT_BASIC:
+		return 0.0
+	var a := attacks[index]
+	if a.has("energy"):
+		return float(a.energy)
+	return 0.0 if a.has("cooldown") else ENERGY_MAX
+
+
+## Vrai si l'attaque spéciale `index` (1 ou 2) peut partir maintenant.
+func attack_ready(index: int) -> bool:
+	if index == SLOT_BASIC or not has_attack(index) or not is_alive() or stun_time > 0.0:
+		return false
+	return cooldowns[index] <= 0.0 and energy >= energy_cost(index)
+
+
+## Vrai si l'unité peut lancer l'attaque `index` à son tour (l'attaque de base l'est toujours).
+func can_use(index: int) -> bool:
+	if index == SLOT_BASIC:
+		return has_attack(index) and is_alive() and stun_time <= 0.0
+	return attack_ready(index)
+
+
+func uses_energy() -> bool:
+	for i in attacks.size():
+		if energy_cost(i) > 0.0:
+			return true
+	return false
 
 
 func add_energy(amount: float) -> void:
-	if has_skill():
+	if uses_energy():
 		energy = minf(ENERGY_MAX, energy + amount)
+
+
+func tick_cooldowns(delta: float) -> void:
+	for i in cooldowns.size():
+		cooldowns[i] = maxf(0.0, cooldowns[i] - delta)

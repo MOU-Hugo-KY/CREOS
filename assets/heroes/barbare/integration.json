@@ -1,0 +1,158 @@
+{
+  "models": [
+    {
+      "name": "Barbare",
+      "triangles": 2402,
+      "vertices": 7206,
+      "bones": 18,
+      "animation_clips": [
+        {
+          "name": "Idle",
+          "duration_seconds": 2.0,
+          "loop": true,
+          "events": []
+        },
+        {
+          "name": "Attack_01_Coup_de_Hache",
+          "duration_seconds": 1.2,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.53,
+              "type": "hit",
+              "weapon": "battleaxe_R"
+            }
+          ]
+        },
+        {
+          "name": "Attack_02_Tourbillon_Furieux",
+          "duration_seconds": 1.65,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.46,
+              "type": "aoe_start"
+            },
+            {
+              "time": 1.42,
+              "type": "aoe_end"
+            }
+          ]
+        },
+        {
+          "name": "Attack_03_Ecrasement_Berserk",
+          "duration_seconds": 1.85,
+          "loop": false,
+          "events": [
+            {
+              "time": 1.09,
+              "type": "ground_slam",
+              "weapon": "both_axes"
+            }
+          ]
+        },
+        {
+          "name": "Walk",
+          "duration_seconds": 1,
+          "loop": true,
+          "events": [
+            {
+              "time": 0.25,
+              "type": "footstep",
+              "foot": "R"
+            },
+            {
+              "time": 0.75,
+              "type": "footstep",
+              "foot": "L"
+            }
+          ]
+        },
+        {
+          "name": "Hit",
+          "duration_seconds": 0.6,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.1,
+              "type": "hit_recoil_peak"
+            }
+          ]
+        },
+        {
+          "name": "Death",
+          "duration_seconds": 1.15,
+          "loop": false,
+          "events": [
+            {
+              "time": 0.82,
+              "type": "body_fall_impact"
+            },
+            {
+              "time": 1.15,
+              "type": "death_pose_hold"
+            }
+          ]
+        }
+      ],
+      "bounds_min": [
+        -1.04,
+        0.0,
+        -0.32
+      ],
+      "bounds_max": [
+        1.18,
+        2.59,
+        0.8433205175519263
+      ],
+      "forward": "+Z",
+      "up": "+Y",
+      "texture": "Pixel_Atlas_128.png",
+      "rig": "skeletal rigid weights; one joint per vertex",
+      "combat_mapping": {
+        "idle": "Idle",
+        "walk": "Walk",
+        "hit": "Hit",
+        "death": "Death",
+        "normal_attack": "Attack_01_Coup_de_Hache",
+        "skill_1": "Attack_02_Tourbillon_Furieux",
+        "skill_2": "Attack_03_Ecrasement_Berserk"
+      },
+      "weapon_grips": [
+        {
+          "hand": "hand_R",
+          "weapon_joint": "held_weapon_R",
+          "grip_world": [
+            0.69,
+            0.96,
+            0.06
+          ],
+          "rest_pose": "upright",
+          "weapon_vertices": 924,
+          "grip_offset_in_hand": [
+            0,
+            -0.03,
+            0
+          ]
+        },
+        {
+          "hand": "hand_L",
+          "weapon_joint": "held_weapon_L",
+          "grip_world": [
+            -0.69,
+            0.96,
+            0.06
+          ],
+          "rest_pose": "upright",
+          "weapon_vertices": 660,
+          "grip_offset_in_hand": [
+            0,
+            -0.03,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "version": 2
+}

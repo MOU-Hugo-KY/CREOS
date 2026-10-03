@@ -1,0 +1,96 @@
+{
+  "name": "Port-Franc",
+  "subtitle": "Ville des chasseurs",
+  "buildings": {
+    "table_des_chasses": {
+      "name": "Table des chasses",
+      "icon": "chasses",
+      "action": "campaign",
+      "description": "Choisir une chasse sur la carte de CREOS."
+    },
+    "loge_des_heros": {
+      "name": "Loge des héros",
+      "icon": "heros",
+      "action": "heroes",
+      "description": "Voir et améliorer tes chasseurs."
+    },
+    "autel": {
+      "name": "Lanterne des Serments",
+      "icon": "autel",
+      "action": "altar",
+      "description": "Prêter serment sous la grande lanterne : un chasseur endormi s'avance dans la lumière."
+    },
+    "marche": {
+      "name": "Marché",
+      "icon": "marche",
+      "action": "shop",
+      "description": "Acheter et vendre du butin de chasse."
+    },
+    "echoppe_masques": {
+      "name": "Échoppe des masques",
+      "icon": "marche",
+      "action": "masks",
+      "description": "Des masques à collectionner pour habiller tes chasseurs (cosmétiques)."
+    },
+    "ma_loge": {
+      "name": "Ma loge",
+      "icon": "ma_loge",
+      "action": "base",
+      "description": "Ta base de chasse, à défendre contre les loges rivales."
+    },
+    "tour": {
+      "name": "Tour de Morvath",
+      "icon": "tour",
+      "action": "tower",
+      "description": "Des étages de plus en plus durs. Jusqu'où iras-tu ?"
+    }
+  },
+  "main_buttons": [
+    "table_des_chasses",
+    "loge_des_heros",
+    "autel",
+    "marche",
+    "ma_loge"
+  ],
+  "side_left": [
+    {
+      "id": "primes",
+      "name": "Primes",
+      "icon": "primes",
+      "action": "quests"
+    },
+    {
+      "id": "recompenses",
+      "name": "Récompenses",
+      "icon": "recompenses",
+      "action": "rewards"
+    },
+    {
+      "id": "evenements",
+      "name": "Corruption",
+      "icon": "evenements",
+      "action": "events"
+    }
+  ],
+  "side_right": [
+    {
+      "id": "classement",
+      "name": "Classement",
+      "icon": "classement",
+      "action": "leaderboard"
+    },
+    {
+      "id": "guilde",
+      "name": "Guilde",
+      "icon": "guilde",
+      "action": "guild"
+    },
+    {
+      "id": "tour",
+      "name": "Tour",
+      "icon": "tour",
+      "action": "tower"
+    }
+  ],
+  "first_hunt": "brumenoire_1"
+}

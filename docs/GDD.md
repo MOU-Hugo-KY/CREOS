@@ -111,15 +111,20 @@ Chaque région a une **jauge de Corruption** (0 à 100 %).
 - **Runes** gravées sur l'équipement (4 emplacements),
 - **Relique** : un seul emplacement, objet unique et puissant (rareté Légendaire et au-dessus).
 
-### 3.6 Héros de départ (prototype : modèles KayKit en attendant les nôtres)
+### 3.6 Héros de départ (nos propres modèles chibi, dans `assets/heroes/`)
 
-| Héros | Classe | Élément | Famille | Modèle du proto |
-|---|---|---|---|---|
-| **Brannoc le Roc** | Gardien | Nature | Chasseurs | Knight |
-| **Kaëla Croc-Vif** | Lame | Feu | Chasseurs | Barbarian |
-| **Ysolde des Marées** | Arcaniste | Eau | Sylvains | Mage |
-| **Fennir l'Ombre** | Traqueur | Ombre | Chasseurs | Rogue_Hooded |
-| **Sœur Aubeline** | Mystique | Lumière | Chasseurs | Rogue |
+| Héros | Classe | Élément | Famille | Modèle | Attaques (① base · ② recharge · ③ ultime) |
+|---|---|---|---|---|---|
+| **Torvald Barbe-Rouge** | Gardien | Feu | Chasseurs | Barbare | Coup de hache · Tourbillon furieux (provocation) · Écrasement berserk (étourdit, bouclier) |
+| **Kaïto le Ronin** | Lame | Eau | Chasseurs | Ronin | Double entaille · Coupe tournoyante (zone) · Frappe plongeante (achève le plus faible) |
+| **Docteur Vesprin** | Traqueur | Nature | Chasseurs | Alchimiste de la peste | Fiole explosive · Flaque toxique (poison) · Explosion du réservoir (poison de zone) |
+| **Frère Orage** | Arcaniste | Lumière | Chasseurs | Moine des éclairs | Paume foudroyante · Pas du tonnerre (étourdit) · Sentence céleste (foudre en chaîne) |
+| **Sire Malgrave** | Gardien | Ombre | Revenants | Chevalier possédé (Légendaire) | Masse maudite · Chaînes spectrales (attire, étourdit) · Onde du tombeau (malédiction de zone, bouclier) |
+
+> L'équipe n'a pas de soigneur : elle tient grâce aux boucliers et provocations de Torvald et
+> aux étourdissements. Les anciens héros du prototype (Brannoc, Kaëla, Ysolde, Fennir, Aubeline,
+> modèles KayKit) ont été retirés ; leurs fiches restent dans l'historique Git si on veut les
+> refaire avec nos propres modèles.
 
 Les fiches complètes (stats et compétences) sont dans `data/heroes.json`.
 
@@ -128,10 +133,19 @@ Les fiches complètes (stats et compétences) sont dans `data/heroes.json`.
 ## 4. Combat (repris de Dungeon Boss, adapté)
 
 - **4 héros contre des vagues de monstres** (2 ou 3 vagues), **puis un boss**.
-- **Temps réel avec jauge d'action** : chaque unité a une **Vitesse**. Sa jauge se remplit en continu,
-  et quand elle est pleine, l'unité fait son **attaque de base** automatiquement.
-- **Compétence spéciale** : chaque héros a une jauge d'**énergie**. Une fois pleine, le joueur
-  **touche le portrait** du héros pour lancer sa compétence (ou mode **Auto**).
+- **Tour par tour à jauges** : chaque unité a une **Vitesse**. Sa jauge se remplit en continu ;
+  quand celle d'un **héros** est pleine, le combat se fige et ses **3 attaques** apparaissent en
+  petites icônes en bas de l'écran : le joueur en choisit une. Les ennemis jouent seuls.
+- **3 attaques par héros** (une icône chacune, visibles seulement à son tour) :
+  1. **Attaque de base** : toujours disponible.
+  2. **Attaque à recharge** : ensuite elle se recharge (6 à 10 s).
+  3. **Ultime** : coûte toute la jauge d'**énergie** (gagnée en attaquant et en recevant des coups).
+  En mode **Auto**, l'IA choisit l'ultime dès qu'elle est prête, sinon l'attaque à recharge,
+  sinon l'attaque de base.
+- **Interface épurée** : pas de panneau en bas ; seulement des barres fines (vie, énergie) au-dessus
+  des personnages, la vague, Auto et ×2. Une flèche et un anneau doré montrent le héros qui joue.
+  Les monstres ont 1 attaque ; les boss en ont 3 comme les héros.
+- **Étoiles** : 3 si aucun héros n'est tombé, 2 si un seul est tombé, 1 sinon.
 - **Ciblage** : les Gardiens avec Provocation attirent les attaques. Sinon, la cible est choisie
   selon la compétence (le plus faible, le plus proche, toute l'équipe…).
 - **Traits défensifs** : *Cuirasse* (réduit les dégâts physiques), *Garde-mystique* (réduit les

@@ -1,0 +1,59 @@
+{
+  "parts": {
+    "body": {
+      "file": "body.png",
+      "pivot": [
+        400,
+        650
+      ],
+      "z": 0
+    },
+    "cape": {
+      "file": "cape.png",
+      "pivot": [
+        280,
+        20
+      ],
+      "parent": "body",
+      "at": [
+        380,
+        60
+      ],
+      "z": -2
+    },
+    "head": {
+      "file": "head.png",
+      "pivot": [
+        400,
+        430
+      ],
+      "parent": "body",
+      "at": [
+        400,
+        70
+      ],
+      "z": 2
+    },
+    "arm_front": {
+      "file": "arm_front.png",
+      "pivot": [
+        60,
+        380
+      ],
+      "parent": "body",
+      "at": [
+        520,
+        150
+      ],
+      "z": 3
+    }
+  },
+  "pixel_size": 0.00238,
+  "shadow": 0.9,
+  "portrait": [
+    300,
+    60,
+    540
+  ],
+  "height": 2.4
+}
