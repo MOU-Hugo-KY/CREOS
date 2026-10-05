@@ -6,8 +6,10 @@ extends CanvasLayer
 signal action(action_name: String, id: String)
 signal ui_sound(sfx_name: String)
 signal screen_opened(open: bool)  # un écran plein (Loge…) s'ouvre ou se ferme
+signal time_of_day_requested(hour: float)  # -1 = heure réelle
 
 const ICON_DIR := "res://assets/ui/hub/"
+const TIMES := [["Heure réelle", -1.0], ["Aube", 7.0], ["Jour", 13.0], ["Crépuscule", 19.3], ["Nuit", 23.0]]
 # Bouton « Y aller » des primes : action -> bâtiment ou bouton concerné
 const ACTION_TARGETS := {"campaign": "table_des_chasses", "altar": "autel", "heroes": "loge_des_heros",
 	"shop": "echoppe_masques", "guild": "guilde", "tower": "tour"}
@@ -24,6 +26,7 @@ var _xp_bar: ProgressBar
 var _name_label: Label
 var _avatar_holder: Control
 var _avatar_id := ""
+var _time_index := 0
 var _side_buttons: Dictionary = {}  # id -> IconButton
 var _values: Dictionary = {}  # "or" / "gemmes" / "energie" -> Label
 var lodge: HeroesScreen
@@ -299,6 +302,22 @@ func _build_resources() -> void:
 	_sound_button.add_theme_stylebox_override("hover", Palette.stylebox(Color(0, 0, 0, 0.5), Color(1, 1, 1, 0.5), 26, 2))
 	_sound_button.add_theme_stylebox_override("pressed", Palette.stylebox(Color(Palette.GOLD, 0.3), Palette.GOLD, 26, 2))
 	_sound_button.toggled.connect(_toggle_sound)
+	# Moment de la journée sur le port : heure réelle, ou aube / jour / crépuscule / nuit.
+	var time_button := Button.new()
+	time_button.focus_mode = Control.FOCUS_NONE
+	time_button.custom_minimum_size = Vector2(190, 52)
+	time_button.add_theme_font_size_override("font_size", 19)
+	time_button.add_theme_stylebox_override("normal", Palette.stylebox(Color(0, 0, 0, 0.4), Color(1, 1, 1, 0.25), 26, 2))
+	time_button.add_theme_stylebox_override("hover", Palette.stylebox(Color(0, 0, 0, 0.5), Color(1, 1, 1, 0.5), 26, 2))
+	time_button.add_theme_stylebox_override("pressed", Palette.stylebox(Color(0, 0, 0, 0.5), Palette.GOLD, 26, 2))
+	time_button.text = TIMES[0][0]
+	time_button.tooltip_text = "Changer le moment de la journée"
+	time_button.pressed.connect(func() -> void:
+		_time_index = (_time_index + 1) % TIMES.size()
+		time_button.text = TIMES[_time_index][0]
+		ui_sound.emit("ui_toggle")
+		time_of_day_requested.emit(float(TIMES[_time_index][1])))
+	row.add_child(time_button)
 	row.add_child(_sound_button)
 
 

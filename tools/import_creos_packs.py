@@ -103,6 +103,8 @@ def import_clip_pack(pack_dir, out_dir, origin_for, scale_for, used_textures):
     for c in manifest["clips"]:
         cid = c["id"]
         src = pack_dir / c.get("file", "clips/%s.json" % cid)
+        if not src.exists():
+            continue  # le catalogue d'une partie peut citer les clips de l'autre partie
         clip, texs = convert_clip(src, origin_for(cid), scale_for(cid))
         used_textures.update(texs)
         json.dump(clip, open(out_dir / "clips" / (cid + ".json"), "w", encoding="utf-8"), separators=(",", ":"),

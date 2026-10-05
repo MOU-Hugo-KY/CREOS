@@ -9,6 +9,7 @@ extends SceneTree
 ##   --end               attend l'écran de fin et le capture en dernier
 ##   --scene=res://scenes/hub/hub.tscn   capture une autre scène (défaut : le combat)
 ##   --action=campaign   (hub) ouvre un écran avant la capture : campaign, heroes, altar, shop, relics…
+##   --hour=23      (hub) heure du port (aube 7, jour 13, crépuscule 19.3, nuit 23)
 ##   --hero=corbin       (hub, avec --action=heroes) ouvre la fiche de ce héros
 
 var shots: Array[int] = [200]
@@ -22,6 +23,7 @@ var scene_path := "res://scenes/battle/battle.tscn"
 var action := ""
 var hero := ""
 var tab := ""
+var hour := -2.0
 
 
 func _initialize() -> void:
@@ -46,6 +48,8 @@ func _initialize() -> void:
 			action = arg.trim_prefix("--action=")
 		elif arg.begins_with("--hero="):
 			hero = arg.trim_prefix("--hero=")
+		elif arg.begins_with("--hour="):
+			hour = float(arg.trim_prefix("--hour="))
 		elif arg.begins_with("--tab="):
 			tab = arg.trim_prefix("--tab=")
 	root.get_node("PlayerData").use_memory_only()  # ne touche pas à la vraie sauvegarde
@@ -58,6 +62,9 @@ func _initialize() -> void:
 
 func _process(_delta: float) -> bool:
 	frames += 1
+	if frames == 2 and hour > -2.0 and "town" in scene:
+		scene.town.ambience.hour_override = hour
+		scene.town.ambience.current = scene.town.ambience._mood_at(hour)
 	if frames == 5 and action != "":
 		scene._do_action(action, "")
 		if hero != "":

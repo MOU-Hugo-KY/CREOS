@@ -81,11 +81,17 @@
    "above": "autel"
   },
   {
-   "file": "Bateau_Tangue_10f_8fps.png",
+   "file": "Bateau_De_Peche.png",
    "x": 3310,
-   "y": 590,
-   "size": 290,
-   "ground": 640
+   "y": 600,
+   "size": 300,
+   "ground": 640,
+   "sway": {
+    "rot": 2.2,
+    "bob": 4,
+    "speed": 0.7,
+    "pivot": "bottom"
+   }
   },
   {
    "file": "Fumee_Cheminee_8f_10fps.png",
@@ -131,14 +137,14 @@
   },
   {
    "file": "Flamme_Lanterne_8f_12fps.png",
-   "x": 2392,
-   "y": 466,
+   "x": 2321,
+   "y": 468,
    "size": 36,
    "ground": 623
   },
   {
    "file": "Flamme_Lanterne_8f_12fps.png",
-   "x": 2538,
+   "x": 2465,
    "y": 448,
    "size": 36,
    "ground": 623
@@ -204,7 +210,13 @@
    "x": 120,
    "y": 760,
    "size": 260,
-   "front": true
+   "front": true,
+   "sway": {
+    "rot": 2.5,
+    "bob": 0,
+    "speed": 0.5,
+    "pivot": "top"
+   }
   },
   {
    "file": "Feuillage_8f_8fps.png",
@@ -212,14 +224,26 @@
    "y": 820,
    "size": 240,
    "front": true,
-   "flip": true
+   "flip": true,
+   "sway": {
+    "rot": 2.5,
+    "bob": 0,
+    "speed": 0.5,
+    "pivot": "top"
+   }
   },
   {
    "file": "Feuillage_8f_8fps.png",
    "x": 1990,
    "y": 340,
    "size": 170,
-   "ground": 600
+   "ground": 600,
+   "sway": {
+    "rot": 2.5,
+    "bob": 0,
+    "speed": 0.5,
+    "pivot": "top"
+   }
   }
  ],
  "gulls": {
@@ -247,5 +271,56 @@
   1900,
   130
  ],
- "hero_height": 230
+ "hero_height": 230,
+ "windows": [
+  [
+   1365,
+   330,
+   30
+  ],
+  [
+   1428,
+   325,
+   30
+  ],
+  [
+   1695,
+   215,
+   26
+  ],
+  [
+   1432,
+   490,
+   26
+  ],
+  [
+   1370,
+   495,
+   26
+  ],
+  [
+   2387,
+   235,
+   30
+  ],
+  [
+   2268,
+   470,
+   24
+  ],
+  [
+   2610,
+   470,
+   30
+  ],
+  [
+   2652,
+   300,
+   26
+  ]
+ ],
+ "sun": [
+  3720,
+  520
+ ]
 }

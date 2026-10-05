@@ -45,7 +45,11 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 - `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage), en 2D : `port_franc_2d.gd` monte la
   scène 3840 × 1080 décrite par `assets/hub2d/port/Scene.json` (calques en parallaxe, bâtiments
   cliquables avec image de survol et sans étiquette, animations en planches de sprites, mouettes,
-  marchand, héros qui se promènent avec leurs clips de marche). `python tools/preview_port.py
+  marchand, héros qui se promènent avec leurs clips de marche). `port_ambience.gd` : cycle jour/nuit
+  (aube, jour, crépuscule, nuit, d'après l'heure réelle ou le bouton du hub) avec couleur du ciel,
+  teinte de la ville, halos des lanternes et fenêtres, étoiles, lune, brume, rayons, lucioles,
+  poussières et feuilles. Les planches qui « sautent » (bateau, feuillage) sont remplacées par une
+  image fixe qui se balance (`"sway"` dans Scene.json). `python tools/preview_port.py
   sortie.png --grid` dessine la scène pour placer les éléments. Bâtiments et actions : `data/hub.json`
   (l'Échoppe des masques est le Marchand). Profil de départ : `data/player_start.json`.
 - **Interface** : `scripts/ui/ui_kit.gd` (`UiKit`) = le style commun, d'après la maquette

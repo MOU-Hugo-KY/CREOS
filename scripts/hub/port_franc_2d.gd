@@ -13,12 +13,15 @@ const DIR := "res://assets/hub2d/port/"
 const SIZE := Vector2(3840, 1080)
 
 var scene: Dictionary = {}
+var layer_sprites: Array[Sprite2D] = []  # un par calque de Scene.json, dans l'ordre
+var ambience: PortAmbience
 var buildings: Dictionary = {}  # id -> {node, sprite, tex, hover, mask, rect}
 var hovered := ""
 
 var _planes: Array[Dictionary] = []  # {node, parallax}
 var _objects: Node2D  # objets posés sur la place, triés par leur point au sol
 var _anims: Array[Dictionary] = []  # {sprite, fps, frames, phase}
+var _sways: Array[Dictionary] = []  # images qui se balancent {node, rot, bob, speed, ph, base}
 var _gulls: Array[Dictionary] = []
 var _walkers: Array[Dictionary] = []
 var _time := 0.0
@@ -37,6 +40,7 @@ func _ready() -> void:
 		s.texture = load(DIR + String(layer.file))
 		s.centered = false
 		plane.add_child(s)
+		layer_sprites.append(s)
 		if float(layer.get("parallax", 1.0)) == 1.0 and not front:
 			_objects = Node2D.new()
 			_objects.y_sort_enabled = true
@@ -50,6 +54,9 @@ func _ready() -> void:
 	_add_gulls(scene.get("gulls", {}))
 	_add_merchant(scene.get("merchant", {}))
 	_add_heroes()
+	ambience = PortAmbience.new()
+	add_child(ambience)
+	ambience.setup(self)
 
 
 ## Le hub place la caméra : `left` = bord gauche visible (en px de la scène).
@@ -109,6 +116,11 @@ func _process(delta: float) -> void:
 	_time += delta
 	for a: Dictionary in _anims:
 		(a.sprite as Sprite2D).frame = int((_time + float(a.phase)) * float(a.fps)) % int(a.frames)
+	for sw: Dictionary in _sways:
+		var t := _time * float(sw.speed) * TAU * 0.5 + float(sw.ph)
+		var node: Node2D = sw.node
+		node.rotation = sin(t) * float(sw.rot)
+		node.position = sw.base + Vector2(0, sin(t * 0.8 + 1.3) * float(sw.bob))
 	var g: Dictionary = scene.get("gulls", {})
 	for i in _gulls.size():
 		var gull: Dictionary = _gulls[i]
@@ -117,7 +129,7 @@ func _process(delta: float) -> void:
 		var r: Array = g.get("radius", [1000, 70])
 		var s: Sprite2D = gull.sprite
 		s.position = Vector2(float(c[0]) + cos(ang) * float(r[0]), float(c[1]) + sin(ang * 2.0) * float(r[1]) + i * 30)
-		s.flip_h = sin(ang) > 0.0
+		s.flip_h = sin(ang) < 0.0  # la mouette est dessinée tournée vers la gauche
 	for w: Dictionary in _walkers:
 		_walk(w, delta)
 
@@ -130,6 +142,14 @@ func _plane(parallax: float, z: int) -> Node2D:
 	add_child(n)
 	_planes.append({"node": n, "parallax": parallax})
 	return n
+
+
+func planes() -> Array[Dictionary]:
+	return _planes
+
+
+func plane_for(parallax: float) -> Node2D:
+	return _plane_for(parallax)
 
 
 func _plane_for(parallax: float) -> Node2D:
@@ -172,8 +192,11 @@ func _add_building(b: Dictionary) -> void:
 func _add_anim(a: Dictionary) -> void:
 	var file := String(a.file)
 	var parts := file.get_basename().split("_")
-	var frames := int(parts[parts.size() - 2].trim_suffix("f"))
-	var fps := float(parts[parts.size() - 1].trim_suffix("fps"))
+	var frames := 1
+	var fps := 0.0
+	if parts.size() >= 3 and parts[parts.size() - 2].ends_with("f") and parts[parts.size() - 1].ends_with("fps"):
+		frames = int(parts[parts.size() - 2].trim_suffix("f"))
+		fps = float(parts[parts.size() - 1].trim_suffix("fps"))
 	var tex: Texture2D = load(DIR + file)
 	if tex == null:
 		return
@@ -183,27 +206,45 @@ func _add_anim(a: Dictionary) -> void:
 	var size := float(a.size)
 	sprite.scale = Vector2.ONE * size / float(tex.get_height())
 	sprite.flip_h = a.get("flip", false)
-	_anims.append({"sprite": sprite, "fps": fps, "frames": frames, "phase": _rng.randf() * 3.0})
+	var visual: Node2D = sprite
+	if a.has("sway"):
+		# Image fixe qui se balance doucement (les planches qui « sautent » d'une image à l'autre
+		# sont remplacées par ce mouvement continu) : autour de son haut (lierre) ou de son bas (bateau).
+		var sw: Dictionary = a.sway
+		var pivot := Node2D.new()
+		var down := String(sw.get("pivot", "bottom")) == "bottom"
+		sprite.position = Vector2(0, -size / 2.0 if down else size / 2.0)
+		pivot.add_child(sprite)
+		visual = pivot
+		_sways.append({"node": pivot, "rot": deg_to_rad(float(sw.get("rot", 2.0))), "bob": float(sw.get("bob", 0.0)),
+			"speed": float(sw.get("speed", 0.6)), "ph": _rng.randf() * TAU, "offset": size / 2.0 * (1.0 if down else -1.0)})
+	elif frames > 1:
+		_anims.append({"sprite": sprite, "fps": fps, "frames": frames, "phase": _rng.randf() * 3.0})
 	var at := Vector2(a.x, a.y)
+	var parent: Node2D
+	var local := at
 	if a.get("front", false):
-		_plane_for(1.15).add_child(sprite)
-		sprite.position = at
-		sprite.z_index = 1
+		parent = _plane_for(1.15)
+		visual.z_index = 1
 	elif a.has("parallax"):
-		var plane := _plane_for(float(a.parallax))
-		plane.add_child(sprite)
-		sprite.position = at
-		sprite.z_index = 2
+		parent = _plane_for(float(a.parallax))
+		visual.z_index = 2
 	else:
 		# Posée sur la place : triée par son point au sol (ou juste devant le bâtiment qu'elle orne).
 		var ground := float(a.get("ground", at.y + size / 2.0))
 		if a.has("above") and buildings.has(String(a.above)):
 			ground = float(buildings[String(a.above)].ground) + 0.5
-		var holder := Node2D.new()
-		holder.position = Vector2(at.x, ground)
-		holder.add_child(sprite)
-		sprite.position = Vector2(0, at.y - ground)
-		_objects.add_child(holder)
+		parent = Node2D.new()
+		parent.position = Vector2(at.x, ground)
+		_objects.add_child(parent)
+		local = Vector2(0, at.y - ground)
+	parent.add_child(visual)
+	if visual == sprite:
+		sprite.position = local
+	else:
+		var sw_entry: Dictionary = _sways[-1]
+		visual.position = local + Vector2(0, float(sw_entry.offset))
+		sw_entry["base"] = visual.position
 
 
 func _add_gulls(g: Dictionary) -> void:

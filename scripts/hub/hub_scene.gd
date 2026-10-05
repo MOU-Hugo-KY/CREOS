@@ -42,6 +42,7 @@ func _ready() -> void:
 	hud.action.connect(_do_action)
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 	hud.hunt_prep.start_requested.connect(start_hunt)
+	hud.time_of_day_requested.connect(func(h: float) -> void: town.ambience.hour_override = h)
 
 
 ## Bords de l'écran légèrement assombris et chauds : cadre l'image et attire l'œil au centre.

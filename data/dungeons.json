@@ -511,6 +511,134 @@
   },
   "energy_cost": 5
  },
+ "monde03_1": {
+  "name": "Terriers de l'ile — 1",
+  "region": "monde03",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r03_fourmi_pilleuse",
+    "r03_fourmi_pilleuse",
+    "r03_fourmi_pilleuse"
+   ],
+   [
+    "r03_fourmi_pilleuse",
+    "r03_fourmi_pilleuse",
+    "r03_fourmi_pilleuse"
+   ],
+   [
+    "r03_fourmi_pilleuse",
+    "r03_soldate_mandibule",
+    "r03_fourmi_pilleuse"
+   ]
+  ],
+  "rewards": {
+   "gold": 360,
+   "xp": 188,
+   "essence_ombre": 2,
+   "mandibule_rouge": 2,
+   "relique_jin_seok": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde03_2": {
+  "name": "Terriers de l'ile — 2",
+  "region": "monde03",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r03_scarabee_de_resine",
+    "r03_scarabee_de_resine",
+    "r03_fourmi_pilleuse"
+   ],
+   [
+    "r03_scarabee_de_resine",
+    "r03_fourmi_pilleuse",
+    "r03_scarabee_de_resine"
+   ],
+   [
+    "r03_scarabee_de_resine",
+    "r03_foreur_dambre",
+    "r03_scarabee_de_resine"
+   ]
+  ],
+  "rewards": {
+   "gold": 375,
+   "xp": 196,
+   "essence_ombre": 2,
+   "resine_ambre": 2,
+   "relique_yun_tao": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde03_3": {
+  "name": "Terriers de l'ile — 3",
+  "region": "monde03",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r03_araignee_tisseuse",
+    "r03_araignee_tisseuse",
+    "r03_scarabee_de_resine"
+   ],
+   [
+    "r03_araignee_tisseuse",
+    "r03_scarabee_de_resine",
+    "r03_araignee_tisseuse"
+   ],
+   [
+    "r03_araignee_tisseuse",
+    "r03_veuve_des_tunnels",
+    "r03_araignee_tisseuse"
+   ]
+  ],
+  "rewards": {
+   "gold": 390,
+   "xp": 204,
+   "essence_ombre": 2,
+   "soie_solide": 2,
+   "relique_tang_su": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde03_4": {
+  "name": "Terriers de l'ile — 4",
+  "region": "monde03",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r03_mante_verte",
+    "r03_mante_verte",
+    "r03_araignee_tisseuse"
+   ],
+   [
+    "r03_mante_verte",
+    "r03_araignee_tisseuse",
+    "r03_mante_verte"
+   ],
+   [
+    "r03_mante_verte",
+    "r03_mante_sabreuse",
+    "r03_mante_verte"
+   ]
+  ],
+  "rewards": {
+   "gold": 405,
+   "xp": 212,
+   "essence_ombre": 2,
+   "griffe_de_mante": 2,
+   "relique_corbin": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
  "monde03_5": {
   "name": "Terriers de l'ile — 5",
   "region": "monde03",
@@ -520,11 +648,11 @@
    [
     "r03_termite_mineur",
     "r03_termite_mineur",
-    "r03_termite_mineur"
+    "r03_mante_verte"
    ],
    [
     "r03_termite_mineur",
-    "r03_termite_mineur",
+    "r03_mante_verte",
     "r03_termite_mineur"
    ],
    [

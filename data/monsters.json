@@ -1247,6 +1247,318 @@
    }
   ]
  },
+ "r03_fourmi_pilleuse": {
+  "name": "Fourmi pilleuse",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "mandibule_rouge",
+  "stats": {
+   "hp": 1049,
+   "atk": 127,
+   "mag": 127,
+   "def": 47,
+   "res": 47,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_fourmi_pilleuse_attack",
+    "name": "Attaque",
+    "clip": "r03_fourmi_pilleuse_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r03_soldate_mandibule": {
+  "name": "Soldate mandibule",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "mandibule_rouge",
+  "stats": {
+   "hp": 2518,
+   "atk": 159,
+   "mag": 159,
+   "def": 57,
+   "res": 57,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_soldate_mandibule_attack",
+    "name": "Attaque",
+    "clip": "r03_soldate_mandibule_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r03_soldate_mandibule_skill",
+    "name": "Tenaille de guerre",
+    "clip": "r03_soldate_mandibule_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r03_scarabee_de_resine": {
+  "name": "Scarabée de résine",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "resine_ambre",
+  "stats": {
+   "hp": 1088,
+   "atk": 132,
+   "mag": 132,
+   "def": 48,
+   "res": 48,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_scarabee_de_resine_attack",
+    "name": "Attaque",
+    "clip": "r03_scarabee_de_resine_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r03_foreur_dambre": {
+  "name": "Foreur d’ambre",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "resine_ambre",
+  "stats": {
+   "hp": 2611,
+   "atk": 164,
+   "mag": 164,
+   "def": 58,
+   "res": 58,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_foreur_dambre_attack",
+    "name": "Attaque",
+    "clip": "r03_foreur_dambre_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r03_foreur_dambre_skill",
+    "name": "Percée de résine",
+    "clip": "r03_foreur_dambre_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r03_araignee_tisseuse": {
+  "name": "Araignée tisseuse",
+  "element": "nature",
+  "family": "arachnid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "soie_solide",
+  "stats": {
+   "hp": 1127,
+   "atk": 136,
+   "mag": 136,
+   "def": 50,
+   "res": 50,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_araignee_tisseuse_attack",
+    "name": "Attaque",
+    "clip": "r03_araignee_tisseuse_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r03_veuve_des_tunnels": {
+  "name": "Veuve des tunnels",
+  "element": "nature",
+  "family": "arachnid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "soie_solide",
+  "stats": {
+   "hp": 2704,
+   "atk": 170,
+   "mag": 170,
+   "def": 60,
+   "res": 60,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_veuve_des_tunnels_attack",
+    "name": "Attaque",
+    "clip": "r03_veuve_des_tunnels_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r03_veuve_des_tunnels_skill",
+    "name": "Cocon captif",
+    "clip": "r03_veuve_des_tunnels_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r03_mante_verte": {
+  "name": "Mante verte",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "griffe_de_mante",
+  "stats": {
+   "hp": 1165,
+   "atk": 141,
+   "mag": 141,
+   "def": 51,
+   "res": 51,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_mante_verte_attack",
+    "name": "Attaque",
+    "clip": "r03_mante_verte_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r03_mante_sabreuse": {
+  "name": "Mante sabreuse",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "griffe_de_mante",
+  "stats": {
+   "hp": 2797,
+   "atk": 176,
+   "mag": 176,
+   "def": 61,
+   "res": 61,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_mante_sabreuse_attack",
+    "name": "Attaque",
+    "clip": "r03_mante_sabreuse_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r03_mante_sabreuse_skill",
+    "name": "Fauchage croisé",
+    "clip": "r03_mante_sabreuse_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
  "r03_termite_mineur": {
   "name": "Termite mineur",
   "element": "nature",
