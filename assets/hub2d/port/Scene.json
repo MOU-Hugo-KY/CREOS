@@ -113,42 +113,48 @@
    "x": 1632,
    "y": 424,
    "size": 40,
-   "ground": 623
+   "ground": 623,
+   "hidden": true
   },
   {
    "file": "Flamme_Lanterne_8f_12fps.png",
    "x": 1768,
    "y": 432,
    "size": 40,
-   "ground": 623
+   "ground": 623,
+   "hidden": true
   },
   {
    "file": "Flamme_Lanterne_8f_12fps.png",
    "x": 2321,
    "y": 468,
    "size": 36,
-   "ground": 623
+   "ground": 623,
+   "hidden": true
   },
   {
    "file": "Flamme_Lanterne_8f_12fps.png",
    "x": 2465,
    "y": 448,
    "size": 36,
-   "ground": 623
+   "ground": 623,
+   "hidden": true
   },
   {
    "file": "Flamme_Lanterne_8f_12fps.png",
    "x": 367,
    "y": 866,
    "size": 44,
-   "front": true
+   "front": true,
+   "hidden": true
   },
   {
    "file": "Flamme_Lanterne_8f_12fps.png",
    "x": 3522,
    "y": 792,
    "size": 44,
-   "front": true
+   "front": true,
+   "hidden": true
   },
   {
    "file": "Fanion_8f_10fps.png",

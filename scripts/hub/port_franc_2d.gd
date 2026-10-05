@@ -190,6 +190,8 @@ func _add_building(b: Dictionary) -> void:
 
 
 func _add_anim(a: Dictionary) -> void:
+	if a.get("hidden", false):
+		return  # garde seulement le halo de lumière (port_ambience)
 	var file := String(a.file)
 	var parts := file.get_basename().split("_")
 	var frames := 1
