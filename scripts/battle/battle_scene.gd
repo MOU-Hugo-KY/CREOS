@@ -45,6 +45,8 @@ var _last_sound: Dictionary = {}  # nom -> heure (évite 4 fois le même son au 
 var _ended := false
 var _event_seq := 0
 
+var _last_slot := {}  # uid -> emplacement de sa dernière attaque (coups lourds)
+
 
 func _ready() -> void:
 	dungeon_id = PlayerData.current_dungeon
@@ -266,6 +268,8 @@ func _on_attack(ev: Dictionary) -> float:
 		return 0.0
 	var clip := String(ev.get("clip", ""))
 	var delay := v.play_attack(clip)
+	_last_slot[int(ev.src)] = int(ev.slot)
+	fx.dust(v.position, 0.8)  # appui au sol au départ de l'attaque
 	var color := Palette.element_color(v.unit.element)
 	if int(ev.slot) == BattleUnit.SLOT_COOLDOWN:
 		v.popup(ev.name, Palette.COOLDOWN.lightened(0.3), false, 1.6)
@@ -327,7 +331,16 @@ func _on_impact(ev: Dictionary) -> void:
 				t.flash(Color(0.6, 0.3, 0.9), 0.35)
 			else:
 				t.play_hit(color)
+				var heavy: bool = ev.crit or int(_last_slot.get(int(ev.src), 0)) >= BattleUnit.SLOT_ULTIMATE
 				fx.burst(t.chest_position(), color, ev.crit)
+				fx.slash(t.chest_position(), color, heavy)
+				fx.dust(t.position, 0.6)
+				# Arrêt sur image : attaquant et cible se figent un instant.
+				var stop := 0.11 if heavy else 0.06
+				t.freeze(stop)
+				if src:
+					src.freeze(stop)
+				fx.shake(0.35 if heavy else 0.12)
 				var txt := str(int(ev.amount)) + ("!" if ev.crit else "")
 				if int(ev.amount) <= 0:
 					txt = "Absorbé"
@@ -381,6 +394,8 @@ func _on_impact(ev: Dictionary) -> void:
 				t.hp_seq = ev.seq
 				t.play_death()
 				_sfx("death", -2.0)
+				var fall_at := t.position
+				_schedule(1.3, func() -> void: fx.dust(fall_at, 1.3))
 		"victory":
 			_end_battle(true)
 		"defeat":

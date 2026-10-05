@@ -72,6 +72,9 @@ func is_dead() -> bool:
 
 ## Joue le clip d'une attaque (le clip contient la course, les coups et les effets).
 ## Renvoie le délai avant le premier impact (0 : les instants viennent des repères du clip).
+var _base_scale := Vector2.ZERO
+
+
 func play_attack(clip: String, _hit_time := 0.0) -> float:
 	if _dead:
 		return 0.0
@@ -103,14 +106,26 @@ func set_target_mark(on: bool) -> void:
 func play_hit(color := Color.WHITE) -> void:
 	if _dead:
 		return
-	player.flash(color.lightened(0.3), 0.75)
+	player.flash(Color.WHITE.lerp(color, 0.25), 1.0)
 	if not _attacking and player.has_clip(_id + "_hurt"):
 		player.play(_id + "_hurt")
 		player.idle_clip = _id + "_idle"
+	# Recul et écrasement (pieds au sol) : le coup se sent.
 	var tw := create_tween()
-	var back := Vector2(-10 if unit.team == 0 else 10, 0)
-	tw.tween_property(player, "position", back, 0.06)
-	tw.tween_property(player, "position", Vector2.ZERO, 0.18)
+	var back := Vector2(-24 if unit.team == 0 else 24, 0)
+	tw.tween_property(player, "position", back, 0.05).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(player, "position", Vector2.ZERO, 0.28).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	if _base_scale == Vector2.ZERO:
+		_base_scale = scale
+	var sq := create_tween()
+	sq.tween_property(self, "scale", _base_scale * Vector2(1.12, 0.88), 0.05)
+	sq.tween_property(self, "scale", _base_scale * Vector2(0.96, 1.04), 0.09)
+	sq.tween_property(self, "scale", _base_scale, 0.12)
+
+
+## Arrêt sur image : le personnage se fige un instant au moment du coup.
+func freeze(seconds: float) -> void:
+	player.freeze(seconds)
 
 
 func play_death() -> void:

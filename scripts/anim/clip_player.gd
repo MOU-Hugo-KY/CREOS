@@ -48,6 +48,7 @@ var _mat: ShaderMaterial
 var _voices: Array[AudioStreamPlayer] = []
 var _rig: Rig  # squelette du personnage : remplace les pièces du clip quand il a cette animation
 var _rig_anim := ""
+var _freeze := 0.0  # arrêt sur image (impact) : le clip ne avance plus pendant ce temps
 
 
 func _init() -> void:
@@ -100,6 +101,11 @@ func cue_times(id: String) -> Array[float]:
 	return out
 
 
+## Fige l'animation un court instant (sensation d'impact).
+func freeze(seconds: float) -> void:
+	_freeze = maxf(_freeze, seconds)
+
+
 func is_playing() -> bool:
 	return _running
 
@@ -130,6 +136,9 @@ func _process(delta: float) -> void:
 	if _flash > 0.0:
 		_flash = maxf(0.0, _flash - delta * 3.0)
 		_mat.set_shader_parameter("flash", _flash)
+	if _freeze > 0.0:
+		_freeze -= delta
+		return
 	if not _running:
 		return
 	_t += delta * speed
