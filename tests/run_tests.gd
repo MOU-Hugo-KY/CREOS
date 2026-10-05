@@ -372,6 +372,10 @@ func test_hero_upgrades() -> void:
 		and Progression.echo_tier(12, gd.progression) == 5, "paliers d'Échos 1/3/6/9/12")
 	check(s1.atk > s0.atk and s3.atk > s1.atk and s1.spd == s0.spd, "les Échos renforcent le héros (pas sa vitesse)")
 	check((s1.atk / s0.atk) > (s1.mag / s0.mag), "la statistique principale gagne le plus")
+	# Technique secrète : 4e attaque à 6 Échos, celle de la voie active.
+	check(Progression.hero_for_battle(h, 1, gd.progression, 5).attacks.size() == 3, "pas de technique secrète avant 6 Échos")
+	var with_secret := Progression.hero_for_battle(h, 1, gd.progression, 6, 0, 1)
+	check(with_secret.attacks.size() == 4 and with_secret.attacks[3].clip == "aegis_4", "à 6 Échos, la technique secrète de la voie active")
 	# Reliques : 100 fragments pour la retrouver, puis fragments + matériaux pour chaque palier.
 	check(not pd.upgrade_relic("aegis"), "pas de relique sans fragments")
 	pd.state.items["relique_aegis"] = 110

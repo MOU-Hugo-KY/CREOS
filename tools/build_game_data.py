@@ -195,6 +195,83 @@ def hit_times(bundle, clip_id, hits):
     return out
 
 
+STAT_OF = {"ATQ": "atk", "MAG": "mag", "DEF": "def", "PV": "hp"}
+STATUS_WORDS = {"Mouillé": "mouille", "Marqué": "marque", "Déséquilibré": "desequilibre", "Enraciné": "enracine",
+                "Somnolence": "somnolence", "Résonance": "resonance", "Scellé": "scelle", "Ouverture": "ouverture"}
+
+
+def secret_effects(text, hero):
+    """Traduit le texte d'une technique secrète (palier 6 d'une voie) en effets du moteur.
+    Approximation automatique : les chiffres sont ceux de la fiche, à affiner plus tard."""
+    import re
+    t = text.split(" : ", 1)[1] if " : " in text else text
+    main_stat = STAT_OF.get(hero["primary"], "atk") if hero["primary"] != "PV" else "atk"
+    effects, target = [], "single_enemy"
+    multi = re.search(r"(\d+) × (\d+) % (ATQ|MAG|DEF)", t)
+    single = re.search(r"(\d+) % (ATQ|MAG|DEF)(?! à)", t)
+    low = t.lower()
+    first_hit = single.start() if single else len(t)  # une technique offensive commence par ses dégâts
+    if "bouclier" in low and low.index("bouclier") < first_hit:
+        m = re.search(r"bouclier[^;]*?(\d+) % (ATQ|MAG|DEF|PV)", t)
+        power, stat = (int(m.group(1)) / 100, STAT_OF[m.group(2)]) if m else (1.0, "def")
+        who = "all_allies" if ("collectif" in low or "à tous" in low) else ("self" if "personnel" in low else "lowest_hp_ally")
+        return who, [dict(type="shield", power=power, stat=stat)]
+    if "soin" in low and low.index("soin") < first_hit:
+        m = re.search(r"(\d+) % (ATQ|MAG|PV)", t)
+        power, stat = (int(m.group(1)) / 100, STAT_OF[m.group(2)]) if m else (1.0, "mag")
+        if stat == "hp":
+            power = power  # pourcentage des PV max du soigneur
+        return ("all_allies" if "collectif" in low else "lowest_hp_ally"), [dict(type="heal", power=power, stat=stat)]
+    m = re.search(r"\+(\d+) % (DEF|ATQ/MAG|ATQ) (à tous|aux alliés)", t)
+    if m:
+        stats = ["atk", "mag"] if m.group(2) == "ATQ/MAG" else [STAT_OF[m.group(2)]]
+        return "all_allies", [buff(x, int(m.group(1)) / 100) for x in stats]
+    if "leurre" in low:
+        return "lowest_hp_ally", [st("leurre", A)]
+    if "garde" in low and "%" in t and not single:
+        return "lowest_hp_ally", [st("garde", A)]
+    if "protège" in low or "protection" in low:
+        return "lowest_hp_ally", [st("garde", A), dict(type="cleanse")]
+    if multi:
+        n, pw, stat = int(multi.group(1)), int(multi.group(2)) / 100, STAT_OF[multi.group(3)]
+        effects += [dmg(pw, stat) for _ in range(n)]
+    elif single:
+        effects.append(dmg(int(single.group(1)) / 100, STAT_OF[single.group(2)]))
+    else:
+        effects.append(dmg(1.5, main_stat))
+    if "sur tous" in low:
+        target = "all_enemies"
+    elif "ricochet" in low:
+        m = re.search(r"ricochet (\d+) %", t)
+        effects.append(dmg(int(m.group(1)) / 100 if m else 0.8, effects[0]["stat"], target="random_enemy"))
+    m = re.search(r"\+(\d+) % (contre|si) ([A-Za-zéèêÉ]+)", t)
+    if m and m.group(3) in STATUS_WORDS:
+        effects[0]["bonus_if"] = STATUS_WORDS[m.group(3)]
+        effects[0]["bonus"] = int(m.group(1)) / 100
+    for word, key in STATUS_WORDS.items():
+        if word in t and not ("contre " + word) in t and not ("consomme " + word) in t and "si la cible" not in t:
+            effects.append(st(key))
+    if "consomme sa Brûlure" in t:
+        effects[0]["bonus_if"] = "brulure"
+        effects[0]["bonus"] = 0.3
+    elif "Brûlure" in t:
+        effects.append(dot(0.12))
+    if "Poison" in t:
+        effects.append(dot(0.12, "atk", name="poison"))
+    m = re.search(r"vol de vie (\d+) %", low)
+    if m:
+        effects.append(dict(type="lifesteal", ratio=int(m.group(1)) / 100))
+    m = re.search(r"(\d+) % (de )?jauge", t)
+    if m:
+        effects.append(dict(type="gauge", amount=-int(m.group(1)) / 100))
+    if "étourdi" in low:
+        effects.append(dict(type="stun", duration=A, if_status="desequilibre" if "déséquilibr" in low else "petale",
+                            consume=True))
+    if "esquive garantie" in low:
+        effects.append(buff("evade", 0.6, A, self_only=True))
+    return target, effects
+
+
 def build_heroes(sheet):
     out = {}
     by_id = {h["id"]: h for h in sheet["heroes"]}
@@ -219,7 +296,12 @@ def build_heroes(sheet):
         secrets = []
         for i, p in enumerate(h["paths"]):
             st6 = p["stages"].get("6", "")
-            secrets.append({"name": st6.split(" :")[0] if " :" in st6 else p["name"], "clip": "%s_%d" % (hid, 3 + i)})
+            clip = "%s_%d" % (hid, 3 + i)
+            target, effects = secret_effects(st6, h)
+            hits = sum(1 for e in effects if e["type"] == "damage") or 1
+            secrets.append({"id": clip, "name": st6.split(" :")[0] if " :" in st6 else p["name"], "clip": clip,
+                            "description": st6.split(" : ", 1)[1] if " : " in st6 else st6, "target": target,
+                            "effects": effects, "cooldown": 8.0, "hit_times": hit_times("heroes", clip, hits)})
         out[hid] = {
             "name": h["name"], "short": SHORT.get(hid, h["name"]), "species": h["species"], "role": h["role"],
             "class": cls, "element": elem, "family": "chasseurs", "rarity": rarity, "range": rng,

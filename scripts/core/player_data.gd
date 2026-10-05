@@ -295,7 +295,8 @@ func hero_stats(id: String, hero: Dictionary) -> Dictionary:
 ## Données d'un héros prêtes pour le combat : stats à son niveau, avec ses Échos et sa relique.
 func hero_for_battle(id: String) -> Dictionary:
 	var gd: Node = (Engine.get_main_loop() as SceneTree).root.get_node("GameData")
-	return Progression.hero_for_battle(gd.hero(id), hero_level(id), _config, hero_echoes(id), relic_tier(id))
+	return Progression.hero_for_battle(gd.hero(id), hero_level(id), _config, hero_echoes(id), relic_tier(id),
+		hero_path(id))
 
 
 # --- Reliques ----------------------------------------------------------------------

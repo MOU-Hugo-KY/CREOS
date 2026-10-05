@@ -133,7 +133,7 @@ func _on_quartet_requested() -> void:
 
 
 ## Toucher (ou cliquer) un ennemi le désigne comme cible de l'équipe.
-## Clavier : 1, 2, 3 choisissent l'attaque du héros dont c'est le tour, 4 le quatuor.
+## Clavier : 1, 2, 3 choisissent l'attaque du héros dont c'est le tour, 4 le quatuor, 5 la technique secrète.
 func _unhandled_input(event: InputEvent) -> void:
 	var click := event as InputEventMouseButton
 	if click and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
@@ -148,6 +148,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if key.keycode == KEY_4:
 		_on_quartet_requested()
+		return
+	if key.keycode == KEY_5:
+		_on_attack_requested(engine.awaiting_uid, BattleUnit.SLOT_SECRET)
 		return
 	var slot := key.keycode - KEY_1
 	if slot >= 0 and slot <= 2:
@@ -266,6 +269,8 @@ func _on_attack(ev: Dictionary) -> float:
 	var color := Palette.element_color(v.unit.element)
 	if int(ev.slot) == BattleUnit.SLOT_COOLDOWN:
 		v.popup(ev.name, Palette.COOLDOWN.lightened(0.3), false, 1.6)
+	elif int(ev.slot) == BattleUnit.SLOT_SECRET:
+		v.popup(ev.name, Palette.GOLD, true, 1.6)
 	elif int(ev.slot) == BattleUnit.SLOT_ULTIMATE:
 		hud.callout(ev.name, v.unit.display_name, color, v.unit.team == 0)
 		fx.aura(v.position, color)

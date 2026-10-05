@@ -32,11 +32,16 @@ static func stats_at_level(base: Dictionary, level: int, growth: Dictionary) -> 
 
 
 ## Données d'un héros prêtes pour le combat : stats à son niveau, avec ses Échos et sa relique.
-static func hero_for_battle(hero: Dictionary, level: int, config: Dictionary, echoes := 0, relic_tier := 0) -> Dictionary:
+## Au palier 3 d'Échos (6 Échos), la technique secrète de la voie active devient une 4e attaque.
+static func hero_for_battle(hero: Dictionary, level: int, config: Dictionary, echoes := 0, relic_tier := 0,
+		path := 0) -> Dictionary:
 	var d := hero.duplicate(true)
 	d["level"] = level
 	d["echoes"] = echoes
 	d["stats"] = hero_stats(hero, level, echoes, config, relic_tier)
+	var secrets: Array = hero.get("secret_techniques", [])
+	if echo_tier(echoes, config) >= 3 and path < secrets.size() and secrets[path].has("effects"):
+		d.attacks.append(secrets[path].duplicate(true))
 	return d
 
 

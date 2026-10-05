@@ -163,16 +163,70 @@
   ],
   "secret_techniques": [
    {
+    "id": "corbin_3",
     "name": "Décapitation nocturne",
-    "clip": "corbin_3"
+    "clip": "corbin_3",
+    "description": "180 % ATQ ; +40 % si la cible a moins de 40 % PV.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.8,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "corbin_4",
     "name": "Pas du corbeau",
-    "clip": "corbin_4"
+    "clip": "corbin_4",
+    "description": "esquive garantie contre la prochaine attaque ciblée ; riposte 100 % ATQ.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "buff",
+      "stat": "evade",
+      "amount": 0.6,
+      "duration": 2.0,
+      "self_only": true
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "corbin_5",
     "name": "Vol de présages",
-    "clip": "corbin_5"
+    "clip": "corbin_5",
+    "description": "80 % ATQ sur tous ; pose Marqué 2 tours.",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "marque",
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Cape transformée en oiseaux noirs, marques bordeaux, convergence puis retour des corbeaux."
@@ -320,16 +374,63 @@
   ],
   "secret_techniques": [
    {
+    "id": "aegis_3",
     "name": "Enclume renversée",
-    "clip": "aegis_3"
+    "clip": "aegis_3",
+    "description": "180 % ATQ ; retire 35 % du bouclier avant dégâts.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.8,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "aegis_4",
     "name": "Onde du siège",
-    "clip": "aegis_4"
+    "clip": "aegis_4",
+    "description": "110 % ATQ sur tous ; Déséquilibré 1 tour.",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.1,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "desequilibre",
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "aegis_5",
     "name": "Garde de forge",
-    "clip": "aegis_5"
+    "clip": "aegis_5",
+    "description": "protège un allié ; bouclier 15 % PV d’Aegis pendant 2 tours.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 0.15,
+      "stat": "hp"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Silhouette colossale derrière le héros, marteau synchronisé et fracture en étoile."
@@ -469,16 +570,69 @@
   ],
   "secret_techniques": [
    {
+    "id": "brume_3",
     "name": "Lame de ressac",
-    "clip": "brume_3"
+    "clip": "brume_3",
+    "description": "180 % MAG ; +30 % contre Mouillé.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.8,
+      "stat": "mag",
+      "bonus_if": "mouille",
+      "bonus": 0.3
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "brume_4",
     "name": "Dôme des marées",
-    "clip": "brume_4"
+    "clip": "brume_4",
+    "description": "bouclier 80 % MAG à tous, 2 tours.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 0.8,
+      "stat": "mag"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "brume_5",
     "name": "Prison liquide",
-    "clip": "brume_5"
+    "clip": "brume_5",
+    "description": "100 % MAG ; Mouillé et retard de 15 % de jauge.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "mouille",
+      "duration": 4.0
+     },
+     {
+      "type": "gauge",
+      "amount": -0.15
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Cercle d’eau, poissons spectraux puis vague et brume basse."
@@ -684,16 +838,60 @@
   ],
   "secret_techniques": [
    {
+    "id": "orage_3",
     "name": "Poing qui fend le ciel",
-    "clip": "orage_3"
+    "clip": "orage_3",
+    "description": "190 % ATQ ; +30 % contre Mouillé.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.9,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.3
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "orage_4",
     "name": "Respiration du tonnerre",
-    "clip": "orage_4"
+    "clip": "orage_4",
+    "description": "soin collectif 150 % ATQ ; consomme jusqu’à 3 Souffles pour +15 % chacun.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "heal",
+      "power": 1.5,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "orage_5",
     "name": "Cercle du tonnerre",
-    "clip": "orage_5"
+    "clip": "orage_5",
+    "description": "100 % ATQ sur tous ; +15 points précision de contrôle alliée 1 tour.",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Huit frappes rythmées par la foudre, énergie réunie puis pluie de soin."
@@ -839,16 +1037,67 @@
   ],
   "secret_techniques": [
    {
+    "id": "kharok_3",
     "name": "Dôme de chitine",
-    "clip": "kharok_3"
+    "clip": "kharok_3",
+    "description": "bouclier collectif 130 % DEF, 2 tours.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 1.3,
+      "stat": "def"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "kharok_4",
     "name": "Charge couronnée",
-    "clip": "kharok_4"
+    "clip": "kharok_4",
+    "description": "180 % DEF ; étourdit si la cible est déséquilibrée et consomme cet état.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.8,
+      "stat": "def"
+     },
+     {
+      "type": "stun",
+      "duration": 2.0,
+      "if_status": "desequilibre",
+      "consume": true
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "kharok_5",
     "name": "Serment de chitine",
-    "clip": "kharok_5"
+    "clip": "kharok_5",
+    "description": "protège deux alliés 1 tour à 25 % de détournement chacun.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "status",
+      "name": "garde",
+      "duration": 2.0
+     },
+     {
+      "type": "cleanse"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Bouclier refermé, charge en scarabée royal, carapace déployée autour des alliés."
@@ -997,16 +1246,67 @@
   ],
   "secret_techniques": [
    {
+    "id": "braise_3",
     "name": "Tison vivant",
-    "clip": "braise_3"
+    "clip": "braise_3",
+    "description": "120 % MAG ; pose 2 charges de Brûlure.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.2,
+      "stat": "mag"
+     },
+     {
+      "type": "dot",
+      "power": 0.12,
+      "stat": "mag",
+      "duration": 4.0,
+      "name": "brulure"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "braise_4",
     "name": "Creuset explosif",
-    "clip": "braise_4"
+    "clip": "braise_4",
+    "description": "200 % MAG sur une cible ; consomme sa Brûlure pour +15 % par charge.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 2.0,
+      "stat": "mag",
+      "bonus_if": "brulure",
+      "bonus": 0.3
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "braise_5",
     "name": "Four ouvert",
-    "clip": "braise_5"
+    "clip": "braise_5",
+    "description": "pose Braises 2 tours, maximum une zone.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.5,
+      "stat": "mag"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Soufflet frénétique, four rouge, dragon de braises et explosion finale."
@@ -1154,16 +1454,70 @@
   ],
   "secret_techniques": [
    {
+    "id": "nacre_3",
     "name": "Accord triomphal",
-    "clip": "nacre_3"
+    "clip": "nacre_3",
+    "description": "+15 % ATQ/MAG aux alliés 2 tours.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "buff",
+      "stat": "atk",
+      "amount": 0.15,
+      "duration": 4.0
+     },
+     {
+      "type": "buff",
+      "stat": "mag",
+      "amount": 0.15,
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "nacre_4",
     "name": "Voile lunaire",
-    "clip": "nacre_4"
+    "clip": "nacre_4",
+    "description": "bouclier collectif 10 % PV max de Nacre, 2 tours.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 0.1,
+      "stat": "hp"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "nacre_5",
     "name": "Accord assoupi",
-    "clip": "nacre_5"
+    "clip": "nacre_5",
+    "description": "80 % MAG sur tous ; ajoute 1 Somnolence.",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "somnolence",
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Déploiement des ailes, lune, phalènes ; Lucidité illumine les alliés, sans soin."
@@ -1319,16 +1673,65 @@
   ],
   "secret_techniques": [
    {
+    "id": "rivet_3",
     "name": "Carreau du capitaine",
-    "clip": "rivet_3"
+    "clip": "rivet_3",
+    "description": "190 % ATQ ; +20 points chance critique.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.9,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "rivet_4",
     "name": "Tir à rebonds",
-    "clip": "rivet_4"
+    "clip": "rivet_4",
+    "description": "110 % ATQ puis un ricochet 80 % ATQ.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.1,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.8,
+      "stat": "atk",
+      "target": "random_enemy"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512,
+     1.672
+    ]
    },
    {
+    "id": "rivet_5",
     "name": "Cache de secours",
-    "clip": "rivet_5"
+    "clip": "rivet_5",
+    "description": "bouclier personnel 18 % PV ; +15 points précision 2 tours.",
+    "target": "self",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 0.18,
+      "stat": "hp"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Pièces lancées, tirs à ricochets, grand carreau et salut au tricorne."
@@ -1477,16 +1880,58 @@
   ],
   "secret_techniques": [
    {
+    "id": "sylve_3",
     "name": "Mur de racines",
-    "clip": "sylve_3"
+    "clip": "sylve_3",
+    "description": "bouclier collectif 10 % PV max de Sylve, 2 tours.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 0.1,
+      "stat": "hp"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "sylve_4",
     "name": "Nœud ancien",
-    "clip": "sylve_4"
+    "clip": "sylve_4",
+    "description": "120 % ATQ ; Enraciné 1 action si la cible a une charge.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.2,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "sylve_5",
     "name": "Pousse vitale",
-    "clip": "sylve_5"
+    "clip": "sylve_5",
+    "description": "soin d’un allié 12 % PV max de Sylve, puis +10 points résistance 1 tour.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "heal",
+      "power": 0.12,
+      "stat": "hp"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Mains au sol, forêt ancienne et arbre géant, feuilles devenant une armure d’écorce."
@@ -1623,16 +2068,58 @@
   ],
   "secret_techniques": [
    {
+    "id": "valen_3",
     "name": "Perce-cuirasse",
-    "clip": "valen_3"
+    "clip": "valen_3",
+    "description": "190 % ATQ ; ignore 20 % DEF.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.9,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "valen_4",
     "name": "Ronde des lances",
-    "clip": "valen_4"
+    "clip": "valen_4",
+    "description": "110 % ATQ sur tous.",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.1,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "valen_5",
     "name": "Lance en arrêt",
-    "clip": "valen_5"
+    "clip": "valen_5",
+    "description": "+25 points blocage 1 tour ; prochaine riposte 120 % ATQ.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.2,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Appui au sol, charge traversant la ligne et onde de lance."
@@ -1767,16 +2254,64 @@
   ],
   "secret_techniques": [
    {
+    "id": "bastion_3",
     "name": "Porte close",
-    "clip": "bastion_3"
+    "clip": "bastion_3",
+    "description": "bouclier 200 % DEF sur un allié, 2 tours.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 2.0,
+      "stat": "def"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "bastion_4",
     "name": "Sortie du bastion",
-    "clip": "bastion_4"
+    "clip": "bastion_4",
+    "description": "180 % DEF ; Déséquilibré 1 tour.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.8,
+      "stat": "def"
+     },
+     {
+      "type": "status",
+      "name": "desequilibre",
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "bastion_5",
     "name": "Ordre de tenir",
-    "clip": "bastion_5"
+    "clip": "bastion_5",
+    "description": "+20 % DEF à tous 2 tours ; pas de cumul avec Écorce, garder le plus fort.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "buff",
+      "stat": "def",
+      "amount": 0.2,
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Pavois planté, boucliers géants autour des alliés et onde dorée."
@@ -1920,16 +2455,58 @@
   ],
   "secret_techniques": [
    {
+    "id": "saffran_3",
     "name": "Cachet de rupture",
-    "clip": "saffran_3"
+    "clip": "saffran_3",
+    "description": "180 % MAG ; consomme Scellé pour +30 % dégâts.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.8,
+      "stat": "mag"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "saffran_4",
     "name": "Galerie des reflets",
-    "clip": "saffran_4"
+    "clip": "saffran_4",
+    "description": "leurre sur deux alliés, 1 tour.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "status",
+      "name": "leurre",
+      "duration": 2.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "saffran_5",
     "name": "Sceau de silence rituel",
-    "clip": "saffran_5"
+    "clip": "saffran_5",
+    "description": "100 % MAG ; bloque la prochaine application de bonus, maximum 1 tour.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "mag"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Cercle au pinceau, doubles en papier, origamis et sceaux explosifs."
@@ -2073,16 +2650,63 @@
   ],
   "secret_techniques": [
    {
+    "id": "oona_3",
     "name": "Perle réparatrice",
-    "clip": "oona_3"
+    "clip": "oona_3",
+    "description": "soin ciblé 220 % MAG.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "heal",
+      "power": 2.2,
+      "stat": "mag"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "oona_4",
     "name": "Bulle d’encre",
-    "clip": "oona_4"
+    "clip": "oona_4",
+    "description": "bouclier collectif 100 % MAG, 2 tours.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 1.0,
+      "stat": "mag"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "oona_5",
     "name": "Nœud des profondeurs",
-    "clip": "oona_5"
+    "clip": "oona_5",
+    "description": "120 % MAG ; Enraciné 1 action sur une cible aveuglée.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.2,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "enracine",
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Fiole lancée dans la conque, grande bulle, tentacules et potions alliées."
@@ -2226,16 +2850,70 @@
   ],
   "secret_techniques": [
    {
+    "id": "calx_3",
     "name": "Battant funéraire",
-    "clip": "calx_3"
+    "clip": "calx_3",
+    "description": "190 % MAG ; pose 1 Résonance.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.9,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "resonance",
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "calx_4",
     "name": "Heure immuable",
-    "clip": "calx_4"
+    "clip": "calx_4",
+    "description": "protection contre le prochain contrôle sur deux alliés, 1 tour.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "status",
+      "name": "garde",
+      "duration": 2.0
+     },
+     {
+      "type": "cleanse"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "calx_5",
     "name": "Temps suspendu",
-    "clip": "calx_5"
+    "clip": "calx_5",
+    "description": "80 % MAG sur tous ; retire 10 % de jauge.",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8,
+      "stat": "mag"
+     },
+     {
+      "type": "gauge",
+      "amount": -0.1
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Clé tournante, clocher spectral, anneaux dorés et dernier glas."
@@ -2398,16 +3076,75 @@
   ],
   "secret_techniques": [
    {
+    "id": "nyx_3",
     "name": "Baiser nocturne",
-    "clip": "nyx_3"
+    "clip": "nyx_3",
+    "description": "180 % ATQ ; vol de vie 35 %.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.8,
+      "stat": "atk"
+     },
+     {
+      "type": "lifesteal",
+      "ratio": 0.35
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "nyx_4",
     "name": "Croissant double",
-    "clip": "nyx_4"
+    "clip": "nyx_4",
+    "description": "2 × 100 % ATQ sur une cible.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512,
+     1.672
+    ]
    },
    {
+    "id": "nyx_5",
     "name": "Vol d’ombre",
-    "clip": "nyx_5"
+    "clip": "nyx_5",
+    "description": "esquive garantie de la prochaine attaque ciblée, 1 tour ; 100 % ATQ sur une cible.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "buff",
+      "stat": "evade",
+      "amount": 0.6,
+      "duration": 2.0,
+      "self_only": true
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Suspension, plongée, obscurcissement par les ailes et filaments de vol de vie."
@@ -2581,16 +3318,64 @@
   ],
   "secret_techniques": [
    {
+    "id": "mei_lian_3",
     "name": "Douzième mouvement — Pétale perçant",
-    "clip": "mei_lian_3"
+    "clip": "mei_lian_3",
+    "description": "190 % ATQ ; consomme les marques pour +15 % dégâts chacune.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.9,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "mei_lian_4",
     "name": "Douzième mouvement — Jardin clos",
-    "clip": "mei_lian_4"
+    "clip": "mei_lian_4",
+    "description": "bouclier 150 % ATQ sur un allié ; prochaine attaque contre lui prépare une riposte 100 % ATQ.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 1.5,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "mei_lian_5",
     "name": "Douzième mouvement — Branche gelée",
-    "clip": "mei_lian_5"
+    "clip": "mei_lian_5",
+    "description": "140 % ATQ ; consomme les marques pour tenter Étourdi 1 action.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.4,
+      "stat": "atk"
+     },
+     {
+      "type": "stun",
+      "duration": 2.0,
+      "if_status": "petale",
+      "consume": true
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Saut, 24 mouvements en silhouettes, branches fleuries, pluie de pétales roses ; arme rengainée puis impacts."
@@ -2756,16 +3541,63 @@
   ],
   "secret_techniques": [
    {
+    "id": "jin_seok_3",
     "name": "Paume qui brise le bronze",
-    "clip": "jin_seok_3"
+    "clip": "jin_seok_3",
+    "description": "200 % ATQ ; consomme Déséquilibré pour +25 %.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 2.0,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "jin_seok_4",
     "name": "Dôme de Shaolin",
-    "clip": "jin_seok_4"
+    "clip": "jin_seok_4",
+    "description": "bouclier collectif 110 % DEF, 2 tours.",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 1.1,
+      "stat": "def"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "jin_seok_5",
     "name": "Paume des méridiens",
-    "clip": "jin_seok_5"
+    "clip": "jin_seok_5",
+    "description": "130 % ATQ ; Déséquilibré ; interdit le prochain bonus de la cible 1 tour.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.3,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "desequilibre",
+      "duration": 4.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Cloche d’énergie, paumes dorées en rythme, onde de rupture."
@@ -2904,16 +3736,62 @@
   ],
   "secret_techniques": [
    {
+    "id": "yun_tao_3",
     "name": "Courant perçant",
-    "clip": "yun_tao_3"
+    "clip": "yun_tao_3",
+    "description": "190 % ATQ ; consomme Ouverture pour ignorer 20 % DEF.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.9,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "yun_tao_4",
     "name": "Miroir du courant",
-    "clip": "yun_tao_4"
+    "clip": "yun_tao_4",
+    "description": "garde de deux alliés 1 tour, réduction 30 % chacun.",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "status",
+      "name": "garde",
+      "duration": 2.0
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "yun_tao_5",
     "name": "Retour des nuages",
-    "clip": "yun_tao_5"
+    "clip": "yun_tao_5",
+    "description": "90 % ATQ sur tous ; retire 10 % jauge.",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.9,
+      "stat": "atk"
+     },
+     {
+      "type": "gauge",
+      "amount": -0.1
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Courants circulaires, cercle du Taiji et lames adverses redirigées."
@@ -3073,16 +3951,77 @@
   ],
   "secret_techniques": [
    {
+    "id": "tang_su_3",
     "name": "Aiguille du serpent",
-    "clip": "tang_su_3"
+    "clip": "tang_su_3",
+    "description": "120 % ATQ ; pose 2 charges Poison.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.2,
+      "stat": "atk"
+     },
+     {
+      "type": "dot",
+      "power": 0.12,
+      "stat": "atk",
+      "duration": 4.0,
+      "name": "poison"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    },
    {
+    "id": "tang_su_4",
     "name": "Arbalète des ombres",
-    "clip": "tang_su_4"
+    "clip": "tang_su_4",
+    "description": "3 × 70 % ATQ sur une cible.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.7,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.7,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.7,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512,
+     1.672,
+     1.832
+    ]
    },
    {
+    "id": "tang_su_5",
     "name": "Nœud interdit",
-    "clip": "tang_su_5"
+    "clip": "tang_su_5",
+    "description": "100 % ATQ ; bloque le prochain soin reçu par une cible empoisonnée, maximum 1 tour.",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     }
+    ],
+    "cooldown": 8.0,
+    "hit_times": [
+     1.512
+    ]
    }
   ],
   "ultimate_visual": "Pluie d’aiguilles, motifs de méridiens et réseau mécanique."

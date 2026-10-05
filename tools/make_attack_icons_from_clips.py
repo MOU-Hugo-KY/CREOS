@@ -68,7 +68,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     n = 0
     for hid, h in heroes.items():
-        for a in h["attacks"]:
+        for a in h["attacks"] + h.get("secret_techniques", []):
             icon = icon_for(hid, a, h.get("element", ""))
             if icon:
                 icon.save(OUT / (a["id"] + ".png"))

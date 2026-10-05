@@ -1,6 +1,7 @@
 class_name AttackBar
 extends Control
-## Les 3 icônes d'attaque du héros dont c'est le tour, en bas de l'écran.
+## Les icônes d'attaque du héros dont c'est le tour, en bas de l'écran (3, ou 4 avec sa
+## technique secrète à partir de 6 Échos).
 ## Invisible le reste du temps.
 
 signal attack_chosen(slot: int)
@@ -18,8 +19,8 @@ func _ready() -> void:
 	grow_vertical = Control.GROW_DIRECTION_BEGIN
 	offset_top = -215
 	offset_bottom = -18
-	offset_left = -260
-	offset_right = 260
+	offset_left = -330
+	offset_right = 330
 	var v := VBoxContainer.new()
 	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	v.alignment = BoxContainer.ALIGNMENT_END
@@ -42,7 +43,7 @@ func _ready() -> void:
 	_row.add_theme_constant_override("separation", 30)
 	_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	v.add_child(_row)
-	for i in 3:
+	for i in 4:
 		var icon := AttackIcon.new()
 		var slot := i
 		icon.pressed.connect(func() -> void: attack_chosen.emit(slot))
@@ -94,7 +95,7 @@ func refresh() -> void:
 		var corner := ""
 		var progress := 1.0
 		match i:
-			BattleUnit.SLOT_COOLDOWN:
+			BattleUnit.SLOT_COOLDOWN, BattleUnit.SLOT_SECRET:
 				var cd: float = unit.attacks[i].get("cooldown", 1.0)
 				var left := unit.cooldowns[i]
 				progress = 1.0 - left / maxf(cd, 0.01)

@@ -309,7 +309,7 @@ func _hero_by_id(id: String) -> BattleUnit:
 
 ## IA simple : l'ultime dès qu'elle est prête, sinon l'attaque à recharge, sinon l'attaque de base.
 func _ai_choice(u: BattleUnit) -> int:
-	for slot in [BattleUnit.SLOT_ULTIMATE, BattleUnit.SLOT_COOLDOWN]:
+	for slot in [BattleUnit.SLOT_ULTIMATE, BattleUnit.SLOT_SECRET, BattleUnit.SLOT_COOLDOWN]:
 		if u.attack_ready(slot):
 			return slot
 	return BattleUnit.SLOT_BASIC

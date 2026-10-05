@@ -12,6 +12,7 @@ const ENERGY_MAX := 100.0
 const SLOT_BASIC := 0
 const SLOT_COOLDOWN := 1
 const SLOT_ULTIMATE := 2
+const SLOT_SECRET := 3  # technique secrète de la voie active (à partir de 6 Échos)
 
 var uid: int
 var def_id: String
