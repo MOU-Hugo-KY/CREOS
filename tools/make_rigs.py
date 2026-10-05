@@ -204,59 +204,107 @@ def aim(rest, target):
     return round((target - rest + 180) % 360 - 180)
 
 
-def attack(extras, clip, slot, rest):
+# Façon de se battre de chaque héros : type de geste et poids.
+#   slash (taille avec l'arme), slam (coup lourd écrasant), thrust (estoc), punch (poings, les deux
+#   bras en alternance), shoot (tir avec recul), cast (sort : bras levé puis poussé vers l'avant).
+#   heavy (lent, appuyé), normal, light (vif), floaty (vole : flotte au-dessus du sol).
+STYLES = {
+    "aegis": ("slash", "heavy"), "bastion": ("slam", "heavy"), "braise": ("shoot", "heavy"),
+    "brume": ("cast", "normal"), "calx": ("slam", "heavy"), "jin_seok": ("punch", "light"),
+    "kharok": ("thrust", "normal"), "mei_lian": ("slash", "light"), "nacre": ("cast", "floaty"),
+    "nyx": ("slash", "floaty"), "oona": ("cast", "normal"), "orage": ("punch", "light"),
+    "rivet": ("shoot", "normal"), "saffran": ("cast", "light"), "sylve": ("slam", "heavy"),
+    "tang_su": ("shoot", "light"), "valen": ("thrust", "normal"), "yun_tao": ("slash", "light"),
+}
+TIMING = {  # (élan normal, élan ultime, durée de la frappe, retenue après le coup)
+    "heavy": (0.45, 0.75, 0.10, 0.22), "normal": (0.32, 0.6, 0.08, 0.16),
+    "light": (0.22, 0.5, 0.055, 0.12), "floaty": (0.3, 0.6, 0.08, 0.18),
+}
+
+
+def poses(kind, big, wide):
+    """(prêt, impact) pour le bras avant : valeurs r/x/y de l'os, et réaction du torse."""
+    m = 1.35 if big else 1.0
+    if kind == "slash":
+        return {"r": round(-48 * wide * m)}, {"r": round(26 * m)}, -14, 18
+    if kind == "slam":
+        return {"r": round(-62 * wide * m)}, {"r": round(40 * m)}, -18, 26
+    if kind == "thrust":
+        return {"r": 12, "x": -26}, {"r": -6, "x": round(42 * m)}, -10, 14
+    if kind == "punch":
+        return {"r": 10, "x": -18}, {"r": -8, "x": round(38 * m)}, -8, 12
+    if kind == "shoot":
+        return {"r": -3}, {"r": -16, "x": -16}, -4, -8
+    return {"r": round(-58 * m), "y": -6}, {"r": 6, "x": round(24 * m)}, -6, 10  # cast
+
+
+def attack(extras, clip, slot, rest, style):
+    kind, weight = style
     dur = clip["dur"]
     cues = sorted({round(float(c[0]), 3) for c in clip.get("cue", [])}) or [dur * 0.55]
     first, last = cues[0], cues[-1]
     end = dur - 0.05
-    hold = last + (end - last) * 0.35
     big = slot >= 2
-    wind = max(0.1, first - (0.6 if big else 0.32))
-    k = {}
-    # Élan puis frappe(s), retenue, retour au repos.
-    # Arme levée (sans passer devant le visage) puis abattue vers l'avant ; l'ultime va plus loin.
-    # Un bras qui pend (angle de repos vers le bas) balaie plus large qu'un bras déjà tendu.
+    t_wind, t_wind_big, snap, keep = TIMING[weight]
+    wind = max(0.08, first - (t_wind_big if big else t_wind))
+    hold = min(end - 0.15, last + keep + (end - last) * 0.25)
     wide = 1.4 if rest > 35 else 1.0
-    up = round(-(70 if big else 48) * wide)
-    hit, follow = (34 if big else 24), 14
-    arm = [(0, {"r": 0}, ""), (wind, {"r": up}, "o")]
-    torso = [(0, {"r": 0, "sy": 1}, ""), (wind, {"r": -14, "sy": 0.95 if big else 1}, "o")]
-    hip = [(0, {"y": 0}, ""), (wind, {"y": 14 if big else 8}, "o")]
+    ready, hit, lean_ready, lean_hit = poses(kind, big, wide)
+    rest_v = {"r": 0, "x": 0, "y": 0}
+    follow = {c: round(v * 0.75) for c, v in hit.items()}
+    over = {c: round(v * 1.15) for c, v in hit.items()}
+    hover = -10 if weight == "floaty" else 0
+    dip = {"heavy": 16, "normal": 9, "light": 6, "floaty": 4}[weight]
+    arm = [(0, dict(rest_v), ""), (wind, dict(ready), "o")]
+    arm_b = [(0, dict(rest_v), ""), (wind, {"r": -20, "x": 0}, "o")]
+    torso = [(0, {"r": 0, "sy": 1}, ""), (wind, {"r": lean_ready, "sy": 0.95 if big else 0.98}, "o")]
+    hip = [(0, {"y": hover}, ""), (wind, {"y": hover + dip}, "o")]
     head = [(0, {"r": 0}, ""), (wind, {"r": -8}, "o")]
-    arm_b = [(0, {"r": 0}, ""), (wind, {"r": -25}, "o")]
-    if big:  # ultime : on tient la charge en tremblant
-        t = wind
-        while t + 0.2 < first - 0.15:
-            t += 0.2
-            arm.append((t, {"r": up - (6 if len(arm) % 2 else 0)}, ""))
-            torso.append((t, {"r": -16 if len(torso) % 2 else -12}, ""))
-    prev = wind
+    # Charge tenue (avec un léger tremblement pour l'ultime) jusqu'au déclenchement de la frappe.
+    t = wind
+    while t + 0.16 < first - snap:
+        t += 0.16
+        odd = len(arm) % 2
+        arm.append((t, {**ready, "r": ready["r"] + (3 if odd and big else 0)}, ""))
+        torso.append((t, {"r": lean_ready - (2 if odd and big else 0)}, ""))
+    prev = first
     for n, c in enumerate(cues):
-        if n > 0 and c - prev > 0.12:
-            mid = (prev + c) / 2
-            arm.append((mid, {"r": round(up * 0.7)}, "o"))
-            torso.append((mid, {"r": -6}, ""))
-        arm.append((c, {"r": hit}, "i"))
-        torso.append((c, {"r": 18, "sy": 1}, "i"))
-        hip.append((c, {"y": -4}, "o"))
-        head.append((c, {"r": 9}, "o"))
-        arm_b.append((c, {"r": 30}, "o"))
-        prev = c
-    arm += [(hold, {"r": follow}, ""), (end, {"r": 0}, "")]
-    torso += [(hold, {"r": 10}, ""), (end, {"r": 0}, "")]
-    hip += [(hold, {"y": 6 if big else 0}, ""), (end, {"y": 0}, "")]
-    head += [(hold, {"r": 5}, ""), (end, {"r": 0}, "")]
-    arm_b += [(hold, {"r": 15}, ""), (end, {"r": 0}, "")]
-    k.update(arm_f=K(*arm), torso=K(*torso), hip=K(*hip), head=K(*head), arm_b=K(*arm_b))
+        alt = kind == "punch" and n % 2 == 1  # coups de poing alternés
+        striker, other = (arm_b, arm) if alt else (arm, arm_b)
+        if n > 0:
+            back = max(prev + 0.02, c - snap)
+            if back - prev > 0.05:
+                striker.append((back, dict(ready), "o"))
+                torso.append((back, {"r": lean_ready * 0.6}, ""))
+        else:
+            striker.append((max(wind, c - snap), dict(ready), ""))
+            torso.append((max(wind, c - snap), {"r": lean_ready}, ""))
+        striker.append((c, dict(over), "i"))  # frappe sèche, en quelques images
+        if c + 0.05 < end:
+            striker.append((c + 0.05, dict(hit), "o"))
+        other.append((c, {"r": 22 if kind != "punch" else 0, "x": -10 if kind == "punch" else 0}, "o"))
+        torso.append((c, {"r": lean_hit, "sy": 1.03}, "i"))
+        hip.append((c, {"y": hover + (dip * 0.8 if kind == "slam" else -4)}, "o"))
+        head.append((c, {"r": 8 if lean_hit > 0 else -6}, "o"))
+        prev = c + 0.05
+    arm += [(hold, dict(follow), ""), (end, dict(rest_v), "")]
+    arm_b += [(hold, {"r": 10, "x": 0}, ""), (end, dict(rest_v), "")]
+    torso += [(hold, {"r": lean_hit * 0.6, "sy": 1}, ""), (end, {"r": 0}, "b")]
+    hip += [(hold, {"y": hover + dip * 0.3}, ""), (end, {"y": hover}, "")]
+    head += [(hold, {"r": 4}, ""), (end, {"r": 0}, "b")]
+    arm.sort(key=lambda a: a[0])
+    arm_b.sort(key=lambda a: a[0])
+    k = {"arm_f": K(*arm), "torso": K(*torso), "hip": K(*hip), "head": K(*head), "arm_b": K(*arm_b)}
     track = root_track(clip)
-    moves = track is not None
     if track:
         k["root"] = track
-    step = 26 if moves else 10
-    k["leg_front"] = K((0, {"r": 0}, ""), (wind, {"r": 6}, ""), (first, {"r": -step}, "o"), (hold, {"r": -step * 0.7}, ""), (end, {"r": 0}, ""))
-    k["leg_back"] = K((0, {"r": 0}, ""), (wind, {"r": -6}, ""), (first, {"r": step * 0.9}, "o"), (hold, {"r": step * 0.6}, ""), (end, {"r": 0}, ""))
+    step = 26 if track else (6 if weight == "floaty" else 12)
+    k["leg_front"] = K((0, {"r": 0}, ""), (wind, {"r": 8}, ""), (first, {"r": -step}, "o"), (hold, {"r": -step * 0.6}, ""), (end, {"r": 0}, ""))
+    k["leg_back"] = K((0, {"r": 0}, ""), (wind, {"r": -8}, ""), (first, {"r": step * 0.9}, "o"), (hold, {"r": step * 0.5}, ""), (end, {"r": 0}, ""))
+    flap = 2.0 if weight == "floaty" else 1.0
     for x in extras:
-        k[x] = K((0, {"r": 0}, ""), (wind, {"r": -8}, ""), (first, {"r": 16}, ""), (min(end, first + 0.3), {"r": 6}, "b"), (end, {"r": 0}, ""))
+        k[x] = K((0, {"r": 0}, ""), (wind, {"r": -8 * flap}, ""), (first, {"r": 16 * flap}, ""),
+                 (min(end, first + 0.3), {"r": 6}, "b"), (end, {"r": 0}, ""))
     return {"dur": dur, "keys": k}
 
 
@@ -268,6 +316,11 @@ def make(hero, force=False):
     arm = next((p for p in parts if p["id"] == "arm_f"), None)
     rest = math.degrees(math.atan2(arm["pos"][1] - arm["pivot"][1], arm["pos"][0] - arm["pivot"][0])) if arm else 0.0
     anims = {"idle": idle(extras)}
+    if STYLES.get(hero, ("", ""))[1] == "floaty":  # vole : flotte plus haut, ailes battantes
+        anims["idle"]["keys"]["hip"] = K((0, {"y": -10}, ""), (0.6, {"y": -18}, ""), (1.3, {"y": -8}, ""), (2.0, {"y": -10}, ""))
+        for x in extras:
+            anims["idle"]["keys"][x] = K((0, {"r": 0}, ""), (0.25, {"r": -14}, "o"), (0.6, {"r": 6}, ""), (1.0, {"r": 0}, ""),
+                                         (1.25, {"r": -14}, "o"), (1.6, {"r": 6}, ""), (2.0, {"r": 0}, ""))
     w = load_clip(hero + "_walk")
     anims["walk"] = walk(extras, w["dur"] if w else 1.2)
     h = load_clip(hero + "_hurt")
@@ -282,7 +335,7 @@ def make(hero, force=False):
     for slot in range(6):
         c = load_clip("%s_%d" % (hero, slot))
         if c:
-            anims[str(slot)] = attack(extras, c, slot, rest)
+            anims[str(slot)] = attack(extras, c, slot, rest, STYLES.get(hero, ("slash", "normal")))
     # Retire les clés d'os absents (ex. héros sans bras).
     for a in anims.values():
         a["keys"] = {b: v for b, v in a["keys"].items() if b in has}
