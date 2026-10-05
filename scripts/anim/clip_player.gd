@@ -231,6 +231,13 @@ static func load_clip(dir: String, id: String) -> Dictionary:
 	return clip
 
 
+## Charge à l'avance un clip et ses images (évite un à-coup la première fois qu'il est joué).
+static func warm(dir: String, id: String) -> void:
+	var clip := load_clip(dir, id)
+	for name: String in clip.get("tex", []):
+		texture(dir + "tex/" + name)
+
+
 static func texture(path: String) -> Texture2D:
 	if not _textures.has(path):
 		_textures[path] = load(path) if ResourceLoader.exists(path) else null

@@ -287,8 +287,8 @@ func _on_quartet(ev: Dictionary) -> float:
 	var clip := String(ev.get("clip", ""))
 	var p := ClipPlayer.new()
 	p.bundle = "res://assets/anim/heroes/"
-	p.scale = Vector2.ONE * UnitView.HERO_SCALE
-	p.position = Vector2(HERO_SPOTS[3].x, HERO_SPOTS[0].y)
+	p.scale = Vector2.ONE * 0.65  # les quatre héros du clip sont dessinés plus petits
+	p.position = Vector2(330, HERO_SPOTS[0].y)  # les effets tombent sur la ligne ennemie
 	p.z_index = 12
 	_units_root.add_child(p)
 	p.play(clip, false)

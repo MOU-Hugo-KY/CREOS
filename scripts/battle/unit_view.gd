@@ -40,6 +40,10 @@ func setup(p_unit: BattleUnit, p_data: Dictionary) -> void:
 	player.sound_volume_db = -10.0
 	add_child(player)
 	player.play(_id + "_idle")
+	for clip_name: String in [_id + "_hurt", _id + "_death"]:
+		ClipPlayer.warm(player.bundle, clip_name)
+	for a: Dictionary in data.get("attacks", []):
+		ClipPlayer.warm(player.bundle, String(a.get("clip", "")))
 	var r := player.actor_rect(_id + "_idle")
 	height = maxf(60.0, -r.position.y * model_scale)
 
