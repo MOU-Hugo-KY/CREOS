@@ -81,20 +81,6 @@
    "above": "autel"
   },
   {
-   "file": "Bateau_De_Peche.png",
-   "x": 3560,
-   "y": 556,
-   "size": 190,
-   "ground": 645,
-   "sway": {
-    "rot": 2.2,
-    "bob": 4,
-    "speed": 0.7,
-    "pivot": "bottom"
-   },
-   "cut_bottom": 0.09
-  },
-  {
    "file": "Fumee_Cheminee_8f_10fps.png",
    "x": 1466,
    "y": 30,
@@ -179,34 +165,6 @@
    "parallax": 0.75
   },
   {
-   "file": "Eau_Port_8f_10fps.png",
-   "x": 3250,
-   "y": 680,
-   "size": 130,
-   "ground": 600
-  },
-  {
-   "file": "Eau_Port_8f_10fps.png",
-   "x": 3380,
-   "y": 640,
-   "size": 150,
-   "ground": 600
-  },
-  {
-   "file": "Eau_Port_8f_10fps.png",
-   "x": 3720,
-   "y": 660,
-   "size": 140,
-   "ground": 600
-  },
-  {
-   "file": "Eau_Port_8f_10fps.png",
-   "x": 3820,
-   "y": 580,
-   "size": 110,
-   "ground": 600
-  },
-  {
    "file": "Feuillage_8f_8fps.png",
    "x": 120,
    "y": 760,
@@ -232,26 +190,6 @@
     "speed": 0.5,
     "pivot": "top"
    }
-  },
-  {
-   "file": "Feuillage_8f_8fps.png",
-   "x": 1990,
-   "y": 340,
-   "size": 170,
-   "ground": 600,
-   "sway": {
-    "rot": 2.5,
-    "bob": 0,
-    "speed": 0.5,
-    "pivot": "top"
-   }
-  },
-  {
-   "file": "Eau_Port_8f_10fps.png",
-   "x": 3555,
-   "y": 640,
-   "size": 230,
-   "ground": 650
   }
  ],
  "gulls": {

@@ -52,6 +52,9 @@ func _ready() -> void:
 	visible = false
 
 
+var _tween: Tween
+
+
 func show_for(p_unit: BattleUnit) -> void:
 	unit = p_unit
 	var color := Palette.element_color(unit.element)
@@ -67,7 +70,10 @@ func show_for(p_unit: BattleUnit) -> void:
 	modulate.a = 0.0
 	_row.scale = Vector2.ONE * 0.85
 	_row.pivot_offset = _row.size / 2.0
+	if _tween:
+		_tween.kill()  # sinon le fondu de fermeture du héros précédent recache la barre
 	var tw := create_tween().set_parallel()
+	_tween = tw
 	tw.tween_property(self, "modulate:a", 1.0, 0.15)
 	tw.tween_property(_row, "scale", Vector2.ONE, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
@@ -78,7 +84,10 @@ func hide_bar(chosen := -1) -> void:
 	if chosen >= 0 and chosen < _icons.size():
 		_icons[chosen].press_feedback()
 	unit = null
+	if _tween:
+		_tween.kill()
 	var tw := create_tween()
+	_tween = tw
 	tw.tween_interval(0.1)
 	tw.tween_property(self, "modulate:a", 0.0, 0.15)
 	tw.tween_callback(func() -> void:

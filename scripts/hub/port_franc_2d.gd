@@ -62,7 +62,7 @@ func _ready() -> void:
 ## Le hub place la caméra : `left` = bord gauche visible (en px de la scène).
 func set_view_left(left: float) -> void:
 	for p: Dictionary in _planes:
-		var f: float = p.parallax
+		var f: float = minf(p.parallax, 1.0)  # le premier plan suit la place : pas de bord vide
 		p.node.position.x = (left - 960.0) * (1.0 - f)
 
 
