@@ -46,6 +46,8 @@ var _running := false
 var _flash := 0.0
 var _mat: ShaderMaterial
 var _voices: Array[AudioStreamPlayer] = []
+var _rig: Rig  # squelette du personnage : remplace les pièces du clip quand il a cette animation
+var _rig_anim := ""
 
 
 func _init() -> void:
@@ -72,6 +74,9 @@ func play(id: String, then_idle := true) -> bool:
 	_cue_i = 0
 	_snd_i = 0
 	_running = true
+	var cut := id.rfind("_")
+	_rig = Rig.for_actor(id.substr(0, cut)) if cut > 0 and bundle.ends_with("heroes/") else null
+	_rig_anim = id.substr(cut + 1) if _rig and _rig.has_anim(id.substr(cut + 1)) else ""
 	if not then_idle:
 		idle_clip = ""
 	queue_redraw()
@@ -128,6 +133,8 @@ func _process(delta: float) -> void:
 	if not _running:
 		return
 	_t += delta * speed
+	if _rig_anim != "":
+		queue_redraw()  # le squelette bouge en continu, pas image par image
 	var snd: Array = _clip.snd
 	while _snd_i < snd.size() and _t >= float(snd[_snd_i][0]):
 		_play_sound(String(snd[_snd_i][1]))
@@ -160,9 +167,12 @@ func _draw() -> void:
 		return
 	var frames: Array = _clip.f
 	var f := clampi(_frame, 0, frames.size() - 1)
+	var rigged := _rig_anim != ""
+	if rigged and show_actor:
+		_rig.draw_pose(self, _rig_anim, _t)
 	for cmd: Array in frames[f]:
 		var layer := int(cmd[8])
-		if (layer == 0 and not show_actor) or (layer == 1 and not show_effects):
+		if (layer == 0 and (rigged or not show_actor)) or (layer == 1 and not show_effects):
 			continue
 		var kind := int(cmd[0])
 		if kind >= 0:
