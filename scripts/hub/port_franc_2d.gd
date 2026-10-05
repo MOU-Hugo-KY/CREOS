@@ -206,6 +206,12 @@ func _add_anim(a: Dictionary) -> void:
 	var size := float(a.size)
 	sprite.scale = Vector2.ONE * size / float(tex.get_height())
 	sprite.flip_h = a.get("flip", false)
+	if a.has("cut_bottom"):
+		# Coupe le bas du dessin (la coque « entre » dans l'eau).
+		var keep := 1.0 - float(a.cut_bottom)
+		sprite.region_enabled = true
+		sprite.region_rect = Rect2(0, 0, tex.get_width(), tex.get_height() * keep)
+		sprite.offset = Vector2(0, -tex.get_height() * (1.0 - keep) / 2.0)  # le haut ne bouge pas
 	var visual: Node2D = sprite
 	if a.has("sway"):
 		# Image fixe qui se balance doucement (les planches qui « sautent » d'une image à l'autre

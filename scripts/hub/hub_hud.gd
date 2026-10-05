@@ -330,9 +330,8 @@ func _pill(icon_name: String, value: String) -> Control:
 	p.add_child(h)
 	var icon := TextureRect.new()
 	icon.texture = _icon(icon_name)
-	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.custom_minimum_size = Vector2(44, 44)
+	icon.custom_minimum_size = Vector2(54, 54)
 	h.add_child(icon)
 	var l := UiKit.title(value + "  ", 24)
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -353,7 +352,7 @@ func _build_main_buttons() -> void:
 	var buildings: Dictionary = GameData.hub.get("buildings", {})
 	for id: String in GameData.hub.get("main_buttons", []):
 		var info: Dictionary = buildings.get(id, {})
-		var b := IconButton.new().setup(_icon(info.get("icon", "")), info.get("name", id), 50.0)
+		var b := IconButton.new().setup(_icon(info.get("icon", "")), info.get("name", id), 58.0)
 		var act: String = info.get("action", "")
 		b.pressed.connect(func() -> void:
 			ui_sound.emit("ui_click")

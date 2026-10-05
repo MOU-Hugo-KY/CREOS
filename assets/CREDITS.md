@@ -22,7 +22,8 @@ et `ambience.gdshader` viennent du pack « Ambiances animées » (créé pour CR
 ## Icônes (`assets/ui/attacks/`, `assets/ui/hub/`)
 
 Icônes d'attaques tirées de l'image d'impact de chaque clip par `tools/make_attack_icons_from_clips.py` ;
-icônes du hub dessinées par `tools/make_ui_icons.py` (créées par nous).
+icônes du hub et des monnaies dessinées par `tools/make_hub_icons.py` (pièces d'or, diamant,
+énergie, parchemin, coffre, œil, trophée, bouclier, créés par nous) ou reprises des dessins du port.
 
 ## Sons et musiques (`assets/audio/`)
 

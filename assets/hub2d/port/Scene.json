@@ -66,9 +66,9 @@
   {
    "id": "tour",
    "file": "Tour_De_Morvath",
-   "x": 3200,
-   "y": 505,
-   "w": 150,
+   "x": 3180,
+   "y": 592,
+   "w": 120,
    "parallax": 0.35
   }
  ],
@@ -82,16 +82,17 @@
   },
   {
    "file": "Bateau_De_Peche.png",
-   "x": 3310,
-   "y": 600,
-   "size": 300,
-   "ground": 640,
+   "x": 3560,
+   "y": 556,
+   "size": 190,
+   "ground": 645,
    "sway": {
     "rot": 2.2,
     "bob": 4,
     "speed": 0.7,
     "pivot": "bottom"
-   }
+   },
+   "cut_bottom": 0.09
   },
   {
    "file": "Fumee_Cheminee_8f_10fps.png",
@@ -186,8 +187,8 @@
   },
   {
    "file": "Eau_Port_8f_10fps.png",
-   "x": 3520,
-   "y": 610,
+   "x": 3380,
+   "y": 640,
    "size": 150,
    "ground": 600
   },
@@ -244,6 +245,13 @@
     "speed": 0.5,
     "pivot": "top"
    }
+  },
+  {
+   "file": "Eau_Port_8f_10fps.png",
+   "x": 3555,
+   "y": 640,
+   "size": 230,
+   "ground": 650
   }
  ],
  "gulls": {

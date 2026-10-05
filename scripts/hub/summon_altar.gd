@@ -8,7 +8,7 @@ signal closed
 signal ui_sound(sfx_name: String)
 
 const ICON_DIR := "res://assets/ui/hub/"
-const CURRENCIES := [["fragments_relique", "autel"], ["gems", "gemmes"]]
+const CURRENCIES := [["fragments_relique", "eclats"], ["gems", "gemmes"]]
 
 var _stage: SummonStage
 var _balance: Dictionary = {}  # monnaie -> Label

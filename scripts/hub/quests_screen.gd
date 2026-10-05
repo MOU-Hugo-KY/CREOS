@@ -9,7 +9,7 @@ signal ui_sound(sfx_name: String)
 
 const ACTION_ICONS := {"campaign": "chasses", "altar": "autel", "heroes": "heros", "shop": "marche",
 	"guild": "guilde", "tower": "tour", "": "primes"}
-const REWARD_ICONS := {"gold": "or", "gems": "gemmes", "fragments_relique": "autel", "energy": "energie"}
+const REWARD_ICONS := {"gold": "or", "gems": "gemmes", "fragments_relique": "eclats", "energy": "energie", "materiaux_relique": "reliques"}
 
 var _points_bar: ProgressBar
 var _points_label: Label

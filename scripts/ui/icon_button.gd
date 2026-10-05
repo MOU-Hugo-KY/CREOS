@@ -1,7 +1,7 @@
 class_name IconButton
 extends Control
-## Bouton rond avec une icône pixel art et un nom dessous (menus du hub).
-## Même style que les icônes d'attaque du combat.
+## Bouton rond avec une icône dessinée et un nom dessous (menus du hub) : médaillon ivoire
+## cerclé d'encre et de laiton, avec une ombre franche, comme le reste de l'interface.
 
 signal pressed
 
@@ -61,19 +61,25 @@ func _gui_input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	var c := Vector2(custom_minimum_size.x / 2.0, radius + 4.0)
-	# Médaillon en relief : ombre, tranche de bois, disque bleu nuit, reflet en haut.
-	draw_circle(c + Vector2(0, 6), radius, Color(0, 0, 0, 0.3))
+	var hover := _hover
+	# Médaillon : ombre franche d'encre, cercle d'encre, anneau de laiton, disque ivoire.
+	draw_circle(c + Vector2(0, 7), radius, Color(0, 0, 0, 0.35))
 	draw_circle(c + Vector2(0, 4), radius, UiKit.INK)
-	draw_circle(c, radius, UiKit.WOOD)
-	draw_circle(c, radius - 4.0, Color("2d3554"))
-	draw_circle(c - Vector2(0, radius * 0.18), radius * 0.72, Color(1, 1, 1, 0.06))
+	draw_circle(c, radius, UiKit.INK)
+	draw_circle(c, radius - 3.0, Color("c6a66c").lightened(0.15 if hover else 0.0))
+	draw_circle(c, radius - 8.0, UiKit.INK)
+	draw_circle(c, radius - 10.0, Color("f3ead6") if hover else UiKit.PARCHMENT)
+	# Lumière douce en haut, ombre en bas du disque.
+	draw_circle(c + Vector2(0, radius * 0.35), radius * 0.62, Color(0.55, 0.45, 0.3, 0.12))
+	draw_circle(c - Vector2(0, radius * 0.3), radius * 0.55, Color(1, 1, 1, 0.25))
 	if icon:
-		var s := radius * 1.45
-		draw_texture_rect(icon, Rect2(c - Vector2(s, s) / 2.0, Vector2(s, s)), false)
-	draw_arc(c, radius - 2.0, 0, TAU, 64, accent.lightened(0.2) if _hover else Color("c8925a"), 4.0 if _hover else 3.0, true)
+		var s := radius * 1.62
+		draw_texture_rect(icon, Rect2(c - Vector2(s, s) / 2.0 - Vector2(0, 2), Vector2(s, s)), false)
+	if hover:
+		draw_arc(c, radius + 3.0, 0, TAU, 64, accent.lightened(0.3), 4.0, true)
 	if badge > 0:
-		var b := c + Vector2(radius * 0.72, -radius * 0.72)
-		draw_circle(b, 15, Color.WHITE)
-		draw_circle(b, 12.5, Color("e8443a"))
+		var b := c + Vector2(radius * 0.74, -radius * 0.74)
+		draw_circle(b, 16, UiKit.INK)
+		draw_circle(b, 13, Color("c8453c"))
 		var font := get_theme_default_font()
 		draw_string(font, b + Vector2(-5 if badge < 10 else -9, 6), str(badge), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.WHITE)

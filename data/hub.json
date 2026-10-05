@@ -40,7 +40,7 @@
     },
     "reliques": {
       "name": "Reliques",
-      "icon": "autel",
+      "icon": "reliques",
       "action": "relics",
       "description": "Les reliques anciennes de tes héros et les quatuors."
     }

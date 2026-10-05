@@ -14,7 +14,10 @@ DIR = Path(__file__).resolve().parent.parent / "assets" / "hub2d" / "port"
 
 def sheet_frame(path, frame):
     im = Image.open(path).convert("RGBA")
-    n = int(path.stem.split("_")[-2].rstrip("f"))
+    parts = path.stem.split("_")
+    if len(parts) < 3 or not parts[-1].endswith("fps"):
+        return im  # image fixe
+    n = int(parts[-2].rstrip("f"))
     w = im.width // n
     return im.crop((w * (frame % n), 0, w * (frame % n) + w, im.height))
 
