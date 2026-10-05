@@ -1,0 +1,26 @@
+{
+ "world": 8,
+ "name": "Pics des Wyvernes",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "Le col des ailes",
+   "role": "Entree"
+  },
+  {
+   "name": "Le pont des nuages",
+   "role": "Profondeur"
+  },
+  {
+   "name": "Le nid de la Matriarche des Pics",
+   "role": "Boss"
+  }
+ ]
+}

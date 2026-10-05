@@ -1,0 +1,148 @@
+{
+  "id": "Monde03_03",
+  "world": 3,
+  "name": "La chambre des Mille-Oeufs",
+  "ambience": "Poussière, gouttes et lueurs des cocons",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 302,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        220,
+        109.5,
+        100,
+        100
+      ],
+      "color": "ffb54a60",
+      "phase": 9.93
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        257.5,
+        147,
+        25,
+        65
+      ],
+      "color": "ff873bcd",
+      "phase": 9.93
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        1100,
+        115.5,
+        100,
+        100
+      ],
+      "color": "ffb54a60",
+      "phase": 10.93
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        1137.5,
+        153,
+        25,
+        65
+      ],
+      "color": "ff873bcd",
+      "phase": 10.93
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        484,
+        239.5,
+        52,
+        52
+      ],
+      "color": "ffb54a60",
+      "phase": 11.93
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        503.5,
+        259,
+        13,
+        30
+      ],
+      "color": "ff873bcd",
+      "phase": 11.93
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        732.0,
+        151.0,
+        100,
+        100
+      ],
+      "color": "c777ff85",
+      "phase": 9.93
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        285.0,
+        88.0,
+        80,
+        80
+      ],
+      "color": "c777ff85",
+      "phase": 9.93
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        80,
+        80,
+        1120,
+        350
+      ],
+      "color": "d2ba90",
+      "style": "dust",
+      "count": 22,
+      "seed": 302,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        250,
+        285,
+        760,
+        120
+      ],
+      "color": "b09a8670",
+      "phase": 9.93,
+      "optional_mobile": true
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        270,
+        50,
+        690,
+        300
+      ],
+      "color": "ccbfa5",
+      "style": "drop",
+      "count": 10,
+      "seed": 352,
+      "size": 1,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

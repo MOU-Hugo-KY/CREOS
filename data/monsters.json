@@ -1,168 +1,5930 @@
 {
-  "squelette_serviteur": {
-    "name": "Serviteur squelette",
-    "class": "lame",
-    "element": "ombre",
-    "family": "revenants",
-    "range": "melee",
-    "attack_kind": "physical",
-    "stats": {
-      "hp": 500,
-      "atk": 55,
-      "def": 30,
-      "res": 20,
-      "spd": 90,
-      "crit": 0.05
-    },
-    "puppet": "res://assets/monsters2d/serviteur/",
-    "attacks": [
-      {
-        "id": "griffe",
-        "name": "Griffe",
-        "anim": "slash",
-        "hit_time": 0.3
-      }
-    ]
+ "slime_marin": {
+  "name": "Slime marin",
+  "element": "eau",
+  "family": "slime",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 160,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "gel_marin",
+  "stats": {
+   "hp": 430,
+   "atk": 52,
+   "mag": 52,
+   "def": 28,
+   "res": 28,
+   "spd": 92,
+   "crit": 0.05
   },
-  "squelette_guerrier": {
-    "name": "Guerrier squelette",
-    "class": "gardien",
-    "element": "ombre",
-    "family": "revenants",
-    "range": "melee",
-    "attack_kind": "physical",
-    "stats": {
-      "hp": 800,
-      "atk": 60,
-      "def": 60,
-      "res": 30,
-      "spd": 80,
-      "crit": 0.05
-    },
-    "puppet": "res://assets/monsters2d/guerrier/",
-    "attacks": [
-      {
-        "id": "taille_rouillee",
-        "name": "Taille rouillée",
-        "anim": "slam",
-        "hit_time": 0.4
-      }
+  "attacks": [
+   {
+    "id": "slime_marin_attack",
+    "name": "Attaque",
+    "clip": "slime_marin_attack",
+    "hit_times": [
+     0.52
     ]
+   }
+  ]
+ },
+ "slime_couronne": {
+  "name": "Slime couronné de corail",
+  "element": "eau",
+  "family": "slime",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 245,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "gel_marin",
+  "stats": {
+   "hp": 1032,
+   "atk": 65,
+   "mag": 65,
+   "def": 34,
+   "res": 34,
+   "spd": 98,
+   "crit": 0.05
   },
-  "squelette_rodeur": {
-    "name": "Rôdeur squelette",
-    "class": "traqueur",
-    "element": "eau",
-    "family": "revenants",
-    "range": "ranged",
-    "attack_kind": "physical",
-    "stats": {
-      "hp": 520,
-      "atk": 70,
-      "def": 25,
-      "res": 25,
-      "spd": 105,
-      "crit": 0.15
-    },
-    "puppet": "res://assets/monsters2d/rodeur/",
-    "attacks": [
-      {
-        "id": "lame_lancee",
-        "name": "Lame lancée",
-        "anim": "throw",
-        "hit_time": 0.4
-      }
+  "attacks": [
+   {
+    "id": "slime_couronne_attack",
+    "name": "Attaque",
+    "clip": "slime_couronne_attack",
+    "hit_times": [
+     0.52
     ]
+   },
+   {
+    "id": "slime_couronne_skill",
+    "name": "Marée de corail",
+    "clip": "slime_couronne_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "crabe_sable": {
+  "name": "Crabe des sables",
+  "element": "eau",
+  "family": "crab",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 165,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "carapace_renforcee",
+  "stats": {
+   "hp": 469,
+   "atk": 57,
+   "mag": 57,
+   "def": 29,
+   "res": 29,
+   "spd": 94,
+   "crit": 0.05
   },
-  "acolyte_noir": {
-    "name": "Acolyte de Morvath",
-    "class": "arcaniste",
-    "element": "ombre",
-    "family": "revenants",
-    "range": "ranged",
-    "attack_kind": "magic",
-    "stats": {
-      "hp": 600,
-      "atk": 90,
-      "def": 20,
-      "res": 50,
-      "spd": 95,
-      "crit": 0.05
-    },
-    "puppet": "res://assets/monsters2d/acolyte/",
-    "attacks": [
-      {
-        "id": "trait_d_ombre",
-        "name": "Trait d'ombre",
-        "anim": "cast",
-        "hit_time": 0.45
-      }
+  "attacks": [
+   {
+    "id": "crabe_sable_attack",
+    "name": "Attaque",
+    "clip": "crabe_sable_attack",
+    "hit_times": [
+     0.52
     ]
+   }
+  ]
+ },
+ "ermite_tonneau": {
+  "name": "Ermite au tonneau",
+  "element": "eau",
+  "family": "crab",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 255,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "carapace_renforcee",
+  "stats": {
+   "hp": 1125,
+   "atk": 71,
+   "mag": 71,
+   "def": 35,
+   "res": 35,
+   "spd": 100,
+   "crit": 0.05
   },
-  "vel_zareth": {
-    "name": "Vel'Zareth la Liche",
-    "class": "arcaniste",
-    "element": "ombre",
-    "family": "revenants",
-    "range": "ranged",
-    "attack_kind": "magic",
-    "boss": true,
-    "stats": {
-      "hp": 4800,
-      "atk": 102,
-      "def": 45,
-      "res": 70,
-      "spd": 95,
-      "crit": 0.1
-    },
-    "puppet": "res://assets/monsters2d/vel_zareth/",
-    "attacks": [
-      {
-        "id": "rayon_d_ombre",
-        "name": "Rayon d'ombre",
-        "anim": "cast",
-        "hit_time": 0.45
-      },
-      {
-        "id": "toucher_glacial",
-        "name": "Toucher glacial",
-        "description": "Gèle le chasseur le plus affaibli pendant 1,5 s.",
-        "anim": "cast_sky",
-        "hit_time": 0.5,
-        "cooldown": 8.0,
-        "target": "lowest_hp_enemy",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 1.3
-          },
-          {
-            "type": "stun",
-            "duration": 1.5
-          }
-        ]
-      },
-      {
-        "id": "nova_necrotique",
-        "name": "Nova nécrotique",
-        "description": "Explosion d'ombre sur toute l'équipe, qui pourrit pendant 5 s.",
-        "anim": "cast_sky",
-        "hit_time": 0.9,
-        "energy": 100,
-        "target": "all_enemies",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 1.15,
-            "kind": "magic"
-          },
-          {
-            "type": "dot",
-            "power": 0.25,
-            "duration": 5.0
-          }
-        ]
-      }
+  "attacks": [
+   {
+    "id": "ermite_tonneau_attack",
+    "name": "Attaque",
+    "clip": "ermite_tonneau_attack",
+    "hit_times": [
+     0.52
     ]
-  }
+   },
+   {
+    "id": "ermite_tonneau_skill",
+    "name": "Roulade du tonneau",
+    "clip": "ermite_tonneau_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "goeland": {
+  "name": "Goéland corrompu",
+  "element": "eau",
+  "family": "bird",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 175,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "plume_falaise",
+  "stats": {
+   "hp": 507,
+   "atk": 61,
+   "mag": 61,
+   "def": 30,
+   "res": 30,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "goeland_attack",
+    "name": "Attaque",
+    "clip": "goeland_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "goeland_harponne": {
+  "name": "Goéland harponné",
+  "element": "eau",
+  "family": "bird",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 270,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "plume_falaise",
+  "stats": {
+   "hp": 1218,
+   "atk": 77,
+   "mag": 77,
+   "def": 36,
+   "res": 36,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "goeland_harponne_attack",
+    "name": "Attaque",
+    "clip": "goeland_harponne_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "goeland_harponne_skill",
+    "name": "Rafale des naufragés",
+    "clip": "goeland_harponne_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "slime_saumure": {
+  "name": "Slime de saumure",
+  "element": "eau",
+  "family": "slime",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 165,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "cristal_sel",
+  "stats": {
+   "hp": 546,
+   "atk": 66,
+   "mag": 66,
+   "def": 32,
+   "res": 32,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "slime_saumure_attack",
+    "name": "Attaque",
+    "clip": "slime_saumure_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "slime_salin": {
+  "name": "Slime des marais salants",
+  "element": "eau",
+  "family": "slime",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 255,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "cristal_sel",
+  "stats": {
+   "hp": 1311,
+   "atk": 83,
+   "mag": 83,
+   "def": 38,
+   "res": 38,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "slime_salin_attack",
+    "name": "Attaque",
+    "clip": "slime_salin_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "slime_salin_skill",
+    "name": "Éruption saline",
+    "clip": "slime_salin_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "gobelin_recuperateur": {
+  "name": "Gobelin récupérateur",
+  "element": "eau",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "ferraille",
+  "stats": {
+   "hp": 585,
+   "atk": 71,
+   "mag": 71,
+   "def": 33,
+   "res": 33,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "gobelin_recuperateur_attack",
+    "name": "Attaque",
+    "clip": "gobelin_recuperateur_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "gobelin_casier": {
+  "name": "Maître des casiers",
+  "element": "eau",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 275,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "cordage_solide",
+  "stats": {
+   "hp": 1404,
+   "atk": 88,
+   "mag": 88,
+   "def": 39,
+   "res": 39,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "gobelin_casier_attack",
+    "name": "Attaque",
+    "clip": "gobelin_casier_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "gobelin_casier_skill",
+    "name": "Piège du récupérateur",
+    "clip": "gobelin_casier_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "scarabee_maree": {
+  "name": "Scarabée des marées",
+  "element": "eau",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 180,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "chitine_epaisse",
+  "stats": {
+   "hp": 624,
+   "atk": 75,
+   "mag": 75,
+   "def": 34,
+   "res": 34,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "scarabee_maree_attack",
+    "name": "Attaque",
+    "clip": "scarabee_maree_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "homard_entrave": {
+  "name": "Homard aux pinces entravées",
+  "element": "eau",
+  "family": "crab",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "chitine_epaisse",
+  "stats": {
+   "hp": 1496,
+   "atk": 94,
+   "mag": 94,
+   "def": 41,
+   "res": 41,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "homard_entrave_attack",
+    "name": "Attaque",
+    "clip": "homard_entrave_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "homard_entrave_skill",
+    "name": "Étau des profondeurs",
+    "clip": "homard_entrave_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "squelette_pecheur": {
+  "name": "Squelette pêcheur",
+  "element": "eau",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 235,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "os_marin",
+  "stats": {
+   "hp": 662,
+   "atk": 80,
+   "mag": 80,
+   "def": 35,
+   "res": 35,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "squelette_pecheur_attack",
+    "name": "Attaque",
+    "clip": "squelette_pecheur_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "gardien_noye": {
+  "name": "Gardien noyé à l’ancre",
+  "element": "eau",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 300,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "essence_noye",
+  "stats": {
+   "hp": 1589,
+   "atk": 100,
+   "mag": 100,
+   "def": 42,
+   "res": 42,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "gardien_noye_attack",
+    "name": "Attaque",
+    "clip": "gardien_noye_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "gardien_noye_skill",
+    "name": "Ancre du fond",
+    "clip": "gardien_noye_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "crabe_epave": {
+  "name": "Crabe des épaves",
+  "element": "eau",
+  "family": "crab",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 185,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "bois_epave",
+  "stats": {
+   "hp": 701,
+   "atk": 85,
+   "mag": 85,
+   "def": 36,
+   "res": 36,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "crabe_epave_attack",
+    "name": "Attaque",
+    "clip": "crabe_epave_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "brise_coque": {
+  "name": "Brise-Coque",
+  "element": "eau",
+  "family": "crab",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": true,
+  "size": 355,
+  "anim": "res://assets/anim/enemies/r01/",
+  "drop": "carapace_briseur",
+  "stats": {
+   "hp": 2523,
+   "atk": 117,
+   "mag": 117,
+   "def": 44,
+   "res": 44,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "brise_coque_attack",
+    "name": "Attaque",
+    "clip": "brise_coque_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "brise_coque_skill",
+    "name": "Naufrage vivant",
+    "clip": "brise_coque_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r02_pousse_grognonne": {
+  "name": "Pousse grognonne",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "spore_doree",
+  "stats": {
+   "hp": 740,
+   "atk": 89,
+   "mag": 89,
+   "def": 38,
+   "res": 38,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_pousse_grognonne_attack",
+    "name": "Attaque",
+    "clip": "r02_pousse_grognonne_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r02_tambour_des_spores": {
+  "name": "Tambour des spores",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "spore_doree",
+  "stats": {
+   "hp": 1775,
+   "atk": 112,
+   "mag": 112,
+   "def": 45,
+   "res": 45,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_tambour_des_spores_attack",
+    "name": "Attaque",
+    "clip": "r02_tambour_des_spores_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r02_tambour_des_spores_skill",
+    "name": "Tambour sporifique",
+    "clip": "r02_tambour_des_spores_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r02_ortie_mordante": {
+  "name": "Ortie mordante",
+  "element": "nature",
+  "family": "plant",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "fibre_urticante",
+  "stats": {
+   "hp": 778,
+   "atk": 94,
+   "mag": 94,
+   "def": 39,
+   "res": 39,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_ortie_mordante_attack",
+    "name": "Attaque",
+    "clip": "r02_ortie_mordante_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r02_fleur_devoreuse": {
+  "name": "Fleur dévoreuse",
+  "element": "nature",
+  "family": "plant",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "fibre_urticante",
+  "stats": {
+   "hp": 1868,
+   "atk": 118,
+   "mag": 118,
+   "def": 47,
+   "res": 47,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_fleur_devoreuse_attack",
+    "name": "Attaque",
+    "clip": "r02_fleur_devoreuse_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r02_fleur_devoreuse_skill",
+    "name": "Mâchoire végétale",
+    "clip": "r02_fleur_devoreuse_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r02_champignon_eclaireur": {
+  "name": "Champignon éclaireur",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "spore_lumineuse",
+  "stats": {
+   "hp": 817,
+   "atk": 99,
+   "mag": 99,
+   "def": 40,
+   "res": 40,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_champignon_eclaireur_attack",
+    "name": "Attaque",
+    "clip": "r02_champignon_eclaireur_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r02_gardien_phosphorescent": {
+  "name": "Gardien phosphorescent",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "spore_lumineuse",
+  "stats": {
+   "hp": 1961,
+   "atk": 124,
+   "mag": 124,
+   "def": 48,
+   "res": 48,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_gardien_phosphorescent_attack",
+    "name": "Attaque",
+    "clip": "r02_gardien_phosphorescent_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r02_gardien_phosphorescent_skill",
+    "name": "Lueur aveuglante",
+    "clip": "r02_gardien_phosphorescent_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r02_racine_rampante": {
+  "name": "Racine rampante",
+  "element": "nature",
+  "family": "plant",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "bois_vivant",
+  "stats": {
+   "hp": 856,
+   "atk": 103,
+   "mag": 103,
+   "def": 41,
+   "res": 41,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_racine_rampante_attack",
+    "name": "Attaque",
+    "clip": "r02_racine_rampante_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r02_souche_possedee": {
+  "name": "Souche possédée",
+  "element": "nature",
+  "family": "plant",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "bois_vivant",
+  "stats": {
+   "hp": 2054,
+   "atk": 129,
+   "mag": 129,
+   "def": 49,
+   "res": 49,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_souche_possedee_attack",
+    "name": "Attaque",
+    "clip": "r02_souche_possedee_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r02_souche_possedee_skill",
+    "name": "Étreinte des racines",
+    "clip": "r02_souche_possedee_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r02_puffball_sauteur": {
+  "name": "Puffball sauteur",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "poudre_sporifique",
+  "stats": {
+   "hp": 894,
+   "atk": 108,
+   "mag": 108,
+   "def": 42,
+   "res": 42,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_puffball_sauteur_attack",
+    "name": "Attaque",
+    "clip": "r02_puffball_sauteur_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r02_vesse_de_rage": {
+  "name": "Vesse de rage",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "poudre_sporifique",
+  "stats": {
+   "hp": 2147,
+   "atk": 135,
+   "mag": 135,
+   "def": 51,
+   "res": 51,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_vesse_de_rage_attack",
+    "name": "Attaque",
+    "clip": "r02_vesse_de_rage_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r02_vesse_de_rage_skill",
+    "name": "Explosion de spores",
+    "clip": "r02_vesse_de_rage_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r02_liane_fouetteuse": {
+  "name": "Liane fouetteuse",
+  "element": "nature",
+  "family": "plant",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "epine_rouge",
+  "stats": {
+   "hp": 933,
+   "atk": 113,
+   "mag": 113,
+   "def": 44,
+   "res": 44,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_liane_fouetteuse_attack",
+    "name": "Attaque",
+    "clip": "r02_liane_fouetteuse_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r02_rosier_des_epines": {
+  "name": "Rosier des épines",
+  "element": "nature",
+  "family": "plant",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "epine_rouge",
+  "stats": {
+   "hp": 2239,
+   "atk": 141,
+   "mag": 141,
+   "def": 52,
+   "res": 52,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_rosier_des_epines_attack",
+    "name": "Attaque",
+    "clip": "r02_rosier_des_epines_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r02_rosier_des_epines_skill",
+    "name": "Couronne d’épines",
+    "clip": "r02_rosier_des_epines_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r02_myconide_porte_buche": {
+  "name": "Myconide porte-bûche",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "seve_epaisse",
+  "stats": {
+   "hp": 972,
+   "atk": 118,
+   "mag": 118,
+   "def": 45,
+   "res": 45,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_myconide_porte_buche_attack",
+    "name": "Attaque",
+    "clip": "r02_myconide_porte_buche_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r02_le_coupe_seve": {
+  "name": "Le Coupe-Sève",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "seve_epaisse",
+  "stats": {
+   "hp": 2332,
+   "atk": 147,
+   "mag": 147,
+   "def": 54,
+   "res": 54,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_le_coupe_seve_attack",
+    "name": "Attaque",
+    "clip": "r02_le_coupe_seve_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r02_le_coupe_seve_skill",
+    "name": "Hache fongique",
+    "clip": "r02_le_coupe_seve_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r02_sporelle_pale": {
+  "name": "Sporelle pâle",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "coeur_mycelien",
+  "stats": {
+   "hp": 1010,
+   "atk": 122,
+   "mag": 122,
+   "def": 46,
+   "res": 46,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_sporelle_pale_attack",
+    "name": "Attaque",
+    "clip": "r02_sporelle_pale_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r02_mere_des_spores": {
+  "name": "Mère des Spores",
+  "element": "nature",
+  "family": "fungus",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r02/",
+  "drop": "coeur_mycelien",
+  "stats": {
+   "hp": 3638,
+   "atk": 168,
+   "mag": 168,
+   "def": 55,
+   "res": 55,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r02_mere_des_spores_attack",
+    "name": "Attaque",
+    "clip": "r02_mere_des_spores_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r02_mere_des_spores_skill",
+    "name": "Jardin des spores",
+    "clip": "r02_mere_des_spores_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r03_termite_mineur": {
+  "name": "Termite mineur",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "pierre_terrier",
+  "stats": {
+   "hp": 1204,
+   "atk": 146,
+   "mag": 146,
+   "def": 52,
+   "res": 52,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_termite_mineur_attack",
+    "name": "Attaque",
+    "clip": "r03_termite_mineur_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r03_briseur_de_galerie": {
+  "name": "Briseur de galerie",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "pierre_terrier",
+  "stats": {
+   "hp": 2890,
+   "atk": 182,
+   "mag": 182,
+   "def": 62,
+   "res": 62,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_briseur_de_galerie_attack",
+    "name": "Attaque",
+    "clip": "r03_briseur_de_galerie_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r03_briseur_de_galerie_skill",
+    "name": "Effondrement",
+    "clip": "r03_briseur_de_galerie_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r03_papillon_poudreux": {
+  "name": "Papillon poudreux",
+  "element": "nature",
+  "family": "winged_insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "poudre_ailes",
+  "stats": {
+   "hp": 1243,
+   "atk": 150,
+   "mag": 150,
+   "def": 53,
+   "res": 53,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_papillon_poudreux_attack",
+    "name": "Attaque",
+    "clip": "r03_papillon_poudreux_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r03_papillon_des_songes": {
+  "name": "Papillon des songes",
+  "element": "nature",
+  "family": "winged_insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "poudre_ailes",
+  "stats": {
+   "hp": 2982,
+   "atk": 188,
+   "mag": 188,
+   "def": 64,
+   "res": 64,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_papillon_des_songes_attack",
+    "name": "Attaque",
+    "clip": "r03_papillon_des_songes_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r03_papillon_des_songes_skill",
+    "name": "Poussière somnolente",
+    "clip": "r03_papillon_des_songes_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r03_guepe_chasseuse": {
+  "name": "Guêpe chasseuse",
+  "element": "nature",
+  "family": "winged_insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "venin_dense",
+  "stats": {
+   "hp": 1281,
+   "atk": 155,
+   "mag": 155,
+   "def": 54,
+   "res": 54,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_guepe_chasseuse_attack",
+    "name": "Attaque",
+    "clip": "r03_guepe_chasseuse_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r03_frelon_porte_venin": {
+  "name": "Frelon porte-venin",
+  "element": "nature",
+  "family": "winged_insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "venin_dense",
+  "stats": {
+   "hp": 3075,
+   "atk": 194,
+   "mag": 194,
+   "def": 65,
+   "res": 65,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_frelon_porte_venin_attack",
+    "name": "Attaque",
+    "clip": "r03_frelon_porte_venin_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r03_frelon_porte_venin_skill",
+    "name": "Dard perforant",
+    "clip": "r03_frelon_porte_venin_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r03_larve_cuirassee": {
+  "name": "Larve cuirassée",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "chitine_royale",
+  "stats": {
+   "hp": 1320,
+   "atk": 160,
+   "mag": 160,
+   "def": 56,
+   "res": 56,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_larve_cuirassee_attack",
+    "name": "Attaque",
+    "clip": "r03_larve_cuirassee_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r03_reine_aux_mille_ufs": {
+  "name": "Reine aux Mille Œufs",
+  "element": "nature",
+  "family": "insect",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r03/",
+  "drop": "chitine_royale",
+  "stats": {
+   "hp": 4752,
+   "atk": 220,
+   "mag": 220,
+   "def": 67,
+   "res": 67,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r03_reine_aux_mille_ufs_attack",
+    "name": "Attaque",
+    "clip": "r03_reine_aux_mille_ufs_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r03_reine_aux_mille_ufs_skill",
+    "name": "Éclosion massive",
+    "clip": "r03_reine_aux_mille_ufs_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r04_gobelin_fouilleur": {
+  "name": "Gobelin fouilleur",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "poudre_noire",
+  "stats": {
+   "hp": 1359,
+   "atk": 164,
+   "mag": 164,
+   "def": 57,
+   "res": 57,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_gobelin_fouilleur_attack",
+    "name": "Attaque",
+    "clip": "r04_gobelin_fouilleur_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r04_gobelin_artificier": {
+  "name": "Gobelin artificier",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "poudre_noire",
+  "stats": {
+   "hp": 3261,
+   "atk": 205,
+   "mag": 205,
+   "def": 68,
+   "res": 68,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_gobelin_artificier_attack",
+    "name": "Attaque",
+    "clip": "r04_gobelin_artificier_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r04_gobelin_artificier_skill",
+    "name": "Salve explosive",
+    "clip": "r04_gobelin_artificier_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r04_orc_coupe_bois": {
+  "name": "Orc coupe-bois",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "fer_brut",
+  "stats": {
+   "hp": 1398,
+   "atk": 169,
+   "mag": 169,
+   "def": 58,
+   "res": 58,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_orc_coupe_bois_attack",
+    "name": "Attaque",
+    "clip": "r04_orc_coupe_bois_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r04_orc_briseur": {
+  "name": "Orc briseur",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "fer_brut",
+  "stats": {
+   "hp": 3354,
+   "atk": 211,
+   "mag": 211,
+   "def": 70,
+   "res": 70,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_orc_briseur_attack",
+    "name": "Attaque",
+    "clip": "r04_orc_briseur_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r04_orc_briseur_skill",
+    "name": "Brise-armure",
+    "clip": "r04_orc_briseur_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r04_voleuse_de_camp": {
+  "name": "Voleuse de camp",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "piece_pillee",
+  "stats": {
+   "hp": 1436,
+   "atk": 174,
+   "mag": 174,
+   "def": 59,
+   "res": 59,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_voleuse_de_camp_attack",
+    "name": "Attaque",
+    "clip": "r04_voleuse_de_camp_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r04_capitaine_des_voleurs": {
+  "name": "Capitaine des voleurs",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "piece_pillee",
+  "stats": {
+   "hp": 3447,
+   "atk": 217,
+   "mag": 217,
+   "def": 71,
+   "res": 71,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_capitaine_des_voleurs_attack",
+    "name": "Attaque",
+    "clip": "r04_capitaine_des_voleurs_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r04_capitaine_des_voleurs_skill",
+    "name": "Lame du chef",
+    "clip": "r04_capitaine_des_voleurs_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r04_gobelin_frondeur": {
+  "name": "Gobelin frondeur",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "cuir_epais",
+  "stats": {
+   "hp": 1475,
+   "atk": 178,
+   "mag": 178,
+   "def": 60,
+   "res": 60,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_gobelin_frondeur_attack",
+    "name": "Attaque",
+    "clip": "r04_gobelin_frondeur_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r04_chef_des_frondeurs": {
+  "name": "Chef des frondeurs",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "cuir_epais",
+  "stats": {
+   "hp": 3540,
+   "atk": 223,
+   "mag": 223,
+   "def": 72,
+   "res": 72,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_chef_des_frondeurs_attack",
+    "name": "Attaque",
+    "clip": "r04_chef_des_frondeurs_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r04_chef_des_frondeurs_skill",
+    "name": "Pluie de pierres",
+    "clip": "r04_chef_des_frondeurs_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r04_orc_garde_braise": {
+  "name": "Orc garde-braise",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "charbon_dur",
+  "stats": {
+   "hp": 1514,
+   "atk": 183,
+   "mag": 183,
+   "def": 62,
+   "res": 62,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_orc_garde_braise_attack",
+    "name": "Attaque",
+    "clip": "r04_orc_garde_braise_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r04_le_mange_braise": {
+  "name": "Le Mange-Braise",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "charbon_dur",
+  "stats": {
+   "hp": 3633,
+   "atk": 229,
+   "mag": 229,
+   "def": 74,
+   "res": 74,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_le_mange_braise_attack",
+    "name": "Attaque",
+    "clip": "r04_le_mange_braise_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r04_le_mange_braise_skill",
+    "name": "Souffle du four",
+    "clip": "r04_le_mange_braise_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r04_contrebandier": {
+  "name": "Contrebandier",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "plan_contrebande",
+  "stats": {
+   "hp": 1552,
+   "atk": 188,
+   "mag": 188,
+   "def": 63,
+   "res": 63,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_contrebandier_attack",
+    "name": "Attaque",
+    "clip": "r04_contrebandier_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r04_la_dette_rouge": {
+  "name": "La Dette rouge",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "plan_contrebande",
+  "stats": {
+   "hp": 3726,
+   "atk": 235,
+   "mag": 235,
+   "def": 75,
+   "res": 75,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_la_dette_rouge_attack",
+    "name": "Attaque",
+    "clip": "r04_la_dette_rouge_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r04_la_dette_rouge_skill",
+    "name": "Tir de représailles",
+    "clip": "r04_la_dette_rouge_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r04_gobelin_chaman": {
+  "name": "Gobelin chaman",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "os_totemique",
+  "stats": {
+   "hp": 1591,
+   "atk": 192,
+   "mag": 192,
+   "def": 64,
+   "res": 64,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_gobelin_chaman_attack",
+    "name": "Attaque",
+    "clip": "r04_gobelin_chaman_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r04_chaman_des_os": {
+  "name": "Chaman des os",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "os_totemique",
+  "stats": {
+   "hp": 3818,
+   "atk": 240,
+   "mag": 240,
+   "def": 77,
+   "res": 77,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_chaman_des_os_attack",
+    "name": "Attaque",
+    "clip": "r04_chaman_des_os_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r04_chaman_des_os_skill",
+    "name": "Totem d’entrave",
+    "clip": "r04_chaman_des_os_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r04_orc_porte_banniere": {
+  "name": "Orc porte-bannière",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "acier_du_chef",
+  "stats": {
+   "hp": 1630,
+   "atk": 197,
+   "mag": 197,
+   "def": 65,
+   "res": 65,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_orc_porte_banniere_attack",
+    "name": "Attaque",
+    "clip": "r04_orc_porte_banniere_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r04_gorvak_le_marque": {
+  "name": "Gorvak le Marqué",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r04/",
+  "drop": "acier_du_chef",
+  "stats": {
+   "hp": 5867,
+   "atk": 271,
+   "mag": 271,
+   "def": 78,
+   "res": 78,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r04_gorvak_le_marque_attack",
+    "name": "Attaque",
+    "clip": "r04_gorvak_le_marque_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r04_gorvak_le_marque_skill",
+    "name": "Poing du sceau",
+    "clip": "r04_gorvak_le_marque_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r05_golem_de_gravats": {
+  "name": "Golem de gravats",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "charbon_vivant",
+  "stats": {
+   "hp": 1668,
+   "atk": 202,
+   "mag": 202,
+   "def": 66,
+   "res": 66,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_golem_de_gravats_attack",
+    "name": "Attaque",
+    "clip": "r05_golem_de_gravats_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r05_golem_de_charbon": {
+  "name": "Golem de charbon",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "charbon_vivant",
+  "stats": {
+   "hp": 4004,
+   "atk": 252,
+   "mag": 252,
+   "def": 80,
+   "res": 80,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_golem_de_charbon_attack",
+    "name": "Attaque",
+    "clip": "r05_golem_de_charbon_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r05_golem_de_charbon_skill",
+    "name": "Percussion noire",
+    "clip": "r05_golem_de_charbon_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r05_eclat_vivant": {
+  "name": "Éclat vivant",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "cristal_geode",
+  "stats": {
+   "hp": 1707,
+   "atk": 206,
+   "mag": 206,
+   "def": 68,
+   "res": 68,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_eclat_vivant_attack",
+    "name": "Attaque",
+    "clip": "r05_eclat_vivant_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r05_geode_instable": {
+  "name": "Géode instable",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "cristal_geode",
+  "stats": {
+   "hp": 4097,
+   "atk": 258,
+   "mag": 258,
+   "def": 81,
+   "res": 81,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_geode_instable_attack",
+    "name": "Attaque",
+    "clip": "r05_geode_instable_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r05_geode_instable_skill",
+    "name": "Explosion de géode",
+    "clip": "r05_geode_instable_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r05_statue_eveillee": {
+  "name": "Statue éveillée",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "pierre_taillee",
+  "stats": {
+   "hp": 1746,
+   "atk": 211,
+   "mag": 211,
+   "def": 69,
+   "res": 69,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_statue_eveillee_attack",
+    "name": "Attaque",
+    "clip": "r05_statue_eveillee_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r05_gardien_du_seuil": {
+  "name": "Gardien du seuil",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "pierre_taillee",
+  "stats": {
+   "hp": 4190,
+   "atk": 264,
+   "mag": 264,
+   "def": 83,
+   "res": 83,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_gardien_du_seuil_attack",
+    "name": "Attaque",
+    "clip": "r05_gardien_du_seuil_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r05_gardien_du_seuil_skill",
+    "name": "Rempart minéral",
+    "clip": "r05_gardien_du_seuil_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r05_golem_dargile": {
+  "name": "Golem d’argile",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "argile_cuite",
+  "stats": {
+   "hp": 1785,
+   "atk": 216,
+   "mag": 216,
+   "def": 70,
+   "res": 70,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_golem_dargile_attack",
+    "name": "Attaque",
+    "clip": "r05_golem_dargile_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r05_le_cur_du_four": {
+  "name": "Le Cœur du four",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "argile_cuite",
+  "stats": {
+   "hp": 4283,
+   "atk": 270,
+   "mag": 270,
+   "def": 84,
+   "res": 84,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_le_cur_du_four_attack",
+    "name": "Attaque",
+    "clip": "r05_le_cur_du_four_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r05_le_cur_du_four_skill",
+    "name": "Fournaise d’argile",
+    "clip": "r05_le_cur_du_four_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r05_sentinelle_de_cuivre": {
+  "name": "Sentinelle de cuivre",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "cuivre_ancien",
+  "stats": {
+   "hp": 1823,
+   "atk": 220,
+   "mag": 220,
+   "def": 71,
+   "res": 71,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_sentinelle_de_cuivre_attack",
+    "name": "Attaque",
+    "clip": "r05_sentinelle_de_cuivre_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r05_forge_ambulante": {
+  "name": "Forge ambulante",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "cuivre_ancien",
+  "stats": {
+   "hp": 4376,
+   "atk": 276,
+   "mag": 276,
+   "def": 85,
+   "res": 85,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_forge_ambulante_attack",
+    "name": "Attaque",
+    "clip": "r05_forge_ambulante_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r05_forge_ambulante_skill",
+    "name": "Marteau de forge",
+    "clip": "r05_forge_ambulante_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r05_golem_de_mousse": {
+  "name": "Golem de mousse",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "mousse_minerale",
+  "stats": {
+   "hp": 1862,
+   "atk": 225,
+   "mag": 225,
+   "def": 72,
+   "res": 72,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_golem_de_mousse_attack",
+    "name": "Attaque",
+    "clip": "r05_golem_de_mousse_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r05_le_jardin_de_pierre": {
+  "name": "Le Jardin de pierre",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "mousse_minerale",
+  "stats": {
+   "hp": 4469,
+   "atk": 281,
+   "mag": 281,
+   "def": 87,
+   "res": 87,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_le_jardin_de_pierre_attack",
+    "name": "Attaque",
+    "clip": "r05_le_jardin_de_pierre_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r05_le_jardin_de_pierre_skill",
+    "name": "Racines minérales",
+    "clip": "r05_le_jardin_de_pierre_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r05_ouvrier_de_pierre": {
+  "name": "Ouvrier de pierre",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "calcaire_ancien",
+  "stats": {
+   "hp": 1901,
+   "atk": 230,
+   "mag": 230,
+   "def": 74,
+   "res": 74,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_ouvrier_de_pierre_attack",
+    "name": "Attaque",
+    "clip": "r05_ouvrier_de_pierre_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r05_le_marteau_aveugle": {
+  "name": "Le Marteau aveugle",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "calcaire_ancien",
+  "stats": {
+   "hp": 4561,
+   "atk": 287,
+   "mag": 287,
+   "def": 88,
+   "res": 88,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_le_marteau_aveugle_attack",
+    "name": "Attaque",
+    "clip": "r05_le_marteau_aveugle_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r05_le_marteau_aveugle_skill",
+    "name": "Double écrasement",
+    "clip": "r05_le_marteau_aveugle_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r05_golem_ferre": {
+  "name": "Golem ferré",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "noyau_colosse",
+  "stats": {
+   "hp": 1939,
+   "atk": 235,
+   "mag": 235,
+   "def": 75,
+   "res": 75,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_golem_ferre_attack",
+    "name": "Attaque",
+    "clip": "r05_golem_ferre_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r05_colosse_entrave": {
+  "name": "Colosse entravé",
+  "element": "",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r05/",
+  "drop": "noyau_colosse",
+  "stats": {
+   "hp": 6981,
+   "atk": 322,
+   "mag": 322,
+   "def": 90,
+   "res": 90,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r05_colosse_entrave_attack",
+    "name": "Attaque",
+    "clip": "r05_colosse_entrave_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r05_colosse_entrave_skill",
+    "name": "Rupture des chaînes",
+    "clip": "r05_colosse_entrave_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r06_squelette_guetteur": {
+  "name": "Squelette guetteur",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "os_ancien",
+  "stats": {
+   "hp": 1978,
+   "atk": 239,
+   "mag": 239,
+   "def": 76,
+   "res": 76,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_squelette_guetteur_attack",
+    "name": "Attaque",
+    "clip": "r06_squelette_guetteur_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r06_porte_etendard_mort": {
+  "name": "Porte-étendard mort",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "os_ancien",
+  "stats": {
+   "hp": 4747,
+   "atk": 299,
+   "mag": 299,
+   "def": 91,
+   "res": 91,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_porte_etendard_mort_attack",
+    "name": "Attaque",
+    "clip": "r06_porte_etendard_mort_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r06_porte_etendard_mort_skill",
+    "name": "Appel des tombes",
+    "clip": "r06_porte_etendard_mort_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r06_noye_des_cryptes": {
+  "name": "Noyé des cryptes",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "fer_funeraire",
+  "stats": {
+   "hp": 2017,
+   "atk": 244,
+   "mag": 244,
+   "def": 77,
+   "res": 77,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_noye_des_cryptes_attack",
+    "name": "Attaque",
+    "clip": "r06_noye_des_cryptes_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r06_bourreau_sans_tete": {
+  "name": "Bourreau sans tête",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "fer_funeraire",
+  "stats": {
+   "hp": 4840,
+   "atk": 305,
+   "mag": 305,
+   "def": 93,
+   "res": 93,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_bourreau_sans_tete_attack",
+    "name": "Attaque",
+    "clip": "r06_bourreau_sans_tete_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r06_bourreau_sans_tete_skill",
+    "name": "Sentence de fer",
+    "clip": "r06_bourreau_sans_tete_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r06_mage_squelette": {
+  "name": "Mage squelette",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "cire_spectrale",
+  "stats": {
+   "hp": 2055,
+   "atk": 249,
+   "mag": 249,
+   "def": 78,
+   "res": 78,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_mage_squelette_attack",
+    "name": "Attaque",
+    "clip": "r06_mage_squelette_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r06_liche_des_cierges": {
+  "name": "Liche des cierges",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "cire_spectrale",
+  "stats": {
+   "hp": 4933,
+   "atk": 311,
+   "mag": 311,
+   "def": 94,
+   "res": 94,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_liche_des_cierges_attack",
+    "name": "Attaque",
+    "clip": "r06_liche_des_cierges_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r06_liche_des_cierges_skill",
+    "name": "Cercle des cierges",
+    "clip": "r06_liche_des_cierges_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r06_chevalier_rouille": {
+  "name": "Chevalier rouillé",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "acier_corrode",
+  "stats": {
+   "hp": 2094,
+   "atk": 253,
+   "mag": 253,
+   "def": 80,
+   "res": 80,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_chevalier_rouille_attack",
+    "name": "Attaque",
+    "clip": "r06_chevalier_rouille_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r06_chevalier_du_caveau": {
+  "name": "Chevalier du caveau",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "acier_corrode",
+  "stats": {
+   "hp": 5026,
+   "atk": 317,
+   "mag": 317,
+   "def": 96,
+   "res": 96,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_chevalier_du_caveau_attack",
+    "name": "Attaque",
+    "clip": "r06_chevalier_du_caveau_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r06_chevalier_du_caveau_skill",
+    "name": "Lame du tombeau",
+    "clip": "r06_chevalier_du_caveau_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r06_fossoyeur_oublie": {
+  "name": "Fossoyeur oublié",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "pierre_memorielle",
+  "stats": {
+   "hp": 2133,
+   "atk": 258,
+   "mag": 258,
+   "def": 81,
+   "res": 81,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_fossoyeur_oublie_attack",
+    "name": "Attaque",
+    "clip": "r06_fossoyeur_oublie_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r06_le_gardien_des_noms": {
+  "name": "Le Gardien des noms",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "pierre_memorielle",
+  "stats": {
+   "hp": 5119,
+   "atk": 322,
+   "mag": 322,
+   "def": 97,
+   "res": 97,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_le_gardien_des_noms_attack",
+    "name": "Attaque",
+    "clip": "r06_le_gardien_des_noms_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r06_le_gardien_des_noms_skill",
+    "name": "Oubli des vivants",
+    "clip": "r06_le_gardien_des_noms_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r06_spectre_du_puits": {
+  "name": "Spectre du puits",
+  "element": "ombre",
+  "family": "specter",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "essence_spectrale",
+  "stats": {
+   "hp": 2172,
+   "atk": 263,
+   "mag": 263,
+   "def": 82,
+   "res": 82,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_spectre_du_puits_attack",
+    "name": "Attaque",
+    "clip": "r06_spectre_du_puits_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r06_dame_des_eaux_mortes": {
+  "name": "Dame des eaux mortes",
+  "element": "ombre",
+  "family": "specter",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "essence_spectrale",
+  "stats": {
+   "hp": 5212,
+   "atk": 328,
+   "mag": 328,
+   "def": 98,
+   "res": 98,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_dame_des_eaux_mortes_attack",
+    "name": "Attaque",
+    "clip": "r06_dame_des_eaux_mortes_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r06_dame_des_eaux_mortes_skill",
+    "name": "Marée spectrale",
+    "clip": "r06_dame_des_eaux_mortes_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r06_osselet_rampant": {
+  "name": "Osselet rampant",
+  "element": "ombre",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "crochet_osseux",
+  "stats": {
+   "hp": 2210,
+   "atk": 267,
+   "mag": 267,
+   "def": 83,
+   "res": 83,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_osselet_rampant_attack",
+    "name": "Attaque",
+    "clip": "r06_osselet_rampant_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r06_cerbere_des_ossuaires": {
+  "name": "Cerbère des ossuaires",
+  "element": "ombre",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "crochet_osseux",
+  "stats": {
+   "hp": 5304,
+   "atk": 334,
+   "mag": 334,
+   "def": 100,
+   "res": 100,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_cerbere_des_ossuaires_attack",
+    "name": "Attaque",
+    "clip": "r06_cerbere_des_ossuaires_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r06_cerbere_des_ossuaires_skill",
+    "name": "Morsure funéraire",
+    "clip": "r06_cerbere_des_ossuaires_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r06_acolyte_de_la_vase": {
+  "name": "Acolyte de la vase",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "coeur_liche",
+  "stats": {
+   "hp": 2249,
+   "atk": 272,
+   "mag": 272,
+   "def": 84,
+   "res": 84,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_acolyte_de_la_vase_attack",
+    "name": "Attaque",
+    "clip": "r06_acolyte_de_la_vase_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r06_liche_des_marees": {
+  "name": "Liche des marées",
+  "element": "ombre",
+  "family": "specter",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r06/",
+  "drop": "coeur_liche",
+  "stats": {
+   "hp": 8096,
+   "atk": 374,
+   "mag": 374,
+   "def": 101,
+   "res": 101,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r06_liche_des_marees_attack",
+    "name": "Attaque",
+    "clip": "r06_liche_des_marees_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r06_liche_des_marees_skill",
+    "name": "Ressac des morts",
+    "clip": "r06_liche_des_marees_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r07_eclaireur_possede": {
+  "name": "Éclaireur possédé",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "insigne_eclaireur",
+  "stats": {
+   "hp": 2288,
+   "atk": 277,
+   "mag": 277,
+   "def": 86,
+   "res": 86,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_eclaireur_possede_attack",
+    "name": "Attaque",
+    "clip": "r07_eclaireur_possede_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r07_duelliste_marque": {
+  "name": "Duelliste marqué",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "insigne_eclaireur",
+  "stats": {
+   "hp": 5490,
+   "atk": 346,
+   "mag": 346,
+   "def": 103,
+   "res": 103,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_duelliste_marque_attack",
+    "name": "Attaque",
+    "clip": "r07_duelliste_marque_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r07_duelliste_marque_skill",
+    "name": "Riposte du sceau",
+    "clip": "r07_duelliste_marque_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r07_arbaletrier_lie": {
+  "name": "Arbalétrier lié",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "mecanisme_arbalete",
+  "stats": {
+   "hp": 2326,
+   "atk": 281,
+   "mag": 281,
+   "def": 87,
+   "res": 87,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_arbaletrier_lie_attack",
+    "name": "Attaque",
+    "clip": "r07_arbaletrier_lie_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r07_arbaletriere_des_remparts": {
+  "name": "Arbalétrière des remparts",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "mecanisme_arbalete",
+  "stats": {
+   "hp": 5583,
+   "atk": 352,
+   "mag": 352,
+   "def": 104,
+   "res": 104,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_arbaletriere_des_remparts_attack",
+    "name": "Attaque",
+    "clip": "r07_arbaletriere_des_remparts_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r07_arbaletriere_des_remparts_skill",
+    "name": "Carreau d’entrave",
+    "clip": "r07_arbaletriere_des_remparts_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r07_traqueur_nocturne": {
+  "name": "Traqueur nocturne",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "sifflet_meute",
+  "stats": {
+   "hp": 2365,
+   "atk": 286,
+   "mag": 286,
+   "def": 88,
+   "res": 88,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_traqueur_nocturne_attack",
+    "name": "Attaque",
+    "clip": "r07_traqueur_nocturne_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r07_maitre_des_meutes": {
+  "name": "Maître des meutes",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "sifflet_meute",
+  "stats": {
+   "hp": 5676,
+   "atk": 358,
+   "mag": 358,
+   "def": 106,
+   "res": 106,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_maitre_des_meutes_attack",
+    "name": "Attaque",
+    "clip": "r07_maitre_des_meutes_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r07_maitre_des_meutes_skill",
+    "name": "Ordre de chasse",
+    "clip": "r07_maitre_des_meutes_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r07_loup_de_chasse": {
+  "name": "Loup de chasse",
+  "element": "ombre",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "fourrure_argentee",
+  "stats": {
+   "hp": 2404,
+   "atk": 291,
+   "mag": 291,
+   "def": 89,
+   "res": 89,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_loup_de_chasse_attack",
+    "name": "Attaque",
+    "clip": "r07_loup_de_chasse_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r07_croc_de_lancien_camp": {
+  "name": "Croc de l’ancien camp",
+  "element": "ombre",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "fourrure_argentee",
+  "stats": {
+   "hp": 5769,
+   "atk": 363,
+   "mag": 363,
+   "def": 107,
+   "res": 107,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_croc_de_lancien_camp_attack",
+    "name": "Attaque",
+    "clip": "r07_croc_de_lancien_camp_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r07_croc_de_lancien_camp_skill",
+    "name": "Bond du traqueur",
+    "clip": "r07_croc_de_lancien_camp_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r07_piegeuse_liee": {
+  "name": "Piégeuse liée",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "chaine_chasse",
+  "stats": {
+   "hp": 2442,
+   "atk": 295,
+   "mag": 295,
+   "def": 90,
+   "res": 90,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_piegeuse_liee_attack",
+    "name": "Attaque",
+    "clip": "r07_piegeuse_liee_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r07_la_gardienne_des_collets": {
+  "name": "La Gardienne des collets",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "chaine_chasse",
+  "stats": {
+   "hp": 5862,
+   "atk": 369,
+   "mag": 369,
+   "def": 108,
+   "res": 108,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_la_gardienne_des_collets_attack",
+    "name": "Attaque",
+    "clip": "r07_la_gardienne_des_collets_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r07_la_gardienne_des_collets_skill",
+    "name": "Champ de pièges",
+    "clip": "r07_la_gardienne_des_collets_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r07_soigneur_devoye": {
+  "name": "Soigneur dévoyé",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "filtre_fumigation",
+  "stats": {
+   "hp": 2481,
+   "atk": 300,
+   "mag": 300,
+   "def": 92,
+   "res": 92,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_soigneur_devoye_attack",
+    "name": "Attaque",
+    "clip": "r07_soigneur_devoye_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r07_le_porte_fleau": {
+  "name": "Le Porte-Fléau",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "filtre_fumigation",
+  "stats": {
+   "hp": 5955,
+   "atk": 375,
+   "mag": 375,
+   "def": 110,
+   "res": 110,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_le_porte_fleau_attack",
+    "name": "Attaque",
+    "clip": "r07_le_porte_fleau_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r07_le_porte_fleau_skill",
+    "name": "Brume de faiblesse",
+    "clip": "r07_le_porte_fleau_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r07_chasseur_de_primes": {
+  "name": "Chasseur de primes",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "insigne_veteran",
+  "stats": {
+   "hp": 2520,
+   "atk": 305,
+   "mag": 305,
+   "def": 93,
+   "res": 93,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_chasseur_de_primes_attack",
+    "name": "Attaque",
+    "clip": "r07_chasseur_de_primes_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r07_le_collectionneur_dinsignes": {
+  "name": "Le Collectionneur d’insignes",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "insigne_veteran",
+  "stats": {
+   "hp": 6048,
+   "atk": 381,
+   "mag": 381,
+   "def": 111,
+   "res": 111,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_le_collectionneur_dinsignes_attack",
+    "name": "Attaque",
+    "clip": "r07_le_collectionneur_dinsignes_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r07_le_collectionneur_dinsignes_skill",
+    "name": "Récolte du chasseur",
+    "clip": "r07_le_collectionneur_dinsignes_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r07_garde_de_lancienne_loge": {
+  "name": "Garde de l’ancienne loge",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "sceau_commandant",
+  "stats": {
+   "hp": 2558,
+   "atk": 309,
+   "mag": 309,
+   "def": 94,
+   "res": 94,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_garde_de_lancienne_loge_attack",
+    "name": "Attaque",
+    "clip": "r07_garde_de_lancienne_loge_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r07_ancien_chef_des_chasseurs": {
+  "name": "Ancien chef des chasseurs",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r07/",
+  "drop": "sceau_commandant",
+  "stats": {
+   "hp": 9211,
+   "atk": 425,
+   "mag": 425,
+   "def": 113,
+   "res": 113,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r07_ancien_chef_des_chasseurs_attack",
+    "name": "Attaque",
+    "clip": "r07_ancien_chef_des_chasseurs_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r07_ancien_chef_des_chasseurs_skill",
+    "name": "Dernière battue",
+    "clip": "r07_ancien_chef_des_chasseurs_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r08_reptile_des_rochers": {
+  "name": "Reptile des rochers",
+  "element": "feu",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "ecaille_rocheuse",
+  "stats": {
+   "hp": 2597,
+   "atk": 314,
+   "mag": 314,
+   "def": 95,
+   "res": 95,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_reptile_des_rochers_attack",
+    "name": "Attaque",
+    "clip": "r08_reptile_des_rochers_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r08_gardien_du_nid": {
+  "name": "Gardien du nid",
+  "element": "feu",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "ecaille_rocheuse",
+  "stats": {
+   "hp": 6233,
+   "atk": 393,
+   "mag": 393,
+   "def": 114,
+   "res": 114,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_gardien_du_nid_attack",
+    "name": "Attaque",
+    "clip": "r08_gardien_du_nid_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r08_gardien_du_nid_skill",
+    "name": "Charge du nid",
+    "clip": "r08_gardien_du_nid_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r08_wyverne_fauve": {
+  "name": "Wyverne fauve",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "membrane_fauve",
+  "stats": {
+   "hp": 2636,
+   "atk": 319,
+   "mag": 319,
+   "def": 96,
+   "res": 96,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_wyverne_fauve_attack",
+    "name": "Attaque",
+    "clip": "r08_wyverne_fauve_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r08_wyverne_blessee": {
+  "name": "Wyverne blessée",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "membrane_fauve",
+  "stats": {
+   "hp": 6326,
+   "atk": 398,
+   "mag": 398,
+   "def": 116,
+   "res": 116,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_wyverne_blessee_attack",
+    "name": "Attaque",
+    "clip": "r08_wyverne_blessee_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r08_wyverne_blessee_skill",
+    "name": "Piqué sauvage",
+    "clip": "r08_wyverne_blessee_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r08_serpent_des_cimes": {
+  "name": "Serpent des cimes",
+  "element": "feu",
+  "family": "serpent",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "venin_cimes",
+  "stats": {
+   "hp": 2675,
+   "atk": 323,
+   "mag": 323,
+   "def": 98,
+   "res": 98,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_serpent_des_cimes_attack",
+    "name": "Attaque",
+    "clip": "r08_serpent_des_cimes_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r08_vipere_des_nuages": {
+  "name": "Vipère des nuages",
+  "element": "feu",
+  "family": "serpent",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "venin_cimes",
+  "stats": {
+   "hp": 6419,
+   "atk": 404,
+   "mag": 404,
+   "def": 117,
+   "res": 117,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_vipere_des_nuages_attack",
+    "name": "Attaque",
+    "clip": "r08_vipere_des_nuages_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r08_vipere_des_nuages_skill",
+    "name": "Souffle engourdissant",
+    "clip": "r08_vipere_des_nuages_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r08_wyverne_dos": {
+  "name": "Wyverne d’os",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "os_draconique",
+  "stats": {
+   "hp": 2713,
+   "atk": 328,
+   "mag": 328,
+   "def": 99,
+   "res": 99,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_wyverne_dos_attack",
+    "name": "Attaque",
+    "clip": "r08_wyverne_dos_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r08_wyverne_des_ossuaires": {
+  "name": "Wyverne des ossuaires",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "os_draconique",
+  "stats": {
+   "hp": 6512,
+   "atk": 410,
+   "mag": 410,
+   "def": 119,
+   "res": 119,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_wyverne_des_ossuaires_attack",
+    "name": "Attaque",
+    "clip": "r08_wyverne_des_ossuaires_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r08_wyverne_des_ossuaires_skill",
+    "name": "Rugissement d’os",
+    "clip": "r08_wyverne_des_ossuaires_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r08_griffe_des_falaises": {
+  "name": "Griffe des falaises",
+  "element": "feu",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "griffe_cime",
+  "stats": {
+   "hp": 2752,
+   "atk": 333,
+   "mag": 333,
+   "def": 100,
+   "res": 100,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_griffe_des_falaises_attack",
+    "name": "Attaque",
+    "clip": "r08_griffe_des_falaises_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r08_le_dechire_roche": {
+  "name": "Le Déchire-Roche",
+  "element": "feu",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "griffe_cime",
+  "stats": {
+   "hp": 6605,
+   "atk": 416,
+   "mag": 416,
+   "def": 120,
+   "res": 120,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_le_dechire_roche_attack",
+    "name": "Attaque",
+    "clip": "r08_le_dechire_roche_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r08_le_dechire_roche_skill",
+    "name": "Griffes de pierre",
+    "clip": "r08_le_dechire_roche_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r08_wyverne_de_brume": {
+  "name": "Wyverne de brume",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "membrane_argentee",
+  "stats": {
+   "hp": 2791,
+   "atk": 337,
+   "mag": 337,
+   "def": 101,
+   "res": 101,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_wyverne_de_brume_attack",
+    "name": "Attaque",
+    "clip": "r08_wyverne_de_brume_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r08_aile_des_nuages": {
+  "name": "Aile des nuages",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "membrane_argentee",
+  "stats": {
+   "hp": 6698,
+   "atk": 422,
+   "mag": 422,
+   "def": 121,
+   "res": 121,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_aile_des_nuages_attack",
+    "name": "Attaque",
+    "clip": "r08_aile_des_nuages_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r08_aile_des_nuages_skill",
+    "name": "Rafale glacée",
+    "clip": "r08_aile_des_nuages_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r08_vautour_des_pics": {
+  "name": "Vautour des pics",
+  "element": "feu",
+  "family": "bird",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "plume_cime",
+  "stats": {
+   "hp": 2829,
+   "atk": 342,
+   "mag": 342,
+   "def": 102,
+   "res": 102,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_vautour_des_pics_attack",
+    "name": "Attaque",
+    "clip": "r08_vautour_des_pics_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r08_roi_des_charognes": {
+  "name": "Roi des charognes",
+  "element": "feu",
+  "family": "bird",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "plume_cime",
+  "stats": {
+   "hp": 6791,
+   "atk": 428,
+   "mag": 428,
+   "def": 123,
+   "res": 123,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_roi_des_charognes_attack",
+    "name": "Attaque",
+    "clip": "r08_roi_des_charognes_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r08_roi_des_charognes_skill",
+    "name": "Pluie de plumes",
+    "clip": "r08_roi_des_charognes_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r08_wyverne_du_couvain": {
+  "name": "Wyverne du couvain",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "crochet_matriarche",
+  "stats": {
+   "hp": 2868,
+   "atk": 347,
+   "mag": 347,
+   "def": 104,
+   "res": 104,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_wyverne_du_couvain_attack",
+    "name": "Attaque",
+    "clip": "r08_wyverne_du_couvain_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r08_matriarche_des_pics": {
+  "name": "Matriarche des Pics",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r08/",
+  "drop": "crochet_matriarche",
+  "stats": {
+   "hp": 10325,
+   "atk": 477,
+   "mag": 477,
+   "def": 124,
+   "res": 124,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r08_matriarche_des_pics_attack",
+    "name": "Attaque",
+    "clip": "r08_matriarche_des_pics_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r08_matriarche_des_pics_skill",
+    "name": "Colère de la matriarche",
+    "clip": "r08_matriarche_des_pics_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r09_garde_draconique": {
+  "name": "Garde draconique",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "acier_draconique",
+  "stats": {
+   "hp": 2907,
+   "atk": 352,
+   "mag": 352,
+   "def": 105,
+   "res": 105,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_garde_draconique_attack",
+    "name": "Attaque",
+    "clip": "r09_garde_draconique_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r09_chevalier_du_sanctuaire": {
+  "name": "Chevalier du sanctuaire",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "acier_draconique",
+  "stats": {
+   "hp": 6976,
+   "atk": 439,
+   "mag": 439,
+   "def": 126,
+   "res": 126,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_chevalier_du_sanctuaire_attack",
+    "name": "Attaque",
+    "clip": "r09_chevalier_du_sanctuaire_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r09_chevalier_du_sanctuaire_skill",
+    "name": "Sentence draconique",
+    "clip": "r09_chevalier_du_sanctuaire_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r09_salamandre_cendree": {
+  "name": "Salamandre cendrée",
+  "element": "feu",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "ecaille_cendree",
+  "stats": {
+   "hp": 2946,
+   "atk": 356,
+   "mag": 356,
+   "def": 106,
+   "res": 106,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_salamandre_cendree_attack",
+    "name": "Attaque",
+    "clip": "r09_salamandre_cendree_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r09_gueule_de_lave": {
+  "name": "Gueule de lave",
+  "element": "feu",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "ecaille_cendree",
+  "stats": {
+   "hp": 7069,
+   "atk": 445,
+   "mag": 445,
+   "def": 127,
+   "res": 127,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_gueule_de_lave_attack",
+    "name": "Attaque",
+    "clip": "r09_gueule_de_lave_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r09_gueule_de_lave_skill",
+    "name": "Vague de lave",
+    "clip": "r09_gueule_de_lave_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r09_acolyte_des_ufs": {
+  "name": "Acolyte des œufs",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "coquille_ancienne",
+  "stats": {
+   "hp": 2984,
+   "atk": 361,
+   "mag": 361,
+   "def": 107,
+   "res": 107,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_acolyte_des_ufs_attack",
+    "name": "Attaque",
+    "clip": "r09_acolyte_des_ufs_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r09_gardien_des_ufs": {
+  "name": "Gardien des œufs",
+  "element": "feu",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "coquille_ancienne",
+  "stats": {
+   "hp": 7162,
+   "atk": 451,
+   "mag": 451,
+   "def": 129,
+   "res": 129,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_gardien_des_ufs_attack",
+    "name": "Attaque",
+    "clip": "r09_gardien_des_ufs_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r09_gardien_des_ufs_skill",
+    "name": "Protection du couvain",
+    "clip": "r09_gardien_des_ufs_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r09_serpent_des_braises": {
+  "name": "Serpent des braises",
+  "element": "feu",
+  "family": "serpent",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "crochet_braise",
+  "stats": {
+   "hp": 3023,
+   "atk": 366,
+   "mag": 366,
+   "def": 108,
+   "res": 108,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_serpent_des_braises_attack",
+    "name": "Attaque",
+    "clip": "r09_serpent_des_braises_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r09_dragon_de_la_premiere_braise": {
+  "name": "Dragon de la Première Braise",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "crochet_braise",
+  "stats": {
+   "hp": 7255,
+   "atk": 457,
+   "mag": 457,
+   "def": 130,
+   "res": 130,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_dragon_de_la_premiere_braise_attack",
+    "name": "Attaque",
+    "clip": "r09_dragon_de_la_premiere_braise_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r09_dragon_de_la_premiere_braise_skill",
+    "name": "Souffle de braise",
+    "clip": "r09_dragon_de_la_premiere_braise_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r09_statue_draconique": {
+  "name": "Statue draconique",
+  "element": "feu",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "jade_sanctuaire",
+  "stats": {
+   "hp": 3062,
+   "atk": 370,
+   "mag": 370,
+   "def": 110,
+   "res": 110,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_statue_draconique_attack",
+    "name": "Attaque",
+    "clip": "r09_statue_draconique_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r09_le_veilleur_de_jade": {
+  "name": "Le Veilleur de jade",
+  "element": "feu",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "jade_sanctuaire",
+  "stats": {
+   "hp": 7348,
+   "atk": 463,
+   "mag": 463,
+   "def": 132,
+   "res": 132,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_le_veilleur_de_jade_attack",
+    "name": "Attaque",
+    "clip": "r09_le_veilleur_de_jade_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r09_le_veilleur_de_jade_skill",
+    "name": "Sceau de jade",
+    "clip": "r09_le_veilleur_de_jade_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r09_serviteur_des_ecailles": {
+  "name": "Serviteur des écailles",
+  "element": "feu",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "ecaille_ivoire",
+  "stats": {
+   "hp": 3100,
+   "atk": 375,
+   "mag": 375,
+   "def": 111,
+   "res": 111,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_serviteur_des_ecailles_attack",
+    "name": "Attaque",
+    "clip": "r09_serviteur_des_ecailles_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r09_dragon_des_vents_anciens": {
+  "name": "Dragon des Vents anciens",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "ecaille_ivoire",
+  "stats": {
+   "hp": 7441,
+   "atk": 469,
+   "mag": 469,
+   "def": 133,
+   "res": 133,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_dragon_des_vents_anciens_attack",
+    "name": "Attaque",
+    "clip": "r09_dragon_des_vents_anciens_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r09_dragon_des_vents_anciens_skill",
+    "name": "Souffle des vents",
+    "clip": "r09_dragon_des_vents_anciens_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r09_ame_du_sanctuaire": {
+  "name": "Âme du sanctuaire",
+  "element": "feu",
+  "family": "specter",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "essence_draconique",
+  "stats": {
+   "hp": 3139,
+   "atk": 380,
+   "mag": 380,
+   "def": 112,
+   "res": 112,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_ame_du_sanctuaire_attack",
+    "name": "Attaque",
+    "clip": "r09_ame_du_sanctuaire_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r09_dragon_spectral": {
+  "name": "Dragon spectral",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "essence_draconique",
+  "stats": {
+   "hp": 7534,
+   "atk": 474,
+   "mag": 474,
+   "def": 134,
+   "res": 134,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_dragon_spectral_attack",
+    "name": "Attaque",
+    "clip": "r09_dragon_spectral_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r09_dragon_spectral_skill",
+    "name": "Flamme spectrale",
+    "clip": "r09_dragon_spectral_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r09_sentinelle_du_grand_sceau": {
+  "name": "Sentinelle du grand sceau",
+  "element": "feu",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "coeur_draconique",
+  "stats": {
+   "hp": 3178,
+   "atk": 384,
+   "mag": 384,
+   "def": 113,
+   "res": 113,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_sentinelle_du_grand_sceau_attack",
+    "name": "Attaque",
+    "clip": "r09_sentinelle_du_grand_sceau_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r09_dragon_ancien_asservi": {
+  "name": "Dragon ancien asservi",
+  "element": "feu",
+  "family": "dragon",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r09/",
+  "drop": "coeur_draconique",
+  "stats": {
+   "hp": 11440,
+   "atk": 528,
+   "mag": 528,
+   "def": 136,
+   "res": 136,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r09_dragon_ancien_asservi_attack",
+    "name": "Attaque",
+    "clip": "r09_dragon_ancien_asservi_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r09_dragon_ancien_asservi_skill",
+    "name": "Colère du dragon ancien",
+    "clip": "r09_dragon_ancien_asservi_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ },
+ "r10_serviteur_du_sceau": {
+  "name": "Serviteur du sceau",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "poussiere_sceau",
+  "stats": {
+   "hp": 3216,
+   "atk": 389,
+   "mag": 389,
+   "def": 114,
+   "res": 114,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_serviteur_du_sceau_attack",
+    "name": "Attaque",
+    "clip": "r10_serviteur_du_sceau_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r10_sentinelle_occulte": {
+  "name": "Sentinelle occulte",
+  "element": "ombre",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "poussiere_sceau",
+  "stats": {
+   "hp": 7719,
+   "atk": 486,
+   "mag": 486,
+   "def": 137,
+   "res": 137,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_sentinelle_occulte_attack",
+    "name": "Attaque",
+    "clip": "r10_sentinelle_occulte_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r10_sentinelle_occulte_skill",
+    "name": "Sceau d’arrêt",
+    "clip": "r10_sentinelle_occulte_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r10_rat_des_experiences": {
+  "name": "Rat des expériences",
+  "element": "ombre",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "crochet_experience",
+  "stats": {
+   "hp": 3255,
+   "atk": 394,
+   "mag": 394,
+   "def": 116,
+   "res": 116,
+   "spd": 94,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_rat_des_experiences_attack",
+    "name": "Attaque",
+    "clip": "r10_rat_des_experiences_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r10_le_devoreur_de_chaines": {
+  "name": "Le Dévoreur de chaînes",
+  "element": "ombre",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "crochet_experience",
+  "stats": {
+   "hp": 7812,
+   "atk": 492,
+   "mag": 492,
+   "def": 139,
+   "res": 139,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_le_devoreur_de_chaines_attack",
+    "name": "Attaque",
+    "clip": "r10_le_devoreur_de_chaines_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r10_le_devoreur_de_chaines_skill",
+    "name": "Morsure des chaînes",
+    "clip": "r10_le_devoreur_de_chaines_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r10_acolyte_noir": {
+  "name": "Acolyte noir",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "essence_capturee",
+  "stats": {
+   "hp": 3294,
+   "atk": 398,
+   "mag": 398,
+   "def": 117,
+   "res": 117,
+   "spd": 96,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_acolyte_noir_attack",
+    "name": "Attaque",
+    "clip": "r10_acolyte_noir_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r10_collectionneur_dames": {
+  "name": "Collectionneur d’âmes",
+  "element": "ombre",
+  "family": "specter",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "essence_capturee",
+  "stats": {
+   "hp": 7905,
+   "atk": 498,
+   "mag": 498,
+   "def": 140,
+   "res": 140,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_collectionneur_dames_attack",
+    "name": "Attaque",
+    "clip": "r10_collectionneur_dames_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r10_collectionneur_dames_skill",
+    "name": "Prison des âmes",
+    "clip": "r10_collectionneur_dames_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r10_golem_cousu": {
+  "name": "Golem cousu",
+  "element": "ombre",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "maillon_runique",
+  "stats": {
+   "hp": 3332,
+   "atk": 403,
+   "mag": 403,
+   "def": 118,
+   "res": 118,
+   "spd": 98,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_golem_cousu_attack",
+    "name": "Attaque",
+    "clip": "r10_golem_cousu_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r10_le_gardien_des_chaines": {
+  "name": "Le Gardien des chaînes",
+  "element": "ombre",
+  "family": "golem",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "maillon_runique",
+  "stats": {
+   "hp": 7998,
+   "atk": 504,
+   "mag": 504,
+   "def": 142,
+   "res": 142,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_le_gardien_des_chaines_attack",
+    "name": "Attaque",
+    "clip": "r10_le_gardien_des_chaines_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r10_le_gardien_des_chaines_skill",
+    "name": "Poids des entraves",
+    "clip": "r10_le_gardien_des_chaines_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r10_chasseur_sans_volonte": {
+  "name": "Chasseur sans volonté",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "fil_occulte",
+  "stats": {
+   "hp": 3371,
+   "atk": 408,
+   "mag": 408,
+   "def": 119,
+   "res": 119,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_chasseur_sans_volonte_attack",
+    "name": "Attaque",
+    "clip": "r10_chasseur_sans_volonte_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r10_la_marionnettiste": {
+  "name": "La Marionnettiste",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "fil_occulte",
+  "stats": {
+   "hp": 8091,
+   "atk": 510,
+   "mag": 510,
+   "def": 143,
+   "res": 143,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_la_marionnettiste_attack",
+    "name": "Attaque",
+    "clip": "r10_la_marionnettiste_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r10_la_marionnettiste_skill",
+    "name": "Fils du maître",
+    "clip": "r10_la_marionnettiste_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r10_corbeau_lie": {
+  "name": "Corbeau lié",
+  "element": "ombre",
+  "family": "bird",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "plume_occultee",
+  "stats": {
+   "hp": 3410,
+   "atk": 412,
+   "mag": 412,
+   "def": 120,
+   "res": 120,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_corbeau_lie_attack",
+    "name": "Attaque",
+    "clip": "r10_corbeau_lie_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r10_oiseau_des_mauvaises_augures": {
+  "name": "Oiseau des mauvaises augures",
+  "element": "ombre",
+  "family": "bird",
+  "range": "ranged",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "plume_occultee",
+  "stats": {
+   "hp": 8184,
+   "atk": 515,
+   "mag": 515,
+   "def": 144,
+   "res": 144,
+   "spd": 108,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_oiseau_des_mauvaises_augures_attack",
+    "name": "Attaque",
+    "clip": "r10_oiseau_des_mauvaises_augures_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r10_oiseau_des_mauvaises_augures_skill",
+    "name": "Vol des malédictions",
+    "clip": "r10_oiseau_des_mauvaises_augures_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r10_chimere_mineure": {
+  "name": "Chimère mineure",
+  "element": "ombre",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "noyau_chimere",
+  "stats": {
+   "hp": 3449,
+   "atk": 417,
+   "mag": 417,
+   "def": 122,
+   "res": 122,
+   "spd": 104,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_chimere_mineure_attack",
+    "name": "Attaque",
+    "clip": "r10_chimere_mineure_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r10_chimere_des_captifs": {
+  "name": "Chimère des captifs",
+  "element": "ombre",
+  "family": "quadruped",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": true,
+  "regional_boss": false,
+  "size": 285,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "noyau_chimere",
+  "stats": {
+   "hp": 8277,
+   "atk": 521,
+   "mag": 521,
+   "def": 146,
+   "res": 146,
+   "spd": 110,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_chimere_des_captifs_attack",
+    "name": "Attaque",
+    "clip": "r10_chimere_des_captifs_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r10_chimere_des_captifs_skill",
+    "name": "Rage des trois bêtes",
+    "clip": "r10_chimere_des_captifs_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.2
+    ]
+   }
+  ]
+ },
+ "r10_garde_du_dernier_cercle": {
+  "name": "Garde du dernier cercle",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "melee",
+  "attack_kind": "physical",
+  "boss": false,
+  "regional_boss": false,
+  "size": 210,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "catalyseur_noir",
+  "stats": {
+   "hp": 3487,
+   "atk": 422,
+   "mag": 422,
+   "def": 123,
+   "res": 123,
+   "spd": 106,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_garde_du_dernier_cercle_attack",
+    "name": "Attaque",
+    "clip": "r10_garde_du_dernier_cercle_attack",
+    "hit_times": [
+     0.52
+    ]
+   }
+  ]
+ },
+ "r10_magicien_noir": {
+  "name": "Magicien noir",
+  "element": "ombre",
+  "family": "humanoid",
+  "range": "ranged",
+  "attack_kind": "magic",
+  "boss": true,
+  "regional_boss": true,
+  "size": 330,
+  "anim": "res://assets/anim/enemies/r10/",
+  "drop": "catalyseur_noir",
+  "stats": {
+   "hp": 12554,
+   "atk": 580,
+   "mag": 580,
+   "def": 147,
+   "res": 147,
+   "spd": 112,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "r10_magicien_noir_attack",
+    "name": "Attaque",
+    "clip": "r10_magicien_noir_attack",
+    "hit_times": [
+     0.52
+    ]
+   },
+   {
+    "id": "r10_magicien_noir_skill",
+    "name": "Rituel des monstres",
+    "clip": "r10_magicien_noir_skill",
+    "cooldown": 9.0,
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.8
+     }
+    ],
+    "hit_times": [
+     1.469
+    ]
+   }
+  ]
+ }
 }

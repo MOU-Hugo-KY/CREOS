@@ -1,26 +1,17 @@
-extends Node3D
-## Scène du hub : Port-Franc. Relie le décor (bâtiments cliquables), les héros qui se promènent,
-## l'interface et la navigation (la Table des chasses lance le combat).
+extends Node2D
+## Scène du hub : Port-Franc en 2D. Relie le décor (bâtiments cliquables, héros qui se promènent),
+## l'interface et la navigation (la Table des chasses ouvre la carte des mondes, puis la chasse).
 
 const BATTLE_SCENE := "res://scenes/battle/battle.tscn"
-# Caméra façon village de Dungeon Boss : la place au premier plan, la ville en terrasses au fond
-# et l'horizon (le continent) juste au-dessus des toits.
-const CAMERA_POS := Vector3(0, 11.0, 21.0)
-const CAMERA_LOOK := Vector3(0, 5.0, -10.0)
-const PAN_LIMIT := 7.0
 const DRAG_THRESHOLD := 12.0
 
-var town: Node3D  # PortFranc2D (décor dessiné) ou PortFranc (ancien décor 3D)
-var _cam_pos := CAMERA_POS
-var _cam_look := CAMERA_LOOK
-var _pan_limit := PAN_LIMIT
+var town: PortFranc2D
 var hud: HubHud
 var audio: BattleAudio
-var camera: Camera3D
-var wanderers: Array[Wanderer] = []
+var camera: Camera2D
 
-var _pan := 0.0
-var _pan_target := 0.0
+var _view_left := 0.0  # bord gauche visible, en px de la scène
+var _view_target := 0.0
 var _dragging := false
 var _drag_start := Vector2.ZERO
 var _drag_moved := false
@@ -28,31 +19,19 @@ var _drag_moved := false
 
 func _ready() -> void:
 	Engine.time_scale = 1.0
-	if ResourceLoader.exists(PortFranc2D.DIR + "Port_Place.png"):
-		town = PortFranc2D.new()
-	else:
-		town = PortFranc.new()
+	town = PortFranc2D.new()
 	add_child(town)
-	town.building_clicked.connect(_on_building_clicked)
-
-	camera = Camera3D.new()
-	camera.fov = 42
-	if town is PortFranc2D:
-		_cam_pos = town.camera_pos
-		_cam_look = town.camera_look
-		_pan_limit = town.pan_limit
-		camera.fov = PortFranc2D.FOV
+	camera = Camera2D.new()
+	camera.anchor_mode = Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT
 	add_child(camera)
+	camera.make_current()
 	_add_vignette()
+	get_viewport().size_changed.connect(_fit)
+	_fit()
+	# On arrive sur la place, la Lanterne et la Loge des héros au centre.
+	_view_left = clampf(1350.0 - _visible_width() / 2.0, 0.0, _max_left())
+	_view_target = _view_left
 	_update_camera()
-
-	var i := 0
-	for id: String in ([] if town is PortFranc2D else PlayerData.owned_heroes()):
-		var w := Wanderer.new()
-		add_child(w)
-		w.setup(GameData.hero(id), 100 + i)
-		wanderers.append(w)
-		i += 1
 
 	audio = BattleAudio.new()
 	add_child(audio)
@@ -61,7 +40,6 @@ func _ready() -> void:
 	hud = HubHud.new()
 	add_child(hud)
 	hud.action.connect(_do_action)
-	hud.screen_opened.connect(func(open: bool) -> void: town.set_labels_visible(not open))
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 	hud.hunt_prep.start_requested.connect(start_hunt)
 
@@ -79,8 +57,8 @@ func _add_vignette() -> void:
 shader_type canvas_item;
 void fragment() {
 	vec2 d = (UV - 0.5) * vec2(1.0, 0.8);
-	float v = smoothstep(0.35, 0.85, length(d));
-	COLOR = vec4(0.12, 0.06, 0.08, v * 0.55);
+	float v = smoothstep(0.4, 0.9, length(d));
+	COLOR = vec4(0.12, 0.06, 0.08, v * 0.45);
 }
 """
 	var mat := ShaderMaterial.new()
@@ -90,36 +68,63 @@ void fragment() {
 
 
 func _process(delta: float) -> void:
-	_pan = lerpf(_pan, _pan_target, 1.0 - exp(-delta * 8.0))
+	_view_left = lerpf(_view_left, _view_target, 1.0 - exp(-delta * 8.0))
 	_update_camera()
 
 
-## Glisser horizontalement pour regarder la ville (le clic sur un bâtiment reste possible).
+## Glisser horizontalement pour regarder la ville ; toucher un bâtiment l'ouvre.
 func _unhandled_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.button_index == MOUSE_BUTTON_LEFT:
-		_dragging = mb.pressed
 		if mb.pressed:
+			_dragging = true
 			_drag_start = mb.position
 			_drag_moved = false
+		else:
+			_dragging = false
+			if not _drag_moved:
+				var id := town.building_at(get_global_mouse_position())
+				if id != "":
+					_on_building_clicked(id)
+	if mb and mb.pressed and mb.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+		var dir := -1.0 if mb.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0
+		_view_target = clampf(_view_target + dir * 160.0, 0.0, _max_left())
 	var mm := event as InputEventMouseMotion
-	if mm and _dragging:
-		if mm.position.distance_to(_drag_start) > DRAG_THRESHOLD:
-			_drag_moved = true
-		if _drag_moved:
-			_pan_target = clampf(_pan_target - mm.relative.x * 0.02, -_pan_limit, _pan_limit)
+	if mm:
+		if _dragging:
+			if mm.position.distance_to(_drag_start) > DRAG_THRESHOLD:
+				_drag_moved = true
+			if _drag_moved:
+				_view_target = clampf(_view_target - mm.relative.x / camera.zoom.x, 0.0, _max_left())
+		else:
+			var id := town.building_at(get_global_mouse_position())
+			town.set_hovered(id)
+			Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND if id != "" else Input.CURSOR_ARROW)
+
+
+func _fit() -> void:
+	var vs := get_viewport().get_visible_rect().size
+	var z := vs.y / PortFranc2D.SIZE.y
+	camera.zoom = Vector2(z, z)
+	_view_target = clampf(_view_target, 0.0, _max_left())
+
+
+func _visible_width() -> float:
+	return get_viewport().get_visible_rect().size.x / maxf(0.01, camera.zoom.x)
+
+
+func _max_left() -> float:
+	return maxf(0.0, PortFranc2D.SIZE.x - _visible_width())
 
 
 func _update_camera() -> void:
-	var off := Vector3(_pan, 0, 0)
-	camera.position = _cam_pos + off
-	camera.look_at(_cam_look + off, Vector3.UP)
+	camera.position = Vector2(_view_left, 0)
+	town.set_view_left(_view_left)
 
 
 func _on_building_clicked(id: String) -> void:
-	if _drag_moved:
-		return  # c'était un glissement, pas un clic
 	var info: Dictionary = GameData.hub.get("buildings", {}).get(id, {})
+	town.bounce(id)
 	audio.play("ui_click", -4.0, 0.0)
 	_do_action(info.get("action", ""), id)
 
@@ -127,17 +132,20 @@ func _on_building_clicked(id: String) -> void:
 func _do_action(action_name: String, id: String) -> void:
 	match action_name:
 		"campaign":
-			# D'abord l'écran « Préparer la chasse » (choix de l'équipe), puis le combat.
-			hud.open_hunt_prep(GameData.hub.get("first_hunt", "brumenoire_1"))
+			# D'abord la carte des mondes et l'écran « Préparer la chasse », puis le combat.
+			hud.open_campaign()
 		"heroes":
 			hud.open_lodge()
 		"altar":
 			hud.open_altar()
 		"quests":
 			hud.open_quests()
+		"shop":
+			hud.open_shop()
+		"relics":
+			hud.open_relics()
 		_:
-			var name := _name_of(id)
-			hud.toast("%s — bientôt disponible !" % name)
+			hud.toast("%s — bientôt disponible !" % _name_of(id))
 
 
 func start_hunt(hunt: String) -> void:

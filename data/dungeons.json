@@ -1,31 +1,2434 @@
 {
-  "brumenoire_1": {
-    "name": "Brumenoire — Le Gué des Noyés",
-    "region": "brumenoire",
-    "corruption": 0.4,
-    "waves": [
-      [
-        "squelette_serviteur",
-        "squelette_serviteur",
-        "squelette_rodeur"
-      ],
-      [
-        "squelette_guerrier",
-        "acolyte_noir",
-        "squelette_rodeur"
-      ],
-      [
-        "squelette_guerrier",
-        "vel_zareth",
-        "acolyte_noir"
-      ]
-    ],
-    "rewards": {
-      "gold": 250,
-      "xp": 120,
-      "essence_ombre": 3,
-      "fragments_relique": 4
-    },
-    "energy_cost": 6
-  }
+ "monde01_1": {
+  "name": "Abords de Port-Franc — 1",
+  "region": "monde01",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "slime_marin",
+    "slime_marin",
+    "slime_marin"
+   ],
+   [
+    "slime_marin",
+    "slime_marin",
+    "slime_marin"
+   ],
+   [
+    "slime_marin",
+    "slime_couronne",
+    "slime_marin"
+   ]
+  ],
+  "rewards": {
+   "gold": 120,
+   "xp": 60,
+   "essence_ombre": 1,
+   "gel_marin": 2,
+   "relique_corbin": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 4
+ },
+ "monde01_2": {
+  "name": "Abords de Port-Franc — 2",
+  "region": "monde01",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "crabe_sable",
+    "crabe_sable",
+    "slime_marin"
+   ],
+   [
+    "crabe_sable",
+    "slime_marin",
+    "crabe_sable"
+   ],
+   [
+    "crabe_sable",
+    "ermite_tonneau",
+    "crabe_sable"
+   ]
+  ],
+  "rewards": {
+   "gold": 135,
+   "xp": 68,
+   "essence_ombre": 1,
+   "carapace_renforcee": 2,
+   "relique_aegis": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 4
+ },
+ "monde01_3": {
+  "name": "Abords de Port-Franc — 3",
+  "region": "monde01",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "goeland",
+    "goeland",
+    "crabe_sable"
+   ],
+   [
+    "goeland",
+    "crabe_sable",
+    "goeland"
+   ],
+   [
+    "goeland",
+    "goeland_harponne",
+    "goeland"
+   ]
+  ],
+  "rewards": {
+   "gold": 150,
+   "xp": 76,
+   "essence_ombre": 1,
+   "plume_falaise": 2,
+   "relique_brume": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 4
+ },
+ "monde01_4": {
+  "name": "Abords de Port-Franc — 4",
+  "region": "monde01",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "slime_saumure",
+    "slime_saumure",
+    "goeland"
+   ],
+   [
+    "slime_saumure",
+    "goeland",
+    "slime_saumure"
+   ],
+   [
+    "slime_saumure",
+    "slime_salin",
+    "slime_saumure"
+   ]
+  ],
+  "rewards": {
+   "gold": 165,
+   "xp": 84,
+   "essence_ombre": 1,
+   "cristal_sel": 2,
+   "relique_orage": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 4
+ },
+ "monde01_5": {
+  "name": "Abords de Port-Franc — 5",
+  "region": "monde01",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "gobelin_recuperateur",
+    "gobelin_recuperateur",
+    "slime_saumure"
+   ],
+   [
+    "gobelin_recuperateur",
+    "slime_saumure",
+    "gobelin_recuperateur"
+   ],
+   [
+    "gobelin_recuperateur",
+    "gobelin_casier",
+    "gobelin_recuperateur"
+   ]
+  ],
+  "rewards": {
+   "gold": 180,
+   "xp": 92,
+   "essence_ombre": 1,
+   "ferraille": 2,
+   "relique_kharok": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 4
+ },
+ "monde01_6": {
+  "name": "Abords de Port-Franc — 6",
+  "region": "monde01",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "scarabee_maree",
+    "scarabee_maree",
+    "gobelin_recuperateur"
+   ],
+   [
+    "scarabee_maree",
+    "gobelin_recuperateur",
+    "scarabee_maree"
+   ],
+   [
+    "scarabee_maree",
+    "homard_entrave",
+    "scarabee_maree"
+   ]
+  ],
+  "rewards": {
+   "gold": 195,
+   "xp": 100,
+   "essence_ombre": 1,
+   "chitine_epaisse": 2,
+   "relique_braise": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 4
+ },
+ "monde01_7": {
+  "name": "Abords de Port-Franc — 7",
+  "region": "monde01",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "squelette_pecheur",
+    "squelette_pecheur",
+    "scarabee_maree"
+   ],
+   [
+    "squelette_pecheur",
+    "scarabee_maree",
+    "squelette_pecheur"
+   ],
+   [
+    "squelette_pecheur",
+    "gardien_noye",
+    "squelette_pecheur"
+   ]
+  ],
+  "rewards": {
+   "gold": 210,
+   "xp": 108,
+   "essence_ombre": 1,
+   "os_marin": 2,
+   "relique_nacre": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 4
+ },
+ "monde01_8": {
+  "name": "Abords de Port-Franc — 8",
+  "region": "monde01",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "crabe_epave",
+    "crabe_epave",
+    "squelette_pecheur"
+   ],
+   [
+    "crabe_epave",
+    "squelette_pecheur",
+    "crabe_epave"
+   ],
+   [
+    "crabe_epave",
+    "brise_coque",
+    "crabe_epave"
+   ]
+  ],
+  "rewards": {
+   "gold": 225,
+   "xp": 116,
+   "essence_ombre": 1,
+   "bois_epave": 2,
+   "relique_rivet": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 4
+ },
+ "monde02_1": {
+  "name": "Bois des Spores — 1",
+  "region": "monde02",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r02_pousse_grognonne",
+    "r02_pousse_grognonne",
+    "r02_pousse_grognonne"
+   ],
+   [
+    "r02_pousse_grognonne",
+    "r02_pousse_grognonne",
+    "r02_pousse_grognonne"
+   ],
+   [
+    "r02_pousse_grognonne",
+    "r02_tambour_des_spores",
+    "r02_pousse_grognonne"
+   ]
+  ],
+  "rewards": {
+   "gold": 240,
+   "xp": 124,
+   "essence_ombre": 1,
+   "spore_doree": 2,
+   "relique_sylve": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde02_2": {
+  "name": "Bois des Spores — 2",
+  "region": "monde02",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r02_ortie_mordante",
+    "r02_ortie_mordante",
+    "r02_pousse_grognonne"
+   ],
+   [
+    "r02_ortie_mordante",
+    "r02_pousse_grognonne",
+    "r02_ortie_mordante"
+   ],
+   [
+    "r02_ortie_mordante",
+    "r02_fleur_devoreuse",
+    "r02_ortie_mordante"
+   ]
+  ],
+  "rewards": {
+   "gold": 255,
+   "xp": 132,
+   "essence_ombre": 1,
+   "fibre_urticante": 2,
+   "relique_valen": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde02_3": {
+  "name": "Bois des Spores — 3",
+  "region": "monde02",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r02_champignon_eclaireur",
+    "r02_champignon_eclaireur",
+    "r02_ortie_mordante"
+   ],
+   [
+    "r02_champignon_eclaireur",
+    "r02_ortie_mordante",
+    "r02_champignon_eclaireur"
+   ],
+   [
+    "r02_champignon_eclaireur",
+    "r02_gardien_phosphorescent",
+    "r02_champignon_eclaireur"
+   ]
+  ],
+  "rewards": {
+   "gold": 270,
+   "xp": 140,
+   "essence_ombre": 2,
+   "spore_lumineuse": 2,
+   "relique_bastion": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde02_4": {
+  "name": "Bois des Spores — 4",
+  "region": "monde02",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r02_racine_rampante",
+    "r02_racine_rampante",
+    "r02_champignon_eclaireur"
+   ],
+   [
+    "r02_racine_rampante",
+    "r02_champignon_eclaireur",
+    "r02_racine_rampante"
+   ],
+   [
+    "r02_racine_rampante",
+    "r02_souche_possedee",
+    "r02_racine_rampante"
+   ]
+  ],
+  "rewards": {
+   "gold": 285,
+   "xp": 148,
+   "essence_ombre": 2,
+   "bois_vivant": 2,
+   "relique_saffran": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde02_5": {
+  "name": "Bois des Spores — 5",
+  "region": "monde02",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r02_puffball_sauteur",
+    "r02_puffball_sauteur",
+    "r02_racine_rampante"
+   ],
+   [
+    "r02_puffball_sauteur",
+    "r02_racine_rampante",
+    "r02_puffball_sauteur"
+   ],
+   [
+    "r02_puffball_sauteur",
+    "r02_vesse_de_rage",
+    "r02_puffball_sauteur"
+   ]
+  ],
+  "rewards": {
+   "gold": 300,
+   "xp": 156,
+   "essence_ombre": 2,
+   "poudre_sporifique": 2,
+   "relique_oona": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde02_6": {
+  "name": "Bois des Spores — 6",
+  "region": "monde02",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r02_liane_fouetteuse",
+    "r02_liane_fouetteuse",
+    "r02_puffball_sauteur"
+   ],
+   [
+    "r02_liane_fouetteuse",
+    "r02_puffball_sauteur",
+    "r02_liane_fouetteuse"
+   ],
+   [
+    "r02_liane_fouetteuse",
+    "r02_rosier_des_epines",
+    "r02_liane_fouetteuse"
+   ]
+  ],
+  "rewards": {
+   "gold": 315,
+   "xp": 164,
+   "essence_ombre": 2,
+   "epine_rouge": 2,
+   "relique_calx": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde02_7": {
+  "name": "Bois des Spores — 7",
+  "region": "monde02",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r02_myconide_porte_buche",
+    "r02_myconide_porte_buche",
+    "r02_liane_fouetteuse"
+   ],
+   [
+    "r02_myconide_porte_buche",
+    "r02_liane_fouetteuse",
+    "r02_myconide_porte_buche"
+   ],
+   [
+    "r02_myconide_porte_buche",
+    "r02_le_coupe_seve",
+    "r02_myconide_porte_buche"
+   ]
+  ],
+  "rewards": {
+   "gold": 330,
+   "xp": 172,
+   "essence_ombre": 2,
+   "seve_epaisse": 2,
+   "relique_nyx": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde02_8": {
+  "name": "Bois des Spores — 8",
+  "region": "monde02",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r02_sporelle_pale",
+    "r02_sporelle_pale",
+    "r02_myconide_porte_buche"
+   ],
+   [
+    "r02_sporelle_pale",
+    "r02_myconide_porte_buche",
+    "r02_sporelle_pale"
+   ],
+   [
+    "r02_sporelle_pale",
+    "r02_mere_des_spores",
+    "r02_sporelle_pale"
+   ]
+  ],
+  "rewards": {
+   "gold": 345,
+   "xp": 180,
+   "essence_ombre": 2,
+   "coeur_mycelien": 2,
+   "relique_mei_lian": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde03_5": {
+  "name": "Terriers de l'ile — 5",
+  "region": "monde03",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r03_termite_mineur",
+    "r03_termite_mineur",
+    "r03_termite_mineur"
+   ],
+   [
+    "r03_termite_mineur",
+    "r03_termite_mineur",
+    "r03_termite_mineur"
+   ],
+   [
+    "r03_termite_mineur",
+    "r03_briseur_de_galerie",
+    "r03_termite_mineur"
+   ]
+  ],
+  "rewards": {
+   "gold": 420,
+   "xp": 220,
+   "essence_ombre": 3,
+   "pierre_terrier": 2,
+   "relique_aegis": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde03_6": {
+  "name": "Terriers de l'ile — 6",
+  "region": "monde03",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r03_papillon_poudreux",
+    "r03_papillon_poudreux",
+    "r03_termite_mineur"
+   ],
+   [
+    "r03_papillon_poudreux",
+    "r03_termite_mineur",
+    "r03_papillon_poudreux"
+   ],
+   [
+    "r03_papillon_poudreux",
+    "r03_papillon_des_songes",
+    "r03_papillon_poudreux"
+   ]
+  ],
+  "rewards": {
+   "gold": 435,
+   "xp": 228,
+   "essence_ombre": 3,
+   "poudre_ailes": 2,
+   "relique_brume": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde03_7": {
+  "name": "Terriers de l'ile — 7",
+  "region": "monde03",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r03_guepe_chasseuse",
+    "r03_guepe_chasseuse",
+    "r03_papillon_poudreux"
+   ],
+   [
+    "r03_guepe_chasseuse",
+    "r03_papillon_poudreux",
+    "r03_guepe_chasseuse"
+   ],
+   [
+    "r03_guepe_chasseuse",
+    "r03_frelon_porte_venin",
+    "r03_guepe_chasseuse"
+   ]
+  ],
+  "rewards": {
+   "gold": 450,
+   "xp": 236,
+   "essence_ombre": 3,
+   "venin_dense": 2,
+   "relique_orage": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde03_8": {
+  "name": "Terriers de l'ile — 8",
+  "region": "monde03",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r03_larve_cuirassee",
+    "r03_larve_cuirassee",
+    "r03_guepe_chasseuse"
+   ],
+   [
+    "r03_larve_cuirassee",
+    "r03_guepe_chasseuse",
+    "r03_larve_cuirassee"
+   ],
+   [
+    "r03_larve_cuirassee",
+    "r03_reine_aux_mille_ufs",
+    "r03_larve_cuirassee"
+   ]
+  ],
+  "rewards": {
+   "gold": 465,
+   "xp": 244,
+   "essence_ombre": 3,
+   "chitine_royale": 2,
+   "relique_kharok": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 5
+ },
+ "monde04_1": {
+  "name": "Camps pillards — 1",
+  "region": "monde04",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r04_gobelin_fouilleur",
+    "r04_gobelin_fouilleur",
+    "r04_gobelin_fouilleur"
+   ],
+   [
+    "r04_gobelin_fouilleur",
+    "r04_gobelin_fouilleur",
+    "r04_gobelin_fouilleur"
+   ],
+   [
+    "r04_gobelin_fouilleur",
+    "r04_gobelin_artificier",
+    "r04_gobelin_fouilleur"
+   ]
+  ],
+  "rewards": {
+   "gold": 480,
+   "xp": 252,
+   "essence_ombre": 3,
+   "poudre_noire": 2,
+   "relique_braise": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde04_2": {
+  "name": "Camps pillards — 2",
+  "region": "monde04",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r04_orc_coupe_bois",
+    "r04_orc_coupe_bois",
+    "r04_gobelin_fouilleur"
+   ],
+   [
+    "r04_orc_coupe_bois",
+    "r04_gobelin_fouilleur",
+    "r04_orc_coupe_bois"
+   ],
+   [
+    "r04_orc_coupe_bois",
+    "r04_orc_briseur",
+    "r04_orc_coupe_bois"
+   ]
+  ],
+  "rewards": {
+   "gold": 495,
+   "xp": 260,
+   "essence_ombre": 3,
+   "fer_brut": 2,
+   "relique_nacre": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde04_3": {
+  "name": "Camps pillards — 3",
+  "region": "monde04",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r04_voleuse_de_camp",
+    "r04_voleuse_de_camp",
+    "r04_orc_coupe_bois"
+   ],
+   [
+    "r04_voleuse_de_camp",
+    "r04_orc_coupe_bois",
+    "r04_voleuse_de_camp"
+   ],
+   [
+    "r04_voleuse_de_camp",
+    "r04_capitaine_des_voleurs",
+    "r04_voleuse_de_camp"
+   ]
+  ],
+  "rewards": {
+   "gold": 510,
+   "xp": 268,
+   "essence_ombre": 3,
+   "piece_pillee": 2,
+   "relique_rivet": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde04_4": {
+  "name": "Camps pillards — 4",
+  "region": "monde04",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r04_gobelin_frondeur",
+    "r04_gobelin_frondeur",
+    "r04_voleuse_de_camp"
+   ],
+   [
+    "r04_gobelin_frondeur",
+    "r04_voleuse_de_camp",
+    "r04_gobelin_frondeur"
+   ],
+   [
+    "r04_gobelin_frondeur",
+    "r04_chef_des_frondeurs",
+    "r04_gobelin_frondeur"
+   ]
+  ],
+  "rewards": {
+   "gold": 525,
+   "xp": 276,
+   "essence_ombre": 3,
+   "cuir_epais": 2,
+   "relique_sylve": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde04_5": {
+  "name": "Camps pillards — 5",
+  "region": "monde04",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r04_orc_garde_braise",
+    "r04_orc_garde_braise",
+    "r04_gobelin_frondeur"
+   ],
+   [
+    "r04_orc_garde_braise",
+    "r04_gobelin_frondeur",
+    "r04_orc_garde_braise"
+   ],
+   [
+    "r04_orc_garde_braise",
+    "r04_le_mange_braise",
+    "r04_orc_garde_braise"
+   ]
+  ],
+  "rewards": {
+   "gold": 540,
+   "xp": 284,
+   "essence_ombre": 3,
+   "charbon_dur": 2,
+   "relique_valen": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde04_6": {
+  "name": "Camps pillards — 6",
+  "region": "monde04",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r04_contrebandier",
+    "r04_contrebandier",
+    "r04_orc_garde_braise"
+   ],
+   [
+    "r04_contrebandier",
+    "r04_orc_garde_braise",
+    "r04_contrebandier"
+   ],
+   [
+    "r04_contrebandier",
+    "r04_la_dette_rouge",
+    "r04_contrebandier"
+   ]
+  ],
+  "rewards": {
+   "gold": 555,
+   "xp": 292,
+   "essence_ombre": 3,
+   "plan_contrebande": 2,
+   "relique_bastion": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde04_7": {
+  "name": "Camps pillards — 7",
+  "region": "monde04",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r04_gobelin_chaman",
+    "r04_gobelin_chaman",
+    "r04_contrebandier"
+   ],
+   [
+    "r04_gobelin_chaman",
+    "r04_contrebandier",
+    "r04_gobelin_chaman"
+   ],
+   [
+    "r04_gobelin_chaman",
+    "r04_chaman_des_os",
+    "r04_gobelin_chaman"
+   ]
+  ],
+  "rewards": {
+   "gold": 570,
+   "xp": 300,
+   "essence_ombre": 4,
+   "os_totemique": 2,
+   "relique_saffran": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde04_8": {
+  "name": "Camps pillards — 8",
+  "region": "monde04",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r04_orc_porte_banniere",
+    "r04_orc_porte_banniere",
+    "r04_gobelin_chaman"
+   ],
+   [
+    "r04_orc_porte_banniere",
+    "r04_gobelin_chaman",
+    "r04_orc_porte_banniere"
+   ],
+   [
+    "r04_orc_porte_banniere",
+    "r04_gorvak_le_marque",
+    "r04_orc_porte_banniere"
+   ]
+  ],
+  "rewards": {
+   "gold": 585,
+   "xp": 308,
+   "essence_ombre": 4,
+   "acier_du_chef": 2,
+   "relique_oona": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde05_1": {
+  "name": "Carrieres oubliees — 1",
+  "region": "monde05",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r05_golem_de_gravats",
+    "r05_golem_de_gravats",
+    "r05_golem_de_gravats"
+   ],
+   [
+    "r05_golem_de_gravats",
+    "r05_golem_de_gravats",
+    "r05_golem_de_gravats"
+   ],
+   [
+    "r05_golem_de_gravats",
+    "r05_golem_de_charbon",
+    "r05_golem_de_gravats"
+   ]
+  ],
+  "rewards": {
+   "gold": 600,
+   "xp": 316,
+   "essence_ombre": 4,
+   "charbon_vivant": 2,
+   "relique_calx": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde05_2": {
+  "name": "Carrieres oubliees — 2",
+  "region": "monde05",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r05_eclat_vivant",
+    "r05_eclat_vivant",
+    "r05_golem_de_gravats"
+   ],
+   [
+    "r05_eclat_vivant",
+    "r05_golem_de_gravats",
+    "r05_eclat_vivant"
+   ],
+   [
+    "r05_eclat_vivant",
+    "r05_geode_instable",
+    "r05_eclat_vivant"
+   ]
+  ],
+  "rewards": {
+   "gold": 615,
+   "xp": 324,
+   "essence_ombre": 4,
+   "cristal_geode": 2,
+   "relique_nyx": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde05_3": {
+  "name": "Carrieres oubliees — 3",
+  "region": "monde05",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r05_statue_eveillee",
+    "r05_statue_eveillee",
+    "r05_eclat_vivant"
+   ],
+   [
+    "r05_statue_eveillee",
+    "r05_eclat_vivant",
+    "r05_statue_eveillee"
+   ],
+   [
+    "r05_statue_eveillee",
+    "r05_gardien_du_seuil",
+    "r05_statue_eveillee"
+   ]
+  ],
+  "rewards": {
+   "gold": 630,
+   "xp": 332,
+   "essence_ombre": 4,
+   "pierre_taillee": 2,
+   "relique_mei_lian": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde05_4": {
+  "name": "Carrieres oubliees — 4",
+  "region": "monde05",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r05_golem_dargile",
+    "r05_golem_dargile",
+    "r05_statue_eveillee"
+   ],
+   [
+    "r05_golem_dargile",
+    "r05_statue_eveillee",
+    "r05_golem_dargile"
+   ],
+   [
+    "r05_golem_dargile",
+    "r05_le_cur_du_four",
+    "r05_golem_dargile"
+   ]
+  ],
+  "rewards": {
+   "gold": 645,
+   "xp": 340,
+   "essence_ombre": 4,
+   "argile_cuite": 2,
+   "relique_jin_seok": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde05_5": {
+  "name": "Carrieres oubliees — 5",
+  "region": "monde05",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r05_sentinelle_de_cuivre",
+    "r05_sentinelle_de_cuivre",
+    "r05_golem_dargile"
+   ],
+   [
+    "r05_sentinelle_de_cuivre",
+    "r05_golem_dargile",
+    "r05_sentinelle_de_cuivre"
+   ],
+   [
+    "r05_sentinelle_de_cuivre",
+    "r05_forge_ambulante",
+    "r05_sentinelle_de_cuivre"
+   ]
+  ],
+  "rewards": {
+   "gold": 660,
+   "xp": 348,
+   "essence_ombre": 4,
+   "cuivre_ancien": 2,
+   "relique_yun_tao": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde05_6": {
+  "name": "Carrieres oubliees — 6",
+  "region": "monde05",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r05_golem_de_mousse",
+    "r05_golem_de_mousse",
+    "r05_sentinelle_de_cuivre"
+   ],
+   [
+    "r05_golem_de_mousse",
+    "r05_sentinelle_de_cuivre",
+    "r05_golem_de_mousse"
+   ],
+   [
+    "r05_golem_de_mousse",
+    "r05_le_jardin_de_pierre",
+    "r05_golem_de_mousse"
+   ]
+  ],
+  "rewards": {
+   "gold": 675,
+   "xp": 356,
+   "essence_ombre": 4,
+   "mousse_minerale": 2,
+   "relique_tang_su": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde05_7": {
+  "name": "Carrieres oubliees — 7",
+  "region": "monde05",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r05_ouvrier_de_pierre",
+    "r05_ouvrier_de_pierre",
+    "r05_golem_de_mousse"
+   ],
+   [
+    "r05_ouvrier_de_pierre",
+    "r05_golem_de_mousse",
+    "r05_ouvrier_de_pierre"
+   ],
+   [
+    "r05_ouvrier_de_pierre",
+    "r05_le_marteau_aveugle",
+    "r05_ouvrier_de_pierre"
+   ]
+  ],
+  "rewards": {
+   "gold": 690,
+   "xp": 364,
+   "essence_ombre": 4,
+   "calcaire_ancien": 2,
+   "relique_corbin": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde05_8": {
+  "name": "Carrieres oubliees — 8",
+  "region": "monde05",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r05_golem_ferre",
+    "r05_golem_ferre",
+    "r05_ouvrier_de_pierre"
+   ],
+   [
+    "r05_golem_ferre",
+    "r05_ouvrier_de_pierre",
+    "r05_golem_ferre"
+   ],
+   [
+    "r05_golem_ferre",
+    "r05_colosse_entrave",
+    "r05_golem_ferre"
+   ]
+  ],
+  "rewards": {
+   "gold": 705,
+   "xp": 372,
+   "essence_ombre": 4,
+   "noyau_colosse": 2,
+   "relique_aegis": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 6
+ },
+ "monde06_1": {
+  "name": "Necropole engloutie — 1",
+  "region": "monde06",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r06_squelette_guetteur",
+    "r06_squelette_guetteur",
+    "r06_squelette_guetteur"
+   ],
+   [
+    "r06_squelette_guetteur",
+    "r06_squelette_guetteur",
+    "r06_squelette_guetteur"
+   ],
+   [
+    "r06_squelette_guetteur",
+    "r06_porte_etendard_mort",
+    "r06_squelette_guetteur"
+   ]
+  ],
+  "rewards": {
+   "gold": 720,
+   "xp": 380,
+   "essence_ombre": 5,
+   "os_ancien": 2,
+   "relique_brume": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde06_2": {
+  "name": "Necropole engloutie — 2",
+  "region": "monde06",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r06_noye_des_cryptes",
+    "r06_noye_des_cryptes",
+    "r06_squelette_guetteur"
+   ],
+   [
+    "r06_noye_des_cryptes",
+    "r06_squelette_guetteur",
+    "r06_noye_des_cryptes"
+   ],
+   [
+    "r06_noye_des_cryptes",
+    "r06_bourreau_sans_tete",
+    "r06_noye_des_cryptes"
+   ]
+  ],
+  "rewards": {
+   "gold": 735,
+   "xp": 388,
+   "essence_ombre": 5,
+   "fer_funeraire": 2,
+   "relique_orage": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde06_3": {
+  "name": "Necropole engloutie — 3",
+  "region": "monde06",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r06_mage_squelette",
+    "r06_mage_squelette",
+    "r06_noye_des_cryptes"
+   ],
+   [
+    "r06_mage_squelette",
+    "r06_noye_des_cryptes",
+    "r06_mage_squelette"
+   ],
+   [
+    "r06_mage_squelette",
+    "r06_liche_des_cierges",
+    "r06_mage_squelette"
+   ]
+  ],
+  "rewards": {
+   "gold": 750,
+   "xp": 396,
+   "essence_ombre": 5,
+   "cire_spectrale": 2,
+   "relique_kharok": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde06_4": {
+  "name": "Necropole engloutie — 4",
+  "region": "monde06",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r06_chevalier_rouille",
+    "r06_chevalier_rouille",
+    "r06_mage_squelette"
+   ],
+   [
+    "r06_chevalier_rouille",
+    "r06_mage_squelette",
+    "r06_chevalier_rouille"
+   ],
+   [
+    "r06_chevalier_rouille",
+    "r06_chevalier_du_caveau",
+    "r06_chevalier_rouille"
+   ]
+  ],
+  "rewards": {
+   "gold": 765,
+   "xp": 404,
+   "essence_ombre": 5,
+   "acier_corrode": 2,
+   "relique_braise": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde06_5": {
+  "name": "Necropole engloutie — 5",
+  "region": "monde06",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r06_fossoyeur_oublie",
+    "r06_fossoyeur_oublie",
+    "r06_chevalier_rouille"
+   ],
+   [
+    "r06_fossoyeur_oublie",
+    "r06_chevalier_rouille",
+    "r06_fossoyeur_oublie"
+   ],
+   [
+    "r06_fossoyeur_oublie",
+    "r06_le_gardien_des_noms",
+    "r06_fossoyeur_oublie"
+   ]
+  ],
+  "rewards": {
+   "gold": 780,
+   "xp": 412,
+   "essence_ombre": 5,
+   "pierre_memorielle": 2,
+   "relique_nacre": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde06_6": {
+  "name": "Necropole engloutie — 6",
+  "region": "monde06",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r06_spectre_du_puits",
+    "r06_spectre_du_puits",
+    "r06_fossoyeur_oublie"
+   ],
+   [
+    "r06_spectre_du_puits",
+    "r06_fossoyeur_oublie",
+    "r06_spectre_du_puits"
+   ],
+   [
+    "r06_spectre_du_puits",
+    "r06_dame_des_eaux_mortes",
+    "r06_spectre_du_puits"
+   ]
+  ],
+  "rewards": {
+   "gold": 795,
+   "xp": 420,
+   "essence_ombre": 5,
+   "essence_spectrale": 2,
+   "relique_rivet": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde06_7": {
+  "name": "Necropole engloutie — 7",
+  "region": "monde06",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r06_osselet_rampant",
+    "r06_osselet_rampant",
+    "r06_spectre_du_puits"
+   ],
+   [
+    "r06_osselet_rampant",
+    "r06_spectre_du_puits",
+    "r06_osselet_rampant"
+   ],
+   [
+    "r06_osselet_rampant",
+    "r06_cerbere_des_ossuaires",
+    "r06_osselet_rampant"
+   ]
+  ],
+  "rewards": {
+   "gold": 810,
+   "xp": 428,
+   "essence_ombre": 5,
+   "crochet_osseux": 2,
+   "relique_sylve": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde06_8": {
+  "name": "Necropole engloutie — 8",
+  "region": "monde06",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r06_acolyte_de_la_vase",
+    "r06_acolyte_de_la_vase",
+    "r06_osselet_rampant"
+   ],
+   [
+    "r06_acolyte_de_la_vase",
+    "r06_osselet_rampant",
+    "r06_acolyte_de_la_vase"
+   ],
+   [
+    "r06_acolyte_de_la_vase",
+    "r06_liche_des_marees",
+    "r06_acolyte_de_la_vase"
+   ]
+  ],
+  "rewards": {
+   "gold": 825,
+   "xp": 436,
+   "essence_ombre": 5,
+   "coeur_liche": 2,
+   "relique_valen": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde07_1": {
+  "name": "Postes de chasse abandonnes — 1",
+  "region": "monde07",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r07_eclaireur_possede",
+    "r07_eclaireur_possede",
+    "r07_eclaireur_possede"
+   ],
+   [
+    "r07_eclaireur_possede",
+    "r07_eclaireur_possede",
+    "r07_eclaireur_possede"
+   ],
+   [
+    "r07_eclaireur_possede",
+    "r07_duelliste_marque",
+    "r07_eclaireur_possede"
+   ]
+  ],
+  "rewards": {
+   "gold": 840,
+   "xp": 444,
+   "essence_ombre": 5,
+   "insigne_eclaireur": 2,
+   "relique_bastion": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde07_2": {
+  "name": "Postes de chasse abandonnes — 2",
+  "region": "monde07",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r07_arbaletrier_lie",
+    "r07_arbaletrier_lie",
+    "r07_eclaireur_possede"
+   ],
+   [
+    "r07_arbaletrier_lie",
+    "r07_eclaireur_possede",
+    "r07_arbaletrier_lie"
+   ],
+   [
+    "r07_arbaletrier_lie",
+    "r07_arbaletriere_des_remparts",
+    "r07_arbaletrier_lie"
+   ]
+  ],
+  "rewards": {
+   "gold": 855,
+   "xp": 452,
+   "essence_ombre": 5,
+   "mecanisme_arbalete": 2,
+   "relique_saffran": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde07_3": {
+  "name": "Postes de chasse abandonnes — 3",
+  "region": "monde07",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r07_traqueur_nocturne",
+    "r07_traqueur_nocturne",
+    "r07_arbaletrier_lie"
+   ],
+   [
+    "r07_traqueur_nocturne",
+    "r07_arbaletrier_lie",
+    "r07_traqueur_nocturne"
+   ],
+   [
+    "r07_traqueur_nocturne",
+    "r07_maitre_des_meutes",
+    "r07_traqueur_nocturne"
+   ]
+  ],
+  "rewards": {
+   "gold": 870,
+   "xp": 460,
+   "essence_ombre": 6,
+   "sifflet_meute": 2,
+   "relique_oona": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde07_4": {
+  "name": "Postes de chasse abandonnes — 4",
+  "region": "monde07",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r07_loup_de_chasse",
+    "r07_loup_de_chasse",
+    "r07_traqueur_nocturne"
+   ],
+   [
+    "r07_loup_de_chasse",
+    "r07_traqueur_nocturne",
+    "r07_loup_de_chasse"
+   ],
+   [
+    "r07_loup_de_chasse",
+    "r07_croc_de_lancien_camp",
+    "r07_loup_de_chasse"
+   ]
+  ],
+  "rewards": {
+   "gold": 885,
+   "xp": 468,
+   "essence_ombre": 6,
+   "fourrure_argentee": 2,
+   "relique_calx": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde07_5": {
+  "name": "Postes de chasse abandonnes — 5",
+  "region": "monde07",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r07_piegeuse_liee",
+    "r07_piegeuse_liee",
+    "r07_loup_de_chasse"
+   ],
+   [
+    "r07_piegeuse_liee",
+    "r07_loup_de_chasse",
+    "r07_piegeuse_liee"
+   ],
+   [
+    "r07_piegeuse_liee",
+    "r07_la_gardienne_des_collets",
+    "r07_piegeuse_liee"
+   ]
+  ],
+  "rewards": {
+   "gold": 900,
+   "xp": 476,
+   "essence_ombre": 6,
+   "chaine_chasse": 2,
+   "relique_nyx": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde07_6": {
+  "name": "Postes de chasse abandonnes — 6",
+  "region": "monde07",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r07_soigneur_devoye",
+    "r07_soigneur_devoye",
+    "r07_piegeuse_liee"
+   ],
+   [
+    "r07_soigneur_devoye",
+    "r07_piegeuse_liee",
+    "r07_soigneur_devoye"
+   ],
+   [
+    "r07_soigneur_devoye",
+    "r07_le_porte_fleau",
+    "r07_soigneur_devoye"
+   ]
+  ],
+  "rewards": {
+   "gold": 915,
+   "xp": 484,
+   "essence_ombre": 6,
+   "filtre_fumigation": 2,
+   "relique_mei_lian": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde07_7": {
+  "name": "Postes de chasse abandonnes — 7",
+  "region": "monde07",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r07_chasseur_de_primes",
+    "r07_chasseur_de_primes",
+    "r07_soigneur_devoye"
+   ],
+   [
+    "r07_chasseur_de_primes",
+    "r07_soigneur_devoye",
+    "r07_chasseur_de_primes"
+   ],
+   [
+    "r07_chasseur_de_primes",
+    "r07_le_collectionneur_dinsignes",
+    "r07_chasseur_de_primes"
+   ]
+  ],
+  "rewards": {
+   "gold": 930,
+   "xp": 492,
+   "essence_ombre": 6,
+   "insigne_veteran": 2,
+   "relique_jin_seok": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde07_8": {
+  "name": "Postes de chasse abandonnes — 8",
+  "region": "monde07",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r07_garde_de_lancienne_loge",
+    "r07_garde_de_lancienne_loge",
+    "r07_chasseur_de_primes"
+   ],
+   [
+    "r07_garde_de_lancienne_loge",
+    "r07_chasseur_de_primes",
+    "r07_garde_de_lancienne_loge"
+   ],
+   [
+    "r07_garde_de_lancienne_loge",
+    "r07_ancien_chef_des_chasseurs",
+    "r07_garde_de_lancienne_loge"
+   ]
+  ],
+  "rewards": {
+   "gold": 945,
+   "xp": 500,
+   "essence_ombre": 6,
+   "sceau_commandant": 2,
+   "relique_yun_tao": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 7
+ },
+ "monde08_1": {
+  "name": "Pics des Wyvernes — 1",
+  "region": "monde08",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r08_reptile_des_rochers",
+    "r08_reptile_des_rochers",
+    "r08_reptile_des_rochers"
+   ],
+   [
+    "r08_reptile_des_rochers",
+    "r08_reptile_des_rochers",
+    "r08_reptile_des_rochers"
+   ],
+   [
+    "r08_reptile_des_rochers",
+    "r08_gardien_du_nid",
+    "r08_reptile_des_rochers"
+   ]
+  ],
+  "rewards": {
+   "gold": 960,
+   "xp": 508,
+   "essence_ombre": 6,
+   "ecaille_rocheuse": 2,
+   "relique_tang_su": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde08_2": {
+  "name": "Pics des Wyvernes — 2",
+  "region": "monde08",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r08_wyverne_fauve",
+    "r08_wyverne_fauve",
+    "r08_reptile_des_rochers"
+   ],
+   [
+    "r08_wyverne_fauve",
+    "r08_reptile_des_rochers",
+    "r08_wyverne_fauve"
+   ],
+   [
+    "r08_wyverne_fauve",
+    "r08_wyverne_blessee",
+    "r08_wyverne_fauve"
+   ]
+  ],
+  "rewards": {
+   "gold": 975,
+   "xp": 516,
+   "essence_ombre": 6,
+   "membrane_fauve": 2,
+   "relique_corbin": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde08_3": {
+  "name": "Pics des Wyvernes — 3",
+  "region": "monde08",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r08_serpent_des_cimes",
+    "r08_serpent_des_cimes",
+    "r08_wyverne_fauve"
+   ],
+   [
+    "r08_serpent_des_cimes",
+    "r08_wyverne_fauve",
+    "r08_serpent_des_cimes"
+   ],
+   [
+    "r08_serpent_des_cimes",
+    "r08_vipere_des_nuages",
+    "r08_serpent_des_cimes"
+   ]
+  ],
+  "rewards": {
+   "gold": 990,
+   "xp": 524,
+   "essence_ombre": 6,
+   "venin_cimes": 2,
+   "relique_aegis": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde08_4": {
+  "name": "Pics des Wyvernes — 4",
+  "region": "monde08",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r08_wyverne_dos",
+    "r08_wyverne_dos",
+    "r08_serpent_des_cimes"
+   ],
+   [
+    "r08_wyverne_dos",
+    "r08_serpent_des_cimes",
+    "r08_wyverne_dos"
+   ],
+   [
+    "r08_wyverne_dos",
+    "r08_wyverne_des_ossuaires",
+    "r08_wyverne_dos"
+   ]
+  ],
+  "rewards": {
+   "gold": 1005,
+   "xp": 532,
+   "essence_ombre": 6,
+   "os_draconique": 2,
+   "relique_brume": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde08_5": {
+  "name": "Pics des Wyvernes — 5",
+  "region": "monde08",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r08_griffe_des_falaises",
+    "r08_griffe_des_falaises",
+    "r08_wyverne_dos"
+   ],
+   [
+    "r08_griffe_des_falaises",
+    "r08_wyverne_dos",
+    "r08_griffe_des_falaises"
+   ],
+   [
+    "r08_griffe_des_falaises",
+    "r08_le_dechire_roche",
+    "r08_griffe_des_falaises"
+   ]
+  ],
+  "rewards": {
+   "gold": 1020,
+   "xp": 540,
+   "essence_ombre": 7,
+   "griffe_cime": 2,
+   "relique_orage": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde08_6": {
+  "name": "Pics des Wyvernes — 6",
+  "region": "monde08",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r08_wyverne_de_brume",
+    "r08_wyverne_de_brume",
+    "r08_griffe_des_falaises"
+   ],
+   [
+    "r08_wyverne_de_brume",
+    "r08_griffe_des_falaises",
+    "r08_wyverne_de_brume"
+   ],
+   [
+    "r08_wyverne_de_brume",
+    "r08_aile_des_nuages",
+    "r08_wyverne_de_brume"
+   ]
+  ],
+  "rewards": {
+   "gold": 1035,
+   "xp": 548,
+   "essence_ombre": 7,
+   "membrane_argentee": 2,
+   "relique_kharok": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde08_7": {
+  "name": "Pics des Wyvernes — 7",
+  "region": "monde08",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r08_vautour_des_pics",
+    "r08_vautour_des_pics",
+    "r08_wyverne_de_brume"
+   ],
+   [
+    "r08_vautour_des_pics",
+    "r08_wyverne_de_brume",
+    "r08_vautour_des_pics"
+   ],
+   [
+    "r08_vautour_des_pics",
+    "r08_roi_des_charognes",
+    "r08_vautour_des_pics"
+   ]
+  ],
+  "rewards": {
+   "gold": 1050,
+   "xp": 556,
+   "essence_ombre": 7,
+   "plume_cime": 2,
+   "relique_braise": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde08_8": {
+  "name": "Pics des Wyvernes — 8",
+  "region": "monde08",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r08_wyverne_du_couvain",
+    "r08_wyverne_du_couvain",
+    "r08_vautour_des_pics"
+   ],
+   [
+    "r08_wyverne_du_couvain",
+    "r08_vautour_des_pics",
+    "r08_wyverne_du_couvain"
+   ],
+   [
+    "r08_wyverne_du_couvain",
+    "r08_matriarche_des_pics",
+    "r08_wyverne_du_couvain"
+   ]
+  ],
+  "rewards": {
+   "gold": 1065,
+   "xp": 564,
+   "essence_ombre": 7,
+   "crochet_matriarche": 2,
+   "relique_nacre": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde09_1": {
+  "name": "Sanctuaire draconique — 1",
+  "region": "monde09",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r09_garde_draconique",
+    "r09_garde_draconique",
+    "r09_garde_draconique"
+   ],
+   [
+    "r09_garde_draconique",
+    "r09_garde_draconique",
+    "r09_garde_draconique"
+   ],
+   [
+    "r09_garde_draconique",
+    "r09_chevalier_du_sanctuaire",
+    "r09_garde_draconique"
+   ]
+  ],
+  "rewards": {
+   "gold": 1080,
+   "xp": 572,
+   "essence_ombre": 7,
+   "acier_draconique": 2,
+   "relique_rivet": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde09_2": {
+  "name": "Sanctuaire draconique — 2",
+  "region": "monde09",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r09_salamandre_cendree",
+    "r09_salamandre_cendree",
+    "r09_garde_draconique"
+   ],
+   [
+    "r09_salamandre_cendree",
+    "r09_garde_draconique",
+    "r09_salamandre_cendree"
+   ],
+   [
+    "r09_salamandre_cendree",
+    "r09_gueule_de_lave",
+    "r09_salamandre_cendree"
+   ]
+  ],
+  "rewards": {
+   "gold": 1095,
+   "xp": 580,
+   "essence_ombre": 7,
+   "ecaille_cendree": 2,
+   "relique_sylve": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde09_3": {
+  "name": "Sanctuaire draconique — 3",
+  "region": "monde09",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r09_acolyte_des_ufs",
+    "r09_acolyte_des_ufs",
+    "r09_salamandre_cendree"
+   ],
+   [
+    "r09_acolyte_des_ufs",
+    "r09_salamandre_cendree",
+    "r09_acolyte_des_ufs"
+   ],
+   [
+    "r09_acolyte_des_ufs",
+    "r09_gardien_des_ufs",
+    "r09_acolyte_des_ufs"
+   ]
+  ],
+  "rewards": {
+   "gold": 1110,
+   "xp": 588,
+   "essence_ombre": 7,
+   "coquille_ancienne": 2,
+   "relique_valen": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde09_4": {
+  "name": "Sanctuaire draconique — 4",
+  "region": "monde09",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r09_serpent_des_braises",
+    "r09_serpent_des_braises",
+    "r09_acolyte_des_ufs"
+   ],
+   [
+    "r09_serpent_des_braises",
+    "r09_acolyte_des_ufs",
+    "r09_serpent_des_braises"
+   ],
+   [
+    "r09_serpent_des_braises",
+    "r09_dragon_de_la_premiere_braise",
+    "r09_serpent_des_braises"
+   ]
+  ],
+  "rewards": {
+   "gold": 1125,
+   "xp": 596,
+   "essence_ombre": 7,
+   "crochet_braise": 2,
+   "relique_bastion": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde09_5": {
+  "name": "Sanctuaire draconique — 5",
+  "region": "monde09",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r09_statue_draconique",
+    "r09_statue_draconique",
+    "r09_serpent_des_braises"
+   ],
+   [
+    "r09_statue_draconique",
+    "r09_serpent_des_braises",
+    "r09_statue_draconique"
+   ],
+   [
+    "r09_statue_draconique",
+    "r09_le_veilleur_de_jade",
+    "r09_statue_draconique"
+   ]
+  ],
+  "rewards": {
+   "gold": 1140,
+   "xp": 604,
+   "essence_ombre": 7,
+   "jade_sanctuaire": 2,
+   "relique_saffran": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde09_6": {
+  "name": "Sanctuaire draconique — 6",
+  "region": "monde09",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r09_serviteur_des_ecailles",
+    "r09_serviteur_des_ecailles",
+    "r09_statue_draconique"
+   ],
+   [
+    "r09_serviteur_des_ecailles",
+    "r09_statue_draconique",
+    "r09_serviteur_des_ecailles"
+   ],
+   [
+    "r09_serviteur_des_ecailles",
+    "r09_dragon_des_vents_anciens",
+    "r09_serviteur_des_ecailles"
+   ]
+  ],
+  "rewards": {
+   "gold": 1155,
+   "xp": 612,
+   "essence_ombre": 7,
+   "ecaille_ivoire": 2,
+   "relique_oona": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde09_7": {
+  "name": "Sanctuaire draconique — 7",
+  "region": "monde09",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r09_ame_du_sanctuaire",
+    "r09_ame_du_sanctuaire",
+    "r09_serviteur_des_ecailles"
+   ],
+   [
+    "r09_ame_du_sanctuaire",
+    "r09_serviteur_des_ecailles",
+    "r09_ame_du_sanctuaire"
+   ],
+   [
+    "r09_ame_du_sanctuaire",
+    "r09_dragon_spectral",
+    "r09_ame_du_sanctuaire"
+   ]
+  ],
+  "rewards": {
+   "gold": 1170,
+   "xp": 620,
+   "essence_ombre": 8,
+   "essence_draconique": 2,
+   "relique_calx": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde09_8": {
+  "name": "Sanctuaire draconique — 8",
+  "region": "monde09",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r09_sentinelle_du_grand_sceau",
+    "r09_sentinelle_du_grand_sceau",
+    "r09_ame_du_sanctuaire"
+   ],
+   [
+    "r09_sentinelle_du_grand_sceau",
+    "r09_ame_du_sanctuaire",
+    "r09_sentinelle_du_grand_sceau"
+   ],
+   [
+    "r09_sentinelle_du_grand_sceau",
+    "r09_dragon_ancien_asservi",
+    "r09_sentinelle_du_grand_sceau"
+   ]
+  ],
+  "rewards": {
+   "gold": 1185,
+   "xp": 628,
+   "essence_ombre": 8,
+   "coeur_draconique": 2,
+   "relique_nyx": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 8
+ },
+ "monde10_1": {
+  "name": "Domaine du magicien noir — 1",
+  "region": "monde10",
+  "level": 1,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r10_serviteur_du_sceau",
+    "r10_serviteur_du_sceau",
+    "r10_serviteur_du_sceau"
+   ],
+   [
+    "r10_serviteur_du_sceau",
+    "r10_serviteur_du_sceau",
+    "r10_serviteur_du_sceau"
+   ],
+   [
+    "r10_serviteur_du_sceau",
+    "r10_sentinelle_occulte",
+    "r10_serviteur_du_sceau"
+   ]
+  ],
+  "rewards": {
+   "gold": 1200,
+   "xp": 636,
+   "essence_ombre": 8,
+   "poussiere_sceau": 2,
+   "relique_mei_lian": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 9
+ },
+ "monde10_2": {
+  "name": "Domaine du magicien noir — 2",
+  "region": "monde10",
+  "level": 2,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r10_rat_des_experiences",
+    "r10_rat_des_experiences",
+    "r10_serviteur_du_sceau"
+   ],
+   [
+    "r10_rat_des_experiences",
+    "r10_serviteur_du_sceau",
+    "r10_rat_des_experiences"
+   ],
+   [
+    "r10_rat_des_experiences",
+    "r10_le_devoreur_de_chaines",
+    "r10_rat_des_experiences"
+   ]
+  ],
+  "rewards": {
+   "gold": 1215,
+   "xp": 644,
+   "essence_ombre": 8,
+   "crochet_experience": 2,
+   "relique_jin_seok": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 9
+ },
+ "monde10_3": {
+  "name": "Domaine du magicien noir — 3",
+  "region": "monde10",
+  "level": 3,
+  "decor_scene": 1,
+  "waves": [
+   [
+    "r10_acolyte_noir",
+    "r10_acolyte_noir",
+    "r10_rat_des_experiences"
+   ],
+   [
+    "r10_acolyte_noir",
+    "r10_rat_des_experiences",
+    "r10_acolyte_noir"
+   ],
+   [
+    "r10_acolyte_noir",
+    "r10_collectionneur_dames",
+    "r10_acolyte_noir"
+   ]
+  ],
+  "rewards": {
+   "gold": 1230,
+   "xp": 652,
+   "essence_ombre": 8,
+   "essence_capturee": 2,
+   "relique_yun_tao": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 9
+ },
+ "monde10_4": {
+  "name": "Domaine du magicien noir — 4",
+  "region": "monde10",
+  "level": 4,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r10_golem_cousu",
+    "r10_golem_cousu",
+    "r10_acolyte_noir"
+   ],
+   [
+    "r10_golem_cousu",
+    "r10_acolyte_noir",
+    "r10_golem_cousu"
+   ],
+   [
+    "r10_golem_cousu",
+    "r10_le_gardien_des_chaines",
+    "r10_golem_cousu"
+   ]
+  ],
+  "rewards": {
+   "gold": 1245,
+   "xp": 660,
+   "essence_ombre": 8,
+   "maillon_runique": 2,
+   "relique_tang_su": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 9
+ },
+ "monde10_5": {
+  "name": "Domaine du magicien noir — 5",
+  "region": "monde10",
+  "level": 5,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r10_chasseur_sans_volonte",
+    "r10_chasseur_sans_volonte",
+    "r10_golem_cousu"
+   ],
+   [
+    "r10_chasseur_sans_volonte",
+    "r10_golem_cousu",
+    "r10_chasseur_sans_volonte"
+   ],
+   [
+    "r10_chasseur_sans_volonte",
+    "r10_la_marionnettiste",
+    "r10_chasseur_sans_volonte"
+   ]
+  ],
+  "rewards": {
+   "gold": 1260,
+   "xp": 668,
+   "essence_ombre": 8,
+   "fil_occulte": 2,
+   "relique_corbin": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 9
+ },
+ "monde10_6": {
+  "name": "Domaine du magicien noir — 6",
+  "region": "monde10",
+  "level": 6,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r10_corbeau_lie",
+    "r10_corbeau_lie",
+    "r10_chasseur_sans_volonte"
+   ],
+   [
+    "r10_corbeau_lie",
+    "r10_chasseur_sans_volonte",
+    "r10_corbeau_lie"
+   ],
+   [
+    "r10_corbeau_lie",
+    "r10_oiseau_des_mauvaises_augures",
+    "r10_corbeau_lie"
+   ]
+  ],
+  "rewards": {
+   "gold": 1275,
+   "xp": 676,
+   "essence_ombre": 8,
+   "plume_occultee": 2,
+   "relique_aegis": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 9
+ },
+ "monde10_7": {
+  "name": "Domaine du magicien noir — 7",
+  "region": "monde10",
+  "level": 7,
+  "decor_scene": 2,
+  "waves": [
+   [
+    "r10_chimere_mineure",
+    "r10_chimere_mineure",
+    "r10_corbeau_lie"
+   ],
+   [
+    "r10_chimere_mineure",
+    "r10_corbeau_lie",
+    "r10_chimere_mineure"
+   ],
+   [
+    "r10_chimere_mineure",
+    "r10_chimere_des_captifs",
+    "r10_chimere_mineure"
+   ]
+  ],
+  "rewards": {
+   "gold": 1290,
+   "xp": 684,
+   "essence_ombre": 8,
+   "noyau_chimere": 2,
+   "relique_brume": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 9
+ },
+ "monde10_8": {
+  "name": "Domaine du magicien noir — 8",
+  "region": "monde10",
+  "level": 8,
+  "decor_scene": 3,
+  "waves": [
+   [
+    "r10_garde_du_dernier_cercle",
+    "r10_garde_du_dernier_cercle",
+    "r10_chimere_mineure"
+   ],
+   [
+    "r10_garde_du_dernier_cercle",
+    "r10_chimere_mineure",
+    "r10_garde_du_dernier_cercle"
+   ],
+   [
+    "r10_garde_du_dernier_cercle",
+    "r10_magicien_noir",
+    "r10_garde_du_dernier_cercle"
+   ]
+  ],
+  "rewards": {
+   "gold": 1305,
+   "xp": 692,
+   "essence_ombre": 8,
+   "catalyseur_noir": 2,
+   "relique_orage": 3,
+   "materiaux_relique": 5
+  },
+  "energy_cost": 9
+ }
 }

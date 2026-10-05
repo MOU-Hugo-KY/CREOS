@@ -1,0 +1,86 @@
+{
+  "id": "Monde01_01",
+  "world": 1,
+  "name": "La route des chasseurs",
+  "ambience": "Vagues, lumière des lanternes et embruns",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 100,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        152,
+        193.5,
+        36,
+        36
+      ],
+      "color": "ffb54a60",
+      "phase": 1.37
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        165.5,
+        207,
+        9,
+        13
+      ],
+      "color": "ff873bcd",
+      "phase": 1.37
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        1172,
+        210.5,
+        36,
+        36
+      ],
+      "color": "ffb54a60",
+      "phase": 2.37
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        1185.5,
+        224,
+        9,
+        14
+      ],
+      "color": "ff873bcd",
+      "phase": 2.37
+    },
+    {
+      "kind": "water",
+      "rect": [
+        865,
+        245,
+        355,
+        136
+      ],
+      "color": "e4ece2b0",
+      "phase": 1.37
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        720,
+        210,
+        480,
+        170
+      ],
+      "color": "d7e4d1",
+      "style": "dust",
+      "count": 22,
+      "seed": 100,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

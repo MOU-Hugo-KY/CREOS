@@ -1,0 +1,119 @@
+{
+  "id": "Monde06_02",
+  "world": 6,
+  "name": "Les cryptes noyees",
+  "ambience": "Ondulations, brume et flammes de bougies",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 601,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        151,
+        306.5,
+        36,
+        36
+      ],
+      "color": "ffb54a60",
+      "phase": 11.13
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        164.5,
+        320,
+        9,
+        24
+      ],
+      "color": "ff873bcd",
+      "phase": 11.13
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        86,
+        245.0,
+        32,
+        32
+      ],
+      "color": "ffb54a60",
+      "phase": 12.13
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        98.0,
+        257,
+        8,
+        20
+      ],
+      "color": "ff873bcd",
+      "phase": 12.13
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        960,
+        316.0,
+        40,
+        40
+      ],
+      "color": "ffb54a60",
+      "phase": 13.13
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        975.0,
+        331,
+        10,
+        23
+      ],
+      "color": "ff873bcd",
+      "phase": 13.13
+    },
+    {
+      "kind": "water",
+      "rect": [
+        497,
+        305,
+        354,
+        89
+      ],
+      "color": "c9e6db95",
+      "phase": 11.13
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        140,
+        250,
+        1000,
+        150
+      ],
+      "color": "a7c9b68c",
+      "phase": 11.13
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        190,
+        40,
+        860,
+        300
+      ],
+      "color": "97b6af",
+      "style": "drop",
+      "count": 12,
+      "seed": 601,
+      "size": 1,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

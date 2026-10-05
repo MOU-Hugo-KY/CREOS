@@ -123,7 +123,7 @@ func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, 
 	_restart.disabled = not replay.get("possible", true)
 	_restart.tooltip_text = "" if not _restart.disabled else "Pas assez d'énergie (%d)." % int(replay.get("energy", 0))
 	for key: String in rewards:
-		_rewards_box.add_child(_reward_row(REWARD_NAMES.get(key, key.capitalize()), "+%d" % int(rewards[key]),
+		_rewards_box.add_child(_reward_row(_reward_name(key), "+%d" % int(rewards[key]),
 			REWARD_COLORS.get(key, Color(0.8, 0.6, 1.0))))
 
 	for c in _heroes_box.get_children():
@@ -166,6 +166,21 @@ func _section_title(text: String) -> Label:
 	l.add_theme_font_size_override("font_size", 24)
 	l.add_theme_color_override("font_color", Palette.GOLD)
 	return l
+
+
+## Nom lisible d'un butin : fragments d'une relique, matériaux de monstres…
+func _reward_name(key: String) -> String:
+	if REWARD_NAMES.has(key):
+		return REWARD_NAMES[key]
+	if key.begins_with("relique_"):
+		var relic: Dictionary = GameData.relics.get("relics", {}).get(key.trim_prefix("relique_"), {})
+		return "Fragments · %s" % relic.get("name", key)
+	match key:
+		"materiaux_relique":
+			return "Matériaux de relique"
+		"fragments_relique":
+			return "Éclats de serment"
+	return key.replace("_", " ").capitalize()
 
 
 func _reward_row(label: String, amount: String, color: Color) -> Control:

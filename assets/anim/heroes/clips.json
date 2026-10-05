@@ -1,0 +1,1069 @@
+{
+"clips": [
+{
+"id": "corbin_0",
+"title": "Lame du corbeau",
+"dur": 1.3
+},
+{
+"id": "corbin_1",
+"title": "Fumée noire",
+"dur": 2.2
+},
+{
+"id": "corbin_2",
+"title": "Banquet des corbeaux",
+"dur": 4.6
+},
+{
+"id": "corbin_3",
+"title": "Décapitation nocturne ",
+"dur": 2.8
+},
+{
+"id": "corbin_4",
+"title": "Pas du corbeau ",
+"dur": 2.8
+},
+{
+"id": "corbin_5",
+"title": "Vol de présages ",
+"dur": 2.8
+},
+{
+"id": "corbin_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "corbin_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "corbin_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "corbin_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "corbin_relic",
+"title": "Broche du Premier Corbeau",
+"dur": 2.4
+},
+{
+"id": "aegis_0",
+"title": "Coup de forge",
+"dur": 1.3
+},
+{
+"id": "aegis_1",
+"title": "Fissure",
+"dur": 2.2
+},
+{
+"id": "aegis_2",
+"title": "Jugement du colosse",
+"dur": 4.6
+},
+{
+"id": "aegis_3",
+"title": "Enclume renversée ",
+"dur": 2.8
+},
+{
+"id": "aegis_4",
+"title": "Onde du siège ",
+"dur": 2.8
+},
+{
+"id": "aegis_5",
+"title": "Garde de forge ",
+"dur": 2.8
+},
+{
+"id": "aegis_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "aegis_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "aegis_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "aegis_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "aegis_relic",
+"title": "Éclat de l’Enclume Royale",
+"dur": 2.4
+},
+{
+"id": "brume_0",
+"title": "Éclat des marées",
+"dur": 1.3
+},
+{
+"id": "brume_1",
+"title": "Voile marin",
+"dur": 2.2
+},
+{
+"id": "brume_2",
+"title": "Marée des profondeurs",
+"dur": 4.6
+},
+{
+"id": "brume_3",
+"title": "Lame de ressac ",
+"dur": 2.8
+},
+{
+"id": "brume_4",
+"title": "Dôme des marées ",
+"dur": 2.8
+},
+{
+"id": "brume_5",
+"title": "Prison liquide ",
+"dur": 2.8
+},
+{
+"id": "brume_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "brume_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "brume_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "brume_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "brume_relic",
+"title": "Conque de la Marée Oubliée",
+"dur": 2.4
+},
+{
+"id": "orage_0",
+"title": "Poings du tonnerre",
+"dur": 1.3
+},
+{
+"id": "orage_1",
+"title": "Paume bienveillante",
+"dur": 2.2
+},
+{
+"id": "orage_2",
+"title": "Huit battements du tonnerre",
+"dur": 4.6
+},
+{
+"id": "orage_3",
+"title": "Poing qui fend le ciel ",
+"dur": 2.8
+},
+{
+"id": "orage_4",
+"title": "Respiration du tonnerre ",
+"dur": 2.8
+},
+{
+"id": "orage_5",
+"title": "Cercle du tonnerre ",
+"dur": 2.8
+},
+{
+"id": "orage_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "orage_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "orage_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "orage_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "orage_relic",
+"title": "Chapelet du Ciel Fendu",
+"dur": 2.4
+},
+{
+"id": "kharok_0",
+"title": "Percée de garde",
+"dur": 1.3
+},
+{
+"id": "kharok_1",
+"title": "Carapace partagée",
+"dur": 2.2
+},
+{
+"id": "kharok_2",
+"title": "Carapace royale",
+"dur": 4.6
+},
+{
+"id": "kharok_3",
+"title": "Dôme de chitine ",
+"dur": 2.8
+},
+{
+"id": "kharok_4",
+"title": "Charge couronnée ",
+"dur": 2.8
+},
+{
+"id": "kharok_5",
+"title": "Serment de chitine ",
+"dur": 2.8
+},
+{
+"id": "kharok_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "kharok_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "kharok_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "kharok_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "kharok_relic",
+"title": "Sceau du Roi-Carapace",
+"dur": 2.4
+},
+{
+"id": "braise_0",
+"title": "Soufflet ardent",
+"dur": 1.3
+},
+{
+"id": "braise_1",
+"title": "Marmite explosive",
+"dur": 2.2
+},
+{
+"id": "braise_2",
+"title": "Forge en éruption",
+"dur": 4.6
+},
+{
+"id": "braise_3",
+"title": "Tison vivant ",
+"dur": 2.8
+},
+{
+"id": "braise_4",
+"title": "Creuset explosif ",
+"dur": 2.8
+},
+{
+"id": "braise_5",
+"title": "Four ouvert ",
+"dur": 2.8
+},
+{
+"id": "braise_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "braise_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "braise_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "braise_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "braise_relic",
+"title": "Braise du Premier Four",
+"dur": 2.4
+},
+{
+"id": "nacre_0",
+"title": "Note troublante",
+"dur": 1.3
+},
+{
+"id": "nacre_1",
+"title": "Poussière de lune",
+"dur": 2.2
+},
+{
+"id": "nacre_2",
+"title": "Nuit des mille songes",
+"dur": 4.6
+},
+{
+"id": "nacre_3",
+"title": "Accord triomphal ",
+"dur": 2.8
+},
+{
+"id": "nacre_4",
+"title": "Voile lunaire ",
+"dur": 2.8
+},
+{
+"id": "nacre_5",
+"title": "Accord assoupi ",
+"dur": 2.8
+},
+{
+"id": "nacre_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "nacre_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "nacre_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "nacre_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "nacre_relic",
+"title": "Corde de la Harpe des Songes",
+"dur": 2.4
+},
+{
+"id": "rivet_0",
+"title": "Carreau sournois",
+"dur": 1.3
+},
+{
+"id": "rivet_1",
+"title": "Tir de contrebande",
+"dur": 2.2
+},
+{
+"id": "rivet_2",
+"title": "Casse du siècle",
+"dur": 4.6
+},
+{
+"id": "rivet_3",
+"title": "Carreau du capitaine ",
+"dur": 2.8
+},
+{
+"id": "rivet_4",
+"title": "Tir à rebonds ",
+"dur": 2.8
+},
+{
+"id": "rivet_5",
+"title": "Cache de secours ",
+"dur": 2.8
+},
+{
+"id": "rivet_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "rivet_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "rivet_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "rivet_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "rivet_relic",
+"title": "Pièce du Corsaire sans Tombe",
+"dur": 2.4
+},
+{
+"id": "sylve_0",
+"title": "Poigne de racines",
+"dur": 1.3
+},
+{
+"id": "sylve_1",
+"title": "Sève ancienne",
+"dur": 2.2
+},
+{
+"id": "sylve_2",
+"title": "La forêt se souvient",
+"dur": 4.6
+},
+{
+"id": "sylve_3",
+"title": "Mur de racines ",
+"dur": 2.8
+},
+{
+"id": "sylve_4",
+"title": "Nœud ancien ",
+"dur": 2.8
+},
+{
+"id": "sylve_5",
+"title": "Pousse vitale ",
+"dur": 2.8
+},
+{
+"id": "sylve_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "sylve_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "sylve_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "sylve_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "sylve_relic",
+"title": "Gland du Premier Chêne",
+"dur": 2.4
+},
+{
+"id": "valen_0",
+"title": "Pointe de garde",
+"dur": 1.3
+},
+{
+"id": "valen_1",
+"title": "Balayage du vétéran",
+"dur": 2.2
+},
+{
+"id": "valen_2",
+"title": "Lance qui fend l’horizon",
+"dur": 4.6
+},
+{
+"id": "valen_3",
+"title": "Perce-cuirasse ",
+"dur": 2.8
+},
+{
+"id": "valen_4",
+"title": "Ronde des lances ",
+"dur": 2.8
+},
+{
+"id": "valen_5",
+"title": "Lance en arrêt ",
+"dur": 2.8
+},
+{
+"id": "valen_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "valen_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "valen_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "valen_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "valen_relic",
+"title": "Fer de Lance des Cent Sièges",
+"dur": 2.4
+},
+{
+"id": "bastion_0",
+"title": "Masse du rempart",
+"dur": 1.3
+},
+{
+"id": "bastion_1",
+"title": "Défi de fer",
+"dur": 2.2
+},
+{
+"id": "bastion_2",
+"title": "Dernier rempart",
+"dur": 4.6
+},
+{
+"id": "bastion_3",
+"title": "Porte close ",
+"dur": 2.8
+},
+{
+"id": "bastion_4",
+"title": "Sortie du bastion ",
+"dur": 2.8
+},
+{
+"id": "bastion_5",
+"title": "Ordre de tenir ",
+"dur": 2.8
+},
+{
+"id": "bastion_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "bastion_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "bastion_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "bastion_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "bastion_relic",
+"title": "Clou du Dernier Rempart",
+"dur": 2.4
+},
+{
+"id": "saffran_0",
+"title": "Trait trompeur",
+"dur": 1.3
+},
+{
+"id": "saffran_1",
+"title": "Reflets mensongers",
+"dur": 2.2
+},
+{
+"id": "saffran_2",
+"title": "Théâtre des faux visages",
+"dur": 4.6
+},
+{
+"id": "saffran_3",
+"title": "Cachet de rupture ",
+"dur": 2.8
+},
+{
+"id": "saffran_4",
+"title": "Galerie des reflets ",
+"dur": 2.8
+},
+{
+"id": "saffran_5",
+"title": "Sceau de silence rituel ",
+"dur": 2.8
+},
+{
+"id": "saffran_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "saffran_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "saffran_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "saffran_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "saffran_relic",
+"title": "Miroir du Renard sans Visage",
+"dur": 2.4
+},
+{
+"id": "oona_0",
+"title": "Jet d’encre",
+"dur": 1.3
+},
+{
+"id": "oona_1",
+"title": "Élixir du large",
+"dur": 2.2
+},
+{
+"id": "oona_2",
+"title": "Officine des abysses",
+"dur": 4.6
+},
+{
+"id": "oona_3",
+"title": "Perle réparatrice ",
+"dur": 2.8
+},
+{
+"id": "oona_4",
+"title": "Bulle d’encre ",
+"dur": 2.8
+},
+{
+"id": "oona_5",
+"title": "Nœud des profondeurs ",
+"dur": 2.8
+},
+{
+"id": "oona_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "oona_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "oona_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "oona_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "oona_relic",
+"title": "Perle de l’Apothicaire noyé",
+"dur": 2.4
+},
+{
+"id": "calx_0",
+"title": "Coup de battant",
+"dur": 1.3
+},
+{
+"id": "calx_1",
+"title": "Cloche d’alarme",
+"dur": 2.2
+},
+{
+"id": "calx_2",
+"title": "Glas des anciens",
+"dur": 4.6
+},
+{
+"id": "calx_3",
+"title": "Battant funéraire ",
+"dur": 2.8
+},
+{
+"id": "calx_4",
+"title": "Heure immuable ",
+"dur": 2.8
+},
+{
+"id": "calx_5",
+"title": "Temps suspendu ",
+"dur": 2.8
+},
+{
+"id": "calx_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "calx_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "calx_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "calx_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "calx_relic",
+"title": "Battant de la Cloche funéraire",
+"dur": 2.4
+},
+{
+"id": "nyx_0",
+"title": "Morsure d’ombre",
+"dur": 1.3
+},
+{
+"id": "nyx_1",
+"title": "Pas du crépuscule",
+"dur": 2.2
+},
+{
+"id": "nyx_2",
+"title": "Bal du crépuscule",
+"dur": 4.6
+},
+{
+"id": "nyx_3",
+"title": "Baiser nocturne ",
+"dur": 2.8
+},
+{
+"id": "nyx_4",
+"title": "Croissant double ",
+"dur": 2.8
+},
+{
+"id": "nyx_5",
+"title": "Vol d’ombre ",
+"dur": 2.8
+},
+{
+"id": "nyx_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "nyx_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "nyx_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "nyx_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "nyx_relic",
+"title": "Agrafe de la Première Nuit",
+"dur": 2.4
+},
+{
+"id": "mei_lian_0",
+"title": "Pétale tranchant",
+"dur": 1.3
+},
+{
+"id": "mei_lian_1",
+"title": "Pas du prunier",
+"dur": 2.2
+},
+{
+"id": "mei_lian_2",
+"title": "Les 24 mouvements du mont Hua",
+"dur": 4.6
+},
+{
+"id": "mei_lian_3",
+"title": "Douzième mouvement — Pétale perçant ",
+"dur": 2.8
+},
+{
+"id": "mei_lian_4",
+"title": "Douzième mouvement — Jardin clos ",
+"dur": 2.8
+},
+{
+"id": "mei_lian_5",
+"title": "Douzième mouvement — Branche gelée ",
+"dur": 2.8
+},
+{
+"id": "mei_lian_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "mei_lian_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "mei_lian_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "mei_lian_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "mei_lian_relic",
+"title": "Branche du Prunier immortel",
+"dur": 2.4
+},
+{
+"id": "jin_seok_0",
+"title": "Poing de bronze",
+"dur": 1.3
+},
+{
+"id": "jin_seok_1",
+"title": "Cloche d’or",
+"dur": 2.2
+},
+{
+"id": "jin_seok_2",
+"title": "Les cent paumes de Shaolin",
+"dur": 4.6
+},
+{
+"id": "jin_seok_3",
+"title": "Paume qui brise le bronze ",
+"dur": 2.8
+},
+{
+"id": "jin_seok_4",
+"title": "Dôme de Shaolin ",
+"dur": 2.8
+},
+{
+"id": "jin_seok_5",
+"title": "Paume des méridiens ",
+"dur": 2.8
+},
+{
+"id": "jin_seok_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "jin_seok_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "jin_seok_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "jin_seok_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "jin_seok_relic",
+"title": "Fragment de la Cloche d’Or",
+"dur": 2.4
+},
+{
+"id": "yun_tao_0",
+"title": "Fil du courant",
+"dur": 1.3
+},
+{
+"id": "yun_tao_1",
+"title": "Cercle du Taiji",
+"dur": 2.2
+},
+{
+"id": "yun_tao_2",
+"title": "Le ciel retourne la lame",
+"dur": 4.6
+},
+{
+"id": "yun_tao_3",
+"title": "Courant perçant ",
+"dur": 2.8
+},
+{
+"id": "yun_tao_4",
+"title": "Miroir du courant ",
+"dur": 2.8
+},
+{
+"id": "yun_tao_5",
+"title": "Retour des nuages ",
+"dur": 2.8
+},
+{
+"id": "yun_tao_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "yun_tao_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "yun_tao_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "yun_tao_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "yun_tao_relic",
+"title": "Anneau du Courant immobile",
+"dur": 2.4
+},
+{
+"id": "tang_su_0",
+"title": "Aiguille silencieuse",
+"dur": 1.3
+},
+{
+"id": "tang_su_1",
+"title": "Méridiens fermés",
+"dur": 2.2
+},
+{
+"id": "tang_su_2",
+"title": "Pluie des mille aiguilles",
+"dur": 4.6
+},
+{
+"id": "tang_su_3",
+"title": "Aiguille du serpent ",
+"dur": 2.8
+},
+{
+"id": "tang_su_4",
+"title": "Arbalète des ombres ",
+"dur": 2.8
+},
+{
+"id": "tang_su_5",
+"title": "Nœud interdit ",
+"dur": 2.8
+},
+{
+"id": "tang_su_idle",
+"title": "Repos",
+"dur": 2
+},
+{
+"id": "tang_su_walk",
+"title": "Marche",
+"dur": 1.2
+},
+{
+"id": "tang_su_hurt",
+"title": "Touché",
+"dur": 0.75
+},
+{
+"id": "tang_su_death",
+"title": "Mort",
+"dur": 2.2
+},
+{
+"id": "tang_su_relic",
+"title": "Étui des Aiguilles sans Ombre",
+"dur": 2.4
+},
+{
+"id": "quatuor_0",
+"title": "Les quatre voies, un seul ciel",
+"dur": 6.6
+},
+{
+"id": "quatuor_1",
+"title": "La tempête des origines",
+"dur": 6.6
+},
+{
+"id": "quatuor_2",
+"title": "Le rempart avance",
+"dur": 6.6
+},
+{
+"id": "quatuor_3",
+"title": "La nuit aux quatre visages",
+"dur": 6.6
+}
+]
+}

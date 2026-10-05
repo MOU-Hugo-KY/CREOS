@@ -1,0 +1,53 @@
+{
+  "id": "Monde02_03",
+  "world": 2,
+  "name": "Le berceau de la Mere des Spores",
+  "ambience": "Spores, brume et pulsations fongiques",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 202,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        673.5,
+        122.5,
+        125,
+        125
+      ],
+      "color": "c777ff85",
+      "phase": 8.56
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        160,
+        275,
+        950,
+        130
+      ],
+      "color": "d9cab28a",
+      "phase": 8.56
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        80,
+        80,
+        1120,
+        350
+      ],
+      "color": "e8d7a5",
+      "style": "spore",
+      "count": 22,
+      "seed": 202,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

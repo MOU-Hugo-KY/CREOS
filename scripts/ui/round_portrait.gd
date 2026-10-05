@@ -51,6 +51,9 @@ func set_grey(on: bool) -> void:
 ## Haut de l'image d'aperçu (la tête et le buste), découpé en carré.
 ## (Une vraie image découpée, pas une AtlasTexture : le masque rond du shader a besoin d'UV de 0 à 1.)
 static func portrait_texture(hero: Dictionary) -> Texture2D:
+	var direct := String(hero.get("portrait", ""))
+	if direct.begins_with("res://") and ResourceLoader.exists(direct):
+		return load(direct)
 	if hero.has("puppet"):
 		return _puppet_portrait(String(hero.puppet))
 	var path: String = String(hero.get("model", "")).get_base_dir() + "/apercu.png"

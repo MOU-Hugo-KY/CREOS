@@ -265,8 +265,74 @@ func hero_level(id: String) -> int:
 	return int(state.get("heroes", {}).get(id, {}).get("level", 1))
 
 
-func hero_stars(id: String) -> int:
-	return int(state.get("heroes", {}).get(id, {}).get("stars", _config.get("stars", {}).get("start", 1)))
+## Échos d'un héros : un par doublon obtenu à la Lanterne (jamais d'autre source).
+func hero_echoes(id: String) -> int:
+	return int(state.get("heroes", {}).get(id, {}).get("echoes", 0))
+
+
+## Palier d'Échos (0 à 5 : seuils 1, 3, 6, 9, 12).
+func hero_echo_tier(id: String) -> int:
+	return Progression.echo_tier(hero_echoes(id), _config)
+
+
+## Voie d'Héritage active (0, 1 ou 2), changeable gratuitement hors combat.
+func hero_path(id: String) -> int:
+	return int(state.get("heroes", {}).get(id, {}).get("path", 0))
+
+
+func set_hero_path(id: String, path: int) -> void:
+	if state.heroes.has(id) and path >= 0 and path <= 2:
+		state.heroes[id].path = path
+		save_game()
+		changed.emit()
+
+
+## Stats d'un héros possédé (niveau, Échos, relique).
+func hero_stats(id: String, hero: Dictionary) -> Dictionary:
+	return Progression.hero_stats(hero, hero_level(id), hero_echoes(id), _config, relic_tier(id))
+
+
+## Données d'un héros prêtes pour le combat : stats à son niveau, avec ses Échos et sa relique.
+func hero_for_battle(id: String) -> Dictionary:
+	var gd: Node = (Engine.get_main_loop() as SceneTree).root.get_node("GameData")
+	return Progression.hero_for_battle(gd.hero(id), hero_level(id), _config, hero_echoes(id), relic_tier(id))
+
+
+# --- Reliques ----------------------------------------------------------------------
+
+## Palier de la relique d'un héros (0 = pas encore retrouvée, 5 = Héritage).
+func relic_tier(id: String) -> int:
+	return int(state.get("relics", {}).get(id, 0))
+
+
+func relic_fragments(id: String) -> int:
+	return item_count("relique_" + id)
+
+
+## Coût du palier suivant : {fragments, materials, name} ({} au maximum).
+func relic_next_cost(id: String) -> Dictionary:
+	return Progression.relic_cost(relic_tier(id), _config)
+
+
+func can_upgrade_relic(id: String) -> bool:
+	var c := relic_next_cost(id)
+	return state.heroes.has(id) and not c.is_empty() and relic_fragments(id) >= int(c.fragments) \
+		and item_count("materiaux_relique") >= int(c.materials)
+
+
+## Retrouve ou améliore la relique d'un héros possédé contre ses fragments et des matériaux.
+func upgrade_relic(id: String) -> bool:
+	if not can_upgrade_relic(id):
+		return false
+	var c := relic_next_cost(id)
+	state.items["relique_" + id] = relic_fragments(id) - int(c.fragments)
+	state.items["materiaux_relique"] = item_count("materiaux_relique") - int(c.materials)
+	if not state.has("relics"):
+		state.relics = {}
+	state.relics[id] = relic_tier(id) + 1
+	save_game()
+	changed.emit()
+	return true
 
 
 func hero_level_up_cost(id: String) -> int:
@@ -284,23 +350,6 @@ func level_up_hero(id: String) -> bool:
 	state.heroes[id].level = hero_level(id) + 1
 	state.heroes[id].xp = 0
 	record_event("hero_level_up")
-	save_game()
-	changed.emit()
-	return true
-
-
-## Fragments du héros pour gagner une étoile (-1 = déjà au maximum).
-func hero_star_cost(id: String) -> int:
-	return Progression.star_cost(hero_stars(id), _config)
-
-
-## Évolution : une étoile de plus contre des fragments du héros.
-func evolve_hero(id: String) -> bool:
-	var cost := hero_star_cost(id)
-	if not state.heroes.has(id) or cost < 0 or hero_shards(id) < cost:
-		return false
-	state.hero_shards[id] = hero_shards(id) - cost
-	state.heroes[id].stars = hero_stars(id) + 1
 	save_game()
 	changed.emit()
 	return true
@@ -330,11 +379,6 @@ func item_count(item: String) -> int:
 	return int(state.get("items", {}).get(item, 0))
 
 
-## Fragments d'un héros (gagnés quand on invoque un héros déjà possédé ; serviront aux étoiles).
-func hero_shards(id: String) -> int:
-	return int(state.get("hero_shards", {}).get(id, 0))
-
-
 ## Prix d'une invocation avec `currency` ("fragments_relique" ou "gems").
 func summon_cost(currency: String, config: Dictionary) -> int:
 	return int(config.get("currencies", {}).get(currency, {}).get("cost", 0))
@@ -349,8 +393,8 @@ func can_summon(currency: String, config: Dictionary) -> bool:
 	return cost > 0 and summon_balance(currency) >= cost
 
 
-## Invoque un héros de `pool` (heroes.json). Renvoie {id, rarity, new, shards}, ou {} si
-## le joueur n'a pas de quoi payer. Un héros déjà possédé donne des fragments de ce héros.
+## Invoque un héros de `pool` (heroes.json). Renvoie {id, rarity, new, echoes}, ou {} si
+## le joueur n'a pas de quoi payer. Un héros déjà possédé revient en Écho (+1 Écho).
 func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomNumberGenerator) -> Dictionary:
 	if not can_summon(currency, config):
 		return {}
@@ -367,14 +411,12 @@ func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomN
 	state.summon_count = count + 1
 	record_event("summon")
 	state.summon_pity = 0 if r.rarity >= int(config.get("pity_min_rarity", 4)) else pity + 1
-	var result := {"id": r.id, "rarity": r.rarity, "new": not state.heroes.has(r.id), "shards": 0}
+	var result := {"id": r.id, "rarity": r.rarity, "new": not state.heroes.has(r.id), "echoes": 0}
 	if result.new:
 		state.heroes[r.id] = {"level": 1, "xp": 0}
 	else:
-		result.shards = int(config.get("duplicate_shards", {}).get(str(r.rarity), 10))
-		if not state.has("hero_shards"):
-			state.hero_shards = {}
-		state.hero_shards[r.id] = hero_shards(r.id) + result.shards
+		state.heroes[r.id].echoes = hero_echoes(r.id) + 1
+		result.echoes = hero_echoes(r.id)
 	save_game()
 	changed.emit()
 	return result
@@ -383,6 +425,82 @@ func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomN
 ## Invocations restantes avant le Légendaire garanti.
 func summons_to_pity(config: Dictionary) -> int:
 	return int(config.get("pity_every", 10)) - int(state.get("summon_pity", 0))
+
+
+## Niveaux de la campagne dans l'ordre (monde puis niveau).
+func campaign_order() -> Array:
+	var ids: Array = _dungeons.keys()
+	ids.sort_custom(func(a: String, b: String) -> bool:
+		var da: Dictionary = _dungeons[a]
+		var db: Dictionary = _dungeons[b]
+		if da.get("region", "") != db.get("region", ""):
+			return String(da.get("region", "")) < String(db.get("region", ""))
+		return int(da.get("level", 0)) < int(db.get("level", 0)))
+	return ids
+
+
+## Un niveau est ouvert si c'est le premier, ou si le niveau d'avant a été gagné.
+func dungeon_unlocked(dungeon_id: String) -> bool:
+	var order := campaign_order()
+	var i := order.find(dungeon_id)
+	return i == 0 or (i > 0 and best_stars(order[i - 1]) > 0)
+
+
+## Dernier niveau ouvert de la campagne (là où le joueur en est).
+func current_campaign_level() -> String:
+	var order := campaign_order()
+	var last := String(order[0]) if not order.is_empty() else ""
+	for id: String in order:
+		if not dungeon_unlocked(id):
+			break
+		last = id
+	return last
+
+
+# --- Marchand ----------------------------------------------------------------------
+
+## Achète une offre du Marchand ({cost: {...}, gives: {...}}). Faux si pas de quoi payer.
+func buy(offer: Dictionary) -> bool:
+	var cost: Dictionary = offer.get("cost", {})
+	for key: String in cost:
+		if _balance(key) < int(cost[key]):
+			return false
+	for key: String in cost:
+		_spend(key, int(cost[key]))
+	_grant(offer.get("gives", {}))
+	return true
+
+
+## Vend `amount` matériaux de chasse au Marchand contre de l'or.
+func sell(item: String, amount: int, price: int) -> bool:
+	if amount <= 0 or item_count(item) < amount:
+		return false
+	state.items[item] = item_count(item) - amount
+	_grant({"gold": amount * price})
+	return true
+
+
+func _balance(key: String) -> int:
+	match key:
+		"gold":
+			return gold()
+		"gems":
+			return gems()
+		"energy":
+			return energy()
+	return item_count(key)
+
+
+func _spend(key: String, n: int) -> void:
+	match key:
+		"gold":
+			state.gold = gold() - n
+		"gems":
+			state.gems = gems() - n
+		"energy":
+			state.energy = energy() - n
+		_:
+			state.items[key] = item_count(key) - n
 
 
 func hunt_cost(dungeon_id: String) -> int:

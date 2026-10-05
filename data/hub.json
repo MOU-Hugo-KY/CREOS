@@ -20,17 +20,11 @@
       "action": "altar",
       "description": "Prêter serment sous la grande lanterne : un chasseur endormi s'avance dans la lumière."
     },
-    "marche": {
-      "name": "Marché",
+    "echoppe_masques": {
+      "name": "Marchand",
       "icon": "marche",
       "action": "shop",
-      "description": "Acheter et vendre du butin de chasse."
-    },
-    "echoppe_masques": {
-      "name": "Échoppe des masques",
-      "icon": "marche",
-      "action": "masks",
-      "description": "Des masques à collectionner pour habiller tes chasseurs (cosmétiques)."
+      "description": "Le marchand de masques : il achète ton butin de chasse et vend ce qu'il faut pour progresser."
     },
     "ma_loge": {
       "name": "Ma loge",
@@ -43,13 +37,20 @@
       "icon": "tour",
       "action": "tower",
       "description": "Des étages de plus en plus durs. Jusqu'où iras-tu ?"
+    },
+    "reliques": {
+      "name": "Reliques",
+      "icon": "autel",
+      "action": "relics",
+      "description": "Les reliques anciennes de tes héros et les quatuors."
     }
   },
   "main_buttons": [
     "table_des_chasses",
     "loge_des_heros",
     "autel",
-    "marche",
+    "reliques",
+    "echoppe_masques",
     "ma_loge"
   ],
   "side_left": [
@@ -92,5 +93,52 @@
       "action": "tower"
     }
   ],
-  "first_hunt": "brumenoire_1"
+  "first_hunt": "monde01_1",
+  "shop": [
+    {
+      "id": "energie",
+      "name": "Gourde d'énergie",
+      "description": "+30 énergie pour repartir en chasse.",
+      "cost": {
+        "gems": 30
+      },
+      "gives": {
+        "energy": 30
+      }
+    },
+    {
+      "id": "eclats",
+      "name": "Éclats de serment",
+      "description": "10 fragments pour une invocation à la Lanterne.",
+      "cost": {
+        "gold": 2500
+      },
+      "gives": {
+        "fragments_relique": 10
+      }
+    },
+    {
+      "id": "materiaux",
+      "name": "Matériaux de relique",
+      "description": "10 matériaux pour restaurer une relique.",
+      "cost": {
+        "gold": 1500
+      },
+      "gives": {
+        "materiaux_relique": 10
+      }
+    },
+    {
+      "id": "essences",
+      "name": "Essences d'ombre",
+      "description": "5 essences d'ombre.",
+      "cost": {
+        "gold": 800
+      },
+      "gives": {
+        "essence_ombre": 5
+      }
+    }
+  ],
+  "sell_price": 25
 }

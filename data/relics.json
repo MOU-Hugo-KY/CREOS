@@ -1,0 +1,478 @@
+{
+ "tiers": [
+  {
+   "name": "Retrouvée",
+   "primary": 0.05,
+   "secondary": 0.02,
+   "fragments": 100,
+   "materials": 0
+  },
+  {
+   "name": "Restaurée",
+   "primary": 0.1,
+   "secondary": 0.04,
+   "fragments": 10,
+   "materials": 20
+  },
+  {
+   "name": "Éveillée",
+   "primary": 0.15,
+   "secondary": 0.06,
+   "fragments": 20,
+   "materials": 40
+  },
+  {
+   "name": "Accordée",
+   "primary": 0.2,
+   "secondary": 0.08,
+   "fragments": 30,
+   "materials": 70
+  },
+  {
+   "name": "Héritage",
+   "primary": 0.25,
+   "secondary": 0.1,
+   "fragments": 40,
+   "materials": 100
+  }
+ ],
+ "relics": {
+  "corbin": {
+   "name": "Broche du Premier Corbeau",
+   "hero": "corbin",
+   "dungeon": "Crypte des Veilleurs — Brumenoire",
+   "material": "Plumes sépulcrales",
+   "trial": "Terminer trois salles de la crypte en consommant au moins trois marques par salle.",
+   "awakening": "Une marque consommée laisse une plume ; maximum 4. L’ultime dépense les plumes pour 20 % ATQ supplémentaires chacune.",
+   "accord": "Rivet : un tir sur Marqué ignore 15 % DEF ; consomme la marque.",
+   "contribution": "Prépare Marqué sur tous les ennemis avant les frappes du Pacte des ombres.",
+   "icon": "res://assets/relics/relic_corbin_icon.png",
+   "sprite": "res://assets/relics/relic_corbin.png",
+   "clip": "corbin_relic"
+  },
+  "aegis": {
+   "name": "Éclat de l’Enclume Royale",
+   "hero": "aegis",
+   "dungeon": "Forge ensevelie — Cendrefer",
+   "material": "Scories royales",
+   "trial": "Briser cinq boucliers dans la forge puis vaincre son gardien.",
+   "awakening": "Les coups lourds posent une fracture, maximum 3 par cible ; l’ultime les consomme et retire 10 % du bouclier actuel par fracture.",
+   "accord": "Valen : Brèche permet au prochain coup lourd d’ignorer 20 % DEF ; Brèche consommée.",
+   "contribution": "Retire 30 % des boucliers ennemis avant le choc de Dernière ligne.",
+   "icon": "res://assets/relics/relic_aegis_icon.png",
+   "sprite": "res://assets/relics/relic_aegis.png",
+   "clip": "aegis_relic"
+  },
+  "brume": {
+   "name": "Conque de la Marée Oubliée",
+   "hero": "brume",
+   "dungeon": "Sanctuaire englouti — Sel-Brisé",
+   "material": "Nacres abyssales",
+   "trial": "Déclencher six réactions eau/foudre dans le sanctuaire.",
+   "awakening": "Mouillé accumule Pression à chaque application, maximum 2 ; une réaction de foudre la dépense pour +15 % dégâts par charge.",
+   "accord": "Orage : la première réaction du tour applique Mouillé à une cible non mouillée.",
+   "contribution": "Applique Mouillé avant la phase électrique du Cycle des éléments.",
+   "icon": "res://assets/relics/relic_brume_icon.png",
+   "sprite": "res://assets/relics/relic_brume.png",
+   "clip": "brume_relic"
+  },
+  "orage": {
+   "name": "Chapelet du Ciel Fendu",
+   "hero": "orage",
+   "dungeon": "Monastère des Orages",
+   "material": "Perles fulgurantes",
+   "trial": "Soigner trois alliés différents après avoir déclenché une réaction de foudre.",
+   "awakening": "Le Souffle consommé pose une charge protectrice sur le plus blessé ; sa prochaine attaque reçue provoque une riposte 60 % ATQ. Une charge maximum.",
+   "accord": "Brume : sa foudre sur Mouillé propage 50 % des dégâts à une autre cible, sans nouvelle réaction.",
+   "contribution": "Lie les cibles mouillées et ajoute une propagation à 50 % pendant le Cycle.",
+   "icon": "res://assets/relics/relic_orage_icon.png",
+   "sprite": "res://assets/relics/relic_orage.png",
+   "clip": "orage_relic"
+  },
+  "kharok": {
+   "name": "Sceau du Roi-Carapace",
+   "hero": "kharok",
+   "dungeon": "Tombe du Scarabée couronné",
+   "material": "Chitines royales",
+   "trial": "Absorber 20 impacts dirigés vers des alliés dans la tombe.",
+   "awakening": "Les dégâts absorbés accumulent Charge, maximum 3 ; l’ultime consomme Charge pour +10 % dégâts et boucliers par charge.",
+   "accord": "Bastion : un bouclier collectif détruit prépare une riposte du prochain attaquant, une seule en attente.",
+   "contribution": "Convertit les charges accumulées en +10 % dégâts collectifs par charge, maximum +30 %, pour Dernière ligne.",
+   "icon": "res://assets/relics/relic_kharok_icon.png",
+   "sprite": "res://assets/relics/relic_kharok.png",
+   "clip": "kharok_relic"
+  },
+  "braise": {
+   "name": "Braise du Premier Four",
+   "hero": "braise",
+   "dungeon": "Four ancestral — Cendrefer",
+   "material": "Charbons ancestraux",
+   "trial": "Consommer douze charges de brûlure pendant les runs du four.",
+   "awakening": "Brûlure consommée donne Chaleur, maximum 3 ; à 3, l’ultime dépense tout et laisse Braises 1 tour.",
+   "accord": "Sylve : Feu sur Enraciné crée Braises, 50 % MAG au prochain tour du lanceur ; pas de réaction récursive.",
+   "contribution": "Transforme les racines finales en vapeur brûlante et ajoute 60 % MAG à la phase finale du Cycle.",
+   "icon": "res://assets/relics/relic_braise_icon.png",
+   "sprite": "res://assets/relics/relic_braise.png",
+   "clip": "braise_relic"
+  },
+  "nacre": {
+   "name": "Corde de la Harpe des Songes",
+   "hero": "nacre",
+   "dungeon": "Théâtre abandonné des Lanternes",
+   "material": "Cordes spectrales",
+   "trial": "Retrouver trois fragments de partition dans trois salles puis réussir la salle du silence.",
+   "awakening": "Lucidité donne une Note par allié ; son prochain critique prolonge un bonus de 1 tour ; une Note par application, maximum 1 tour de prolongation par bonus.",
+   "accord": "Nyx : consommer Sommeil donne +50 % vol de vie sur cette attaque uniquement.",
+   "contribution": "Aucune contribution de quatuor validée : emplacement réservé, sans effet fictif.",
+   "icon": "res://assets/relics/relic_nacre_icon.png",
+   "sprite": "res://assets/relics/relic_nacre.png",
+   "clip": "nacre_relic"
+  },
+  "rivet": {
+   "name": "Pièce du Corsaire sans Tombe",
+   "hero": "rivet",
+   "dungeon": "Épave du Roi des Contrebandiers",
+   "material": "Pièces ternies",
+   "trial": "Reconstituer une carte en quatre morceaux puis terminer la chambre du trésor.",
+   "awakening": "Trois ricochets réussis chargent la pièce ; le prochain tir mortel poursuit à 50 % dégâts sur une autre cible et dépense la charge.",
+   "accord": "Corbin : un tir sur Marqué ignore 15 % DEF et consomme la marque.",
+   "contribution": "Ajoute une poursuite à 50 % dégâts après le premier ennemi éliminé pendant le Pacte.",
+   "icon": "res://assets/relics/relic_rivet_icon.png",
+   "sprite": "res://assets/relics/relic_rivet.png",
+   "clip": "rivet_relic"
+  },
+  "sylve": {
+   "name": "Gland du Premier Chêne",
+   "hero": "sylve",
+   "dungeon": "Cœur ancien — Sylvecroc",
+   "material": "Graines millénaires",
+   "trial": "Résister à dix contrôles sous une protection de Sylve dans la forêt.",
+   "awakening": "Ses protections posent une Graine, maximum 1 par allié ; résistance à un contrôle la consomme pour un bouclier 6 % PV max de Sylve.",
+   "accord": "Braise : racines et feu produisent une zone de Braises ; l’entrave est consommée.",
+   "contribution": "Termine le Cycle par un bouclier collectif 8 % PV max de Sylve, sans soin.",
+   "icon": "res://assets/relics/relic_sylve_icon.png",
+   "sprite": "res://assets/relics/relic_sylve.png",
+   "clip": "sylve_relic"
+  },
+  "valen": {
+   "name": "Fer de Lance des Cent Sièges",
+   "hero": "valen",
+   "dungeon": "Bastion des Lances brisées",
+   "material": "Fers de siège",
+   "trial": "Réussir douze frappes sur des ennemis déséquilibrés dans le bastion.",
+   "awakening": "Frappes contre Déséquilibré posent Brèche, maximum une par cible ; le prochain coup lourd consomme Brèche et ignore 20 % DEF.",
+   "accord": "Aegis : coup lourd sur Brèche gagne l’ignorance de défense et prépare Déséquilibré 1 tour.",
+   "contribution": "Ouvre Brèche sur tous avant le coup final de Dernière ligne.",
+   "icon": "res://assets/relics/relic_valen_icon.png",
+   "sprite": "res://assets/relics/relic_valen.png",
+   "clip": "valen_relic"
+  },
+  "bastion": {
+   "name": "Clou du Dernier Rempart",
+   "hero": "bastion",
+   "dungeon": "Citadelle du Siège éternel",
+   "material": "Clous consacrés",
+   "trial": "Protéger le même allié pendant trois vagues successives du siège.",
+   "awakening": "Protections appliquées accumulent Résolution, maximum 3 ; l’ultime dépense tout et sa fortification résiste à une dissipation.",
+   "accord": "Kharok : un bouclier allié détruit prépare une riposte de formation, une seule en attente.",
+   "contribution": "Maintient une protection collective 100 % DEF pendant Dernière ligne et protège cette application d’une dissipation.",
+   "icon": "res://assets/relics/relic_bastion_icon.png",
+   "sprite": "res://assets/relics/relic_bastion.png",
+   "clip": "bastion_relic"
+  },
+  "saffran": {
+   "name": "Miroir du Renard sans Visage",
+   "hero": "saffran",
+   "dungeon": "Sanctuaire des Masques menteurs",
+   "material": "Éclats de miroir",
+   "trial": "Faire détruire six leurres par les gardiens du sanctuaire.",
+   "awakening": "Un leurre détruit pose Scellé ; l’ultime peut consommer un sceau de sa cible principale pour bloquer son prochain bonus, maximum 1 tour.",
+   "accord": "Calx : une sonnerie sur Scellé consomme le sceau et retarde la jauge de 10 %, une fois par cible et par action.",
+   "contribution": "Bloque le prochain bonus de chaque ennemi touché par le Pacte, maximum 1 tour.",
+   "icon": "res://assets/relics/relic_saffran_icon.png",
+   "sprite": "res://assets/relics/relic_saffran.png",
+   "clip": "saffran_relic"
+  },
+  "oona": {
+   "name": "Perle de l’Apothicaire noyé",
+   "hero": "oona",
+   "dungeon": "Laboratoire des Abysses",
+   "material": "Perles médicinales",
+   "trial": "Retirer dix malus avec Élixir dans le laboratoire.",
+   "awakening": "Stocke 25 % des soins excédentaires, plafond 200 % MAG ; la prochaine compétence de soin transforme la réserve en bouclier sur sa cible puis vide la perle.",
+   "accord": "Nacre : un allié sous Lucidité soigné par Élixir conserve 20 % des soins excédentaires supplémentaires dans la réserve, plafond inchangé.",
+   "contribution": "Aucun quatuor validé pour Oona : contribution collective réservée.",
+   "icon": "res://assets/relics/relic_oona_icon.png",
+   "sprite": "res://assets/relics/relic_oona.png",
+   "clip": "oona_relic"
+  },
+  "calx": {
+   "name": "Battant de la Cloche funéraire",
+   "hero": "calx",
+   "dungeon": "Beffroi des Heures mortes",
+   "material": "Bronzes funéraires",
+   "trial": "Retarder douze actions dans le beffroi sans perdre un allié.",
+   "awakening": "Chaque contrôle ennemi réussi donne un Écho sonore de COMBAT, maximum 3 ; l’ultime consomme ces charges pour -3 % jauge supplémentaires chacune. Ce compteur n’est PAS un Écho de doublon.",
+   "accord": "Saffran : sonnerie sur Scellé consomme le sceau et retarde de 10 %, dans le plafond total.",
+   "contribution": "Aucun quatuor validé pour Calx : contribution collective réservée.",
+   "icon": "res://assets/relics/relic_calx_icon.png",
+   "sprite": "res://assets/relics/relic_calx.png",
+   "clip": "calx_relic"
+  },
+  "nyx": {
+   "name": "Agrafe de la Première Nuit",
+   "hero": "nyx",
+   "dungeon": "Crypte du Crépuscule",
+   "material": "Agrafes nocturnes",
+   "trial": "Survivre à trois combats sous 30 % PV puis achever le gardien.",
+   "awakening": "Les soins excédentaires alimentent une réserve, plafond 20 % PV max ; une attaque fatale consomme la réserve et laisse Nyx à 1 PV puis soigne sa réserve, une fois par combat.",
+   "accord": "Nacre : consommer Sommeil renforce de 50 % le vol de vie de cette action, plafond 50 % des dégâts.",
+   "contribution": "Convertit 10 % des dégâts de la frappe finale du Pacte en réserve de survie pour Nyx, plafond inchangé.",
+   "icon": "res://assets/relics/relic_nyx_icon.png",
+   "sprite": "res://assets/relics/relic_nyx.png",
+   "clip": "nyx_relic"
+  },
+  "mei_lian": {
+   "name": "Branche du Prunier immortel",
+   "hero": "mei_lian",
+   "dungeon": "Jardin interdit du mont Hua",
+   "material": "Pétales immortels",
+   "trial": "Terminer le jardin avec le quatuor Murim complet et ses quatre ultimes utilisés.",
+   "awakening": "Consommer une marque produit un Pétale persistant, maximum 3 ; l’ultime les consomme pour +10 % dégâts par pétale et Armure réduite avant les dernières frappes.",
+   "accord": "Jin Seok : un coup de paume sur une cible marquée prépare un bouclier 60 % ATQ de Mei Lian sur le plus blessé ; consomme une marque, une fois par tour.",
+   "contribution": "Transforme les marques restantes en floraison et applique Armure réduite avant les dernières frappes du quatuor.",
+   "icon": "res://assets/relics/relic_mei_lian_icon.png",
+   "sprite": "res://assets/relics/relic_mei_lian.png",
+   "clip": "mei_lian_relic"
+  },
+  "jin_seok": {
+   "name": "Fragment de la Cloche d’Or",
+   "hero": "jin_seok",
+   "dungeon": "Salle des Cent Épreuves — Shaolin",
+   "material": "Bronzes sacrés",
+   "trial": "Absorber vingt impacts avec Cloche et réussir l’épreuve sans perdre l’allié protégé.",
+   "awakening": "Les dégâts absorbés par Cloche donnent Charge de cloche, maximum 3 ; l’ultime la consomme pour poser Déséquilibré avant ses frappes sur une cible par charge.",
+   "accord": "Yun Tao : parade sur un allié protégé prépare une riposte ; une seule riposte de protection par attaque reçue.",
+   "contribution": "Ouvre les défenses par Déséquilibré avant l’assaut Murim.",
+   "icon": "res://assets/relics/relic_jin_seok_icon.png",
+   "sprite": "res://assets/relics/relic_jin_seok.png",
+   "clip": "jin_seok_relic"
+  },
+  "yun_tao": {
+   "name": "Anneau du Courant immobile",
+   "hero": "yun_tao",
+   "dungeon": "Pavillon suspendu — Wudang",
+   "material": "Anneaux de jade ancien",
+   "trial": "Réussir douze parades dans le pavillon puis vaincre le maître du courant.",
+   "awakening": "Une parade conserve une Ouverture en réserve ; l’ultime la transmet à une autre cible, maximum une réserve.",
+   "accord": "Tang Su : poison sur Ouverture renforce le prochain déclenchement de poison de 25 %, consomme Ouverture.",
+   "contribution": "Transmet les Ouvertures à la ligne adverse avant le réseau d’aiguilles Murim.",
+   "icon": "res://assets/relics/relic_yun_tao_icon.png",
+   "sprite": "res://assets/relics/relic_yun_tao.png",
+   "clip": "yun_tao_relic"
+  },
+  "tang_su": {
+   "name": "Étui des Aiguilles sans Ombre",
+   "hero": "tang_su",
+   "dungeon": "Caveau des Mécanismes — clan Tang",
+   "material": "Aiguilles anciennes",
+   "trial": "Déclencher six réactions sur Ouverture puis empêcher trois soins dans le caveau.",
+   "awakening": "Poison consommé charge une aiguille cachée, maximum 1 par cible ; prochain soin ou bonus tenté déclenche 80 % ATQ puis consomme l’aiguille.",
+   "accord": "Yun Tao : Poison sur Ouverture augmente de 25 % le prochain tic de poison et consomme Ouverture.",
+   "contribution": "Empêche le prochain soin des ennemis empoisonnés pendant la résolution du combo Murim.",
+   "icon": "res://assets/relics/relic_tang_su_icon.png",
+   "sprite": "res://assets/relics/relic_tang_su.png",
+   "clip": "tang_su_relic"
+  }
+ },
+ "quartets": {
+  "murim": {
+   "name": "Formation des quatre voies",
+   "members": [
+    "mei_lian",
+    "jin_seok",
+    "yun_tao",
+    "tang_su"
+   ],
+   "attack": "Les quatre voies, un seul ciel",
+   "effect": "160 % de la statistique offensive de CHAQUE membre sur tous (Mei ATQ, Jin ATQ, Yun ATQ, Tang ATQ), mitigation appliquée à chaque contribution. Consomme marques/poisons pour +5 % dégâts collectifs par charge, maximum +30 %. Étourdit 1 action les cibles déséquilibrées.",
+   "bonus": "Ultimes : Mei laisse un champ de pétales (prochaine marque consommée donne un bouclier 60 % ATQ) ; Jin une cloche absorbant la prochaine zone ; Yun un cercle de contre-attaque sur allié protégé ; Tang un réseau punissant la prochaine tentative de soin. Une charge par effet, durée 2 tours.",
+   "resonance": "Le jardin des quatre voies : domaine 2 tours. La première technique de chaque allié consomme une Ouverture pour ignorer 15 % DEF ; première tentative de soin ennemie déclenche 80 % ATQ de Tang Su. Une activation par membre et une explosion totale.",
+   "visual": "Jin enferme la ligne dans une cloche ; Yun rassemble le courant ; Tang trace le réseau ; Mei exécute 24 mouvements dans les pétales.",
+   "clip": "quatuor_0",
+   "contributions": {
+    "mei_lian": [
+     1.6,
+     "atk"
+    ],
+    "jin_seok": [
+     1.6,
+     "atk"
+    ],
+    "yun_tao": [
+     1.6,
+     "atk"
+    ],
+    "tang_su": [
+     1.6,
+     "atk"
+    ]
+   },
+   "hit_times": [
+    1.452,
+    2.508,
+    3.564,
+    4.62
+   ]
+  },
+  "elements": {
+   "name": "Cycle des éléments",
+   "members": [
+    "brume",
+    "orage",
+    "braise",
+    "sylve"
+   ],
+   "attack": "La tempête des origines",
+   "effect": "150 % MAG de Brume + 150 % ATQ d’Orage + 150 % MAG de Braise + 100 % ATQ de Sylve sur tous, chaque contribution mitigée. Prépare racines et Mouillé puis résout foudre et feu ; les réactions ne se répètent pas. Terminaison défensive, sans soin collectif supplémentaire.",
+   "bonus": "Première réaction eau/foudre ou racines/feu de chaque tour de formation donne au plus blessé un bouclier de 5 % PV max de Sylve ; maximum un bouclier de formation par tour.",
+   "resonance": "Le cycle primordial : zone 2 tours. La prochaine attaque élémentaire alliée déclenche une seule réaction supplémentaire de 80 % de sa statistique offensive, puis consomme la zone.",
+   "visual": "Racines, marée, réseau électrique puis vapeur brûlante et écorce protectrice.",
+   "clip": "quatuor_1",
+   "contributions": {
+    "brume": [
+     1.5,
+     "mag"
+    ],
+    "orage": [
+     1.5,
+     "atk"
+    ],
+    "braise": [
+     1.5,
+     "mag"
+    ],
+    "sylve": [
+     1.0,
+     "atk"
+    ]
+   },
+   "hit_times": [
+    1.452,
+    2.508,
+    3.564,
+    4.62
+   ]
+  },
+  "rempart": {
+   "name": "Dernière ligne",
+   "members": [
+    "bastion",
+    "kharok",
+    "aegis",
+    "valen"
+   ],
+   "attack": "Le rempart avance",
+   "effect": "100 % DEF de Bastion + 120 % DEF de Kharok + 180 % ATQ d’Aegis + 160 % ATQ de Valen sur tous, chaque contribution mitigée. Retire 25 % des boucliers actuels avant dégâts et étourdit 1 action les cibles déséquilibrées.",
+   "bonus": "Un bouclier allié détruit prépare une riposte de 60 % de la statistique offensive du prochain attaquant ; une seule en attente, une préparation maximum par tour de formation.",
+   "resonance": "La citadelle vivante : garde collective 2 tours. Absorbe la prochaine zone ennemie et prépare une riposte collective à 30 % des quatre contributions ; une seule absorption.",
+   "visual": "Deux boucliers enferment la ligne, lance ouvre la brèche, marteau frappe au centre.",
+   "clip": "quatuor_2",
+   "contributions": {
+    "bastion": [
+     1.0,
+     "def"
+    ],
+    "kharok": [
+     1.2,
+     "def"
+    ],
+    "aegis": [
+     1.8,
+     "atk"
+    ],
+    "valen": [
+     1.6,
+     "atk"
+    ]
+   },
+   "hit_times": [
+    1.452,
+    2.508,
+    3.564,
+    4.62
+   ]
+  },
+  "ombres": {
+   "name": "Pacte des ombres",
+   "members": [
+    "corbin",
+    "rivet",
+    "saffran",
+    "nyx"
+   ],
+   "attack": "La nuit aux quatre visages",
+   "effect": "140 % ATQ Corbin + 140 % ATQ Rivet + 140 % MAG Saffran + 140 % ATQ Nyx sur tous, chaque contribution mitigée ; dernier coup 80 % ATQ Nyx sur le survivant le plus blessé.",
+   "bonus": "Première marque ou sceau consommé du tour donne une esquive garantie contre la prochaine attaque ciblée à l’allié le plus fragile, durée 1 tour ; une seule esquive de formation disponible.",
+   "resonance": "Le pacte de minuit : leurre collectif 2 tours. La prochaine attaque ciblée ennemie est détournée ; sa destruction prépare une embuscade de 25 % des quatre contributions sur l’assaillant. Ne détourne pas les zones.",
+   "visual": "Leurres, corbeaux, carreaux à ricochets puis croissants nocturnes.",
+   "clip": "quatuor_3",
+   "contributions": {
+    "corbin": [
+     1.4,
+     "atk"
+    ],
+    "rivet": [
+     1.4,
+     "atk"
+    ],
+    "saffran": [
+     1.4,
+     "mag"
+    ],
+    "nyx": [
+     1.4,
+     "atk"
+    ]
+   },
+   "hit_times": [
+    1.452,
+    2.508,
+    3.564,
+    4.62
+   ]
+  }
+ },
+ "echoes": {
+  "thresholds": [
+   1,
+   3,
+   6,
+   9,
+   12
+  ],
+  "stats": {
+   "primary": [
+    10,
+    22,
+    38,
+    56,
+    80
+   ],
+   "secondary": [
+    7,
+    15,
+    26,
+    38,
+    55
+   ],
+   "other": [
+    4,
+    9,
+    15,
+    22,
+    30
+   ]
+  }
+ }
+}

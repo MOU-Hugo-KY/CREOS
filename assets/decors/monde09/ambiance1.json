@@ -1,0 +1,98 @@
+{
+  "id": "Monde09_01",
+  "world": 9,
+  "name": "La porte des ecailles",
+  "ambience": "Braises, fumée et pulsations du sceau",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 900,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        822,
+        263.0,
+        72,
+        72
+      ],
+      "color": "ffb54a60",
+      "phase": 12.330000000000002
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        849.0,
+        290,
+        18,
+        35
+      ],
+      "color": "ff873bcd",
+      "phase": 12.330000000000002
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        1096,
+        105.0,
+        64,
+        64
+      ],
+      "color": "ffb54a60",
+      "phase": 13.330000000000002
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        1120.0,
+        129,
+        16,
+        30
+      ],
+      "color": "ff873bcd",
+      "phase": 13.330000000000002
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        929.0,
+        349.0,
+        90,
+        90
+      ],
+      "color": "c777ff85",
+      "phase": 12.330000000000002
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        90,
+        100,
+        1100,
+        305
+      ],
+      "color": "ffae61",
+      "style": "ember",
+      "count": 22,
+      "seed": 900,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        220,
+        200,
+        170,
+        180
+      ],
+      "color": "967d7370",
+      "phase": 12.330000000000002,
+      "optional_mobile": true
+    }
+  ]
+}

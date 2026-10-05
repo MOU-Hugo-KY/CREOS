@@ -96,6 +96,11 @@ func refresh() -> void:
 		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		col.add_child(n)
 		_pool.add_child(col)
+	# Quatuor formé par l'équipe : son attaque combinée sera disponible en combat.
+	for qid: String in GameData.quartets():
+		var q: Dictionary = GameData.quartets()[qid]
+		if q.members.all(func(m: String) -> bool: return m in team):
+			_info.text += "\nQuatuor formé : %s  ·  attaque combinée « %s »" % [q.name, q.attack]
 	_go.text = "Partir en chasse  ·  %d énergie" % cost
 	_go.disabled = team.is_empty() or not PlayerData.can_start_hunt(dungeon_id)
 	if PlayerData.energy() < cost:

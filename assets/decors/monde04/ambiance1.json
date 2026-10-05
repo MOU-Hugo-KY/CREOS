@@ -1,0 +1,49 @@
+{
+  "id": "Monde04_01",
+  "world": 4,
+  "name": "La lisiere des pillards",
+  "ambience": "Flammes, fumée, braises et feuilles au vent",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 400,
+  "effects": [
+    {
+      "kind": "particles",
+      "rect": [
+        60,
+        160,
+        1160,
+        255
+      ],
+      "color": "ffbb66",
+      "style": "ember",
+      "count": 22,
+      "seed": 400,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        80,
+        80,
+        1120,
+        350
+      ],
+      "color": "c68d4c",
+      "style": "leaf",
+      "count": 12,
+      "seed": 410,
+      "size": 3,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5,
+      "optional_mobile": true
+    }
+  ]
+}

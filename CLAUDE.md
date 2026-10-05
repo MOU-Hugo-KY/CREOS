@@ -17,17 +17,23 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   capture appellent `PlayerData.use_memory_only()` pour ne jamais toucher la vraie sauvegarde.
 - Autoload `GameSettings` (`scripts/core/game_settings.gd`) : volumes Général / Musique / Effets
   (bus audio du même nom), enregistrés dans `user://settings.cfg`. Bouton SON en jeu.
-- Héros : **dessins 2D animés en marionnettes** (style « fantasy occulte » encrée, comme Cult of the
-  Lamb) dans `assets/heroes2d/<id>/` : pièces PNG (head, body, arm_front, arm_back, cape),
-  `fiche.png` (dessin complet, sert au portrait) et `puppet.json` (pivots, points d'accroche,
-  `pixel_size`, cadrage du portrait). `scripts/battle/puppet_2d.gd` (`Puppet2D`) les assemble et
-  anime tout par code ; le champ `"anim"` d'une attaque est un mouvement : punch, kick, slam, spin,
-  cast, cast_sky, throw, slash, stab, shoot, pull. Héros actuels : Corbin, Aegis, Brume, Orage.
-  Ennemis du marais (`assets/monsters2d/`) et marchand de masques (`assets/npcs2d/`) : même
-  système (`"puppet"` dans `monsters.json`, dessinés tournés vers la droite ; `"float"` = lévitation).
-  `python tools/compose_puppet.py <dossier> [hauteur_m] [sortie.png]` recolle les pièces pour
-  vérifier les points d'attache et donne le `pixel_size`. Décor : packs **KayKit (CC0)** dans
-  `assets/kaykit/`.
+- **Tout le jeu est en 2D dessinée.** Animations en pièces détachées livrées par ChatGPT, importées
+  par `python tools/import_creos_packs.py [D:/dev/CREOS_sources]` (sources hors du dépôt) en
+  « clips » JSON compacts : chaque image = liste de commandes de dessin (pièce PNG + position,
+  rotation, transparence ; traits ; anneaux), origine (0, 0) = point au sol de l'acteur.
+  `scripts/anim/clip_player.gd` (`ClipPlayer`, Node2D) les joue partout (combat, hub, Loge, Lanterne).
+  - Héros (19) : `assets/anim/heroes/` — clips `<id>_idle/_walk/_hurt/_death/_relic`, attaques
+    `<id>_0/_1/_2` (base, compétence, ultime), techniques secrètes `<id>_3/_4/_5` (une par voie),
+    `quatuor_0..3` ; `fiches/` (dessin complet) et `portraits/` (têtes, découpées automatiquement).
+  - Ennemis (152, 10 mondes) : `assets/anim/enemies/rNN/` — `<id>_idle/_walk/_attack/_hurt/_death`,
+    `_skill` pour les boss. Ils regardent à gauche.
+  - Décors de combat : `assets/decors/mondeNN/` (fond1-3, sol, premier plan, ambiance1-3.json lue
+    par `scripts/battle/ambience.gd`). Cadre 1280 × 720, pieds vers y = 590.
+  - Reliques : `assets/relics/`. Marchand de masques : `assets/npcs2d/` (`PaperDoll`, pièces + puppet.json).
+  - `python tools/render_clip.py` dessine un clip en image (vérifier sans Godot) ;
+    `python tools/make_attack_icons_from_clips.py` refait les icônes d'attaque ;
+    `python tools/build_game_data.py` régénère heroes/monsters/dungeons/regions/relics.json depuis la
+    fiche de combat (`CREOS_Donnees_Combat.json`) et la table des effets en tête du script.
 
 ## Architecture (à respecter)
 - `scripts/combat/` = **logique pure** (RefCounted, aucun nœud, aucun affichage), **déterministe**
@@ -36,49 +42,55 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   `heal`, `shield`, `status`, `death`, `wave_start`, `victory`, `defeat`).
   **Tour par tour** : quand la jauge d'un héros est pleine (hors Auto), le moteur se fige
   (`awaiting_uid`) jusqu'à `request_attack(uid, slot)`.
-- `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage) : `port_franc.gd` place nos modèles
-  GLB de `assets/hub/` (en mètres, origine au sol, façade +Z ; tailles dans `manifest.json`),
-  bâtiments cliquables, héros qui se promènent, interface, Loge des héros. Direction artistique :
-  **héros en pixels, décor propre** (les textures pixel des bâtiments sont lissées en aplats au
-  chargement) ; le continent à l'horizon est dans `continent_backdrop.gd`. Bâtiments, boutons et
-  actions décrits dans `data/hub.json` ; profil de départ dans `data/player_start.json`.
-- **Direction artistique (octobre 2026)** : tout le jeu passe dans **le style des personnages KayKit**
-  (formes trapues et arrondies, biseaux, couleurs en aplats d'une palette partagée, pas de
-  texture détaillée). Les héros seront refaits sur le **squelette KayKit** (mêmes 41 os) pour
-  profiter de ses 76 animations, plus 3 attaques animées par héros. Le brief complet pour
-  ChatGPT/Blender est dans `docs/pour_chatgpt/PROMPT_BLENDER_COMPLET.md`. En attendant, les
-  héros en pixels et le hub actuel restent en place.
+- `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage), en 2D : `port_franc_2d.gd` monte la
+  scène 3840 × 1080 décrite par `assets/hub2d/port/Scene.json` (calques en parallaxe, bâtiments
+  cliquables avec image de survol et sans étiquette, animations en planches de sprites, mouettes,
+  marchand, héros qui se promènent avec leurs clips de marche). `python tools/preview_port.py
+  sortie.png --grid` dessine la scène pour placer les éléments. Bâtiments et actions : `data/hub.json`
+  (l'Échoppe des masques est le Marchand). Profil de départ : `data/player_start.json`.
 - **Interface** : `scripts/ui/ui_kit.gd` (`UiKit`) = le style commun, d'après la maquette
   `docs/maquette_interfaces/` (ivoire #eee4cd cerclé d'encre #29262e avec ombre dure, bordeaux
   #793b49, laiton #c6a66c, ardoise #505e75, turquoise #63c8be ; police Fredoka ; boutons en relief) ; `UiWindow` = fenêtre de jeu avec ruban
   de titre et croix. Tout nouvel écran les utilise. Écrans du hub : Loge des héros (`HeroesScreen` :
-  collection filtrable, fiche avec Force, amélioration contre de l'or, étoiles/évolution avec les
-  fragments du héros, règles dans `Progression`), Profil (clic sur le profil en haut à gauche), Primes du jour (`QuestsScreen`, règles pures dans `scripts/core/quests.gd`,
+  les 19 héros, ceux à recruter grisés ; fiche avec Force, amélioration contre de l'or, onglets
+  Techniques / Voies / Relique / Échos, règles dans `Progression`), Table des chasses
+  (`CampaignScreen` : 10 mondes × 8 niveaux, un niveau s'ouvre quand le précédent est gagné, puis
+  `HuntPrepScreen`), Marchand (`ShopScreen`, offres dans `hub.json`), Reliques et quatuors
+  (`RelicsScreen`), Profil (clic sur le profil en haut à gauche), Primes du jour (`QuestsScreen`, règles pures dans `scripts/core/quests.gd`,
   données dans `data/quests.json`, événements notés par `PlayerData.record_event()`), Loge,
-  Autel des Reliques (invocations, `data/summon.json`).
+  Lanterne des Serments (invocations, `data/summon.json`).
+- **Progression (fiche de combat)** : niveaux 1-60 ; **Échos** = doublons du même héros (seuils
+  1/3/6/9/12, bonus surtout sur la statistique principale, `progression.json` "echoes") ;
+  **reliques** à 5 paliers (fragments `relique_<héros>` gagnés en campagne + `materiaux_relique`) ;
+  3 voies d'Héritage par héros (une active). **Quatuors** (`data/relics.json` "quartets") : si les 4
+  membres sont dans l'équipe et ont chacun lancé leur ultime, bouton QUATUOR une fois par combat.
 - **Port-Franc en 2D** (`scripts/hub/port_franc_2d.gd`, images dans `assets/hub2d/port/`) : un
   « théâtre » de calques posés à différentes distances de la caméra (parallaxe en glissant),
   bâtiments cliquables avec leur image de survol, animations en planches de sprites
   (`Nom_8f_10fps.png`), héros marionnettes qui se promènent. Ordre de dessin explicite
   (`render_priority`) : fond < place < objets triés par leur point au sol < premier plan.
   L'ancien port 3D (`port_franc.gd`) ne sert plus que si ces images sont absentes.
-- `scripts/battle/` = **affichage** : lit les événements et anime. Ne met jamais de règle de jeu ici.
-  `battle_scene.gd` (chef d'orchestre), `unit_view.gd` (un personnage), `marsh_level.gd` (décor),
-  `battle_fx.gd` (effets), `battle_audio.gd` (sons), `ui/` (interface et écran de fin).
-  Le moteur applique les dégâts tout de suite ; l'affichage les montre à l'instant `hit_time`.
+- `scripts/battle/` = **affichage**, en 2D : lit les événements et anime. Ne met jamais de règle de
+  jeu ici. `battle_scene.gd` (chef d'orchestre, formation en losange), `battle_stage.gd` (décor du
+  monde), `unit_view.gd` (un personnage : ClipPlayer, ombre, cible, nombres), `battle_fx.gd`
+  (secousses, éclats), `battle_audio.gd` (sons), `ui/` (interface, bouton du quatuor, écran de fin).
+  Les instants d'impact (`hit_times`) viennent des repères des clips.
 - **Les données vont dans `data/*.json`** (héros, monstres, donjons, régions), pas dans le code.
   Un nouveau héros = une entrée JSON (+ un modèle 3D), sans toucher au moteur si ses effets existent.
-- Icônes d'attaque : `assets/ui/attacks/<id>.png`, dessinées par `python tools/make_attack_icons.py`
-  (une fonction par attaque ; en ajouter une pour chaque nouvelle attaque de héros).
+- Icônes d'attaque : `assets/ui/attacks/<id>.png`, tirées des clips par
+  `python tools/make_attack_icons_from_clips.py`.
 - **3 attaques par héros** dans `"attacks"` : [0] base, [1] à recharge (`"cooldown"`),
   [2] ultime (`"energy"`). Chaque attaque : `id`, `name`, `description`, `anim`, `hit_time`,
   `target`, `effects`. Les monstres peuvent n'en avoir qu'une (sans `effects` = dégâts ×1).
   Options : `hit_times` (plusieurs coups), `fx` (effet visuel), `dash: false` (ne court pas).
   Un effet peut avoir sa propre `target` (ex. foudre qui se propage à `all_enemies`).
-- Héros : nos modèles chibi dans `assets/heroes/<nom>/` (`.glb` + `integration.json` d'origine).
-  `"anims"` donne les noms des clips repos/course/touché/mort, `"portrait"` le cadrage.
-- Effets d'attaque supportés : `damage`, `heal`, `shield`, `taunt`, `stun`, `dot`, `cleanse`.
-  Cibles : `single_enemy`, `all_enemies`, `lowest_hp_enemy`, `all_allies`, `lowest_hp_ally`, `self`.
+- Une attaque a un `"clip"` (son animation) et `hit_times` (instants d'impact du clip).
+- Effets d'attaque supportés : `damage` (`stat` atk/mag/def/hp, `bonus_if` un état), `heal`, `shield`,
+  `taunt`, `stun`, `dot` (brûlure/poison), `cleanse`, `status` (marque, mouille, desequilibre,
+  aveugle, scelle, enracine, leurre, garde…), `buff` (± stat pendant une durée), `regen`, `gauge`,
+  `lifesteal`. Tout effet peut avoir `if_status` (+ `consume`). Durées en secondes (« 2 tours » ≈ 4 s).
+  Cibles : `single_enemy`, `all_enemies`, `lowest_hp_enemy`, `random_enemy` (chaque coup au hasard),
+  `two_enemies`, `all_allies`, `lowest_hp_ally`, `self`.
 
 ## Commandes
 ```bash
@@ -93,7 +105,8 @@ godot --path . --resolution 1280x720 --script res://tools/screenshot.gd  # captu
 Sous Windows, `godot` = le chemin de l'exécutable installé par `tools/setup-windows.ps1`.
 
 **Avant chaque commit** : lance les trois tests ci-dessus, ils doivent passer.
-Si tu changes l'équilibrage (stats, formules), regarde la ligne « victoires : X/20 » des tests.
+Si tu changes l'équilibrage (stats, formules), regarde la ligne « victoires : X/20 » des tests et
+`godot --headless --path . --script res://tools/balance_report.gd` (toute la campagne).
 
 ## Outils MCP prévus (installés par `tools/setup-*.ps1|sh`)
 - `godot` (Coding-Solo/godot-mcp) : lancer l'éditeur ou le jeu, lire les erreurs de debug.

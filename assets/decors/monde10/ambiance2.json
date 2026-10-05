@@ -1,0 +1,121 @@
+{
+  "id": "Monde10_02",
+  "world": 10,
+  "name": "Les ateliers de domination",
+  "ambience": "Flammes, cendres, filaments et cercle rituel",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 1001,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        249,
+        227.5,
+        68,
+        68
+      ],
+      "color": "ffb54a60",
+      "phase": 16.61
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        274.5,
+        253,
+        17,
+        42
+      ],
+      "color": "ff873bcd",
+      "phase": 16.61
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        815,
+        224.0,
+        80,
+        80
+      ],
+      "color": "ffb54a60",
+      "phase": 17.61
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        845.0,
+        254,
+        20,
+        46
+      ],
+      "color": "ff873bcd",
+      "phase": 17.61
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        815,
+        139,
+        80,
+        125
+      ],
+      "color": "948c8280",
+      "phase": 17.61,
+      "optional_mobile": true
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        711.5,
+        191.5,
+        95,
+        95
+      ],
+      "color": "c777ff85",
+      "phase": 16.61
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        150,
+        40,
+        980,
+        335
+      ],
+      "color": "c7a8d1",
+      "style": "ash",
+      "count": 22,
+      "seed": 1001,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "kind": "magic",
+      "rect": [
+        710,
+        120,
+        75,
+        230
+      ],
+      "color": "be77eea0",
+      "phase": 16.61
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        150,
+        300,
+        1000,
+        100
+      ],
+      "color": "a383bb60",
+      "phase": 16.61,
+      "optional_mobile": true
+    }
+  ]
+}

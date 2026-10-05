@@ -1,0 +1,86 @@
+{
+  "id": "Monde01_02",
+  "world": 1,
+  "name": "Les criques des contrebandiers",
+  "ambience": "Vagues, lumière des lanternes et embruns",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 101,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        355,
+        196.0,
+        40,
+        40
+      ],
+      "color": "ffb54a60",
+      "phase": 4.28
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        370.0,
+        211,
+        10,
+        14
+      ],
+      "color": "ff873bcd",
+      "phase": 4.28
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        1150,
+        305.0,
+        40,
+        40
+      ],
+      "color": "ffb54a60",
+      "phase": 5.28
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        1165.0,
+        320,
+        10,
+        15
+      ],
+      "color": "ff873bcd",
+      "phase": 5.28
+    },
+    {
+      "kind": "water",
+      "rect": [
+        420,
+        260,
+        410,
+        138
+      ],
+      "color": "e4ece2b0",
+      "phase": 4.28
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        720,
+        210,
+        480,
+        170
+      ],
+      "color": "d7e4d1",
+      "style": "dust",
+      "count": 22,
+      "seed": 101,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

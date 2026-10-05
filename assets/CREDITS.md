@@ -1,44 +1,28 @@
 # Crédits des assets
 
-## Héros (`assets/heroes/`)
+## Tout le jeu en 2D dessinée (créé pour CREOS par Hugo avec ChatGPT)
 
-Modèles 3D chibi originaux créés pour CREOS (fournis par Hugo) : Barbare, Ronin, Alchimiste de la
-peste, Moine des éclairs, Chevalier possédé (en réserve, pas encore jouable). Version « prises
-d'armes corrigées » : les armes suivent les os `held_weapon_L` / `held_weapon_R`. Chaque dossier garde le `integration.json` d'origine (clips, instants
-d'impact) et un `apercu.png`.
+Illustrations, pièces détachées et animations créées spécialement pour CREOS (images générées
+avec l'outil de génération d'images de ChatGPT, d'après les briefs de `docs/pour_chatgpt/`).
+Importées et allégées par `tools/import_creos_packs.py` (sources dans `D:/dev/CREOS_sources`).
+
+| Dossier | Contenu | Pack d'origine |
+|---|---|---|
+| `anim/heroes/` | 19 héros : pièces, 213 clips (attaques, techniques secrètes, quatuors, repos, marche, touché, mort, reliques), sons | CREOS_Pack_Animations_Reliques_V2 |
+| `anim/heroes/fiches/`, `portraits/` | fiches des 19 héros (portraits découpés automatiquement) | CREOS_5_Nouveaux_Heros_2D, CREOS_7_Nouveaux_Heros_2D_Lot2, CREOS_Quatuor_Murim_2D, lot des 4 premiers héros |
+| `anim/enemies/rNN/` | 152 ennemis des 10 mondes de l'acte I (repos, marche, attaque, touché, mort, compétence des boss), sons | CREOS_Ennemis_Region1_Animes, CREOS_MondeNN_Partie1/2 |
+| `decors/mondeNN/` | 30 décors de combat (fond, sol, premier plan) + ambiances animées | CREOS_Decors_MondeNN, CREOS_Ambiances_Animees |
+| `relics/` | 19 reliques (sprites et icônes) | CREOS_Pack_Animations_Reliques_V2 |
+| `hub2d/port/` | Port-Franc en 2D : calques, bâtiments, survols, animations | Port_Franc_Full_2D_Lot1 |
+| `npcs2d/marchand_masques/` | le marchand de masques en pièces | Brumenoire_Et_Marchand_2D |
+
+Les sons des packs sont des bruitages synthétisés originaux (convertis en OGG). `scripts/battle/ambience.gd`
+et `ambience.gdshader` viennent du pack « Ambiances animées » (créé pour CREOS).
 
 ## Icônes (`assets/ui/attacks/`, `assets/ui/hub/`)
 
-Dessinées pour CREOS par `tools/make_attack_icons.py` et `tools/make_ui_icons.py` (pixel art
-32 × 32, créé par nous).
-
-## Port-Franc, lot 1 du générateur Blender (`assets/hub/lot1/`)
-
-11 bâtiments générés par `tools/blender/port_franc_lot1/build_port_franc.py` (script écrit pour
-CREOS, lancé avec Blender 5.2) : Loge des héros, Ma loge, Marché, Table des chasses, Autel des
-Reliques, et 6 maisons à thème (boulangerie, forge, taverne, pêcheur, herboriste, cartographe).
-Textures cuites par Cycles dans un atlas partagé (`textures/`, BaseColor, Normal, ORM) ; les GLB
-sont livrés sans leurs images (`tools/blender/strip_glb_images.py`), le jeu applique l'atlas.
-
-## Décor de Port-Franc (`assets/hub/`)
-
-15 modèles GLB originaux créés pour CREOS (fournis par Hugo) : Loge des héros, Ma loge, 3 maisons,
-Marché, Table des chasses, Autel des Reliques (nœud `Cristal` animé par le jeu), Tour de Morvath
-(40 m), ponton, bateau, lampadaire, arbre, tonneau, caisses. `manifest.json` donne les tailles ;
-aperçus dans `apercus/`. Le sol (dalles KayKit), la mer, les remparts et les montagnes sont
-ajoutés par `scripts/hub/port_franc.gd`.
-
-## Monstres et décor
-
-| Dossier | Pack | Auteur | Licence | Source |
-|---|---|---|---|---|
-| `kaykit/dungeon` | KayKit Dungeon Remastered 1.0 | Kay Lousberg | CC0 | https://github.com/KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0 |
-| `kaykit/adventurers` | KayKit Character Pack: Adventurers 1.0 | Kay Lousberg | CC0 | https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0 |
-| `kaykit/skeletons` | KayKit Character Pack: Skeletons 1.0 | Kay Lousberg | CC0 | https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0 |
-| `kaykit/prototype` | KayKit Prototype Bits 1.0 | Kay Lousberg | CC0 | https://github.com/KayKit-Game-Assets/KayKit-Prototype-Bits-1.0 |
-
-Seuls les fichiers glTF/GLB et leurs textures ont été copiés (sans les versions FBX/OBJ).
-CC0 = domaine public : utilisation libre, même commerciale. Créditer reste une bonne pratique.
+Icônes d'attaques tirées de l'image d'impact de chaque clip par `tools/make_attack_icons_from_clips.py` ;
+icônes du hub dessinées par `tools/make_ui_icons.py` (créées par nous).
 
 ## Sons et musiques (`assets/audio/`)
 
@@ -61,12 +45,3 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 | Dossier | Police | Auteur | Licence | Source |
 |---|---|---|---|---|
 | `fonts/Fredoka.ttf` | Fredoka (variable) | The Fredoka Project Authors | SIL OFL 1.1 (`fonts/OFL.txt`) | https://github.com/google/fonts/tree/main/ofl/fredoka |
-
-## Créés pour CREOS
-
-| Dossier | Contenu |
-|---|---|
-| `heroes2d/` | Héros dessinés en 2D (Corbin, Aegis, Brume, Orage), générés pour CREOS avec l'outil d'images de ChatGPT |
-| `monsters2d/`, `npcs2d/` | Ennemis de Brumenoire et marchand de masques dessinés en 2D, générés pour CREOS avec l'outil d'images de ChatGPT |
-| `hub2d/port/` | Port-Franc dessiné en 2D (calques, bâtiments, animations), généré pour CREOS avec l'outil d'images de ChatGPT |
-| `hub/hybride/` | Pack « Port-Franc hybride » (Lanterne des serments, Échoppe des masques…), généré par script pour CREOS |

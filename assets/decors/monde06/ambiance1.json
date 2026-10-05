@@ -1,0 +1,102 @@
+{
+  "id": "Monde06_01",
+  "world": 6,
+  "name": "Les tombes de la maree",
+  "ambience": "Ondulations, brume et flammes de bougies",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 600,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        247,
+        270.5,
+        36,
+        36
+      ],
+      "color": "ffb54a60",
+      "phase": 8.22
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        260.5,
+        284,
+        9,
+        17
+      ],
+      "color": "ff873bcd",
+      "phase": 8.22
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        661,
+        246.0,
+        48,
+        48
+      ],
+      "color": "ffb54a60",
+      "phase": 9.22
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        679.0,
+        264,
+        12,
+        22
+      ],
+      "color": "ff873bcd",
+      "phase": 9.22
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        982,
+        271.0,
+        40,
+        40
+      ],
+      "color": "ffb54a60",
+      "phase": 10.22
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        997.0,
+        286,
+        10,
+        19
+      ],
+      "color": "ff873bcd",
+      "phase": 10.22
+    },
+    {
+      "kind": "water",
+      "rect": [
+        300,
+        235,
+        650,
+        139
+      ],
+      "color": "c9e6db95",
+      "phase": 8.22
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        140,
+        250,
+        1000,
+        150
+      ],
+      "color": "a7c9b68c",
+      "phase": 8.22
+    }
+  ]
+}

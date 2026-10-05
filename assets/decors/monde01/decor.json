@@ -1,0 +1,26 @@
+{
+ "world": 1,
+ "name": "Abords de Port-Franc",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "La route des chasseurs",
+   "role": "Entree"
+  },
+  {
+   "name": "Les criques des contrebandiers",
+   "role": "Profondeur"
+  },
+  {
+   "name": "Le rivage du Brise-Coque",
+   "role": "Boss"
+  }
+ ]
+}

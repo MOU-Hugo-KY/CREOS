@@ -1,0 +1,54 @@
+{
+  "id": "Monde08_02",
+  "world": 8,
+  "name": "Le pont des nuages",
+  "ambience": "Nuages, brume des ravins et poussière au vent",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 801,
+  "effects": [
+    {
+      "kind": "mist",
+      "rect": [
+        210,
+        170,
+        850,
+        160
+      ],
+      "color": "f0e5dabb",
+      "phase": 13.870000000000001
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        50,
+        300,
+        1180,
+        110
+      ],
+      "color": "e9e0d095",
+      "phase": 19.87,
+      "optional_mobile": true
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        50,
+        60,
+        1180,
+        330
+      ],
+      "color": "e7d4ad",
+      "style": "dust",
+      "count": 22,
+      "seed": 801,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

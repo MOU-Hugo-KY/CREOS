@@ -1,0 +1,97 @@
+{
+  "id": "Monde06_03",
+  "world": 6,
+  "name": "Le sanctuaire de la Liche des Marees",
+  "ambience": "Ondulations, brume et flammes de bougies",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 602,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        83,
+        310.5,
+        44,
+        44
+      ],
+      "color": "ffb54a60",
+      "phase": 14.040000000000001
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        99.5,
+        327,
+        11,
+        25
+      ],
+      "color": "ff873bcd",
+      "phase": 14.040000000000001
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        1194,
+        291.5,
+        44,
+        44
+      ],
+      "color": "ffb54a60",
+      "phase": 15.040000000000001
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        1210.5,
+        308,
+        11,
+        25
+      ],
+      "color": "ff873bcd",
+      "phase": 15.040000000000001
+    },
+    {
+      "kind": "water",
+      "rect": [
+        833,
+        250,
+        306,
+        128
+      ],
+      "color": "c9e6db95",
+      "phase": 14.040000000000001
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        140,
+        250,
+        1000,
+        150
+      ],
+      "color": "a7c9b68c",
+      "phase": 14.040000000000001
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        190,
+        40,
+        860,
+        300
+      ],
+      "color": "97b6af",
+      "style": "drop",
+      "count": 12,
+      "seed": 602,
+      "size": 1,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

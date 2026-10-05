@@ -1,0 +1,26 @@
+{
+ "world": 9,
+ "name": "Sanctuaire draconique",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "La porte des ecailles",
+   "role": "Entree"
+  },
+  {
+   "name": "Les chambres des braises",
+   "role": "Profondeur"
+  },
+  {
+   "name": "Le grand sceau du Dragon Ancien",
+   "role": "Boss"
+  }
+ ]
+}

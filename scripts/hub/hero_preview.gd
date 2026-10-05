@@ -1,111 +1,107 @@
 class_name HeroPreview
 extends SubViewport
-## Petite scène 3D séparée qui montre un héros sur un socle lumineux, en train de tourner
-## doucement. `play(anim)` lui fait jouer une animation (ses attaques) puis revenir au repos.
+## Petite scène 2D séparée qui montre un héros animé (clips en pièces détachées) sur un socle
+## lumineux. `play(clip)` lui fait jouer une attaque (on recule la vue pour voir toute l'action)
+## puis il revient au repos ; « cheer » joue la présentation de sa relique.
 
-var _pivot: Node3D
-var _model: Node3D
-var _puppet: Puppet2D
+var _root: Node2D
+var _stage: Node2D
+var _player: ClipPlayer
 var _hero: Dictionary = {}
-var _anim: AnimationPlayer
-var _idle := "Idle"
-var _disc_mat: StandardMaterial3D
-var _rim: OmniLight3D
+var _color := Color.WHITE
+var _time := 0.0
+var _tween: Tween
+
+
+func _init() -> void:
+	size = Vector2i(16, 16)  # la taille vient du conteneur (sinon il réclame 512 px de haut)
 
 
 func _ready() -> void:
-	own_world_3d = true
 	transparent_bg = true
-	msaa_3d = Viewport.MSAA_2X
-	var env := WorldEnvironment.new()
-	var e := Environment.new()
-	e.background_mode = Environment.BG_CLEAR_COLOR
-	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.6, 0.62, 0.75)
-	e.ambient_light_energy = 0.7
-	e.glow_enabled = true
-	e.glow_intensity = 0.6
-	env.environment = e
-	add_child(env)
-	var cam := Camera3D.new()
-	cam.fov = 32
-	add_child(cam)
-	cam.look_at_from_position(Vector3(0, 2.4, 7.6), Vector3(0, 1.35, 0))
-	var key := DirectionalLight3D.new()
-	key.rotation_degrees = Vector3(-35, 25, 0)
-	key.light_energy = 1.3
-	key.shadow_enabled = true
-	add_child(key)
-	_rim = OmniLight3D.new()
-	_rim.position = Vector3(0, 2.0, -2.0)
-	_rim.omni_range = 6.0
-	_rim.light_energy = 2.0
-	add_child(_rim)
-	# Socle
-	var disc := MeshInstance3D.new()
-	var cyl := CylinderMesh.new()
-	cyl.top_radius = 1.25
-	cyl.bottom_radius = 1.35
-	cyl.height = 0.18
-	cyl.radial_segments = 32
-	disc.mesh = cyl
-	_disc_mat = StandardMaterial3D.new()
-	_disc_mat.albedo_color = Color(0.12, 0.12, 0.15)
-	_disc_mat.emission_enabled = true
-	_disc_mat.emission_energy_multiplier = 0.12
-	disc.material_override = _disc_mat
-	disc.position.y = -0.09
-	add_child(disc)
-	_pivot = Node3D.new()
-	add_child(_pivot)
+	_root = Node2D.new()
+	add_child(_root)
+	_stage = Node2D.new()
+	_root.add_child(_stage)
+	_root.draw.connect(_draw_pedestal)
+	size_changed.connect(_layout)
+	_layout()
 
 
 func _process(delta: float) -> void:
-	_pivot.rotation.y += delta * 0.35
+	_time += delta
+	_root.queue_redraw()
 
 
 func clear_hero() -> void:
-	if _model:
-		_model.queue_free()
-	_model = null
-	_puppet = null
-	_anim = null
+	if _player:
+		_player.queue_free()
+	_player = null
 
 
 func show_hero(hero: Dictionary) -> void:
 	clear_hero()
-	_idle = hero.get("anims", {}).get("idle", "Idle")
-	var color := Palette.element_color(hero.get("element", ""))
-	_disc_mat.emission = color
-	_rim.light_color = color
-	_pivot.rotation.y = deg_to_rad(-20)
 	_hero = hero
-	if hero.has("puppet"):
-		_puppet = Puppet2D.new()
-		_pivot.add_child(_puppet)
-		_puppet.setup(hero.puppet)
-		_model = _puppet
-		return
-	var scene: PackedScene = load(hero.get("model", ""))
-	if scene == null:
-		return
-	_model = scene.instantiate()
-	_pivot.add_child(_model)
-	_anim = _model.find_child("AnimationPlayer", true, false)
-	if _anim and _anim.has_animation(_idle):
-		_anim.get_animation(_idle).loop_mode = Animation.LOOP_LINEAR
-		_anim.play(_idle)
+	_color = Palette.element_color(hero.get("element", ""))
+	var id := String(hero.get("id", ""))
+	_player = ClipPlayer.new()
+	_player.bundle = String(hero.get("anim", "res://assets/anim/heroes/"))
+	_player.idle_clip = id + "_idle"
+	_player.sound_volume_db = -6.0
+	_stage.add_child(_player)
+	_player.play(id + "_idle")
+	_layout()
 
 
-func play(anim_name: String) -> void:
-	if _puppet:
-		var hit := 0.45
-		for a: Dictionary in _hero.get("attacks", []):
-			if a.get("anim", "") == anim_name:
-				hit = float(a.get("hit_time", a.get("hit_times", [0.45])[0]))
-		_puppet.play(anim_name, hit)
+## Joue un clip du héros (une attaque : `<id>_0`, `<id>_1`…) ; « cheer » = sa relique.
+func play(clip: String) -> void:
+	if _player == null:
 		return
-	if _anim == null or not _anim.has_animation(anim_name):
+	var id := String(_hero.get("id", ""))
+	if clip == "cheer":
+		clip = id + "_relic"
+	if not _player.has_clip(clip):
 		return
-	_anim.play(anim_name, 0.15)
-	_anim.queue(_idle)
+	_player.play(clip)
+	_player.idle_clip = id + "_idle"
+	# Les attaques foncent vers la droite : on recule la vue le temps du clip.
+	var attack := clip.right(1).is_valid_int()
+	if _tween:
+		_tween.kill()
+	_tween = create_tween()
+	var base := _base_scale()
+	if attack:
+		_tween.tween_property(_stage, "scale", Vector2.ONE * base * 0.45, 0.25)
+		_tween.parallel().tween_property(_stage, "position:x", size.x * 0.16, 0.25)
+		_tween.tween_interval(maxf(0.2, _player.duration(clip) - 0.5))
+	_tween.tween_property(_stage, "scale", Vector2.ONE * base, 0.3)
+	_tween.parallel().tween_property(_stage, "position:x", size.x * 0.5, 0.3)
+
+
+func _base_scale() -> float:
+	return size.y / 470.0
+
+
+func _layout() -> void:
+	if _stage == null:
+		return
+	_stage.position = Vector2(size.x * 0.5, size.y * 0.86)
+	_stage.scale = Vector2.ONE * _base_scale()
+
+
+func _draw_pedestal() -> void:
+	var c := Vector2(size.x * 0.5, size.y * 0.86)
+	var r := Vector2(size.y * 0.3, size.y * 0.075)
+	var pulse := 0.5 + 0.15 * sin(_time * 2.0)
+	for i in 3:
+		var k := 1.0 + i * 0.18
+		var pts := PackedVector2Array()
+		for s in 40:
+			var a := TAU * s / 40.0
+			pts.append(c + Vector2(cos(a) * r.x * k, sin(a) * r.y * k))
+		_root.draw_colored_polygon(pts, Color(_color, (0.22 - i * 0.06) * pulse * 2.0))
+	var ring := PackedVector2Array()
+	for s in 41:
+		var a := TAU * s / 40.0
+		ring.append(c + Vector2(cos(a) * r.x, sin(a) * r.y))
+	_root.draw_polyline(ring, Color(_color.lightened(0.3), 0.8), 3.0, true)

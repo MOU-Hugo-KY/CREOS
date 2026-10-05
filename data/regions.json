@@ -1,9 +1,112 @@
 {
-  "port_franc":  { "name": "Port-Franc",            "order": 0, "element": null,      "hub": true },
-  "sylvecroc":   { "name": "Forêt de Sylvecroc",    "order": 1, "element": "nature",  "boss": "Grondebête, ours-titan corrompu" },
-  "brumenoire":  { "name": "Marais de Brumenoire",  "order": 2, "element": "ombre",   "boss": "Vel'Zareth la Liche" },
-  "sel_brise":   { "name": "Côtes de Sel-Brisé",    "order": 3, "element": "eau",     "boss": "Mère-Abysse, kraken" },
-  "cendrefer":   { "name": "Pics de Cendrefer",     "order": 4, "element": "feu",     "boss": "Ignorak, golem de lave" },
-  "drakonis":    { "name": "Île des Dragons",       "order": 5, "element": null,      "boss": "Aethryss, dragonne ancestrale" },
-  "citadelle":   { "name": "Citadelle de Morvath",  "order": 6, "element": "ombre",   "boss": "Morvath, le Mage Noir" }
+ "monde01": {
+  "name": "Abords de Port-Franc",
+  "order": 1,
+  "element": "eau",
+  "decor": "res://assets/decors/monde01/",
+  "scenes": [
+   "La route des chasseurs",
+   "Les criques des contrebandiers",
+   "Le rivage du Brise-Coque"
+  ]
+ },
+ "monde02": {
+  "name": "Bois des Spores",
+  "order": 2,
+  "element": "nature",
+  "decor": "res://assets/decors/monde02/",
+  "scenes": [
+   "Le sentier des spores",
+   "Les racines affamees",
+   "Le berceau de la Mere des Spores"
+  ]
+ },
+ "monde03": {
+  "name": "Terriers de l'ile",
+  "order": 3,
+  "element": "nature",
+  "decor": "res://assets/decors/monde03/",
+  "scenes": [
+   "La bouche des terriers",
+   "Les galeries de soie",
+   "La chambre des Mille-Oeufs"
+  ]
+ },
+ "monde04": {
+  "name": "Camps pillards",
+  "order": 4,
+  "element": "feu",
+  "decor": "res://assets/decors/monde04/",
+  "scenes": [
+   "La lisiere des pillards",
+   "Le camp des braises",
+   "La cour de Gorvak"
+  ]
+ },
+ "monde05": {
+  "name": "Carrieres oubliees",
+  "order": 5,
+  "element": null,
+  "decor": "res://assets/decors/monde05/",
+  "scenes": [
+   "Les marches de la carriere",
+   "Les puits enchaines",
+   "Le cercle du Colosse Entrave"
+  ]
+ },
+ "monde06": {
+  "name": "Necropole engloutie",
+  "order": 6,
+  "element": "ombre",
+  "decor": "res://assets/decors/monde06/",
+  "scenes": [
+   "Les tombes de la maree",
+   "Les cryptes noyees",
+   "Le sanctuaire de la Liche des Marees"
+  ]
+ },
+ "monde07": {
+  "name": "Postes de chasse abandonnes",
+  "order": 7,
+  "element": "ombre",
+  "decor": "res://assets/decors/monde07/",
+  "scenes": [
+   "Le relais desert",
+   "Les remparts silencieux",
+   "La cour de l'Ancien Chef"
+  ]
+ },
+ "monde08": {
+  "name": "Pics des Wyvernes",
+  "order": 8,
+  "element": "feu",
+  "decor": "res://assets/decors/monde08/",
+  "scenes": [
+   "Le col des ailes",
+   "Le pont des nuages",
+   "Le nid de la Matriarche des Pics"
+  ]
+ },
+ "monde09": {
+  "name": "Sanctuaire draconique",
+  "order": 9,
+  "element": "feu",
+  "decor": "res://assets/decors/monde09/",
+  "scenes": [
+   "La porte des ecailles",
+   "Les chambres des braises",
+   "Le grand sceau du Dragon Ancien"
+  ]
+ },
+ "monde10": {
+  "name": "Domaine du magicien noir",
+  "order": 10,
+  "element": "ombre",
+  "decor": "res://assets/decors/monde10/",
+  "scenes": [
+   "La route du dernier cercle",
+   "Les ateliers de domination",
+   "La salle du Rituel des Monstres"
+  ]
+ }
 }

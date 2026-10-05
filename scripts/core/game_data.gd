@@ -10,6 +10,7 @@ var player_start: Dictionary = {}
 var progression: Dictionary = {}
 var summon: Dictionary = {}
 var quests: Dictionary = {}
+var relics: Dictionary = {}  # reliques, quatuors et Échos (data/relics.json)
 
 
 func _ready() -> void:
@@ -26,6 +27,7 @@ func reload() -> void:
 	progression = load_json("res://data/progression.json")
 	summon = load_json("res://data/summon.json")
 	quests = load_json("res://data/quests.json")
+	relics = load_json("res://data/relics.json")
 
 
 static func load_json(path: String) -> Dictionary:
@@ -67,3 +69,24 @@ func dungeon_rewards(id: String, stars: int) -> Dictionary:
 	if stars <= 0:
 		return {}
 	return dungeon(id).get("rewards", {}).duplicate()
+
+
+func quartets() -> Dictionary:
+	return relics.get("quartets", {})
+
+
+## Niveaux (donjons) d'un monde, dans l'ordre.
+func region_dungeons(region_id: String) -> Array:
+	var out: Array = []
+	for id: String in dungeons:
+		if dungeons[id].get("region", "") == region_id:
+			out.append(id)
+	out.sort_custom(func(a: String, b: String) -> bool: return int(dungeons[a].get("level", 0)) < int(dungeons[b].get("level", 0)))
+	return out
+
+
+## Mondes de la campagne, dans l'ordre.
+func region_ids() -> Array:
+	var ids: Array = regions.keys()
+	ids.sort_custom(func(a: String, b: String) -> bool: return int(regions[a].get("order", 0)) < int(regions[b].get("order", 0)))
+	return ids

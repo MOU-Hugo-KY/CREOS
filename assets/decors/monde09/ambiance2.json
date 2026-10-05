@@ -1,0 +1,122 @@
+{
+  "id": "Monde09_02",
+  "world": 9,
+  "name": "Les chambres des braises",
+  "ambience": "Braises, fumée et pulsations du sceau",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 901,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        377,
+        235.0,
+        128,
+        128
+      ],
+      "color": "ffb54a60",
+      "phase": 15.240000000000002
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        425.0,
+        283,
+        32,
+        51
+      ],
+      "color": "ff873bcd",
+      "phase": 15.240000000000002
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        377,
+        168,
+        128,
+        125
+      ],
+      "color": "948c8280",
+      "phase": 15.240000000000002,
+      "optional_mobile": true
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        805,
+        235.0,
+        128,
+        128
+      ],
+      "color": "ffb54a60",
+      "phase": 16.240000000000002
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        853.0,
+        283,
+        32,
+        51
+      ],
+      "color": "ff873bcd",
+      "phase": 16.240000000000002
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        805,
+        168,
+        128,
+        125
+      ],
+      "color": "948c8280",
+      "phase": 16.240000000000002,
+      "optional_mobile": true
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        597.5,
+        276.5,
+        95,
+        95
+      ],
+      "color": "c777ff85",
+      "phase": 15.240000000000002
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        90,
+        100,
+        1100,
+        305
+      ],
+      "color": "ffae61",
+      "style": "ember",
+      "count": 22,
+      "seed": 901,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        220,
+        200,
+        170,
+        180
+      ],
+      "color": "967d7370",
+      "phase": 15.240000000000002,
+      "optional_mobile": true
+    }
+  ]
+}

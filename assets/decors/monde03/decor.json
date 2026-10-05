@@ -1,0 +1,26 @@
+{
+ "world": 3,
+ "name": "Terriers de l'ile",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "La bouche des terriers",
+   "role": "Entree"
+  },
+  {
+   "name": "Les galeries de soie",
+   "role": "Profondeur"
+  },
+  {
+   "name": "La chambre des Mille-Oeufs",
+   "role": "Boss"
+  }
+ ]
+}

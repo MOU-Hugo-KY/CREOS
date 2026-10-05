@@ -32,6 +32,7 @@ const ELEMENT_NAMES := {
 
 const CLASS_NAMES := {
 	"gardien": "Gardien", "lame": "Lame", "arcaniste": "Arcaniste", "traqueur": "Traqueur", "mystique": "Mystique",
+	"moine": "Moine", "lancier": "Lancier", "soutien": "Soutien", "illusionniste": "Illusionniste", "automate": "Automate",
 }
 
 # Rareté (GDD §3.4) : nom et couleur.

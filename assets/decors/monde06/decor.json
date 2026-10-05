@@ -1,0 +1,26 @@
+{
+ "world": 6,
+ "name": "Necropole engloutie",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "Les tombes de la maree",
+   "role": "Entree"
+  },
+  {
+   "name": "Les cryptes noyees",
+   "role": "Profondeur"
+  },
+  {
+   "name": "Le sanctuaire de la Liche des Marees",
+   "role": "Boss"
+  }
+ ]
+}

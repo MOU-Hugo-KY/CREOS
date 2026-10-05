@@ -1,0 +1,26 @@
+{
+ "world": 4,
+ "name": "Camps pillards",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "La lisiere des pillards",
+   "role": "Entree"
+  },
+  {
+   "name": "Le camp des braises",
+   "role": "Profondeur"
+  },
+  {
+   "name": "La cour de Gorvak",
+   "role": "Boss"
+  }
+ ]
+}

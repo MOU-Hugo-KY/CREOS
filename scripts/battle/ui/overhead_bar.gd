@@ -4,6 +4,9 @@ extends Control
 ## et une flèche qui pulse au-dessus du héros dont c'est le tour.
 
 const WIDTH := 112.0
+const SHORT_TAGS := {"marque": "MARQUÉ", "mouille": "MOUILLÉ", "desequilibre": "DÉSÉQ.", "aveugle": "AVEUGLÉ",
+	"enracine": "ENRACINÉ", "scelle": "SCELLÉ", "brulure": "BRÛLURE", "poison": "POISON", "armure_reduite": "ARMURE ↓",
+	"somnolence": "SOMNOL.", "ouverture": "OUVERTURE", "petale": "PÉTALE", "resonance": "RÉSON."}
 
 var view: UnitView
 var active := false  # c'est au tour de ce héros
@@ -40,15 +43,13 @@ func setup(p_view: UnitView) -> void:
 	add_child(_status)
 
 
-func follow(camera: Camera3D, delta: float) -> void:
+func follow(delta: float) -> void:
 	_time += delta
 	var u := view.unit
-	var alive := view.shown_hp > 0.0 and view.visible
-	var head := view.head_position()
-	visible = alive and not camera.is_position_behind(head)
+	visible = view.shown_hp > 0.0 and view.visible and view.modulate.a > 0.5
 	if not visible:
 		return
-	position = camera.unproject_position(head) - Vector2(size.x / 2.0, size.y)
+	position = view.head_screen() - Vector2(size.x / 2.0, size.y)
 	_hp.set_values(view.shown_hp / u.max_hp, u.shield / u.max_hp)
 	if _energy:
 		_energy.set_values(u.energy / BattleUnit.ENERGY_MAX)
@@ -57,8 +58,10 @@ func follow(camera: Camera3D, delta: float) -> void:
 		tags.append("ÉTOURDI")
 	if u.taunt_time > 0.0:
 		tags.append("PROVOC.")
-	if not u.dots.is_empty():
-		tags.append("POISON")
+	for key: String in ["marque", "mouille", "desequilibre", "aveugle", "enracine", "scelle", "brulure", "poison",
+			"armure_reduite", "somnolence", "ouverture", "petale", "resonance"]:
+		if u.has_status(key):
+			tags.append(SHORT_TAGS.get(key, key))
 	_status.text = " · ".join(tags)
 	_status.visible = not active
 	queue_redraw()

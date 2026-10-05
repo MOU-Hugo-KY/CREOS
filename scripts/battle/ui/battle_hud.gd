@@ -5,13 +5,13 @@ extends CanvasLayer
 ## des personnages, et les 3 icônes d'attaque seulement quand c'est au tour d'un héros.
 
 signal attack_requested(uid: int, slot: int)
+signal quartet_requested
 signal auto_toggled(on: bool)
 signal speed_toggled(fast: bool)
 signal restart_requested
 signal hub_requested
 signal ui_sound(sfx_name: String)
 
-var camera: Camera3D
 var end_screen: EndScreen
 var attack_bar: AttackBar
 
@@ -31,6 +31,7 @@ var _callout: Label
 var _turn_uid := -1
 var _sound_button: Button
 var _sound_panel: SoundPanel
+var _quartet_button: Button
 
 
 func _ready() -> void:
@@ -54,6 +55,18 @@ func _ready() -> void:
 		if _turn_uid != -1:
 			attack_requested.emit(_turn_uid, slot))
 	_root.add_child(attack_bar)
+
+	# Attaque combinée du quatuor : apparaît au-dessus des attaques quand elle est prête.
+	_quartet_button = UiKit.button("QUATUOR", "gold", 26, Vector2(420, 64))
+	_quartet_button.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	_quartet_button.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_quartet_button.offset_top = -300
+	_quartet_button.offset_bottom = -236
+	_quartet_button.offset_left = -210
+	_quartet_button.offset_right = 210
+	_quartet_button.visible = false
+	_quartet_button.pressed.connect(func() -> void: quartet_requested.emit())
+	_root.add_child(_quartet_button)
 
 	end_screen = EndScreen.new()
 	end_screen.visible = false
@@ -103,6 +116,18 @@ func set_auto(on: bool) -> void:
 	_auto_button.set_pressed_no_signal(on)
 
 
+## Bouton du quatuor : visible quand l'attaque combinée peut partir (pendant le tour d'un héros).
+func set_quartet(ready: bool, attack_name: String) -> void:
+	if ready and not _quartet_button.visible:
+		_quartet_button.text = "QUATUOR : %s" % attack_name
+		_quartet_button.visible = true
+		_quartet_button.pivot_offset = _quartet_button.size / 2.0
+		_quartet_button.scale = Vector2.ONE * 0.7
+		_quartet_button.create_tween().tween_property(_quartet_button, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	elif not ready:
+		_quartet_button.visible = false
+
+
 func set_wave(index: int, count: int) -> void:
 	_wave_label.text = "Vague %d / %d" % [index + 1, count]
 
@@ -125,7 +150,7 @@ func end_turn(chosen_slot := -1) -> void:
 
 func refresh(delta: float) -> void:
 	for uid in _overheads:
-		_overheads[uid].follow(camera, delta)
+		_overheads[uid].follow(delta)
 	attack_bar.refresh()
 	if _boss_view:
 		var u := _boss_view.unit

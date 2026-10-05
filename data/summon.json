@@ -1,6 +1,6 @@
 {
   "name": "Lanterne des Serments",
-  "description": "Prête serment sous la grande lanterne : un chasseur endormi s'avance dans la lumière. Tous les héros s'obtiennent en jouant.",
+  "description": "Prête serment sous la grande lanterne : un chasseur endormi s'avance dans la lumière. Un héros déjà recruté revient en Écho et le renforce. Tous les héros s'obtiennent en jouant.",
   "currencies": {
     "fragments_relique": {
       "name": "Fragments de Relique",
@@ -18,13 +18,5 @@
   },
   "pity_every": 10,
   "pity_min_rarity": 4,
-  "first_summon": "",
-  "duplicate_shards": {
-    "1": 5,
-    "2": 8,
-    "3": 10,
-    "4": 25,
-    "5": 50,
-    "6": 100
-  }
+  "first_summon": ""
 }

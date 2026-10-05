@@ -8,6 +8,8 @@ extends SceneTree
 ##   --speed=2           accélère le combat
 ##   --end               attend l'écran de fin et le capture en dernier
 ##   --scene=res://scenes/hub/hub.tscn   capture une autre scène (défaut : le combat)
+##   --action=campaign   (hub) ouvre un écran avant la capture : campaign, heroes, altar, shop, relics…
+##   --hero=corbin       (hub, avec --action=heroes) ouvre la fiche de ce héros
 
 var shots: Array[int] = [200]
 var out := "res://docs/capture-prototype.png"
@@ -17,6 +19,9 @@ var taken := 0
 var end_frame := -1
 var scene: Node
 var scene_path := "res://scenes/battle/battle.tscn"
+var action := ""
+var hero := ""
+var tab := ""
 
 
 func _initialize() -> void:
@@ -37,6 +42,12 @@ func _initialize() -> void:
 			wait_end = true
 		elif arg.begins_with("--scene="):
 			scene_path = arg.trim_prefix("--scene=")
+		elif arg.begins_with("--action="):
+			action = arg.trim_prefix("--action=")
+		elif arg.begins_with("--hero="):
+			hero = arg.trim_prefix("--hero=")
+		elif arg.begins_with("--tab="):
+			tab = arg.trim_prefix("--tab=")
 	root.get_node("PlayerData").use_memory_only()  # ne touche pas à la vraie sauvegarde
 	scene = load(scene_path).instantiate()
 	root.add_child(scene)
@@ -47,6 +58,10 @@ func _initialize() -> void:
 
 func _process(_delta: float) -> bool:
 	frames += 1
+	if frames == 5 and action != "":
+		scene._do_action(action, "")
+		if hero != "":
+			scene.hud.lodge.show_hero(hero, tab if tab != "" else "Techniques")
 	if frames in shots:
 		_save()
 	if wait_end and end_frame < 0 and "end_screen" in scene.hud and scene.hud.end_screen.visible:

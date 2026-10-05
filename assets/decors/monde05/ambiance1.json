@@ -1,0 +1,53 @@
+{
+  "id": "Monde05_01",
+  "world": 5,
+  "name": "Les marches de la carriere",
+  "ambience": "Poussière des carrières et lueurs minérales",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 500,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        260.5,
+        282.5,
+        65,
+        65
+      ],
+      "color": "c777ff85",
+      "phase": 6.8500000000000005
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        100,
+        100,
+        1080,
+        320
+      ],
+      "color": "d9c396",
+      "style": "dust",
+      "count": 22,
+      "seed": 500,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        120,
+        290,
+        1050,
+        130
+      ],
+      "color": "e2d0af60",
+      "phase": 6.8500000000000005
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+ "world": 10,
+ "name": "Domaine du magicien noir",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "La route du dernier cercle",
+   "role": "Entree"
+  },
+  {
+   "name": "Les ateliers de domination",
+   "role": "Profondeur"
+  },
+  {
+   "name": "La salle du Rituel des Monstres",
+   "role": "Boss"
+  }
+ ]
+}

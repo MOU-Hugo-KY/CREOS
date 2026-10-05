@@ -1,8 +1,8 @@
 class_name HeroesScreen
 extends Control
-## « Loge des héros » : la collection (cartes filtrables par rôle) et la fiche d'un héros
-## (héros animé, statistiques, Force, amélioration contre de l'or, onglets Aptitudes /
-## Équipement / Étoiles, place dans l'équipe de chasse). Style de la maquette CREOS : fond
+## « Loge des héros » : la collection (cartes filtrables par rôle, héros à recruter grisés) et la
+## fiche d'un héros (héros animé, statistiques, Force, amélioration contre de l'or, onglets
+## Techniques / Voies / Relique / Échos, place dans l'équipe de chasse). Style de la maquette CREOS : fond
 ## d'encre, panneaux ivoire cerclés d'encre, bordeaux, laiton et turquoise.
 
 signal closed
@@ -11,13 +11,13 @@ signal ui_sound(sfx_name: String)
 const ATTACK_ICON_DIR := "res://assets/ui/attacks/"
 const BG := Color("19181e")
 const CARD := Color("34323c")
-const STAT_NAMES := [["hp", "Vie"], ["atk", "Attaque"], ["def", "Défense"], ["res", "Résistance"],
+const STAT_NAMES := [["hp", "Vie"], ["atk", "Attaque"], ["mag", "Magie"], ["def", "Défense"],
 	["spd", "Vitesse"], ["crit", "Critique"]]
-const TABS := ["Aptitudes", "Équipement", "Étoiles"]
+const TABS := ["Techniques", "Voies", "Relique", "Échos"]
 
 var selected := ""
 var _filter := ""  # classe affichée ("" = toutes)
-var _tab := "Aptitudes"
+var _tab := "Techniques"
 
 var _title: Label
 var _count: Label
@@ -142,7 +142,11 @@ func _fill_collection() -> void:
 		_filters.add_child(_tab_button(name, _filter == cl, func() -> void: _set_filter(cl)))
 	for c in _grid.get_children():
 		c.queue_free()
-	for id: String in PlayerData.owned_heroes():
+	var ids: Array = PlayerData.owned_heroes()
+	for id: String in GameData.heroes:
+		if id not in ids:
+			ids.append(id)  # les héros à recruter, après ceux qu'on possède
+	for id: String in ids:
 		var hero := GameData.hero(id)
 		if _filter == "" or hero.get("class", "") == _filter:
 			_grid.add_child(_hero_card(hero))
@@ -180,9 +184,12 @@ func _hero_card(hero: Dictionary) -> Control:
 	hover.border_width_bottom = 10
 	card.add_theme_stylebox_override("hover", hover)
 	card.add_theme_stylebox_override("pressed", hover)
+	var owned: bool = PlayerData.state.heroes.has(id)
 	card.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		show_hero(id))
+	if not owned:
+		card.modulate = Color(0.55, 0.55, 0.6)
 	var m := MarginContainer.new()
 	m.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for side in ["left", "right", "top"]:
@@ -215,7 +222,10 @@ func _hero_card(hero: Dictionary) -> Control:
 	var name := UiKit.title(String(hero.name), 28, UiKit.PARCHMENT)
 	v.add_child(name)
 	v.add_child(UiKit.label(_role(hero), 19, UiKit.TEAL))
-	v.add_child(UiKit.label(_stars(PlayerData.hero_stars(id)), 24, UiKit.WOOD_LIGHT))
+	if not owned:
+		v.add_child(UiKit.label("À recruter à la Lanterne", 19, UiKit.WOOD_LIGHT))
+		return card
+	v.add_child(UiKit.label(_echo_marks(id), 22, UiKit.WOOD_LIGHT))
 	var row := HBoxContainer.new()
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	v.add_child(row)
@@ -282,9 +292,9 @@ func _build_detail(page: VBoxContainer) -> void:
 	tab_panel.add_child(_tab_box)
 
 
-func show_hero(id: String) -> void:
+func show_hero(id: String, tab := "Techniques") -> void:
 	selected = id
-	_tab = "Aptitudes"
+	_tab = tab
 	_collection.visible = false
 	_detail.visible = true
 	_back.text = "← Collection"
@@ -306,13 +316,16 @@ func _fill_detail() -> void:
 	role.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(role)
 	top.add_child(_badge(rarity[0], UiKit.WOOD))
-	var desc := UiKit.label(String(hero.get("description", "")), 18, UiKit.PARCHMENT_DARK)
+	var desc := UiKit.label(String(hero.get("species", hero.get("description", ""))), 18, UiKit.PARCHMENT_DARK)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_left_info.add_child(desc)
 	var bottom: VBoxContainer = _left_info.get_meta("bottom")
 	for c in bottom.get_children():
 		c.queue_free()
-	bottom.add_child(UiKit.label(_stars(PlayerData.hero_stars(id)), 30, UiKit.WOOD_LIGHT))
+	var owned: bool = PlayerData.state.heroes.has(id)
+	if not owned:
+		bottom.add_child(UiKit.title("À recruter à la Lanterne des Serments", 24, UiKit.WOOD_LIGHT))
+	bottom.add_child(UiKit.label(_echo_marks(id), 28, UiKit.WOOD_LIGHT))
 	var lrow := HBoxContainer.new()
 	bottom.add_child(lrow)
 	var lvl := UiKit.title("Niveau %d / %d" % [PlayerData.hero_level(id), int(GameData.progression.get("max_level", 30))], 26, UiKit.PARCHMENT)
@@ -329,7 +342,7 @@ func _fill_detail() -> void:
 	for c in _stats_box.get_children():
 		c.queue_free()
 	_stats_box.add_child(_section("Statistiques"))
-	var stats := Progression.hero_stats(hero, PlayerData.hero_level(id), PlayerData.hero_stars(id), GameData.progression)
+	var stats := PlayerData.hero_stats(id, hero)
 	for s: Array in STAT_NAMES:
 		var row := HBoxContainer.new()
 		_stats_box.add_child(row)
@@ -354,15 +367,16 @@ func _fill_detail() -> void:
 	up.disabled = max_level or PlayerData.gold() < cost
 	up.pressed.connect(_ask_level_up)
 	actions.add_child(up)
-	var evo := UiKit.button("Évolution", "gold", 21, Vector2(180, 60))
-	evo.pressed.connect(func() -> void: _set_tab("Étoiles"))
+	var evo := UiKit.button("Relique", "gold", 21, Vector2(180, 60))
+	evo.pressed.connect(func() -> void: _set_tab("Relique"))
 	actions.add_child(evo)
 	var in_team := PlayerData.in_team(id)
 	var full := PlayerData.team().size() >= PlayerData.TEAM_SIZE
+	up.disabled = up.disabled or not owned
 	var team_b := UiKit.button("Retirer de l'équipe" if in_team else ("Équipe complète" if full else "Dans l'équipe"),
 		"blue" if in_team else "green", 21, Vector2(0, 60))
 	team_b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	team_b.disabled = (in_team and PlayerData.team().size() <= 1) or (not in_team and full)
+	team_b.disabled = (in_team and PlayerData.team().size() <= 1) or (not in_team and full) or not owned
 	team_b.pressed.connect(func() -> void:
 		if PlayerData.toggle_team(id):
 			ui_sound.emit("ui_toggle"))
@@ -377,12 +391,14 @@ func _fill_detail() -> void:
 	for c in _tab_box.get_children():
 		c.queue_free()
 	match _tab:
-		"Aptitudes":
+		"Techniques":
 			_fill_skills(hero)
-		"Équipement":
-			_fill_equipment()
+		"Voies":
+			_fill_paths(id, hero)
+		"Relique":
+			_fill_relic(id, hero)
 		_:
-			_fill_stars(id)
+			_fill_echoes(id, hero)
 
 
 func _fill_skills(hero: Dictionary) -> void:
@@ -399,7 +415,7 @@ func _fill_skills(hero: Dictionary) -> void:
 		b.expand_icon = true
 		b.custom_minimum_size = Vector2(68, 68)
 		b.tooltip_text = "Voir l'attaque"
-		var anim: String = a.get("anim", "")
+		var anim: String = a.get("clip", a.get("anim", ""))
 		b.pressed.connect(func() -> void:
 			ui_sound.emit("ui_click")
 			_preview.play(anim))
@@ -421,40 +437,143 @@ func _fill_skills(hero: Dictionary) -> void:
 	_tab_box.add_child(UiKit.label("Touche une icône pour voir l'attaque.", 16, UiKit.TEXT_SOFT))
 
 
-func _fill_equipment() -> void:
-	for slot in ["Arme ou focus", "Protection", "Relique"]:
+## Les trois voies d'Héritage : une seule active (changement gratuit hors combat), toutes
+## progressent ensemble avec les Échos. Au palier 3 (6 Échos), une quatrième technique.
+func _fill_paths(id: String, hero: Dictionary) -> void:
+	var tier := PlayerData.hero_echo_tier(id)
+	var active := PlayerData.hero_path(id)
+	var thresholds: Array = GameData.progression.get("echoes", {}).get("thresholds", [1, 3, 6, 9, 12])
+	var paths: Array = hero.get("paths", [])
+	var secrets: Array = hero.get("secret_techniques", [])
+	for i in paths.size():
+		var path: Dictionary = paths[i]
 		var p := PanelContainer.new()
-		var sb := UiKit.box(UiKit.PARCHMENT_DARK, Color("9c8a68"), 12, 2)
-		sb.set_content_margin_all(18)
-		p.add_theme_stylebox_override("panel", sb)
-		p.add_child(UiKit.label("%s · emplacement libre" % slot, 20, UiKit.TEXT_SOFT))
+		p.add_theme_stylebox_override("panel", UiKit.card(UiKit.TEAL if i == active else Color.TRANSPARENT))
 		_tab_box.add_child(p)
-	_tab_box.add_child(UiKit.label("L'équipement arrive avec le butin des chasses (bientôt).", 16, UiKit.TEXT_SOFT))
-
-
-func _fill_stars(id: String) -> void:
-	var stars := PlayerData.hero_stars(id)
-	var cost := PlayerData.hero_star_cost(id)
-	if cost < 0:
-		_tab_box.add_child(_section("%d étoiles : évolution maximale" % stars))
-		return
-	_tab_box.add_child(_section("Évolution  %d → %d étoiles" % [stars, stars + 1]))
-	var have := PlayerData.hero_shards(id)
-	_tab_box.add_child(UiKit.label("Fragments : %d / %d" % [have, cost], 21, UiKit.INK))
-	var bar := UiKit.progress(UiKit.TEAL, 18)
-	bar.max_value = cost
-	bar.value = mini(have, cost)
-	_tab_box.add_child(bar)
-	var bonus := int(round(float(GameData.progression.get("stars", {}).get("bonus_per_star", 0.1)) * 100.0))
-	var note := UiKit.label("Chaque étoile donne +%d %% de vie, attaque, défense et résistance. Les fragments d'un héros s'obtiennent en l'invoquant de nouveau à la Lanterne. La rareté reste une information à part." % bonus, 17, UiKit.TEXT_SOFT)
+		var col := VBoxContainer.new()
+		col.add_theme_constant_override("separation", 4)
+		p.add_child(col)
+		var head := HBoxContainer.new()
+		col.add_child(head)
+		var t := UiKit.label("%s  ·  %s" % [path.get("name", ""), path.get("focus", "")], 22, UiKit.INK)
+		t.add_theme_font_override("font", UiKit.FONT_BOLD)
+		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		head.add_child(t)
+		if i < secrets.size():
+			var clip := String(secrets[i].get("clip", ""))
+			var see := UiKit.button("Voir", "blue", 16, Vector2(80, 40))
+			see.tooltip_text = String(secrets[i].get("name", ""))
+			see.pressed.connect(func() -> void:
+				ui_sound.emit("ui_click")
+				_preview.play(clip))
+			head.add_child(see)
+		var choose := UiKit.button("Active" if i == active else "Choisir", "green" if i == active else "wood", 16, Vector2(110, 40))
+		choose.disabled = i == active or not PlayerData.state.heroes.has(id)
+		var path_index := i
+		choose.pressed.connect(func() -> void:
+			ui_sound.emit("ui_toggle")
+			PlayerData.set_hero_path(id, path_index))
+		head.add_child(choose)
+		var stages: Dictionary = path.get("stages", {})
+		for k in thresholds.size():
+			var key := str(int(thresholds[k]))
+			var reached := tier > k
+			var line := UiKit.label("%s %s Échos : %s" % ["◆" if reached else "◇", key, stages.get(key, "")], 17,
+				UiKit.INK if reached else UiKit.TEXT_SOFT)
+			line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			col.add_child(line)
+	var note := UiKit.label("Les Échos viennent uniquement des doublons du même héros, obtenus à la Lanterne.", 16, UiKit.TEXT_SOFT)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_tab_box.add_child(note)
-	var b := UiKit.button("Faire évoluer" if have >= cost else "Fragments insuffisants", "green", 22, Vector2(0, 60))
-	b.disabled = have < cost
-	b.pressed.connect(func() -> void:
-		if PlayerData.evolve_hero(id):
-			ui_sound.emit("ultimate_impact"))
-	_tab_box.add_child(b)
+
+
+## La relique ancienne du héros : cinq paliers (statistiques et effets), fragments gagnés en chasse.
+func _fill_relic(id: String, hero: Dictionary) -> void:
+	var relic: Dictionary = GameData.relics.get("relics", {}).get(id, {})
+	if relic.is_empty():
+		_tab_box.add_child(UiKit.label("Pas de relique connue.", 20, UiKit.TEXT_SOFT))
+		return
+	var tier := PlayerData.relic_tier(id)
+	var tiers: Array = GameData.progression.get("relic_tiers", [])
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 18)
+	_tab_box.add_child(row)
+	var img := TextureRect.new()
+	img.texture = load(String(relic.sprite)) if ResourceLoader.exists(String(relic.get("sprite", ""))) else null
+	img.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	img.custom_minimum_size = Vector2(170, 170)
+	if tier == 0:
+		img.modulate = Color(0.35, 0.33, 0.38)
+	row.add_child(img)
+	var col := VBoxContainer.new()
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(col)
+	var t := UiKit.label(String(relic.name), 26, UiKit.INK)
+	t.add_theme_font_override("font", UiKit.FONT_BOLD)
+	col.add_child(t)
+	var state_name := "Pas encore retrouvée" if tier == 0 else "Palier %d · %s" % [tier, tiers[tier - 1].get("name", "")]
+	col.add_child(UiKit.label(state_name, 21, UiKit.WOOD))
+	if tier > 0:
+		var tt: Dictionary = tiers[tier - 1]
+		col.add_child(UiKit.label("+%d %% %s · +%d %% %s" % [int(float(tt.primary) * 100), hero.get("primary", ""),
+			int(float(tt.secondary) * 100), hero.get("secondary", "")], 19, UiKit.INK))
+	col.add_child(UiKit.label("Fragments : %d   ·   Matériaux : %d" % [PlayerData.relic_fragments(id), PlayerData.item_count("materiaux_relique")], 18, UiKit.TEXT_SOFT))
+	var see := UiKit.button("Voir la relique", "blue", 18, Vector2(0, 46))
+	see.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		_preview.play("cheer"))
+	col.add_child(see)
+	var cost := PlayerData.relic_next_cost(id)
+	if not cost.is_empty():
+		var label := "Retrouver" if tier == 0 else "Améliorer"
+		var b := UiKit.button("%s · %d fragments%s" % [label, int(cost.fragments),
+			"" if int(cost.materials) == 0 else " + %d matériaux" % int(cost.materials)], "green", 20, Vector2(0, 58))
+		b.disabled = not PlayerData.can_upgrade_relic(id)
+		b.pressed.connect(func() -> void:
+			if PlayerData.upgrade_relic(id):
+				ui_sound.emit("ultimate_impact")
+				_preview.play("cheer"))
+		_tab_box.add_child(b)
+	for line: Array in [["Où la trouver", "%s (%s)" % [relic.get("dungeon", ""), relic.get("material", "")]],
+			["III · Éveillée", relic.get("awakening", "")], ["IV · Accordée", relic.get("accord", "")],
+			["V · Héritage", relic.get("contribution", "")], ["Épreuve du palier V", relic.get("trial", "")]]:
+		var l := UiKit.label("%s : %s" % line, 17, UiKit.INK)
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		_tab_box.add_child(l)
+	var note := UiKit.label("Chaque niveau de la campagne garde la relique d'un héros : 3 fragments par victoire.", 16, UiKit.TEXT_SOFT)
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_tab_box.add_child(note)
+
+
+## Les Échos (doublons du même héros) : paliers 1, 3, 6, 9, 12 et leurs gains de statistiques.
+func _fill_echoes(id: String, hero: Dictionary) -> void:
+	var e: Dictionary = GameData.progression.get("echoes", {})
+	var echoes := PlayerData.hero_echoes(id)
+	var tier := PlayerData.hero_echo_tier(id)
+	var next := Progression.next_echo_threshold(echoes, GameData.progression)
+	_tab_box.add_child(_section("Échos : %d" % echoes))
+	if next > 0:
+		_tab_box.add_child(UiKit.label("Prochain palier à %d Échos" % next, 21, UiKit.INK))
+		var bar := UiKit.progress(UiKit.TEAL, 18)
+		bar.max_value = next
+		bar.value = echoes
+		_tab_box.add_child(bar)
+	else:
+		_tab_box.add_child(UiKit.label("Tous les paliers sont atteints.", 21, UiKit.INK))
+	var thresholds: Array = e.get("thresholds", [])
+	var unlocks: Array = e.get("unlocks", [])
+	for k in thresholds.size():
+		var reached := tier > k
+		var l := UiKit.label("%s %d Échos · %s · +%d %% %s, +%d %% %s, +%d %% autres" % [
+			"◆" if reached else "◇", int(thresholds[k]), unlocks[k] if k < unlocks.size() else "",
+			int(float(e.primary[k]) * 100), hero.get("primary", ""), int(float(e.secondary[k]) * 100),
+			hero.get("secondary", ""), int(float(e.other[k]) * 100)], 18, UiKit.INK if reached else UiKit.TEXT_SOFT)
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		_tab_box.add_child(l)
+	var note := UiKit.label("Un héros déjà recruté qui revient à la Lanterne donne un Écho. Aucune autre source.", 16, UiKit.TEXT_SOFT)
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_tab_box.add_child(note)
 
 
 func _set_tab(t: String) -> void:
@@ -545,20 +664,24 @@ func _section(text: String) -> Label:
 
 
 func _role(hero: Dictionary) -> String:
-	return "%s · %s" % [Palette.CLASS_NAMES.get(hero.get("class"), ""), Palette.ELEMENT_NAMES.get(hero.get("element"), "")]
+	var role := String(hero.get("role", Palette.CLASS_NAMES.get(hero.get("class"), "")))
+	return "%s · %s" % [role, Palette.ELEMENT_NAMES.get(hero.get("element"), "")]
 
 
-func _stars(n: int) -> String:
-	var max_stars := int(GameData.progression.get("stars", {}).get("max", 6))
-	return "★".repeat(n) + "☆".repeat(maxi(0, max_stars - n))
+## Paliers d'Échos atteints : ◆ plein par palier (5 au plus), et le nombre d'Échos.
+func _echo_marks(id: String) -> String:
+	var tier := PlayerData.hero_echo_tier(id)
+	return "%s  %d Écho%s" % ["◆".repeat(tier) + "◇".repeat(5 - tier), PlayerData.hero_echoes(id),
+		"s" if PlayerData.hero_echoes(id) > 1 else ""]
 
 
 func _power(id: String) -> int:
-	var hero := GameData.hero(id)
-	return Progression.power(Progression.hero_stats(hero, PlayerData.hero_level(id), PlayerData.hero_stars(id), GameData.progression))
+	return Progression.power(PlayerData.hero_stats(id, GameData.hero(id)))
 
 
 func _fiche(hero: Dictionary) -> Texture2D:
+	if ResourceLoader.exists(String(hero.get("fiche", ""))):
+		return load(String(hero.fiche))
 	if hero.has("puppet"):
 		var path := String(hero.puppet).path_join("fiche.png")
 		if ResourceLoader.exists(path):

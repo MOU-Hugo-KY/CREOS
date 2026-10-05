@@ -1,0 +1,64 @@
+{
+  "id": "Monde02_01",
+  "world": 2,
+  "name": "Le sentier des spores",
+  "ambience": "Spores, brume et pulsations fongiques",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 200,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        67.0,
+        152.0,
+        100,
+        100
+      ],
+      "color": "c777ff85",
+      "phase": 2.74
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        1054.5,
+        236.5,
+        95,
+        95
+      ],
+      "color": "c777ff85",
+      "phase": 2.74
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        160,
+        275,
+        950,
+        130
+      ],
+      "color": "d9cab28a",
+      "phase": 2.74
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        80,
+        80,
+        1120,
+        350
+      ],
+      "color": "e8d7a5",
+      "style": "spore",
+      "count": 22,
+      "seed": 200,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

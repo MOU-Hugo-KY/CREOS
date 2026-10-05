@@ -83,7 +83,7 @@ func _ready() -> void:
 	_pity.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	left.add_child(_pity)
 	left.add_child(HSeparator.new())
-	var tip := _label("Les Fragments de Relique se gagnent en chasse. Un héros déjà réveillé donne ses propres fragments (pour ses étoiles).", 16, Palette.TEXT_DIM)
+	var tip := _label("Les Éclats de serment se gagnent en chasse et chez le Marchand. Un héros déjà recruté revient en Écho et devient plus fort.", 16, Palette.TEXT_DIM)
 	tip.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	left.add_child(tip)
 
@@ -117,9 +117,14 @@ func _ready() -> void:
 
 	var right := _panel(body, 330)
 	right.add_child(_label("Héros de l'Autel", 26, Palette.GOLD))
+	var pool_scroll := ScrollContainer.new()
+	pool_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	pool_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	right.add_child(pool_scroll)
 	_pool = VBoxContainer.new()
+	_pool.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_pool.add_theme_constant_override("separation", 8)
-	right.add_child(_pool)
+	pool_scroll.add_child(_pool)
 
 	PlayerData.changed.connect(_refresh)
 
@@ -162,7 +167,7 @@ func _show_result(hero: Dictionary, r: Dictionary) -> void:
 		_result_detail.text = "Nouveau héros ! Il t'attend dans la Loge."
 		_result_detail.add_theme_color_override("font_color", Palette.GOLD)
 	else:
-		_result_detail.text = "Déjà réveillé : +%d fragments de %s" % [r.shards, hero.name]
+		_result_detail.text = "Déjà recruté : +1 Écho pour %s (%d au total)" % [hero.name, r.echoes]
 		_result_detail.add_theme_color_override("font_color", Palette.TEXT)
 	_result.add_theme_stylebox_override("panel", Palette.stylebox(Color(0, 0, 0, 0.6), rarity[1], 18, 3))
 	_result.visible = true
@@ -230,9 +235,9 @@ func _pool_row(hero: Dictionary) -> Control:
 	h.add_child(col)
 	col.add_child(_label(hero.name, 19, Palette.TEXT if owned else Palette.TEXT_DIM))
 	var status := "Réveillé" if owned else "Endormi"
-	var shards := PlayerData.hero_shards(hero.id)
-	if shards > 0:
-		status += "  ·  %d fragments" % shards
+	var echoes := PlayerData.hero_echoes(hero.id)
+	if echoes > 0:
+		status += "  ·  %d Écho%s" % [echoes, "s" if echoes > 1 else ""]
 	col.add_child(_label("%s  ·  %s" % [rarity[0], status], 15, rarity[1] if owned else Palette.TEXT_DIM))
 	return row
 

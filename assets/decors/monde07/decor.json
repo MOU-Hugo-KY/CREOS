@@ -1,0 +1,26 @@
+{
+ "world": 7,
+ "name": "Postes de chasse abandonnes",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "Le relais desert",
+   "role": "Entree"
+  },
+  {
+   "name": "Les remparts silencieux",
+   "role": "Profondeur"
+  },
+  {
+   "name": "La cour de l'Ancien Chef",
+   "role": "Boss"
+  }
+ ]
+}

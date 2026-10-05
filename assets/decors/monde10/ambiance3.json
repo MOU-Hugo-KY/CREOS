@@ -1,0 +1,155 @@
+{
+  "id": "Monde10_03",
+  "world": 10,
+  "name": "La salle du Rituel des Monstres",
+  "ambience": "Flammes, cendres, filaments et cercle rituel",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 1002,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        441,
+        209.0,
+        80,
+        80
+      ],
+      "color": "ffb54a60",
+      "phase": 19.520000000000003
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        471.0,
+        239,
+        20,
+        43
+      ],
+      "color": "ff873bcd",
+      "phase": 19.520000000000003
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        441,
+        124,
+        80,
+        125
+      ],
+      "color": "948c8280",
+      "phase": 19.520000000000003,
+      "optional_mobile": true
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        849,
+        213.0,
+        80,
+        80
+      ],
+      "color": "ffb54a60",
+      "phase": 20.520000000000003
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        879.0,
+        243,
+        20,
+        43
+      ],
+      "color": "ff873bcd",
+      "phase": 20.520000000000003
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        849,
+        128,
+        80,
+        125
+      ],
+      "color": "948c8280",
+      "phase": 20.520000000000003,
+      "optional_mobile": true
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        665.5,
+        16.5,
+        135,
+        135
+      ],
+      "color": "c777ff85",
+      "phase": 19.520000000000003
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        686.5,
+        186.5,
+        75,
+        75
+      ],
+      "color": "c777ff85",
+      "phase": 19.520000000000003
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        150,
+        40,
+        980,
+        335
+      ],
+      "color": "c7a8d1",
+      "style": "ash",
+      "count": 22,
+      "seed": 1002,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "kind": "magic",
+      "rect": [
+        710,
+        120,
+        75,
+        230
+      ],
+      "color": "be77eea0",
+      "phase": 19.520000000000003
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        150,
+        300,
+        1000,
+        100
+      ],
+      "color": "a383bb60",
+      "phase": 19.520000000000003,
+      "optional_mobile": true
+    },
+    {
+      "kind": "ritual",
+      "rect": [
+        656,
+        16,
+        150,
+        150
+      ],
+      "color": "d097f3a0",
+      "phase": 19.520000000000003
+    }
+  ]
+}

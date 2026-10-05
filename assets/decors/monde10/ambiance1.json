@@ -1,0 +1,133 @@
+{
+  "id": "Monde10_01",
+  "world": 10,
+  "name": "La route du dernier cercle",
+  "ambience": "Flammes, cendres, filaments et cercle rituel",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 1000,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        341,
+        232.0,
+        88,
+        88
+      ],
+      "color": "ffb54a60",
+      "phase": 13.700000000000001
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        374.0,
+        265,
+        22,
+        47
+      ],
+      "color": "ff873bcd",
+      "phase": 13.700000000000001
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        341,
+        150,
+        88,
+        125
+      ],
+      "color": "948c8280",
+      "phase": 13.700000000000001,
+      "optional_mobile": true
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        884,
+        240.0,
+        88,
+        88
+      ],
+      "color": "ffb54a60",
+      "phase": 14.700000000000001
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        917.0,
+        273,
+        22,
+        47
+      ],
+      "color": "ff873bcd",
+      "phase": 14.700000000000001
+    },
+    {
+      "kind": "smoke",
+      "rect": [
+        884,
+        158,
+        88,
+        125
+      ],
+      "color": "948c8280",
+      "phase": 14.700000000000001,
+      "optional_mobile": true
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        690.5,
+        177.5,
+        95,
+        95
+      ],
+      "color": "c777ff85",
+      "phase": 13.700000000000001
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        150,
+        40,
+        980,
+        335
+      ],
+      "color": "c7a8d1",
+      "style": "ash",
+      "count": 22,
+      "seed": 1000,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "kind": "magic",
+      "rect": [
+        710,
+        120,
+        75,
+        230
+      ],
+      "color": "be77eea0",
+      "phase": 13.700000000000001
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        150,
+        300,
+        1000,
+        100
+      ],
+      "color": "a383bb60",
+      "phase": 13.700000000000001,
+      "optional_mobile": true
+    }
+  ]
+}

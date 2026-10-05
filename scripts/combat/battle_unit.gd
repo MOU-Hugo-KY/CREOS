@@ -29,6 +29,7 @@ var cooldowns: Array[float] = []  # temps restant avant de pouvoir relancer chaq
 var max_hp: float
 var hp: float
 var atk: float
+var mag: float  # magie (techniques « MAG » de la fiche de combat)
 var def: float
 var res: float
 var spd: float
@@ -39,7 +40,11 @@ var energy := 0.0
 var shield := 0.0
 var taunt_time := 0.0
 var stun_time := 0.0
-var dots: Array = []  # [{dps, time, src, acc}]
+var dots: Array = []  # [{dps, time, src, acc, name}]
+var hots: Array = []  # régénérations [{hps, time, src, acc}]
+var statuses: Dictionary = {}  # état -> temps restant (marque, mouille, desequilibre, aveugle…)
+var mods: Array = []  # bonus/malus temporaires [{stat, amount, time}]
+var used_ultimate := false  # a lancé son ultime au moins une fois (condition du quatuor)
 
 
 static func from_data(p_uid: int, p_def_id: String, data: Dictionary, p_team: int, p_slot: int) -> BattleUnit:
@@ -62,6 +67,7 @@ static func from_data(p_uid: int, p_def_id: String, data: Dictionary, p_team: in
 	u.max_hp = s.get("hp", 100)
 	u.hp = u.max_hp
 	u.atk = s.get("atk", 10)
+	u.mag = s.get("mag", u.atk)
 	u.def = s.get("def", 0)
 	u.res = s.get("res", 0)
 	u.spd = s.get("spd", 100)
@@ -116,3 +122,40 @@ func add_energy(amount: float) -> void:
 func tick_cooldowns(delta: float) -> void:
 	for i in cooldowns.size():
 		cooldowns[i] = maxf(0.0, cooldowns[i] - delta)
+
+
+## Statistique avec les bonus/malus en cours. atk, mag, def, res : en pourcentage ;
+## crit, evade (esquive) : en points ajoutés.
+func stat(name: String) -> float:
+	var base := 0.0
+	match name:
+		"atk": base = atk
+		"mag": base = mag
+		"def": base = def
+		"res": base = res
+		"hp": base = max_hp
+		"crit": base = crit
+		"evade": base = 0.0
+		"spd": base = spd
+	var bonus := 0.0
+	for m: Dictionary in mods:
+		if m.stat == name:
+			bonus += float(m.amount)
+	if name in ["crit", "evade"]:
+		return clampf(base + bonus, 0.0, 0.6)
+	return maxf(0.0, base * (1.0 + bonus))
+
+
+func has_status(name: String) -> bool:
+	return statuses.get(name, 0.0) > 0.0
+
+
+func tick_statuses(delta: float) -> void:
+	for key in statuses.keys():
+		statuses[key] -= delta
+		if statuses[key] <= 0.0:
+			statuses.erase(key)
+	for m: Dictionary in mods.duplicate():
+		m.time -= delta
+		if m.time <= 0.0:
+			mods.erase(m)

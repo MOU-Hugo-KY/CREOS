@@ -1,0 +1,99 @@
+{
+  "id": "Monde07_01",
+  "world": 7,
+  "name": "Le relais desert",
+  "ambience": "Feuilles, lanternes et corruption violette",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 700,
+  "effects": [
+    {
+      "kind": "glow",
+      "rect": [
+        35,
+        193.5,
+        36,
+        36
+      ],
+      "color": "ffb54a60",
+      "phase": 9.59
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        48.5,
+        207,
+        9,
+        15
+      ],
+      "color": "ff873bcd",
+      "phase": 9.59
+    },
+    {
+      "kind": "glow",
+      "rect": [
+        995,
+        235.5,
+        44,
+        44
+      ],
+      "color": "ffb54a60",
+      "phase": 10.59
+    },
+    {
+      "kind": "flame",
+      "rect": [
+        1011.5,
+        252,
+        11,
+        20
+      ],
+      "color": "ff873bcd",
+      "phase": 10.59
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        80,
+        80,
+        1120,
+        350
+      ],
+      "color": "c68d4c",
+      "style": "leaf",
+      "count": 12,
+      "seed": 710,
+      "size": 3,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5,
+      "optional_mobile": true
+    },
+    {
+      "kind": "magic",
+      "rect": [
+        35,
+        290,
+        110,
+        150
+      ],
+      "color": "be77dc60",
+      "phase": 9.59,
+      "optional_mobile": true
+    },
+    {
+      "kind": "mist",
+      "rect": [
+        230,
+        310,
+        850,
+        95
+      ],
+      "color": "b3a9a36a",
+      "phase": 9.59
+    }
+  ]
+}

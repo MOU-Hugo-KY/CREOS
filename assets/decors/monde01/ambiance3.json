@@ -1,0 +1,42 @@
+{
+  "id": "Monde01_03",
+  "world": 1,
+  "name": "Le rivage du Brise-Coque",
+  "ambience": "Vagues, lumière des lanternes et embruns",
+  "stage": [
+    1280,
+    720
+  ],
+  "z_index": -10,
+  "seed": 102,
+  "effects": [
+    {
+      "kind": "water",
+      "rect": [
+        0,
+        240,
+        580,
+        145
+      ],
+      "color": "e4ece2b0",
+      "phase": 7.19
+    },
+    {
+      "kind": "particles",
+      "rect": [
+        720,
+        210,
+        480,
+        170
+      ],
+      "color": "d7e4d1",
+      "style": "dust",
+      "count": 22,
+      "seed": 102,
+      "size": 2,
+      "duration": 10,
+      "drift": 0.2,
+      "opacity": 0.5
+    }
+  ]
+}

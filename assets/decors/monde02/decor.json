@@ -1,0 +1,26 @@
+{
+ "world": 2,
+ "name": "Bois des Spores",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "Le sentier des spores",
+   "role": "Entree"
+  },
+  {
+   "name": "Les racines affamees",
+   "role": "Profondeur"
+  },
+  {
+   "name": "Le berceau de la Mere des Spores",
+   "role": "Boss"
+  }
+ ]
+}

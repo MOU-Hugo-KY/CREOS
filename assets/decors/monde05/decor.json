@@ -1,0 +1,26 @@
+{
+ "world": 5,
+ "name": "Carrieres oubliees",
+ "foot_baseline": 590,
+ "safe_combat_rect": [
+  256,
+  447,
+  768,
+  179
+ ],
+ "foreground_offset": 96,
+ "scenes": [
+  {
+   "name": "Les marches de la carriere",
+   "role": "Entree"
+  },
+  {
+   "name": "Les puits enchaines",
+   "role": "Profondeur"
+  },
+  {
+   "name": "Le cercle du Colosse Entrave",
+   "role": "Boss"
+  }
+ ]
+}

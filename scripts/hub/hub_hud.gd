@@ -10,7 +10,7 @@ signal screen_opened(open: bool)  # un écran plein (Loge…) s'ouvre ou se ferm
 const ICON_DIR := "res://assets/ui/hub/"
 # Bouton « Y aller » des primes : action -> bâtiment ou bouton concerné
 const ACTION_TARGETS := {"campaign": "table_des_chasses", "altar": "autel", "heroes": "loge_des_heros",
-	"shop": "marche", "guild": "guilde", "tower": "tour"}
+	"shop": "echoppe_masques", "guild": "guilde", "tower": "tour"}
 
 var _root: Control
 var _toast: Label
@@ -31,6 +31,9 @@ var altar: SummonAltar
 var profile: ProfileScreen
 var quests: QuestsScreen
 var hunt_prep: HuntPrepScreen
+var campaign: CampaignScreen
+var shop: ShopScreen
+var relics: RelicsScreen
 
 
 func _ready() -> void:
@@ -66,9 +69,39 @@ func _ready() -> void:
 	quests.go_to.connect(func(act: String) -> void: action.emit(act, ACTION_TARGETS.get(act, "")))
 	_root.add_child(quests)
 	hunt_prep = HuntPrepScreen.new()
-	hunt_prep.closed.connect(func() -> void: _set_menus_visible(true))
+	hunt_prep.closed.connect(func() -> void:
+		if not campaign.visible and campaign.region == "":
+			_set_menus_visible(true))
 	hunt_prep.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
 	_root.add_child(hunt_prep)
+	campaign = CampaignScreen.new()
+	campaign.closed.connect(func() -> void:
+		if not hunt_prep.visible:
+			_set_menus_visible(true))
+	campaign.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	campaign.hunt_chosen.connect(func(id: String) -> void:
+		campaign.visible = false
+		hunt_prep.open_for(id))
+	_root.add_child(campaign)
+	# Fermer la préparation de chasse ramène à la carte des mondes.
+	hunt_prep.closed.connect(func() -> void:
+		if campaign.region != "":
+			campaign.open()
+			campaign.refresh())
+	shop = ShopScreen.new()
+	shop.closed.connect(func() -> void: _set_menus_visible(true))
+	shop.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	_root.add_child(shop)
+	relics = RelicsScreen.new()
+	relics.closed.connect(func() -> void:
+		if not lodge.visible:
+			_set_menus_visible(true))
+	relics.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	relics.hero_relic_requested.connect(func(id: String) -> void:
+		relics.visible = false
+		lodge.open()
+		lodge.show_hero(id, "Relique"))
+	_root.add_child(relics)
 	PlayerData.changed.connect(refresh)
 	refresh()
 	var timer := Timer.new()
@@ -127,6 +160,22 @@ func open_hunt_prep(dungeon_id: String) -> void:
 	hunt_prep.open_for(dungeon_id)
 
 
+## La Table des chasses : la carte des mondes, ouverte sur le niveau où en est le joueur.
+func open_campaign() -> void:
+	_set_menus_visible(false)
+	campaign.open_current()
+
+
+func open_shop() -> void:
+	_set_menus_visible(false)
+	shop.open()
+
+
+func open_relics() -> void:
+	_set_menus_visible(false)
+	relics.open()
+
+
 func open_quests() -> void:
 	_set_menus_visible(false)
 	quests.open()
@@ -146,7 +195,7 @@ func close_altar() -> void:
 func _set_menus_visible(on: bool) -> void:
 	screen_opened.emit(not on)
 	for c in _root.get_children():
-		if c not in [lodge, altar, profile, quests, hunt_prep, _toast]:
+		if c not in [lodge, altar, profile, quests, hunt_prep, campaign, shop, relics, _toast]:
 			c.visible = on
 	if on and _sound_panel:
 		_sound_panel.visible = _sound_button.button_pressed

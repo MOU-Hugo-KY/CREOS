@@ -93,3 +93,18 @@
 ## Étape 6 — Mobile
 - [ ] Export Android (Android Studio + SDK, `export_presets.cfg`), test sur téléphone
 - [ ] Interface tactile et performances (≥ 30 FPS sur un téléphone moyen)
+
+## Tout en 2D dessinée (octobre 2026)
+- [x] Port-Franc en 2D : calques en parallaxe, bâtiments sans étiquettes avec survol, fumées,
+      flammes, fanions, eau, bateau, mouettes, cristal de la Lanterne, feuillage ; le marchand de
+      masques et son échoppe font office de Marchand
+- [x] Combat en 2D : décors peints des 10 mondes (30 scènes) avec ambiances animées, formation en
+      losange, clips d'animation pour les attaques, coups reçus, morts
+- [x] 19 héros jouables avec leurs 3 techniques (fiche de combat), techniques secrètes visibles
+- [x] Campagne de l'acte I : 10 mondes × 8 niveaux, 152 ennemis animés (il manque les niveaux 1-4
+      du monde 3 : zip à retélécharger)
+- [x] Quatuors : attaque combinée quand les 4 membres ont lancé leur ultime (une fois par combat)
+- [x] Échos (doublons), 3 voies d'Héritage, reliques à 5 paliers
+- [ ] Effets réels des voies (paliers 1 à 12) et des reliques III à V, quatrième technique jouable
+- [ ] Équilibrage fin des 57 techniques (chiffres de la fiche, non testés)
+- [ ] Écran d'invocation dessiné (lot 4), carte du continent (lot 5), interface dessinée (lot 6)

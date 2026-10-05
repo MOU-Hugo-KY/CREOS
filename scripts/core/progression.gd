@@ -31,30 +31,72 @@ static func stats_at_level(base: Dictionary, level: int, growth: Dictionary) -> 
 	return out
 
 
-## Données d'un héros prêtes pour le combat, avec ses stats à son niveau et ses étoiles.
-static func hero_for_battle(hero: Dictionary, level: int, config: Dictionary, stars := 1) -> Dictionary:
+## Données d'un héros prêtes pour le combat : stats à son niveau, avec ses Échos et sa relique.
+static func hero_for_battle(hero: Dictionary, level: int, config: Dictionary, echoes := 0, relic_tier := 0) -> Dictionary:
 	var d := hero.duplicate(true)
 	d["level"] = level
-	d["stars"] = stars
-	d["stats"] = hero_stats(hero, level, stars, config)
+	d["echoes"] = echoes
+	d["stats"] = hero_stats(hero, level, echoes, config, relic_tier)
 	return d
 
 
-## Stats d'un héros : niveau, puis bonus des étoiles (+10 % par étoile au-delà de la première,
-## sauf vitesse et critique).
-static func hero_stats(hero: Dictionary, level: int, stars: int, config: Dictionary) -> Dictionary:
+## Correspondance des statistiques de la fiche de combat avec celles du moteur.
+const SHEET_STATS := {"PV": ["hp"], "ATQ": ["atk"], "MAG": ["mag"], "DEF": ["def", "res"]}
+
+
+## Stats d'un héros : base × croissance de niveau × (1 + bonus d'Échos), puis × (1 + bonus de
+## relique). Les Échos renforcent surtout la statistique principale du héros, puis la secondaire ;
+## la relique aussi. La vitesse et le critique ne changent pas.
+static func hero_stats(hero: Dictionary, level: int, echoes: int, config: Dictionary, relic_tier := 0) -> Dictionary:
 	var s := stats_at_level(hero.get("stats", {}), level, config.get("stat_growth", {}))
-	var bonus := float(config.get("stars", {}).get("bonus_per_star", 0.1)) * maxi(0, stars - 1)
-	for key in ["hp", "atk", "def", "res"]:
-		if s.has(key):
-			s[key] = round(float(s[key]) * (1.0 + bonus))
+	var tier := echo_tier(echoes, config)
+	var e: Dictionary = config.get("echoes", {})
+	var relics: Array = config.get("relic_tiers", [])
+	for sheet: String in SHEET_STATS:
+		var rank := "other"
+		if hero.get("primary", "") == sheet:
+			rank = "primary"
+		elif hero.get("secondary", "") == sheet:
+			rank = "secondary"
+		var echo_bonus := float(e.get(rank, [])[tier - 1]) if tier > 0 else 0.0
+		var relic_bonus := 0.0
+		if relic_tier > 0 and relic_tier <= relics.size() and rank != "other":
+			relic_bonus = float(relics[relic_tier - 1].get(rank, 0.0))
+		for key: String in SHEET_STATS[sheet]:
+			if s.has(key):
+				s[key] = round(float(s[key]) * (1.0 + echo_bonus) * (1.0 + relic_bonus))
 	return s
+
+
+## Palier d'Échos atteint (0 à 5) pour un nombre d'Échos (doublons du même héros).
+static func echo_tier(echoes: int, config: Dictionary) -> int:
+	var tier := 0
+	for t in config.get("echoes", {}).get("thresholds", [1, 3, 6, 9, 12]):
+		if echoes >= int(t):
+			tier += 1
+	return tier
+
+
+## Échos à réunir pour le palier suivant (-1 si le dernier est atteint).
+static func next_echo_threshold(echoes: int, config: Dictionary) -> int:
+	for t in config.get("echoes", {}).get("thresholds", [1, 3, 6, 9, 12]):
+		if echoes < int(t):
+			return int(t)
+	return -1
+
+
+## Coût du palier de relique suivant : {fragments, materials, name}, ou {} au maximum.
+static func relic_cost(tier: int, config: Dictionary) -> Dictionary:
+	var tiers: Array = config.get("relic_tiers", [])
+	if tier >= tiers.size():
+		return {}
+	return tiers[tier]
 
 
 ## Force d'un héros (un seul nombre pour comparer) à partir de ses stats.
 static func power(stats: Dictionary) -> int:
 	return int(round(float(stats.get("hp", 0)) / 8.0 + float(stats.get("atk", 0)) * 2.0
-		+ float(stats.get("def", 0)) + float(stats.get("res", 0)) + float(stats.get("spd", 0))
+		+ float(stats.get("mag", 0)) * 0.5 + float(stats.get("def", 0)) + float(stats.get("res", 0)) + float(stats.get("spd", 0))
 		+ float(stats.get("crit", 0)) * 300.0))
 
 
@@ -62,16 +104,6 @@ static func power(stats: Dictionary) -> int:
 static func level_up_cost(level: int, config: Dictionary) -> int:
 	var c: Dictionary = config.get("level_up_gold", {})
 	return int(c.get("base", 150)) + int(c.get("per_level", 75)) * (level - 1)
-
-
-## Fragments du héros pour passer de `stars` à `stars + 1` (-1 si déjà au maximum).
-static func star_cost(stars: int, config: Dictionary) -> int:
-	var s: Dictionary = config.get("stars", {})
-	var costs: Array = s.get("shards", [])
-	var i := stars - int(s.get("start", 1))
-	if stars >= int(s.get("max", 6)) or i < 0 or i >= costs.size():
-		return -1
-	return int(costs[i])
 
 
 ## Partage du butin d'un combat gagné : l'XP du donjon va à chaque héros de l'équipe,

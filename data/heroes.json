@@ -1,317 +1,3090 @@
 {
-  "corbin": {
-    "name": "Corbin le Corbeau",
-    "short": "Corbin",
-    "class": "lame",
-    "element": "ombre",
-    "family": "chasseurs",
-    "rarity": 3,
-    "range": "melee",
-    "attack_kind": "physical",
-    "description": "Chasseur de l'ombre au masque de corbeau. Il frappe vite et achève les plus faibles.",
-    "puppet": "res://assets/heroes2d/corbin/",
-    "stats": {
-      "hp": 1050,
-      "atk": 130,
-      "def": 50,
-      "res": 35,
-      "spd": 110,
-      "crit": 0.2
-    },
-    "attacks": [
-      {
-        "id": "entaille_du_corbeau",
-        "name": "Entaille du corbeau",
-        "description": "Deux coups de serpe rapides sur un ennemi.",
-        "anim": "slash",
-        "hit_times": [
-          0.38,
-          0.62
-        ],
-        "target": "single_enemy",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 0.55
-          },
-          {
-            "type": "damage",
-            "power": 0.55
-          }
-        ]
-      },
-      {
-        "id": "danse_des_lames",
-        "name": "Danse des lames",
-        "description": "Tourbillonne au milieu des ennemis et les entaille tous.",
-        "anim": "spin",
-        "hit_time": 0.6,
-        "cooldown": 8.0,
-        "target": "all_enemies",
-        "fx": "whirlwind",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 0.75
-          }
-        ]
-      },
-      {
-        "id": "pique_du_corbeau",
-        "name": "Pique du corbeau",
-        "description": "Fond sur l'ennemi le plus affaibli et l'achève d'un coup de bec d'acier.",
-        "anim": "stab",
-        "hit_time": 0.55,
-        "energy": 100,
-        "target": "lowest_hp_enemy",
-        "fx": "ground_slam",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 2.6
-          }
-        ]
-      }
-    ]
+ "corbin": {
+  "name": "Corbin",
+  "short": "Corbin",
+  "species": "Humain masqué",
+  "role": "Assassin / marques",
+  "class": "lame",
+  "element": "ombre",
+  "family": "chasseurs",
+  "rarity": 3,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "ATQ",
+  "secondary": "PV",
+  "description": "Humain masqué. Assassin / marques.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/corbin.png",
+  "fiche": "res://assets/anim/heroes/fiches/corbin.png",
+  "quartet": "ombres",
+  "stats": {
+   "hp": 1050,
+   "atk": 110,
+   "mag": 45,
+   "def": 35,
+   "res": 35,
+   "spd": 108,
+   "crit": 0.1
   },
-  "aegis": {
-    "name": "Aegis le Rempart",
-    "short": "Aegis",
-    "class": "gardien",
-    "element": "lumiere",
-    "family": "chasseurs",
-    "rarity": 3,
-    "range": "melee",
-    "attack_kind": "physical",
-    "description": "Gardien au bouclier solaire. Il attire les coups et protège ses compagnons.",
-    "puppet": "res://assets/heroes2d/aegis/",
-    "stats": {
-      "hp": 1500,
-      "atk": 80,
-      "def": 85,
-      "res": 55,
-      "spd": 85,
-      "crit": 0.05
-    },
-    "attacks": [
-      {
-        "id": "marteau_du_rempart",
-        "name": "Marteau du rempart",
-        "description": "Un lourd coup de marteau sur un ennemi.",
-        "anim": "slam",
-        "hit_time": 0.5,
-        "target": "single_enemy",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 1.0
-          }
-        ]
-      },
-      {
-        "id": "bouclier_solaire",
-        "name": "Bouclier solaire",
-        "description": "Lève son bouclier : provoque les ennemis 5 s et protège toute l'équipe.",
-        "anim": "cast",
-        "hit_time": 0.5,
-        "cooldown": 10.0,
-        "dash": false,
-        "target": "all_allies",
-        "effects": [
-          {
-            "type": "taunt",
-            "duration": 5.0,
-            "self_only": true
-          },
-          {
-            "type": "shield",
-            "power": 0.35
-          }
-        ]
-      },
-      {
-        "id": "impact_du_bastion",
-        "name": "Impact du bastion",
-        "description": "Écrase le sol : dégâts et étourdissement 1,5 s sur tous les ennemis, et un bouclier pour Aegis.",
-        "anim": "slam",
-        "hit_time": 0.9,
-        "energy": 100,
-        "target": "all_enemies",
-        "fx": "ground_slam",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 1.1
-          },
-          {
-            "type": "stun",
-            "duration": 1.5
-          },
-          {
-            "type": "shield",
-            "power": 1.2,
-            "self_only": true
-          }
-        ]
-      }
+  "attacks": [
+   {
+    "id": "corbin_0",
+    "name": "Lame du corbeau",
+    "description": "100 % ATQ, une cible ; Marqué 2 tours.",
+    "visual": "Entaille courte et plume bordeaux.",
+    "clip": "corbin_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "marque",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
     ]
+   },
+   {
+    "id": "corbin_1",
+    "name": "Fumée noire",
+    "description": "Aveuglé 2 tours sur une cible ; +15 points d’esquive personnelle 2 tours.",
+    "visual": "Cape en fumée noire.",
+    "clip": "corbin_1",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "status",
+      "name": "aveugle",
+      "duration": 4.0
+     },
+     {
+      "type": "buff",
+      "stat": "evade",
+      "amount": 0.15,
+      "duration": 4.0,
+      "self_only": true
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "corbin_2",
+    "name": "Banquet des corbeaux",
+    "description": "4 × 40 % ATQ sur une cible ; consomme sa marque pour appliquer Armure réduite 2 tours.",
+    "visual": "Corbeaux et frappes depuis plusieurs angles.",
+    "clip": "corbin_2",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.4,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.4,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.4,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.4,
+      "stat": "atk"
+     },
+     {
+      "type": "buff",
+      "stat": "def",
+      "amount": -0.2,
+      "duration": 4.0,
+      "status": "armure_reduite",
+      "if_status": "marque",
+      "consume": true
+     }
+    ],
+    "hit_times": [
+     2.484,
+     2.644,
+     2.804,
+     2.964
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Bec du bourreau",
+    "focus": "Cible unique",
+    "stages": {
+     "1": "+10 % dégâts contre Marqué.",
+     "3": "Les attaques répétées gagnent +5 % dégâts par frappe, maximum +20 % ; remis à zéro au changement de cible.",
+     "6": "Décapitation nocturne : 180 % ATQ ; +40 % si la cible a moins de 40 % PV.",
+     "9": "+30 % dégâts des techniques offensives contre Marqué.",
+     "12": "Une élimination avec Décapitation prépare une frappe normale gratuite sur une autre cible, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Manteau des ombres",
+    "focus": "Esquive",
+    "stages": {
+     "1": "Fumée noire donne aussi un bouclier de 8 % PV max.",
+     "3": "Après une esquive, pose Marqué sur l’assaillant, une fois par tour.",
+     "6": "Pas du corbeau : esquive garantie contre la prochaine attaque ciblée ; riposte 100 % ATQ.",
+     "9": "+30 % puissance du bouclier de Fumée noire.",
+     "12": "50 % de riposte 80 % ATQ après une esquive, une fois par tour."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Messager funeste",
+    "focus": "Préparation",
+    "stages": {
+     "1": "La normale peut marquer une seconde cible à 50 %.",
+     "3": "Consommer Marqué réduit aussi les soins reçus de 25 % pendant 1 tour.",
+     "6": "Vol de présages : 80 % ATQ sur tous ; pose Marqué 2 tours.",
+     "9": "+30 % dégâts des frappes qui consomment une marque.",
+     "12": "La première marque consommée du tour est transmise à une autre cible non marquée."
+    },
+    "conclusion": "La première tentative de contrôle du combo gagne +10 points précision, caps et immunités conservés."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Décapitation nocturne",
+    "clip": "corbin_3"
+   },
+   {
+    "name": "Pas du corbeau",
+    "clip": "corbin_4"
+   },
+   {
+    "name": "Vol de présages",
+    "clip": "corbin_5"
+   }
+  ],
+  "ultimate_visual": "Cape transformée en oiseaux noirs, marques bordeaux, convergence puis retour des corbeaux."
+ },
+ "aegis": {
+  "name": "Aegis",
+  "short": "Aegis",
+  "species": "Humain",
+  "role": "Briseur / coups lourds",
+  "class": "gardien",
+  "element": "lumiere",
+  "family": "chasseurs",
+  "rarity": 3,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "ATQ",
+  "secondary": "DEF",
+  "description": "Humain. Briseur / coups lourds.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/aegis.png",
+  "fiche": "res://assets/anim/heroes/fiches/aegis.png",
+  "quartet": "rempart",
+  "stats": {
+   "hp": 1400,
+   "atk": 115,
+   "mag": 25,
+   "def": 60,
+   "res": 60,
+   "spd": 88,
+   "crit": 0.05
   },
-  "brume": {
-    "name": "Brume des Marées",
-    "short": "Brume",
-    "class": "arcaniste",
-    "element": "eau",
-    "family": "chasseurs",
-    "rarity": 3,
-    "range": "ranged",
-    "attack_kind": "magic",
-    "description": "Sorcière des marées. Elle soigne ses alliés et noie ses ennemis dans la brume.",
-    "puppet": "res://assets/heroes2d/brume/",
-    "stats": {
-      "hp": 900,
-      "atk": 115,
-      "def": 35,
-      "res": 65,
-      "spd": 100,
-      "crit": 0.1
-    },
-    "attacks": [
-      {
-        "id": "eclat_lunaire",
-        "name": "Éclat lunaire",
-        "description": "Lance un éclat d'eau glacée sur un ennemi.",
-        "anim": "cast",
-        "hit_time": 0.55,
-        "dash": false,
-        "target": "single_enemy",
-        "fx": "vial",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 1.0
-          }
-        ]
-      },
-      {
-        "id": "maree_apaisante",
-        "name": "Marée apaisante",
-        "description": "Une vague douce soigne toute l'équipe et lave poisons et étourdissements.",
-        "anim": "cast_sky",
-        "hit_time": 0.6,
-        "cooldown": 10.0,
-        "dash": false,
-        "target": "all_allies",
-        "effects": [
-          {
-            "type": "heal",
-            "power": 0.7
-          },
-          {
-            "type": "cleanse"
-          }
-        ]
-      },
-      {
-        "id": "malediction_de_brume",
-        "name": "Malédiction de brume",
-        "description": "Une brume maudite blesse tous les ennemis et les ronge pendant 5 s.",
-        "anim": "cast_sky",
-        "hit_time": 0.9,
-        "energy": 100,
-        "dash": false,
-        "target": "all_enemies",
-        "fx": "poison_burst",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 1.0
-          },
-          {
-            "type": "dot",
-            "power": 0.3,
-            "duration": 5.0
-          }
-        ]
-      }
+  "attacks": [
+   {
+    "id": "aegis_0",
+    "name": "Coup de forge",
+    "description": "115 % ATQ sur une cible.",
+    "visual": "Marteau et impact de pierre.",
+    "clip": "aegis_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.15,
+      "stat": "atk"
+     }
+    ],
+    "hit_times": [
+     0.702
     ]
+   },
+   {
+    "id": "aegis_1",
+    "name": "Fissure",
+    "description": "110 % ATQ ; Déséquilibré et Armure réduite 2 tours.",
+    "visual": "Fissure sous la cible.",
+    "clip": "aegis_1",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.1,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "desequilibre",
+      "duration": 4.0
+     },
+     {
+      "type": "buff",
+      "stat": "def",
+      "amount": -0.2,
+      "duration": 4.0,
+      "status": "armure_reduite"
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "aegis_2",
+    "name": "Jugement du colosse",
+    "description": "190 % ATQ sur tous ; étourdit 1 action les cibles déséquilibrées, consomme Déséquilibré.",
+    "visual": "Colosse et marteau géant.",
+    "clip": "aegis_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.9,
+      "stat": "atk"
+     },
+     {
+      "type": "stun",
+      "duration": 2.0,
+      "if_status": "desequilibre",
+      "consume": true
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Briseur de couronnes",
+    "focus": "Antibouclier",
+    "stages": {
+     "1": "+20 % dégâts contre les boucliers.",
+     "3": "Fissure retire aussi 20 % du bouclier actuel de la cible.",
+     "6": "Enclume renversée : 180 % ATQ ; retire 35 % du bouclier avant dégâts.",
+     "9": "+30 % dégâts des techniques contre une cible protégée.",
+     "12": "Briser un bouclier prépare 100 % ATQ supplémentaires sur sa cible, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Marteau du siège",
+    "focus": "Zone",
+    "stages": {
+     "1": "L’ultime gagne +10 % dégâts.",
+     "3": "Fissure touche une seconde cible à 50 % des dégâts, sans contrôle supplémentaire.",
+     "6": "Onde du siège : 110 % ATQ sur tous ; Déséquilibré 1 tour.",
+     "9": "+30 % dégâts des attaques de zone.",
+     "12": "Premier ennemi éliminé par une zone déclenche une onde 50 % ATQ sur les survivants, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Gardien de l’enclume",
+    "focus": "Résistance",
+    "stages": {
+     "1": "Après Fissure, bouclier personnel 8 % PV.",
+     "3": "L’ultime donne ce bouclier à l’allié le plus blessé.",
+     "6": "Garde de forge : protège un allié ; bouclier 15 % PV d’Aegis pendant 2 tours.",
+     "9": "+30 % puissance des boucliers produits.",
+     "12": "50 % de riposte 80 % ATQ après un blocage, une fois par tour."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Enclume renversée",
+    "clip": "aegis_3"
+   },
+   {
+    "name": "Onde du siège",
+    "clip": "aegis_4"
+   },
+   {
+    "name": "Garde de forge",
+    "clip": "aegis_5"
+   }
+  ],
+  "ultimate_visual": "Silhouette colossale derrière le héros, marteau synchronisé et fracture en étoile."
+ },
+ "brume": {
+  "name": "Brume",
+  "short": "Brume",
+  "species": "Être encapuchonné",
+  "role": "Eau / préparation élémentaire",
+  "class": "arcaniste",
+  "element": "eau",
+  "family": "chasseurs",
+  "rarity": 3,
+  "range": "ranged",
+  "attack_kind": "magic",
+  "primary": "MAG",
+  "secondary": "PV",
+  "description": "Être encapuchonné. Eau / préparation élémentaire.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/brume.png",
+  "fiche": "res://assets/anim/heroes/fiches/brume.png",
+  "quartet": "elements",
+  "stats": {
+   "hp": 1100,
+   "atk": 35,
+   "mag": 110,
+   "def": 35,
+   "res": 35,
+   "spd": 100,
+   "crit": 0.05
   },
-  "orage": {
-    "name": "Frère Orage",
-    "short": "Orage",
-    "class": "arcaniste",
-    "element": "lumiere",
-    "family": "chasseurs",
-    "rarity": 3,
-    "range": "melee",
-    "attack_kind": "magic",
-    "description": "Moine des éclairs, encapuchonné de blanc. Ses poings frappent comme la foudre.",
-    "puppet": "res://assets/heroes2d/orage/",
-    "stats": {
-      "hp": 1000,
-      "atk": 115,
-      "def": 45,
-      "res": 70,
-      "spd": 105,
-      "crit": 0.1
-    },
-    "attacks": [
-      {
-        "id": "paume_foudroyante",
-        "name": "Paume foudroyante",
-        "description": "Un coup de poing chargé d'éclairs.",
-        "anim": "punch",
-        "hit_time": 0.41,
-        "target": "single_enemy",
-        "fx": "lightning_hit",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 1.0
-          }
-        ]
-      },
-      {
-        "id": "pas_du_tonnerre",
-        "name": "Pas du tonnerre",
-        "description": "Fonce comme l'éclair et donne un coup de pied qui étourdit 1 s.",
-        "anim": "kick",
-        "hit_time": 0.5,
-        "cooldown": 7.0,
-        "target": "single_enemy",
-        "fx": "lightning_hit",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 1.4
-          },
-          {
-            "type": "stun",
-            "duration": 1.0
-          }
-        ]
-      },
-      {
-        "id": "sentence_celeste",
-        "name": "Sentence céleste",
-        "description": "La foudre tombe sur un ennemi puis se propage à tous les autres.",
-        "anim": "cast_sky",
-        "hit_time": 0.9,
-        "energy": 100,
-        "dash": false,
-        "target": "single_enemy",
-        "fx": "sky_lightning",
-        "effects": [
-          {
-            "type": "damage",
-            "power": 2.0
-          },
-          {
-            "type": "damage",
-            "power": 0.8,
-            "target": "all_enemies"
-          }
-        ]
-      }
+  "attacks": [
+   {
+    "id": "brume_0",
+    "name": "Éclat des marées",
+    "description": "100 % MAG ; Mouillé 2 tours.",
+    "visual": "Éclat d’eau et coquillage.",
+    "clip": "brume_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "mouille",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
     ]
-  }
+   },
+   {
+    "id": "brume_1",
+    "name": "Voile marin",
+    "description": "Bouclier 110 % MAG à un allié, 2 tours ; son prochain assaillant inflige -15 % dégâts pendant 1 tour.",
+    "visual": "Voile d’eau autour de l’allié.",
+    "clip": "brume_1",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 1.1,
+      "stat": "mag"
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "brume_2",
+    "name": "Marée des profondeurs",
+    "description": "160 % MAG sur tous ; Mouillé 2 tours.",
+    "visual": "Vague en créature marine.",
+    "clip": "brume_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.6,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "mouille",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Marée dévorante",
+    "focus": "Dégâts d’eau",
+    "stages": {
+     "1": "+10 % dégâts contre Mouillé.",
+     "3": "L’ultime retire 10 % du bouclier actuel avant dégâts.",
+     "6": "Lame de ressac : 180 % MAG ; +30 % contre Mouillé.",
+     "9": "+30 % dégâts des techniques d’eau.",
+     "12": "Consommer Mouillé déclenche un ressac 60 % MAG, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Gardienne du rivage",
+    "focus": "Protection",
+    "stages": {
+     "1": "Voile marin gagne +15 % puissance.",
+     "3": "À expiration naturelle, le voile donne +10 points de résistance au contrôle 1 tour.",
+     "6": "Dôme des marées : bouclier 80 % MAG à tous, 2 tours.",
+     "9": "+30 % puissance des boucliers d’eau.",
+     "12": "Premier voile brisé du tour applique Mouillé à l’assaillant et protège un autre allié pour 50 % MAG."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Courant conducteur",
+    "focus": "Réaction foudre",
+    "stages": {
+     "1": "Une réaction eau/foudre inflige +10 % dégâts.",
+     "3": "La réaction transmet Mouillé à une autre cible une fois par tour.",
+     "6": "Prison liquide : 100 % MAG ; Mouillé et retard de 15 % de jauge.",
+     "9": "+30 % dégâts de réaction déclenchés sur ses cibles mouillées.",
+     "12": "La première propagation de foudre du tour atteint une troisième cible à 40 % des dégâts initiaux."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Lame de ressac",
+    "clip": "brume_3"
+   },
+   {
+    "name": "Dôme des marées",
+    "clip": "brume_4"
+   },
+   {
+    "name": "Prison liquide",
+    "clip": "brume_5"
+   }
+  ],
+  "ultimate_visual": "Cercle d’eau, poissons spectraux puis vague et brume basse."
+ },
+ "orage": {
+  "name": "Orage",
+  "short": "Orage",
+  "species": "Être encapuchonné",
+  "role": "Foudre / frappes et soins",
+  "class": "moine",
+  "element": "lumiere",
+  "family": "chasseurs",
+  "rarity": 3,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "ATQ",
+  "secondary": "PV",
+  "description": "Être encapuchonné. Foudre / frappes et soins.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/orage.png",
+  "fiche": "res://assets/anim/heroes/fiches/orage.png",
+  "quartet": "elements",
+  "stats": {
+   "hp": 1250,
+   "atk": 100,
+   "mag": 55,
+   "def": 45,
+   "res": 45,
+   "spd": 105,
+   "crit": 0.08
+  },
+  "attacks": [
+   {
+    "id": "orage_0",
+    "name": "Poings du tonnerre",
+    "description": "3 × 35 % ATQ ; chaque coup réussi donne 1 Souffle, maximum 6.",
+    "visual": "Trois poings électriques.",
+    "clip": "orage_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.35,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.35,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.35,
+      "stat": "atk"
+     }
+    ],
+    "hit_times": [
+     0.702,
+     0.862,
+     1.022
+    ]
+   },
+   {
+    "id": "orage_1",
+    "name": "Paume bienveillante",
+    "description": "Consomme tout le Souffle : soin de tous pour 35 % ATQ par charge. Sans charge : soin de 50 % ATQ.",
+    "visual": "Paumes et pluie lumineuse.",
+    "clip": "orage_1",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "heal",
+      "power": 1.05,
+      "stat": "atk"
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "orage_2",
+    "name": "Huit battements du tonnerre",
+    "description": "8 × 25 % ATQ répartis sur les ennemis ; soin collectif 120 % ATQ après les frappes ; déclenche eau/foudre une fois par cible.",
+    "visual": "Bonds électriques puis soin.",
+    "clip": "orage_2",
+    "target": "random_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.25,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.5
+     },
+     {
+      "type": "damage",
+      "power": 0.25,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.5
+     },
+     {
+      "type": "damage",
+      "power": 0.25,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.5
+     },
+     {
+      "type": "damage",
+      "power": 0.25,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.5
+     },
+     {
+      "type": "damage",
+      "power": 0.25,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.5
+     },
+     {
+      "type": "damage",
+      "power": 0.25,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.5
+     },
+     {
+      "type": "damage",
+      "power": 0.25,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.5
+     },
+     {
+      "type": "damage",
+      "power": 0.25,
+      "stat": "atk",
+      "bonus_if": "mouille",
+      "bonus": 0.5
+     },
+     {
+      "type": "heal",
+      "power": 1.2,
+      "stat": "atk",
+      "target": "all_allies"
+     }
+    ],
+    "hit_times": [
+     1.288,
+     1.61,
+     1.932,
+     2.254,
+     2.576,
+     2.898,
+     3.22,
+     3.542
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Poing céleste",
+    "focus": "Cible unique",
+    "stages": {
+     "1": "Les trois poings infligent +10 % sur une même cible.",
+     "3": "À 6 Souffles, le prochain coup offensif gagne +25 % dégâts et consomme 2 Souffles.",
+     "6": "Poing qui fend le ciel : 190 % ATQ ; +30 % contre Mouillé.",
+     "9": "+30 % dégâts de ses techniques électriques.",
+     "12": "Le dernier coup de la technique secrète prépare un poing 80 % ATQ, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Souffle partagé",
+    "focus": "Soin",
+    "stages": {
+     "1": "+10 % puissance des soins.",
+     "3": "Paume donne au plus blessé un bouclier égal à 20 % du soin effectué.",
+     "6": "Respiration du tonnerre : soin collectif 150 % ATQ ; consomme jusqu’à 3 Souffles pour +15 % chacun.",
+     "9": "+30 % puissance des soins de Paume et Respiration.",
+     "12": "Premier allié sauvé sous 25 % PV reçoit une protection contre le prochain contrôle, une fois par tour."
+    },
+    "conclusion": "Après le combo, soin collectif de 60 % de la statistique de soin du héros : ATQ pour Orage/Nyx, PV max × 0,06 pour Sylve (soin de 6 % PV max, exception au coefficient de 60 %)."
+   },
+   {
+    "name": "Orage circulaire",
+    "focus": "Propagation",
+    "stages": {
+     "1": "+10 % dégâts des frappes sur des cibles différentes.",
+     "3": "L’ultime privilégie les cibles mouillées pour ses premières frappes.",
+     "6": "Cercle du tonnerre : 100 % ATQ sur tous ; +15 points précision de contrôle alliée 1 tour.",
+     "9": "+30 % dégâts des propagations électriques.",
+     "12": "La première propagation du tour prépare un bouclier 60 % ATQ sur l’allié le plus blessé."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Poing qui fend le ciel",
+    "clip": "orage_3"
+   },
+   {
+    "name": "Respiration du tonnerre",
+    "clip": "orage_4"
+   },
+   {
+    "name": "Cercle du tonnerre",
+    "clip": "orage_5"
+   }
+  ],
+  "ultimate_visual": "Huit frappes rythmées par la foudre, énergie réunie puis pluie de soin."
+ },
+ "kharok": {
+  "name": "Kharok",
+  "short": "Kharok",
+  "species": "Scarabée humanoïde",
+  "role": "Tank / protection",
+  "class": "gardien",
+  "element": "nature",
+  "family": "chasseurs",
+  "rarity": 3,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "DEF",
+  "secondary": "PV",
+  "description": "Scarabée humanoïde. Tank / protection.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/kharok.png",
+  "fiche": "res://assets/anim/heroes/fiches/kharok.png",
+  "quartet": "rempart",
+  "stats": {
+   "hp": 1700,
+   "atk": 75,
+   "mag": 20,
+   "def": 75,
+   "res": 75,
+   "spd": 82,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "kharok_0",
+    "name": "Percée de garde",
+    "description": "100 % ATQ ; Déséquilibré 2 tours.",
+    "visual": "Lance et choc de carapace.",
+    "clip": "kharok_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "desequilibre",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "kharok_1",
+    "name": "Carapace partagée",
+    "description": "Protège un allié 2 tours : détourne 35 % de ses dégâts vers Kharok ; dégâts détournés réduits de 20 %.",
+    "visual": "Plaque de carapace alliée.",
+    "clip": "kharok_1",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 1.0,
+      "stat": "def"
+     },
+     {
+      "type": "status",
+      "name": "protege",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "kharok_2",
+    "name": "Carapace royale",
+    "description": "120 % DEF sur tous ; bouclier collectif 100 % DEF pendant 2 tours.",
+    "visual": "Scarabée géant et plaques.",
+    "clip": "kharok_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.2,
+      "stat": "def"
+     },
+     {
+      "type": "shield",
+      "power": 1.0,
+      "stat": "def",
+      "target": "all_allies"
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Roi carapace",
+    "focus": "Boucliers",
+    "stages": {
+     "1": "+10 % puissance des boucliers.",
+     "3": "Carapace partagée donne aussi un bouclier 80 % DEF.",
+     "6": "Dôme de chitine : bouclier collectif 130 % DEF, 2 tours.",
+     "9": "+30 % puissance des boucliers de carapace.",
+     "12": "Premier bouclier allié détruit du tour est remplacé par 50 % de sa valeur initiale, une fois par combat."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Bélier solaire",
+    "focus": "Charge",
+    "stages": {
+     "1": "+10 % dégâts de l’ultime.",
+     "3": "Percée inflige +20 % contre Déséquilibré.",
+     "6": "Charge couronnée : 180 % DEF ; étourdit si la cible est déséquilibrée et consomme cet état.",
+     "9": "+30 % dégâts des charges.",
+     "12": "Une charge sur une cible contrôlée déclenche un choc 60 % DEF sur une seconde cible, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Gardien lié",
+    "focus": "Interception",
+    "stages": {
+     "1": "Les dégâts détournés sont réduits de 30 % au lieu de 20 %.",
+     "3": "Après une interception, +10 points résistance au contrôle 1 tour.",
+     "6": "Serment de chitine : protège deux alliés 1 tour à 25 % de détournement chacun.",
+     "9": "+30 % puissance du bouclier personnel reçu à son ultime.",
+     "12": "50 % de riposte 70 % DEF après interception, une fois par tour."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Dôme de chitine",
+    "clip": "kharok_3"
+   },
+   {
+    "name": "Charge couronnée",
+    "clip": "kharok_4"
+   },
+   {
+    "name": "Serment de chitine",
+    "clip": "kharok_5"
+   }
+  ],
+  "ultimate_visual": "Bouclier refermé, charge en scarabée royal, carapace déployée autour des alliés."
+ },
+ "braise": {
+  "name": "Braise",
+  "short": "Braise",
+  "species": "Salamandre humanoïde",
+  "role": "Feu / brûlure",
+  "class": "arcaniste",
+  "element": "feu",
+  "family": "chasseurs",
+  "rarity": 4,
+  "range": "ranged",
+  "attack_kind": "magic",
+  "primary": "MAG",
+  "secondary": "ATQ",
+  "description": "Salamandre humanoïde. Feu / brûlure.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/braise.png",
+  "fiche": "res://assets/anim/heroes/fiches/braise.png",
+  "quartet": "elements",
+  "stats": {
+   "hp": 1200,
+   "atk": 65,
+   "mag": 110,
+   "def": 40,
+   "res": 40,
+   "spd": 95,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "braise_0",
+    "name": "Soufflet ardent",
+    "description": "100 % MAG ; Brûlure 2 tours.",
+    "visual": "Jet court de feu.",
+    "clip": "braise_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "mag"
+     },
+     {
+      "type": "dot",
+      "power": 0.12,
+      "stat": "mag",
+      "duration": 4.0,
+      "name": "brulure"
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "braise_1",
+    "name": "Marmite explosive",
+    "description": "90 % MAG sur tous ; prolonge leurs brûlures de 1 tour, durée totale maximum 3.",
+    "visual": "Marmite et braises.",
+    "clip": "braise_1",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.9,
+      "stat": "mag",
+      "bonus_if": "brulure",
+      "bonus": 0.2
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "braise_2",
+    "name": "Forge en éruption",
+    "description": "180 % MAG sur tous ; Brûlure 2 tours ; transforme Enraciné en Braises et consomme Enraciné.",
+    "visual": "Dragon de braises.",
+    "clip": "braise_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.8,
+      "stat": "mag",
+      "bonus_if": "enracine",
+      "bonus": 0.3,
+      "consume": true
+     },
+     {
+      "type": "dot",
+      "power": 0.12,
+      "stat": "mag",
+      "duration": 4.0,
+      "name": "brulure"
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Four incandescent",
+    "focus": "Brûlure",
+    "stages": {
+     "1": "+10 % dégâts de Brûlure.",
+     "3": "Réappliquer Brûlure ajoute une charge, maximum 3.",
+     "6": "Tison vivant : 120 % MAG ; pose 2 charges de Brûlure.",
+     "9": "+30 % dégâts périodiques des brûlures.",
+     "12": "La première cible morte en brûlant transmet une charge à une autre cible, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Canon de forge",
+    "focus": "Impact",
+    "stages": {
+     "1": "+10 % dégâts directs de feu.",
+     "3": "Marmite gagne +20 % contre les cibles déjà brûlées.",
+     "6": "Creuset explosif : 200 % MAG sur une cible ; consomme sa Brûlure pour +15 % par charge.",
+     "9": "+30 % dégâts directs de feu.",
+     "12": "Une consommation de 3 charges prépare une explosion 50 % MAG sur les autres ennemis, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Braise persistante",
+    "focus": "Terrain",
+    "stages": {
+     "1": "Braises dure jusqu’à la fin du prochain tour de Braise.",
+     "3": "Les cibles qui sortent d’un contrôle dans les braises subissent 40 % MAG.",
+     "6": "Four ouvert : pose Braises 2 tours, maximum une zone.",
+     "9": "+30 % dégâts des zones de braises.",
+     "12": "Première activation de Braises du tour réduit les dégâts de sa victime de 15 % pendant 1 tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Tison vivant",
+    "clip": "braise_3"
+   },
+   {
+    "name": "Creuset explosif",
+    "clip": "braise_4"
+   },
+   {
+    "name": "Four ouvert",
+    "clip": "braise_5"
+   }
+  ],
+  "ultimate_visual": "Soufflet frénétique, four rouge, dragon de braises et explosion finale."
+ },
+ "nacre": {
+  "name": "Nacre",
+  "short": "Nacre",
+  "species": "Phalène humanoïde",
+  "role": "Bonus alliés / sommeil",
+  "class": "soutien",
+  "element": "lumiere",
+  "family": "chasseurs",
+  "rarity": 4,
+  "range": "ranged",
+  "attack_kind": "magic",
+  "primary": "PV",
+  "secondary": "DEF",
+  "description": "Phalène humanoïde. Bonus alliés / sommeil.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/nacre.png",
+  "fiche": "res://assets/anim/heroes/fiches/nacre.png",
+  "quartet": "",
+  "stats": {
+   "hp": 1300,
+   "atk": 30,
+   "mag": 85,
+   "def": 45,
+   "res": 45,
+   "spd": 102,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "nacre_0",
+    "name": "Note troublante",
+    "description": "90 % MAG ; Somnolence +1, maximum 3, durée 2 tours.",
+    "visual": "Note et petite phalène.",
+    "clip": "nacre_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.9,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "somnolence",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "nacre_1",
+    "name": "Poussière de lune",
+    "description": "Retire un malus d’un allié ; régénération 60 % MAG à la fin de ses 2 prochains tours.",
+    "visual": "Poussière nacrée.",
+    "clip": "nacre_1",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "cleanse"
+     },
+     {
+      "type": "regen",
+      "power": 0.3,
+      "stat": "mag",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "nacre_2",
+    "name": "Nuit des mille songes",
+    "description": "Endort 1 action les ennemis à 3 Somnolences, consomme ces charges ; Lucidité alliée 2 tours : +10 points précision et +20 points dégâts critiques. AUCUN soin.",
+    "visual": "Lune, ailes et rubans musicaux.",
+    "clip": "nacre_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "stun",
+      "duration": 2.0,
+      "if_status": "somnolence",
+      "consume": true,
+      "label": "Endormi !"
+     },
+     {
+      "type": "buff",
+      "stat": "crit",
+      "amount": 0.2,
+      "duration": 4.0,
+      "target": "all_allies"
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Chant de victoire",
+    "focus": "Bonus offensifs",
+    "stages": {
+     "1": "Lucidité donne aussi +5 points chance critique.",
+     "3": "Première attaque sous Lucidité ignore 10 % DEF.",
+     "6": "Accord triomphal : +15 % ATQ/MAG aux alliés 2 tours.",
+     "9": "Bonus ATQ/MAG d’Accord passe à +20 % ; bonus dégâts critiques de Lucidité à +30 points.",
+     "12": "Premier critique allié du tour sous Lucidité prépare une note de protection 6 % PV max de Nacre."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   },
+   {
+    "name": "Gardienne des songes",
+    "focus": "Protection",
+    "stages": {
+     "1": "Poussière donne un bouclier 5 % PV max de Nacre.",
+     "3": "Lucidité donne +10 points résistance au contrôle.",
+     "6": "Voile lunaire : bouclier collectif 10 % PV max de Nacre, 2 tours.",
+     "9": "+30 % puissance de ses boucliers.",
+     "12": "La première résistance alliée à un contrôle sous Lucidité prolonge un bonus de 1 tour, une fois par tour."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   },
+   {
+    "name": "Berceuse interdite",
+    "focus": "Sommeil",
+    "stages": {
+     "1": "Note a 50 % de poser une seconde Somnolence.",
+     "3": "Les ennemis réveillés infligent -15 % dégâts pendant 1 tour.",
+     "6": "Accord assoupi : 80 % MAG sur tous ; ajoute 1 Somnolence.",
+     "9": "+15 points précision des tentatives de sommeil ; +30 % dégâts contre Somnolence.",
+     "12": "Premier sommeil réussi du tour prépare un bonus de précision de +10 points sur le prochain attaquant allié."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Accord triomphal",
+    "clip": "nacre_3"
+   },
+   {
+    "name": "Voile lunaire",
+    "clip": "nacre_4"
+   },
+   {
+    "name": "Accord assoupi",
+    "clip": "nacre_5"
+   }
+  ],
+  "ultimate_visual": "Déploiement des ailes, lune, phalènes ; Lucidité illumine les alliés, sans soin."
+ },
+ "rivet": {
+  "name": "Rivet",
+  "short": "Rivet",
+  "species": "Rat humanoïde",
+  "role": "Tireur / critique",
+  "class": "traqueur",
+  "element": "ombre",
+  "family": "chasseurs",
+  "rarity": 3,
+  "range": "ranged",
+  "attack_kind": "physical",
+  "primary": "ATQ",
+  "secondary": "PV",
+  "description": "Rat humanoïde. Tireur / critique.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/rivet.png",
+  "fiche": "res://assets/anim/heroes/fiches/rivet.png",
+  "quartet": "ombres",
+  "stats": {
+   "hp": 1000,
+   "atk": 115,
+   "mag": 20,
+   "def": 30,
+   "res": 30,
+   "spd": 112,
+   "crit": 0.15
+  },
+  "attacks": [
+   {
+    "id": "rivet_0",
+    "name": "Carreau sournois",
+    "description": "100 % ATQ ; +15 points chance critique contre Marqué.",
+    "visual": "Carreau court.",
+    "clip": "rivet_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk",
+      "bonus_if": "marque",
+      "bonus": 0.15
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "rivet_1",
+    "name": "Tir de contrebande",
+    "description": "120 % ATQ ; Armure réduite 2 tours.",
+    "visual": "Carreau lourd.",
+    "clip": "rivet_1",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.2,
+      "stat": "atk"
+     },
+     {
+      "type": "buff",
+      "stat": "def",
+      "amount": -0.2,
+      "duration": 4.0,
+      "status": "armure_reduite"
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "rivet_2",
+    "name": "Casse du siècle",
+    "description": "140 % ATQ sur une cible puis 2 ricochets à 70 % ATQ sur des cibles différentes ; consommer Marqué renforce le ricochet concerné de 25 %.",
+    "visual": "Pièces et ricochets.",
+    "clip": "rivet_2",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.4,
+      "stat": "atk",
+      "bonus_if": "marque",
+      "bonus": 0.25,
+      "consume": true
+     },
+     {
+      "type": "damage",
+      "power": 0.7,
+      "stat": "atk",
+      "target": "random_enemy"
+     },
+     {
+      "type": "damage",
+      "power": 0.7,
+      "stat": "atk",
+      "target": "random_enemy"
+     }
+    ],
+    "hit_times": [
+     2.484,
+     2.644,
+     2.804
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Œil du corsaire",
+    "focus": "Critique",
+    "stages": {
+     "1": "+5 points chance critique.",
+     "3": "Un critique normal donne +10 points précision 1 tour.",
+     "6": "Carreau du capitaine : 190 % ATQ ; +20 points chance critique.",
+     "9": "+30 points dégâts critiques de ses techniques.",
+     "12": "Premier critique du tour prépare un carreau 70 % ATQ sur sa cible."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Maître des ricochets",
+    "focus": "Zone",
+    "stages": {
+     "1": "+10 % dégâts des ricochets.",
+     "3": "L’ultime gagne un ricochet à 40 % ATQ si trois ennemis au moins sont vivants.",
+     "6": "Tir à rebonds : 110 % ATQ puis un ricochet 80 % ATQ.",
+     "9": "+30 % dégâts des ricochets.",
+     "12": "Premier ricochet qui élimine sa cible poursuit à 50 % sur une autre, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Contrebandier prudent",
+    "focus": "Survie",
+    "stages": {
+     "1": "Après Tir de contrebande, bouclier personnel 6 % PV.",
+     "3": "Sous ce bouclier, +10 points esquive.",
+     "6": "Cache de secours : bouclier personnel 18 % PV ; +15 points précision 2 tours.",
+     "9": "+30 % puissance des boucliers personnels.",
+     "12": "50 % chance de contre-tir 80 % ATQ après esquive, une fois par tour."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Carreau du capitaine",
+    "clip": "rivet_3"
+   },
+   {
+    "name": "Tir à rebonds",
+    "clip": "rivet_4"
+   },
+   {
+    "name": "Cache de secours",
+    "clip": "rivet_5"
+   }
+  ],
+  "ultimate_visual": "Pièces lancées, tirs à ricochets, grand carreau et salut au tricorne."
+ },
+ "sylve": {
+  "name": "Sylve",
+  "short": "Sylve",
+  "species": "Arbre vivant",
+  "role": "Entrave / défense alliée",
+  "class": "gardien",
+  "element": "nature",
+  "family": "chasseurs",
+  "rarity": 4,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "PV",
+  "secondary": "DEF",
+  "description": "Arbre vivant. Entrave / défense alliée.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/sylve.png",
+  "fiche": "res://assets/anim/heroes/fiches/sylve.png",
+  "quartet": "elements",
+  "stats": {
+   "hp": 1800,
+   "atk": 65,
+   "mag": 75,
+   "def": 60,
+   "res": 60,
+   "spd": 80,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "sylve_0",
+    "name": "Poigne de racines",
+    "description": "90 % ATQ ; Enracinement +1. À 2 charges, Enraciné 1 action.",
+    "visual": "Main de branche et racines.",
+    "clip": "sylve_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.9,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "enracine",
+      "duration": 2.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "sylve_1",
+    "name": "Sève ancienne",
+    "description": "Régénération collective 4 % PV max de Sylve à la fin des 2 prochains tours de chaque allié ; +10 points résistance au contrôle 2 tours.",
+    "visual": "Sève et petites feuilles.",
+    "clip": "sylve_1",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "regen",
+      "power": 0.04,
+      "stat": "hp",
+      "duration": 4.0
+     },
+     {
+      "type": "buff",
+      "stat": "res",
+      "amount": 0.1,
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "sylve_2",
+    "name": "La forêt se souvient",
+    "description": "Tente Enraciné 1 action sur tous ; Écorce ancienne : +20 % DEF et +15 points résistance au contrôle à tous les alliés 2 tours. AUCUN soin.",
+    "visual": "Forêt et écorces protectrices.",
+    "clip": "sylve_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "status",
+      "name": "enracine",
+      "duration": 2.0
+     },
+     {
+      "type": "buff",
+      "stat": "def",
+      "amount": 0.2,
+      "duration": 4.0,
+      "target": "all_allies"
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Chêne protecteur",
+    "focus": "Défense",
+    "stages": {
+     "1": "Écorce donne aussi un bouclier 4 % PV max de Sylve.",
+     "3": "Sève donne +5 % DEF supplémentaires.",
+     "6": "Mur de racines : bouclier collectif 10 % PV max de Sylve, 2 tours.",
+     "9": "+30 % puissance de ses boucliers ; bonus DEF d’Écorce passe à +25 %.",
+     "12": "La première protection détruite du tour donne +15 points résistance au contrôle à son porteur 1 tour."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Racines conquérantes",
+    "focus": "Entrave",
+    "stages": {
+     "1": "Poigne a 50 % chance de poser une seconde charge.",
+     "3": "Une cible enracinée inflige -15 % dégâts pendant 1 tour après libération.",
+     "6": "Nœud ancien : 120 % ATQ ; Enraciné 1 action si la cible a une charge.",
+     "9": "+15 points précision de l’entrave ; +30 % dégâts de Poigne et Nœud.",
+     "12": "Première entrave réussie du tour transmet une charge à une autre cible."
+    },
+    "conclusion": "La première tentative de contrôle du combo gagne +10 points précision, caps et immunités conservés."
+   },
+   {
+    "name": "Sève persistante",
+    "focus": "Régénération",
+    "stages": {
+     "1": "+10 % puissance de Sève, pas de soin ajouté à l’ultime.",
+     "3": "Sève retire un effet de dégâts périodiques au plus blessé à l’application.",
+     "6": "Pousse vitale : soin d’un allié 12 % PV max de Sylve, puis +10 points résistance 1 tour.",
+     "9": "+30 % puissance de Sève et Pousse.",
+     "12": "Première résistance au contrôle d’un allié sous Sève prépare un bouclier 5 % PV max de Sylve, une fois par tour."
+    },
+    "conclusion": "Après le combo, soin collectif de 60 % de la statistique de soin du héros : ATQ pour Orage/Nyx, PV max × 0,06 pour Sylve (soin de 6 % PV max, exception au coefficient de 60 %)."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Mur de racines",
+    "clip": "sylve_3"
+   },
+   {
+    "name": "Nœud ancien",
+    "clip": "sylve_4"
+   },
+   {
+    "name": "Pousse vitale",
+    "clip": "sylve_5"
+   }
+  ],
+  "ultimate_visual": "Mains au sol, forêt ancienne et arbre géant, feuilles devenant une armure d’écorce."
+ },
+ "valen": {
+  "name": "Valen",
+  "short": "Valen",
+  "species": "Humain",
+  "role": "Lancier / brèche",
+  "class": "lancier",
+  "element": "lumiere",
+  "family": "chasseurs",
+  "rarity": 3,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "ATQ",
+  "secondary": "DEF",
+  "description": "Humain. Lancier / brèche.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/valen.png",
+  "fiche": "res://assets/anim/heroes/fiches/valen.png",
+  "quartet": "rempart",
+  "stats": {
+   "hp": 1250,
+   "atk": 110,
+   "mag": 20,
+   "def": 45,
+   "res": 45,
+   "spd": 104,
+   "crit": 0.08
+  },
+  "attacks": [
+   {
+    "id": "valen_0",
+    "name": "Pointe de garde",
+    "description": "105 % ATQ sur une cible.",
+    "visual": "Pointe précise.",
+    "clip": "valen_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.05,
+      "stat": "atk"
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "valen_1",
+    "name": "Balayage du vétéran",
+    "description": "85 % ATQ sur deux cibles ; Déséquilibré 2 tours.",
+    "visual": "Arc de lance.",
+    "clip": "valen_1",
+    "target": "two_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.85,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "desequilibre",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "valen_2",
+    "name": "Lance qui fend l’horizon",
+    "description": "170 % ATQ sur tous ; +25 % dégâts contre Armure réduite.",
+    "visual": "Charge et fer de lance géant.",
+    "clip": "valen_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.7,
+      "stat": "atk",
+      "bonus_if": "armure_reduite",
+      "bonus": 0.25
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Pointe du siège",
+    "focus": "Cible unique",
+    "stages": {
+     "1": "+10 % dégâts contre Armure réduite.",
+     "3": "Pointe prépare Brèche après deux touches de la même cible.",
+     "6": "Perce-cuirasse : 190 % ATQ ; ignore 20 % DEF.",
+     "9": "+30 % dégâts des attaques ciblées.",
+     "12": "Premier coup sur Brèche prépare une pointe 80 % ATQ ; consomme Brèche."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Lancier circulaire",
+    "focus": "Zone",
+    "stages": {
+     "1": "Balayage touche une troisième cible à 40 % des dégâts.",
+     "3": "L’ultime applique Déséquilibré 1 tour à sa cible principale.",
+     "6": "Ronde des lances : 110 % ATQ sur tous.",
+     "9": "+30 % dégâts des balayages et charges de zone.",
+     "12": "Première élimination par une zone pose Brèche sur un survivant."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Garde du vétéran",
+    "focus": "Riposte",
+    "stages": {
+     "1": "+5 points chance de blocage.",
+     "3": "Après blocage, Pointe gagne +20 % dégâts à sa prochaine utilisation.",
+     "6": "Lance en arrêt : +25 points blocage 1 tour ; prochaine riposte 120 % ATQ.",
+     "9": "+30 % dégâts des ripostes.",
+     "12": "50 % de riposte après blocage, une fois par tour."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Perce-cuirasse",
+    "clip": "valen_3"
+   },
+   {
+    "name": "Ronde des lances",
+    "clip": "valen_4"
+   },
+   {
+    "name": "Lance en arrêt",
+    "clip": "valen_5"
+   }
+  ],
+  "ultimate_visual": "Appui au sol, charge traversant la ligne et onde de lance."
+ },
+ "bastion": {
+  "name": "Bastion",
+  "short": "Bastion",
+  "species": "Humain",
+  "role": "Tank / provocation",
+  "class": "gardien",
+  "element": "lumiere",
+  "family": "chasseurs",
+  "rarity": 3,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "DEF",
+  "secondary": "PV",
+  "description": "Humain. Tank / provocation.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/bastion.png",
+  "fiche": "res://assets/anim/heroes/fiches/bastion.png",
+  "quartet": "rempart",
+  "stats": {
+   "hp": 1900,
+   "atk": 70,
+   "mag": 20,
+   "def": 85,
+   "res": 85,
+   "spd": 75,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "bastion_0",
+    "name": "Masse du rempart",
+    "description": "100 % ATQ sur une cible.",
+    "visual": "Masse courte.",
+    "clip": "bastion_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "bastion_1",
+    "name": "Défi de fer",
+    "description": "Provocation 1 action sur tous ; +25 % DEF personnelle 2 tours.",
+    "visual": "Pavois et défi.",
+    "clip": "bastion_1",
+    "target": "self",
+    "effects": [
+     {
+      "type": "taunt",
+      "duration": 3.0
+     },
+     {
+      "type": "buff",
+      "stat": "def",
+      "amount": 0.25,
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "bastion_2",
+    "name": "Dernier rempart",
+    "description": "Bouclier collectif 160 % DEF, 2 tours ; prochaine attaque de zone reçue prépare une riposte 100 % DEF sur son auteur.",
+    "visual": "Forteresse de boucliers.",
+    "clip": "bastion_2",
+    "target": "all_allies",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 1.6,
+      "stat": "def"
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Forteresse immobile",
+    "focus": "Défense",
+    "stages": {
+     "1": "+10 % puissance des boucliers.",
+     "3": "Défi donne un bouclier personnel 100 % DEF.",
+     "6": "Porte close : bouclier 200 % DEF sur un allié, 2 tours.",
+     "9": "+30 % puissance des protections.",
+     "12": "Premier bouclier personnel détruit du combat est restauré à 50 % une fois."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Marteau du rempart",
+    "focus": "Riposte",
+    "stages": {
+     "1": "Les ripostes infligent +10 %.",
+     "3": "Masse après blocage applique Déséquilibré 1 tour.",
+     "6": "Sortie du bastion : 180 % DEF ; Déséquilibré 1 tour.",
+     "9": "+30 % dégâts des techniques qui utilisent DEF.",
+     "12": "50 % chance de riposte 100 % DEF après blocage, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Commandant du siège",
+    "focus": "Protection collective",
+    "stages": {
+     "1": "L’ultime donne +10 points résistance au contrôle 1 tour.",
+     "3": "Défi diminue de 10 % les dégâts de son prochain assaillant.",
+     "6": "Ordre de tenir : +20 % DEF à tous 2 tours ; pas de cumul avec Écorce, garder le plus fort.",
+     "9": "Bonus DEF d’Ordre passe à +30 %.",
+     "12": "Premier allié protégé qui bloque prépare une riposte du prochain attaquant allié, une seule en attente."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Porte close",
+    "clip": "bastion_3"
+   },
+   {
+    "name": "Sortie du bastion",
+    "clip": "bastion_4"
+   },
+   {
+    "name": "Ordre de tenir",
+    "clip": "bastion_5"
+   }
+  ],
+  "ultimate_visual": "Pavois planté, boucliers géants autour des alliés et onde dorée."
+ },
+ "saffran": {
+  "name": "Saffran",
+  "short": "Saffran",
+  "species": "Renard humanoïde",
+  "role": "Sceaux / illusion",
+  "class": "illusionniste",
+  "element": "feu",
+  "family": "chasseurs",
+  "rarity": 4,
+  "range": "ranged",
+  "attack_kind": "magic",
+  "primary": "MAG",
+  "secondary": "PV",
+  "description": "Renard humanoïde. Sceaux / illusion.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/saffran.png",
+  "fiche": "res://assets/anim/heroes/fiches/saffran.png",
+  "quartet": "ombres",
+  "stats": {
+   "hp": 1050,
+   "atk": 45,
+   "mag": 105,
+   "def": 35,
+   "res": 35,
+   "spd": 109,
+   "crit": 0.08
+  },
+  "attacks": [
+   {
+    "id": "saffran_0",
+    "name": "Trait trompeur",
+    "description": "95 % MAG ; Scellé 2 tours.",
+    "visual": "Pinceau et sceau.",
+    "clip": "saffran_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.95,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "scelle",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "saffran_1",
+    "name": "Reflets mensongers",
+    "description": "Leurre sur un allié : absorbe une attaque ciblée, dure 2 tours ; pas une attaque de zone.",
+    "visual": "Double en papier.",
+    "clip": "saffran_1",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "status",
+      "name": "leurre",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "saffran_2",
+    "name": "Théâtre des faux visages",
+    "description": "140 % MAG sur tous ; consomme Scellé pour +40 % MAG et Aveuglé 2 tours sur les cibles concernées.",
+    "visual": "Origamis et explosion de sceaux.",
+    "clip": "saffran_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.4,
+      "stat": "mag",
+      "bonus_if": "scelle",
+      "bonus": 0.4
+     },
+     {
+      "type": "status",
+      "name": "aveugle",
+      "duration": 4.0,
+      "if_status": "scelle",
+      "consume": true
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Sceau brisant",
+    "focus": "Dégâts",
+    "stages": {
+     "1": "+10 % dégâts contre Scellé.",
+     "3": "Consommer un sceau applique Armure réduite 1 tour.",
+     "6": "Cachet de rupture : 180 % MAG ; consomme Scellé pour +30 % dégâts.",
+     "9": "+30 % dégâts des techniques consommant Scellé.",
+     "12": "Le premier sceau consommé du tour prépare 50 % MAG sur une autre cible scellée."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Maître des leurres",
+    "focus": "Protection",
+    "stages": {
+     "1": "Leurre donne +10 points esquive à son porteur 1 tour après destruction.",
+     "3": "Un leurre détruit pose Scellé sur l’assaillant.",
+     "6": "Galerie des reflets : leurre sur deux alliés, 1 tour.",
+     "9": "Le leurre accorde aussi un bouclier 80 % MAG à son apparition.",
+     "12": "Premier leurre détruit du tour transmet un reflet à l’allié le plus blessé ; pas de retransmission."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Interdit ancien",
+    "focus": "Antibonus",
+    "stages": {
+     "1": "Scellé diminue de 10 % les bonus d’ATQ/MAG de la cible.",
+     "3": "L’ultime peut retirer un bonus positif sur sa cible principale scellée.",
+     "6": "Sceau de silence rituel : 100 % MAG ; bloque la prochaine application de bonus, maximum 1 tour.",
+     "9": "+15 points précision de ses interdictions ; +30 % dégâts contre cible interdite.",
+     "12": "Première tentative de bonus bloquée déclenche 80 % MAG, une fois par tour."
+    },
+    "conclusion": "La première tentative de contrôle du combo gagne +10 points précision, caps et immunités conservés."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Cachet de rupture",
+    "clip": "saffran_3"
+   },
+   {
+    "name": "Galerie des reflets",
+    "clip": "saffran_4"
+   },
+   {
+    "name": "Sceau de silence rituel",
+    "clip": "saffran_5"
+   }
+  ],
+  "ultimate_visual": "Cercle au pinceau, doubles en papier, origamis et sceaux explosifs."
+ },
+ "oona": {
+  "name": "Oona",
+  "short": "Oona",
+  "species": "Pieuvre terrestre",
+  "role": "Soin / dissipation / entrave",
+  "class": "soutien",
+  "element": "eau",
+  "family": "chasseurs",
+  "rarity": 4,
+  "range": "ranged",
+  "attack_kind": "magic",
+  "primary": "MAG",
+  "secondary": "PV",
+  "description": "Pieuvre terrestre. Soin / dissipation / entrave.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/oona.png",
+  "fiche": "res://assets/anim/heroes/fiches/oona.png",
+  "quartet": "",
+  "stats": {
+   "hp": 1400,
+   "atk": 25,
+   "mag": 100,
+   "def": 45,
+   "res": 45,
+   "spd": 92,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "oona_0",
+    "name": "Jet d’encre",
+    "description": "90 % MAG ; Aveuglé 2 tours.",
+    "visual": "Jet d’encre.",
+    "clip": "oona_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.9,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "aveugle",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "oona_1",
+    "name": "Élixir du large",
+    "description": "Soin 180 % MAG à un allié ; retire un malus.",
+    "visual": "Fiole et bulle verte.",
+    "clip": "oona_1",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "heal",
+      "power": 1.8,
+      "stat": "mag"
+     },
+     {
+      "type": "cleanse"
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "oona_2",
+    "name": "Officine des abysses",
+    "description": "Enraciné 1 action sur tous avec précision de contrôle ; soin collectif 120 % MAG.",
+    "visual": "Bulle, tentacules et potions.",
+    "clip": "oona_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "status",
+      "name": "enracine",
+      "duration": 2.0
+     },
+     {
+      "type": "heal",
+      "power": 1.2,
+      "stat": "mag",
+      "target": "all_allies"
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Apothicaire des abysses",
+    "focus": "Soin",
+    "stages": {
+     "1": "+10 % puissance des soins.",
+     "3": "Élixir retire un second malus sur sa cible si elle est sous 40 % PV.",
+     "6": "Perle réparatrice : soin ciblé 220 % MAG.",
+     "9": "+30 % puissance des soins.",
+     "12": "Premier soin sur une cible sous 25 % PV donne une immunité au prochain poison, une fois par tour."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   },
+   {
+    "name": "Encre gardienne",
+    "focus": "Protection",
+    "stages": {
+     "1": "Jet diminue aussi les dégâts de sa cible de 10 % 1 tour.",
+     "3": "Élixir donne un bouclier égal à 20 % du soin réalisé.",
+     "6": "Bulle d’encre : bouclier collectif 100 % MAG, 2 tours.",
+     "9": "+30 % puissance des boucliers.",
+     "12": "Premier bouclier détruit du tour applique Aveuglé à l’assaillant."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   },
+   {
+    "name": "Étreinte abyssale",
+    "focus": "Entrave",
+    "stages": {
+     "1": "+5 points précision de contrôle.",
+     "3": "Une cible entravée reçoit -20 % soins pendant 1 tour après libération.",
+     "6": "Nœud des profondeurs : 120 % MAG ; Enraciné 1 action sur une cible aveuglée.",
+     "9": "+15 points précision de l’entrave ; +30 % dégâts sur cible entravée.",
+     "12": "Première entrave réussie du tour prolonge un malus non contrôlant de 1 tour sur cette cible."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Perle réparatrice",
+    "clip": "oona_3"
+   },
+   {
+    "name": "Bulle d’encre",
+    "clip": "oona_4"
+   },
+   {
+    "name": "Nœud des profondeurs",
+    "clip": "oona_5"
+   }
+  ],
+  "ultimate_visual": "Fiole lancée dans la conque, grande bulle, tentacules et potions alliées."
+ },
+ "calx": {
+  "name": "Calx",
+  "short": "Calx",
+  "species": "Automate de pierre et laiton",
+  "role": "Résonance / retard d’action",
+  "class": "automate",
+  "element": "feu",
+  "family": "chasseurs",
+  "rarity": 4,
+  "range": "ranged",
+  "attack_kind": "magic",
+  "primary": "MAG",
+  "secondary": "DEF",
+  "description": "Automate de pierre et laiton. Résonance / retard d’action.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/calx.png",
+  "fiche": "res://assets/anim/heroes/fiches/calx.png",
+  "quartet": "",
+  "stats": {
+   "hp": 1500,
+   "atk": 55,
+   "mag": 95,
+   "def": 65,
+   "res": 65,
+   "spd": 85,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "calx_0",
+    "name": "Coup de battant",
+    "description": "100 % MAG ; Résonance +1 sur la cible, maximum 3, 2 tours.",
+    "visual": "Maillet et vibration.",
+    "clip": "calx_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "mag"
+     },
+     {
+      "type": "status",
+      "name": "resonance",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "calx_1",
+    "name": "Cloche d’alarme",
+    "description": "Un allié résiste automatiquement au prochain étourdissement, silence ou retard de jauge, durée 2 tours.",
+    "visual": "Cloche protectrice.",
+    "clip": "calx_1",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "cleanse"
+     },
+     {
+      "type": "status",
+      "name": "alarme",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "calx_2",
+    "name": "Glas des anciens",
+    "description": "150 % MAG sur tous ; consomme Résonance : -5 % jauge par charge, maximum -15 % ; sur Scellé, déclenche la réaction de sceau.",
+    "visual": "Clocher fantôme et anneaux.",
+    "clip": "calx_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.5,
+      "stat": "mag"
+     },
+     {
+      "type": "gauge",
+      "amount": -0.1,
+      "bonus_if": "resonance",
+      "consume": true
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Glas de rupture",
+    "focus": "Dégâts",
+    "stages": {
+     "1": "+10 % dégâts contre Résonance.",
+     "3": "L’ultime gagne +10 % dégâts par charge consommée, maximum +30 %.",
+     "6": "Battant funéraire : 190 % MAG ; pose 1 Résonance.",
+     "9": "+30 % dégâts des sonneries offensives.",
+     "12": "Première consommation de 3 Résonances prépare une onde 50 % MAG sur les autres ennemis."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   },
+   {
+    "name": "Gardien des heures",
+    "focus": "Protection",
+    "stages": {
+     "1": "Cloche donne un bouclier 70 % MAG.",
+     "3": "Bloquer un contrôle donne +10 points précision à son porteur 1 tour.",
+     "6": "Heure immuable : protection contre le prochain contrôle sur deux alliés, 1 tour.",
+     "9": "+30 % puissance des boucliers de Cloche.",
+     "12": "Premier contrôle bloqué du tour retarde l’assaillant de 10 % de jauge."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   },
+   {
+    "name": "Maître du rythme",
+    "focus": "Retard",
+    "stages": {
+     "1": "Les retards directs gagnent +3 points de jauge.",
+     "3": "Coup de battant sur 3 charges retarde de 5 %, une fois par cible et par tour.",
+     "6": "Temps suspendu : 80 % MAG sur tous ; retire 10 % de jauge.",
+     "9": "+15 points précision des retards ; plafond par action inchangé.",
+     "12": "Première cible retardée du tour transmet une Résonance à une autre cible."
+    },
+    "conclusion": "Conclusion collective en attente : aucun quatuor exact validé pour ce héros."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Battant funéraire",
+    "clip": "calx_3"
+   },
+   {
+    "name": "Heure immuable",
+    "clip": "calx_4"
+   },
+   {
+    "name": "Temps suspendu",
+    "clip": "calx_5"
+   }
+  ],
+  "ultimate_visual": "Clé tournante, clocher spectral, anneaux dorés et dernier glas."
+ },
+ "nyx": {
+  "name": "Nyx",
+  "short": "Nyx",
+  "species": "Chauve-souris humanoïde",
+  "role": "Assassin / vol de vie",
+  "class": "lame",
+  "element": "ombre",
+  "family": "chasseurs",
+  "rarity": 4,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "ATQ",
+  "secondary": "PV",
+  "description": "Chauve-souris humanoïde. Assassin / vol de vie.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/nyx.png",
+  "fiche": "res://assets/anim/heroes/fiches/nyx.png",
+  "quartet": "ombres",
+  "stats": {
+   "hp": 1050,
+   "atk": 110,
+   "mag": 25,
+   "def": 30,
+   "res": 30,
+   "spd": 115,
+   "crit": 0.12
+  },
+  "attacks": [
+   {
+    "id": "nyx_0",
+    "name": "Morsure d’ombre",
+    "description": "100 % ATQ ; soigne Nyx de 20 % des dégâts réellement infligés.",
+    "visual": "Entaille et filament rouge.",
+    "clip": "nyx_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "lifesteal",
+      "ratio": 0.2
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "nyx_1",
+    "name": "Pas du crépuscule",
+    "description": "+15 points esquive 2 tours ; +20 points chance critique sur sa prochaine attaque.",
+    "visual": "Pas et ailes repliées.",
+    "clip": "nyx_1",
+    "target": "self",
+    "effects": [
+     {
+      "type": "buff",
+      "stat": "evade",
+      "amount": 0.15,
+      "duration": 4.0
+     },
+     {
+      "type": "buff",
+      "stat": "crit",
+      "amount": 0.2,
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "nyx_2",
+    "name": "Bal du crépuscule",
+    "description": "4 × 50 % ATQ sur une cible ; vol de vie 20 % ; consomme Sommeil pour vol de vie 30 % sur cette action.",
+    "visual": "Plongée et croissants sombres.",
+    "clip": "nyx_2",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.5,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.5,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.5,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.5,
+      "stat": "atk"
+     },
+     {
+      "type": "lifesteal",
+      "ratio": 0.2
+     }
+    ],
+    "hit_times": [
+     2.484,
+     2.644,
+     2.804,
+     2.964
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Crocs de minuit",
+    "focus": "Vol de vie",
+    "stages": {
+     "1": "Vol de vie personnel gagne +5 points.",
+     "3": "Premier vol de vie du tour sous 40 % PV donne un bouclier égal à 20 % du soin.",
+     "6": "Baiser nocturne : 180 % ATQ ; vol de vie 35 %.",
+     "9": "+30 % puissance des soins de vol de vie, plafond de 50 % des dégâts.",
+     "12": "Premier excédent de soin du tour prépare un bouclier personnel égal à 30 % de cet excédent."
+    },
+    "conclusion": "Après le combo, soin collectif de 60 % de la statistique de soin du héros : ATQ pour Orage/Nyx, PV max × 0,06 pour Sylve (soin de 6 % PV max, exception au coefficient de 60 %)."
+   },
+   {
+    "name": "Lames du crépuscule",
+    "focus": "Critique",
+    "stages": {
+     "1": "+5 points chance critique.",
+     "3": "Pas donne aussi +10 points précision à sa prochaine attaque.",
+     "6": "Croissant double : 2 × 100 % ATQ sur une cible.",
+     "9": "+30 points dégâts critiques.",
+     "12": "Premier critique sur une cible sous 30 % PV prépare une frappe 80 % ATQ, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Ailes silencieuses",
+    "focus": "Esquive",
+    "stages": {
+     "1": "+5 points esquive pendant Pas.",
+     "3": "Une esquive pose Marqué sur l’assaillant, une fois par tour.",
+     "6": "Vol d’ombre : esquive garantie de la prochaine attaque ciblée, 1 tour ; 100 % ATQ sur une cible.",
+     "9": "+30 % dégâts des ripostes et attaques contre Marqué.",
+     "12": "50 % chance de riposte 80 % ATQ après esquive, une fois par tour."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Baiser nocturne",
+    "clip": "nyx_3"
+   },
+   {
+    "name": "Croissant double",
+    "clip": "nyx_4"
+   },
+   {
+    "name": "Vol d’ombre",
+    "clip": "nyx_5"
+   }
+  ],
+  "ultimate_visual": "Suspension, plongée, obscurcissement par les ailes et filaments de vol de vie."
+ },
+ "mei_lian": {
+  "name": "Mei Lian",
+  "short": "Mei Lian",
+  "species": "Humaine — mont Hua",
+  "role": "Épéiste / pétales",
+  "class": "lame",
+  "element": "nature",
+  "family": "chasseurs",
+  "rarity": 5,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "ATQ",
+  "secondary": "DEF",
+  "description": "Humaine — mont Hua. Épéiste / pétales.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/mei_lian.png",
+  "fiche": "res://assets/anim/heroes/fiches/mei_lian.png",
+  "quartet": "murim",
+  "stats": {
+   "hp": 1150,
+   "atk": 110,
+   "mag": 30,
+   "def": 40,
+   "res": 40,
+   "spd": 110,
+   "crit": 0.1
+  },
+  "attacks": [
+   {
+    "id": "mei_lian_0",
+    "name": "Pétale tranchant",
+    "description": "100 % ATQ ; Marque de pétale 2 tours, maximum 3.",
+    "visual": "Entaille et pétale rose.",
+    "clip": "mei_lian_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "petale",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "mei_lian_1",
+    "name": "Pas du prunier",
+    "description": "+20 points esquive 1 tour ; première esquive prépare une riposte 80 % ATQ sur une cible avec Marque de pétale.",
+    "visual": "Pas et branche fleurie.",
+    "clip": "mei_lian_1",
+    "target": "self",
+    "effects": [
+     {
+      "type": "buff",
+      "stat": "evade",
+      "amount": 0.2,
+      "duration": 2.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "mei_lian_2",
+    "name": "Les 24 mouvements du mont Hua",
+    "description": "24 traces visuelles ; 6 impacts de 30 % ATQ sur chaque ennemi ; les cibles avec Marque de pétale reçoivent Armure réduite avant dégâts. Ne pas déclencher 24 réactions.",
+    "visual": "Bond, silhouettes, pétales et rengainement.",
+    "clip": "mei_lian_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "buff",
+      "stat": "def",
+      "amount": -0.2,
+      "duration": 4.0,
+      "status": "armure_reduite",
+      "if_status": "petale"
+     },
+     {
+      "type": "damage",
+      "power": 0.3,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.3,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.3,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.3,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.3,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.3,
+      "stat": "atk"
+     }
+    ],
+    "hit_times": [
+     1.288,
+     1.702,
+     2.116,
+     2.53,
+     2.944,
+     3.358
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Lame du prunier",
+    "focus": "Cible unique",
+    "stages": {
+     "1": "+10 % dégâts contre Marque de pétale.",
+     "3": "Frappes répétées sur une même cible : +5 % chacune, maximum +20 %, reset au changement de cible.",
+     "6": "Douzième mouvement — Pétale perçant : 190 % ATQ ; consomme les marques pour +15 % dégâts chacune.",
+     "9": "+30 % dégâts des techniques du prunier.",
+     "12": "Pétale perçant prépare une frappe 80 % ATQ si sa cible survit, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Jardin protecteur",
+    "focus": "Défense",
+    "stages": {
+     "1": "Consommer une marque donne au plus blessé un bouclier 60 % ATQ.",
+     "3": "+20 % puissance des boucliers issus des pétales.",
+     "6": "Douzième mouvement — Jardin clos : bouclier 150 % ATQ sur un allié ; prochaine attaque contre lui prépare une riposte 100 % ATQ.",
+     "9": "+30 % puissance des protections du prunier.",
+     "12": "50 % chance de riposter après parade ou blocage réussi, une fois par tour ; Pas compte comme parade uniquement pendant sa garde."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Prunier d’hiver",
+    "focus": "Contrôle",
+    "stages": {
+     "1": "+10 % dégâts contre Déséquilibré.",
+     "3": "Consommer une marque sur Déséquilibré retire 10 % de jauge, une fois par action.",
+     "6": "Douzième mouvement — Branche gelée : 140 % ATQ ; consomme les marques pour tenter Étourdi 1 action.",
+     "9": "+15 points précision de contrôle ; +30 % dégâts contre cible contrôlée.",
+     "12": "Premier contrôle réussi du tour prépare une frappe 60 % ATQ qui pose une marque."
+    },
+    "conclusion": "La première tentative de contrôle du combo gagne +10 points précision, caps et immunités conservés."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Douzième mouvement — Pétale perçant",
+    "clip": "mei_lian_3"
+   },
+   {
+    "name": "Douzième mouvement — Jardin clos",
+    "clip": "mei_lian_4"
+   },
+   {
+    "name": "Douzième mouvement — Branche gelée",
+    "clip": "mei_lian_5"
+   }
+  ],
+  "ultimate_visual": "Saut, 24 mouvements en silhouettes, branches fleuries, pluie de pétales roses ; arme rengainée puis impacts."
+ },
+ "jin_seok": {
+  "name": "Jin Seok",
+  "short": "Jin Seok",
+  "species": "Humain — Shaolin",
+  "role": "Protection / déséquilibre",
+  "class": "moine",
+  "element": "lumiere",
+  "family": "chasseurs",
+  "rarity": 5,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "DEF",
+  "secondary": "ATQ",
+  "description": "Humain — Shaolin. Protection / déséquilibre.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/jin_seok.png",
+  "fiche": "res://assets/anim/heroes/fiches/jin_seok.png",
+  "quartet": "murim",
+  "stats": {
+   "hp": 1650,
+   "atk": 90,
+   "mag": 20,
+   "def": 70,
+   "res": 70,
+   "spd": 88,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "jin_seok_0",
+    "name": "Poing de bronze",
+    "description": "100 % ATQ ; Déséquilibré 2 tours.",
+    "visual": "Poing et anneaux de bronze.",
+    "clip": "jin_seok_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "desequilibre",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "jin_seok_1",
+    "name": "Cloche d’or",
+    "description": "Bouclier 150 % DEF sur un allié 2 tours ; sa prochaine attaque reçue prépare une riposte 80 % ATQ de Jin Seok.",
+    "visual": "Cloche d’énergie.",
+    "clip": "jin_seok_1",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "shield",
+      "power": 1.5,
+      "stat": "def"
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "jin_seok_2",
+    "name": "Les cent paumes de Shaolin",
+    "description": "5 × 35 % ATQ répartis sur tous ; les cibles déjà déséquilibrées sont étourdies 1 action et perdent Déséquilibré.",
+    "visual": "Grande cloche et paumes multiples.",
+    "clip": "jin_seok_2",
+    "target": "random_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.35,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.35,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.35,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.35,
+      "stat": "atk"
+     },
+     {
+      "type": "damage",
+      "power": 0.35,
+      "stat": "atk"
+     },
+     {
+      "type": "stun",
+      "duration": 2.0,
+      "if_status": "desequilibre",
+      "consume": true,
+      "target": "all_enemies"
+     }
+    ],
+    "hit_times": [
+     2.484,
+     2.644,
+     2.804,
+     2.964,
+     3.124
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Poing de bronze",
+    "focus": "Dégâts",
+    "stages": {
+     "1": "+10 % dégâts contre Déséquilibré.",
+     "3": "Deux normales réussies sur une même cible préparent +20 % dégâts sur la prochaine technique.",
+     "6": "Paume qui brise le bronze : 200 % ATQ ; consomme Déséquilibré pour +25 %.",
+     "9": "+30 % dégâts des techniques de paume.",
+     "12": "Premier coup sur une cible étourdie prépare une paume 80 % ATQ, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Cloche inviolable",
+    "focus": "Protection",
+    "stages": {
+     "1": "+10 % puissance de Cloche.",
+     "3": "La cloche donne aussi +10 points résistance au contrôle.",
+     "6": "Dôme de Shaolin : bouclier collectif 110 % DEF, 2 tours.",
+     "9": "+30 % puissance des boucliers.",
+     "12": "Première cloche brisée du combat laisse son porteur protégé contre le prochain contrôle."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Gardien des méridiens",
+    "focus": "Contrôle",
+    "stages": {
+     "1": "+5 points précision de contrôle.",
+     "3": "Poing sur Déséquilibré retire 5 % jauge, une fois par action.",
+     "6": "Paume des méridiens : 130 % ATQ ; Déséquilibré ; interdit le prochain bonus de la cible 1 tour.",
+     "9": "+15 points précision de contrôle ; +30 % dégâts sur cible contrôlée.",
+     "12": "Premier étourdissement réussi donne un bouclier 70 % DEF au plus blessé, une fois par tour."
+    },
+    "conclusion": "La première tentative de contrôle du combo gagne +10 points précision, caps et immunités conservés."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Paume qui brise le bronze",
+    "clip": "jin_seok_3"
+   },
+   {
+    "name": "Dôme de Shaolin",
+    "clip": "jin_seok_4"
+   },
+   {
+    "name": "Paume des méridiens",
+    "clip": "jin_seok_5"
+   }
+  ],
+  "ultimate_visual": "Cloche d’énergie, paumes dorées en rythme, onde de rupture."
+ },
+ "yun_tao": {
+  "name": "Yun Tao",
+  "short": "Yun Tao",
+  "species": "Humain — Wudang",
+  "role": "Parade / redirection",
+  "class": "moine",
+  "element": "eau",
+  "family": "chasseurs",
+  "rarity": 5,
+  "range": "melee",
+  "attack_kind": "physical",
+  "primary": "DEF",
+  "secondary": "ATQ",
+  "description": "Humain — Wudang. Parade / redirection.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/yun_tao.png",
+  "fiche": "res://assets/anim/heroes/fiches/yun_tao.png",
+  "quartet": "murim",
+  "stats": {
+   "hp": 1300,
+   "atk": 90,
+   "mag": 35,
+   "def": 60,
+   "res": 60,
+   "spd": 100,
+   "crit": 0.05
+  },
+  "attacks": [
+   {
+    "id": "yun_tao_0",
+    "name": "Fil du courant",
+    "description": "100 % ATQ ; Ouverture 2 tours.",
+    "visual": "Fil de lame et cercle.",
+    "clip": "yun_tao_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "status",
+      "name": "ouverture",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "yun_tao_1",
+    "name": "Cercle du Taiji",
+    "description": "Garde d’un allié 2 tours : prochaine attaque reçue -40 % dégâts et Déséquilibré sur l’assaillant ; compte comme Parade.",
+    "visual": "Cercle de redirection.",
+    "clip": "yun_tao_1",
+    "target": "lowest_hp_ally",
+    "effects": [
+     {
+      "type": "status",
+      "name": "garde",
+      "duration": 4.0
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "yun_tao_2",
+    "name": "Le ciel retourne la lame",
+    "description": "140 % ATQ sur tous ; retire 15 % de jauge aux ennemis touchés.",
+    "visual": "Courant circulaire et lames redirigées.",
+    "clip": "yun_tao_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.4,
+      "stat": "atk"
+     },
+     {
+      "type": "gauge",
+      "amount": -0.15
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Lame du courant",
+    "focus": "Dégâts",
+    "stages": {
+     "1": "+10 % dégâts contre Ouverture.",
+     "3": "Consommer Ouverture donne +15 % dégâts à sa prochaine normale.",
+     "6": "Courant perçant : 190 % ATQ ; consomme Ouverture pour ignorer 20 % DEF.",
+     "9": "+30 % dégâts des techniques de lame.",
+     "12": "Premier coup qui consomme Ouverture prépare une lame 70 % ATQ sur une autre cible ouverte."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Taiji immobile",
+    "focus": "Parade",
+    "stages": {
+     "1": "La réduction de Cercle passe de 40 % à 45 %.",
+     "3": "Une parade donne un bouclier 80 % DEF à l’allié gardé.",
+     "6": "Miroir du courant : garde de deux alliés 1 tour, réduction 30 % chacun.",
+     "9": "Réduction de Cercle passe à 55 %, plafond total réduction 70 %.",
+     "12": "50 % chance de riposte 100 % ATQ après parade, une fois par tour."
+    },
+    "conclusion": "Après le combo, bouclier collectif de 8 % PV max du héros pendant 2 tours."
+   },
+   {
+    "name": "Main du ciel",
+    "focus": "Rythme",
+    "stages": {
+     "1": "+5 points précision des retards.",
+     "3": "Fil sur Ouverture retire 5 % jauge, une fois par action.",
+     "6": "Retour des nuages : 90 % ATQ sur tous ; retire 10 % jauge.",
+     "9": "+30 % dégâts contre Ouverture ; retards gagnent +3 points dans le plafond.",
+     "12": "Premier retard réussi transmet Ouverture à une autre cible non ouverte."
+    },
+    "conclusion": "À la fin du combo, retire 5 points de jauge aux ennemis touchés, caps de retard conservés."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Courant perçant",
+    "clip": "yun_tao_3"
+   },
+   {
+    "name": "Miroir du courant",
+    "clip": "yun_tao_4"
+   },
+   {
+    "name": "Retour des nuages",
+    "clip": "yun_tao_5"
+   }
+  ],
+  "ultimate_visual": "Courants circulaires, cercle du Taiji et lames adverses redirigées."
+ },
+ "tang_su": {
+  "name": "Tang Su",
+  "short": "Tang Su",
+  "species": "Humaine — clan Tang",
+  "role": "Poison / anti-soin",
+  "class": "traqueur",
+  "element": "ombre",
+  "family": "chasseurs",
+  "rarity": 5,
+  "range": "ranged",
+  "attack_kind": "physical",
+  "primary": "ATQ",
+  "secondary": "MAG",
+  "description": "Humaine — clan Tang. Poison / anti-soin.",
+  "anim": "res://assets/anim/heroes/",
+  "portrait": "res://assets/anim/heroes/portraits/tang_su.png",
+  "fiche": "res://assets/anim/heroes/fiches/tang_su.png",
+  "quartet": "murim",
+  "stats": {
+   "hp": 1050,
+   "atk": 105,
+   "mag": 70,
+   "def": 30,
+   "res": 30,
+   "spd": 112,
+   "crit": 0.1
+  },
+  "attacks": [
+   {
+    "id": "tang_su_0",
+    "name": "Aiguille silencieuse",
+    "description": "90 % ATQ ; Poison 2 tours.",
+    "visual": "Aiguille fine.",
+    "clip": "tang_su_0",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 0.9,
+      "stat": "atk"
+     },
+     {
+      "type": "dot",
+      "power": 0.12,
+      "stat": "atk",
+      "duration": 4.0,
+      "name": "poison"
+     }
+    ],
+    "hit_times": [
+     0.702
+    ]
+   },
+   {
+    "id": "tang_su_1",
+    "name": "Méridiens fermés",
+    "description": "100 % ATQ ; sur Poison : -15 % dégâts infligés et -30 % soins reçus 2 tours.",
+    "visual": "Aiguilles aux méridiens.",
+    "clip": "tang_su_1",
+    "target": "single_enemy",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.0,
+      "stat": "atk"
+     },
+     {
+      "type": "buff",
+      "stat": "atk",
+      "amount": -0.15,
+      "duration": 4.0,
+      "if_status": "poison"
+     }
+    ],
+    "hit_times": [
+     1.188
+    ],
+    "cooldown": 6.0
+   },
+   {
+    "id": "tang_su_2",
+    "name": "Pluie des mille aiguilles",
+    "description": "150 % ATQ sur tous ; Poison 2 tours ; sur Ouverture, applique Armure réduite et consomme Ouverture.",
+    "visual": "Réseau d’aiguilles et pluie métallique.",
+    "clip": "tang_su_2",
+    "target": "all_enemies",
+    "effects": [
+     {
+      "type": "damage",
+      "power": 1.5,
+      "stat": "atk"
+     },
+     {
+      "type": "dot",
+      "power": 0.12,
+      "stat": "atk",
+      "duration": 4.0,
+      "name": "poison"
+     },
+     {
+      "type": "buff",
+      "stat": "def",
+      "amount": -0.2,
+      "duration": 4.0,
+      "status": "armure_reduite",
+      "if_status": "ouverture",
+      "consume": true
+     }
+    ],
+    "hit_times": [
+     2.484
+    ],
+    "energy": 100
+   }
+  ],
+  "paths": [
+   {
+    "name": "Venin sans retour",
+    "focus": "Poison",
+    "stages": {
+     "1": "+10 % dégâts de Poison.",
+     "3": "Réappliquer Poison ajoute une charge, maximum 3.",
+     "6": "Aiguille du serpent : 120 % ATQ ; pose 2 charges Poison.",
+     "9": "+30 % dégâts périodiques de Poison.",
+     "12": "Première cible qui tente un soin sous Poison subit un déclenchement immédiat de poison, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Mécanismes cachés",
+    "focus": "Dégâts directs",
+    "stages": {
+     "1": "+10 % dégâts sur Ouverture.",
+     "3": "Méridiens ignore 10 % DEF d’une cible empoisonnée.",
+     "6": "Arbalète des ombres : 3 × 70 % ATQ sur une cible.",
+     "9": "+30 % dégâts directs des techniques d’aiguilles.",
+     "12": "Premier coup sur Ouverture prépare une aiguille 70 % ATQ ; consomme Ouverture, une fois par tour."
+    },
+    "conclusion": "La dernière contribution offensive du combo gagne +30 % dégâts, sans nouvelle consommation de statut."
+   },
+   {
+    "name": "Méridiens scellés",
+    "focus": "Interdiction",
+    "stages": {
+     "1": "Méridiens réduit les soins de 40 % au lieu de 30 %.",
+     "3": "Une cible sous Méridiens reçoit -10 % puissance des bonus ATQ/MAG.",
+     "6": "Nœud interdit : 100 % ATQ ; bloque le prochain soin reçu par une cible empoisonnée, maximum 1 tour.",
+     "9": "+15 points précision des interdictions ; +30 % dégâts contre cible sous Méridiens.",
+     "12": "Première tentative de soin bloquée pose Ouverture sur sa cible, une fois par tour."
+    },
+    "conclusion": "La première tentative de contrôle du combo gagne +10 points précision, caps et immunités conservés."
+   }
+  ],
+  "secret_techniques": [
+   {
+    "name": "Aiguille du serpent",
+    "clip": "tang_su_3"
+   },
+   {
+    "name": "Arbalète des ombres",
+    "clip": "tang_su_4"
+   },
+   {
+    "name": "Nœud interdit",
+    "clip": "tang_su_5"
+   }
+  ],
+  "ultimate_visual": "Pluie d’aiguilles, motifs de méridiens et réseau mécanique."
+ }
 }

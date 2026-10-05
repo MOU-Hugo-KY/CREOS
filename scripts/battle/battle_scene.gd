@@ -1,17 +1,28 @@
-extends Node3D
-## Scène de combat jouable : relie le BattleEngine (logique) à l'affichage 3D, aux sons et à
-## l'interface. Tout est construit par code pour rester simple à modifier par Claude ou à la main.
+extends Node2D
+## Scène de combat jouable, entièrement en 2D : relie le BattleEngine (logique) au décor dessiné du
+## monde, aux personnages animés (clips en pièces détachées), aux sons et à l'interface. Tout est
+## construit par code. Repère de travail : cadre 1280 × 720 (pieds vers y = 590), agrandi à l'écran.
 ##
-## Le moteur applique les dégâts tout de suite ; l'affichage, lui, les montre à l'instant de
-## l'impact dans l'animation (`hit_time` de l'attaque, + la course pour le corps-à-corps).
+## Le moteur applique les dégâts tout de suite ; l'affichage, lui, les montre aux instants d'impact
+## dessinés dans le clip de l'attaque (`hit_times`, repris des repères du clip).
 
 const HUB_SCENE := "res://scenes/hub/hub.tscn"
-const HERO_SPOTS := [Vector3(-2.6, 0, 0.6), Vector3(-4.4, 0, -1.6), Vector3(-4.6, 0, 2.6), Vector3(-6.6, 0, 0.4)]
-const ENEMY_SPOTS := [Vector3(2.6, 0, 0.6), Vector3(4.4, 0, -1.6), Vector3(4.6, 0, 2.6), Vector3(6.6, 0, 0.4)]
-const BOSS_SPOT := Vector3(6.3, 0, 0.9)  # au fond à droite : le boss domine sans cacher ses sbires
-const HERO_YAW := 62.0  # de trois quarts vers la caméra (90 = profil pur)
-const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague (apparition des ennemis)
+const FRAME := Vector2(1280, 720)
+# Formation en losange : devant, haut, bas, arrière (en pixels du cadre, point au sol).
+const HERO_SPOTS := [Vector2(530, 596), Vector2(410, 540), Vector2(395, 652), Vector2(265, 594)]
+const ENEMY_SPOTS := [Vector2(770, 596), Vector2(885, 540), Vector2(900, 652), Vector2(1030, 594)]
+const BOSS_SPOT := Vector2(1000, 604)
+const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague
 const END_DELAY := 1.4
+const STATUS_LABELS := {
+	"taunt": "Provocation !", "stun": "Étourdi !", "marque": "Marqué", "mouille": "Mouillé",
+	"desequilibre": "Déséquilibré", "aveugle": "Aveuglé", "scelle": "Scellé", "somnolence": "Somnolence",
+	"ouverture": "Ouverture", "resonance": "Résonance", "enracine": "Enraciné", "petale": "Pétale",
+	"armure_reduite": "Armure réduite", "brulure": "Brûlure", "poison": "Poison", "regen": "Régénération",
+	"leurre": "Leurre", "garde": "Garde", "alarme": "Alarme", "protege": "Protégé", "retard": "Retard",
+	"buff_def": "DEF ↑", "buff_atk": "ATQ ↑", "buff_crit": "Critique ↑", "buff_evade": "Esquive ↑",
+	"buff_res": "Résistance ↑", "debuff_atk": "ATQ ↓", "debuff_def": "DEF ↓",
+}
 
 var engine := BattleEngine.new()
 var dungeon_id := ""  # donjon choisi au hub (PlayerData.current_dungeon)
@@ -22,9 +33,10 @@ var unit_data: Dictionary = {}  # uid -> Dictionary
 var hud: BattleHud
 var fx: BattleFx
 var audio: BattleAudio
-var camera: Camera3D
+var camera: Camera2D
+var stage: BattleStage
 
-var _units_root: Node3D
+var _units_root: Node2D
 var _pending: Array = []  # [{t, fn}] événements à afficher plus tard (instant d'impact)
 var _clock := 0.0
 var _hold := 0.0
@@ -35,13 +47,16 @@ var _event_seq := 0
 
 
 func _ready() -> void:
+	dungeon_id = PlayerData.current_dungeon
+	if dungeon_id == "" or not GameData.dungeons.has(dungeon_id):
+		dungeon_id = GameData.hub.get("first_hunt", "monde01_1")
 	_build_world()
 	audio = BattleAudio.new()
 	add_child(audio)
 	hud = BattleHud.new()
-	hud.camera = camera
 	add_child(hud)
 	hud.attack_requested.connect(_on_attack_requested)
+	hud.quartet_requested.connect(_on_quartet_requested)
 	hud.auto_toggled.connect(func(on: bool) -> void:
 		engine.auto_mode = on
 		if on:
@@ -53,10 +68,9 @@ func _ready() -> void:
 	hud.hub_requested.connect(func() -> void:
 		Engine.time_scale = 1.0
 		get_tree().change_scene_to_file(HUB_SCENE))
-	dungeon_id = PlayerData.current_dungeon
-	if dungeon_id == "":
-		dungeon_id = GameData.hub.get("first_hunt", "brumenoire_1")
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
+	get_viewport().size_changed.connect(_fit_camera)
+	_fit_camera()
 	start_battle(randi())
 
 
@@ -71,17 +85,16 @@ func start_battle(rng_seed: int) -> void:
 	hud.reset()
 	var was_auto := engine.auto_mode
 	engine = BattleEngine.new()
-	# Équipe choisie dans la Loge, avec les stats de chaque héros à son niveau.
+	# Équipe choisie avant la chasse, avec les stats de chaque héros (niveau, Échos, relique).
 	team_ids = PlayerData.team()
 	var team_data: Array = team_ids.map(func(id: String) -> Dictionary:
-		return Progression.hero_for_battle(GameData.hero(id), PlayerData.hero_level(id), GameData.progression,
-			PlayerData.hero_stars(id)))
-	engine.setup(team_data, GameData.dungeon_waves(dungeon_id), rng_seed)
+		return PlayerData.hero_for_battle(id))
+	engine.setup(team_data, GameData.dungeon_waves(dungeon_id), rng_seed, GameData.quartets())
 	engine.auto_mode = was_auto
 	hud.set_auto(was_auto)
 	for i in engine.heroes.size():
 		var h := engine.heroes[i]
-		_spawn(h, team_data[i], HERO_SPOTS[i], HERO_YAW)
+		_spawn(h, team_data[i], HERO_SPOTS[i])
 		_hero_stats[h.uid] = {"damage": 0.0, "healing": 0.0}
 	audio.play_music("battle_loop")
 	_handle_events()
@@ -101,6 +114,7 @@ func _process(delta: float) -> void:
 		engine.step(delta)
 		_handle_events()
 	_run_pending()
+	hud.set_quartet(engine.awaiting_uid != -1 and engine.quartet_ready(), String(engine.quartet.get("attack", "")))
 	hud.refresh(delta)
 
 
@@ -111,8 +125,15 @@ func _on_attack_requested(uid: int, slot: int) -> void:
 		_handle_events()
 
 
+func _on_quartet_requested() -> void:
+	if engine.request_quartet(engine.awaiting_uid):
+		audio.play("ui_ready", -2.0, 0.0)
+		_end_turn()
+		_handle_events()
+
+
 ## Toucher (ou cliquer) un ennemi le désigne comme cible de l'équipe.
-## Clavier : 1, 2, 3 choisissent l'attaque du héros dont c'est le tour.
+## Clavier : 1, 2, 3 choisissent l'attaque du héros dont c'est le tour, 4 le quatuor.
 func _unhandled_input(event: InputEvent) -> void:
 	var click := event as InputEventMouseButton
 	if click and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
@@ -125,6 +146,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	var key := event as InputEventKey
 	if key == null or not key.pressed or key.echo or engine.awaiting_uid == -1:
 		return
+	if key.keycode == KEY_4:
+		_on_quartet_requested()
+		return
 	var slot := key.keycode - KEY_1
 	if slot >= 0 and slot <= 2:
 		_on_attack_requested(engine.awaiting_uid, slot)
@@ -132,14 +156,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Ennemi vivant le plus proche du point touché à l'écran (rayon généreux pour le doigt).
 func _enemy_at(screen_pos: Vector2) -> UnitView:
-	var radius := 110.0 * get_viewport().get_visible_rect().size.y / 1080.0
+	var radius := 120.0 * get_viewport().get_visible_rect().size.y / 1080.0
 	var best: UnitView = null
 	var best_d := radius
 	for uid in views:
 		var v: UnitView = views[uid]
-		if v.unit.team != 1 or v.is_dead() or camera.is_position_behind(v.chest_position()):
+		if v.unit.team != 1 or v.is_dead():
 			continue
-		var d := camera.unproject_position(v.chest_position()).distance_to(screen_pos)
+		var d := v.chest_screen().distance_to(screen_pos)
 		if d < best_d:
 			best_d = d
 			best = v
@@ -171,8 +195,8 @@ func _end_turn(slot := -1) -> void:
 # --- Événements du moteur -> affichage ----------------------------------------
 
 func _handle_events() -> void:
-	# Attaque en cours : décalage (course) + instants d'impact. Le k-ième coup reçu par une cible
-	# s'affiche au k-ième instant (`hit_times`), le reste (états, mort) après son dernier coup.
+	# Le k-ième coup reçu par une cible s'affiche au k-ième instant d'impact du clip (`hit_times`),
+	# le reste (états, mort) après son dernier coup.
 	var offset := 0.0
 	var times: Array = [0.0]
 	var hits_per_dst: Dictionary = {}
@@ -192,19 +216,20 @@ func _handle_events() -> void:
 				_begin_turn(ev.src)
 			"focus":
 				_show_focus(ev.target)
-			"attack":
-				if ev.slot == BattleUnit.SLOT_ULTIMATE and engine.get_unit(ev.src).team == 0:
+			"attack", "quartet":
+				if ev.type == "attack" and ev.slot == BattleUnit.SLOT_ULTIMATE and engine.get_unit(ev.src).team == 0:
 					PlayerData.record_event("ultimate")  # prime du jour « Pleine puissance »
-				var delay := _on_attack(ev)
+				offset = _on_attack(ev) if ev.type == "attack" else _on_quartet(ev)
 				times = ev.hit_times
-				offset = delay - float(times[0])
+				if times.is_empty():
+					times = [0.4]
 				hits_per_dst.clear()
 				last_time.clear()
 			_:
 				var t := 0.0
 				if ev.get("dot", false):
 					t = 0.0
-				elif ev.type == "damage":
+				elif ev.type == "damage" or ev.type == "miss":
 					var k: int = hits_per_dst.get(ev.dst, 0)
 					hits_per_dst[ev.dst] = k + 1
 					t = offset + float(times[mini(k, times.size() - 1)])
@@ -231,137 +256,56 @@ func _on_wave_start(ev: Dictionary) -> void:
 	_hold = INTRO_HOLD
 
 
-## Lance l'animation d'attaque et ses effets. Renvoie le délai avant le premier impact.
+## Lance le clip de l'attaque. Renvoie le délai avant le premier impact.
 func _on_attack(ev: Dictionary) -> float:
 	var v: UnitView = views.get(ev.src)
 	if v == null:
 		return 0.0
-	var atk_data: Dictionary = v.unit.attacks[ev.slot]
-	var targets: Array[UnitView] = []
-	for uid: int in ev.targets:
-		if views.has(uid):
-			targets.append(views[uid])
-	var offensive := targets.any(func(t: UnitView) -> bool: return t.unit.team != v.unit.team)
-	var melee := offensive and v.unit.range_type == "melee"
+	var clip := String(ev.get("clip", ""))
+	var delay := v.play_attack(clip)
 	var color := Palette.element_color(v.unit.element)
-	var dash_to: Variant = null
-	if melee and atk_data.get("dash", true) and not targets.is_empty():
-		dash_to = targets[0].home_position
-	var delay := v.play_attack(ev.anim, ev.hit_time, dash_to)
-	var hit_offsets: Array = ev.hit_times.map(func(h: float) -> float: return delay - float(ev.hit_time) + h)
-
-	# Sons de départ.
-	if melee:
-		for h: float in hit_offsets:
-			_schedule(maxf(0.0, h - 0.15), func() -> void: _sfx("swing", -2.0))
-	elif v.unit.attack_kind == "magic" or not offensive:
-		_sfx("magic_cast", -8.0)
-	else:
-		_schedule(maxf(0.0, delay - 0.3), func() -> void: _sfx("throw", -3.0))
-
-	_play_attack_fx(v, atk_data.get("fx", ""), targets, offensive, melee, color, delay, hit_offsets, atk_data)
-
-	match int(ev.slot):
-		BattleUnit.SLOT_COOLDOWN:
-			v.popup(ev.name, Palette.COOLDOWN.lightened(0.3), false, 2.9)
-		BattleUnit.SLOT_ULTIMATE:
-			hud.callout(ev.name, v.unit.display_name, color, v.unit.team == 0)
-			fx.aura(v.global_position, color)
-			fx.ring(v.global_position, color, 2.5)
-			_sfx("ui_ready", -4.0)
-			if offensive:
-				_schedule(delay, func() -> void:
-					fx.shake(0.7)
-					_sfx("ultimate_impact", 0.0))
+	if int(ev.slot) == BattleUnit.SLOT_COOLDOWN:
+		v.popup(ev.name, Palette.COOLDOWN.lightened(0.3), false, 1.6)
+	elif int(ev.slot) == BattleUnit.SLOT_ULTIMATE:
+		hud.callout(ev.name, v.unit.display_name, color, v.unit.team == 0)
+		fx.aura(v.position, color)
+		stage.ambience.set_ultimate_active(true)
+		_schedule(maxf(1.5, v.clip_duration(clip) - 0.3), func() -> void:
+			stage.ambience.set_ultimate_active(false))
+		_sfx("ui_ready", -4.0)
 	return delay
 
 
-## Effets visuels d'une attaque. `fx` vient du JSON de l'attaque (sinon : effet par défaut).
-func _play_attack_fx(v: UnitView, fx_name: String, targets: Array[UnitView], offensive: bool, melee: bool,
-		color: Color, delay: float, hit_offsets: Array, atk_data: Dictionary) -> void:
-	match fx_name:
-		"vial":
-			# Fiole lancée en cloche, qui éclate en petit nuage.
-			if targets.is_empty():
-				return
-			var tgt := targets[0]
-			var travel := minf(0.3, delay)
-			_schedule(delay - travel, func() -> void:
-				fx.projectile(v.chest_position() + Vector3(0, 0.5, 0), tgt.chest_position(), color, travel, 0.25)
-				_sfx("throw", -4.0))
-			_schedule(delay, func() -> void:
-				fx.cloud(tgt.global_position, Color(color, 0.5), 1.5))
-		"poison_pool":
-			var duration := 4.0
-			for e: Dictionary in atk_data.get("effects", []):
-				if e.get("type") == "dot":
-					duration = e.get("duration", duration)
-			_schedule(delay, func() -> void:
-				for t in targets:
-					fx.pool(t.global_position, color, duration)
-				_sfx("magic_shot", -8.0))
-		"poison_burst":
-			_schedule(delay, func() -> void:
-				fx.cloud(v.global_position, Color(color, 0.6), 3.0)
-				fx.ring(v.global_position, color, 7.0)
-				for t in targets:
-					fx.cloud(t.global_position, Color(color, 0.45), 1.6))
-		"lightning_hit":
-			for h: float in hit_offsets:
-				_schedule(h, func() -> void:
-					for t in targets:
-						fx.lightning(v.chest_position(), t.chest_position(), color, 5)
-					_sfx("magic_shot", -6.0))
-		"sky_lightning":
-			_schedule(delay, func() -> void:
-				if not targets.is_empty():
-					fx.sky_lightning(targets[0].global_position, color))
-			_schedule(delay + 0.12, func() -> void:
-				for i in range(1, targets.size()):
-					fx.lightning(targets[0].chest_position(), targets[i].chest_position(), color, 7)
-					fx.burst(targets[i].chest_position(), color, false))
-		"chain_pull":
-			# Chaînes lancées vers la cible, qui est attirée vers le chevalier à l'impact.
-			var launch := maxf(0.0, delay - 0.38)
-			for t in targets:
-				_schedule(launch, func() -> void:
-					fx.chain(v.chest_position() + Vector3(0, 0.2, 0), t, color, 0.35, 0.45)
-					_sfx("throw", -2.0))
-				_schedule(delay, func() -> void:
-					if t.is_dead():
-						return
-					var pull := (v.global_position - t.global_position).normalized() * 1.4
-					var tw := t.create_tween()
-					tw.tween_property(t, "position", t.home_position + pull, 0.15)
-					tw.tween_interval(0.25)
-					tw.tween_property(t, "position", t.home_position, 0.3))
-		"whirlwind":
-			for h: float in hit_offsets:
-				_schedule(h, func() -> void: fx.ring(v.global_position, color, 3.2))
-		"ground_slam":
-			_schedule(delay, func() -> void:
-				fx.ring(v.global_position, color, 6.0)
-				fx.cloud(v.global_position, Color(0.45, 0.4, 0.33, 0.5), 2.0)
-				fx.shake(0.6))
-		_:
-			# Par défaut : boule magique (une cible à distance) ou éclats sur chaque cible (zone).
-			if offensive and not melee:
-				if targets.size() == 1:
-					var travel := minf(0.3, delay)
-					var tgt := targets[0]
-					_schedule(delay - travel, func() -> void:
-						fx.projectile(v.chest_position() + Vector3(0, 0.3, 0), tgt.chest_position(), color, travel)
-						if v.unit.attack_kind == "magic":
-							_sfx("magic_shot", -10.0))
-				else:
-					_schedule(delay, func() -> void:
-						for t in targets:
-							fx.burst(t.chest_position(), color, true))
-	if not offensive:
-		var is_heal: bool = atk_data.get("effects", [{}])[0].get("type") == "heal"
-		_schedule(delay, func() -> void:
-			for t in targets:
-				fx.aura(t.global_position, Palette.HEAL if is_heal else Palette.SHIELD))
+## Attaque combinée du quatuor : les quatre héros s'effacent pendant que le clip du quatuor les
+## montre ensemble, puis reviennent.
+func _on_quartet(ev: Dictionary) -> float:
+	var clip := String(ev.get("clip", ""))
+	var p := ClipPlayer.new()
+	p.bundle = "res://assets/anim/heroes/"
+	p.scale = Vector2.ONE * UnitView.HERO_SCALE
+	p.position = Vector2(HERO_SPOTS[3].x, HERO_SPOTS[0].y)
+	p.z_index = 12
+	_units_root.add_child(p)
+	p.play(clip, false)
+	var members: Array = ev.members
+	for uid: int in members:
+		if views.has(uid):
+			views[uid].modulate.a = 0.0
+	var dur := maxf(2.0, p.duration(clip))
+	hud.callout(String(ev.name), "Quatuor", Palette.GOLD, true)
+	stage.ambience.set_ultimate_active(true)
+	_schedule(dur, func() -> void:
+		p.queue_free()
+		stage.ambience.set_ultimate_active(false)
+		for uid: int in members:
+			if views.has(uid) and not views[uid].is_dead():
+				var tw: Tween = views[uid].create_tween()
+				tw.tween_property(views[uid], "modulate:a", 1.0, 0.25))
+	for t: float in ev.hit_times:
+		_schedule(t, func() -> void:
+			fx.shake(0.45)
+			_sfx("ultimate_impact", -2.0))
+	return 0.0
 
 
 func _on_impact(ev: Dictionary) -> void:
@@ -374,10 +318,10 @@ func _on_impact(ev: Dictionary) -> void:
 			var src: UnitView = views.get(ev.src)
 			var color := Palette.element_color(src.unit.element) if src else Color.WHITE
 			if ev.get("dot", false):
-				t.popup(str(int(ev.amount)), Color(0.75, 0.55, 1.0), false, 1.6)
+				t.popup(str(int(ev.amount)), Color(0.75, 0.55, 1.0), false, 0.8)
 				t.flash(Color(0.6, 0.3, 0.9), 0.35)
 			else:
-				t.play_hit(color.lightened(0.4))
+				t.play_hit(color)
 				fx.burst(t.chest_position(), color, ev.crit)
 				var txt := str(int(ev.amount)) + ("!" if ev.crit else "")
 				if int(ev.amount) <= 0:
@@ -391,12 +335,16 @@ func _on_impact(ev: Dictionary) -> void:
 					popup_color = Color(0.65, 0.65, 0.72)
 				t.popup(txt, popup_color, ev.crit)
 				if ev.crit:
-					fx.shake(0.35)
+					fx.shake(0.3)
 					_sfx("hit_heavy", -1.0)
 				else:
 					_sfx("hit", -4.0)
 			if src and _hero_stats.has(src.unit.uid):
 				_hero_stats[src.unit.uid].damage += ev.amount
+		"miss":
+			var t: UnitView = views.get(ev.dst)
+			if t:
+				t.popup("Leurre !" if ev.reason == "leurre" else "Esquive !", Color(0.8, 0.9, 1.0))
 		"heal":
 			var t: UnitView = views.get(ev.dst)
 			if t == null:
@@ -416,10 +364,11 @@ func _on_impact(ev: Dictionary) -> void:
 		"status":
 			var t: UnitView = views.get(ev.dst)
 			if t:
-				var labels := {"stun": "Étourdi !", "taunt": "Provocation !", "dot": ""}
-				var text: String = labels.get(ev.status, "")
+				var text: String = ev.get("label", "")
+				if text == "":
+					text = STATUS_LABELS.get(ev.status, "")
 				if text != "":
-					t.popup(text, Palette.GOLD, false, 3.0)
+					t.popup(text, Palette.GOLD, false, 1.4)
 		"death":
 			var t: UnitView = views.get(ev.dst)
 			if t:
@@ -476,6 +425,7 @@ func _set_shown_hp(v: UnitView, ev: Dictionary) -> void:
 		v.shown_hp = ev.hp
 		v.hp_seq = ev.seq
 
+
 func _schedule(delay: float, fn: Callable) -> void:
 	if delay <= 0.0:
 		fn.call()
@@ -511,39 +461,49 @@ func _spawn_wave() -> void:
 			hud.remove_overhead(uid)
 	var k := 0
 	for e in engine.enemies:
-		var spot: Vector3 = BOSS_SPOT
+		var spot: Vector2 = BOSS_SPOT
 		if not e.is_boss:
 			spot = ENEMY_SPOTS[k % ENEMY_SPOTS.size()]
 			k += 1
-		_spawn(e, GameData.monster(e.def_id), spot, -HERO_YAW)
+		_spawn(e, GameData.monster(e.def_id), spot)
 
 
-func _spawn(u: BattleUnit, data: Dictionary, pos: Vector3, yaw_deg: float) -> void:
+func _spawn(u: BattleUnit, data: Dictionary, pos: Vector2) -> void:
 	var v := UnitView.new()
-	_units_root.add_child(v)
 	v.position = pos
-	v.rotation_degrees.y = yaw_deg
+	_units_root.add_child(v)
 	v.setup(u, data)
 	views[u.uid] = v
 	unit_data[u.uid] = data
 	hud.add_overhead(v)
 
 
-# --- Monde 3D ----------------------------------------------------------------
+# --- Monde 2D ----------------------------------------------------------------
 
 func _build_world() -> void:
-	add_child(MarshLevel.new())
+	var d := GameData.dungeon(dungeon_id)
+	var region: Dictionary = GameData.regions.get(d.get("region", ""), {})
+	stage = BattleStage.new()
+	add_child(stage)
+	stage.setup(String(region.get("decor", "res://assets/decors/monde01/")), int(d.get("decor_scene", 1)))
 
-	camera = Camera3D.new()
-	camera.position = Vector3(0, 8.6, 13.2)
-	camera.rotation_degrees = Vector3(-27, 0, 0)
-	camera.fov = 48
+	camera = Camera2D.new()
+	camera.position = FRAME / 2.0
 	add_child(camera)
+	camera.make_current()
+
+	_units_root = Node2D.new()
+	_units_root.name = "Units"
+	_units_root.y_sort_enabled = true
+	add_child(_units_root)
 
 	fx = BattleFx.new()
 	add_child(fx)
 	fx.setup(camera)
 
-	_units_root = Node3D.new()
-	_units_root.name = "Units"
-	add_child(_units_root)
+
+## Le cadre 1280 × 720 remplit la fenêtre (on coupe un peu les bords si le format diffère).
+func _fit_camera() -> void:
+	var vs := get_viewport().get_visible_rect().size
+	var z := maxf(vs.y / FRAME.y, vs.x / FRAME.x)
+	camera.zoom = Vector2(z, z)
