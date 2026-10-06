@@ -1,0 +1,413 @@
+{
+ "hero": "orage",
+ "scale": 4.8,
+ "anchor": [
+  96,
+  146
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "hurt": "hurt",
+  "death": "death",
+  "relic": "skill",
+  "dodge": "dodge",
+  "0": "attack_1",
+  "1": "skill",
+  "2": "ultimate",
+  "3": "attack_2",
+  "4": "skill",
+  "5": "ultimate"
+ },
+ "anims": {
+  "attack_1": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_attack_1_000.png",
+     0.11
+    ],
+    [
+     "orage_attack_1_001.png",
+     0.1
+    ],
+    [
+     "orage_attack_1_002.png",
+     0.09
+    ],
+    [
+     "orage_attack_1_003.png",
+     0.06
+    ],
+    [
+     "orage_attack_1_004.png",
+     0.075
+    ],
+    [
+     "orage_attack_1_005.png",
+     0.09
+    ],
+    [
+     "orage_attack_1_006.png",
+     0.11
+    ],
+    [
+     "orage_attack_1_007.png",
+     0.14
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "attack_2": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_attack_2_000.png",
+     0.11
+    ],
+    [
+     "orage_attack_2_001.png",
+     0.1
+    ],
+    [
+     "orage_attack_2_002.png",
+     0.09
+    ],
+    [
+     "orage_attack_2_003.png",
+     0.06
+    ],
+    [
+     "orage_attack_2_004.png",
+     0.075
+    ],
+    [
+     "orage_attack_2_005.png",
+     0.09
+    ],
+    [
+     "orage_attack_2_006.png",
+     0.11
+    ],
+    [
+     "orage_attack_2_007.png",
+     0.14
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_skill_000.png",
+     0.13
+    ],
+    [
+     "orage_skill_001.png",
+     0.15
+    ],
+    [
+     "orage_skill_002.png",
+     0.15
+    ],
+    [
+     "orage_skill_003.png",
+     0.085
+    ],
+    [
+     "orage_skill_004.png",
+     0.11
+    ],
+    [
+     "orage_skill_005.png",
+     0.11
+    ],
+    [
+     "orage_skill_006.png",
+     0.13
+    ],
+    [
+     "orage_skill_007.png",
+     0.16
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_ultimate_000.png",
+     0.16
+    ],
+    [
+     "orage_ultimate_001.png",
+     0.18
+    ],
+    [
+     "orage_ultimate_002.png",
+     0.18
+    ],
+    [
+     "orage_ultimate_003.png",
+     0.08
+    ],
+    [
+     "orage_ultimate_004.png",
+     0.15
+    ],
+    [
+     "orage_ultimate_005.png",
+     0.16
+    ],
+    [
+     "orage_ultimate_006.png",
+     0.18
+    ],
+    [
+     "orage_ultimate_007.png",
+     0.2
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_dodge_000.png",
+     0.09
+    ],
+    [
+     "orage_dodge_001.png",
+     0.07
+    ],
+    [
+     "orage_dodge_002.png",
+     0.055
+    ],
+    [
+     "orage_dodge_003.png",
+     0.055
+    ],
+    [
+     "orage_dodge_004.png",
+     0.07
+    ],
+    [
+     "orage_dodge_005.png",
+     0.085
+    ],
+    [
+     "orage_dodge_006.png",
+     0.1
+    ],
+    [
+     "orage_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_hurt_000.png",
+     0.09
+    ],
+    [
+     "orage_hurt_001.png",
+     0.06
+    ],
+    [
+     "orage_hurt_002.png",
+     0.065
+    ],
+    [
+     "orage_hurt_003.png",
+     0.08
+    ],
+    [
+     "orage_hurt_004.png",
+     0.095
+    ],
+    [
+     "orage_hurt_005.png",
+     0.11
+    ],
+    [
+     "orage_hurt_006.png",
+     0.12
+    ],
+    [
+     "orage_hurt_007.png",
+     0.14
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_death_000.png",
+     0.09
+    ],
+    [
+     "orage_death_001.png",
+     0.09
+    ],
+    [
+     "orage_death_002.png",
+     0.1
+    ],
+    [
+     "orage_death_003.png",
+     0.11
+    ],
+    [
+     "orage_death_004.png",
+     0.12
+    ],
+    [
+     "orage_death_005.png",
+     0.14
+    ],
+    [
+     "orage_death_006.png",
+     0.18
+    ],
+    [
+     "orage_death_007.png",
+     0.7
+    ]
+   ],
+   "hit_frame": null
+  },
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "orage_idle_000.png",
+     0.125
+    ],
+    [
+     "orage_idle_001.png",
+     0.125
+    ],
+    [
+     "orage_idle_002.png",
+     0.125
+    ],
+    [
+     "orage_idle_003.png",
+     0.125
+    ],
+    [
+     "orage_idle_004.png",
+     0.125
+    ],
+    [
+     "orage_idle_005.png",
+     0.125
+    ],
+    [
+     "orage_idle_006.png",
+     0.125
+    ],
+    [
+     "orage_idle_007.png",
+     0.125
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "orage_walk_000.png",
+     0.1
+    ],
+    [
+     "orage_walk_001.png",
+     0.1
+    ],
+    [
+     "orage_walk_002.png",
+     0.1
+    ],
+    [
+     "orage_walk_003.png",
+     0.1
+    ],
+    [
+     "orage_walk_004.png",
+     0.1
+    ],
+    [
+     "orage_walk_005.png",
+     0.1
+    ],
+    [
+     "orage_walk_006.png",
+     0.1
+    ],
+    [
+     "orage_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "orage_fx_000.png",
+    0.055
+   ],
+   [
+    "orage_fx_001.png",
+    0.055
+   ],
+   [
+    "orage_fx_002.png",
+    0.055
+   ],
+   [
+    "orage_fx_003.png",
+    0.065
+   ],
+   [
+    "orage_fx_004.png",
+    0.065
+   ],
+   [
+    "orage_fx_005.png",
+    0.075
+   ],
+   [
+    "orage_fx_006.png",
+    0.085
+   ],
+   [
+    "orage_fx_007.png",
+    0.1
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack_1": 0.6,
+   "attack_2": 0.75,
+   "skill": 1,
+   "ultimate": 1.5
+  }
+ }
+}

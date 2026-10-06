@@ -377,6 +377,26 @@ func _on_quartet(ev: Dictionary) -> float:
 	return 0.0
 
 
+## Héros en pixel art : son effet « signature » (pack ChatGPT) éclate sur la cible touchée.
+func _signature_fx(src: UnitView, t: UnitView, slot: int) -> void:
+	var sheet := PixelSheet.for_actor(src.unit.def_id) if src.unit.team == 0 else null
+	if sheet == null or sheet.effect == null:
+		return
+	var anim := sheet.anim_for(str(slot))
+	var spr := AnimatedSprite2D.new()
+	spr.sprite_frames = sheet.effect
+	spr.centered = false
+	spr.offset = -sheet.effect_pivot
+	spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var size := float(sheet.effect_scale.get(anim, 1.0)) * sheet.scale * src.model_scale * 0.55
+	spr.scale = Vector2(size, size)
+	spr.position = t.chest_position()
+	spr.z_index = 50
+	fx.add_child(spr)
+	spr.play()
+	spr.animation_finished.connect(spr.queue_free)
+
+
 func _on_impact(ev: Dictionary) -> void:
 	match ev.type:
 		"damage":
@@ -396,6 +416,7 @@ func _on_impact(ev: Dictionary) -> void:
 				fx.slash(t.chest_position(), color, heavy)
 				if src:
 					fx.element_hit(t.chest_position(), src.unit.element, heavy)
+					_signature_fx(src, t, int(_last_slot.get(int(ev.src), 0)))
 				if heavy:
 					fx.kick(0.05 if ev.crit else 0.035)
 				fx.dust(t.position, 0.6)

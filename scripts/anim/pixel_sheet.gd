@@ -12,6 +12,9 @@ var scale := 4.8
 var anchor := Vector2(96, 146)
 var map: Dictionary = {}  # clip du jeu ("0", "idle"…) -> animation du pack
 var anims: Dictionary = {}  # nom -> {loop, frames: [[Texture2D, durée]], hit_frame, total, hit_time}
+var effect: SpriteFrames  # effet « signature » joué sur la cible à l'impact (null si aucun)
+var effect_pivot := Vector2(64, 64)
+var effect_scale: Dictionary = {}  # animation d'attaque -> taille conseillée
 
 
 static func for_actor(id: String) -> PixelSheet:
@@ -45,6 +48,15 @@ func _build(data: Dictionary, dir: String) -> void:
 			total += float(f[1])
 			i += 1
 		anims[name] = {"loop": bool(a.loop), "frames": frames, "total": total, "hit_time": hit_time}
+	var fx: Variant = data.get("effect")
+	if fx is Dictionary:
+		effect = SpriteFrames.new()
+		effect.set_animation_loop("default", false)
+		effect.set_animation_speed("default", 1.0)
+		for f: Array in fx.frames:
+			effect.add_frame("default", ClipPlayer.texture(dir + String(f[0])), float(f[1]))
+		effect_pivot = Vector2(fx.pivot[0], fx.pivot[1])
+		effect_scale = fx.get("scale", {})
 
 
 ## Animation pixel qui joue le clip `clip` du jeu ("" si aucune).
