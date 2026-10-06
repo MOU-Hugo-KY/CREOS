@@ -1,0 +1,918 @@
+{
+  "character": "rivet",
+  "pack": "Hub top-down",
+  "cell_size": [
+    192,
+    192
+  ],
+  "pivot": [
+    96,
+    146
+  ],
+  "world_scale": 0.7,
+  "palette_colors": 64,
+  "animations": {
+    "idle_down": {
+      "sheet": "rivet_idle_down.png",
+      "loop": true,
+      "fps": 8.0,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        }
+      ]
+    },
+    "walk_down": {
+      "sheet": "rivet_walk_down.png",
+      "loop": true,
+      "fps": 10.0,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        }
+      ]
+    },
+    "idle_up": {
+      "sheet": "rivet_idle_up.png",
+      "loop": true,
+      "fps": 8.0,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        }
+      ]
+    },
+    "walk_up": {
+      "sheet": "rivet_walk_up.png",
+      "loop": true,
+      "fps": 10.0,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        }
+      ]
+    },
+    "idle_right": {
+      "sheet": "rivet_idle_right.png",
+      "loop": true,
+      "fps": 8.0,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        }
+      ]
+    },
+    "walk_right": {
+      "sheet": "rivet_walk_right.png",
+      "loop": true,
+      "fps": 10.0,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        }
+      ]
+    },
+    "idle_left": {
+      "sheet": "rivet_idle_left.png",
+      "loop": true,
+      "fps": 8.0,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125.0
+        }
+      ]
+    },
+    "walk_left": {
+      "sheet": "rivet_walk_left.png",
+      "loop": true,
+      "fps": 10.0,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100.0
+        }
+      ]
+    }
+  },
+  "directions": {
+    "up": "Redrawn back view",
+    "down": "Redrawn front view",
+    "right": "Redrawn right view",
+    "left": "Mirror of right, asymmetric details reversed"
+  }
+}

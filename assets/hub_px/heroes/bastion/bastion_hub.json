@@ -1,0 +1,918 @@
+{
+  "character": "bastion",
+  "pack": "Hub top-down",
+  "cell_size": [
+    192,
+    192
+  ],
+  "pivot": [
+    96,
+    146
+  ],
+  "world_scale": 0.7,
+  "palette_colors": 64,
+  "animations": {
+    "idle_down": {
+      "sheet": "bastion_idle_down.png",
+      "loop": true,
+      "fps": 8,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        }
+      ]
+    },
+    "walk_down": {
+      "sheet": "bastion_walk_down.png",
+      "loop": true,
+      "fps": 10,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        }
+      ]
+    },
+    "idle_up": {
+      "sheet": "bastion_idle_up.png",
+      "loop": true,
+      "fps": 8,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        }
+      ]
+    },
+    "walk_up": {
+      "sheet": "bastion_walk_up.png",
+      "loop": true,
+      "fps": 10,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        }
+      ]
+    },
+    "idle_right": {
+      "sheet": "bastion_idle_right.png",
+      "loop": true,
+      "fps": 8,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        }
+      ]
+    },
+    "walk_right": {
+      "sheet": "bastion_walk_right.png",
+      "loop": true,
+      "fps": 10,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        }
+      ]
+    },
+    "idle_left": {
+      "sheet": "bastion_idle_left.png",
+      "loop": true,
+      "fps": 8,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 125
+        }
+      ]
+    },
+    "walk_left": {
+      "sheet": "bastion_walk_left.png",
+      "loop": true,
+      "fps": 10,
+      "frame_count": 8,
+      "frames": [
+        {
+          "rect": [
+            0,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            192,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            384,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            576,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            768,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            960,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            1152,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        },
+        {
+          "rect": [
+            1344,
+            0,
+            192,
+            192
+          ],
+          "pivot": [
+            96,
+            146
+          ],
+          "duration_ms": 100
+        }
+      ]
+    }
+  },
+  "directions": {
+    "up": "Redrawn back view",
+    "down": "Redrawn front view",
+    "right": "Redrawn right view",
+    "left": "Mirror of right, asymmetric details reversed"
+  }
+}

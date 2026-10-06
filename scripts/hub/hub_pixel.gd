@@ -2,37 +2,29 @@ class_name HubPixel
 extends Node2D
 ## Le hub en pixel art (vue de dessus inclinée), d'après `assets/hub_px/hub_layout.json` (carte 1280 × 720) :
 ## sol, bâtiments et objets triés par leur pied, effets animés (cristal, flammes, fumée, bannières,
-## étincelles), lumières, jour/nuit. Corbin se promène tout seul sur la place en contournant les
-## bâtiments ; toucher un bâtiment ouvre son service.
+## étincelles), lumières, jour/nuit. Les héros de l'équipe (planches 4 directions dans `heroes/`) se
+## promènent seuls sur la place en contournant les bâtiments ; toucher un bâtiment ouvre son service.
 
 signal service_requested(service_id: String)
 
 const DIR := "res://assets/hub_px/"
 const SIZE := Vector2(1280, 720)
 const SPEED := 130.0
+const MAX_WALKERS := 6
 
 var layout: Dictionary = {}
 var buildings: Dictionary = {}  # id -> {node, hitbox: Rect2, approach: Vector2, label}
-var _walkers: Array = []  # personnages qui marchent (le joueur)
-var avatar: Node2D
-var _sprite: AnimatedSprite2D
+var _walkers: Array[Dictionary] = []  # héros qui se promènent : {node, sprite, path, rest, facing}
+var avatar: Node2D  # le premier promeneur (Corbin si possible)
 var _world: Node2D
 var _ground: Sprite2D
 var _ambient: CanvasModulate
 var _lights: Array[Dictionary] = []
 var _fx: Array[AnimatedSprite2D] = []
 var _nav := AStarGrid2D.new()
-var _path := PackedVector2Array()
-var _rest := 1.0
 var _clock := 0.0
 var _hour_override := -1.0
 var _hovered := ""
-var _facing := "down"
-## Avatar du hub (pack Corbin 4 directions) : animation -> nombre d'images (cases de 192 × 192).
-const FRAME_COUNTS := {
-	"idle_down": 8, "idle_up": 8, "idle_right": 8, "idle_left": 8,
-	"walk_down": 12, "walk_up": 8, "walk_right": 8, "walk_left": 8,
-}
 
 
 func _ready() -> void:
@@ -59,7 +51,7 @@ func _ready() -> void:
 	for item: Dictionary in layout.lights:
 		_add_light(item)
 	_build_navigation()
-	_build_avatar()
+	_build_walkers()
 	set_hour(-1.0)
 
 
@@ -158,29 +150,59 @@ func _nearest_walkable(p: Vector2) -> Vector2i:
 	return best
 
 
-func _build_avatar() -> void:
-	avatar = Node2D.new()
-	avatar.position = Vector2(layout.spawn[0], layout.spawn[1])
-	_world.add_child(avatar)
-	_sprite = AnimatedSprite2D.new()
+## Héros sur la place : l'équipe de chasse (sinon les héros possédés), Corbin d'abord, 6 au plus.
+func _build_walkers() -> void:
+	var ids: Array = PlayerData.team().duplicate()
+	if ids.is_empty():
+		ids = PlayerData.owned_heroes().duplicate()
+	ids.erase("corbin")
+	ids.push_front("corbin")
+	var spawn := Vector2(layout.spawn[0], layout.spawn[1])
+	for id: String in ids:
+		if _walkers.size() >= MAX_WALKERS:
+			break
+		var frames := _hero_frames(id)
+		if frames == null:
+			continue
+		var node := Node2D.new()
+		node.position = spawn if _walkers.is_empty() else _nav.get_point_position(
+			_nearest_walkable(Vector2(randf_range(250, 1030), randf_range(320, 640))))
+		_world.add_child(node)
+		var sprite := AnimatedSprite2D.new()
+		sprite.sprite_frames = frames
+		sprite.centered = false
+		sprite.offset = Vector2(-96, -146)
+		sprite.scale = Vector2(0.7, 0.7)
+		node.add_child(sprite)
+		sprite.play("idle_down")
+		sprite.frame = randi() % frames.get_frame_count("idle_down")
+		_walkers.append({"id": id, "node": node, "sprite": sprite, "path": PackedVector2Array(),
+			"rest": randf_range(0.5, 3.0), "facing": "down"})
+	if not _walkers.is_empty():
+		avatar = _walkers[0].node
+
+
+## Planches 4 directions d'un héros (`heroes/<id>/<id>_hub.json`), ou null s'il n'en a pas.
+func _hero_frames(id: String) -> SpriteFrames:
+	var path := DIR + "heroes/%s/%s_hub.json" % [id, id]
+	if not FileAccess.file_exists(path):
+		return null
+	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(path))
 	var frames := SpriteFrames.new()
 	frames.remove_animation("default")
-	for anim: String in FRAME_COUNTS:
+	for anim: String in data.animations:
+		var a: Dictionary = data.animations[anim]
 		frames.add_animation(anim)
-		frames.set_animation_speed(anim, 8 if anim.begins_with("idle") else 10)
-		var tex: Texture2D = load(DIR + "avatar/corbin_" + anim + ".png")
-		for i in int(FRAME_COUNTS[anim]):
+		frames.set_animation_speed(anim, float(a.fps))
+		frames.set_animation_loop(anim, bool(a.loop))
+		var tex: Texture2D = load(DIR + "heroes/%s/%s" % [id, a.sheet])
+		for f: Dictionary in a.frames:
 			var atlas := AtlasTexture.new()
 			atlas.atlas = tex
-			atlas.region = Rect2(i * 192, 0, 192, 192)
+			var r: Array = f.rect
+			atlas.region = Rect2(r[0], r[1], r[2], r[3])
 			frames.add_frame(anim, atlas)
-	_sprite.sprite_frames = frames
-	_sprite.centered = false
-	_sprite.offset = Vector2(-96, -146)
-	_sprite.scale = Vector2(0.7, 0.7)
-	avatar.add_child(_sprite)
-	_sprite.play("idle_down")
-	_walkers.append(avatar)
+	return frames
 
 
 ## Toucher la carte : si c'est un bâtiment, il s'ouvre tout de suite (le joueur ne dirige pas Corbin).
@@ -191,14 +213,14 @@ func tap(point: Vector2) -> void:
 		service_requested.emit(id)
 
 
-## Corbin se promène tout seul : il choisit un endroit libre de la place, y marche, s'arrête un moment.
-func _wander_next() -> void:
+## Un héros se promène tout seul : il choisit un endroit libre de la place, y marche, s'arrête un moment.
+func _wander_next(w: Dictionary) -> void:
 	for attempt in 20:
 		var p := Vector2(randf_range(200, 1080), randf_range(300, 660))
 		var cell := _nearest_walkable(p)
-		var path := _nav.get_point_path(_nearest_walkable(avatar.position), cell)
+		var path := _nav.get_point_path(_nearest_walkable(w.node.position), cell)
 		if path.size() > 2:
-			_path = path
+			w.path = path
 			return
 
 
@@ -234,38 +256,47 @@ func _process(delta: float) -> void:
 		set_hour(-1.0)  # heure réelle : on suit l'horloge
 	for l: Dictionary in _lights:
 		l.node.energy = l.energy * _light_level * (1.0 + 0.06 * sin(_clock * 3.1 + l.phase) + 0.025 * sin(_clock * 7.3 + l.phase))
+	for w: Dictionary in _walkers:
+		_walk(w, delta)
+
+
+func _walk(w: Dictionary, delta: float) -> void:
+	var node: Node2D = w.node
+	var sprite: AnimatedSprite2D = w.sprite
+	var path: PackedVector2Array = w.path
 	var dir := Vector2.ZERO
-	if not _path.is_empty():
-		dir = _path[0] - avatar.position
-		avatar.position = avatar.position.move_toward(_path[0], SPEED * 0.6 * delta)
-		if avatar.position.distance_to(_path[0]) < 1.0:
-			_path.remove_at(0)
-			if _path.is_empty():
-				_rest = randf_range(1.5, 4.0)  # pause avant la prochaine balade
+	if not path.is_empty():
+		dir = path[0] - node.position
+		node.position = node.position.move_toward(path[0], SPEED * 0.6 * delta)
+		if node.position.distance_to(path[0]) < 1.0:
+			path.remove_at(0)
+			w.path = path
+			if path.is_empty():
+				w.rest = randf_range(1.5, 5.0)  # pause avant la prochaine balade
 	else:
-		_rest -= delta
-		if _rest <= 0.0:
-			_wander_next()
+		w.rest -= delta
+		if w.rest <= 0.0:
+			_wander_next(w)
 	if dir.length() > 0.1:
 		# Axe dominant : face, dos, droite ou gauche.
 		if absf(dir.x) >= absf(dir.y):
-			_facing = "right" if dir.x > 0.0 else "left"
+			w.facing = "right" if dir.x > 0.0 else "left"
 		else:
-			_facing = "down" if dir.y > 0.0 else "up"
-		_play_keep_phase("walk_" + _facing)
+			w.facing = "down" if dir.y > 0.0 else "up"
+		_play_keep_phase(sprite, "walk_" + w.facing)
 	else:
-		_sprite.play("idle_" + _facing)
+		sprite.play("idle_" + w.facing)
 
 
 ## Change de direction de marche sans repartir de la première image.
-func _play_keep_phase(anim: String) -> void:
-	if _sprite.animation == anim:
+func _play_keep_phase(sprite: AnimatedSprite2D, anim: String) -> void:
+	if sprite.animation == anim:
 		return
-	var was_walking := String(_sprite.animation).begins_with("walk")
-	var phase := float(_sprite.frame) / float(_sprite.sprite_frames.get_frame_count(_sprite.animation))
-	_sprite.play(anim)
+	var was_walking := String(sprite.animation).begins_with("walk")
+	var phase := float(sprite.frame) / float(sprite.sprite_frames.get_frame_count(sprite.animation))
+	sprite.play(anim)
 	if was_walking:
-		_sprite.frame = int(phase * _sprite.sprite_frames.get_frame_count(anim))
+		sprite.frame = int(phase * sprite.sprite_frames.get_frame_count(anim))
 
 
 # --- Jour et nuit ------------------------------------------------------------------------
