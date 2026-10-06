@@ -6,6 +6,7 @@ extends CanvasLayer
 
 signal attack_requested(uid: int, slot: int)
 signal quartet_requested
+signal combo_requested(combo_id: String)
 signal auto_toggled(on: bool)
 signal speed_toggled(fast: bool)
 signal restart_requested
@@ -32,6 +33,8 @@ var _turn_uid := -1
 var _sound_button: Button
 var _sound_panel: SoundPanel
 var _quartet_button: Button
+var _combo_box: VBoxContainer  # boutons des combos prêts (quatuor, trios, duos)
+var _combo_ids: Array = []
 
 
 func _ready() -> void:
@@ -67,6 +70,16 @@ func _ready() -> void:
 	_quartet_button.visible = false
 	_quartet_button.pressed.connect(func() -> void: quartet_requested.emit())
 	_root.add_child(_quartet_button)
+	_combo_box = VBoxContainer.new()
+	_combo_box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	_combo_box.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_combo_box.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_combo_box.offset_bottom = -236
+	_combo_box.offset_left = -230
+	_combo_box.offset_right = 230
+	_combo_box.alignment = BoxContainer.ALIGNMENT_END
+	_combo_box.add_theme_constant_override("separation", 8)
+	_root.add_child(_combo_box)
 
 	end_screen = EndScreen.new()
 	end_screen.visible = false
@@ -126,6 +139,25 @@ func set_quartet(ready: bool, attack_name: String) -> void:
 		_quartet_button.create_tween().tween_property(_quartet_button, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	elif not ready:
 		_quartet_button.visible = false
+
+
+## Boutons des combos d'équipe prêts : [{id, title, attack, size}] (au plus 3 affichés).
+func set_combos(list: Array) -> void:
+	var ids := list.map(func(c: Dictionary) -> String: return c.id)
+	if ids == _combo_ids:
+		return
+	_combo_ids = ids
+	for child in _combo_box.get_children():
+		child.queue_free()
+	for c: Dictionary in list.slice(0, 3):
+		var kind: String = {4: "QUATUOR", 3: "TRIO", 2: "DUO"}.get(int(c.size), "COMBO")
+		var b := UiKit.button("%s : %s" % [kind, c.attack], "gold" if int(c.size) >= 4 else "green", 22, Vector2(460, 54))
+		var cid: String = c.id
+		b.pressed.connect(func() -> void: combo_requested.emit(cid))
+		_combo_box.add_child(b)
+		b.pivot_offset = Vector2(230, 27)
+		b.scale = Vector2.ONE * 0.7
+		b.create_tween().tween_property(b, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
 func set_wave(index: int, count: int) -> void:

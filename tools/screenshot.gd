@@ -26,6 +26,9 @@ var tab := ""
 var hour := -2.0
 
 
+var team: Array = []
+
+
 func _initialize() -> void:
 	var auto := false
 	var speed := 1.0
@@ -52,7 +55,14 @@ func _initialize() -> void:
 			hour = float(arg.trim_prefix("--hour="))
 		elif arg.begins_with("--tab="):
 			tab = arg.trim_prefix("--tab=")
-	root.get_node("PlayerData").use_memory_only()  # ne touche pas à la vraie sauvegarde
+		elif arg.begins_with("--team="):  # ex. --team=corbin,nyx,rivet,aegis,bastion,nacre,valen,orage
+			team = Array(arg.trim_prefix("--team=").split(","))
+	var pd := root.get_node("PlayerData")
+	pd.use_memory_only()  # ne touche pas à la vraie sauvegarde
+	if not team.is_empty():
+		for id: String in team:
+			pd.state.heroes[id] = {"level": 20, "xp": 0}
+		pd.state.team = team
 	scene = load(scene_path).instantiate()
 	root.add_child(scene)
 	if scene.has_method("set_auto"):

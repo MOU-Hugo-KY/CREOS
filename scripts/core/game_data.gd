@@ -11,6 +11,7 @@ var progression: Dictionary = {}
 var summon: Dictionary = {}
 var quests: Dictionary = {}
 var relics: Dictionary = {}  # reliques, quatuors et Échos (data/relics.json)
+var combos_data: Dictionary = {}  # duos, trios et synergies (data/combos.json)
 
 
 func _ready() -> void:
@@ -28,6 +29,7 @@ func reload() -> void:
 	summon = load_json("res://data/summon.json")
 	quests = load_json("res://data/quests.json")
 	relics = load_json("res://data/relics.json")
+	combos_data = load_json("res://data/combos.json")
 
 
 static func load_json(path: String) -> Dictionary:
@@ -73,6 +75,46 @@ func dungeon_rewards(id: String, stars: int) -> Dictionary:
 
 func quartets() -> Dictionary:
 	return relics.get("quartets", {})
+
+
+## Tous les combos d'équipe : quatuors, trios et duos.
+func team_combos() -> Dictionary:
+	var out: Dictionary = quartets().duplicate()
+	out.merge(combos_data.get("combos", {}))
+	return out
+
+
+func synergies() -> Dictionary:
+	return combos_data.get("synergies", {})
+
+
+## Vagues d'un donjon pour une équipe de `team_size` héros : au-delà de 4, chaque vague reçoit des
+## ennemis en plus (copies des siens, jusqu'à 8) et le boss plus de points de vie.
+func dungeon_waves_for(id: String, team_size: int) -> Array:
+	var waves := dungeon_waves(id)
+	if team_size <= 4:
+		return waves
+	var factor := team_size / 4.0
+	var out: Array = []
+	for wave: Array in waves:
+		var grown: Array = []
+		var minions: Array = []
+		for m: Dictionary in wave:
+			if m.get("boss", false):
+				var boss := m.duplicate(true)
+				if boss.has("stats"):
+					boss.stats["hp"] = float(boss.stats.get("hp", 100)) * factor
+				grown.append(boss)
+			else:
+				grown.append(m)
+				minions.append(m)
+		var want := mini(8, roundi(minions.size() * factor))
+		var i := 0
+		while minions.size() > 0 and grown.size() - (wave.size() - minions.size()) < want:
+			grown.append(minions[i % minions.size()])
+			i += 1
+		out.append(grown)
+	return out
 
 
 ## Niveaux (donjons) d'un monde, dans l'ordre.

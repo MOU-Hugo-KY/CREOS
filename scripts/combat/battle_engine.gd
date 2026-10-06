@@ -52,13 +52,19 @@ var _events: Array[Dictionary] = []
 var awaiting_uid := -1  # héros qui attend le choix du joueur (-1 = personne)
 var focus_uid := -1  # ennemi ciblé par le joueur (-1 = choix automatique)
 var _wave_timer := 0.0
-var quartet: Dictionary = {}  # quatuor de l'équipe (data/relics.json "quartets"), vide si aucun
-var quartet_used := false  # une seule attaque combinée par combat
+## Combos d'équipe possibles (quatuors de relics.json, duos et trios de combos.json) : ceux dont tous
+## les membres sont dans l'équipe. Chacun une seule fois par combat.
+var combos: Array = []
+var combos_used: Dictionary = {}
+var quartet: Dictionary = {}  # le quatuor de l'équipe s'il y en a un (raccourci)
+## Synergies actives (plusieurs héros du même élément ou de la même classe) : {kind, key, name, count, bonus}
+var synergies: Array = []
 
 
 ## heroes_data : Array de Dictionary (données de heroes.json + clé "id").
 ## waves_data  : Array d'Array de Dictionary (données de monsters.json + clé "id").
-func setup(heroes_data: Array, waves_data: Array, rng_seed: int = 0, quartets: Dictionary = {}) -> void:
+func setup(heroes_data: Array, waves_data: Array, rng_seed: int = 0, team_combos: Dictionary = {},
+		synergy_data: Dictionary = {}) -> void:
 	_rng.seed = rng_seed
 	heroes.clear()
 	for i in heroes_data.size():
@@ -72,14 +78,45 @@ func setup(heroes_data: Array, waves_data: Array, rng_seed: int = 0, quartets: D
 	awaiting_uid = -1
 	focus_uid = -1
 	quartet = {}
-	quartet_used = false
+	combos = []
+	combos_used = {}
 	var ids: Array = heroes_data.map(func(d: Dictionary) -> String: return d.get("id", ""))
-	for qid: String in quartets:
-		var q: Dictionary = quartets[qid]
-		if q.members.all(func(m: String) -> bool: return m in ids):
-			quartet = q.duplicate(true)
-			quartet["id"] = qid
+	for cid: String in team_combos:
+		var c: Dictionary = team_combos[cid]
+		if c.members.all(func(m: String) -> bool: return m in ids):
+			var combo := c.duplicate(true)
+			combo["id"] = cid
+			combos.append(combo)
+			if combo.members.size() >= 4 and quartet.is_empty():
+				quartet = combo
+	combos.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.members.size() > b.members.size())
+	_apply_synergies(synergy_data)
 	_start_next_wave()
+
+
+## Bonus permanents quand plusieurs héros partagent un élément ou une classe (combos.json "synergies").
+func _apply_synergies(data: Dictionary) -> void:
+	synergies = []
+	for kind: String in ["element", "class"]:
+		var counts := {}
+		for h in heroes:
+			var key: String = h.element if kind == "element" else h.unit_class
+			counts[key] = int(counts.get(key, 0)) + 1
+		var table: Dictionary = data.get(kind, {})
+		for key: String in counts:
+			if not table.has(key):
+				continue
+			var best: Dictionary = {}
+			for level: Array in table[key].levels:
+				if counts[key] >= int(level[0]):
+					best = level[1]
+			if best.is_empty():
+				continue
+			synergies.append({"kind": kind, "key": key, "name": table[key].get("name", key), "count": counts[key], "bonus": best})
+			for h in heroes:
+				if (h.element if kind == "element" else h.unit_class) == key:
+					for stat_name: String in best:
+						h.mods.append({"stat": stat_name, "amount": float(best[stat_name]), "time": INF})
 
 
 func all_units() -> Array[BattleUnit]:
@@ -118,26 +155,47 @@ func set_focus(uid: int) -> bool:
 	return true
 
 
-## Le quatuor peut frapper : ses 4 membres sont dans l'équipe, vivants, libres d'agir, et chacun a
-## déjà lancé son ultime une fois dans ce combat. Une seule fois par combat.
-func quartet_ready() -> bool:
-	if quartet.is_empty() or quartet_used or finished:
+## Un combo peut frapper : ses membres sont dans l'équipe, vivants, libres d'agir, et chacun a déjà
+## lancé son ultime une fois dans ce combat. Une seule fois par combat.
+func combo_ready(id: String) -> bool:
+	var c := _combo(id)
+	if c.is_empty() or combos_used.has(id) or finished:
 		return false
-	for m: String in quartet.members:
+	for m: String in c.members:
 		var u := _hero_by_id(m)
 		if u == null or not u.is_alive() or not u.used_ultimate or u.stun_time > 0.0:
 			return false
 	return true
 
 
-## Le héros dont c'est le tour déclenche l'attaque combinée (elle consomme son action).
-func request_quartet(uid: int) -> bool:
-	if uid != awaiting_uid or not quartet_ready():
+## Combos prêts, du plus grand (quatuor) au plus petit (duo).
+func ready_combos() -> Array:
+	return combos.filter(func(c: Dictionary) -> bool: return combo_ready(c.id)).map(func(c: Dictionary) -> String: return c.id)
+
+
+## Le héros dont c'est le tour déclenche un combo (il consomme son action).
+func request_combo(uid: int, id: String) -> bool:
+	if uid != awaiting_uid or not combo_ready(id):
 		return false
 	awaiting_uid = -1
-	_use_quartet(get_unit(uid))
+	_use_combo(get_unit(uid), _combo(id))
 	_check_end()
 	return true
+
+
+func _combo(id: String) -> Dictionary:
+	for c: Dictionary in combos:
+		if c.id == id:
+			return c
+	return {}
+
+
+func quartet_ready() -> bool:
+	return not quartet.is_empty() and combo_ready(quartet.id)
+
+
+func request_quartet(uid: int) -> bool:
+	return not quartet.is_empty() and request_combo(uid, quartet.id)
 
 
 func drain_events() -> Array[Dictionary]:
@@ -178,7 +236,7 @@ func step(delta: float) -> void:
 	for u in all_units():
 		if not u.is_alive() or u.stun_time > 0.0:
 			continue
-		u.gauge += u.spd * GAUGE_RATE * delta
+		u.gauge += u.stat("spd") * GAUGE_RATE * delta
 		if u.gauge >= BattleUnit.GAUGE_MAX:
 			u.gauge -= BattleUnit.GAUGE_MAX
 			if u.team == 0 and not auto_mode:
@@ -294,8 +352,9 @@ func _tick_statuses(u: BattleUnit, delta: float) -> void:
 
 
 func _ai_act(u: BattleUnit) -> void:
-	if u.team == 0 and quartet_ready():
-		_use_quartet(u)
+	var ready := ready_combos() if u.team == 0 else []
+	if not ready.is_empty():
+		_use_combo(u, _combo(ready[0]))
 	else:
 		_use_attack(u, _ai_choice(u))
 
@@ -515,25 +574,46 @@ func _heal(src: BattleUnit, t: BattleUnit, amount: float) -> void:
 	_emit({"type": "heal", "src": src.uid if src else -1, "dst": t.uid, "amount": amount, "hp": t.hp})
 
 
-## Attaque combinée du quatuor : chaque membre ajoute sa contribution (puissance × sa statistique)
-## sur tous les ennemis, chaque contribution étant réduite par la défense de la cible.
-func _use_quartet(caster: BattleUnit) -> void:
-	quartet_used = true
+## Attaque combinée (quatuor, trio, duo) : chaque membre ajoute sa contribution (puissance × sa
+## statistique) sur tous les ennemis, réduite par leur défense ; puis soins, boucliers et états.
+func _use_combo(caster: BattleUnit, combo: Dictionary) -> void:
+	combos_used[combo.id] = true
 	var foes := _foes_of(caster)
 	var members: Array[BattleUnit] = []
-	for m: String in quartet.members:
+	for m: String in combo.members:
 		members.append(_hero_by_id(m))
 	_emit({
-		"type": "quartet", "id": quartet.id, "src": caster.uid, "name": quartet.get("attack", ""),
-		"clip": quartet.get("clip", ""), "members": members.map(func(u: BattleUnit) -> int: return u.uid),
+		"type": "quartet", "id": combo.id, "src": caster.uid, "name": combo.get("attack", ""),
+		"title": combo.get("name", ""), "clip": combo.get("clip", ""),
+		"members": members.map(func(u: BattleUnit) -> int: return u.uid),
 		"targets": foes.map(func(t: BattleUnit) -> int: return t.uid),
-		"hit_times": quartet.get("hit_times", [1.45, 2.5, 3.56, 4.62]),
+		"hit_times": combo.get("hit_times", [1.45, 2.5, 3.56, 4.62]),
 	})
-	var contributions: Dictionary = quartet.get("contributions", {})
+	var contributions: Dictionary = combo.get("contributions", {})
 	for u in members:
+		if combo.has("contributions") and not contributions.has(u.def_id):
+			continue
 		var c: Array = contributions.get(u.def_id, [1.5, "atk"])
 		for t in _foes_of(caster):
 			_hit(u, t, float(c[0]), "magic" if c[1] == "mag" else "physical", String(c[1]), false, false)
+	var allies := heroes.filter(func(h: BattleUnit) -> bool: return h.is_alive())
+	for key: String in ["heal", "shield"]:
+		if not combo.has(key):
+			continue
+		var power := 0.0
+		for u in members:
+			power += u.stat(String(combo[key][1])) * float(combo[key][0]) / members.size()
+		for a: BattleUnit in allies:
+			if key == "heal":
+				_heal(caster, a, power * _variance())
+			else:
+				a.shield += power
+				_emit({"type": "shield", "dst": a.uid, "amount": power})
+	if combo.has("status"):
+		for t in _foes_of(caster):
+			if t.is_alive():
+				t.statuses[combo.status.name] = maxf(t.statuses.get(combo.status.name, 0.0), float(combo.status.time))
+				_emit({"type": "status", "dst": t.uid, "status": combo.status.name, "duration": float(combo.status.time)})
 
 
 func _hit(src: BattleUnit, dst: BattleUnit, power: float, kind: String, stat_name := "", single := false,

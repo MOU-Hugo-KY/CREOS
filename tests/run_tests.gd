@@ -21,6 +21,7 @@ func _initialize() -> void:
 	test_quests()
 	test_hero_upgrades()
 	test_quartet()
+	test_team_combos()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -241,8 +242,8 @@ func test_save() -> void:
 	check(pd.team().size() == 4, "équipe de départ de 4 héros")
 	check(not pd.toggle_team("recrue"), "pas de héros non possédé dans l'équipe")
 	pd.state.heroes["recrue"] = {"level": 1, "xp": 0}
-	check(not pd.toggle_team("recrue"), "pas de 5e héros dans l'équipe")
-	check(pd.toggle_team("orage") and pd.toggle_team("recrue") and pd.in_team("recrue"), "remplacer un héros de l'équipe")
+	check(pd.toggle_team("recrue") and pd.team().size() == 5, "un 5e héros rejoint l'équipe (jusqu'à 8)")
+	check(pd.toggle_team("recrue") and not pd.in_team("recrue"), "retirer un héros de l'équipe")
 	check(pd.start_hunt("monde01_1") and pd.energy() == energy0 - pd.hunt_cost("monde01_1"), "une chasse coûte de l'énergie")
 	var res: Dictionary = pd.finish_hunt("monde01_1", true, 3, {"gold": 250, "xp": 120, "essence_ombre": 3}, pd.team())
 	check(pd.gold() == gold0 + 250 and pd.item_count("essence_ombre") == 3, "victoire : or et essences gagnés")
@@ -422,4 +423,36 @@ func test_quartet() -> void:
 	var other := BattleEngine.new()
 	other.setup(_team(gd), gd.dungeon_waves("monde01_1"), 5, gd.quartets())
 	check(other.quartet.is_empty(), "pas de quatuor sans ses quatre membres")
+	gd.free()
+
+
+func test_team_combos() -> void:
+	print("Équipe de 8, duos, trios et synergies")
+	var gd := _data()
+	var ids := ["corbin", "nyx", "rivet", "aegis", "bastion", "nacre", "valen", "orage"]
+	var team: Array = ids.map(func(id: String) -> Dictionary:
+		var d: Dictionary = gd.hero(id).duplicate(true)
+		d["id"] = id
+		return d)
+	var waves: Array = gd.dungeon_waves_for("monde01_1", team.size())
+	check(waves[0].size() > gd.dungeon_waves("monde01_1")[0].size(), "une équipe de 8 affronte des vagues plus fournies")
+	var e := BattleEngine.new()
+	e.setup(team, waves, 3, gd.team_combos(), gd.synergies())
+	check(e.heroes.size() == 8, "8 héros au combat")
+	var combo_ids: Array = e.combos.map(func(c: Dictionary) -> String: return c.id)
+	check("crocs_jumeaux" in combo_ids and "nuit_sans_lune" in combo_ids and "aube" in combo_ids,
+		"duos et trios formés par l'équipe")
+	check(e.combos[0].members.size() >= e.combos[-1].members.size(), "les plus grands combos d'abord")
+	var names: Array = e.synergies.map(func(s: Dictionary) -> String: return s.key)
+	check("lumiere" in names and "ombre" in names and "gardien" in names, "synergies d'élément et de classe actives")
+	var aegis: BattleUnit = e._hero_by_id("aegis")
+	check(aegis.stat("def") > aegis.def, "une synergie augmente la statistique")
+	var hero := _wait_turn(e)
+	for h in e.heroes:
+		h.used_ultimate = true
+	check(hero != null and "crocs_jumeaux" in e.ready_combos(), "duo prêt quand ses membres ont lancé leur ultime")
+	check(e.request_combo(hero.uid, "aube"), "le héros dont c'est le tour lance un trio")
+	var evs := e.drain_events()
+	check(evs.any(func(ev: Dictionary) -> bool: return ev.type == "shield"), "le trio de l'aube protège l'équipe")
+	check(not e.combo_ready("aube") and e.combo_ready("crocs_jumeaux"), "chaque combo une fois par combat, les autres restent prêts")
 	gd.free()

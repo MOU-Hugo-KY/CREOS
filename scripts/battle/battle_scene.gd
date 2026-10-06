@@ -9,9 +9,14 @@ extends Node2D
 const HUB_SCENE := "res://scenes/hub/hub.tscn"
 const FRAME := Vector2(1280, 720)
 # Formation en losange : devant, haut, bas, arrière (en pixels du cadre, point au sol).
-const HERO_SPOTS := [Vector2(530, 596), Vector2(410, 540), Vector2(395, 652), Vector2(265, 594)]
-const ENEMY_SPOTS := [Vector2(770, 596), Vector2(885, 540), Vector2(900, 652), Vector2(1030, 594)]
-const BOSS_SPOT := Vector2(1000, 604)
+## Jusqu'à 8 héros et 8 ennemis, sur deux rangs en quinconce (le premier rang devant).
+## (Dans un même rang, ceux de devant sont un poil plus bas : ils passent devant ceux de derrière.)
+const HERO_SPOTS := [Vector2(575, 554), Vector2(520, 668), Vector2(450, 552), Vector2(395, 666),
+	Vector2(325, 550), Vector2(270, 664), Vector2(200, 548), Vector2(145, 662)]
+const ENEMY_SPOTS := [Vector2(705, 554), Vector2(760, 668), Vector2(830, 552), Vector2(885, 666),
+	Vector2(955, 550), Vector2(1010, 664), Vector2(1080, 548), Vector2(1135, 662)]
+const CROWD_SCALE := 0.78  # combattants un peu plus petits quand il y a plus de 4 héros
+const BOSS_SPOT := Vector2(1040, 604)
 const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague
 const END_DELAY := 1.4
 const STATUS_LABELS := {
@@ -59,6 +64,7 @@ func _ready() -> void:
 	add_child(hud)
 	hud.attack_requested.connect(_on_attack_requested)
 	hud.quartet_requested.connect(_on_quartet_requested)
+	hud.combo_requested.connect(_on_combo_requested)
 	hud.auto_toggled.connect(func(on: bool) -> void:
 		engine.auto_mode = on
 		if on:
@@ -91,7 +97,8 @@ func start_battle(rng_seed: int) -> void:
 	team_ids = PlayerData.team()
 	var team_data: Array = team_ids.map(func(id: String) -> Dictionary:
 		return PlayerData.hero_for_battle(id))
-	engine.setup(team_data, GameData.dungeon_waves(dungeon_id), rng_seed, GameData.quartets())
+	engine.setup(team_data, GameData.dungeon_waves_for(dungeon_id, team_data.size()), rng_seed,
+		GameData.team_combos(), GameData.synergies())
 	engine.auto_mode = was_auto
 	hud.set_auto(was_auto)
 	for i in engine.heroes.size():
@@ -116,7 +123,12 @@ func _process(delta: float) -> void:
 		engine.step(delta)
 		_handle_events()
 	_run_pending()
-	hud.set_quartet(engine.awaiting_uid != -1 and engine.quartet_ready(), String(engine.quartet.get("attack", "")))
+	var ready: Array = []
+	if engine.awaiting_uid != -1:
+		for cid: String in engine.ready_combos():
+			var c := engine._combo(cid)
+			ready.append({"id": cid, "attack": c.get("attack", ""), "size": c.members.size()})
+	hud.set_combos(ready)
 	hud.refresh(delta)
 
 
@@ -128,7 +140,13 @@ func _on_attack_requested(uid: int, slot: int) -> void:
 
 
 func _on_quartet_requested() -> void:
-	if engine.request_quartet(engine.awaiting_uid):
+	var ready := engine.ready_combos()
+	if not ready.is_empty():
+		_on_combo_requested(ready[0])
+
+
+func _on_combo_requested(combo_id: String) -> void:
+	if engine.request_combo(engine.awaiting_uid, combo_id):
 		audio.play("ui_ready", -2.0, 0.0)
 		_end_turn()
 		_handle_events()
@@ -296,10 +314,41 @@ func _on_attack(ev: Dictionary) -> float:
 	return delay
 
 
+## Duo ou trio : chaque membre lance son ultime à sa place, en même temps, vers les ennemis.
+func _on_small_combo(ev: Dictionary) -> float:
+	var hits: Array = []
+	for uid: int in ev.targets:
+		if views.has(uid):
+			hits.append(views[uid].chest_position())
+	var aim := Vector2.INF
+	if not hits.is_empty():
+		aim = Vector2.ZERO
+		for p: Vector2 in hits:
+			aim += p
+		aim /= hits.size()
+	for uid: int in ev.members:
+		var v: UnitView = views.get(uid)
+		if v:
+			v.play_attack(v._id + "_2", 0.0, aim)
+			fx.aura(v.position, Palette.element_color(v.unit.element))
+	var kind := "Trio" if ev.members.size() == 3 else "Duo"
+	hud.callout(String(ev.name), "%s · %s" % [kind, ev.get("title", "")], Palette.GOLD, true)
+	stage.ambience.set_ultimate_active(true)
+	_schedule(2.4, func() -> void: stage.ambience.set_ultimate_active(false))
+	for t: float in ev.hit_times:
+		_schedule(t, func() -> void:
+			fx.shake(0.35)
+			fx.kick(0.04)
+			_sfx("ultimate_impact", -3.0))
+	return 0.0
+
+
 ## Attaque combinée du quatuor : les quatre héros s'effacent pendant que le clip du quatuor les
 ## montre ensemble, puis reviennent.
 func _on_quartet(ev: Dictionary) -> float:
 	var clip := String(ev.get("clip", ""))
+	if clip == "":
+		return _on_small_combo(ev)
 	var p := ClipPlayer.new()
 	p.bundle = "res://assets/anim/heroes/"
 	p.scale = Vector2.ONE * 0.65  # les quatre héros du clip sont dessinés plus petits
@@ -508,6 +557,8 @@ func _spawn(u: BattleUnit, data: Dictionary, pos: Vector2) -> void:
 	v.position = pos
 	_units_root.add_child(v)
 	v.setup(u, data)
+	if engine.heroes.size() > 4:
+		v.scale = Vector2.ONE * CROWD_SCALE
 	views[u.uid] = v
 	unit_data[u.uid] = data
 	hud.add_overhead(v)

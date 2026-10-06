@@ -12,7 +12,7 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 - Autoload `GameData` (`scripts/core/game_data.gd`) charge `data/*.json`.
 - Autoload `PlayerData` (`scripts/core/player_data.gd`) : **la sauvegarde** (`user://save.json`) :
   or, gemmes, énergie (se recharge avec le temps), niveau de la loge, héros possédés (niveau, XP),
-  équipe de chasse (4 max), objets, étoiles par donjon. Règles pures et testées dans
+  équipe de chasse (8 max), objets, étoiles par donjon. Règles pures et testées dans
   `scripts/core/progression.gd`, chiffres dans `data/progression.json`. Les tests et l'outil de
   capture appellent `PlayerData.use_memory_only()` pour ne jamais toucher la vraie sauvegarde.
 - Autoload `GameSettings` (`scripts/core/game_settings.gd`) : volumes Général / Musique / Effets
@@ -66,8 +66,11 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 - **Progression (fiche de combat)** : niveaux 1-60 ; **Échos** = doublons du même héros (seuils
   1/3/6/9/12, bonus surtout sur la statistique principale, `progression.json` "echoes") ;
   **reliques** à 5 paliers (fragments `relique_<héros>` gagnés en campagne + `materiaux_relique`) ;
-  3 voies d'Héritage par héros (une active). **Quatuors** (`data/relics.json` "quartets") : si les 4
-  membres sont dans l'équipe et ont chacun lancé leur ultime, bouton QUATUOR une fois par combat.
+  3 voies d'Héritage par héros (une active). **Combos d'équipe** : quatuors (`data/relics.json` "quartets"),
+  duos et trios (`data/combos.json` "combos") ; si les membres sont dans l'équipe et ont chacun lancé leur
+  ultime, un bouton par combo prêt (une fois par combat chacun). **Synergies** (`combos.json` "synergies") :
+  bonus permanents selon le nombre de héros du même élément ou de la même classe. Au-delà de 4 héros,
+  `GameData.dungeon_waves_for()` grossit les vagues (jusqu'à 8 ennemis, boss plus solide).
 - **Port-Franc en 2D** (`scripts/hub/port_franc_2d.gd`, images dans `assets/hub2d/port/`) : un
   « théâtre » de calques posés à différentes distances de la caméra (parallaxe en glissant),
   bâtiments cliquables avec leur image de survol, animations en planches de sprites

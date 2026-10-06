@@ -1,0 +1,50 @@
+{
+  "_doc": "Combos d'équipe (duos et trios) et synergies. Les quatuors sont dans relics.json. Un combo est prêt quand tous ses membres sont dans l'équipe, vivants, et ont lancé leur ultime une fois ; une seule fois par combat. contributions = [puissance, statistique] de chaque membre sur tous les ennemis ; heal/shield = [puissance, statistique] sur tous les alliés ; status = état posé sur les ennemis touchés (secondes).",
+  "combos": {
+    "crocs_jumeaux": {"name": "Crocs jumeaux", "attack": "Danse des deux crocs", "members": ["corbin", "nyx"],
+      "contributions": {"corbin": [1.3, "atk"], "nyx": [1.3, "atk"]}, "status": {"name": "marque", "time": 6}, "hit_times": [0.9, 1.3]},
+    "mur_et_pointe": {"name": "Mur et pointe", "attack": "Charge du rempart", "members": ["aegis", "valen"],
+      "contributions": {"aegis": [0.9, "def"], "valen": [1.4, "atk"]}, "shield": [0.6, "def"], "hit_times": [1.0]},
+    "vapeur": {"name": "Vapeur ardente", "attack": "Brume brûlante", "members": ["braise", "brume"],
+      "contributions": {"braise": [1.4, "mag"], "brume": [1.2, "mag"]}, "status": {"name": "aveugle", "time": 4}, "hit_times": [1.0]},
+    "racines": {"name": "Racines anciennes", "attack": "Étreinte des racines", "members": ["sylve", "kharok"],
+      "contributions": {"sylve": [1.0, "def"], "kharok": [1.2, "atk"]}, "status": {"name": "enracine", "time": 4}, "hit_times": [1.0]},
+    "tir_croise": {"name": "Tir croisé", "attack": "Pluie de carreaux", "members": ["rivet", "tang_su"],
+      "contributions": {"rivet": [1.3, "atk"], "tang_su": [1.4, "atk"]}, "hit_times": [0.8, 1.1, 1.4]},
+    "chant_des_marees": {"name": "Chant des marées", "attack": "Berceuse de nacre", "members": ["nacre", "oona"],
+      "contributions": {}, "heal": [1.2, "mag"], "shield": [0.5, "mag"], "hit_times": [1.0]},
+    "cent_poings": {"name": "Cent poings", "attack": "Tonnerre des paumes", "members": ["orage", "jin_seok"],
+      "contributions": {"orage": [1.2, "atk"], "jin_seok": [1.3, "atk"]}, "status": {"name": "desequilibre", "time": 4}, "hit_times": [0.7, 1.0, 1.3]},
+    "fournaise": {"name": "Fournaise", "attack": "Cœur de forge", "members": ["calx", "saffran"],
+      "contributions": {"calx": [1.1, "def"], "saffran": [1.4, "mag"]}, "hit_times": [1.1]},
+    "petales_courant": {"name": "Pétales et courant", "attack": "Lame du fleuve fleuri", "members": ["mei_lian", "yun_tao"],
+      "contributions": {"mei_lian": [1.4, "atk"], "yun_tao": [1.3, "atk"]}, "status": {"name": "mouille", "time": 6}, "hit_times": [0.9, 1.3]},
+    "aube": {"name": "Trinité de l'aube", "attack": "Lumière du premier jour", "members": ["aegis", "bastion", "nacre"],
+      "contributions": {"aegis": [0.8, "def"], "bastion": [0.8, "def"], "nacre": [1.0, "mag"]}, "shield": [0.9, "def"], "hit_times": [1.2]},
+    "abysses": {"name": "Chœur des abysses", "attack": "La grande marée", "members": ["brume", "oona", "yun_tao"],
+      "contributions": {"brume": [1.3, "mag"], "oona": [1.1, "mag"], "yun_tao": [1.3, "atk"]}, "heal": [0.6, "mag"], "status": {"name": "mouille", "time": 6}, "hit_times": [1.0, 1.6]},
+    "brasier": {"name": "Brasier des trois", "attack": "Ciel de cendres", "members": ["braise", "saffran", "calx"],
+      "contributions": {"braise": [1.5, "mag"], "saffran": [1.3, "mag"], "calx": [1.0, "def"]}, "hit_times": [1.0, 1.5]},
+    "sous_bois": {"name": "Gardiens du sous-bois", "attack": "Colère de la forêt", "members": ["sylve", "kharok", "mei_lian"],
+      "contributions": {"sylve": [1.0, "def"], "kharok": [1.2, "atk"], "mei_lian": [1.5, "atk"]}, "heal": [0.4, "def"], "hit_times": [1.0, 1.5]},
+    "nuit_sans_lune": {"name": "Nuit sans lune", "attack": "Trois ombres, un seul coup", "members": ["corbin", "nyx", "rivet"],
+      "contributions": {"corbin": [1.4, "atk"], "nyx": [1.4, "atk"], "rivet": [1.3, "atk"]}, "status": {"name": "marque", "time": 8}, "hit_times": [0.8, 1.2, 1.6]}
+  },
+  "synergies": {
+    "element": {
+      "feu": {"name": "Ardeur", "levels": [[2, {"atk": 0.1, "mag": 0.1}], [3, {"atk": 0.2, "mag": 0.2}]]},
+      "eau": {"name": "Courant", "levels": [[2, {"res": 0.15}], [3, {"res": 0.3, "mag": 0.1}]]},
+      "nature": {"name": "Sève", "levels": [[2, {"def": 0.12}], [3, {"def": 0.25, "atk": 0.1}]]},
+      "lumiere": {"name": "Aurore", "levels": [[2, {"def": 0.08, "res": 0.08}], [4, {"def": 0.16, "res": 0.16}], [6, {"def": 0.25, "res": 0.25, "atk": 0.1}]]},
+      "ombre": {"name": "Pénombre", "levels": [[2, {"crit": 0.05}], [4, {"crit": 0.12, "atk": 0.1}]]}
+    },
+    "class": {
+      "gardien": {"name": "Rempart", "levels": [[2, {"def": 0.15}], [4, {"def": 0.3, "res": 0.15}]]},
+      "lame": {"name": "Fil de la lame", "levels": [[2, {"atk": 0.12}], [3, {"atk": 0.22, "crit": 0.05}]]},
+      "moine": {"name": "Discipline", "levels": [[2, {"spd": 0.1}], [3, {"spd": 0.2, "atk": 0.1}]]},
+      "traqueur": {"name": "Traque", "levels": [[2, {"crit": 0.1}]]},
+      "arcaniste": {"name": "Arcanes", "levels": [[2, {"mag": 0.18}]]},
+      "soutien": {"name": "Soutien", "levels": [[2, {"res": 0.15, "def": 0.1}]]}
+    }
+  }
+}

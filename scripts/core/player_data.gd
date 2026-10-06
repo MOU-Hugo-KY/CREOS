@@ -7,7 +7,7 @@ signal changed
 
 const SAVE_PATH := "user://save.json"
 const SAVE_VERSION := 1
-const TEAM_SIZE := 4
+const TEAM_SIZE := 8
 
 var state: Dictionary = {}
 var current_dungeon := ""

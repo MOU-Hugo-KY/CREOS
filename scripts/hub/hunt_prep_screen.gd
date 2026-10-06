@@ -64,14 +64,14 @@ func refresh() -> void:
 	var team := PlayerData.team()
 	for i in PlayerData.TEAM_SIZE:
 		var col := VBoxContainer.new()
-		col.custom_minimum_size = Vector2(170, 0)
+		col.custom_minimum_size = Vector2(124, 0)
 		_slots.add_child(col)
 		var center := CenterContainer.new()
 		col.add_child(center)
 		if i < team.size():
 			var id: String = team[i]
-			center.add_child(_portrait_button(id, 130, true))
-			var n := UiKit.label(String(GameData.hero(id).get("short", GameData.hero(id).name)), 21, UiKit.INK)
+			center.add_child(_portrait_button(id, 100, true))
+			var n := UiKit.label(String(GameData.hero(id).get("short", GameData.hero(id).name)), 18, UiKit.INK)
 			n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			col.add_child(n)
 			var lv := UiKit.label("Niv. %d" % PlayerData.hero_level(id), 17, UiKit.TEXT_SOFT)
@@ -79,8 +79,8 @@ func refresh() -> void:
 			col.add_child(lv)
 		else:
 			var empty := Panel.new()
-			empty.custom_minimum_size = Vector2(130, 130)
-			empty.add_theme_stylebox_override("panel", UiKit.box(Color(0, 0, 0, 0.08), UiKit.PARCHMENT_DARK.darkened(0.2), 65, 3))
+			empty.custom_minimum_size = Vector2(100, 100)
+			empty.add_theme_stylebox_override("panel", UiKit.box(Color(0, 0, 0, 0.08), UiKit.PARCHMENT_DARK.darkened(0.2), 50, 3))
 			center.add_child(empty)
 			var n := UiKit.label("Place libre", 19, UiKit.TEXT_SOFT)
 			n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -96,15 +96,42 @@ func refresh() -> void:
 		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		col.add_child(n)
 		_pool.add_child(col)
-	# Quatuor formé par l'équipe : son attaque combinée sera disponible en combat.
-	for qid: String in GameData.quartets():
-		var q: Dictionary = GameData.quartets()[qid]
-		if q.members.all(func(m: String) -> bool: return m in team):
-			_info.text += "\nQuatuor formé : %s  ·  attaque combinée « %s »" % [q.name, q.attack]
+	# Combos formés par l'équipe (attaques combinées en combat) et synergies actives.
+	var formed: Array = []
+	for cid: String in GameData.team_combos():
+		var c: Dictionary = GameData.team_combos()[cid]
+		if c.members.all(func(m: String) -> bool: return m in team):
+			formed.append("%s (%d)" % [c.name, c.members.size()])
+	if not formed.is_empty():
+		_info.text += "\nCombos : " + ", ".join(formed)
+	var active := synergy_lines(team)
+	if not active.is_empty():
+		_info.text += "\nSynergies : " + ", ".join(active)
 	_go.text = "Partir en chasse  ·  %d énergie" % cost
 	_go.disabled = team.is_empty() or not PlayerData.can_start_hunt(dungeon_id)
 	if PlayerData.energy() < cost:
 		_go.text = "Pas assez d'énergie (%d / %d)" % [PlayerData.energy(), cost]
+
+
+## Synergies que l'équipe déclenche : « Ardeur ×2 », « Rempart ×4 »…
+static func synergy_lines(team: Array) -> Array:
+	var out: Array = []
+	var table := GameData.synergies()
+	for kind: String in ["element", "class"]:
+		var counts := {}
+		for id: String in team:
+			var key := String(GameData.hero(id).get(kind, ""))
+			counts[key] = int(counts.get(key, 0)) + 1
+		for key: String in counts:
+			if not table.get(kind, {}).has(key):
+				continue
+			var reached := 0
+			for level: Array in table[kind][key].levels:
+				if counts[key] >= int(level[0]):
+					reached = int(level[0])
+			if reached > 0:
+				out.append("%s ×%d" % [table[kind][key].name, counts[key]])
+	return out
 
 
 func _portrait_button(id: String, size: float, in_slot: bool) -> Control:
