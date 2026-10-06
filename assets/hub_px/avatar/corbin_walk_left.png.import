@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci8bpwnr30id5"
-path="res://.godot/imported/corbin_walk.png-47f569ba8102802b0d6de10e067b7dda.ctex"
+uid="uid://018yp0mj61jo"
+path="res://.godot/imported/corbin_walk_left.png-49b93097194a659e2f6a89e3f682b03b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hub_px/avatar/corbin_walk.png"
-dest_files=["res://.godot/imported/corbin_walk.png-47f569ba8102802b0d6de10e067b7dda.ctex"]
+source_file="res://assets/hub_px/avatar/corbin_walk_left.png"
+dest_files=["res://.godot/imported/corbin_walk_left.png-49b93097194a659e2f6a89e3f682b03b.ctex"]
 
 [params]
 

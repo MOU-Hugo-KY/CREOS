@@ -27,6 +27,12 @@ var _rest := 1.0
 var _clock := 0.0
 var _hour_override := -1.0
 var _hovered := ""
+var _facing := "down"
+## Avatar du hub (pack Corbin 4 directions) : animation -> nombre d'images (cases de 192 × 192).
+const FRAME_COUNTS := {
+	"idle_down": 8, "idle_up": 8, "idle_right": 8, "idle_left": 8,
+	"walk_down": 12, "walk_up": 8, "walk_right": 8, "walk_left": 8,
+}
 
 
 func _ready() -> void:
@@ -159,11 +165,11 @@ func _build_avatar() -> void:
 	_sprite = AnimatedSprite2D.new()
 	var frames := SpriteFrames.new()
 	frames.remove_animation("default")
-	for anim: String in ["idle", "walk"]:
+	for anim: String in FRAME_COUNTS:
 		frames.add_animation(anim)
-		frames.set_animation_speed(anim, 8 if anim == "idle" else 10)
+		frames.set_animation_speed(anim, 8 if anim.begins_with("idle") else 10)
 		var tex: Texture2D = load(DIR + "avatar/corbin_" + anim + ".png")
-		for i in 8:
+		for i in int(FRAME_COUNTS[anim]):
 			var atlas := AtlasTexture.new()
 			atlas.atlas = tex
 			atlas.region = Rect2(i * 192, 0, 192, 192)
@@ -173,7 +179,7 @@ func _build_avatar() -> void:
 	_sprite.offset = Vector2(-96, -146)
 	_sprite.scale = Vector2(0.7, 0.7)
 	avatar.add_child(_sprite)
-	_sprite.play("idle")
+	_sprite.play("idle_down")
 	_walkers.append(avatar)
 
 
@@ -241,10 +247,25 @@ func _process(delta: float) -> void:
 		if _rest <= 0.0:
 			_wander_next()
 	if dir.length() > 0.1:
-		_sprite.play("walk")
-		_sprite.flip_h = dir.x < 0.0
+		# Axe dominant : face, dos, droite ou gauche.
+		if absf(dir.x) >= absf(dir.y):
+			_facing = "right" if dir.x > 0.0 else "left"
+		else:
+			_facing = "down" if dir.y > 0.0 else "up"
+		_play_keep_phase("walk_" + _facing)
 	else:
-		_sprite.play("idle")
+		_sprite.play("idle_" + _facing)
+
+
+## Change de direction de marche sans repartir de la première image.
+func _play_keep_phase(anim: String) -> void:
+	if _sprite.animation == anim:
+		return
+	var was_walking := String(_sprite.animation).begins_with("walk")
+	var phase := float(_sprite.frame) / float(_sprite.sprite_frames.get_frame_count(_sprite.animation))
+	_sprite.play(anim)
+	if was_walking:
+		_sprite.frame = int(phase * _sprite.sprite_frames.get_frame_count(anim))
 
 
 # --- Jour et nuit ------------------------------------------------------------------------
