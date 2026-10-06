@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu66gmlu7n8he"
-path="res://.godot/imported/sol.png-1660a9300ca78b96b586fbc14d085bec.ctex"
+uid="uid://co20pme4ju2ws"
+path="res://.godot/imported/fond3.png-fe4690415bb62189e56b88d0b2ff034b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/decors/monde01/sol.png"
-dest_files=["res://.godot/imported/sol.png-1660a9300ca78b96b586fbc14d085bec.ctex"]
+source_file="res://assets/decors/monde01/fond3.png"
+dest_files=["res://.godot/imported/fond3.png-fe4690415bb62189e56b88d0b2ff034b.ctex"]
 
 [params]
 

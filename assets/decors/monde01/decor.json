@@ -1,26 +1,50 @@
 {
- "world": 1,
- "name": "Abords de Port-Franc",
- "foot_baseline": 590,
- "safe_combat_rect": [
-  256,
-  447,
-  768,
-  179
- ],
- "foreground_offset": 96,
- "scenes": [
-  {
-   "name": "La route des chasseurs",
-   "role": "Entree"
-  },
-  {
-   "name": "Les criques des contrebandiers",
-   "role": "Profondeur"
-  },
-  {
-   "name": "Le rivage du Brise-Coque",
-   "role": "Boss"
+  "world": 1,
+  "name": "Abords de Port-Franc",
+  "foot_baseline": 770,
+  "safe_combat_rect": [
+    256,
+    565,
+    1160,
+    329
+  ],
+  "foreground_offset": 0,
+  "scenes": [
+    {
+      "name": "La route des chasseurs",
+      "role": "Entree",
+      "background": "fond1.png",
+      "foreground": "premier_plan1.png"
+    },
+    {
+      "name": "Les criques des contrebandiers",
+      "role": "Profondeur",
+      "background": "fond2.png",
+      "foreground": "premier_plan2.png"
+    },
+    {
+      "name": "Le rivage du Brise-Coque",
+      "role": "Boss",
+      "background": "fond3.png",
+      "foreground": "premier_plan3.png"
+    }
+  ],
+  "canvas_size": [
+    1672,
+    941
+  ],
+  "texture_filter": "nearest",
+  "files": [
+    "fond1.png",
+    "fond2.png",
+    "fond3.png",
+    "premier_plan1.png",
+    "premier_plan2.png",
+    "premier_plan3.png"
+  ],
+  "ground_layer": null,
+  "foreground_limits": {
+    "side_width_px": 200,
+    "bottom_height_px": 75
   }
- ]
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddbs007jxk4e0"
-path="res://.godot/imported/fond2.jpg-fe1d5d955cab195b5fcae65940a7dabd.ctex"
+uid="uid://dpiwubp8pb50x"
+path="res://.godot/imported/premier_plan1.png-8b673d08beef018a948bb1d985fab31f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/decors/monde01/fond2.jpg"
-dest_files=["res://.godot/imported/fond2.jpg-fe1d5d955cab195b5fcae65940a7dabd.ctex"]
+source_file="res://assets/decors/monde01/premier_plan1.png"
+dest_files=["res://.godot/imported/premier_plan1.png-8b673d08beef018a948bb1d985fab31f.ctex"]
 
 [params]
 
