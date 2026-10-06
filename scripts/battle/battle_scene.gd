@@ -334,6 +334,10 @@ func _on_impact(ev: Dictionary) -> void:
 				var heavy: bool = ev.crit or int(_last_slot.get(int(ev.src), 0)) >= BattleUnit.SLOT_ULTIMATE
 				fx.burst(t.chest_position(), color, ev.crit)
 				fx.slash(t.chest_position(), color, heavy)
+				if src:
+					fx.element_hit(t.chest_position(), src.unit.element, heavy)
+				if heavy:
+					fx.kick(0.05 if ev.crit else 0.035)
 				fx.dust(t.position, 0.6)
 				# Arrêt sur image : attaquant et cible se figent un instant.
 				var stop := 0.11 if heavy else 0.06

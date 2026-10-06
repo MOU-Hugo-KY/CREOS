@@ -38,6 +38,7 @@ func setup(p_unit: BattleUnit, p_data: Dictionary) -> void:
 	player.facing = 1.0  # les héros regardent à droite, les ennemis sont dessinés vers la gauche
 	player.idle_clip = _id + "_idle"
 	player.sound_volume_db = -10.0
+	player.effect_color = Palette.element_color(p_unit.element)
 	add_child(player)
 	player.play(_id + "_idle")
 	for clip_name: String in [_id + "_hurt", _id + "_death"]:
@@ -106,7 +107,7 @@ func set_target_mark(on: bool) -> void:
 func play_hit(color := Color.WHITE) -> void:
 	if _dead:
 		return
-	player.flash(Color.WHITE.lerp(color, 0.25), 1.0)
+	player.flash(Color.WHITE.lerp(color, 0.3), 0.8)
 	if not _attacking and player.has_clip(_id + "_hurt"):
 		player.play(_id + "_hurt")
 		player.idle_clip = _id + "_idle"
