@@ -8,6 +8,10 @@ extends Node2D
 
 const HUB_SCENE := "res://scenes/hub/hub.tscn"
 const FRAME := Vector2(1280, 720)
+# Scène de quatuor (repère 512 × 288) posée sur le combat : ses cibles (≈ 374, 217) tombent sur la
+# ligne ennemie et ses pieds de héros sur la ligne alliée.
+const QUARTET_SCALE := 2.0
+const QUARTET_ORIGIN := Vector2(82, 176)
 # Formation en losange : devant, haut, bas, arrière (en pixels du cadre, point au sol).
 ## Jusqu'à 8 héros et 8 ennemis, sur deux rangs en quinconce (le premier rang devant).
 ## (Dans un même rang, ceux de devant sont un poil plus bas : ils passent devant ceux de derrière.)
@@ -349,6 +353,8 @@ func _on_quartet(ev: Dictionary) -> float:
 	var clip := String(ev.get("clip", ""))
 	if clip == "":
 		return _on_small_combo(ev)
+	if FileAccess.file_exists("res://assets/anim/quatuors/%s/%s_quatuor.json" % [ev.id, ev.id]):
+		return _on_pixel_quartet(ev)
 	var p := ClipPlayer.new()
 	p.bundle = "res://assets/anim/heroes/"
 	p.scale = Vector2.ONE * 0.65  # les quatre héros du clip sont dessinés plus petits
@@ -374,6 +380,39 @@ func _on_quartet(ev: Dictionary) -> float:
 		_schedule(t, func() -> void:
 			fx.shake(0.45)
 			_sfx("ultimate_impact", -2.0))
+	return 0.0
+
+
+## Quatuor en pixel art : la scène du pack (512 × 288) agrandie sur tout le cadre, les quatre héros
+## cachés pendant qu'elle se joue. Les dégâts tombent sur ses impacts (hit_times de relics.json).
+func _on_pixel_quartet(ev: Dictionary) -> float:
+	var p := QuatuorPlayer.new()
+	p.scale = Vector2.ONE * QUARTET_SCALE
+	p.position = QUARTET_ORIGIN
+	p.z_index = 40
+	add_child(p)
+	if not p.play(String(ev.id)):
+		p.queue_free()
+		return 0.0
+	var members: Array = ev.members
+	for uid: int in members:
+		if views.has(uid):
+			views[uid].modulate.a = 0.0
+	hud.callout(String(ev.name), "Quatuor", Palette.GOLD, true)
+	stage.ambience.set_ultimate_active(true)
+	p.hit_active.connect(func(e: Dictionary) -> void:
+		var final: bool = e.get("kind", "") == "final_explosion"
+		fx.shake(0.6 if final else 0.3)
+		if final:
+			fx.kick(0.05)
+		_sfx("ultimate_impact", -2.0 if final else -5.0))
+	p.finished.connect(func(_id: String) -> void:
+		p.queue_free()
+		stage.ambience.set_ultimate_active(false)
+		for uid: int in members:
+			if views.has(uid) and not views[uid].is_dead():
+				var tw: Tween = views[uid].create_tween()
+				tw.tween_property(views[uid], "modulate:a", 1.0, 0.25))
 	return 0.0
 
 

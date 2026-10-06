@@ -348,7 +348,7 @@ def build_quartets(sheet):
         out[qid] = {"name": q["name"], "members": q["members"], "attack": q["attack"], "effect": q["effect"],
                     "bonus": q["bonus"], "resonance": q["resonance"], "visual": q["visual"],
                     "clip": "quatuor_%d" % i, "contributions": QUARTET_CONTRIB[qid],
-                    "hit_times": clip_cues("heroes", "quatuor_%d" % i)[1][:4]}
+                    "hit_times": [0.8, 1.2, 1.6, 2.63]}  # impacts des scènes pixel (assets/anim/quatuors)
     return out
 
 
