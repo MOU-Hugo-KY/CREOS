@@ -2,8 +2,8 @@ class_name HubPixel
 extends Node2D
 ## Le hub en pixel art (vue de dessus inclinée), d'après `assets/hub_px/hub_layout.json` (carte 1280 × 720) :
 ## sol, bâtiments et objets triés par leur pied, effets animés (cristal, flammes, fumée, bannières,
-## étincelles), lumières, jour/nuit. Le joueur (Corbin pour l'instant) marche où l'on touche, en
-## contournant les bâtiments ; toucher un bâtiment l'y fait aller, puis ouvre son service.
+## étincelles), lumières, jour/nuit. Corbin se promène tout seul sur la place en contournant les
+## bâtiments ; toucher un bâtiment ouvre son service.
 
 signal service_requested(service_id: String)
 
@@ -23,7 +23,7 @@ var _lights: Array[Dictionary] = []
 var _fx: Array[AnimatedSprite2D] = []
 var _nav := AStarGrid2D.new()
 var _path := PackedVector2Array()
-var _pending := ""
+var _rest := 1.0
 var _clock := 0.0
 var _hour_override := -1.0
 var _hovered := ""
@@ -177,18 +177,23 @@ func _build_avatar() -> void:
 	_walkers.append(avatar)
 
 
-## Toucher un point de la carte : y marcher, ou aller au bâtiment touché puis ouvrir son service.
+## Toucher la carte : si c'est un bâtiment, il s'ouvre tout de suite (le joueur ne dirige pas Corbin).
 func tap(point: Vector2) -> void:
-	_pending = ""
 	var id := building_at(point)
 	if id != "":
-		_pending = id
-		point = buildings[id].approach
 		bounce(id)
-	_path = _nav.get_point_path(_nearest_walkable(avatar.position), _nearest_walkable(point))
-	if _path.is_empty() and _pending != "":
-		service_requested.emit(_pending)
-		_pending = ""
+		service_requested.emit(id)
+
+
+## Corbin se promène tout seul : il choisit un endroit libre de la place, y marche, s'arrête un moment.
+func _wander_next() -> void:
+	for attempt in 20:
+		var p := Vector2(randf_range(200, 1080), randf_range(300, 660))
+		var cell := _nearest_walkable(p)
+		var path := _nav.get_point_path(_nearest_walkable(avatar.position), cell)
+		if path.size() > 2:
+			_path = path
+			return
 
 
 func building_at(point: Vector2) -> String:
@@ -224,25 +229,17 @@ func _process(delta: float) -> void:
 	for l: Dictionary in _lights:
 		l.node.energy = l.energy * _light_level * (1.0 + 0.06 * sin(_clock * 3.1 + l.phase) + 0.025 * sin(_clock * 7.3 + l.phase))
 	var dir := Vector2.ZERO
-	if Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT): dir.x += 1
-	if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_Q) or Input.is_physical_key_pressed(KEY_LEFT): dir.x -= 1
-	if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_Z) or Input.is_physical_key_pressed(KEY_UP): dir.y -= 1
-	if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN): dir.y += 1
-	if dir.length() > 0.0:
-		_path.clear()
-		_pending = ""
-		var step := avatar.position + dir.normalized() * SPEED * delta
-		var cell := Vector2i(floori(step.x / 16), floori(step.y / 16))
-		if _nav.is_in_boundsv(cell) and not _nav.is_point_solid(cell):
-			avatar.position = step
-	elif not _path.is_empty():
+	if not _path.is_empty():
 		dir = _path[0] - avatar.position
-		avatar.position = avatar.position.move_toward(_path[0], SPEED * delta)
+		avatar.position = avatar.position.move_toward(_path[0], SPEED * 0.6 * delta)
 		if avatar.position.distance_to(_path[0]) < 1.0:
 			_path.remove_at(0)
-			if _path.is_empty() and _pending != "":
-				service_requested.emit(_pending)
-				_pending = ""
+			if _path.is_empty():
+				_rest = randf_range(1.5, 4.0)  # pause avant la prochaine balade
+	else:
+		_rest -= delta
+		if _rest <= 0.0:
+			_wander_next()
 	if dir.length() > 0.1:
 		_sprite.play("walk")
 		_sprite.flip_h = dir.x < 0.0

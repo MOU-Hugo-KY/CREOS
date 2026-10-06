@@ -47,7 +47,7 @@ func _fit() -> void:
 	camera.position = (HubPixel.SIZE - vs / z) / 2.0
 
 
-## Toucher la place : le joueur y marche (ou va au bâtiment touché, puis l'ouvre).
+## Toucher un bâtiment l'ouvre.
 func _unhandled_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
