@@ -1,26 +1,50 @@
 {
- "world": 3,
- "name": "Terriers de l'ile",
- "foot_baseline": 590,
- "safe_combat_rect": [
-  256,
-  447,
-  768,
-  179
- ],
- "foreground_offset": 96,
- "scenes": [
-  {
-   "name": "La bouche des terriers",
-   "role": "Entree"
+  "world": 3,
+  "name": "Terriers de l'ile",
+  "foot_baseline": 770,
+  "safe_combat_rect": [
+    256,
+    565,
+    1160,
+    329
+  ],
+  "foreground_offset": 0,
+  "scenes": [
+    {
+      "name": "La bouche des terriers",
+      "role": "Entree",
+      "background": "fond1.png",
+      "foreground": "premier_plan1.png"
+    },
+    {
+      "name": "Les galeries de soie",
+      "role": "Profondeur",
+      "background": "fond2.png",
+      "foreground": "premier_plan2.png"
+    },
+    {
+      "name": "La chambre des Mille-Oeufs",
+      "role": "Boss",
+      "background": "fond3.png",
+      "foreground": "premier_plan3.png"
+    }
+  ],
+  "canvas_size": [
+    1672,
+    941
+  ],
+  "texture_filter": "nearest",
+  "ground_layer": null,
+  "foreground_limits": {
+    "side_width_px": 200,
+    "bottom_height_px": 75
   },
-  {
-   "name": "Les galeries de soie",
-   "role": "Profondeur"
-  },
-  {
-   "name": "La chambre des Mille-Oeufs",
-   "role": "Boss"
-  }
- ]
+  "files": [
+    "fond1.png",
+    "fond2.png",
+    "fond3.png",
+    "premier_plan1.png",
+    "premier_plan2.png",
+    "premier_plan3.png"
+  ]
 }

@@ -1,26 +1,50 @@
 {
- "world": 4,
- "name": "Camps pillards",
- "foot_baseline": 590,
- "safe_combat_rect": [
-  256,
-  447,
-  768,
-  179
- ],
- "foreground_offset": 96,
- "scenes": [
-  {
-   "name": "La lisiere des pillards",
-   "role": "Entree"
+  "world": 4,
+  "name": "Camps pillards",
+  "foot_baseline": 770,
+  "safe_combat_rect": [
+    256,
+    565,
+    1160,
+    329
+  ],
+  "foreground_offset": 0,
+  "scenes": [
+    {
+      "name": "La lisiere des pillards",
+      "role": "Entree",
+      "background": "fond1.png",
+      "foreground": "premier_plan1.png"
+    },
+    {
+      "name": "Le camp des braises",
+      "role": "Profondeur",
+      "background": "fond2.png",
+      "foreground": "premier_plan2.png"
+    },
+    {
+      "name": "La cour de Gorvak",
+      "role": "Boss",
+      "background": "fond3.png",
+      "foreground": "premier_plan3.png"
+    }
+  ],
+  "canvas_size": [
+    1672,
+    941
+  ],
+  "texture_filter": "nearest",
+  "ground_layer": null,
+  "foreground_limits": {
+    "side_width_px": 200,
+    "bottom_height_px": 75
   },
-  {
-   "name": "Le camp des braises",
-   "role": "Profondeur"
-  },
-  {
-   "name": "La cour de Gorvak",
-   "role": "Boss"
-  }
- ]
+  "files": [
+    "fond1.png",
+    "fond2.png",
+    "fond3.png",
+    "premier_plan1.png",
+    "premier_plan2.png",
+    "premier_plan3.png"
+  ]
 }
