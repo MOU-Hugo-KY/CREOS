@@ -80,7 +80,7 @@ func refresh() -> void:
 	for rid: String in GameData.region_ids():
 		_worlds.add_child(_world_button(rid))
 	var info: Dictionary = GameData.regions.get(region, {})
-	var fond := String(info.get("decor", "")) + "fond1.jpg"
+	var fond := String(info.get("decor", "")) + "fond1.png"
 	_banner.texture = load(fond) if ResourceLoader.exists(fond) else null
 	_world_name.text = "Monde %d · %s" % [int(info.get("order", 0)), info.get("name", "")]
 	var ids := GameData.region_dungeons(region)
