@@ -1,0 +1,254 @@
+{
+ "hero": "crabe_epave",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  96,
+  146
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "crabe_epave_idle_000.png",
+     0.26
+    ],
+    [
+     "crabe_epave_idle_001.png",
+     0.26
+    ],
+    [
+     "crabe_epave_idle_002.png",
+     0.26
+    ],
+    [
+     "crabe_epave_idle_003.png",
+     0.26
+    ],
+    [
+     "crabe_epave_idle_004.png",
+     0.26
+    ],
+    [
+     "crabe_epave_idle_005.png",
+     0.26
+    ],
+    [
+     "crabe_epave_idle_006.png",
+     0.26
+    ],
+    [
+     "crabe_epave_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "crabe_epave_walk_000.png",
+     0.1
+    ],
+    [
+     "crabe_epave_walk_001.png",
+     0.1
+    ],
+    [
+     "crabe_epave_walk_002.png",
+     0.1
+    ],
+    [
+     "crabe_epave_walk_003.png",
+     0.1
+    ],
+    [
+     "crabe_epave_walk_004.png",
+     0.1
+    ],
+    [
+     "crabe_epave_walk_005.png",
+     0.1
+    ],
+    [
+     "crabe_epave_walk_006.png",
+     0.1
+    ],
+    [
+     "crabe_epave_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "crabe_epave_attack_000.png",
+     0.11
+    ],
+    [
+     "crabe_epave_attack_001.png",
+     0.1
+    ],
+    [
+     "crabe_epave_attack_002.png",
+     0.08
+    ],
+    [
+     "crabe_epave_attack_003.png",
+     0.065
+    ],
+    [
+     "crabe_epave_attack_004.png",
+     0.08
+    ],
+    [
+     "crabe_epave_attack_005.png",
+     0.095
+    ],
+    [
+     "crabe_epave_attack_006.png",
+     0.11
+    ],
+    [
+     "crabe_epave_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "crabe_epave_hurt_000.png",
+     0.07
+    ],
+    [
+     "crabe_epave_hurt_001.png",
+     0.065
+    ],
+    [
+     "crabe_epave_hurt_002.png",
+     0.07
+    ],
+    [
+     "crabe_epave_hurt_003.png",
+     0.085
+    ],
+    [
+     "crabe_epave_hurt_004.png",
+     0.09
+    ],
+    [
+     "crabe_epave_hurt_005.png",
+     0.1
+    ],
+    [
+     "crabe_epave_hurt_006.png",
+     0.1
+    ],
+    [
+     "crabe_epave_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "crabe_epave_death_000.png",
+     0.1
+    ],
+    [
+     "crabe_epave_death_001.png",
+     0.1
+    ],
+    [
+     "crabe_epave_death_002.png",
+     0.12
+    ],
+    [
+     "crabe_epave_death_003.png",
+     0.12
+    ],
+    [
+     "crabe_epave_death_004.png",
+     0.13
+    ],
+    [
+     "crabe_epave_death_005.png",
+     0.14
+    ],
+    [
+     "crabe_epave_death_006.png",
+     0.15
+    ],
+    [
+     "crabe_epave_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "crabe_epave_fx_000.png",
+    0.08
+   ],
+   [
+    "crabe_epave_fx_001.png",
+    0.08
+   ],
+   [
+    "crabe_epave_fx_002.png",
+    0.08
+   ],
+   [
+    "crabe_epave_fx_003.png",
+    0.08
+   ],
+   [
+    "crabe_epave_fx_004.png",
+    0.08
+   ],
+   [
+    "crabe_epave_fx_005.png",
+    0.08
+   ],
+   [
+    "crabe_epave_fx_006.png",
+    0.08
+   ],
+   [
+    "crabe_epave_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}

@@ -89,7 +89,7 @@ func play(id: String, then_idle := true) -> bool:
 	var cut := id.rfind("_")
 	_rig = Rig.for_actor(id.substr(0, cut)) if cut > 0 and bundle.ends_with("heroes/") else null
 	_rig_anim = id.substr(cut + 1) if _rig and _rig.has_anim(id.substr(cut + 1)) else ""
-	_pixel = PixelSheet.for_actor(id.substr(0, cut)) if cut > 0 and bundle.ends_with("heroes/") else null
+	_pixel = PixelSheet.for_actor(id.substr(0, cut)) if cut > 0 and _pixel_bundle() else null
 	_pixel_anim = _pixel.anim_for(id.substr(cut + 1)) if _pixel else ""
 	if _pixel_anim != "":
 		_rig_anim = ""
@@ -136,13 +136,20 @@ func flash(color: Color, strength := 0.8) -> void:
 	_flash = strength
 
 
+## Héros et monstres peuvent avoir une version pixel art (`PixelSheet`).
+func _pixel_bundle() -> bool:
+	return bundle.ends_with("heroes/") or bundle.contains("/enemies/")
+
+
 ## Rectangle (local, avant retournement) occupé par l'acteur dans la première image du clip
 ## (ou par son squelette au repos).
 func actor_rect(id := "") -> Rect2:
 	var cid := clip_id if id == "" else id
 	var cut := cid.rfind("_")
-	if cut > 0 and bundle.ends_with("heroes/") and PixelSheet.for_actor(cid.substr(0, cut)):
+	if cut > 0 and _pixel_bundle() and PixelSheet.for_actor(cid.substr(0, cut)):
 		var ps := PixelSheet.for_actor(cid.substr(0, cut))
+		if ps.facing < 0.0:
+			return ps.body_rect()  # monstre : taille propre à chacun
 		return Rect2(Vector2(-36, -72) * ps.scale, Vector2(72, 72) * ps.scale)
 	if cut > 0 and bundle.ends_with("heroes/"):
 		var rig := Rig.for_actor(cid.substr(0, cut))
@@ -211,7 +218,7 @@ func _draw() -> void:
 			var s := _pixel.scale
 			var pt := _t + (_phase if _pixel_anim == "idle" else 0.0)  # respirations décalées entre héros
 			var tex := _pixel.frame_at(_pixel_anim, pt, float(_clip.dur), _clip_hit)
-			var dx := _pixel.lunge(_t, float(_clip.dur), _clip_hit) if _pixel_anim.begins_with("attack") else 0.0
+			var dx := _pixel.lunge(_t, float(_clip.dur), _clip_hit) if _pixel_anim.begins_with("attack") or _pixel_anim == "skill" and _pixel.facing < 0.0 else 0.0
 			draw_set_transform(Vector2(dx, 0) - _pixel.anchor * s, 0.0, Vector2(s, s))
 			draw_texture(tex, Vector2.ZERO)
 			draw_set_transform(Vector2.ZERO)

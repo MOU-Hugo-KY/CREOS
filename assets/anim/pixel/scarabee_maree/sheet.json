@@ -1,0 +1,254 @@
+{
+ "hero": "scarabee_maree",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  96,
+  146
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "scarabee_maree_idle_000.png",
+     0.26
+    ],
+    [
+     "scarabee_maree_idle_001.png",
+     0.26
+    ],
+    [
+     "scarabee_maree_idle_002.png",
+     0.26
+    ],
+    [
+     "scarabee_maree_idle_003.png",
+     0.26
+    ],
+    [
+     "scarabee_maree_idle_004.png",
+     0.26
+    ],
+    [
+     "scarabee_maree_idle_005.png",
+     0.26
+    ],
+    [
+     "scarabee_maree_idle_006.png",
+     0.26
+    ],
+    [
+     "scarabee_maree_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "scarabee_maree_walk_000.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_walk_001.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_walk_002.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_walk_003.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_walk_004.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_walk_005.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_walk_006.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "scarabee_maree_attack_000.png",
+     0.11
+    ],
+    [
+     "scarabee_maree_attack_001.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_attack_002.png",
+     0.08
+    ],
+    [
+     "scarabee_maree_attack_003.png",
+     0.065
+    ],
+    [
+     "scarabee_maree_attack_004.png",
+     0.08
+    ],
+    [
+     "scarabee_maree_attack_005.png",
+     0.095
+    ],
+    [
+     "scarabee_maree_attack_006.png",
+     0.11
+    ],
+    [
+     "scarabee_maree_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "scarabee_maree_hurt_000.png",
+     0.07
+    ],
+    [
+     "scarabee_maree_hurt_001.png",
+     0.065
+    ],
+    [
+     "scarabee_maree_hurt_002.png",
+     0.07
+    ],
+    [
+     "scarabee_maree_hurt_003.png",
+     0.085
+    ],
+    [
+     "scarabee_maree_hurt_004.png",
+     0.09
+    ],
+    [
+     "scarabee_maree_hurt_005.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_hurt_006.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "scarabee_maree_death_000.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_death_001.png",
+     0.1
+    ],
+    [
+     "scarabee_maree_death_002.png",
+     0.12
+    ],
+    [
+     "scarabee_maree_death_003.png",
+     0.12
+    ],
+    [
+     "scarabee_maree_death_004.png",
+     0.13
+    ],
+    [
+     "scarabee_maree_death_005.png",
+     0.14
+    ],
+    [
+     "scarabee_maree_death_006.png",
+     0.15
+    ],
+    [
+     "scarabee_maree_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "scarabee_maree_fx_000.png",
+    0.08
+   ],
+   [
+    "scarabee_maree_fx_001.png",
+    0.08
+   ],
+   [
+    "scarabee_maree_fx_002.png",
+    0.08
+   ],
+   [
+    "scarabee_maree_fx_003.png",
+    0.08
+   ],
+   [
+    "scarabee_maree_fx_004.png",
+    0.08
+   ],
+   [
+    "scarabee_maree_fx_005.png",
+    0.08
+   ],
+   [
+    "scarabee_maree_fx_006.png",
+    0.08
+   ],
+   [
+    "scarabee_maree_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}

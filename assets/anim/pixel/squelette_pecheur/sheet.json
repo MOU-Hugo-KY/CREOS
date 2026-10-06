@@ -1,0 +1,254 @@
+{
+ "hero": "squelette_pecheur",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  144,
+  230
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "squelette_pecheur_idle_000.png",
+     0.26
+    ],
+    [
+     "squelette_pecheur_idle_001.png",
+     0.26
+    ],
+    [
+     "squelette_pecheur_idle_002.png",
+     0.26
+    ],
+    [
+     "squelette_pecheur_idle_003.png",
+     0.26
+    ],
+    [
+     "squelette_pecheur_idle_004.png",
+     0.26
+    ],
+    [
+     "squelette_pecheur_idle_005.png",
+     0.26
+    ],
+    [
+     "squelette_pecheur_idle_006.png",
+     0.26
+    ],
+    [
+     "squelette_pecheur_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "squelette_pecheur_walk_000.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_walk_001.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_walk_002.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_walk_003.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_walk_004.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_walk_005.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_walk_006.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "squelette_pecheur_attack_000.png",
+     0.11
+    ],
+    [
+     "squelette_pecheur_attack_001.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_attack_002.png",
+     0.08
+    ],
+    [
+     "squelette_pecheur_attack_003.png",
+     0.065
+    ],
+    [
+     "squelette_pecheur_attack_004.png",
+     0.08
+    ],
+    [
+     "squelette_pecheur_attack_005.png",
+     0.095
+    ],
+    [
+     "squelette_pecheur_attack_006.png",
+     0.11
+    ],
+    [
+     "squelette_pecheur_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "squelette_pecheur_hurt_000.png",
+     0.07
+    ],
+    [
+     "squelette_pecheur_hurt_001.png",
+     0.065
+    ],
+    [
+     "squelette_pecheur_hurt_002.png",
+     0.07
+    ],
+    [
+     "squelette_pecheur_hurt_003.png",
+     0.085
+    ],
+    [
+     "squelette_pecheur_hurt_004.png",
+     0.09
+    ],
+    [
+     "squelette_pecheur_hurt_005.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_hurt_006.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "squelette_pecheur_death_000.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_death_001.png",
+     0.1
+    ],
+    [
+     "squelette_pecheur_death_002.png",
+     0.12
+    ],
+    [
+     "squelette_pecheur_death_003.png",
+     0.12
+    ],
+    [
+     "squelette_pecheur_death_004.png",
+     0.13
+    ],
+    [
+     "squelette_pecheur_death_005.png",
+     0.14
+    ],
+    [
+     "squelette_pecheur_death_006.png",
+     0.15
+    ],
+    [
+     "squelette_pecheur_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "squelette_pecheur_fx_000.png",
+    0.08
+   ],
+   [
+    "squelette_pecheur_fx_001.png",
+    0.08
+   ],
+   [
+    "squelette_pecheur_fx_002.png",
+    0.08
+   ],
+   [
+    "squelette_pecheur_fx_003.png",
+    0.08
+   ],
+   [
+    "squelette_pecheur_fx_004.png",
+    0.08
+   ],
+   [
+    "squelette_pecheur_fx_005.png",
+    0.08
+   ],
+   [
+    "squelette_pecheur_fx_006.png",
+    0.08
+   ],
+   [
+    "squelette_pecheur_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}

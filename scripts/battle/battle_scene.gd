@@ -416,9 +416,9 @@ func _on_pixel_quartet(ev: Dictionary) -> float:
 	return 0.0
 
 
-## Héros en pixel art : son effet « signature » (pack ChatGPT) éclate sur la cible touchée.
+## Héros et monstres en pixel art : leur effet d'impact (pack ChatGPT) éclate sur la cible touchée.
 func _signature_fx(src: UnitView, t: UnitView, slot: int) -> void:
-	var sheet := PixelSheet.for_actor(src.unit.def_id) if src.unit.team == 0 else null
+	var sheet := PixelSheet.for_actor(src.unit.def_id)
 	if sheet == null or sheet.effect == null:
 		return
 	var anim := sheet.anim_for(str(slot))

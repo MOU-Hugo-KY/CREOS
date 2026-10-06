@@ -1,7 +1,7 @@
 class_name PixelSheet
 extends RefCounted
-## Héros en pixel art : une suite d'images par animation (`assets/anim/pixel/<id>/sheet.json`, importé par
-## `tools/import_pixel_hero.py`). Remplace les pièces du héros quand il en a une. Les animations sont
+## Héros et monstres en pixel art : une suite d'images par animation (`assets/anim/pixel/<id>/sheet.json`,
+## importé par `tools/import_pixel_*.py`). Remplace les pièces de l'acteur quand il en a une. Les animations sont
 ## reliées aux clips du jeu (`map`) et étirées pour que leur image de frappe tombe sur l'impact du clip.
 
 const DIR := "res://assets/anim/pixel/"
@@ -9,6 +9,8 @@ const DIR := "res://assets/anim/pixel/"
 static var _cache: Dictionary = {}
 
 var scale := 4.8
+var facing := 1.0  # 1 : dessiné vers la droite (héros), -1 : vers la gauche (monstres)
+var _body := Rect2()
 var anchor := Vector2(96, 146)
 var map: Dictionary = {}  # clip du jeu ("0", "idle"…) -> animation du pack
 var anims: Dictionary = {}  # nom -> {loop, frames: [[Texture2D, durée]], hit_frame, total, hit_time}
@@ -33,6 +35,7 @@ static func for_actor(id: String) -> PixelSheet:
 
 func _build(data: Dictionary, dir: String) -> void:
 	scale = float(data.get("scale", 4.8))
+	facing = float(data.get("facing", 1))
 	anchor = Vector2(data.anchor[0], data.anchor[1])
 	map = data.get("map", {})
 	for name: String in data.anims:
@@ -92,6 +95,15 @@ func frame_at(name: String, t: float, clip_dur: float, clip_hit: float) -> Textu
 	return a.frames[-1][0]
 
 
+## Rectangle du corps (repère local de l'acteur, pieds en 0) d'après la première image de repos.
+func body_rect() -> Rect2:
+	if _body.size == Vector2.ZERO and anims.has("idle"):
+		var tex: Texture2D = anims.idle.frames[0][0]
+		var used := tex.get_image().get_used_rect()
+		_body = Rect2((Vector2(used.position) - anchor) * scale, Vector2(used.size) * scale)
+	return _body
+
+
 ## Petit bond en avant pendant les attaques (les images ne font pas avancer le personnage).
 func lunge(t: float, clip_dur: float, clip_hit: float) -> float:
 	if clip_hit <= 0.0:
@@ -100,5 +112,5 @@ func lunge(t: float, clip_dur: float, clip_hit: float) -> float:
 	if t < clip_hit * 0.6:
 		return 0.0
 	if t < clip_hit:
-		return smoothstep(clip_hit * 0.6, clip_hit, t) * 70.0
-	return (1.0 - smoothstep(clip_hit, out, t)) * 70.0
+		return smoothstep(clip_hit * 0.6, clip_hit, t) * 70.0 * facing
+	return (1.0 - smoothstep(clip_hit, out, t)) * 70.0 * facing

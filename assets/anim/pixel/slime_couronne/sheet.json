@@ -1,0 +1,292 @@
+{
+ "hero": "slime_couronne",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  144,
+  230
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "slime_couronne_idle_000.png",
+     0.26
+    ],
+    [
+     "slime_couronne_idle_001.png",
+     0.26
+    ],
+    [
+     "slime_couronne_idle_002.png",
+     0.26
+    ],
+    [
+     "slime_couronne_idle_003.png",
+     0.26
+    ],
+    [
+     "slime_couronne_idle_004.png",
+     0.26
+    ],
+    [
+     "slime_couronne_idle_005.png",
+     0.26
+    ],
+    [
+     "slime_couronne_idle_006.png",
+     0.26
+    ],
+    [
+     "slime_couronne_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "slime_couronne_walk_000.png",
+     0.1
+    ],
+    [
+     "slime_couronne_walk_001.png",
+     0.1
+    ],
+    [
+     "slime_couronne_walk_002.png",
+     0.1
+    ],
+    [
+     "slime_couronne_walk_003.png",
+     0.1
+    ],
+    [
+     "slime_couronne_walk_004.png",
+     0.1
+    ],
+    [
+     "slime_couronne_walk_005.png",
+     0.1
+    ],
+    [
+     "slime_couronne_walk_006.png",
+     0.1
+    ],
+    [
+     "slime_couronne_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "slime_couronne_attack_000.png",
+     0.11
+    ],
+    [
+     "slime_couronne_attack_001.png",
+     0.1
+    ],
+    [
+     "slime_couronne_attack_002.png",
+     0.08
+    ],
+    [
+     "slime_couronne_attack_003.png",
+     0.065
+    ],
+    [
+     "slime_couronne_attack_004.png",
+     0.08
+    ],
+    [
+     "slime_couronne_attack_005.png",
+     0.095
+    ],
+    [
+     "slime_couronne_attack_006.png",
+     0.11
+    ],
+    [
+     "slime_couronne_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "slime_couronne_hurt_000.png",
+     0.07
+    ],
+    [
+     "slime_couronne_hurt_001.png",
+     0.065
+    ],
+    [
+     "slime_couronne_hurt_002.png",
+     0.07
+    ],
+    [
+     "slime_couronne_hurt_003.png",
+     0.085
+    ],
+    [
+     "slime_couronne_hurt_004.png",
+     0.09
+    ],
+    [
+     "slime_couronne_hurt_005.png",
+     0.1
+    ],
+    [
+     "slime_couronne_hurt_006.png",
+     0.1
+    ],
+    [
+     "slime_couronne_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "slime_couronne_death_000.png",
+     0.1
+    ],
+    [
+     "slime_couronne_death_001.png",
+     0.1
+    ],
+    [
+     "slime_couronne_death_002.png",
+     0.12
+    ],
+    [
+     "slime_couronne_death_003.png",
+     0.12
+    ],
+    [
+     "slime_couronne_death_004.png",
+     0.13
+    ],
+    [
+     "slime_couronne_death_005.png",
+     0.14
+    ],
+    [
+     "slime_couronne_death_006.png",
+     0.15
+    ],
+    [
+     "slime_couronne_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  },
+  "skill": {
+   "loop": false,
+   "frames": [
+    [
+     "slime_couronne_skill_000.png",
+     0.13
+    ],
+    [
+     "slime_couronne_skill_001.png",
+     0.12
+    ],
+    [
+     "slime_couronne_skill_002.png",
+     0.1
+    ],
+    [
+     "slime_couronne_skill_003.png",
+     0.08
+    ],
+    [
+     "slime_couronne_skill_004.png",
+     0.1
+    ],
+    [
+     "slime_couronne_skill_005.png",
+     0.12
+    ],
+    [
+     "slime_couronne_skill_006.png",
+     0.14
+    ],
+    [
+     "slime_couronne_skill_007.png",
+     0.16
+    ]
+   ],
+   "hit_frame": 3
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "slime_couronne_fx_000.png",
+    0.08
+   ],
+   [
+    "slime_couronne_fx_001.png",
+    0.08
+   ],
+   [
+    "slime_couronne_fx_002.png",
+    0.08
+   ],
+   [
+    "slime_couronne_fx_003.png",
+    0.08
+   ],
+   [
+    "slime_couronne_fx_004.png",
+    0.08
+   ],
+   [
+    "slime_couronne_fx_005.png",
+    0.08
+   ],
+   [
+    "slime_couronne_fx_006.png",
+    0.08
+   ],
+   [
+    "slime_couronne_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}

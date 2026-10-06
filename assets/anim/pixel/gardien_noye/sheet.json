@@ -1,0 +1,292 @@
+{
+ "hero": "gardien_noye",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  144,
+  230
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "gardien_noye_idle_000.png",
+     0.26
+    ],
+    [
+     "gardien_noye_idle_001.png",
+     0.26
+    ],
+    [
+     "gardien_noye_idle_002.png",
+     0.26
+    ],
+    [
+     "gardien_noye_idle_003.png",
+     0.26
+    ],
+    [
+     "gardien_noye_idle_004.png",
+     0.26
+    ],
+    [
+     "gardien_noye_idle_005.png",
+     0.26
+    ],
+    [
+     "gardien_noye_idle_006.png",
+     0.26
+    ],
+    [
+     "gardien_noye_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "gardien_noye_walk_000.png",
+     0.1
+    ],
+    [
+     "gardien_noye_walk_001.png",
+     0.1
+    ],
+    [
+     "gardien_noye_walk_002.png",
+     0.1
+    ],
+    [
+     "gardien_noye_walk_003.png",
+     0.1
+    ],
+    [
+     "gardien_noye_walk_004.png",
+     0.1
+    ],
+    [
+     "gardien_noye_walk_005.png",
+     0.1
+    ],
+    [
+     "gardien_noye_walk_006.png",
+     0.1
+    ],
+    [
+     "gardien_noye_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "gardien_noye_attack_000.png",
+     0.11
+    ],
+    [
+     "gardien_noye_attack_001.png",
+     0.1
+    ],
+    [
+     "gardien_noye_attack_002.png",
+     0.08
+    ],
+    [
+     "gardien_noye_attack_003.png",
+     0.065
+    ],
+    [
+     "gardien_noye_attack_004.png",
+     0.08
+    ],
+    [
+     "gardien_noye_attack_005.png",
+     0.095
+    ],
+    [
+     "gardien_noye_attack_006.png",
+     0.11
+    ],
+    [
+     "gardien_noye_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "gardien_noye_hurt_000.png",
+     0.07
+    ],
+    [
+     "gardien_noye_hurt_001.png",
+     0.065
+    ],
+    [
+     "gardien_noye_hurt_002.png",
+     0.07
+    ],
+    [
+     "gardien_noye_hurt_003.png",
+     0.085
+    ],
+    [
+     "gardien_noye_hurt_004.png",
+     0.09
+    ],
+    [
+     "gardien_noye_hurt_005.png",
+     0.1
+    ],
+    [
+     "gardien_noye_hurt_006.png",
+     0.1
+    ],
+    [
+     "gardien_noye_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "gardien_noye_death_000.png",
+     0.1
+    ],
+    [
+     "gardien_noye_death_001.png",
+     0.1
+    ],
+    [
+     "gardien_noye_death_002.png",
+     0.12
+    ],
+    [
+     "gardien_noye_death_003.png",
+     0.12
+    ],
+    [
+     "gardien_noye_death_004.png",
+     0.13
+    ],
+    [
+     "gardien_noye_death_005.png",
+     0.14
+    ],
+    [
+     "gardien_noye_death_006.png",
+     0.15
+    ],
+    [
+     "gardien_noye_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  },
+  "skill": {
+   "loop": false,
+   "frames": [
+    [
+     "gardien_noye_skill_000.png",
+     0.13
+    ],
+    [
+     "gardien_noye_skill_001.png",
+     0.12
+    ],
+    [
+     "gardien_noye_skill_002.png",
+     0.1
+    ],
+    [
+     "gardien_noye_skill_003.png",
+     0.08
+    ],
+    [
+     "gardien_noye_skill_004.png",
+     0.1
+    ],
+    [
+     "gardien_noye_skill_005.png",
+     0.12
+    ],
+    [
+     "gardien_noye_skill_006.png",
+     0.14
+    ],
+    [
+     "gardien_noye_skill_007.png",
+     0.16
+    ]
+   ],
+   "hit_frame": 3
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "gardien_noye_fx_000.png",
+    0.08
+   ],
+   [
+    "gardien_noye_fx_001.png",
+    0.08
+   ],
+   [
+    "gardien_noye_fx_002.png",
+    0.08
+   ],
+   [
+    "gardien_noye_fx_003.png",
+    0.08
+   ],
+   [
+    "gardien_noye_fx_004.png",
+    0.08
+   ],
+   [
+    "gardien_noye_fx_005.png",
+    0.08
+   ],
+   [
+    "gardien_noye_fx_006.png",
+    0.08
+   ],
+   [
+    "gardien_noye_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}

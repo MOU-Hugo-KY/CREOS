@@ -1,0 +1,254 @@
+{
+ "hero": "goeland",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  96,
+  146
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "goeland_idle_000.png",
+     0.26
+    ],
+    [
+     "goeland_idle_001.png",
+     0.26
+    ],
+    [
+     "goeland_idle_002.png",
+     0.26
+    ],
+    [
+     "goeland_idle_003.png",
+     0.26
+    ],
+    [
+     "goeland_idle_004.png",
+     0.26
+    ],
+    [
+     "goeland_idle_005.png",
+     0.26
+    ],
+    [
+     "goeland_idle_006.png",
+     0.26
+    ],
+    [
+     "goeland_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "goeland_walk_000.png",
+     0.1
+    ],
+    [
+     "goeland_walk_001.png",
+     0.1
+    ],
+    [
+     "goeland_walk_002.png",
+     0.1
+    ],
+    [
+     "goeland_walk_003.png",
+     0.1
+    ],
+    [
+     "goeland_walk_004.png",
+     0.1
+    ],
+    [
+     "goeland_walk_005.png",
+     0.1
+    ],
+    [
+     "goeland_walk_006.png",
+     0.1
+    ],
+    [
+     "goeland_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "goeland_attack_000.png",
+     0.11
+    ],
+    [
+     "goeland_attack_001.png",
+     0.1
+    ],
+    [
+     "goeland_attack_002.png",
+     0.08
+    ],
+    [
+     "goeland_attack_003.png",
+     0.065
+    ],
+    [
+     "goeland_attack_004.png",
+     0.08
+    ],
+    [
+     "goeland_attack_005.png",
+     0.095
+    ],
+    [
+     "goeland_attack_006.png",
+     0.11
+    ],
+    [
+     "goeland_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "goeland_hurt_000.png",
+     0.07
+    ],
+    [
+     "goeland_hurt_001.png",
+     0.065
+    ],
+    [
+     "goeland_hurt_002.png",
+     0.07
+    ],
+    [
+     "goeland_hurt_003.png",
+     0.085
+    ],
+    [
+     "goeland_hurt_004.png",
+     0.09
+    ],
+    [
+     "goeland_hurt_005.png",
+     0.1
+    ],
+    [
+     "goeland_hurt_006.png",
+     0.1
+    ],
+    [
+     "goeland_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "goeland_death_000.png",
+     0.1
+    ],
+    [
+     "goeland_death_001.png",
+     0.1
+    ],
+    [
+     "goeland_death_002.png",
+     0.12
+    ],
+    [
+     "goeland_death_003.png",
+     0.12
+    ],
+    [
+     "goeland_death_004.png",
+     0.13
+    ],
+    [
+     "goeland_death_005.png",
+     0.14
+    ],
+    [
+     "goeland_death_006.png",
+     0.15
+    ],
+    [
+     "goeland_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "goeland_fx_000.png",
+    0.08
+   ],
+   [
+    "goeland_fx_001.png",
+    0.08
+   ],
+   [
+    "goeland_fx_002.png",
+    0.08
+   ],
+   [
+    "goeland_fx_003.png",
+    0.08
+   ],
+   [
+    "goeland_fx_004.png",
+    0.08
+   ],
+   [
+    "goeland_fx_005.png",
+    0.08
+   ],
+   [
+    "goeland_fx_006.png",
+    0.08
+   ],
+   [
+    "goeland_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}

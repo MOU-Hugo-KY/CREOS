@@ -1,0 +1,292 @@
+{
+ "hero": "brise_coque",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  144,
+  230
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "brise_coque_idle_000.png",
+     0.26
+    ],
+    [
+     "brise_coque_idle_001.png",
+     0.26
+    ],
+    [
+     "brise_coque_idle_002.png",
+     0.26
+    ],
+    [
+     "brise_coque_idle_003.png",
+     0.26
+    ],
+    [
+     "brise_coque_idle_004.png",
+     0.26
+    ],
+    [
+     "brise_coque_idle_005.png",
+     0.26
+    ],
+    [
+     "brise_coque_idle_006.png",
+     0.26
+    ],
+    [
+     "brise_coque_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "brise_coque_walk_000.png",
+     0.1
+    ],
+    [
+     "brise_coque_walk_001.png",
+     0.1
+    ],
+    [
+     "brise_coque_walk_002.png",
+     0.1
+    ],
+    [
+     "brise_coque_walk_003.png",
+     0.1
+    ],
+    [
+     "brise_coque_walk_004.png",
+     0.1
+    ],
+    [
+     "brise_coque_walk_005.png",
+     0.1
+    ],
+    [
+     "brise_coque_walk_006.png",
+     0.1
+    ],
+    [
+     "brise_coque_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "brise_coque_attack_000.png",
+     0.11
+    ],
+    [
+     "brise_coque_attack_001.png",
+     0.1
+    ],
+    [
+     "brise_coque_attack_002.png",
+     0.08
+    ],
+    [
+     "brise_coque_attack_003.png",
+     0.065
+    ],
+    [
+     "brise_coque_attack_004.png",
+     0.08
+    ],
+    [
+     "brise_coque_attack_005.png",
+     0.095
+    ],
+    [
+     "brise_coque_attack_006.png",
+     0.11
+    ],
+    [
+     "brise_coque_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "brise_coque_hurt_000.png",
+     0.07
+    ],
+    [
+     "brise_coque_hurt_001.png",
+     0.065
+    ],
+    [
+     "brise_coque_hurt_002.png",
+     0.07
+    ],
+    [
+     "brise_coque_hurt_003.png",
+     0.085
+    ],
+    [
+     "brise_coque_hurt_004.png",
+     0.09
+    ],
+    [
+     "brise_coque_hurt_005.png",
+     0.1
+    ],
+    [
+     "brise_coque_hurt_006.png",
+     0.1
+    ],
+    [
+     "brise_coque_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "brise_coque_death_000.png",
+     0.1
+    ],
+    [
+     "brise_coque_death_001.png",
+     0.1
+    ],
+    [
+     "brise_coque_death_002.png",
+     0.12
+    ],
+    [
+     "brise_coque_death_003.png",
+     0.12
+    ],
+    [
+     "brise_coque_death_004.png",
+     0.13
+    ],
+    [
+     "brise_coque_death_005.png",
+     0.14
+    ],
+    [
+     "brise_coque_death_006.png",
+     0.15
+    ],
+    [
+     "brise_coque_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  },
+  "skill": {
+   "loop": false,
+   "frames": [
+    [
+     "brise_coque_skill_000.png",
+     0.13
+    ],
+    [
+     "brise_coque_skill_001.png",
+     0.12
+    ],
+    [
+     "brise_coque_skill_002.png",
+     0.1
+    ],
+    [
+     "brise_coque_skill_003.png",
+     0.08
+    ],
+    [
+     "brise_coque_skill_004.png",
+     0.1
+    ],
+    [
+     "brise_coque_skill_005.png",
+     0.12
+    ],
+    [
+     "brise_coque_skill_006.png",
+     0.14
+    ],
+    [
+     "brise_coque_skill_007.png",
+     0.16
+    ]
+   ],
+   "hit_frame": 3
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "brise_coque_fx_000.png",
+    0.08
+   ],
+   [
+    "brise_coque_fx_001.png",
+    0.08
+   ],
+   [
+    "brise_coque_fx_002.png",
+    0.08
+   ],
+   [
+    "brise_coque_fx_003.png",
+    0.08
+   ],
+   [
+    "brise_coque_fx_004.png",
+    0.08
+   ],
+   [
+    "brise_coque_fx_005.png",
+    0.08
+   ],
+   [
+    "brise_coque_fx_006.png",
+    0.08
+   ],
+   [
+    "brise_coque_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}
