@@ -38,7 +38,7 @@ func _ready() -> void:
 
 	_frame = PanelContainer.new()
 	_frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var sb := UiKit.parchment(26, 6)
+	var sb := UiKit.parchment()
 	sb.content_margin_top = 58
 	sb.content_margin_left = 30
 	sb.content_margin_right = 30
@@ -51,12 +51,11 @@ func _ready() -> void:
 
 	# Ruban du titre, à cheval sur le bord haut
 	var ribbon := PanelContainer.new()
-	var rb := UiKit.box(ribbon_color, UiKit.INK, 18, 5, 6, Vector2(0, 5))
-	rb.border_width_bottom = 9
-	rb.content_margin_left = 54
-	rb.content_margin_right = 54
-	rb.content_margin_top = 4
-	rb.content_margin_bottom = 6
+	var rb := UiKit.kit("title_ribbon", Color.WHITE if ribbon_color == Color("793b49") else ribbon_color.lightened(0.35))
+	rb.content_margin_left = 70
+	rb.content_margin_right = 70
+	rb.content_margin_top = 6
+	rb.content_margin_bottom = 10
 	ribbon.add_theme_stylebox_override("panel", rb)
 	ribbon.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	ribbon.grow_horizontal = Control.GROW_DIRECTION_BOTH

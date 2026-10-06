@@ -2,10 +2,9 @@ class_name UiKit
 extends RefCounted
 ## Kit d'interface de CREOS : le même langage visuel partout (hub, écrans, combat).
 ##
-## Style « fantasy occulte encrée », assorti aux héros dessinés : ivoire cerclé d'encre noire
-## avec une ombre dure en dessous (comme un dessin), bordeaux, laiton, ardoise et magie turquoise.
-## Boutons en relief (une tranche plus foncée en dessous, qui s'écrase quand on appuie),
-## police Fredoka, textes clairs à contour d'encre sur la couleur.
+## Style pixel art (pack ChatGPT `assets/ui/kit/`, marges 9-slice dans `ui_kit.json`) : cadres de bois
+## et de laiton rivetés, fond parchemin, boutons or / ardoise / bordeaux, police Fredoka, textes
+## clairs à contour d'encre sur la couleur.
 
 const FONT := preload("res://assets/fonts/Fredoka_SemiBold.tres")
 const FONT_BOLD := preload("res://assets/fonts/Fredoka_Bold.tres")
@@ -35,6 +34,38 @@ const BUTTONS := {
 	"grey": [Color("a39b8b"), Color("6a6356")],
 }
 const DEPTH := 7  # épaisseur de la tranche des boutons, en pixels
+const KIT_DIR := "res://assets/ui/kit/"
+# Couleur de bouton -> texture du kit et teinte éventuelle
+const KIT_BUTTONS := {
+	"green": ["primary", Color(0.78, 1.15, 1.05)], "gold": ["primary", Color.WHITE],
+	"blue": ["secondary", Color.WHITE], "red": ["danger", Color.WHITE],
+	"purple": ["secondary", Color(1.15, 0.8, 1.25)], "wood": ["primary", Color(0.8, 0.7, 0.6)],
+	"grey": ["disabled", Color.WHITE],
+}
+
+static var _kit: Dictionary = {}
+
+
+## Pièce 9-slice du kit pixel (`ui_kit.json`) : coins nets, centre étiré.
+static func kit(name: String, tint := Color.WHITE) -> StyleBoxTexture:
+	if _kit.is_empty():
+		_kit = JSON.parse_string(FileAccess.get_file_as_string(KIT_DIR + "ui_kit.json")).assets
+	var a: Dictionary = _kit[name]
+	var sb := StyleBoxTexture.new()
+	sb.texture = load(KIT_DIR + String(a.file))
+	var ns: Variant = a.nine_slice
+	if ns is Dictionary:
+		sb.texture_margin_left = ns.left
+		sb.texture_margin_top = ns.top
+		sb.texture_margin_right = ns.right
+		sb.texture_margin_bottom = ns.bottom
+	var cm: Array = a.content_margins
+	sb.content_margin_left = cm[0]
+	sb.content_margin_top = cm[1]
+	sb.content_margin_right = cm[2]
+	sb.content_margin_bottom = cm[3]
+	sb.modulate_color = tint
+	return sb
 
 
 static func box(bg: Color, border := Color.TRANSPARENT, radius := 18, border_width := 0,
@@ -52,32 +83,27 @@ static func box(bg: Color, border := Color.TRANSPARENT, radius := 18, border_wid
 	return sb
 
 
-## Parchemin cerclé de bois : le fond des fenêtres et des cartes.
-static func parchment(radius := 18, border := 4) -> StyleBoxFlat:
-	var sb := box(PARCHMENT, INK, radius, border, 0)
-	sb.border_width_bottom = border + 8  # ombre dure, comme un dessin encré
-	sb.shadow_color = Color(0, 0, 0, 0.35)
-	sb.shadow_size = 18
-	sb.shadow_offset = Vector2(0, 10)
+## Parchemin cerclé de bois : le fond des fenêtres et des grands panneaux.
+static func parchment(_radius := 18, _border := 4) -> StyleBoxTexture:
+	return kit("window_main")
+
+
+## Carte claire posée sur le parchemin (une quête, une statistique…). `highlight` la teinte un peu.
+static func card(highlight := Color.TRANSPARENT) -> StyleBoxTexture:
+	var sb := kit("list_panel")
+	if highlight.a > 0.0:
+		sb.modulate_color = Color.WHITE.lerp(highlight, 0.35).lightened(0.1)
 	sb.set_content_margin_all(18)
 	return sb
 
 
-## Carte claire posée sur le parchemin (une quête, une statistique…).
-static func card(highlight := Color.TRANSPARENT) -> StyleBoxFlat:
-	var sb := box(Color("f6efdf"), INK if highlight.a == 0.0 else highlight, 12, 2, 0)
-	sb.border_width_bottom = 5
-	sb.set_content_margin_all(12)
-	return sb
-
-
-## Pilule sombre semi-transparente (ressources, infos sur le décor).
-static func pill() -> StyleBoxFlat:
-	var sb := box(Color(0.1, 0.07, 0.06, 0.62), Color(1, 0.9, 0.7, 0.25), 30, 2)
-	sb.content_margin_left = 8
-	sb.content_margin_right = 14
-	sb.content_margin_top = 4
-	sb.content_margin_bottom = 4
+## Bandeau sombre (ressources, infos sur le décor).
+static func pill() -> StyleBox:
+	var sb := kit("top_resources")
+	sb.content_margin_left = 14
+	sb.content_margin_right = 20
+	sb.content_margin_top = 8
+	sb.content_margin_bottom = 8
 	return sb
 
 
@@ -88,6 +114,16 @@ static func _button_box(top: Color, edge: Color, pressed: bool) -> StyleBoxFlat:
 	sb.content_margin_right = 22
 	sb.content_margin_top = 10 + (DEPTH - 3 if pressed else 0)
 	sb.content_margin_bottom = 8
+	return sb
+
+
+static func _kit_button(kind: String, state: String) -> StyleBoxTexture:
+	var k: Array = KIT_BUTTONS.get(kind, KIT_BUTTONS.green)
+	var sb := kit("button_%s_%s" % [k[0], state], k[1])
+	sb.content_margin_left = 26
+	sb.content_margin_right = 26
+	sb.content_margin_top = 12 + (3 if state == "pressed" else 0)
+	sb.content_margin_bottom = 12
 	return sb
 
 
@@ -103,10 +139,10 @@ static func button(text: String, kind := "green", font_size := 26, min_size := V
 
 static func style_button(b: Button, kind := "green", font_size := 26) -> void:
 	var c: Array = BUTTONS.get(kind, BUTTONS.green)
-	b.add_theme_stylebox_override("normal", _button_box(c[0], c[1], false))
-	b.add_theme_stylebox_override("hover", _button_box(c[0].lightened(0.08), c[1], false))
-	b.add_theme_stylebox_override("pressed", _button_box(c[0].darkened(0.06), c[1], true))
-	b.add_theme_stylebox_override("disabled", _button_box(BUTTONS.grey[0], BUTTONS.grey[1], false))
+	b.add_theme_stylebox_override("normal", _kit_button(kind, "normal"))
+	b.add_theme_stylebox_override("hover", _kit_button(kind, "hover"))
+	b.add_theme_stylebox_override("pressed", _kit_button(kind, "pressed"))
+	b.add_theme_stylebox_override("disabled", _kit_button("grey", "normal"))
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	b.add_theme_font_override("font", FONT_BOLD)
 	b.add_theme_font_size_override("font_size", font_size)
@@ -117,15 +153,15 @@ static func style_button(b: Button, kind := "green", font_size := 26) -> void:
 	b.add_theme_constant_override("outline_size", 6)
 
 
-## Bouton rond rouge « fermer » (croix), en haut à droite des fenêtres.
+## Bouton « fermer » (croix du kit), en haut à droite des fenêtres.
 static func close_button() -> Button:
-	var b := button("✕", "red", 30, Vector2(62, 62))
-	for state in ["normal", "hover", "pressed"]:
-		var sb: StyleBoxFlat = b.get_theme_stylebox(state).duplicate()
-		sb.set_corner_radius_all(31)
-		sb.content_margin_left = 0
-		sb.content_margin_right = 0
-		b.add_theme_stylebox_override(state, sb)
+	var b := Button.new()
+	b.focus_mode = Control.FOCUS_NONE
+	b.custom_minimum_size = Vector2(62, 62)
+	b.add_theme_stylebox_override("normal", kit("close_normal"))
+	b.add_theme_stylebox_override("hover", kit("close_normal", Color(1.12, 1.08, 1.05)))
+	b.add_theme_stylebox_override("pressed", kit("close_pressed"))
+	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	return b
 
 
@@ -148,16 +184,24 @@ static func title(text: String, size := 40, color := WHITE) -> Label:
 	return l
 
 
-## Barre de progression arrondie. Mettre à jour avec `bar.value`.
+## Barre de progression du kit : fond sombre, remplissage PV (rouge), énergie (or) ou XP (turquoise).
 static func progress(color := Color("63c8be"), height := 22.0, show_text := false) -> ProgressBar:
 	var p := ProgressBar.new()
 	p.custom_minimum_size = Vector2(0, height)
 	p.show_percentage = show_text
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var bg := box(Color(0.24, 0.15, 0.1, 0.85), INK, int(height / 2.0), 2)
-	var fill := box(color, color.darkened(0.3), int(height / 2.0), 0)
-	fill.border_width_bottom = 4
-	fill.border_color = color.darkened(0.25)
+	var fill: StyleBoxTexture
+	if absf(color.h - TEAL.h) < 0.08 and color.s > 0.3:
+		fill = kit("xp_fill")
+	elif color.s > 0.3 and (color.h < 0.03 or color.h > 0.9):
+		fill = kit("pv_fill")
+	elif color.s > 0.3 and color.h < 0.16:
+		fill = kit("energy_fill")
+	else:
+		fill = kit("slider_fill", color.lightened(0.25))  # autre couleur : laiton teinté
+	fill.set_content_margin_all(0)
+	var bg := kit("progress_bg")
+	bg.set_content_margin_all(0)
 	p.add_theme_stylebox_override("background", bg)
 	p.add_theme_stylebox_override("fill", fill)
 	p.add_theme_font_size_override("font_size", int(height * 0.7))
@@ -170,7 +214,8 @@ static func badge(text := "!") -> Label:
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	l.custom_minimum_size = Vector2(30, 30)
-	var sb := box(Color("e8443a"), WHITE, 15, 3)
+	var sb := kit("notification")
+	sb.set_content_margin_all(0)
 	l.add_theme_stylebox_override("normal", sb)
 	return l
 
@@ -190,8 +235,10 @@ static func icon(name: String, size := 40.0) -> TextureRect:
 ## Petite étiquette de récompense : icône + quantité, sur fond crème.
 static func reward_chip(icon_name: String, amount: int) -> PanelContainer:
 	var p := PanelContainer.new()
-	var sb := box(Color("fff1d2"), PARCHMENT_DARK.darkened(0.15), 14, 2)
-	sb.content_margin_left = 4
+	var sb := kit("tooltip")
+	sb.content_margin_top = 4
+	sb.content_margin_bottom = 4
+	sb.content_margin_left = 6
 	sb.content_margin_right = 10
 	p.add_theme_stylebox_override("panel", sb)
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -220,10 +267,15 @@ static func theme() -> Theme:
 	t.default_font_size = 22
 	t.set_color("font_color", "Label", TEXT_ON_PARCHMENT)
 	t.set_stylebox("panel", "PanelContainer", parchment())
-	t.set_stylebox("grabber", "VScrollBar", box(WOOD_LIGHT, Color.TRANSPARENT, 6))
-	t.set_stylebox("grabber_highlight", "VScrollBar", box(WOOD, Color.TRANSPARENT, 6))
-	t.set_stylebox("grabber_pressed", "VScrollBar", box(WOOD, Color.TRANSPARENT, 6))
-	var track := box(Color(0.4, 0.25, 0.15, 0.15), Color.TRANSPARENT, 6)
+	t.set_stylebox("slider", "HSlider", kit("slider_rail"))
+	t.set_stylebox("grabber_area", "HSlider", kit("slider_fill"))
+	t.set_stylebox("grabber_area_highlight", "HSlider", kit("slider_fill"))
+	t.set_icon("grabber", "HSlider", load(KIT_DIR + "slider_knob.png"))
+	t.set_icon("grabber_highlight", "HSlider", load(KIT_DIR + "slider_knob.png"))
+	t.set_stylebox("grabber", "VScrollBar", kit("scroll_thumb"))
+	t.set_stylebox("grabber_highlight", "VScrollBar", kit("scroll_thumb", Color(1.15, 1.1, 1.0)))
+	t.set_stylebox("grabber_pressed", "VScrollBar", kit("scroll_thumb", Color(0.85, 0.85, 0.85)))
+	var track := kit("scroll_rail")
 	track.content_margin_left = 6
 	track.content_margin_right = 6
 	t.set_stylebox("scroll", "VScrollBar", track)

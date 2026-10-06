@@ -237,7 +237,6 @@ func _build_profile() -> void:
 	var sb := UiKit.pill()
 	sb.content_margin_left = 6
 	sb.content_margin_right = 20
-	sb.set_corner_radius_all(48)
 	panel.add_theme_stylebox_override("panel", sb)
 	panel.position = Vector2(22, 16)
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP

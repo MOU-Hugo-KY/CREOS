@@ -134,7 +134,7 @@ func _level_card(id: String) -> Control:
 	var current := id == PlayerData.current_campaign_level()
 	var sb := UiKit.card(UiKit.TEAL if current else Color.TRANSPARENT)
 	if not open:
-		sb.bg_color = Color("cfc5ae")
+		sb.modulate_color = Color(0.72, 0.68, 0.62)
 	for st in ["normal", "hover", "pressed", "disabled"]:
 		b.add_theme_stylebox_override(st, sb)
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
