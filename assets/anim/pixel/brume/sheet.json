@@ -292,35 +292,35 @@
    "frames": [
     [
      "brume_idle_000.png",
-     0.125
+     0.325
     ],
     [
      "brume_idle_001.png",
-     0.125
+     0.325
     ],
     [
      "brume_idle_002.png",
-     0.125
+     0.325
     ],
     [
      "brume_idle_003.png",
-     0.125
+     0.325
     ],
     [
      "brume_idle_004.png",
-     0.125
+     0.325
     ],
     [
      "brume_idle_005.png",
-     0.125
+     0.325
     ],
     [
      "brume_idle_006.png",
-     0.125
+     0.325
     ],
     [
      "brume_idle_007.png",
-     0.125
+     0.325
     ]
    ],
    "hit_frame": null

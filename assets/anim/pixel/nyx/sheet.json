@@ -292,35 +292,35 @@
    "frames": [
     [
      "nyx_idle_000.png",
-     0.125
+     0.3
     ],
     [
      "nyx_idle_001.png",
-     0.125
+     0.3
     ],
     [
      "nyx_idle_002.png",
-     0.125
+     0.3
     ],
     [
      "nyx_idle_003.png",
-     0.125
+     0.3
     ],
     [
      "nyx_idle_004.png",
-     0.125
+     0.3
     ],
     [
      "nyx_idle_005.png",
-     0.125
+     0.3
     ],
     [
      "nyx_idle_006.png",
-     0.125
+     0.3
     ],
     [
      "nyx_idle_007.png",
-     0.125
+     0.3
     ]
    ],
    "hit_frame": null

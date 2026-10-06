@@ -51,6 +51,7 @@ var _rig_anim := ""
 var _pixel: PixelSheet  # héros en pixel art : ses images remplacent pièces et squelette
 var _pixel_anim := ""
 var _clip_hit := -1.0
+var _phase := randf() * 4.0
 var effect_color := Color(1.0, 0.95, 0.8)  # couleur des traînées et de l'aura (élément du héros)
 var _charge_until := 0.0
 ## Cible de l'attaque (repère local). Les effets des clips de héros ont été dessinés pour un ennemi à
@@ -208,7 +209,8 @@ func _draw() -> void:
 	if _pixel_anim != "":
 		if show_actor:
 			var s := _pixel.scale
-			var tex := _pixel.frame_at(_pixel_anim, _t, float(_clip.dur), _clip_hit)
+			var pt := _t + (_phase if _pixel_anim == "idle" else 0.0)  # respirations décalées entre héros
+			var tex := _pixel.frame_at(_pixel_anim, pt, float(_clip.dur), _clip_hit)
 			var dx := _pixel.lunge(_t, float(_clip.dur), _clip_hit) if _pixel_anim.begins_with("attack") else 0.0
 			draw_set_transform(Vector2(dx, 0) - _pixel.anchor * s, 0.0, Vector2(s, s))
 			draw_texture(tex, Vector2.ZERO)
