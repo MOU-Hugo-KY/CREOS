@@ -1,0 +1,254 @@
+{
+ "hero": "r02_sporelle_pale",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  96,
+  146
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "r02_sporelle_pale_idle_000.png",
+     0.26
+    ],
+    [
+     "r02_sporelle_pale_idle_001.png",
+     0.26
+    ],
+    [
+     "r02_sporelle_pale_idle_002.png",
+     0.26
+    ],
+    [
+     "r02_sporelle_pale_idle_003.png",
+     0.26
+    ],
+    [
+     "r02_sporelle_pale_idle_004.png",
+     0.26
+    ],
+    [
+     "r02_sporelle_pale_idle_005.png",
+     0.26
+    ],
+    [
+     "r02_sporelle_pale_idle_006.png",
+     0.26
+    ],
+    [
+     "r02_sporelle_pale_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "r02_sporelle_pale_walk_000.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_walk_001.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_walk_002.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_walk_003.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_walk_004.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_walk_005.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_walk_006.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "r02_sporelle_pale_attack_000.png",
+     0.11
+    ],
+    [
+     "r02_sporelle_pale_attack_001.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_attack_002.png",
+     0.08
+    ],
+    [
+     "r02_sporelle_pale_attack_003.png",
+     0.065
+    ],
+    [
+     "r02_sporelle_pale_attack_004.png",
+     0.08
+    ],
+    [
+     "r02_sporelle_pale_attack_005.png",
+     0.095
+    ],
+    [
+     "r02_sporelle_pale_attack_006.png",
+     0.11
+    ],
+    [
+     "r02_sporelle_pale_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "r02_sporelle_pale_hurt_000.png",
+     0.07
+    ],
+    [
+     "r02_sporelle_pale_hurt_001.png",
+     0.065
+    ],
+    [
+     "r02_sporelle_pale_hurt_002.png",
+     0.07
+    ],
+    [
+     "r02_sporelle_pale_hurt_003.png",
+     0.085
+    ],
+    [
+     "r02_sporelle_pale_hurt_004.png",
+     0.09
+    ],
+    [
+     "r02_sporelle_pale_hurt_005.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_hurt_006.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "r02_sporelle_pale_death_000.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_death_001.png",
+     0.1
+    ],
+    [
+     "r02_sporelle_pale_death_002.png",
+     0.12
+    ],
+    [
+     "r02_sporelle_pale_death_003.png",
+     0.12
+    ],
+    [
+     "r02_sporelle_pale_death_004.png",
+     0.13
+    ],
+    [
+     "r02_sporelle_pale_death_005.png",
+     0.14
+    ],
+    [
+     "r02_sporelle_pale_death_006.png",
+     0.15
+    ],
+    [
+     "r02_sporelle_pale_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "r02_sporelle_pale_fx_000.png",
+    0.08
+   ],
+   [
+    "r02_sporelle_pale_fx_001.png",
+    0.08
+   ],
+   [
+    "r02_sporelle_pale_fx_002.png",
+    0.08
+   ],
+   [
+    "r02_sporelle_pale_fx_003.png",
+    0.08
+   ],
+   [
+    "r02_sporelle_pale_fx_004.png",
+    0.08
+   ],
+   [
+    "r02_sporelle_pale_fx_005.png",
+    0.08
+   ],
+   [
+    "r02_sporelle_pale_fx_006.png",
+    0.08
+   ],
+   [
+    "r02_sporelle_pale_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}
