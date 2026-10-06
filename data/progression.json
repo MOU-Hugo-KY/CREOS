@@ -96,5 +96,11 @@
       "fragments": 40,
       "materials": 100
     }
-  ]
+  ],
+  "rarity_bonus": {
+    "_note": "bonus sur vie, attaque, magie, défense, résistance selon la rareté (3 épique, 4 légendaire, 5 mythique)",
+    "3": 0.0,
+    "4": 0.3,
+    "5": 0.4
+  }
 }

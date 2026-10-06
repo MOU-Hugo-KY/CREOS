@@ -54,6 +54,11 @@ const SHEET_STATS := {"PV": ["hp"], "ATQ": ["atk"], "MAG": ["mag"], "DEF": ["def
 ## la relique aussi. La vitesse et le critique ne changent pas.
 static func hero_stats(hero: Dictionary, level: int, echoes: int, config: Dictionary, relic_tier := 0) -> Dictionary:
 	var s := stats_at_level(hero.get("stats", {}), level, config.get("stat_growth", {}))
+	# Rareté : un mythique est plus fort qu'un légendaire, lui-même plus fort qu'un épique.
+	var rarity := float(config.get("rarity_bonus", {}).get(str(int(hero.get("rarity", 3))), 0.0))
+	for key: String in ["hp", "atk", "mag", "def", "res"]:
+		if s.has(key):
+			s[key] = round(float(s[key]) * (1.0 + rarity))
 	var tier := echo_tier(echoes, config)
 	var e: Dictionary = config.get("echoes", {})
 	var relics: Array = config.get("relic_tiers", [])

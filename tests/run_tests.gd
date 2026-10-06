@@ -224,6 +224,16 @@ func test_progression() -> void:
 	var base: Dictionary = gd.hero("corbin").stats
 	var s5 := Progression.stats_at_level(base, 5, cfg.stat_growth)
 	check(s5.hp > base.hp and s5.atk > base.atk and s5.spd == base.spd, "les stats montent avec le niveau (sauf la vitesse)")
+	# Rareté : en moyenne, au même niveau, mythique > légendaire > épique.
+	var avg := {}
+	for id: String in gd.heroes:
+		var h: Dictionary = gd.heroes[id]
+		var rar := int(h.get("rarity", 3))
+		var pw := Progression.power(Progression.hero_stats(h, 30, 0, cfg))
+		avg[rar] = avg.get(rar, []) + [pw]
+	var mean := func(a: Array) -> float: return float(a.reduce(func(x, y): return x + y, 0)) / a.size()
+	check(mean.call(avg[5]) > mean.call(avg[4]) and mean.call(avg[4]) > mean.call(avg[3]),
+		"les mythiques sont plus forts que les légendaires, eux-mêmes plus forts que les épiques")
 	var split := Progression.split_rewards({"gold": 250, "xp": 120, "essence_ombre": 3}, cfg)
 	check(split.hero_xp == 120 and split.loot.gold == 250 and not split.loot.has("xp"), "partage du butin")
 	var e := Progression.regen_energy(10, 60, 1000.0, 1000.0 + 300 * 3 + 10, 300.0)
