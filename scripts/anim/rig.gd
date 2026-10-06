@@ -45,7 +45,7 @@ func _build(data: Dictionary, tex_dir: String) -> void:
 			draw_order.append(part)
 		parts.append(part)
 		by_id[String(p.id)] = part
-	draw_order.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return int(a.get("z", 0)) < int(b.get("z", 0)))
+	draw_order.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return float(a.get("z", 0)) < float(b.get("z", 0)))
 	for name: String in data.get("anims", {}):
 		var a: Dictionary = data.anims[name]
 		var keys := {}
