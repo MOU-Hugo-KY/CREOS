@@ -48,6 +48,9 @@ var _mat: ShaderMaterial
 var _voices: Array[AudioStreamPlayer] = []
 var _rig: Rig  # squelette du personnage : remplace les pièces du clip quand il a cette animation
 var _rig_anim := ""
+var _pixel: PixelSheet  # héros en pixel art : ses images remplacent pièces et squelette
+var _pixel_anim := ""
+var _clip_hit := -1.0
 var effect_color := Color(1.0, 0.95, 0.8)  # couleur des traînées et de l'aura (élément du héros)
 var _charge_until := 0.0
 ## Cible de l'attaque (repère local). Les effets des clips de héros ont été dessinés pour un ennemi à
@@ -85,6 +88,12 @@ func play(id: String, then_idle := true) -> bool:
 	var cut := id.rfind("_")
 	_rig = Rig.for_actor(id.substr(0, cut)) if cut > 0 and bundle.ends_with("heroes/") else null
 	_rig_anim = id.substr(cut + 1) if _rig and _rig.has_anim(id.substr(cut + 1)) else ""
+	_pixel = PixelSheet.for_actor(id.substr(0, cut)) if cut > 0 and bundle.ends_with("heroes/") else null
+	_pixel_anim = _pixel.anim_for(id.substr(cut + 1)) if _pixel else ""
+	if _pixel_anim != "":
+		_rig_anim = ""
+		texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		_clip_hit = float(clip.cue[0][0]) if not clip.cue.is_empty() else -1.0
 	_charge_until = 0.0
 	if _rig_anim in ["2", "3", "4", "5"] and not clip.cue.is_empty():
 		_charge_until = float(clip.cue[0][0])
@@ -131,6 +140,9 @@ func flash(color: Color, strength := 0.8) -> void:
 func actor_rect(id := "") -> Rect2:
 	var cid := clip_id if id == "" else id
 	var cut := cid.rfind("_")
+	if cut > 0 and bundle.ends_with("heroes/") and PixelSheet.for_actor(cid.substr(0, cut)):
+		var ps := PixelSheet.for_actor(cid.substr(0, cut))
+		return Rect2(Vector2(-36, -72) * ps.scale, Vector2(72, 72) * ps.scale)
 	if cut > 0 and bundle.ends_with("heroes/"):
 		var rig := Rig.for_actor(cid.substr(0, cut))
 		if rig:
@@ -159,8 +171,8 @@ func _process(delta: float) -> void:
 	if not _running:
 		return
 	_t += delta * speed
-	if _rig_anim != "":
-		queue_redraw()  # le squelette bouge en continu, pas image par image
+	if _rig_anim != "" or _pixel_anim != "":
+		queue_redraw()  # le squelette (ou les images pixel) avance en continu, pas au rythme du clip
 	var snd: Array = _clip.snd
 	while _snd_i < snd.size() and _t >= float(snd[_snd_i][0]):
 		_play_sound(String(snd[_snd_i][1]))
@@ -193,6 +205,15 @@ func _draw() -> void:
 		return
 	var frames: Array = _clip.f
 	var f := clampi(_frame, 0, frames.size() - 1)
+	if _pixel_anim != "":
+		if show_actor:
+			var s := _pixel.scale
+			var tex := _pixel.frame_at(_pixel_anim, _t, float(_clip.dur), _clip_hit)
+			var dx := _pixel.lunge(_t, float(_clip.dur), _clip_hit) if _pixel_anim.begins_with("attack") else 0.0
+			draw_set_transform(Vector2(dx, 0) - _pixel.anchor * s, 0.0, Vector2(s, s))
+			draw_texture(tex, Vector2.ZERO)
+			draw_set_transform(Vector2.ZERO)
+		return  # les effets sont dessinés dans les images pixel
 	var rigged := _rig_anim != ""
 	if rigged and show_actor:
 		var attacking := _rig_anim.is_valid_int()
