@@ -107,9 +107,10 @@ func _world_button(rid: String) -> Button:
 	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	b.text = "  %d · %s\n      %s" % [int(info.order), info.name, ("★ %d / %d" % [stars, ids.size() * 3]) if open else "🔒 verrouillé"]
 	var active := rid == region
-	var sb := UiKit.box(UiKit.WOOD if active else (UiKit.SLATE if open else Color("8d8573")), UiKit.INK, 12, 2)
-	sb.border_width_bottom = 6
+	var kind := "danger" if active else ("secondary" if open else "disabled")
 	for st in ["normal", "hover", "pressed", "disabled"]:
+		var sb := UiKit.kit("button_%s_%s" % [kind, "normal" if st == "disabled" else st], Color.WHITE, true)
+		sb.content_margin_left = 14
 		b.add_theme_stylebox_override(st, sb)
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	b.add_theme_font_size_override("font_size", 19)
@@ -141,9 +142,11 @@ func _level_card(id: String) -> Control:
 	b.disabled = not open
 	var v := VBoxContainer.new()
 	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	v.offset_left = 14
-	v.offset_top = 10
-	v.offset_right = -14
+	v.offset_left = 24
+	v.offset_top = 16
+	v.offset_right = -24
+	v.offset_bottom = -14
+	v.add_theme_constant_override("separation", 0)
 	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	b.add_child(v)
 	var level := int(d.get("level", 0))

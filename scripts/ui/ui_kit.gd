@@ -46,24 +46,26 @@ const KIT_BUTTONS := {
 static var _kit: Dictionary = {}
 
 
-## Pièce 9-slice du kit pixel (`ui_kit.json`) : coins nets, centre étiré.
-static func kit(name: String, tint := Color.WHITE) -> StyleBoxTexture:
+## Pièce 9-slice du kit pixel (`ui_kit.json`) : coins nets, centre étiré. `small` : version réduite
+## aux 2/3 (`<nom>_s.png`, cadre plus fin) pour les cartes, boutons et bandeaux.
+static func kit(name: String, tint := Color.WHITE, small := false) -> StyleBoxTexture:
 	if _kit.is_empty():
 		_kit = JSON.parse_string(FileAccess.get_file_as_string(KIT_DIR + "ui_kit.json")).assets
 	var a: Dictionary = _kit[name]
 	var sb := StyleBoxTexture.new()
-	sb.texture = load(KIT_DIR + String(a.file))
+	var k := 2.0 / 3.0 if small else 1.0
+	sb.texture = load(KIT_DIR + String(a.file).replace(".png", "_s.png" if small else ".png"))
 	var ns: Variant = a.nine_slice
 	if ns is Dictionary:
-		sb.texture_margin_left = ns.left
-		sb.texture_margin_top = ns.top
-		sb.texture_margin_right = ns.right
-		sb.texture_margin_bottom = ns.bottom
+		sb.texture_margin_left = floorf(ns.left * k)
+		sb.texture_margin_top = floorf(ns.top * k)
+		sb.texture_margin_right = floorf(ns.right * k)
+		sb.texture_margin_bottom = floorf(ns.bottom * k)
 	var cm: Array = a.content_margins
-	sb.content_margin_left = cm[0]
-	sb.content_margin_top = cm[1]
-	sb.content_margin_right = cm[2]
-	sb.content_margin_bottom = cm[3]
+	sb.content_margin_left = cm[0] * k
+	sb.content_margin_top = cm[1] * k
+	sb.content_margin_right = cm[2] * k
+	sb.content_margin_bottom = cm[3] * k
 	sb.modulate_color = tint
 	return sb
 
@@ -90,16 +92,19 @@ static func parchment(_radius := 18, _border := 4) -> StyleBoxTexture:
 
 ## Carte claire posée sur le parchemin (une quête, une statistique…). `highlight` la teinte un peu.
 static func card(highlight := Color.TRANSPARENT) -> StyleBoxTexture:
-	var sb := kit("list_panel")
+	var sb := kit("list_panel", Color.WHITE, true)
 	if highlight.a > 0.0:
 		sb.modulate_color = Color.WHITE.lerp(highlight, 0.35).lightened(0.1)
-	sb.set_content_margin_all(18)
+	sb.content_margin_left = 22
+	sb.content_margin_right = 22
+	sb.content_margin_top = 16
+	sb.content_margin_bottom = 16
 	return sb
 
 
 ## Bandeau sombre (ressources, infos sur le décor).
 static func pill() -> StyleBox:
-	var sb := kit("top_resources")
+	var sb := kit("top_resources", Color.WHITE, true)
 	sb.content_margin_left = 14
 	sb.content_margin_right = 20
 	sb.content_margin_top = 8
@@ -119,11 +124,11 @@ static func _button_box(top: Color, edge: Color, pressed: bool) -> StyleBoxFlat:
 
 static func _kit_button(kind: String, state: String) -> StyleBoxTexture:
 	var k: Array = KIT_BUTTONS.get(kind, KIT_BUTTONS.green)
-	var sb := kit("button_%s_%s" % [k[0], state], k[1])
-	sb.content_margin_left = 26
-	sb.content_margin_right = 26
-	sb.content_margin_top = 12 + (3 if state == "pressed" else 0)
-	sb.content_margin_bottom = 12
+	var sb := kit("button_%s_%s" % [k[0], state], k[1], true)
+	sb.content_margin_left = 24
+	sb.content_margin_right = 24
+	sb.content_margin_top = 10 + (2 if state == "pressed" else 0)
+	sb.content_margin_bottom = 10
 	return sb
 
 
@@ -235,7 +240,7 @@ static func icon(name: String, size := 40.0) -> TextureRect:
 ## Petite étiquette de récompense : icône + quantité, sur fond crème.
 static func reward_chip(icon_name: String, amount: int) -> PanelContainer:
 	var p := PanelContainer.new()
-	var sb := kit("tooltip")
+	var sb := kit("tooltip", Color.WHITE, true)
 	sb.content_margin_top = 4
 	sb.content_margin_bottom = 4
 	sb.content_margin_left = 6

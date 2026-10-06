@@ -75,7 +75,10 @@ func _process(_delta: float) -> bool:
 	if frames == 2 and hour > -2.0 and "town" in scene:
 		scene.town.set_hour(hour)
 	if frames == 5 and action != "":
-		scene._do_action(action, "")
+		if scene.hud.has_method("open_" + action):  # ex. --action=profile, shop, relics, quests, altar
+			scene.hud.call("open_" + action)
+		else:
+			scene._do_action(action, "")
 		if hero != "":
 			scene.hud.lodge.show_hero(hero, tab if tab != "" else "Techniques")
 	if frames in shots:
