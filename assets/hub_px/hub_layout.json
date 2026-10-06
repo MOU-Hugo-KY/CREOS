@@ -1,0 +1,1330 @@
+{
+ "version": 1,
+ "world_size": [
+  1280,
+  720
+ ],
+ "coordinates": "pixels; origin top-left; x right; y down",
+ "background": "res://assets/hub_px/backgrounds/hub_ground.png",
+ "buildings": [
+  {
+   "id": "hero_lodge",
+   "label": "Loge des héros",
+   "file": "res://assets/hub_px/buildings/hero_lodge.png",
+   "position": [
+    640,
+    300
+   ],
+   "pivot": [
+    124,
+    285
+   ],
+   "size": [
+    249,
+    285
+   ],
+   "approach": [
+    640,
+    330
+   ],
+   "collision": [
+    530,
+    250,
+    220,
+    48
+   ],
+   "hitbox": [
+    516,
+    15,
+    249,
+    285
+   ]
+  },
+  {
+   "id": "hunt_table",
+   "label": "Table des chasses",
+   "file": "res://assets/hub_px/buildings/hunt_table.png",
+   "position": [
+    220,
+    328
+   ],
+   "pivot": [
+    135,
+    225
+   ],
+   "size": [
+    270,
+    225
+   ],
+   "approach": [
+    350,
+    355
+   ],
+   "collision": [
+    105,
+    256,
+    230,
+    68
+   ],
+   "hitbox": [
+    85,
+    103,
+    270,
+    225
+   ]
+  },
+  {
+   "id": "relics",
+   "label": "Reliques",
+   "file": "res://assets/hub_px/buildings/relics.png",
+   "position": [
+    1088,
+    343
+   ],
+   "pivot": [
+    105,
+    245
+   ],
+   "size": [
+    210,
+    245
+   ],
+   "approach": [
+    968,
+    364
+   ],
+   "collision": [
+    998,
+    288,
+    180,
+    55
+   ],
+   "hitbox": [
+    983,
+    98,
+    210,
+    245
+   ]
+  },
+  {
+   "id": "oath_lantern",
+   "label": "Lanterne des Serments",
+   "file": "res://assets/hub_px/buildings/oath_lantern.png",
+   "position": [
+    640,
+    536
+   ],
+   "pivot": [
+    96,
+    225
+   ],
+   "size": [
+    192,
+    225
+   ],
+   "approach": [
+    640,
+    570
+   ],
+   "collision": [
+    570,
+    484,
+    140,
+    52
+   ],
+   "hitbox": [
+    544,
+    311,
+    192,
+    225
+   ]
+  },
+  {
+   "id": "merchant",
+   "label": "Marchand",
+   "file": "res://assets/hub_px/buildings/merchant.png",
+   "position": [
+    204,
+    613
+   ],
+   "pivot": [
+    135,
+    227
+   ],
+   "size": [
+    270,
+    227
+   ],
+   "approach": [
+    352,
+    612
+   ],
+   "collision": [
+    90,
+    556,
+    225,
+    57
+   ],
+   "hitbox": [
+    69,
+    386,
+    270,
+    227
+   ]
+  },
+  {
+   "id": "private_lodge",
+   "label": "Ma loge",
+   "file": "res://assets/hub_px/buildings/private_lodge.png",
+   "position": [
+    1120,
+    631
+   ],
+   "pivot": [
+    128,
+    260
+   ],
+   "size": [
+    256,
+    260
+   ],
+   "approach": [
+    1010,
+    640
+   ],
+   "collision": [
+    1020,
+    574,
+    196,
+    57
+   ],
+   "hitbox": [
+    992,
+    371,
+    256,
+    260
+   ]
+  }
+ ],
+ "props": [
+  {
+   "id": "lamp_0",
+   "file": "res://assets/hub_px/props/lamp.png",
+   "position": [
+    444,
+    318
+   ],
+   "pivot": [
+    13,
+    80
+   ],
+   "size": [
+    26,
+    80
+   ]
+  },
+  {
+   "id": "lamp_1",
+   "file": "res://assets/hub_px/props/lamp.png",
+   "position": [
+    832,
+    318
+   ],
+   "pivot": [
+    13,
+    80
+   ],
+   "size": [
+    26,
+    80
+   ]
+  },
+  {
+   "id": "lamp_2",
+   "file": "res://assets/hub_px/props/lamp.png",
+   "position": [
+    410,
+    444
+   ],
+   "pivot": [
+    13,
+    80
+   ],
+   "size": [
+    26,
+    80
+   ]
+  },
+  {
+   "id": "lamp_3",
+   "file": "res://assets/hub_px/props/lamp.png",
+   "position": [
+    870,
+    444
+   ],
+   "pivot": [
+    13,
+    80
+   ],
+   "size": [
+    26,
+    80
+   ]
+  },
+  {
+   "id": "lamp_4",
+   "file": "res://assets/hub_px/props/lamp.png",
+   "position": [
+    519,
+    565
+   ],
+   "pivot": [
+    13,
+    80
+   ],
+   "size": [
+    26,
+    80
+   ]
+  },
+  {
+   "id": "lamp_5",
+   "file": "res://assets/hub_px/props/lamp.png",
+   "position": [
+    761,
+    565
+   ],
+   "pivot": [
+    13,
+    80
+   ],
+   "size": [
+    26,
+    80
+   ]
+  },
+  {
+   "id": "lamp_6",
+   "file": "res://assets/hub_px/props/lamp.png",
+   "position": [
+    81,
+    615
+   ],
+   "pivot": [
+    13,
+    80
+   ],
+   "size": [
+    26,
+    80
+   ]
+  },
+  {
+   "id": "lamp_7",
+   "file": "res://assets/hub_px/props/lamp.png",
+   "position": [
+    1007,
+    633
+   ],
+   "pivot": [
+    13,
+    80
+   ],
+   "size": [
+    26,
+    80
+   ]
+  },
+  {
+   "id": "brazier_8",
+   "file": "res://assets/hub_px/props/brazier.png",
+   "position": [
+    376,
+    420
+   ],
+   "pivot": [
+    20,
+    48
+   ],
+   "size": [
+    41,
+    48
+   ]
+  },
+  {
+   "id": "brazier_9",
+   "file": "res://assets/hub_px/props/brazier.png",
+   "position": [
+    905,
+    418
+   ],
+   "pivot": [
+    20,
+    48
+   ],
+   "size": [
+    41,
+    48
+   ]
+  },
+  {
+   "id": "bench_10",
+   "file": "res://assets/hub_px/props/bench.png",
+   "position": [
+    885,
+    673
+   ],
+   "pivot": [
+    30,
+    42
+   ],
+   "size": [
+    60,
+    42
+   ]
+  },
+  {
+   "id": "bench_11",
+   "file": "res://assets/hub_px/props/bench.png",
+   "position": [
+    323,
+    670
+   ],
+   "pivot": [
+    30,
+    42
+   ],
+   "size": [
+    60,
+    42
+   ]
+  },
+  {
+   "id": "crate_12",
+   "file": "res://assets/hub_px/props/crate.png",
+   "position": [
+    348,
+    317
+   ],
+   "pivot": [
+    19,
+    42
+   ],
+   "size": [
+    39,
+    42
+   ]
+  },
+  {
+   "id": "barrel_13",
+   "file": "res://assets/hub_px/props/barrel.png",
+   "position": [
+    86,
+    565
+   ],
+   "pivot": [
+    17,
+    44
+   ],
+   "size": [
+    34,
+    44
+   ]
+  },
+  {
+   "id": "barrel_14",
+   "file": "res://assets/hub_px/props/barrel.png",
+   "position": [
+    1242,
+    546
+   ],
+   "pivot": [
+    17,
+    44
+   ],
+   "size": [
+    34,
+    44
+   ]
+  },
+  {
+   "id": "flower_planter_15",
+   "file": "res://assets/hub_px/props/flower_planter.png",
+   "position": [
+    484,
+    318
+   ],
+   "pivot": [
+    30,
+    48
+   ],
+   "size": [
+    61,
+    48
+   ]
+  },
+  {
+   "id": "flower_planter_16",
+   "file": "res://assets/hub_px/props/flower_planter.png",
+   "position": [
+    795,
+    318
+   ],
+   "pivot": [
+    30,
+    48
+   ],
+   "size": [
+    61,
+    48
+   ]
+  }
+ ],
+ "prop_catalog": {
+  "lamp": {
+   "file": "res://assets/hub_px/props/lamp.png",
+   "size": [
+    26,
+    80
+   ],
+   "pivot": [
+    13,
+    80
+   ]
+  },
+  "brazier": {
+   "file": "res://assets/hub_px/props/brazier.png",
+   "size": [
+    41,
+    48
+   ],
+   "pivot": [
+    20,
+    48
+   ]
+  },
+  "banner": {
+   "file": "res://assets/hub_px/props/banner.png",
+   "size": [
+    27,
+    52
+   ],
+   "pivot": [
+    13,
+    52
+   ]
+  },
+  "pennant": {
+   "file": "res://assets/hub_px/props/pennant.png",
+   "size": [
+    56,
+    50
+   ],
+   "pivot": [
+    28,
+    50
+   ]
+  },
+  "cypress": {
+   "file": "res://assets/hub_px/props/cypress.png",
+   "size": [
+    68,
+    150
+   ],
+   "pivot": [
+    34,
+    150
+   ]
+  },
+  "bush": {
+   "file": "res://assets/hub_px/props/bush.png",
+   "size": [
+    82,
+    66
+   ],
+   "pivot": [
+    41,
+    66
+   ]
+  },
+  "flower_planter": {
+   "file": "res://assets/hub_px/props/flower_planter.png",
+   "size": [
+    61,
+    48
+   ],
+   "pivot": [
+    30,
+    48
+   ]
+  },
+  "bench": {
+   "file": "res://assets/hub_px/props/bench.png",
+   "size": [
+    60,
+    42
+   ],
+   "pivot": [
+    30,
+    42
+   ]
+  },
+  "crate": {
+   "file": "res://assets/hub_px/props/crate.png",
+   "size": [
+    39,
+    42
+   ],
+   "pivot": [
+    19,
+    42
+   ]
+  },
+  "barrel": {
+   "file": "res://assets/hub_px/props/barrel.png",
+   "size": [
+    34,
+    44
+   ],
+   "pivot": [
+    17,
+    44
+   ]
+  },
+  "wall": {
+   "file": "res://assets/hub_px/props/wall.png",
+   "size": [
+    103,
+    68
+   ],
+   "pivot": [
+    51,
+    68
+   ]
+  },
+  "gate_post": {
+   "file": "res://assets/hub_px/props/gate_post.png",
+   "size": [
+    29,
+    58
+   ],
+   "pivot": [
+    14,
+    58
+   ]
+  }
+ },
+ "ui_catalog": {
+  "hero_lodge": {
+   "file": "res://assets/hub_px/ui/hero_lodge.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "hunt_table": {
+   "file": "res://assets/hub_px/ui/hunt_table.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "oath_lantern": {
+   "file": "res://assets/hub_px/ui/oath_lantern.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "relics": {
+   "file": "res://assets/hub_px/ui/relics.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "merchant": {
+   "file": "res://assets/hub_px/ui/merchant.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "private_lodge": {
+   "file": "res://assets/hub_px/ui/private_lodge.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "bounties": {
+   "file": "res://assets/hub_px/ui/bounties.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "rewards": {
+   "file": "res://assets/hub_px/ui/rewards.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "corruption": {
+   "file": "res://assets/hub_px/ui/corruption.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "ranking": {
+   "file": "res://assets/hub_px/ui/ranking.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "guild": {
+   "file": "res://assets/hub_px/ui/guild.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "tower": {
+   "file": "res://assets/hub_px/ui/tower.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "gold": {
+   "file": "res://assets/hub_px/ui/gold.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "gems": {
+   "file": "res://assets/hub_px/ui/gems.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "energy": {
+   "file": "res://assets/hub_px/ui/energy.png",
+   "size": [
+    64,
+    64
+   ]
+  },
+  "sound": {
+   "file": "res://assets/hub_px/ui/sound.png",
+   "size": [
+    64,
+    64
+   ]
+  }
+ },
+ "animations": {
+  "crystal": {
+   "sheet": "res://assets/hub_px/effects/crystal_sheet.png",
+   "frame_count": 4,
+   "cell_size": [
+    96,
+    96
+   ],
+   "pivot": [
+    48,
+    80
+   ],
+   "fps": 5,
+   "loop": true,
+   "rects": [
+    [
+     0,
+     0,
+     96,
+     96
+    ],
+    [
+     96,
+     0,
+     96,
+     96
+    ],
+    [
+     192,
+     0,
+     96,
+     96
+    ],
+    [
+     288,
+     0,
+     96,
+     96
+    ]
+   ]
+  },
+  "flame": {
+   "sheet": "res://assets/hub_px/effects/flame_sheet.png",
+   "frame_count": 4,
+   "cell_size": [
+    96,
+    96
+   ],
+   "pivot": [
+    48,
+    80
+   ],
+   "fps": 10,
+   "loop": true,
+   "rects": [
+    [
+     0,
+     0,
+     96,
+     96
+    ],
+    [
+     96,
+     0,
+     96,
+     96
+    ],
+    [
+     192,
+     0,
+     96,
+     96
+    ],
+    [
+     288,
+     0,
+     96,
+     96
+    ]
+   ]
+  },
+  "banner_wave": {
+   "sheet": "res://assets/hub_px/effects/banner_wave_sheet.png",
+   "frame_count": 4,
+   "cell_size": [
+    96,
+    96
+   ],
+   "pivot": [
+    48,
+    10
+   ],
+   "fps": 6,
+   "loop": true,
+   "rects": [
+    [
+     0,
+     0,
+     96,
+     96
+    ],
+    [
+     96,
+     0,
+     96,
+     96
+    ],
+    [
+     192,
+     0,
+     96,
+     96
+    ],
+    [
+     288,
+     0,
+     96,
+     96
+    ]
+   ]
+  },
+  "smoke": {
+   "sheet": "res://assets/hub_px/effects/smoke_sheet.png",
+   "frame_count": 4,
+   "cell_size": [
+    96,
+    96
+   ],
+   "pivot": [
+    48,
+    80
+   ],
+   "fps": 5,
+   "loop": true,
+   "rects": [
+    [
+     0,
+     0,
+     96,
+     96
+    ],
+    [
+     96,
+     0,
+     96,
+     96
+    ],
+    [
+     192,
+     0,
+     96,
+     96
+    ],
+    [
+     288,
+     0,
+     96,
+     96
+    ]
+   ]
+  },
+  "violet_motes": {
+   "sheet": "res://assets/hub_px/effects/violet_motes_sheet.png",
+   "frame_count": 4,
+   "cell_size": [
+    96,
+    96
+   ],
+   "pivot": [
+    48,
+    48
+   ],
+   "fps": 6,
+   "loop": true,
+   "rects": [
+    [
+     0,
+     0,
+     96,
+     96
+    ],
+    [
+     96,
+     0,
+     96,
+     96
+    ],
+    [
+     192,
+     0,
+     96,
+     96
+    ],
+    [
+     288,
+     0,
+     96,
+     96
+    ]
+   ]
+  },
+  "gold_glint": {
+   "sheet": "res://assets/hub_px/effects/gold_glint_sheet.png",
+   "frame_count": 4,
+   "cell_size": [
+    96,
+    96
+   ],
+   "pivot": [
+    48,
+    48
+   ],
+   "fps": 8,
+   "loop": true,
+   "rects": [
+    [
+     0,
+     0,
+     96,
+     96
+    ],
+    [
+     96,
+     0,
+     96,
+     96
+    ],
+    [
+     192,
+     0,
+     96,
+     96
+    ],
+    [
+     288,
+     0,
+     96,
+     96
+    ]
+   ]
+  }
+ },
+ "effects": [
+  {
+   "id": "lantern_crystal",
+   "animation": "crystal",
+   "position": [
+    640,
+    478
+   ],
+   "phase": 0
+  },
+  {
+   "id": "lantern_motes",
+   "animation": "violet_motes",
+   "position": [
+    640,
+    450
+   ],
+   "additive": true,
+   "phase": 1
+  },
+  {
+   "id": "loge_smoke",
+   "animation": "smoke",
+   "position": [
+    1204,
+    406
+   ],
+   "phase": 0
+  },
+  {
+   "id": "fire_0",
+   "animation": "flame",
+   "position": [
+    376,
+    390
+   ],
+   "phase": 0
+  },
+  {
+   "id": "fire_1",
+   "animation": "flame",
+   "position": [
+    905,
+    388
+   ],
+   "phase": 1
+  },
+  {
+   "id": "entrance_banner_0",
+   "animation": "banner_wave",
+   "position": [
+    542,
+    623
+   ],
+   "phase": 0
+  },
+  {
+   "id": "entrance_banner_1",
+   "animation": "banner_wave",
+   "position": [
+    739,
+    623
+   ],
+   "phase": 1
+  },
+  {
+   "id": "interaction_glint_0",
+   "animation": "gold_glint",
+   "position": [
+    640,
+    230
+   ],
+   "additive": true,
+   "phase": 0
+  },
+  {
+   "id": "interaction_glint_1",
+   "animation": "gold_glint",
+   "position": [
+    220,
+    258
+   ],
+   "additive": true,
+   "phase": 1
+  },
+  {
+   "id": "interaction_glint_2",
+   "animation": "gold_glint",
+   "position": [
+    1088,
+    273
+   ],
+   "additive": true,
+   "phase": 2
+  },
+  {
+   "id": "interaction_glint_3",
+   "animation": "gold_glint",
+   "position": [
+    640,
+    466
+   ],
+   "additive": true,
+   "phase": 3
+  },
+  {
+   "id": "interaction_glint_4",
+   "animation": "gold_glint",
+   "position": [
+    204,
+    543
+   ],
+   "additive": true,
+   "phase": 0
+  },
+  {
+   "id": "interaction_glint_5",
+   "animation": "gold_glint",
+   "position": [
+    1120,
+    561
+   ],
+   "additive": true,
+   "phase": 1
+  }
+ ],
+ "lights": [
+  {
+   "id": "violet_crystal",
+   "position": [
+    640,
+    474
+   ],
+   "color": "#ba7bff",
+   "radius": 130,
+   "energy": 1.5,
+   "phase": 0
+  },
+  {
+   "id": "lamp_0",
+   "position": [
+    444,
+    258
+   ],
+   "color": "#ffc777",
+   "radius": 86,
+   "energy": 0.8,
+   "phase": 0.0
+  },
+  {
+   "id": "lamp_1",
+   "position": [
+    832,
+    258
+   ],
+   "color": "#ffc777",
+   "radius": 86,
+   "energy": 0.8,
+   "phase": 0.91
+  },
+  {
+   "id": "lamp_2",
+   "position": [
+    410,
+    384
+   ],
+   "color": "#ffc777",
+   "radius": 86,
+   "energy": 0.8,
+   "phase": 1.82
+  },
+  {
+   "id": "lamp_3",
+   "position": [
+    870,
+    384
+   ],
+   "color": "#ffc777",
+   "radius": 86,
+   "energy": 0.8,
+   "phase": 2.73
+  },
+  {
+   "id": "lamp_4",
+   "position": [
+    519,
+    505
+   ],
+   "color": "#ffc777",
+   "radius": 86,
+   "energy": 0.8,
+   "phase": 3.64
+  },
+  {
+   "id": "lamp_5",
+   "position": [
+    761,
+    505
+   ],
+   "color": "#ffc777",
+   "radius": 86,
+   "energy": 0.8,
+   "phase": 4.55
+  },
+  {
+   "id": "lamp_6",
+   "position": [
+    81,
+    555
+   ],
+   "color": "#ffc777",
+   "radius": 86,
+   "energy": 0.8,
+   "phase": 5.46
+  },
+  {
+   "id": "lamp_7",
+   "position": [
+    1007,
+    573
+   ],
+   "color": "#ffc777",
+   "radius": 86,
+   "energy": 0.8,
+   "phase": 6.37
+  },
+  {
+   "id": "warm_0",
+   "position": [
+    376,
+    390
+   ],
+   "color": "#ffd093",
+   "radius": 70,
+   "energy": 0.7,
+   "phase": 0.0
+  },
+  {
+   "id": "warm_1",
+   "position": [
+    905,
+    388
+   ],
+   "color": "#ffd093",
+   "radius": 70,
+   "energy": 0.7,
+   "phase": 1.7
+  },
+  {
+   "id": "warm_2",
+   "position": [
+    588,
+    250
+   ],
+   "color": "#ffd093",
+   "radius": 70,
+   "energy": 0.7,
+   "phase": 3.4
+  },
+  {
+   "id": "warm_3",
+   "position": [
+    693,
+    250
+   ],
+   "color": "#ffd093",
+   "radius": 70,
+   "energy": 0.7,
+   "phase": 5.1
+  },
+  {
+   "id": "warm_4",
+   "position": [
+    1065,
+    558
+   ],
+   "color": "#ffd093",
+   "radius": 70,
+   "energy": 0.7,
+   "phase": 6.8
+  },
+  {
+   "id": "warm_5",
+   "position": [
+    1170,
+    552
+   ],
+   "color": "#ffd093",
+   "radius": 70,
+   "energy": 0.7,
+   "phase": 8.5
+  },
+  {
+   "id": "warm_6",
+   "position": [
+    220,
+    270
+   ],
+   "color": "#ffd093",
+   "radius": 70,
+   "energy": 0.7,
+   "phase": 10.2
+  },
+  {
+   "id": "warm_7",
+   "position": [
+    205,
+    560
+   ],
+   "color": "#ffd093",
+   "radius": 70,
+   "energy": 0.7,
+   "phase": 11.9
+  }
+ ],
+ "collisions": [
+  [
+   530,
+   250,
+   220,
+   48
+  ],
+  [
+   105,
+   256,
+   230,
+   68
+  ],
+  [
+   998,
+   288,
+   180,
+   55
+  ],
+  [
+   570,
+   484,
+   140,
+   52
+  ],
+  [
+   90,
+   556,
+   225,
+   57
+  ],
+  [
+   1020,
+   574,
+   196,
+   57
+  ]
+ ],
+ "spawn": [
+  480,
+  440
+ ]
+}

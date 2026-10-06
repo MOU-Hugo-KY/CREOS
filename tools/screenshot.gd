@@ -73,8 +73,7 @@ func _initialize() -> void:
 func _process(_delta: float) -> bool:
 	frames += 1
 	if frames == 2 and hour > -2.0 and "town" in scene:
-		scene.town.ambience.hour_override = hour
-		scene.town.ambience.current = scene.town.ambience._mood_at(hour)
+		scene.town.set_hour(hour)
 	if frames == 5 and action != "":
 		scene._do_action(action, "")
 		if hero != "":
