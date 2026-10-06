@@ -49,7 +49,12 @@ var _voices: Array[AudioStreamPlayer] = []
 var _rig: Rig  # squelette du personnage : remplace les pièces du clip quand il a cette animation
 var _rig_anim := ""
 var effect_color := Color(1.0, 0.95, 0.8)  # couleur des traînées et de l'aura (élément du héros)
-var _charge_until := 0.0  # aura de charge (ultime, technique secrète) jusqu'à cet instant du clip
+var _charge_until := 0.0
+## Cible de l'attaque (repère local). Les effets des clips de héros ont été dessinés pour un ennemi à
+## une distance fixe (CLIP_IMPACT) : ils sont recalés sur la vraie cible, d'autant plus qu'ils sont loin
+## du héros (l'aura reste sur lui, le projectile file vers l'ennemi, l'impact tombe dessus).
+var target_local := Vector2.INF
+const CLIP_IMPACT := Vector2(850, -190)  # aura de charge (ultime, technique secrète) jusqu'à cet instant du clip
 var _freeze := 0.0  # arrêt sur image (impact) : le clip ne avance plus pendant ce temps
 
 
@@ -121,8 +126,15 @@ func flash(color: Color, strength := 0.8) -> void:
 	_flash = strength
 
 
-## Rectangle (local, avant retournement) occupé par l'acteur dans la première image du clip.
+## Rectangle (local, avant retournement) occupé par l'acteur dans la première image du clip
+## (ou par son squelette au repos).
 func actor_rect(id := "") -> Rect2:
+	var cid := clip_id if id == "" else id
+	var cut := cid.rfind("_")
+	if cut > 0 and bundle.ends_with("heroes/"):
+		var rig := Rig.for_actor(cid.substr(0, cut))
+		if rig:
+			return rig.rest_rect()
 	var c := _clip if id == "" else load_clip(bundle, id)
 	var rect := Rect2()
 	var first := true
@@ -201,23 +213,34 @@ func _draw() -> void:
 			if tex == null:
 				continue
 			var size := Vector2(cmd[3], cmd[4])
-			draw_set_transform(Vector2(cmd[1], cmd[2]), float(cmd[5]), Vector2(-1.0 if int(cmd[7]) == 1 else 1.0, 1.0))
+			var at := Vector2(cmd[1], cmd[2])
+			if layer == 1:
+				at = _retarget(at)
+			draw_set_transform(at, float(cmd[5]), Vector2(-1.0 if int(cmd[7]) == 1 else 1.0, 1.0))
 			draw_texture_rect(tex, Rect2(-size * 0.5, size), false, Color(1, 1, 1, float(cmd[6])))
 			draw_set_transform(Vector2.ZERO)
 		elif kind == -1:
 			var c := Color(String(cmd[5]))
 			c.a *= float(cmd[7])
-			draw_line(Vector2(cmd[1], cmd[2]), Vector2(cmd[3], cmd[4]), c, float(cmd[6]), true)
+			draw_line(_retarget(Vector2(cmd[1], cmd[2])), _retarget(Vector2(cmd[3], cmd[4])), c, float(cmd[6]), true)
 		else:
 			var c := Color(String(cmd[5]))
 			c.a *= float(cmd[7])
 			var pts := PackedVector2Array()
 			var r := float(cmd[3])
 			var ratio := float(cmd[4])
+			var o := _retarget(Vector2(cmd[1], cmd[2]))
 			for s in 41:
 				var a := TAU * float(s) / 40.0
-				pts.append(Vector2(float(cmd[1]) + cos(a) * r, float(cmd[2]) + sin(a) * r * ratio))
+				pts.append(Vector2(o.x + cos(a) * r, o.y + sin(a) * r * ratio))
 			draw_polyline(pts, c, float(cmd[6]), true)
+
+
+func _retarget(p: Vector2) -> Vector2:
+	if target_local == Vector2.INF or p.x <= 0.0:
+		return p
+	var w := clampf(p.x / CLIP_IMPACT.x, 0.0, 1.25)
+	return p + (target_local - CLIP_IMPACT) * w
 
 
 ## Images rémanentes : quand le personnage se rue, deux silhouettes colorées le suivent.

@@ -121,6 +121,8 @@ func pose(name: String, t: float) -> Dictionary:
 		var turn := rad_to_deg(angle_difference(a.get_rotation(), b.get_rotation()))
 		var move: Vector2 = b.origin - a.origin  # vers où le parent vient de partir : la pièce traîne derrière
 		var amount: float = followers[id]
+		if followers.has(parent):
+			amount *= 0.45  # bout de queue, de cape… : son parent flotte déjà, il suit plus doucement
 		extra[id] = clampf((turn * 0.9 + move.x * 0.35 - move.y * 0.15) * amount, -38.0, 38.0)
 	return _raw(name, t, extra)
 
@@ -138,6 +140,20 @@ func _raw(name: String, t: float, extra: Dictionary) -> Dictionary:
 		world[p.id] = world[parent] * local if world.has(parent) else local
 		world[p.id + "#a"] = float(v.a) * float(world.get(parent + "#a", 1.0))
 	return world
+
+
+## Rectangle occupé au repos (pour placer barres de vie et nombres au-dessus de la tête).
+func rest_rect() -> Rect2:
+	var name := "idle" if anims.has("idle") else String(anims.keys()[0])
+	var world := _raw(name, 0.0, {})
+	var out := Rect2()
+	var first := true
+	for p: Dictionary in draw_order:
+		var w: Transform2D = world[p.id]
+		var r: Rect2 = w * (p.rect as Rect2)
+		out = r if first else out.merge(r)
+		first = false
+	return out
 
 
 ## Pointes des armes (ou des mains) à l'instant t, pour les traînées.

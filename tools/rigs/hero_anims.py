@@ -153,7 +153,7 @@ def arm_poses(b, big):
         up, down = (-135, 50) if big else (-115, 35)
         return (b.aim(up), 25, 30), (b.aim(down), straight, -45), -12, 18
     if kind == "slam":
-        up, down = (-140, 70) if big else (-125, 60)
+        up, down = (-115, 70) if big else (-100, 60)
         return (b.aim(up), -15, -25), (b.aim(down), straight, 40), -16, 26
     if kind in ("thrust", "punch"):
         return (b.aim(125), round(-110 - b.fore_rel * 0.3), 15), (b.aim(5), straight, -5), -10, 16
@@ -322,11 +322,37 @@ def build(hero):
         c = load_clip("%s_%d" % (hero, slot))
         if c:
             anims[str(slot)] = attack(b, c, slot)
-    # Le bras qui frappe passe devant le corps s'il était dessiné derrière.
-    torso_z = b.parts["torso"].get("z", 10)
+    # Le bras qui frappe (épaule, coude, main, arme) passe devant le corps, l'autre bras et le
+    # bouclier, mais derrière la tête : on voit toujours le coup, jamais l'arme sur le visage.
+    main = [b.ua, b.fa, b.wp, "hand_front" if b.ua.endswith("front") else ""]
+    others = [p for p in rig["parts"] if p["id"] not in main and p["id"] != "head" and "tex" in p
+              and not b.parts.get(p["id"], {}).get("parent", "") == "head"]
+    top = max(float(p.get("z", 0)) for p in others)
+    head_z = float(b.parts["head"].get("z", 30)) if "head" in b.parts else top + 10
+    base = top + 0.5 if top + 0.5 < head_z else top + 0.5
+    order = {b.ua: 0.0, b.fa: 0.1, b.wp: 0.2, "hand_front": 0.3}
     for p in rig["parts"]:
-        if p["id"] in (b.ua, b.fa, b.wp) and p.get("z", 0) < torso_z:
-            p["z"] = 40 + p["z"]
+        if p["id"] in main and p["id"]:
+            p["z"] = round(base + order.get(p["id"], 0) * (min(1.0, max(0.2, head_z - base)) if head_z > base else 1), 2)
+    # Arme longue ou lourde (canon, bâton, lance…) : hors attaque, le bras qui la tient bouge peu.
+    wpn = b.parts.get(b.wp)
+    torso_w = b.parts["torso"]["size"][0] if "torso" in b.parts else 150
+    if wpn and max(wpn["size"]) > 1.3 * torso_w:
+        for n, a in anims.items():
+            if n.isdigit():
+                continue
+            for bone in (b.ua, b.fa, b.wp):
+                for key in a["keys"].get(bone, []):
+                    if "r" in key[1]:
+                        key[1]["r"] = round(key[1]["r"] * 0.3, 1)
+    if b.shield2:  # un bras qui porte un grand bouclier bouge peu (sinon le bouclier s'envole)
+        for n, a in anims.items():
+            if n.isdigit():
+                continue
+            for bone in (b.ua2, b.fa2):
+                for key in a["keys"].get(bone, []):
+                    if "r" in key[1]:
+                        key[1]["r"] = round(key[1]["r"] * 0.25, 1)
     for a in anims.values():
         a["keys"] = {n: v for n, v in a["keys"].items() if n in b.parts}
     blocks = []

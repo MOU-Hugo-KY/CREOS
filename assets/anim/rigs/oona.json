@@ -17,10 +17,10 @@
   {"id": "hand_front", "parent": "forearm_front", "tex": "oona_rig_hand_front.png", "pos": [-132.8, -245.3], "size": [65.1, 72.9], "pivot": [-113.8, -227.4], "z": 19},
   {"id": "head", "parent": "torso", "tex": "oona_rig_head.png", "pos": [44.1, -252.6], "size": [216.7, 213.8], "pivot": [44.5, -172.0], "z": 30},
   {"id": "hat", "parent": "head", "tex": "oona_rig_hat.png", "pos": [38.2, -362.9], "size": [129.2, 90.4], "pivot": [50.4, -343.0], "z": 32},
-  {"id": "upper_arm_back", "parent": "torso", "tex": "oona_rig_upper_arm_back.png", "pos": [158.2, -121.9], "size": [116.6, 115.6], "pivot": [124.2, -138.9], "z": 47},
-  {"id": "forearm_hand_back", "parent": "upper_arm_back", "tex": "oona_rig_forearm_hand_back.png", "pos": [214.1, -140.4], "size": [94.2, 104.0], "pivot": [194.2, -114.7], "z": 49},
+  {"id": "upper_arm_back", "parent": "torso", "tex": "oona_rig_upper_arm_back.png", "pos": [158.2, -121.9], "size": [116.6, 115.6], "pivot": [124.2, -138.9], "z": 19.5},
+  {"id": "forearm_hand_back", "parent": "upper_arm_back", "tex": "oona_rig_forearm_hand_back.png", "pos": [214.1, -140.4], "size": [94.2, 104.0], "pivot": [194.2, -114.7], "z": 19.6},
   {"id": "weapon_front", "parent": "hand_front", "tex": "oona_rig_weapon_front.png", "pos": [-113.8, -260.9], "size": [97.2, 111.7], "pivot": [-113.8, -225.4], "z": 18},
-  {"id": "weapon_back", "parent": "forearm_hand_back", "tex": "oona_rig_weapon_back.png", "pos": [231.6, -206.5], "size": [105.9, 154.5], "pivot": [231.1, -177.8], "z": 48}
+  {"id": "weapon_back", "parent": "forearm_hand_back", "tex": "oona_rig_weapon_back.png", "pos": [231.6, -206.5], "size": [105.9, 154.5], "pivot": [231.1, -177.8], "z": 19.7}
  ],
  "anims": {
   "idle": {"dur": 2.0, "loop": true, "keys": {
@@ -104,7 +104,6 @@
    "torso": [[0, {"r": 0, "sy": 1}], [0.382, {"r": -6, "sy": 0.98}, "o"], [0.542, {"r": -6}], [0.702, {"r": 10, "sy": 1.03}, "i"], [0.999, {"r": 6.0, "sy": 1}], [1.25, {"r": 0}, "b"]],
    "hip": [[0, {"y": 0}], [0.382, {"y": 10}, "o"], [0.702, {"y": -4}, "o"], [0.999, {"y": 3.0}], [1.25, {"y": 0}]],
    "head": [[0, {"r": 0}], [0.382, {"r": -8}, "o"], [0.702, {"r": 8}, "o"], [0.999, {"r": 4}], [1.25, {"r": 0}, "b"]],
-   "root": [[0.0, {"x": 0.0, "y": 0.0}, "s"], [0.125, {"x": -1.0, "y": 0.0}, "s"], [0.25, {"x": -1.8, "y": 0.0}, "s"], [0.375, {"x": 40.1, "y": 0.0}, "s"], [0.5, {"x": 75.5, "y": 0.0}, "s"], [0.625, {"x": 90.7, "y": 0.0}, "s"], [0.75, {"x": 84.1, "y": 0.0}, "s"], [0.875, {"x": 57.1, "y": 0.0}, "s"], [1.0, {"x": 16.0, "y": 0.0}, "s"], [1.125, {"x": 0.6, "y": 0.0}, "s"], [1.25, {"x": 0.0, "y": 0.0}, "s"], [1.333, {"x": 0.0, "y": 0.0}, "s"]],
    "hat": [[0.0, {"r": 0.0}], [0.382, {"r": -4.2}], [0.702, {"r": 9.6}], [1.002, {"r": 3.6}], [1.25, {"r": 0.0}, "b"]],
    "tentacle_1": [[0, {"r": 0}], [0.382, {"r": -14}], [0.702, {"r": 20}, "o"], [0.999, {"r": 8}], [1.25, {"r": 0}]],
    "tentacle_2": [[0, {"r": 0}], [0.382, {"r": 14}], [0.702, {"r": -20}, "o"], [0.999, {"r": -8}], [1.25, {"r": 0}]],

@@ -76,14 +76,16 @@ func is_dead() -> bool:
 var _base_scale := Vector2.ZERO
 
 
-func play_attack(clip: String, _hit_time := 0.0) -> float:
+func play_attack(clip: String, _hit_time := 0.0, target := Vector2.INF) -> float:
 	if _dead:
 		return 0.0
+	player.target_local = Vector2.INF if target == Vector2.INF else player.to_local(get_parent().to_global(target))
 	if player.play(clip):
 		player.idle_clip = _id + "_idle"
 		_attacking = true
 		z_index = 8  # les effets de l'attaque passent devant les autres combattants
 		var done := func(_c: String) -> void:
+			player.target_local = Vector2.INF
 			_attacking = false
 			z_index = 0
 		player.finished.connect(done, CONNECT_ONE_SHOT)

@@ -267,7 +267,18 @@ func _on_attack(ev: Dictionary) -> float:
 	if v == null:
 		return 0.0
 	var clip := String(ev.get("clip", ""))
-	var delay := v.play_attack(clip)
+	# Les effets du clip tombent sur la cible (au centre du groupe pour une attaque de zone).
+	var aim := Vector2.INF
+	var hits: Array = []
+	for uid: int in ev.get("targets", []):
+		if views.has(uid) and views[uid] != v:
+			hits.append(views[uid].chest_position())
+	if not hits.is_empty():
+		aim = Vector2.ZERO
+		for p: Vector2 in hits:
+			aim += p
+		aim /= hits.size()
+	var delay := v.play_attack(clip, 0.0, aim)
 	_last_slot[int(ev.src)] = int(ev.slot)
 	fx.dust(v.position, 0.8)  # appui au sol au départ de l'attaque
 	var color := Palette.element_color(v.unit.element)
