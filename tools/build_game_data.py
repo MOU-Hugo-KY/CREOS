@@ -63,7 +63,7 @@ HEROES = {
         ("single_enemy", [st("aveugle"), buff("evade", 0.15, self_only=True)]),
         ("single_enemy", [dmg(0.4), dmg(0.4), dmg(0.4), dmg(0.4), armor_break(if_status="marque", consume=True)]),
     ]),
-    "aegis": ("lumiere", "melee", "physical", 3, "gardien", 0.05, [
+    "aegis": ("lumiere", "melee", "physical", 2, "gardien", 0.05, [
         ("single_enemy", [dmg(1.15)]),
         ("single_enemy", [dmg(1.1), st("desequilibre"), armor_break()]),
         ("all_enemies", [dmg(1.9), dict(type="stun", duration=A, if_status="desequilibre", consume=True)]),
@@ -73,12 +73,12 @@ HEROES = {
         ("lowest_hp_ally", [shield(1.1, "mag")]),
         ("all_enemies", [dmg(1.6, "mag"), st("mouille")]),
     ]),
-    "orage": ("lumiere", "melee", "physical", 3, "moine", 0.08, [
+    "orage": ("lumiere", "melee", "physical", 4, "moine", 0.08, [
         ("single_enemy", [dmg(0.35), dmg(0.35), dmg(0.35)]),
         ("all_allies", [heal(1.05, "atk")]),
         ("random_enemy", [dmg(0.25, bonus_if="mouille", bonus=0.5)] * 8 + [heal(1.2, "atk", target="all_allies")]),
     ]),
-    "kharok": ("nature", "melee", "physical", 3, "gardien", 0.05, [
+    "kharok": ("nature", "melee", "physical", 2, "gardien", 0.05, [
         ("single_enemy", [dmg(1.0), st("desequilibre")]),
         ("lowest_hp_ally", [shield(1.0), st("protege")]),
         ("all_enemies", [dmg(1.2, "def"), shield(1.0, target="all_allies")]),
@@ -88,24 +88,24 @@ HEROES = {
         ("all_enemies", [dmg(0.9, "mag", bonus_if="brulure", bonus=0.2)]),
         ("all_enemies", [dmg(1.8, "mag", bonus_if="enracine", bonus=0.3, consume=True), dot(0.12)]),
     ]),
-    "nacre": ("lumiere", "ranged", "magic", 4, "soutien", 0.05, [
+    "nacre": ("lumiere", "ranged", "magic", 3, "soutien", 0.05, [
         ("single_enemy", [dmg(0.9, "mag"), st("somnolence")]),
         ("lowest_hp_ally", [dict(type="cleanse"), dict(type="regen", power=0.3, stat="mag", duration=T)]),
         ("all_enemies", [dict(type="stun", duration=A, if_status="somnolence", consume=True, label="Endormi !"),
                          buff("crit", 0.2, target="all_allies")]),
     ]),
-    "rivet": ("ombre", "ranged", "physical", 3, "traqueur", 0.15, [
+    "rivet": ("ombre", "ranged", "physical", 2, "traqueur", 0.15, [
         ("single_enemy", [dmg(1.0, bonus_if="marque", bonus=0.15)]),
         ("single_enemy", [dmg(1.2), armor_break()]),
         ("single_enemy", [dmg(1.4, bonus_if="marque", bonus=0.25, consume=True),
                           dmg(0.7, target="random_enemy"), dmg(0.7, target="random_enemy")]),
     ]),
-    "sylve": ("nature", "melee", "physical", 4, "gardien", 0.05, [
+    "sylve": ("nature", "melee", "physical", 3, "gardien", 0.05, [
         ("single_enemy", [dmg(0.9), st("enracine", A)]),
         ("all_allies", [dict(type="regen", power=0.04, stat="hp", duration=T), buff("res", 0.1)]),
         ("all_enemies", [st("enracine", A), buff("def", 0.2, target="all_allies")]),
     ]),
-    "valen": ("lumiere", "melee", "physical", 3, "lancier", 0.08, [
+    "valen": ("lumiere", "melee", "physical", 4, "lancier", 0.08, [
         ("single_enemy", [dmg(1.05)]),
         ("two_enemies", [dmg(0.85), st("desequilibre")]),
         ("all_enemies", [dmg(1.7, bonus_if="armure_reduite", bonus=0.25)]),
@@ -115,43 +115,43 @@ HEROES = {
         ("self", [dict(type="taunt", duration=3.0), buff("def", 0.25)]),
         ("all_allies", [shield(1.6)]),
     ]),
-    "saffran": ("feu", "ranged", "magic", 4, "illusionniste", 0.08, [
+    "saffran": ("feu", "ranged", "magic", 3, "illusionniste", 0.08, [
         ("single_enemy", [dmg(0.95, "mag"), st("scelle")]),
         ("lowest_hp_ally", [st("leurre")]),
         ("all_enemies", [dmg(1.4, "mag", bonus_if="scelle", bonus=0.4), st("aveugle", if_status="scelle", consume=True)]),
     ]),
-    "oona": ("eau", "ranged", "magic", 4, "soutien", 0.05, [
+    "oona": ("eau", "ranged", "magic", 2, "soutien", 0.05, [
         ("single_enemy", [dmg(0.9, "mag"), st("aveugle")]),
         ("lowest_hp_ally", [heal(1.8), dict(type="cleanse")]),
         ("all_enemies", [st("enracine", A), heal(1.2, target="all_allies")]),
     ]),
-    "calx": ("feu", "ranged", "magic", 4, "automate", 0.05, [
+    "calx": ("feu", "ranged", "magic", 2, "automate", 0.05, [
         ("single_enemy", [dmg(1.0, "mag"), st("resonance")]),
         ("lowest_hp_ally", [dict(type="cleanse"), st("alarme")]),
         ("all_enemies", [dmg(1.5, "mag"), dict(type="gauge", amount=-0.1, bonus_if="resonance", consume=True)]),
     ]),
-    "nyx": ("ombre", "melee", "physical", 4, "lame", 0.12, [
+    "nyx": ("ombre", "melee", "physical", 2, "lame", 0.12, [
         ("single_enemy", [dmg(1.0), dict(type="lifesteal", ratio=0.2)]),
         ("self", [buff("evade", 0.15), buff("crit", 0.2)]),
         ("single_enemy", [dmg(0.5), dmg(0.5), dmg(0.5), dmg(0.5), dict(type="lifesteal", ratio=0.2)]),
     ]),
-    "mei_lian": ("nature", "melee", "physical", 5, "lame", 0.10, [
+    "mei_lian": ("nature", "melee", "physical", 4, "lame", 0.10, [
         ("single_enemy", [dmg(1.0), st("petale")]),
         ("self", [buff("evade", 0.2, A)]),
         ("all_enemies", [armor_break(if_status="petale")] + [dmg(0.3)] * 6),
     ]),
-    "jin_seok": ("lumiere", "melee", "physical", 5, "moine", 0.05, [
+    "jin_seok": ("lumiere", "melee", "physical", 3, "moine", 0.05, [
         ("single_enemy", [dmg(1.0), st("desequilibre")]),
         ("lowest_hp_ally", [shield(1.5)]),
         ("random_enemy", [dmg(0.35)] * 5 + [dict(type="stun", duration=A, if_status="desequilibre", consume=True,
                                                  target="all_enemies")]),
     ]),
-    "yun_tao": ("eau", "melee", "physical", 5, "moine", 0.05, [
+    "yun_tao": ("eau", "melee", "physical", 4, "moine", 0.05, [
         ("single_enemy", [dmg(1.0), st("ouverture")]),
         ("lowest_hp_ally", [st("garde")]),
         ("all_enemies", [dmg(1.4), dict(type="gauge", amount=-0.15)]),
     ]),
-    "tang_su": ("ombre", "ranged", "physical", 5, "traqueur", 0.10, [
+    "tang_su": ("ombre", "ranged", "physical", 4, "traqueur", 0.10, [
         ("single_enemy", [dmg(0.9), dot(0.12, "atk", name="poison")]),
         ("single_enemy", [dmg(1.0), debuff("atk", 0.15, if_status="poison")]),
         ("all_enemies", [dmg(1.5), dot(0.12, "atk", name="poison"), armor_break(if_status="ouverture", consume=True)]),
