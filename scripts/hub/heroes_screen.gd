@@ -57,6 +57,9 @@ var _d_stats: Array[Label] = []
 var _d_upgrade: Button
 var _d_team: Button
 var _d_tabs: Array[Button] = []
+var _path_panel: Panel  # détail d'une voie (ses 5 paliers), par-dessus les statistiques
+var _path_title: Label
+var _path_lines: Array[Label] = []
 var _confirm: UiWindow
 var _confirm_text: Label
 
@@ -340,6 +343,12 @@ func _build_detail(_page: VBoxContainer) -> void:
 		var b := ScreenPack.button(root, F, "tab_inactive", t, ScreenPack.rect(T.rects[i]), 28)
 		b.pressed.connect(func() -> void: _set_tab(t))
 		_d_tabs.append(b)
+	_path_panel = ScreenPack.panel(root, F, "stats_panel", ScreenPack.rect(L.stats_rect))
+	_path_panel.z_index = 5
+	_path_title = ScreenPack.text(_path_panel, "", Rect2(34, 26, 1076, 48), 32)
+	for k in 5:
+		_path_lines.append(ScreenPack.text(_path_panel, "", Rect2(34, 92 + k * 78, 1076, 72), 23, UiKit.INK, 0, true))
+	_path_panel.visible = false
 	var cr := ScreenPack.rect(L.content_rect)
 	ScreenPack.panel(root, F, "content_panel", cr)
 	_tab_box = Control.new()
@@ -409,6 +418,7 @@ func _fill_detail() -> void:
 		var base := "tab_active" if TABS[i] == _tab else "tab_inactive"
 		for st in ["normal", "hover", "pressed", "focus"]:
 			b.add_theme_stylebox_override(st, ScreenPack.nine(F, base))
+	_path_panel.visible = false
 	for c in _tab_box.get_children():
 		c.queue_free()
 	match _tab:
@@ -495,14 +505,26 @@ func _fill_paths(id: String, hero: Dictionary) -> void:
 		var lines: Array[String] = []
 		var stages: Dictionary = path.get("stages", {})
 		for k in thresholds.size():
-			lines.append("%s %d Échos : %s" % ["◆" if tier > k else "◇", int(thresholds[k]), stages.get(str(int(thresholds[k])), "")])
-		card.tooltip_text = "\n".join(lines)
+			lines.append("%s %d Échos — %s" % ["◆" if tier > k else "◇", int(thresholds[k]), stages.get(str(int(thresholds[k])), "")])
 		card.mouse_filter = Control.MOUSE_FILTER_PASS
+		var show := func() -> void:
+			_path_title.text = "%s · %s%s" % [path.get("name", ""), path.get("focus", ""), "  (active)" if i == active else ""]
+			for k in _path_lines.size():
+				_path_lines[k].text = lines[k] if k < lines.size() else ""
+				_path_lines[k].add_theme_color_override("font_color", UiKit.INK if tier > k else UiKit.TEXT_SOFT)
+			_path_panel.visible = true
+		card.mouse_entered.connect(show)
+		card.mouse_exited.connect(func() -> void: _path_panel.visible = false)
+		card.gui_input.connect(func(e: InputEvent) -> void:
+			if e is InputEventScreenTouch and e.pressed:
+				show.call())
 		var light := state == "voie_locked"
 		ScreenPack.text(card, String(path.get("name", "")), Rect2(16, 18, r.size.x - 32, 36), 25,
 			UiKit.WHITE if light else UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
 		ScreenPack.text(card, String(path.get("focus", "")) if owned else "Recrute le héros", Rect2(16, 58, r.size.x - 32, 30), 20,
 			UiKit.PARCHMENT_DARK if light else UiKit.TEXT_SOFT, HORIZONTAL_ALIGNMENT_CENTER)
+		ScreenPack.text(card, "Paliers : %d / 5 · survole pour voir" % tier, Rect2(16, 94, r.size.x - 32, 26), 17,
+			UiKit.PARCHMENT_DARK if light else UiKit.WOOD, HORIZONTAL_ALIGNMENT_CENTER)
 		var label := "Active" if i == active else ("Choisir" if owned else "Verrouillée")
 		var cb := ScreenPack.button(_tab_box, F, "voie_choose", label, ScreenPack.rect(V.choose_touch_rects[i]), 26, UiKit.INK)
 		cb.disabled = i == active or not owned

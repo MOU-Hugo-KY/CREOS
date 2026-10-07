@@ -88,6 +88,11 @@ func _process(_delta: float) -> bool:
 			scene.hud.relics.refresh()
 		if hero != "":
 			scene.hud.lodge.show_hero(hero, tab if tab != "" else "Techniques")
+	if frames == 30 and hero != "" and tab == "Voies":  # montre le détail de la première voie
+		for c in scene.hud.lodge._tab_box.get_children():
+			if c is Panel:
+				c.mouse_entered.emit()
+				break
 	if frames in shots:
 		_save()
 	if wait_end and end_frame < 0 and "end_screen" in scene.hud and scene.hud.end_screen.visible:
