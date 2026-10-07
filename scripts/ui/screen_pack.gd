@@ -77,11 +77,11 @@ static func panel(parent: Control, screen: String, name: String, r: Rect2) -> Pa
 ## Image simple posée à `r` (étirée, filtrage net).
 static func image(parent: Control, t: Texture2D, r: Rect2) -> TextureRect:
 	var tr := TextureRect.new()
+	tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE  # avant la taille, sinon l'image impose la sienne
+	tr.stretch_mode = TextureRect.STRETCH_SCALE
 	tr.texture = t
 	tr.position = r.position
 	tr.size = r.size
-	tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	tr.stretch_mode = TextureRect.STRETCH_SCALE
 	tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(tr)
 	return tr
@@ -125,6 +125,7 @@ static func text(parent: Control, s: String, r: Rect2, size := 28, color := UiKi
 		l.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 	l.add_theme_font_override("font", UiKit.FONT)
 	l.add_theme_constant_override("outline_size", 0)
+	l.add_theme_constant_override("line_spacing", 2)
 	l.add_theme_font_size_override("font_size", size)
 	l.add_theme_color_override("font_color", color)
 	l.horizontal_alignment = align

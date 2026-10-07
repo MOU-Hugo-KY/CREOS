@@ -83,6 +83,9 @@ func _process(_delta: float) -> bool:
 			scene.hud.call("open_" + action)
 		else:
 			scene._do_action(action, "")
+		if action == "relics" and tab != "":
+			scene.hud.relics._tab = tab
+			scene.hud.relics.refresh()
 		if hero != "":
 			scene.hud.lodge.show_hero(hero, tab if tab != "" else "Techniques")
 	if frames in shots:

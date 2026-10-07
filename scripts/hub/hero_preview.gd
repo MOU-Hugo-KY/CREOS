@@ -12,6 +12,7 @@ var _color := Color.WHITE
 var _time := 0.0
 var _tween: Tween
 var pedestal := true  # socle lumineux sous le héros
+var zoom := 1.0  # taille du héros (1 : la hauteur de la vue / 470)
 
 
 func _init() -> void:
@@ -80,7 +81,7 @@ func play(clip: String) -> void:
 
 
 func _base_scale() -> float:
-	return size.y / 470.0
+	return size.y / 470.0 * zoom
 
 
 func _layout() -> void:

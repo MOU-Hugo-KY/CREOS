@@ -14,6 +14,12 @@ const CARD := Color("34323c")
 const STAT_NAMES := [["hp", "Vie"], ["atk", "Attaque"], ["mag", "Magie"], ["def", "Défense"],
 	["spd", "Vitesse"], ["crit", "Critique"]]
 const TABS := ["Techniques", "Voies", "Relique", "Échos"]
+const F := "fiche_heros"
+const ELEMENT_KEYS := {"feu": "fire", "eau": "water", "nature": "nature", "lumiere": "light", "ombre": "shadow"}
+const CLASS_KEYS := {"gardien": "guardian", "lame": "blade", "arcaniste": "arcanist", "traqueur": "tracker",
+	"mystique": "arcanist", "moine": "monk", "lancier": "lancer", "soutien": "support",
+	"illusionniste": "illusionist", "automate": "automaton"}
+const RARITY_KEYS := {2: "rare", 3: "epic", 4: "legendary"}
 
 var selected := ""
 var _filter := ""  # classe affichée ("" = toutes)
@@ -26,12 +32,31 @@ var _collection: VBoxContainer
 var _filters: HBoxContainer
 var _grid: GridContainer
 var _team_strip: HBoxContainer
-var _detail: HBoxContainer
+var _page: MarginContainer  # en-tête et collection
+var _detail: Control  # fiche d'un héros (pièces du pack)
 var _preview: HeroPreview
-var _left_info: VBoxContainer
-var _stats_box: VBoxContainer
-var _tabs_row: HBoxContainer
-var _tab_box: VBoxContainer
+var _tab_box: Control
+var _d_title: Label
+var _d_count: Label
+var _d_room: TextureRect
+var _d_socle: TextureRect
+var _d_class: TextureRect
+var _d_element: TextureRect
+var _d_rarity: Panel
+var _d_rarity_label: Label
+var _d_role: Label
+var _d_species: Label
+var _d_echoes: Array[TextureRect] = []
+var _d_echo_count: Label
+var _d_level: Label
+var _d_force: Label
+var _d_xp: Panel
+var _d_xp_text: Label
+var _d_recruit: Label
+var _d_stats: Array[Label] = []
+var _d_upgrade: Button
+var _d_team: Button
+var _d_tabs: Array[Button] = []
 var _confirm: UiWindow
 var _confirm_text: Label
 
@@ -51,6 +76,7 @@ func _ready() -> void:
 	for side in ["top", "bottom"]:
 		margin.add_theme_constant_override("margin_" + side, 26)
 	add_child(margin)
+	_page = margin
 	var page := VBoxContainer.new()
 	page.add_theme_constant_override("separation", 18)
 	margin.add_child(page)
@@ -121,6 +147,7 @@ func _build_collection(page: VBoxContainer) -> void:
 
 func _show_collection() -> void:
 	_detail.visible = false
+	_page.visible = true
 	_collection.visible = true
 	_back.text = "Retour au port"
 	_title.text = "Loge des héros"
@@ -238,66 +265,95 @@ func _hero_card(hero: Dictionary) -> Control:
 
 # --- Fiche d'un héros ---------------------------------------------------------------
 
-func _build_detail(page: VBoxContainer) -> void:
-	_detail = HBoxContainer.new()
-	_detail.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_detail.add_theme_constant_override("separation", 24)
+func _build_detail(_page: VBoxContainer) -> void:
+	# Fiche d'un héros : pièces pixel du pack partie 2 (assets/ui/ecrans/fiche_heros), placées
+	# d'après fiche_heros.json dans un repère 1920 × 1080.
+	_detail = Control.new()
+	_detail.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_detail.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_detail.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_detail.visible = false
-	page.add_child(_detail)
-	# Gauche : le héros animé
-	var left := PanelContainer.new()
-	left.custom_minimum_size = Vector2(700, 0)
-	var lsb := UiKit.box(CARD, UiKit.INK, 18, 3)
-	lsb.border_width_bottom = 11
-	lsb.set_content_margin_all(22)
-	left.add_theme_stylebox_override("panel", lsb)
-	_detail.add_child(left)
-	var lv := VBoxContainer.new()
-	lv.add_theme_constant_override("separation", 6)
-	left.add_child(lv)
-	_left_info = VBoxContainer.new()
-	_left_info.add_theme_constant_override("separation", 2)
-	lv.add_child(_left_info)
+	add_child(_detail)
+	var root := ScreenPack.frame(_detail)
+	var L := ScreenPack.layout(F)
+	var back := ScreenPack.button(root, F, "collection", "← Collection", Rect2(24, 8, 300, 96), 30)
+	back.pressed.connect(_on_back)
+	_d_title = ScreenPack.text(root, "", Rect2(355, 8, 900, 90), 48, UiKit.WHITE)
+	_d_count = ScreenPack.text(root, "", Rect2(1460, 8, 420, 80), 28, UiKit.WHITE, HORIZONTAL_ALIGNMENT_RIGHT)
+	# Vitrine : salle d'armes de l'élément, socle, héros animé, identité, Échos, niveau.
+	ScreenPack.panel(root, F, "vitrine_frame", ScreenPack.rect(L.vitrine_rect))
+	_d_room = ScreenPack.image(root, null, ScreenPack.rect(L.background_rect))
+	_d_socle = ScreenPack.image(root, null, ScreenPack.rect(L.pedestal_rect))
 	var vpc := SubViewportContainer.new()
 	vpc.stretch = true
-	vpc.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	lv.add_child(vpc)
+	var br := ScreenPack.rect(L.background_rect)
+	vpc.position = br.position
+	vpc.size = Vector2(br.size.x, (L.hero_anchor[1] - br.position.y) / 0.86)
+	vpc.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(vpc)
 	_preview = HeroPreview.new()
+	_preview.pedestal = false
+	_preview.zoom = 0.62
 	vpc.add_child(_preview)
-	_left_info.set_meta("bottom", VBoxContainer.new())
-	lv.add_child(_left_info.get_meta("bottom"))
-	# Droite : stats, onglets
-	var scroll := ScrollContainer.new()
-	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_detail.add_child(scroll)
-	var right := VBoxContainer.new()
-	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	right.add_theme_constant_override("separation", 16)
-	scroll.add_child(right)
-	var stats_panel := PanelContainer.new()
-	stats_panel.add_theme_stylebox_override("panel", UiKit.parchment())
-	right.add_child(stats_panel)
-	_stats_box = VBoxContainer.new()
-	_stats_box.add_theme_constant_override("separation", 6)
-	stats_panel.add_child(_stats_box)
-	_tabs_row = HBoxContainer.new()
-	_tabs_row.add_theme_constant_override("separation", 10)
-	right.add_child(_tabs_row)
-	var tab_panel := PanelContainer.new()
-	tab_panel.add_theme_stylebox_override("panel", UiKit.parchment())
-	right.add_child(tab_panel)
-	_tab_box = VBoxContainer.new()
-	_tab_box.add_theme_constant_override("separation", 10)
-	tab_panel.add_child(_tab_box)
+	_d_class = ScreenPack.image(root, null, ScreenPack.rect(L.class_badge_rect))
+	_d_element = ScreenPack.image(root, null, ScreenPack.rect(L.element_badge_rect))
+	var rr := ScreenPack.rect(L.rarity_rect)
+	_d_rarity = ScreenPack.panel(root, F, "badge_rare", rr)
+	_d_rarity_label = ScreenPack.text(root, "", rr, 22, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	var tr := ScreenPack.rect(L.hero_type_rect)
+	ScreenPack.panel(root, F, "hero_type_cartouche", tr)
+	_d_role = ScreenPack.text(root, "", Rect2(tr.position + Vector2(26, 6), Vector2(tr.size.x - 50, 42)), 30, UiKit.WHITE)
+	_d_species = ScreenPack.text(root, "", Rect2(tr.position + Vector2(26, 46), Vector2(tr.size.x - 50, 34)), 22, UiKit.PARCHMENT_DARK)
+	for r: Array in L.echo_rects:
+		_d_echoes.append(ScreenPack.image(root, ScreenPack.tex(F, "echo_empty"), ScreenPack.rect(r)))
+	var er: Array = L.echo_rects[4]
+	_d_echo_count = ScreenPack.text(root, "", Rect2(er[0] + 80, er[1], 260, er[3]), 28)
+	_d_level = ScreenPack.text(root, "", ScreenPack.rect(L.level_rect), 30)
+	_d_force = ScreenPack.text(root, "", ScreenPack.rect(L.force_rect), 30)
+	var xr := ScreenPack.rect(L.xp_rect)
+	var xp_bg := ScreenPack.panel(root, F, "xp_bg", xr)
+	_d_xp = ScreenPack.panel(xp_bg, F, "xp_fill", Rect2(0, 3, xr.size.x, 12))
+	_d_xp_text = ScreenPack.text(root, "", Rect2(xr.position + Vector2(0, 22), Vector2(xr.size.x, 30)), 20)
+	_d_recruit = ScreenPack.text(root, "À recruter à la Lanterne des Serments", Rect2(82, 820, 580, 40), 24, UiKit.WOOD,
+		HORIZONTAL_ALIGNMENT_CENTER)
+	# Statistiques et actions.
+	var sr := ScreenPack.rect(L.stats_rect)
+	ScreenPack.panel(root, F, "stats_panel", sr)
+	ScreenPack.text(root, "STATISTIQUES", Rect2(sr.position + Vector2(34, 30), Vector2(400, 44)), 32)
+	for i in STAT_NAMES.size():
+		var y := sr.position.y + 86 + i * 30
+		ScreenPack.text(root, STAT_NAMES[i][1], Rect2(sr.position.x + 36, y, 400, 30), 25)
+		_d_stats.append(ScreenPack.text(root, "", Rect2(sr.end.x - 436, y, 400, 30), 25, UiKit.INK, HORIZONTAL_ALIGNMENT_RIGHT))
+	var A: Dictionary = L.actions
+	_d_upgrade = ScreenPack.button(root, F, "upgrade", "", ScreenPack.rect(A.upgrade), 28, UiKit.INK)
+	_d_upgrade.pressed.connect(_ask_level_up)
+	var relic_b := ScreenPack.button(root, F, "relic_button", "Relique", ScreenPack.rect(A.relic), 28)
+	relic_b.pressed.connect(func() -> void: _set_tab("Relique"))
+	_d_team = ScreenPack.button(root, F, "team_button", "", ScreenPack.rect(A.team), 28)
+	_d_team.pressed.connect(func() -> void:
+		if PlayerData.toggle_team(selected):
+			ui_sound.emit("ui_toggle"))
+	# Onglets et contenu.
+	var T: Dictionary = L.tabs
+	for i in TABS.size():
+		var t: String = TABS[i]
+		var b := ScreenPack.button(root, F, "tab_inactive", t, ScreenPack.rect(T.rects[i]), 28)
+		b.pressed.connect(func() -> void: _set_tab(t))
+		_d_tabs.append(b)
+	var cr := ScreenPack.rect(L.content_rect)
+	ScreenPack.panel(root, F, "content_panel", cr)
+	_tab_box = Control.new()
+	_tab_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_tab_box.size = Vector2(1920, 1080)
+	root.add_child(_tab_box)
 
 
 func show_hero(id: String, tab := "Techniques") -> void:
 	selected = id
 	_tab = tab
 	_collection.visible = false
+	_page.visible = false
 	_detail.visible = true
-	_back.text = "← Collection"
 	_preview.show_hero(GameData.hero(id))
 	refresh()
 
@@ -305,89 +361,54 @@ func show_hero(id: String, tab := "Techniques") -> void:
 func _fill_detail() -> void:
 	var id := selected
 	var hero := GameData.hero(id)
-	var rarity: Array = Palette.RARITIES.get(int(hero.get("rarity", 1)), ["", Color.WHITE])
-	_title.text = String(hero.name)
-	# Gauche
-	for c in _left_info.get_children():
-		c.queue_free()
-	var top := HBoxContainer.new()
-	_left_info.add_child(top)
-	var role := UiKit.label(_role(hero), 22, UiKit.TEAL)
-	role.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	top.add_child(role)
-	top.add_child(_badge(rarity[0], UiKit.WOOD))
-	var desc := UiKit.label(String(hero.get("species", hero.get("description", ""))), 18, UiKit.PARCHMENT_DARK)
-	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_left_info.add_child(desc)
-	var bottom: VBoxContainer = _left_info.get_meta("bottom")
-	for c in bottom.get_children():
-		c.queue_free()
+	var L := ScreenPack.layout(F)
+	var rarity := int(hero.get("rarity", 2))
+	var elem: String = ELEMENT_KEYS.get(hero.get("element"), "shadow")
 	var owned: bool = PlayerData.state.heroes.has(id)
-	if not owned:
-		bottom.add_child(UiKit.title("À recruter à la Lanterne des Serments", 24, UiKit.WOOD_LIGHT))
-	bottom.add_child(UiKit.label(_echo_marks(id), 28, UiKit.WOOD_LIGHT))
-	var lrow := HBoxContainer.new()
-	bottom.add_child(lrow)
-	var lvl := UiKit.title("Niveau %d / %d" % [PlayerData.hero_level(id), int(GameData.progression.get("max_level", 30))], 26, UiKit.PARCHMENT)
-	lvl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	lrow.add_child(lvl)
-	lrow.add_child(UiKit.title("Force %d" % _power(id), 26, UiKit.WOOD_LIGHT))
-	var bar := UiKit.progress(UiKit.TEAL, 14)
-	bar.max_value = maxf(1.0, PlayerData.hero_xp_to_next(id))
-	bar.value = PlayerData.hero_xp(id)
-	bottom.add_child(bar)
-	bottom.add_child(UiKit.label("Expérience %d / %d · gagnée en chasse" % [PlayerData.hero_xp(id), PlayerData.hero_xp_to_next(id)], 17, UiKit.PARCHMENT_DARK))
-
+	_d_title.text = String(hero.name).to_upper()
+	_d_count.text = _count.text
+	# Vitrine
+	_d_room.texture = ScreenPack.tex(F, "fond_" + elem)
+	_d_socle.texture = ScreenPack.tex(F, "socle_" + elem)
+	_d_class.texture = ScreenPack.tex(F, "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade"))
+	_d_element.texture = ScreenPack.tex(F, "element_%s_64" % elem)
+	_d_rarity.add_theme_stylebox_override("panel", ScreenPack.nine(F, "badge_" + RARITY_KEYS.get(rarity, "rare")))
+	_d_rarity_label.text = Palette.RARITIES.get(rarity, ["?"])[0]
+	_d_role.text = "%s · %s" % [Palette.CLASS_NAMES.get(hero.get("class"), ""), Palette.ELEMENT_NAMES.get(hero.get("element"), "")]
+	_d_species.text = String(hero.get("species", ""))
+	var tier := PlayerData.hero_echo_tier(id)
+	for i in _d_echoes.size():
+		_d_echoes[i].texture = ScreenPack.tex(F, "echo_full" if i < tier else "echo_empty")
+	var echoes := PlayerData.hero_echoes(id)
+	_d_echo_count.text = "%d Écho%s" % [echoes, "s" if echoes > 1 else ""]
+	var max_level := int(GameData.progression.get("max_level", 30))
+	_d_level.text = "Niveau %d / %d" % [PlayerData.hero_level(id), max_level]
+	_d_force.text = "Force %d" % _power(id)
+	var need := maxf(1.0, PlayerData.hero_xp_to_next(id))
+	_d_xp.size.x = maxf(0.0, 588.0 * clampf(PlayerData.hero_xp(id) / need, 0.0, 1.0))
+	_d_xp.visible = _d_xp.size.x >= 12.0
+	_d_xp_text.text = "Expérience %d / %d · gagnée en chasse" % [PlayerData.hero_xp(id), PlayerData.hero_xp_to_next(id)]
+	_d_recruit.visible = not owned
 	# Statistiques et actions
-	for c in _stats_box.get_children():
-		c.queue_free()
-	_stats_box.add_child(_section("Statistiques"))
 	var stats := PlayerData.hero_stats(id, hero)
-	for s: Array in STAT_NAMES:
-		var row := HBoxContainer.new()
-		_stats_box.add_child(row)
-		var n := UiKit.label(s[1], 21, UiKit.TEXT_SOFT)
-		n.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(n)
-		var v: float = stats.get(s[0], 0)
-		var val := UiKit.label("%d %%" % int(v * 100) if s[0] == "crit" else str(int(v)), 22, UiKit.INK)
-		val.add_theme_font_override("font", UiKit.FONT_BOLD)
-		row.add_child(val)
-		var line := ColorRect.new()
-		line.color = Color(UiKit.WOOD_LIGHT, 0.5)
-		line.custom_minimum_size = Vector2(0, 1)
-		_stats_box.add_child(line)
-	var actions := HBoxContainer.new()
-	actions.add_theme_constant_override("separation", 12)
-	_stats_box.add_child(actions)
-	var max_level := PlayerData.hero_level(id) >= int(GameData.progression.get("max_level", 30))
+	for i in STAT_NAMES.size():
+		var key: String = STAT_NAMES[i][0]
+		var v: float = stats.get(key, 0)
+		_d_stats[i].text = "%d %%" % int(v * 100) if key == "crit" else str(int(v))
+	var at_max := PlayerData.hero_level(id) >= max_level
 	var cost := PlayerData.hero_level_up_cost(id)
-	var up := UiKit.button("Niveau max" if max_level else "Améliorer · %d or" % cost, "red", 21, Vector2(0, 60))
-	up.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	up.disabled = max_level or PlayerData.gold() < cost
-	up.pressed.connect(_ask_level_up)
-	actions.add_child(up)
-	var evo := UiKit.button("Relique", "gold", 21, Vector2(180, 60))
-	evo.pressed.connect(func() -> void: _set_tab("Relique"))
-	actions.add_child(evo)
+	_d_upgrade.text = "Niveau max" if at_max else "Améliorer · %d or" % cost
+	_d_upgrade.disabled = at_max or PlayerData.gold() < cost or not owned
 	var in_team := PlayerData.in_team(id)
 	var full := PlayerData.team().size() >= PlayerData.TEAM_SIZE
-	up.disabled = up.disabled or not owned
-	var team_b := UiKit.button("Retirer de l'équipe" if in_team else ("Équipe complète" if full else "Dans l'équipe"),
-		"blue" if in_team else "green", 21, Vector2(0, 60))
-	team_b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	team_b.disabled = (in_team and PlayerData.team().size() <= 1) or (not in_team and full) or not owned
-	team_b.pressed.connect(func() -> void:
-		if PlayerData.toggle_team(id):
-			ui_sound.emit("ui_toggle"))
-	_stats_box.add_child(team_b)
-
+	_d_team.text = "Dans l'équipe · retirer" if in_team else ("Équipe complète" if full else "Ajouter à l'équipe")
+	_d_team.disabled = (in_team and PlayerData.team().size() <= 1) or (not in_team and full) or not owned
 	# Onglets
-	for c in _tabs_row.get_children():
-		c.queue_free()
-	for t: String in TABS:
-		var tab := t
-		_tabs_row.add_child(_tab_button(t, _tab == t, func() -> void: _set_tab(tab)))
+	for i in TABS.size():
+		var b: Button = _d_tabs[i]
+		var base := "tab_active" if TABS[i] == _tab else "tab_inactive"
+		for st in ["normal", "hover", "pressed", "focus"]:
+			b.add_theme_stylebox_override(st, ScreenPack.nine(F, base))
 	for c in _tab_box.get_children():
 		c.queue_free()
 	match _tab:
@@ -402,178 +423,173 @@ func _fill_detail() -> void:
 
 
 func _fill_skills(hero: Dictionary) -> void:
+	var rows: Array = ScreenPack.layout(F).techniques.row_rects
 	var attacks: Array = hero.get("attacks", [])
-	for i in attacks.size():
+	for i in mini(attacks.size(), 3):
 		var a: Dictionary = attacks[i]
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 14)
-		_tab_box.add_child(row)
-		var b := Button.new()
-		b.flat = true
-		b.focus_mode = Control.FOCUS_NONE
-		b.icon = _attack_icon(a)
-		b.expand_icon = true
-		b.custom_minimum_size = Vector2(68, 68)
-		b.tooltip_text = "Voir l'attaque"
-		var anim: String = a.get("clip", a.get("anim", ""))
-		b.pressed.connect(func() -> void:
-			ui_sound.emit("ui_click")
-			_preview.play(anim))
-		row.add_child(b)
-		var col := VBoxContainer.new()
-		col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(col)
+		var r := ScreenPack.rect(rows[i])
 		var kind := "Attaque de base"
 		if i == BattleUnit.SLOT_COOLDOWN:
 			kind = "Recharge %d s" % int(a.get("cooldown", 0))
 		elif i == BattleUnit.SLOT_ULTIMATE:
-			kind = "Ultime · %d énergie" % int(a.get("energy", 100))
-		var t := UiKit.label("%s   ·   %s" % [a.get("name", ""), kind], 22, UiKit.INK)
-		t.add_theme_font_override("font", UiKit.FONT_BOLD)
-		col.add_child(t)
-		var d := UiKit.label(String(a.get("description", "")), 18, UiKit.TEXT_SOFT)
-		d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		col.add_child(d)
-	_tab_box.add_child(UiKit.label("Touche une icône pour voir l'attaque.", 16, UiKit.TEXT_SOFT))
+			kind = "Ultime"
+		var anim: String = a.get("clip", a.get("anim", ""))
+		_technique_row(r, _attack_icon(a), "%s · %s" % [a.get("name", ""), kind], String(a.get("description", "")),
+			func() -> void:
+				ui_sound.emit("ui_click")
+				_preview.play(anim))
+	# Quatrième ligne : la technique secrète de la voie active (6 Échos).
+	var secrets: Array = hero.get("secret_techniques", [])
+	var path := PlayerData.hero_path(selected)
+	var unlocked := PlayerData.hero_echo_tier(selected) >= 3
+	var name := "Technique secrète · 6 Échos"
+	var desc := "Débloquée par la voie d'Héritage."
+	var clip := ""
+	if path < secrets.size():
+		var s: Dictionary = secrets[path]
+		clip = String(s.get("clip", ""))
+		if unlocked:
+			name = "%s · Technique secrète" % s.get("name", "")
+			desc = String(s.get("description", desc))
+	var icon: Texture2D = load("res://assets/ui/kit/lock.png") if not unlocked else null
+	_technique_row(ScreenPack.rect(rows[3]), icon, name, desc, func() -> void:
+		if clip != "":
+			ui_sound.emit("ui_click")
+			_preview.play(clip))
+
+
+func _technique_row(r: Rect2, icon: Texture2D, title: String, desc: String, on_press: Callable) -> void:
+	var holder := Control.new()
+	holder.position = r.position
+	holder.size = Vector2(64, 64)
+	holder.tooltip_text = "Voir l'attaque"
+	holder.gui_input.connect(func(e: InputEvent) -> void:
+		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+			on_press.call())
+	_tab_box.add_child(holder)
+	ScreenPack.panel(holder, F, "technique_icon_frame", Rect2(0, 0, 64, 64))
+	if icon:
+		ScreenPack.image(holder, icon, Rect2(6, 6, 52, 52))
+	ScreenPack.text(_tab_box, title, Rect2(r.position + Vector2(94, 0), Vector2(r.size.x - 100, 34)), 26)
+	var d := ScreenPack.text(_tab_box, desc, Rect2(r.position + Vector2(94, 32), Vector2(r.size.x - 110, 28)), 20, UiKit.TEXT_SOFT)
+	d.clip_text = true
+	d.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	d.tooltip_text = desc
+	d.mouse_filter = Control.MOUSE_FILTER_PASS
 
 
 ## Les trois voies d'Héritage : une seule active (changement gratuit hors combat), toutes
 ## progressent ensemble avec les Échos. Au palier 3 (6 Échos), une quatrième technique.
 func _fill_paths(id: String, hero: Dictionary) -> void:
+	var V: Dictionary = ScreenPack.layout(F).voies
 	var tier := PlayerData.hero_echo_tier(id)
 	var active := PlayerData.hero_path(id)
+	var owned: bool = PlayerData.state.heroes.has(id)
 	var thresholds: Array = GameData.progression.get("echoes", {}).get("thresholds", [1, 3, 6, 9, 12])
 	var paths: Array = hero.get("paths", [])
-	var secrets: Array = hero.get("secret_techniques", [])
-	for i in paths.size():
+	for i in mini(paths.size(), 3):
 		var path: Dictionary = paths[i]
-		var p := PanelContainer.new()
-		p.add_theme_stylebox_override("panel", UiKit.card(UiKit.TEAL if i == active else Color.TRANSPARENT))
-		_tab_box.add_child(p)
-		var col := VBoxContainer.new()
-		col.add_theme_constant_override("separation", 4)
-		p.add_child(col)
-		var head := HBoxContainer.new()
-		col.add_child(head)
-		var t := UiKit.label("%s  ·  %s" % [path.get("name", ""), path.get("focus", "")], 22, UiKit.INK)
-		t.add_theme_font_override("font", UiKit.FONT_BOLD)
-		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		head.add_child(t)
-		if i < secrets.size():
-			var clip := String(secrets[i].get("clip", ""))
-			var see := UiKit.button("Voir", "blue", 16, Vector2(80, 40))
-			see.tooltip_text = String(secrets[i].get("name", ""))
-			see.pressed.connect(func() -> void:
-				ui_sound.emit("ui_click")
-				_preview.play(clip))
-			head.add_child(see)
-		var choose := UiKit.button("Active" if i == active else "Choisir", "green" if i == active else "wood", 16, Vector2(110, 40))
-		choose.disabled = i == active or not PlayerData.state.heroes.has(id)
-		var path_index := i
-		choose.pressed.connect(func() -> void:
-			ui_sound.emit("ui_toggle")
-			PlayerData.set_hero_path(id, path_index))
-		head.add_child(choose)
+		var r := ScreenPack.rect(V.cards[i])
+		var state := "voie_active" if i == active else ("voie_inactive" if owned else "voie_locked")
+		var card := ScreenPack.panel(_tab_box, F, state, r)
+		var lines: Array[String] = []
 		var stages: Dictionary = path.get("stages", {})
 		for k in thresholds.size():
-			var key := str(int(thresholds[k]))
-			var reached := tier > k
-			var line := UiKit.label("%s %s Échos : %s" % ["◆" if reached else "◇", key, stages.get(key, "")], 17,
-				UiKit.INK if reached else UiKit.TEXT_SOFT)
-			line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			col.add_child(line)
-	var note := UiKit.label("Les Échos viennent uniquement des doublons du même héros, obtenus à la Lanterne.", 16, UiKit.TEXT_SOFT)
-	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_tab_box.add_child(note)
+			lines.append("%s %d Échos : %s" % ["◆" if tier > k else "◇", int(thresholds[k]), stages.get(str(int(thresholds[k])), "")])
+		card.tooltip_text = "\n".join(lines)
+		card.mouse_filter = Control.MOUSE_FILTER_PASS
+		var light := state == "voie_locked"
+		ScreenPack.text(card, String(path.get("name", "")), Rect2(16, 18, r.size.x - 32, 36), 25,
+			UiKit.WHITE if light else UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
+		ScreenPack.text(card, String(path.get("focus", "")) if owned else "Recrute le héros", Rect2(16, 58, r.size.x - 32, 30), 20,
+			UiKit.PARCHMENT_DARK if light else UiKit.TEXT_SOFT, HORIZONTAL_ALIGNMENT_CENTER)
+		var label := "Active" if i == active else ("Choisir" if owned else "Verrouillée")
+		var cb := ScreenPack.button(_tab_box, F, "voie_choose", label, ScreenPack.rect(V.choose_touch_rects[i]), 26, UiKit.INK)
+		cb.disabled = i == active or not owned
+		if i == active:
+			cb.add_theme_stylebox_override("disabled", ScreenPack.nine(F, "voie_choose_normal"))
+			cb.add_theme_color_override("font_disabled_color", UiKit.INK)
+		elif not owned:
+			cb.add_theme_color_override("font_disabled_color", UiKit.WHITE)
+		var path_index := i
+		cb.pressed.connect(func() -> void:
+			ui_sound.emit("ui_toggle")
+			PlayerData.set_hero_path(id, path_index))
 
 
-## La relique ancienne du héros : cinq paliers (statistiques et effets), fragments gagnés en chasse.
+## La relique ancienne du héros : cinq paliers, fragments gagnés en chasse.
 func _fill_relic(id: String, hero: Dictionary) -> void:
+	var R: Dictionary = ScreenPack.layout(F).relic
 	var relic: Dictionary = GameData.relics.get("relics", {}).get(id, {})
 	if relic.is_empty():
-		_tab_box.add_child(UiKit.label("Pas de relique connue.", 20, UiKit.TEXT_SOFT))
+		ScreenPack.text(_tab_box, "Pas de relique connue.", Rect2(790, 760, 900, 40), 26, UiKit.TEXT_SOFT)
 		return
 	var tier := PlayerData.relic_tier(id)
 	var tiers: Array = GameData.progression.get("relic_tiers", [])
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 18)
-	_tab_box.add_child(row)
-	var img := TextureRect.new()
-	img.texture = load(String(relic.sprite)) if ResourceLoader.exists(String(relic.get("sprite", ""))) else null
-	img.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	var pr := Rect2(780, 752, 420, 210)
+	var p := ScreenPack.panel(_tab_box, F, "relic_panel", pr)
+	p.mouse_filter = Control.MOUSE_FILTER_PASS
+	p.tooltip_text = "\n".join([
+		"Où la trouver : %s (%s)" % [relic.get("dungeon", ""), relic.get("material", "")],
+		"III · Éveillée : %s" % relic.get("awakening", ""), "IV · Accordée : %s" % relic.get("accord", ""),
+		"V · Héritage : %s" % relic.get("contribution", ""), "Épreuve du palier V : %s" % relic.get("trial", "")])
+	var img := ScreenPack.image(p, load(String(relic.sprite)) if ResourceLoader.exists(String(relic.get("sprite", ""))) else null,
+		Rect2(pr.size.x - 112, 64, 84, 84))
 	img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	img.custom_minimum_size = Vector2(170, 170)
 	if tier == 0:
 		img.modulate = Color(0.35, 0.33, 0.38)
-	row.add_child(img)
-	var col := VBoxContainer.new()
-	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(col)
-	var t := UiKit.label(String(relic.name), 26, UiKit.INK)
-	t.add_theme_font_override("font", UiKit.FONT_BOLD)
-	col.add_child(t)
+	ScreenPack.text(p, String(relic.name), Rect2(20, 16, pr.size.x - 40, 34), 24, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
 	var state_name := "Pas encore retrouvée" if tier == 0 else "Palier %d · %s" % [tier, tiers[tier - 1].get("name", "")]
-	col.add_child(UiKit.label(state_name, 21, UiKit.WOOD))
+	ScreenPack.text(p, state_name, Rect2(20, 52, pr.size.x - 40, 30), 21, UiKit.WOOD, HORIZONTAL_ALIGNMENT_CENTER)
+	var cost := PlayerData.relic_next_cost(id)
+	var need := int(cost.get("fragments", 0))
+	ScreenPack.text(p, "Fragments : %d / %d" % [PlayerData.relic_fragments(id), need], Rect2(24, 128, 300, 28), 20)
+	ScreenPack.text(p, String(relic.get("dungeon", "")), Rect2(24, 158, 300, 28), 20)
+	ScreenPack.text(_tab_box, "LES CINQ PALIERS", Rect2(1234, 770, 500, 40), 26)
+	var steps: Array = R.step_rects
+	for i in steps.size():
+		var r := ScreenPack.rect(steps[i])
+		if i > 0:
+			var prev := ScreenPack.rect(steps[i - 1])
+			var con := ScreenPack.panel(_tab_box, F, "relic_connector", Rect2(prev.end.x - 2, r.position.y + 32, r.position.x - prev.end.x + 4, 8))
+			con.z_index = 0
+		var st := "relic_step_full" if i < tier else ("relic_step_active" if i == tier else "relic_step_empty")
+		ScreenPack.image(_tab_box, ScreenPack.tex(F, st), r)
+		ScreenPack.text(_tab_box, str(i + 1), r, 28, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	var bonus := "Palier 1 : la relique est retrouvée."
 	if tier > 0:
 		var tt: Dictionary = tiers[tier - 1]
-		col.add_child(UiKit.label("+%d %% %s · +%d %% %s" % [int(float(tt.primary) * 100), hero.get("primary", ""),
-			int(float(tt.secondary) * 100), hero.get("secondary", "")], 19, UiKit.INK))
-	col.add_child(UiKit.label("Fragments : %d   ·   Matériaux : %d" % [PlayerData.relic_fragments(id), PlayerData.item_count("materiaux_relique")], 18, UiKit.TEXT_SOFT))
-	var see := UiKit.button("Voir la relique", "blue", 18, Vector2(0, 46))
-	see.pressed.connect(func() -> void:
-		ui_sound.emit("ui_click")
-		_preview.play("cheer"))
-	col.add_child(see)
-	var cost := PlayerData.relic_next_cost(id)
+		bonus = "+%d %% %s · +%d %% %s" % [int(float(tt.primary) * 100), hero.get("primary", ""),
+			int(float(tt.secondary) * 100), hero.get("secondary", "")]
+	ScreenPack.text(_tab_box, bonus, Rect2(1234, 912, 620, 32), 22)
 	if not cost.is_empty():
 		var label := "Retrouver" if tier == 0 else "Améliorer"
-		var b := UiKit.button("%s · %d fragments%s" % [label, int(cost.fragments),
-			"" if int(cost.materials) == 0 else " + %d matériaux" % int(cost.materials)], "green", 20, Vector2(0, 58))
+		var b := ScreenPack.button(_tab_box, F, "upgrade", "%s · %d fragments%s" % [label, need,
+			"" if int(cost.materials) == 0 else " + %d matériaux" % int(cost.materials)], Rect2(1234, 950, 620, 72), 24, UiKit.INK)
 		b.disabled = not PlayerData.can_upgrade_relic(id)
 		b.pressed.connect(func() -> void:
 			if PlayerData.upgrade_relic(id):
 				ui_sound.emit("ultimate_impact")
 				_preview.play("cheer"))
-		_tab_box.add_child(b)
-	for line: Array in [["Où la trouver", "%s (%s)" % [relic.get("dungeon", ""), relic.get("material", "")]],
-			["III · Éveillée", relic.get("awakening", "")], ["IV · Accordée", relic.get("accord", "")],
-			["V · Héritage", relic.get("contribution", "")], ["Épreuve du palier V", relic.get("trial", "")]]:
-		var l := UiKit.label("%s : %s" % line, 17, UiKit.INK)
-		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		_tab_box.add_child(l)
-	var note := UiKit.label("Chaque niveau de la campagne garde la relique d'un héros : 3 fragments par victoire.", 16, UiKit.TEXT_SOFT)
-	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_tab_box.add_child(note)
 
 
 ## Les Échos (doublons du même héros) : paliers 1, 3, 6, 9, 12 et leurs gains de statistiques.
 func _fill_echoes(id: String, hero: Dictionary) -> void:
+	var rows: Array = ScreenPack.layout(F).echoes.row_rects
 	var e: Dictionary = GameData.progression.get("echoes", {})
-	var echoes := PlayerData.hero_echoes(id)
 	var tier := PlayerData.hero_echo_tier(id)
-	var next := Progression.next_echo_threshold(echoes, GameData.progression)
-	_tab_box.add_child(_section("Échos : %d" % echoes))
-	if next > 0:
-		_tab_box.add_child(UiKit.label("Prochain palier à %d Échos" % next, 21, UiKit.INK))
-		var bar := UiKit.progress(UiKit.TEAL, 18)
-		bar.max_value = next
-		bar.value = echoes
-		_tab_box.add_child(bar)
-	else:
-		_tab_box.add_child(UiKit.label("Tous les paliers sont atteints.", 21, UiKit.INK))
 	var thresholds: Array = e.get("thresholds", [])
 	var unlocks: Array = e.get("unlocks", [])
-	for k in thresholds.size():
+	for k in mini(thresholds.size(), rows.size()):
+		var r := ScreenPack.rect(rows[k])
 		var reached := tier > k
-		var l := UiKit.label("%s %d Échos · %s · +%d %% %s, +%d %% %s, +%d %% autres" % [
-			"◆" if reached else "◇", int(thresholds[k]), unlocks[k] if k < unlocks.size() else "",
-			int(float(e.primary[k]) * 100), hero.get("primary", ""), int(float(e.secondary[k]) * 100),
-			hero.get("secondary", ""), int(float(e.other[k]) * 100)], 18, UiKit.INK if reached else UiKit.TEXT_SOFT)
-		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		_tab_box.add_child(l)
-	var note := UiKit.label("Un héros déjà recruté qui revient à la Lanterne donne un Écho. Aucune autre source.", 16, UiKit.TEXT_SOFT)
-	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_tab_box.add_child(note)
+		ScreenPack.image(_tab_box, ScreenPack.tex(F, "echo_full" if reached else "echo_empty"), Rect2(r.position + Vector2(0, 2), Vector2(36, 36)))
+		ScreenPack.text(_tab_box, "%d Échos · %s" % [int(thresholds[k]), unlocks[k] if k < unlocks.size() else ""],
+			Rect2(r.position + Vector2(52, 0), Vector2(520, r.size.y)), 25, UiKit.INK if reached else UiKit.TEXT_SOFT)
+		ScreenPack.text(_tab_box, "+%d %% %s, +%d %% %s, +%d %% autres" % [int(float(e.primary[k]) * 100), hero.get("primary", ""),
+			int(float(e.secondary[k]) * 100), hero.get("secondary", ""), int(float(e.other[k]) * 100)],
+			Rect2(r.position + Vector2(560, 0), Vector2(r.size.x - 560, r.size.y)), 21, UiKit.TEXT_SOFT, HORIZONTAL_ALIGNMENT_RIGHT)
+	ScreenPack.text(_tab_box, "Un doublon donne un Écho. Aucune autre source.", Rect2(780, 998, 1072, 30), 19, UiKit.TEXT_SOFT)
 
 
 func _set_tab(t: String) -> void:

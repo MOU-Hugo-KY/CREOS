@@ -13,6 +13,8 @@ var _tab := "Reliques"
 var _tabs: HBoxContainer
 var _relic_scroll: ScrollContainer
 var _quartet_scroll: ScrollContainer
+var _quartet_page: Control  # écran Quatuors en pixel (pack partie 2, assets/ui/ecrans/quatuors)
+var _quartet_box: Control
 
 
 func _init() -> void:
@@ -42,9 +44,79 @@ func _ready() -> void:
 	_quartets.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_quartets.add_theme_constant_override("separation", 14)
 	_quartet_scroll.add_child(_quartets)
+	_build_quartet_page()
 	PlayerData.changed.connect(func() -> void:
 		if visible:
 			refresh())
+
+
+const Q := "quatuors"
+
+
+func _build_quartet_page() -> void:
+	_quartet_page = Control.new()
+	_quartet_page.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_quartet_page.mouse_filter = Control.MOUSE_FILTER_STOP
+	_quartet_page.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	add_child(_quartet_page)
+	var bg := ColorRect.new()
+	bg.color = Color("2a2530")
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_quartet_page.add_child(bg)
+	var root := ScreenPack.frame(_quartet_page)
+	var L := ScreenPack.layout(Q)
+	var tr := ScreenPack.rect(L.title_rect)
+	ScreenPack.image(root, ScreenPack.tex(Q, "title"), tr)
+	ScreenPack.text(root, "RELIQUES ET QUATUORS", tr, 36, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	var back := ScreenPack.button(root, Q, "return", "← Reliques", ScreenPack.rect(L.return_rect), 28)
+	back.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		_tab = "Reliques"
+		refresh())
+	var wr := ScreenPack.rect(L.main_window_rect)
+	ScreenPack.panel(root, Q, "main_window", wr)
+	ScreenPack.text(root, "QUATUORS · QUATRE HÉROS, UNE ATTAQUE", Rect2(wr.position + Vector2(42, 14), Vector2(1200, 44)), 28)
+	_quartet_box = Control.new()
+	_quartet_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_quartet_box)
+
+
+func _fill_quartet_page() -> void:
+	for c in _quartet_box.get_children():
+		c.queue_free()
+	var C: Dictionary = ScreenPack.layout(Q).cards
+	var forms: Array = ScreenPack.data(Q).get("formations", [])
+	for i in mini(forms.size(), C.rects.size()):
+		var f: Dictionary = forms[i]
+		var q: Dictionary = GameData.quartets().get(f.id, {})
+		var r := ScreenPack.rect(C.rects[i])
+		var card := ScreenPack.panel(_quartet_box, Q, "formation_card", r)
+		var at := func(o: Array) -> Rect2: return Rect2(Vector2(o[0], o[1]), Vector2(o[2], o[3]))
+		ScreenPack.image(card, ScreenPack.tex(Q, "blason_%s_128" % f.id), at.call(C.crest_offset))
+		ScreenPack.text(card, String(q.get("name", f.name)), at.call(C.name_offset), 30)
+		ScreenPack.text(card, String(q.get("attack", f.attack)), at.call(C.attack_name_offset), 24, UiKit.TEXT_SOFT)
+		var members: Array = q.get("members", f.heroes)
+		var all_owned := true
+		for k in mini(members.size(), 4):
+			var pr: Rect2 = at.call(C.portraits_offsets[k])
+			var portrait := RoundPortrait.new().setup(GameData.hero(members[k]), pr.size.x)
+			portrait.position = pr.position
+			portrait.size = pr.size
+			if not PlayerData.state.heroes.has(members[k]):
+				portrait.set_grey(true)
+				all_owned = false
+			card.add_child(portrait)
+		ScreenPack.image(card, ScreenPack.tex(Q, "vignette_" + f.id), at.call(C.vignette_offset))
+		var d := ScreenPack.text(card, " ".join(f.description), at.call(C.description_offset), 21, UiKit.INK, 0, true)
+		d.tooltip_text = String(q.get("effect", ""))
+		d.mouse_filter = Control.MOUSE_FILTER_PASS
+		for row: Array in [["bonus_rect", "bonus_panel", "Bonus · " + ("prêt" if all_owned else "recrute les quatre"), "bonus"],
+				["resonance_rect", "resonance_panel", "Résonance · reliques au palier V", "resonance"]]:
+			var rr: Rect2 = at.call(C[row[0]])
+			var box := ScreenPack.panel(card, Q, row[1], rr)
+			box.mouse_filter = Control.MOUSE_FILTER_PASS
+			box.tooltip_text = String(q.get(row[3], ""))
+			ScreenPack.text(box, row[2], Rect2(30, 0, rr.size.x - 60, rr.size.y), 21, UiKit.WHITE)
 
 
 func open() -> void:
@@ -64,7 +136,8 @@ func refresh() -> void:
 			refresh())
 		_tabs.add_child(b)
 	_relic_scroll.visible = _tab == "Reliques"
-	_quartet_scroll.visible = _tab == "Quatuors"
+	_quartet_scroll.visible = false
+	_quartet_page.visible = _tab == "Quatuors"
 	for c in _grid.get_children():
 		c.queue_free()
 	for c in _quartets.get_children():
@@ -73,8 +146,7 @@ func refresh() -> void:
 		for id: String in GameData.heroes:
 			_grid.add_child(_relic_card(id))
 	else:
-		for qid: String in GameData.quartets():
-			_quartets.add_child(_quartet_card(GameData.quartets()[qid]))
+		_fill_quartet_page()
 
 
 func _relic_card(id: String) -> Control:
@@ -122,38 +194,3 @@ func _relic_card(id: String) -> Control:
 		ui_sound.emit("ui_click")
 		hero_relic_requested.emit(id))
 	return b
-
-
-func _quartet_card(q: Dictionary) -> Control:
-	var p := PanelContainer.new()
-	p.add_theme_stylebox_override("panel", UiKit.card())
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 18)
-	p.add_child(row)
-	var faces := HBoxContainer.new()
-	faces.add_theme_constant_override("separation", 6)
-	row.add_child(faces)
-	var all_owned := true
-	for m: String in q.members:
-		var portrait := RoundPortrait.new().setup(GameData.hero(m), 76)
-		if not PlayerData.state.heroes.has(m):
-			portrait.set_grey(true)
-			all_owned = false
-		faces.add_child(portrait)
-	var col := VBoxContainer.new()
-	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(col)
-	var t := UiKit.label("%s  ·  %s" % [q.get("name", ""), q.get("attack", "")], 22, UiKit.INK)
-	t.add_theme_font_override("font", UiKit.FONT_BOLD)
-	col.add_child(t)
-	for line: String in [String(q.get("effect", "")), "Bonus de formation : " + String(q.get("bonus", ""))]:
-		var l := UiKit.label(line, 16, UiKit.TEXT_SOFT)
-		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		col.add_child(l)
-	var hint := "Mets les quatre dans ton équipe : quand chacun a lancé son ultime, le bouton QUATUOR apparaît (une fois par combat)."
-	if not all_owned:
-		hint = "Recrute les quatre membres à la Lanterne pour débloquer cette attaque combinée."
-	var h := UiKit.label(hint, 16, UiKit.WOOD)
-	h.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	col.add_child(h)
-	return p
