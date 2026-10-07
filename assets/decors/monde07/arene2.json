@@ -1,0 +1,42 @@
+{
+  "nom": "Remparts silencieux",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      524,
+      153,
+      55,
+      "#FFD090"
+    ],
+    [
+      760,
+      153,
+      55,
+      "#FFD090"
+    ],
+    [
+      352,
+      44,
+      50,
+      "#FFD090"
+    ],
+    [
+      920,
+      44,
+      50,
+      "#FFD090"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par2"
+}

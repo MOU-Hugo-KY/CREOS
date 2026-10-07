@@ -1,0 +1,36 @@
+{
+  "nom": "Relais désert",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      560,
+      143,
+      55,
+      "#FFD090"
+    ],
+    [
+      758,
+      144,
+      55,
+      "#FFD090"
+    ],
+    [
+      883,
+      134,
+      50,
+      "#FFD090"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par2"
+}
