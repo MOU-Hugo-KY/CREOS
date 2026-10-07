@@ -1,0 +1,292 @@
+{
+ "hero": "r10_oiseau_des_mauvaises_augures",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  144,
+  230
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "r10_oiseau_des_mauvaises_augures_idle_000.png",
+     0.26
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_idle_001.png",
+     0.26
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_idle_002.png",
+     0.26
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_idle_003.png",
+     0.26
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_idle_004.png",
+     0.26
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_idle_005.png",
+     0.26
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_idle_006.png",
+     0.26
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "r10_oiseau_des_mauvaises_augures_walk_000.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_walk_001.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_walk_002.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_walk_003.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_walk_004.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_walk_005.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_walk_006.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "r10_oiseau_des_mauvaises_augures_attack_000.png",
+     0.11
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_attack_001.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_attack_002.png",
+     0.08
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_attack_003.png",
+     0.065
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_attack_004.png",
+     0.08
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_attack_005.png",
+     0.095
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_attack_006.png",
+     0.11
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "r10_oiseau_des_mauvaises_augures_hurt_000.png",
+     0.07
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_hurt_001.png",
+     0.065
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_hurt_002.png",
+     0.07
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_hurt_003.png",
+     0.085
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_hurt_004.png",
+     0.09
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_hurt_005.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_hurt_006.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "r10_oiseau_des_mauvaises_augures_death_000.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_death_001.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_death_002.png",
+     0.12
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_death_003.png",
+     0.12
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_death_004.png",
+     0.13
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_death_005.png",
+     0.14
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_death_006.png",
+     0.15
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  },
+  "skill": {
+   "loop": false,
+   "frames": [
+    [
+     "r10_oiseau_des_mauvaises_augures_skill_000.png",
+     0.13
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_skill_001.png",
+     0.12
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_skill_002.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_skill_003.png",
+     0.08
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_skill_004.png",
+     0.1
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_skill_005.png",
+     0.12
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_skill_006.png",
+     0.14
+    ],
+    [
+     "r10_oiseau_des_mauvaises_augures_skill_007.png",
+     0.16
+    ]
+   ],
+   "hit_frame": 4
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "r10_oiseau_des_mauvaises_augures_fx_000.png",
+    0.08
+   ],
+   [
+    "r10_oiseau_des_mauvaises_augures_fx_001.png",
+    0.08
+   ],
+   [
+    "r10_oiseau_des_mauvaises_augures_fx_002.png",
+    0.08
+   ],
+   [
+    "r10_oiseau_des_mauvaises_augures_fx_003.png",
+    0.08
+   ],
+   [
+    "r10_oiseau_des_mauvaises_augures_fx_004.png",
+    0.08
+   ],
+   [
+    "r10_oiseau_des_mauvaises_augures_fx_005.png",
+    0.08
+   ],
+   [
+    "r10_oiseau_des_mauvaises_augures_fx_006.png",
+    0.08
+   ],
+   [
+    "r10_oiseau_des_mauvaises_augures_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}

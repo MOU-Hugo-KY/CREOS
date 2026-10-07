@@ -1,0 +1,254 @@
+{
+ "hero": "r09_garde_draconique",
+ "scale": 1.6,
+ "facing": -1,
+ "anchor": [
+  96,
+  146
+ ],
+ "map": {
+  "idle": "idle",
+  "walk": "walk",
+  "run": "walk",
+  "attack": "attack",
+  "skill": "skill",
+  "hurt": "hurt",
+  "death": "death"
+ },
+ "anims": {
+  "idle": {
+   "loop": true,
+   "frames": [
+    [
+     "r09_garde_draconique_idle_000.png",
+     0.26
+    ],
+    [
+     "r09_garde_draconique_idle_001.png",
+     0.26
+    ],
+    [
+     "r09_garde_draconique_idle_002.png",
+     0.26
+    ],
+    [
+     "r09_garde_draconique_idle_003.png",
+     0.26
+    ],
+    [
+     "r09_garde_draconique_idle_004.png",
+     0.26
+    ],
+    [
+     "r09_garde_draconique_idle_005.png",
+     0.26
+    ],
+    [
+     "r09_garde_draconique_idle_006.png",
+     0.26
+    ],
+    [
+     "r09_garde_draconique_idle_007.png",
+     0.26
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk": {
+   "loop": true,
+   "frames": [
+    [
+     "r09_garde_draconique_walk_000.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_walk_001.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_walk_002.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_walk_003.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_walk_004.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_walk_005.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_walk_006.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack": {
+   "loop": false,
+   "frames": [
+    [
+     "r09_garde_draconique_attack_000.png",
+     0.11
+    ],
+    [
+     "r09_garde_draconique_attack_001.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_attack_002.png",
+     0.08
+    ],
+    [
+     "r09_garde_draconique_attack_003.png",
+     0.065
+    ],
+    [
+     "r09_garde_draconique_attack_004.png",
+     0.08
+    ],
+    [
+     "r09_garde_draconique_attack_005.png",
+     0.095
+    ],
+    [
+     "r09_garde_draconique_attack_006.png",
+     0.11
+    ],
+    [
+     "r09_garde_draconique_attack_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "r09_garde_draconique_hurt_000.png",
+     0.07
+    ],
+    [
+     "r09_garde_draconique_hurt_001.png",
+     0.065
+    ],
+    [
+     "r09_garde_draconique_hurt_002.png",
+     0.07
+    ],
+    [
+     "r09_garde_draconique_hurt_003.png",
+     0.085
+    ],
+    [
+     "r09_garde_draconique_hurt_004.png",
+     0.09
+    ],
+    [
+     "r09_garde_draconique_hurt_005.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_hurt_006.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "r09_garde_draconique_death_000.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_death_001.png",
+     0.1
+    ],
+    [
+     "r09_garde_draconique_death_002.png",
+     0.12
+    ],
+    [
+     "r09_garde_draconique_death_003.png",
+     0.12
+    ],
+    [
+     "r09_garde_draconique_death_004.png",
+     0.13
+    ],
+    [
+     "r09_garde_draconique_death_005.png",
+     0.14
+    ],
+    [
+     "r09_garde_draconique_death_006.png",
+     0.15
+    ],
+    [
+     "r09_garde_draconique_death_007.png",
+     0.4
+    ]
+   ],
+   "hit_frame": null
+  }
+ },
+ "effect": {
+  "frames": [
+   [
+    "r09_garde_draconique_fx_000.png",
+    0.08
+   ],
+   [
+    "r09_garde_draconique_fx_001.png",
+    0.08
+   ],
+   [
+    "r09_garde_draconique_fx_002.png",
+    0.08
+   ],
+   [
+    "r09_garde_draconique_fx_003.png",
+    0.08
+   ],
+   [
+    "r09_garde_draconique_fx_004.png",
+    0.08
+   ],
+   [
+    "r09_garde_draconique_fx_005.png",
+    0.08
+   ],
+   [
+    "r09_garde_draconique_fx_006.png",
+    0.08
+   ],
+   [
+    "r09_garde_draconique_fx_007.png",
+    0.08
+   ]
+  ],
+  "pivot": [
+   64,
+   64
+  ],
+  "scale": {
+   "attack": 0.8,
+   "skill": 1.2
+  }
+ }
+}

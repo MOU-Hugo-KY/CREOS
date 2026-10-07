@@ -18,7 +18,7 @@ SCALE = 1.6
 HIT_EVENTS = ("hit_active", "release", "attack_active")
 # Monstres dessinés trop petits (ou trop grands) par rapport à leur rôle : multiplicateur de taille.
 SIZE_FIX = {"r08_vautour_des_pics": 1.8, "r08_serpent_des_cimes": 1.35, "r08_vipere_des_nuages": 1.35,
-            "r08_matriarche_des_pics": 1.3}
+            "r08_matriarche_des_pics": 1.3, "r09_dragon_ancien_asservi": 1.2, "r10_magicien_noir": 1.25}
 
 
 def import_monster(src):
