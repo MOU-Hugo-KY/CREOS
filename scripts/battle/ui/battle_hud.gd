@@ -270,12 +270,14 @@ func _label(size: int, outline := 8) -> Label:
 
 func _build_header() -> void:
 	var cart := PanelContainer.new()
-	cart.add_theme_stylebox_override("panel", AttackBar._nine("wave_cartouche", 24))
+	var cart_box := AttackBar._nine("wave_cartouche", 20)
+	cart_box.modulate_color = Color(0.7, 0.7, 0.76)  # plus sombre, comme la maquette
+	cart.add_theme_stylebox_override("panel", cart_box)
 	cart.position = Vector2(32, 28)
-	cart.custom_minimum_size = Vector2(320, 96)
+	cart.custom_minimum_size = Vector2(230, 64)
 	cart.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.add_child(cart)
-	_wave_label = _label(36, 8)
+	_wave_label = _label(26, 6)
 	_wave_label.add_theme_color_override("font_color", Color("f6efdf"))
 	_wave_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_wave_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -318,7 +320,7 @@ func _toggle_sound_panel(on: bool) -> void:
 		_sound_panel.visible = on
 
 
-## Bouton rond du pack (96 × 96) : fond normal / actif (allumé) / appuyé, glyphe au centre, légende dessous.
+## Bouton rectangulaire (maquette) : cartouche sombre du pack, glyphe à gauche et texte ; doré quand il est actif.
 const GLYPHS := {"AUTO": "glyph_auto", "×2": "glyph_speed", "SON": "glyph_sound"}
 
 
@@ -326,25 +328,26 @@ func _round_button(text: String) -> Button:
 	var b := Button.new()
 	b.toggle_mode = true
 	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(96, 96)
+	b.custom_minimum_size = Vector2(150 if text == "AUTO" else 130, 64)
 	b.tooltip_text = text
 	for st: String in ["normal", "hover", "pressed", "hover_pressed"]:
-		var sb := StyleBoxTexture.new()
-		sb.texture = OverheadBar.tex("round_button_active" if st.contains("pressed") else "round_button_normal")
+		var sb := AttackBar._nine("wave_cartouche", 20)
+		sb.modulate_color = Color(1.15, 1.0, 0.65) if st.contains("pressed") else (Color(0.85, 0.85, 0.9) if st == "hover" else Color(0.7, 0.7, 0.76))
 		b.add_theme_stylebox_override(st, sb)
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	var glyph := TextureRect.new()
 	glyph.texture = OverheadBar.tex(GLYPHS.get(text, "glyph_pause"))
-	glyph.position = Vector2(24, 18)
-	glyph.size = Vector2(48, 48)
+	glyph.position = Vector2(14, 14)
+	glyph.size = Vector2(36, 36)
 	glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	b.add_child(glyph)
-	var cap := _label(15, 4)
+	var cap := _label(24, 6)
 	cap.text = text
+	cap.position = Vector2(56, 0)
+	cap.size = Vector2(b.custom_minimum_size.x - 64, 64)
+	cap.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	cap.position = Vector2(0, 66)
-	cap.size = Vector2(96, 20)
-	cap.add_theme_color_override("font_color", Color("e8d9b0"))
+	cap.add_theme_color_override("font_color", Color("f6efdf"))
 	b.add_child(cap)
 	b.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	return b

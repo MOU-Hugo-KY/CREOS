@@ -10,12 +10,13 @@ signal attack_chosen(slot: int)
 const TRAY := Vector2(1090, 164)
 const SKILL_X := [420.0, 566.0, 712.0]
 const SECRET_POS := Vector2(874, 44)
+## Symbole d'élément du badge (en attendant de vraies icônes d'élément : partie 2 du pack ChatGPT).
+const ELEMENT_GLYPHS := {"feu": "burn", "eau": "wet", "nature": "rooted", "lumiere": "stunned", "ombre": "mark"}
 
 var unit: BattleUnit
 var _icons: Array[AttackIcon] = []
 var _portrait_holder: Control
 var _name: Label
-var _hint: Label
 var _energy: TextureRect
 var _energy_fill: TextureRect
 var _lock: Control
@@ -34,7 +35,9 @@ func _ready() -> void:
 	var tray := Panel.new()
 	tray.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	tray.mouse_filter = Control.MOUSE_FILTER_STOP  # le plateau ne laisse pas passer le toucher
-	tray.add_theme_stylebox_override("panel", _nine("attack_tray", 28))
+	var tray_box := _nine("attack_tray", 28)
+	tray_box.modulate_color = Color(0.62, 0.62, 0.68)  # plus sombre, comme la maquette
+	tray.add_theme_stylebox_override("panel", tray_box)
 	add_child(tray)
 	_portrait_holder = Control.new()
 	_portrait_holder.position = Vector2(24, 20)
@@ -42,23 +45,20 @@ func _ready() -> void:
 	_portrait_holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_portrait_holder)
 	_name = UiKit.title("", 34)
-	_name.position = Vector2(168, 22)
+	_name.position = Vector2(168, 34)
 	_name.size = Vector2(240, 44)
 	add_child(_name)
-	_hint = UiKit.label("À toi de jouer", 20, Color(0.92, 0.88, 0.8), 5, UiKit.INK)
-	_hint.position = Vector2(168, 68)
-	add_child(_hint)
 	_energy = TextureRect.new()
 	_energy.texture = OverheadBar.tex("energy_frame")
 	_energy.stretch_mode = TextureRect.STRETCH_SCALE
-	_energy.position = Vector2(168, 108)
+	_energy.position = Vector2(168, 96)
 	_energy.size = Vector2(220, 10)
 	_energy.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_energy)
 	_energy_fill = TextureRect.new()
 	_energy_fill.texture = OverheadBar.tex("hero_energy_fill")
 	_energy_fill.stretch_mode = TextureRect.STRETCH_SCALE
-	_energy_fill.position = Vector2(170, 110)
+	_energy_fill.position = Vector2(170, 98)
 	_energy_fill.size = Vector2(216, 6)
 	_energy_fill.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_energy_fill)
@@ -107,14 +107,34 @@ func show_for(p_unit: BattleUnit) -> void:
 	_name.text = unit.display_name.to_upper()
 	for c in _portrait_holder.get_children():
 		c.queue_free()
-	var portrait := RoundPortrait.new().setup(GameData.hero(unit.def_id), 104, 0.0)
-	portrait.position = Vector2(10, 10)
-	_portrait_holder.add_child(portrait)
-	var ring := TextureRect.new()
-	ring.texture = OverheadBar.tex("portrait_ring")
-	ring.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	ring.stretch_mode = TextureRect.STRETCH_SCALE
-	_portrait_holder.add_child(ring)
+	# Cadre carré (comme une case de compétence) avec la tête du héros, et son élément en bas à droite.
+	var frame := TextureRect.new()
+	frame.texture = OverheadBar.tex("skill_frame_normal")
+	frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	frame.stretch_mode = TextureRect.STRETCH_SCALE
+	frame.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_portrait_holder.add_child(frame)
+	var head := TextureRect.new()
+	head.texture = RoundPortrait.portrait_texture(GameData.hero(unit.def_id))
+	head.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	head.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	head.position = Vector2(14, 14)
+	head.size = Vector2(96, 96)
+	head.clip_contents = true
+	_portrait_holder.add_child(head)
+	var badge := Control.new()
+	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	badge.position = Vector2(88, 88)
+	badge.size = Vector2(44, 44)
+	var elem_color := Palette.element_color(unit.element).lightened(0.2)
+	var glyph_tex := OverheadBar.tex("status_%s_24" % ELEMENT_GLYPHS.get(unit.element, "mark"))
+	badge.draw.connect(func() -> void:
+		var bf := OverheadBar.tex("secret_frame_normal")
+		if bf:
+			badge.draw_texture_rect(bf, Rect2(Vector2.ZERO, Vector2(44, 44)), false, elem_color)
+		if glyph_tex:
+			badge.draw_texture_rect(glyph_tex, Rect2(Vector2(10, 10), Vector2(24, 24)), false))
+	_portrait_holder.add_child(badge)
 	var color := Palette.element_color(unit.element)
 	for i in _icons.size():
 		var icon := _icons[i]
