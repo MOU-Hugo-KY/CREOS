@@ -21,10 +21,13 @@ const HERO_SPOTS := [Vector2(575, 554), Vector2(520, 668), Vector2(450, 552), Ve
 const ENEMY_SPOTS := [Vector2(705, 554), Vector2(760, 668), Vector2(830, 552), Vector2(885, 666),
 	Vector2(955, 550), Vector2(1010, 664), Vector2(1080, 548), Vector2(1135, 662)]
 const CROWD_SCALE := 0.78  # combattants un peu plus petits quand il y a plus de 4 héros
-# Arène en plongée : formation de 7 par camp, 2 devant, 3 au milieu, 2 à l'arrière.
-# [colonne (0 devant), place dans la colonne (0..1 du haut vers le bas)] pour chaque combattant.
-const TOP_FORMATION := [[0, 0.3], [0, 0.7], [1, 0.5], [1, 0.12], [1, 0.88], [2, 0.3], [2, 0.7]]
-const TOP_SCALE := 0.8
+# Arène en plongée (maquette ChatGPT) : 7 par camp en trois lignes, 2 en haut, 3 au milieu, 2 en bas ;
+# les ennemis en miroir. Pieds dans le cadre 1280 × 720.
+const TOP_HEROES := [Vector2(237, 300), Vector2(417, 300), Vector2(157, 434), Vector2(329, 434),
+	Vector2(505, 434), Vector2(237, 568), Vector2(429, 568)]
+const TOP_ENEMIES := [Vector2(858, 300), Vector2(1034, 300), Vector2(774, 434), Vector2(946, 434),
+	Vector2(1118, 434), Vector2(850, 568), Vector2(1042, 568)]
+const TOP_SCALE := 0.62  # personnages plus petits, tous à la même taille
 const BOSS_SPOT := Vector2(1040, 604)
 const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague
 const END_DELAY := 1.4
@@ -723,20 +726,15 @@ func _spot(team: int, n: int) -> Vector2:
 	if not stage.topdown:
 		var spots: Array = HERO_SPOTS if team == 0 else ENEMY_SPOTS
 		return spots[n % spots.size()]
-	var r := stage.combat_rect
-	var f: Array = TOP_FORMATION[n % TOP_FORMATION.size()]
-	var top := r.position.y + 70.0  # laisse la place de la tête des combattants du fond
-	var y := top + (r.end.y - 25.0 - top) * float(f[1])
-	var mid := r.position.x + r.size.x / 2.0
-	var x := 120.0 + float(f[0]) * 160.0  # distance au centre
-	return Vector2(mid - x if team == 0 else mid + x, y)
+	var spots: Array = TOP_HEROES if team == 0 else TOP_ENEMIES
+	return spots[n % spots.size()]
 
 
 func _boss_spot() -> Vector2:
 	if not stage.topdown:
 		return BOSS_SPOT
 	var r := stage.combat_rect
-	return Vector2(r.position.x + r.size.x * 0.8, r.position.y + r.size.y * 0.62)
+	return Vector2(r.position.x + r.size.x * 0.82, 470.0)
 
 
 func _spawn(u: BattleUnit, data: Dictionary, pos: Vector2) -> void:
@@ -746,8 +744,7 @@ func _spawn(u: BattleUnit, data: Dictionary, pos: Vector2) -> void:
 	v.setup(u, data)
 	if stage.topdown:
 		# Plongée : un peu plus petits au fond, un peu plus grands devant.
-		var depth := clampf((pos.y - stage.combat_rect.position.y) / stage.combat_rect.size.y, 0.0, 1.0)
-		v.scale = Vector2.ONE * TOP_SCALE * lerpf(0.9, 1.06, depth)
+		v.scale = Vector2.ONE * TOP_SCALE
 	elif engine.heroes.size() > 4:
 		v.scale = Vector2.ONE * CROWD_SCALE
 	views[u.uid] = v
