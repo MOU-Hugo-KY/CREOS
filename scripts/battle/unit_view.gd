@@ -51,11 +51,16 @@ func setup(p_unit: BattleUnit, p_data: Dictionary) -> void:
 
 ## Point au-dessus de la tête, dans le repère de la scène de combat.
 func head_position() -> Vector2:
-	return position + Vector2(0, -height - 14.0)
+	return position + Vector2(0, -height * _size_scale() - 14.0)
 
 
 func chest_position() -> Vector2:
-	return position + Vector2(0, -height * 0.5)
+	return position + Vector2(0, -height * 0.5 * _size_scale())
+
+
+## Échelle de placement de la vue (foule, profondeur de l'arène), sans l'écrasement des coups.
+func _size_scale() -> float:
+	return _base_scale.y if _base_scale != Vector2.ZERO else scale.y
 
 
 ## Point au-dessus de la tête, en pixels de l'écran (pour l'interface).

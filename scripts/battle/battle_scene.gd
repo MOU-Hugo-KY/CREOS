@@ -20,6 +20,9 @@ const HERO_SPOTS := [Vector2(575, 554), Vector2(520, 668), Vector2(450, 552), Ve
 const ENEMY_SPOTS := [Vector2(705, 554), Vector2(760, 668), Vector2(830, 552), Vector2(885, 666),
 	Vector2(955, 550), Vector2(1010, 664), Vector2(1080, 548), Vector2(1135, 662)]
 const CROWD_SCALE := 0.78  # combattants un peu plus petits quand il y a plus de 4 héros
+# Arène en plongée : 4 rangées en profondeur, 2 colonnes par camp (devant, derrière), en quinconce.
+const TOP_ROWS := [1, 2, 0, 3]  # ordre de remplissage des rangées (le milieu d'abord)
+const TOP_SCALE := 0.8
 const BOSS_SPOT := Vector2(1040, 604)
 const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague
 const END_DELAY := 1.4
@@ -107,7 +110,7 @@ func start_battle(rng_seed: int) -> void:
 	hud.set_auto(was_auto)
 	for i in engine.heroes.size():
 		var h := engine.heroes[i]
-		_spawn(h, team_data[i], HERO_SPOTS[i])
+		_spawn(h, team_data[i], _spot(0, i))
 		_hero_stats[h.uid] = {"damage": 0.0, "healing": 0.0}
 	audio.play_music("battle_loop")
 	_handle_events()
@@ -605,11 +608,33 @@ func _spawn_wave() -> void:
 			hud.remove_overhead(uid)
 	var k := 0
 	for e in engine.enemies:
-		var spot: Vector2 = BOSS_SPOT
+		var spot: Vector2 = _boss_spot()
 		if not e.is_boss:
-			spot = ENEMY_SPOTS[k % ENEMY_SPOTS.size()]
+			spot = _spot(1, k)
 			k += 1
 		_spawn(e, GameData.monster(e.def_id), spot)
+
+
+## Place du n-ième combattant d'un camp (0 héros, 1 ennemis).
+func _spot(team: int, n: int) -> Vector2:
+	if not stage.topdown:
+		var spots: Array = HERO_SPOTS if team == 0 else ENEMY_SPOTS
+		return spots[n % spots.size()]
+	var r := stage.combat_rect
+	var row: int = TOP_ROWS[n % 4]
+	var col := (n / 4) % 2  # 0 devant, 1 derrière
+	var gap := r.size.y / 4.0
+	var y := r.position.y + gap * (row + 0.75)
+	var mid := r.position.x + r.size.x / 2.0
+	var x := 130.0 + col * 210.0 + (row % 2) * 45.0  # distance au centre
+	return Vector2(mid - x if team == 0 else mid + x, y)
+
+
+func _boss_spot() -> Vector2:
+	if not stage.topdown:
+		return BOSS_SPOT
+	var r := stage.combat_rect
+	return Vector2(r.position.x + r.size.x * 0.8, r.position.y + r.size.y * 0.62)
 
 
 func _spawn(u: BattleUnit, data: Dictionary, pos: Vector2) -> void:
@@ -617,7 +642,11 @@ func _spawn(u: BattleUnit, data: Dictionary, pos: Vector2) -> void:
 	v.position = pos
 	_units_root.add_child(v)
 	v.setup(u, data)
-	if engine.heroes.size() > 4:
+	if stage.topdown:
+		# Plongée : un peu plus petits au fond, un peu plus grands devant.
+		var depth := clampf((pos.y - stage.combat_rect.position.y) / stage.combat_rect.size.y, 0.0, 1.0)
+		v.scale = Vector2.ONE * TOP_SCALE * lerpf(0.9, 1.06, depth)
+	elif engine.heroes.size() > 4:
 		v.scale = Vector2.ONE * CROWD_SCALE
 	views[u.uid] = v
 	unit_data[u.uid] = data

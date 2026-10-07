@@ -1,0 +1,42 @@
+{
+  "nom": "Criques des contrebandiers",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      132,
+      100,
+      70,
+      "#FFB755"
+    ],
+    [
+      359,
+      109,
+      70,
+      "#FFB755"
+    ],
+    [
+      625,
+      98,
+      70,
+      "#FFB755"
+    ],
+    [
+      1067,
+      35,
+      60,
+      "#FFB755"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}

@@ -10,6 +10,9 @@ const SIZE := Vector2(1280, 720)
 
 var ambience: Ambience
 var info: Dictionary = {}
+## Arène vue en plongée (`areneN.png` + `areneN.json`) : les combattants se répartissent sur le sol.
+var topdown := false
+var combat_rect := Rect2(80, 300, 1120, 380)
 
 
 ## `dir` : dossier du monde ; `scene` : 1 entrée, 2 profondeur, 3 boss.
@@ -21,6 +24,9 @@ func setup(dir: String, scene: int) -> void:
 			info = parsed
 	# Décors pixel : fond et premier plan propres à chaque scène (decor.json "scenes"), sur le même
 	# canevas que le fond, sol compris. Anciens décors : fondN.jpg + sol + premier plan coupé en deux.
+	if ResourceLoader.exists(dir + "arene%d.png" % scene):
+		_setup_arena(dir, scene)
+		return
 	var scenes: Array = info.get("scenes", [])
 	var sc: Dictionary = scenes[scene - 1] if scene - 1 < scenes.size() else {}
 	if sc.has("background"):
@@ -33,6 +39,21 @@ func setup(dir: String, scene: int) -> void:
 		_split_foreground(dir + "premier_plan.png")
 	ambience = Ambience.new()
 	ambience.config_path = dir + "ambiance%d.json" % scene
+	ambience.z_index = -10
+	add_child(ambience)
+
+
+func _setup_arena(dir: String, scene: int) -> void:
+	topdown = true
+	var path := dir + "arene%d.json" % scene
+	if FileAccess.file_exists(path):
+		var a: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if a is Dictionary and a.has("combat_rect"):
+			var r: Array = a.combat_rect
+			combat_rect = Rect2(r[0], r[1], r[2], r[3])
+	_layer(dir + "arene%d.png" % scene, -30, true)
+	_layer(dir + "arene%d_avant.png" % scene, 20, true)
+	ambience = Ambience.new()  # pas de particules de l'ancien décor ; sert à l'assombrissement des ultimes
 	ambience.z_index = -10
 	add_child(ambience)
 
