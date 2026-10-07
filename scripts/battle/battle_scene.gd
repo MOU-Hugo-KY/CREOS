@@ -153,7 +153,7 @@ func _process(delta: float) -> void:
 	if engine.awaiting_uid != -1:
 		for cid: String in engine.ready_combos():
 			var c := engine._combo(cid)
-			ready.append({"id": cid, "attack": c.get("attack", ""), "size": c.members.size()})
+			ready.append({"id": cid, "attack": c.get("attack", ""), "size": c.members.size(), "members": c.members})
 	hud.set_combos(ready)
 	hud.refresh(delta)
 

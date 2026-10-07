@@ -1,11 +1,14 @@
 class_name AttackIcon
 extends Control
-## Petite icône ronde d'une attaque. Grisée si elle n'est pas disponible :
-## recharge (secondes restantes) ou énergie (anneau qui se remplit).
+## Case carrée d'une compétence (pièces pixel de assets/ui/combat) : cadre normal / survol / appuyé /
+## indisponible, icône de la compétence à l'intérieur, voile de recharge qui se vide, et pour
+## l'ultime une jauge d'énergie dessous qui brille quand elle est pleine. La technique secrète
+## (slot 3) a une case plus petite.
 
 signal pressed
 
 const ICON_DIR := "res://assets/ui/attacks/"
+const INSET := 16.0
 
 var slot := 0
 var attack: Dictionary = {}
@@ -15,93 +18,116 @@ var progress := 1.0  # 0..1 (recharge ou énergie)
 var corner_text := ""
 
 var _icon: Texture2D
-var _name: Label
 var _hover := false
+var _down := false
+var _time := 0.0
 
 
 func setup(p_slot: int, p_attack: Dictionary, p_accent: Color) -> void:
 	slot = p_slot
 	attack = p_attack
 	accent = p_accent
+	var side := 96.0 if slot == BattleUnit.SLOT_SECRET else 128.0
+	custom_minimum_size = Vector2(side, side)
+	size = custom_minimum_size
+	pivot_offset = size / 2.0
 	var path: String = ICON_DIR + String(attack.get("id", "")) + ".png"
 	_icon = load(path) if ResourceLoader.exists(path) else null
 	tooltip_text = "%s\n%s" % [attack.get("name", ""), attack.get("description", "")]
-	if _name:
-		_name.text = attack.get("name", "")
 	queue_redraw()
 
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(112, 150)
+	custom_minimum_size = Vector2(128, 128)
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	_name = Label.new()
-	_name.text = attack.get("name", "")
-	_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_name.add_theme_font_size_override("font_size", 16)
-	_name.add_theme_constant_override("outline_size", 6)
-	_name.add_theme_constant_override("line_spacing", -3)
-	_name.autowrap_mode = TextServer.AUTOWRAP_WORD
-	_name.position = Vector2(-4, 110)
-	_name.size = Vector2(120, 40)
-	_name.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(_name)
-	mouse_entered.connect(_set_hover.bind(true))
-	mouse_exited.connect(_set_hover.bind(false))
-	pivot_offset = Vector2(56, 56)
+	mouse_entered.connect(func() -> void:
+		_hover = true
+		queue_redraw())
+	mouse_exited.connect(func() -> void:
+		_hover = false
+		_down = false
+		queue_redraw())
 
 
-func _set_hover(on: bool) -> void:
-	_hover = on
-	queue_redraw()
+func _process(delta: float) -> void:
+	_time += delta
+	if slot == BattleUnit.SLOT_ULTIMATE and available:
+		queue_redraw()  # lueur de l'ultime prêt
 
 
 func set_state(p_available: bool, p_progress: float, p_corner: String) -> void:
 	available = p_available
 	progress = clampf(p_progress, 0.0, 1.0)
 	corner_text = p_corner
-	_name.modulate = Color(1, 1, 1) if available else Color(1, 1, 1, 0.45)
+	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if available else Control.CURSOR_ARROW
 	queue_redraw()
 
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
-	if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed and available:
+	if mb == null or mb.button_index != MOUSE_BUTTON_LEFT or not available:
+		return
+	_down = mb.pressed
+	queue_redraw()
+	if not mb.pressed:
 		accept_event()
 		pressed.emit()
 
 
 func press_feedback() -> void:
 	var tw := create_tween()
-	tw.tween_property(self, "scale", Vector2.ONE * 0.88, 0.05)
+	tw.tween_property(self, "scale", Vector2.ONE * 0.9, 0.05)
 	tw.tween_property(self, "scale", Vector2.ONE, 0.12)
 
 
 func _draw() -> void:
-	var c := Vector2(56, 56)
-	var r := 50.0
-	# Fond : disque sombre teinté de la couleur de l'élément.
-	draw_circle(c + Vector2(0, 4), r, Color(0, 0, 0, 0.35))
-	draw_circle(c, r, Color(accent.darkened(0.75), 0.92))
-	draw_circle(c, r * 0.82, Color(accent.darkened(0.6), 0.6))
-	if _icon:
-		var s := r * 1.45
-		draw_texture_rect(_icon, Rect2(c - Vector2(s, s) / 2.0, Vector2(s, s)), false,
-			Color(1, 1, 1) if available else Color(0.6, 0.6, 0.65))
+	var secret := slot == BattleUnit.SLOT_SECRET
+	var base := "secret_frame" if secret else "skill_frame"
+	var state := "disabled" if not available else ("pressed" if _down else ("hover" if _hover else "normal"))
+	var full := Rect2(Vector2.ZERO, size)
+	var inner := full.grow(-INSET)
+	var frame := OverheadBar.tex("%s_%s" % [base, state])
+	if frame:
+		draw_texture_rect(frame, full, false)
+	if _icon:  # par-dessus le fond de la case
+		draw_texture_rect(_icon, inner, false, Color.WHITE if available else Color(0.55, 0.55, 0.6))
 	if not available:
-		draw_circle(c, r, Color(0, 0, 0, 0.25))
-	# Anneau : plein et coloré si disponible, sinon progression (recharge / énergie).
-	draw_arc(c, r, 0, TAU, 64, Color(1, 1, 1, 0.12), 4.0, true)
-	if available:
-		var w := 5.0 if not _hover else 7.0
-		draw_arc(c, r, 0, TAU, 64, accent.lightened(0.25), w, true)
-	elif progress > 0.0:
-		draw_arc(c, r, -PI / 2.0, -PI / 2.0 + TAU * progress, 64, Color(accent, 0.8), 4.0, true)
-	# Numéro de touche (1, 2, 3) et texte de recharge.
-	var font := get_theme_default_font()
-	draw_circle(c + Vector2(-38, -38), 13, Color(0, 0, 0, 0.75))
-	draw_string(font, c + Vector2(-43, -32), str(slot + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Palette.TEXT)
+		# Recharge : voile qui se vide (17 images) ; sinon simple voile gris.
+		if slot == BattleUnit.SLOT_COOLDOWN or secret:
+			var f := clampi(roundi(progress * 16.0), 0, 16)
+			var veil := OverheadBar.tex("anim/cooldown_veil/%02d" % f)
+			if veil:
+				draw_texture_rect(veil, inner, false)
+		else:
+			var grey := OverheadBar.tex("skill_disabled_veil")
+			if grey:
+				draw_texture_rect(grey, inner, false)
+	elif state == "hover":
+		var over := OverheadBar.tex("skill_hover_overlay")
+		if over:
+			draw_texture_rect(over, full, false)
+	elif state == "pressed":
+		var pv := OverheadBar.tex("skill_pressed_veil")
+		if pv:
+			draw_texture_rect(pv, inner, false)
+	if slot == BattleUnit.SLOT_ULTIMATE:
+		var bar := Rect2(Vector2(0, size.y + 6), Vector2(size.x, 10))
+		var ef := OverheadBar.tex("ultimate_energy_frame")
+		if ef:
+			draw_texture_rect(ef, bar, false)
+		var fill := OverheadBar.tex("ultimate_energy_fill")
+		if fill and progress > 0.0:
+			var r := bar.grow(-2.0)
+			draw_texture_rect_region(fill, Rect2(r.position, Vector2(r.size.x * progress, r.size.y)),
+				Rect2(Vector2.ZERO, Vector2(fill.get_width() * progress, fill.get_height())))
+		if available:
+			var glow := OverheadBar.tex("anim/ultimate_ready/%02d" % (int(_time / 0.09) % 8))
+			if glow:
+				draw_texture_rect(glow, full, false)
 	if corner_text != "":
-		var ts := font.get_string_size(corner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 20)
-		var pos := c + Vector2(-ts.x / 2.0, r * 0.75)
-		draw_string_outline(font, pos, corner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 20, 6, Color(0, 0, 0, 0.95))
-		draw_string(font, pos, corner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Palette.TEXT)
+		var font := get_theme_default_font()
+		var fs := 28 if not secret else 22
+		var ts := font.get_string_size(corner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
+		var pos := Vector2((size.x - ts.x) / 2.0, size.y / 2.0 + fs * 0.35)
+		draw_string_outline(font, pos, corner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, 7, Color(0, 0, 0, 0.95))
+		draw_string(font, pos, corner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Palette.TEXT)

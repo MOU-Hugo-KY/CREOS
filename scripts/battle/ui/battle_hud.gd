@@ -71,14 +71,14 @@ func _ready() -> void:
 	_quartet_button.pressed.connect(func() -> void: quartet_requested.emit())
 	_root.add_child(_quartet_button)
 	_combo_box = VBoxContainer.new()
-	_combo_box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
-	_combo_box.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_combo_box.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	_combo_box.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	_combo_box.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	_combo_box.offset_bottom = -236
-	_combo_box.offset_left = -230
-	_combo_box.offset_right = 230
+	_combo_box.offset_right = -28
+	_combo_box.offset_bottom = -26
+	_combo_box.offset_left = -332
 	_combo_box.alignment = BoxContainer.ALIGNMENT_END
-	_combo_box.add_theme_constant_override("separation", 8)
+	_combo_box.add_theme_constant_override("separation", 12)
 	_root.add_child(_combo_box)
 
 	end_screen = EndScreen.new()
@@ -150,14 +150,52 @@ func set_combos(list: Array) -> void:
 	for child in _combo_box.get_children():
 		child.queue_free()
 	for c: Dictionary in list.slice(0, 3):
-		var kind: String = {4: "QUATUOR", 3: "TRIO", 2: "DUO"}.get(int(c.size), "COMBO")
-		var b := UiKit.button("%s : %s" % [kind, c.attack], "gold" if int(c.size) >= 4 else "green", 22, Vector2(460, 54))
-		var cid: String = c.id
-		b.pressed.connect(func() -> void: combo_requested.emit(cid))
+		var b := _combo_button(c)
 		_combo_box.add_child(b)
-		b.pivot_offset = Vector2(230, 27)
+		b.pivot_offset = Vector2(152, 50)
 		b.scale = Vector2.ONE * 0.7
 		b.create_tween().tween_property(b, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+## Bouton de combo du pack (304 × 100) : doré (quatuor), vert (trio) ou turquoise (duo), mini-portraits
+## des membres, nom de l'attaque, et lueur animée par-dessus tant qu'il est prêt.
+func _combo_button(c: Dictionary) -> Button:
+	var kind: String = {4: "quatuor", 3: "trio", 2: "duo"}.get(int(c.size), "duo")
+	var b := Button.new()
+	b.focus_mode = Control.FOCUS_NONE
+	b.custom_minimum_size = Vector2(304, 100)
+	b.tooltip_text = "%s : %s" % [kind.capitalize(), c.attack]
+	b.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	for st: String in ["normal", "hover", "pressed"]:
+		b.add_theme_stylebox_override(st, AttackBar._nine("combo_%s_%s" % [kind, st], 24))
+	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	var cid: String = c.id
+	b.pressed.connect(func() -> void: combo_requested.emit(cid))
+	var members: Array = c.get("members", [])
+	for i in members.size():
+		var p := RoundPortrait.new().setup(GameData.hero(String(members[i])), 44, 0.1)
+		p.position = Vector2(24 + i * 52, 14)
+		b.add_child(p)
+	var name := _label(17, 5)
+	name.text = String(c.attack)
+	name.position = Vector2(20, 64)
+	name.size = Vector2(264, 24)
+	name.clip_text = true
+	name.add_theme_color_override("font_color", Color("fff3d0"))
+	b.add_child(name)
+	var glow := TextureRect.new()
+	glow.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b.add_child(glow)
+	var frame := [0]
+	var timer := Timer.new()
+	timer.wait_time = 0.1
+	timer.autostart = true
+	timer.timeout.connect(func() -> void:
+		frame[0] = (frame[0] + 1) % 8
+		glow.texture = OverheadBar.tex("anim/combo_%s_ready/%02d" % [kind, frame[0]]))
+	b.add_child(timer)
+	return b
 
 
 func set_wave(index: int, count: int) -> void:
@@ -231,17 +269,24 @@ func _label(size: int, outline := 8) -> Label:
 
 
 func _build_header() -> void:
-	_wave_label = _label(26)
-	_wave_label.position = Vector2(32, 22)
-	_wave_label.modulate = Color(1, 1, 1, 0.85)
-	_root.add_child(_wave_label)
+	var cart := PanelContainer.new()
+	cart.add_theme_stylebox_override("panel", AttackBar._nine("wave_cartouche", 24))
+	cart.position = Vector2(32, 28)
+	cart.custom_minimum_size = Vector2(320, 96)
+	cart.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_root.add_child(cart)
+	_wave_label = _label(36, 8)
+	_wave_label.add_theme_color_override("font_color", Color("f6efdf"))
+	_wave_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_wave_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	cart.add_child(_wave_label)
 
 	var right := HBoxContainer.new()
 	right.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	right.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-	right.offset_right = -24
-	right.offset_top = 18
-	right.add_theme_constant_override("separation", 10)
+	right.offset_right = -40
+	right.offset_top = 28
+	right.add_theme_constant_override("separation", 8)
 	_root.add_child(right)
 	_auto_button = _round_button("AUTO")
 	_auto_button.toggled.connect(func(on: bool) -> void:
@@ -273,17 +318,35 @@ func _toggle_sound_panel(on: bool) -> void:
 		_sound_panel.visible = on
 
 
+## Bouton rond du pack (96 × 96) : fond normal / actif (allumé) / appuyé, glyphe au centre, légende dessous.
+const GLYPHS := {"AUTO": "glyph_auto", "×2": "glyph_speed", "SON": "glyph_sound"}
+
+
 func _round_button(text: String) -> Button:
 	var b := Button.new()
-	b.text = text
 	b.toggle_mode = true
 	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(78, 52)
-	b.add_theme_font_size_override("font_size", 20)
-	b.add_theme_stylebox_override("normal", Palette.stylebox(Color(0, 0, 0, 0.35), Color(1, 1, 1, 0.25), 26, 2))
-	b.add_theme_stylebox_override("hover", Palette.stylebox(Color(0, 0, 0, 0.45), Color(1, 1, 1, 0.5), 26, 2))
-	b.add_theme_stylebox_override("pressed", Palette.stylebox(Color(Palette.GOLD, 0.3), Palette.GOLD, 26, 2))
-	b.add_theme_color_override("font_pressed_color", Palette.GOLD.lightened(0.3))
+	b.custom_minimum_size = Vector2(96, 96)
+	b.tooltip_text = text
+	for st: String in ["normal", "hover", "pressed", "hover_pressed"]:
+		var sb := StyleBoxTexture.new()
+		sb.texture = OverheadBar.tex("round_button_active" if st.contains("pressed") else "round_button_normal")
+		b.add_theme_stylebox_override(st, sb)
+	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	var glyph := TextureRect.new()
+	glyph.texture = OverheadBar.tex(GLYPHS.get(text, "glyph_pause"))
+	glyph.position = Vector2(24, 18)
+	glyph.size = Vector2(48, 48)
+	glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b.add_child(glyph)
+	var cap := _label(15, 4)
+	cap.text = text
+	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	cap.position = Vector2(0, 66)
+	cap.size = Vector2(96, 20)
+	cap.add_theme_color_override("font_color", Color("e8d9b0"))
+	b.add_child(cap)
+	b.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	return b
 
 

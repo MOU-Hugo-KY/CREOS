@@ -1,0 +1,3988 @@
+{
+  "schema": "creos_combat_ui_v1",
+  "canvas_reference": [
+    1920,
+    1080
+  ],
+  "texture_filter": "nearest",
+  "text_rendering": {
+    "font": "Fredoka supplied by game",
+    "embedded_text_in_assets": false
+  },
+  "assets": {
+    "kit_window_main": {
+      "file": "kit_ui_actuel/window_main.png",
+      "size": [
+        256,
+        192
+      ],
+      "nine_slice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_confirmation": {
+      "file": "kit_ui_actuel/confirmation.png",
+      "size": [
+        256,
+        160
+      ],
+      "nine_slice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_panel_secondary": {
+      "file": "kit_ui_actuel/panel_secondary.png",
+      "size": [
+        192,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_list_panel": {
+      "file": "kit_ui_actuel/list_panel.png",
+      "size": [
+        192,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_tooltip": {
+      "file": "kit_ui_actuel/tooltip.png",
+      "size": [
+        160,
+        96
+      ],
+      "nine_slice": {
+        "left": 24,
+        "top": 24,
+        "right": 24,
+        "bottom": 24
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_top_resources": {
+      "file": "kit_ui_actuel/top_resources.png",
+      "size": [
+        384,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_title_ribbon": {
+      "file": "kit_ui_actuel/title_ribbon.png",
+      "size": [
+        256,
+        64
+      ],
+      "nine_slice": {
+        "left": 40,
+        "top": 16,
+        "right": 40,
+        "bottom": 16
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        44,
+        18,
+        44,
+        18
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_close_normal": {
+      "file": "kit_ui_actuel/close_normal.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_close_pressed": {
+      "file": "kit_ui_actuel/close_pressed.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_primary_normal": {
+      "file": "kit_ui_actuel/button_primary_normal.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_primary_hover": {
+      "file": "kit_ui_actuel/button_primary_hover.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_primary_pressed": {
+      "file": "kit_ui_actuel/button_primary_pressed.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_secondary_normal": {
+      "file": "kit_ui_actuel/button_secondary_normal.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_secondary_hover": {
+      "file": "kit_ui_actuel/button_secondary_hover.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_secondary_pressed": {
+      "file": "kit_ui_actuel/button_secondary_pressed.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_danger_normal": {
+      "file": "kit_ui_actuel/button_danger_normal.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_danger_hover": {
+      "file": "kit_ui_actuel/button_danger_hover.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_danger_pressed": {
+      "file": "kit_ui_actuel/button_danger_pressed.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_disabled_normal": {
+      "file": "kit_ui_actuel/button_disabled_normal.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_disabled_hover": {
+      "file": "kit_ui_actuel/button_disabled_hover.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_button_disabled_pressed": {
+      "file": "kit_ui_actuel/button_disabled_pressed.png",
+      "size": [
+        192,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_tab_active": {
+      "file": "kit_ui_actuel/tab_active.png",
+      "size": [
+        144,
+        56
+      ],
+      "nine_slice": {
+        "left": 26,
+        "top": 20,
+        "right": 26,
+        "bottom": 20
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        18,
+        30,
+        18
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_tab_inactive": {
+      "file": "kit_ui_actuel/tab_inactive.png",
+      "size": [
+        144,
+        56
+      ],
+      "nine_slice": {
+        "left": 26,
+        "top": 20,
+        "right": 26,
+        "bottom": 20
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        18,
+        30,
+        18
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_separator": {
+      "file": "kit_ui_actuel/separator.png",
+      "size": [
+        192,
+        8
+      ],
+      "nine_slice": {
+        "left": 14,
+        "top": 2,
+        "right": 14,
+        "bottom": 2
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        14,
+        2,
+        14,
+        2
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_progress_bg": {
+      "file": "kit_ui_actuel/progress_bg.png",
+      "size": [
+        192,
+        24
+      ],
+      "nine_slice": {
+        "left": 6,
+        "top": 5,
+        "right": 6,
+        "bottom": 5
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        6,
+        5,
+        6,
+        5
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_xp_fill": {
+      "file": "kit_ui_actuel/xp_fill.png",
+      "size": [
+        192,
+        16
+      ],
+      "nine_slice": {
+        "left": 6,
+        "top": 5,
+        "right": 6,
+        "bottom": 5
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        6,
+        5,
+        6,
+        5
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_pv_fill": {
+      "file": "kit_ui_actuel/pv_fill.png",
+      "size": [
+        192,
+        16
+      ],
+      "nine_slice": {
+        "left": 6,
+        "top": 5,
+        "right": 6,
+        "bottom": 5
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        6,
+        5,
+        6,
+        5
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_energy_fill": {
+      "file": "kit_ui_actuel/energy_fill.png",
+      "size": [
+        192,
+        16
+      ],
+      "nine_slice": {
+        "left": 6,
+        "top": 5,
+        "right": 6,
+        "bottom": 5
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        6,
+        5,
+        6,
+        5
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_progress_shine": {
+      "file": "kit_ui_actuel/progress_shine.png",
+      "size": [
+        192,
+        6
+      ],
+      "nine_slice": {
+        "left": 6,
+        "top": 1,
+        "right": 6,
+        "bottom": 1
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        6,
+        1,
+        6,
+        1
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_slot_common": {
+      "file": "kit_ui_actuel/slot_common.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_slot_rare": {
+      "file": "kit_ui_actuel/slot_rare.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_slot_epic": {
+      "file": "kit_ui_actuel/slot_epic.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_slot_legendary": {
+      "file": "kit_ui_actuel/slot_legendary.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_slot_mythic": {
+      "file": "kit_ui_actuel/slot_mythic.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_portrait_frame": {
+      "file": "kit_ui_actuel/portrait_frame.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_star_full": {
+      "file": "kit_ui_actuel/star_full.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_star_empty": {
+      "file": "kit_ui_actuel/star_empty.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_notification": {
+      "file": "kit_ui_actuel/notification.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_level_circle": {
+      "file": "kit_ui_actuel/level_circle.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_lock": {
+      "file": "kit_ui_actuel/lock.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_check": {
+      "file": "kit_ui_actuel/check.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_slider_rail": {
+      "file": "kit_ui_actuel/slider_rail.png",
+      "size": [
+        192,
+        16
+      ],
+      "nine_slice": {
+        "left": 6,
+        "top": 5,
+        "right": 6,
+        "bottom": 5
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        6,
+        5,
+        6,
+        5
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_slider_fill": {
+      "file": "kit_ui_actuel/slider_fill.png",
+      "size": [
+        192,
+        12
+      ],
+      "nine_slice": {
+        "left": 6,
+        "top": 4,
+        "right": 6,
+        "bottom": 4
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        6,
+        4,
+        6,
+        4
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_scroll_rail": {
+      "file": "kit_ui_actuel/scroll_rail.png",
+      "size": [
+        192,
+        32
+      ],
+      "nine_slice": {
+        "left": 6,
+        "top": 5,
+        "right": 6,
+        "bottom": 5
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        6,
+        5,
+        6,
+        5
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_slider_knob": {
+      "file": "kit_ui_actuel/slider_knob.png",
+      "size": [
+        40,
+        40
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_scroll_thumb": {
+      "file": "kit_ui_actuel/scroll_thumb.png",
+      "size": [
+        48,
+        64
+      ],
+      "nine_slice": {
+        "left": 20,
+        "top": 20,
+        "right": 20,
+        "bottom": 20
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "kit_focus_ring": {
+      "file": "kit_ui_actuel/focus_ring.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 12,
+        "top": 12,
+        "right": 12,
+        "bottom": 12
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "source": "existing_kit_unchanged"
+    },
+    "hp_hero_fill": {
+      "file": "pieces/hp_hero_fill.png",
+      "size": [
+        102,
+        10
+      ],
+      "nine_slice": {
+        "left": 2,
+        "top": 1,
+        "right": 2,
+        "bottom": 1
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fill_mode": "clip_left_to_right"
+    },
+    "hp_enemy_fill": {
+      "file": "pieces/hp_enemy_fill.png",
+      "size": [
+        102,
+        10
+      ],
+      "nine_slice": {
+        "left": 2,
+        "top": 1,
+        "right": 2,
+        "bottom": 1
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fill_mode": "clip_left_to_right"
+    },
+    "shield_fill": {
+      "file": "pieces/shield_fill.png",
+      "size": [
+        102,
+        10
+      ],
+      "nine_slice": {
+        "left": 2,
+        "top": 1,
+        "right": 2,
+        "bottom": 1
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fill_mode": "clip_left_to_right"
+    },
+    "hero_energy_fill": {
+      "file": "pieces/hero_energy_fill.png",
+      "size": [
+        106,
+        4
+      ],
+      "nine_slice": {
+        "left": 2,
+        "top": 1,
+        "right": 2,
+        "bottom": 1
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fill_mode": "clip_left_to_right"
+    },
+    "hp_boss_fill": {
+      "file": "pieces/hp_boss_fill.png",
+      "size": [
+        172,
+        12
+      ],
+      "nine_slice": {
+        "left": 2,
+        "top": 1,
+        "right": 2,
+        "bottom": 1
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fill_mode": "clip_left_to_right"
+    },
+    "boss_energy_fill": {
+      "file": "pieces/boss_energy_fill.png",
+      "size": [
+        176,
+        4
+      ],
+      "nine_slice": {
+        "left": 2,
+        "top": 1,
+        "right": 2,
+        "bottom": 1
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fill_mode": "clip_left_to_right"
+    },
+    "hp_frame": {
+      "file": "pieces/hp_frame.png",
+      "size": [
+        110,
+        18
+      ],
+      "nine_slice": {
+        "left": 4,
+        "top": 4,
+        "right": 4,
+        "bottom": 4
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "hp_boss_frame": {
+      "file": "pieces/hp_boss_frame.png",
+      "size": [
+        180,
+        20
+      ],
+      "nine_slice": {
+        "left": 4,
+        "top": 4,
+        "right": 4,
+        "bottom": 4
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "energy_frame": {
+      "file": "pieces/energy_frame.png",
+      "size": [
+        110,
+        6
+      ],
+      "nine_slice": {
+        "left": 2,
+        "top": 2,
+        "right": 2,
+        "bottom": 2
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "wave_cartouche": {
+      "file": "pieces/wave_cartouche.png",
+      "size": [
+        320,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ]
+    },
+    "attack_tray": {
+      "file": "pieces/attack_tray.png",
+      "size": [
+        1090,
+        164
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ]
+    },
+    "hero_name_cartouche": {
+      "file": "pieces/hero_name_cartouche.png",
+      "size": [
+        232,
+        56
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ]
+    },
+    "boss_cartouche": {
+      "file": "pieces/boss_cartouche.png",
+      "size": [
+        760,
+        130
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ]
+    },
+    "banner_wave": {
+      "file": "pieces/banner_wave.png",
+      "size": [
+        700,
+        96
+      ],
+      "nine_slice": {
+        "left": 40,
+        "top": 16,
+        "right": 40,
+        "bottom": 16
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        44,
+        18,
+        44,
+        18
+      ]
+    },
+    "banner_special": {
+      "file": "pieces/banner_special.png",
+      "size": [
+        900,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ]
+    },
+    "result_victory_window": {
+      "file": "pieces/result_victory_window.png",
+      "size": [
+        1740,
+        940
+      ],
+      "nine_slice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        40,
+        40,
+        40,
+        40
+      ]
+    },
+    "result_defeat_window": {
+      "file": "pieces/result_defeat_window.png",
+      "size": [
+        1740,
+        940
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ]
+    },
+    "result_title": {
+      "file": "pieces/result_title.png",
+      "size": [
+        700,
+        96
+      ],
+      "nine_slice": {
+        "left": 40,
+        "top": 16,
+        "right": 40,
+        "bottom": 16
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        44,
+        18,
+        44,
+        18
+      ]
+    },
+    "reward_slot": {
+      "file": "pieces/reward_slot.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    "hunter_card": {
+      "file": "pieces/hunter_card.png",
+      "size": [
+        208,
+        324
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ]
+    },
+    "hunter_card_ko": {
+      "file": "pieces/hunter_card_ko.png",
+      "size": [
+        208,
+        324
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ]
+    },
+    "advice_panel": {
+      "file": "pieces/advice_panel.png",
+      "size": [
+        1460,
+        80
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ]
+    },
+    "pause_window": {
+      "file": "pieces/pause_window.png",
+      "size": [
+        760,
+        650
+      ],
+      "nine_slice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        40,
+        40,
+        40,
+        40
+      ]
+    },
+    "replay_normal": {
+      "file": "pieces/replay_normal.png",
+      "size": [
+        300,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        300,
+        100
+      ]
+    },
+    "replay_hover": {
+      "file": "pieces/replay_hover.png",
+      "size": [
+        300,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ]
+    },
+    "replay_pressed": {
+      "file": "pieces/replay_pressed.png",
+      "size": [
+        300,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ]
+    },
+    "return_normal": {
+      "file": "pieces/return_normal.png",
+      "size": [
+        360,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        360,
+        100
+      ]
+    },
+    "return_hover": {
+      "file": "pieces/return_hover.png",
+      "size": [
+        360,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ]
+    },
+    "return_pressed": {
+      "file": "pieces/return_pressed.png",
+      "size": [
+        360,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ]
+    },
+    "skill_frame_normal": {
+      "file": "pieces/skill_frame_normal.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "min_touch_size": [
+        128,
+        128
+      ]
+    },
+    "skill_frame_hover": {
+      "file": "pieces/skill_frame_hover.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    "skill_frame_pressed": {
+      "file": "pieces/skill_frame_pressed.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    "skill_frame_disabled": {
+      "file": "pieces/skill_frame_disabled.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    "secret_frame_normal": {
+      "file": "pieces/secret_frame_normal.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "min_touch_size": [
+        96,
+        96
+      ]
+    },
+    "secret_frame_hover": {
+      "file": "pieces/secret_frame_hover.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    "secret_frame_pressed": {
+      "file": "pieces/secret_frame_pressed.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    "secret_frame_disabled": {
+      "file": "pieces/secret_frame_disabled.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    "skill_hover_overlay": {
+      "file": "pieces/skill_hover_overlay.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "skill_disabled_veil": {
+      "file": "pieces/skill_disabled_veil.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "skill_pressed_veil": {
+      "file": "pieces/skill_pressed_veil.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ko_veil": {
+      "file": "pieces/ko_veil.png",
+      "size": [
+        100,
+        100
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "round_button_normal": {
+      "file": "pieces/round_button_normal.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "min_touch_size": [
+        96,
+        96
+      ]
+    },
+    "round_button_active": {
+      "file": "pieces/round_button_active.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "min_touch_size": [
+        96,
+        96
+      ]
+    },
+    "round_button_pressed": {
+      "file": "pieces/round_button_pressed.png",
+      "size": [
+        96,
+        96
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "min_touch_size": [
+        96,
+        96
+      ]
+    },
+    "portrait_ring": {
+      "file": "pieces/portrait_ring.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "portrait_content_rect": [
+        16,
+        16,
+        96,
+        96
+      ]
+    },
+    "portrait_ring_boss": {
+      "file": "pieces/portrait_ring_boss.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "portrait_content_rect": [
+        16,
+        16,
+        96,
+        96
+      ]
+    },
+    "glyph_auto": {
+      "file": "pieces/glyph_auto.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "glyph_speed": {
+      "file": "pieces/glyph_speed.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "glyph_sound": {
+      "file": "pieces/glyph_sound.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "glyph_pause": {
+      "file": "pieces/glyph_pause.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "glyph_chevron": {
+      "file": "pieces/glyph_chevron.png",
+      "size": [
+        48,
+        48
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "combo_quatuor_normal": {
+      "file": "pieces/combo_quatuor_normal.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_quatuor_hover": {
+      "file": "pieces/combo_quatuor_hover.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_quatuor_pressed": {
+      "file": "pieces/combo_quatuor_pressed.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_quatuor_accent": {
+      "file": "pieces/combo_quatuor_accent.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "combo_trio_normal": {
+      "file": "pieces/combo_trio_normal.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_trio_hover": {
+      "file": "pieces/combo_trio_hover.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_trio_pressed": {
+      "file": "pieces/combo_trio_pressed.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_trio_accent": {
+      "file": "pieces/combo_trio_accent.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "combo_duo_normal": {
+      "file": "pieces/combo_duo_normal.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_duo_hover": {
+      "file": "pieces/combo_duo_hover.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_duo_pressed": {
+      "file": "pieces/combo_duo_pressed.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_duo_accent": {
+      "file": "pieces/combo_duo_accent.png",
+      "size": [
+        304,
+        100
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ultimate_energy_frame": {
+      "file": "pieces/ultimate_energy_frame.png",
+      "size": [
+        128,
+        10
+      ],
+      "nine_slice": {
+        "left": 2,
+        "top": 2,
+        "right": 2,
+        "bottom": 2
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ultimate_energy_fill": {
+      "file": "pieces/ultimate_energy_fill.png",
+      "size": [
+        124,
+        6
+      ],
+      "nine_slice": {
+        "left": 1,
+        "top": 1,
+        "right": 1,
+        "bottom": 1
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fill_mode": "clip_left_to_right"
+    },
+    "status_burn_16": {
+      "file": "pieces/status_burn_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_burn_24": {
+      "file": "pieces/status_burn_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_poison_16": {
+      "file": "pieces/status_poison_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_poison_24": {
+      "file": "pieces/status_poison_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_wet_16": {
+      "file": "pieces/status_wet_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_wet_24": {
+      "file": "pieces/status_wet_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_mark_16": {
+      "file": "pieces/status_mark_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_mark_24": {
+      "file": "pieces/status_mark_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_blind_16": {
+      "file": "pieces/status_blind_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_blind_24": {
+      "file": "pieces/status_blind_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_rooted_16": {
+      "file": "pieces/status_rooted_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_rooted_24": {
+      "file": "pieces/status_rooted_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_imbalance_16": {
+      "file": "pieces/status_imbalance_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_imbalance_24": {
+      "file": "pieces/status_imbalance_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_stunned_16": {
+      "file": "pieces/status_stunned_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_stunned_24": {
+      "file": "pieces/status_stunned_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_taunt_16": {
+      "file": "pieces/status_taunt_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_taunt_24": {
+      "file": "pieces/status_taunt_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_shield_16": {
+      "file": "pieces/status_shield_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_shield_24": {
+      "file": "pieces/status_shield_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_guard_16": {
+      "file": "pieces/status_guard_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_guard_24": {
+      "file": "pieces/status_guard_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_regeneration_16": {
+      "file": "pieces/status_regeneration_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_regeneration_24": {
+      "file": "pieces/status_regeneration_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_buff_16": {
+      "file": "pieces/status_buff_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_buff_24": {
+      "file": "pieces/status_buff_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_debuff_16": {
+      "file": "pieces/status_debuff_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_debuff_24": {
+      "file": "pieces/status_debuff_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "reward_gold_64": {
+      "file": "pieces/reward_gold_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "reward_experience_64": {
+      "file": "pieces/reward_experience_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "reward_essences_64": {
+      "file": "pieces/reward_essences_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "reward_relic_fragment_64": {
+      "file": "pieces/reward_relic_fragment_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "reward_materials_64": {
+      "file": "pieces/reward_materials_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "reward_gems_64": {
+      "file": "pieces/reward_gems_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "reward_energy_64": {
+      "file": "pieces/reward_energy_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "reward_best_hunter_medal_64": {
+      "file": "pieces/reward_best_hunter_medal_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "imagegen atlas; cell crop and nearest export"
+    },
+    "status_atlas_16": {
+      "file": "pieces/status_atlas_16.png",
+      "size": [
+        224,
+        16
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame_size": [
+        16,
+        16
+      ],
+      "columns": 14,
+      "names": [
+        "burn",
+        "poison",
+        "wet",
+        "mark",
+        "blind",
+        "rooted",
+        "imbalance",
+        "stunned",
+        "taunt",
+        "shield",
+        "guard",
+        "regeneration",
+        "buff",
+        "debuff"
+      ]
+    },
+    "status_atlas_24": {
+      "file": "pieces/status_atlas_24.png",
+      "size": [
+        336,
+        24
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame_size": [
+        24,
+        24
+      ],
+      "columns": 14,
+      "names": [
+        "burn",
+        "poison",
+        "wet",
+        "mark",
+        "blind",
+        "rooted",
+        "imbalance",
+        "stunned",
+        "taunt",
+        "shield",
+        "guard",
+        "regeneration",
+        "buff",
+        "debuff"
+      ]
+    },
+    "boss_crest": {
+      "file": "pieces/boss_crest.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "animations": {
+    "combo_quatuor_ready": {
+      "file": "animations/combo_quatuor_ready.png",
+      "frame_size": [
+        304,
+        100
+      ],
+      "columns": 8,
+      "rows": 1,
+      "frame_count": 8,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "frames": [
+        "animations/combo_quatuor_ready/00.png",
+        "animations/combo_quatuor_ready/01.png",
+        "animations/combo_quatuor_ready/02.png",
+        "animations/combo_quatuor_ready/03.png",
+        "animations/combo_quatuor_ready/04.png",
+        "animations/combo_quatuor_ready/05.png",
+        "animations/combo_quatuor_ready/06.png",
+        "animations/combo_quatuor_ready/07.png"
+      ],
+      "blend": "alpha",
+      "layer": "above_button",
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_trio_ready": {
+      "file": "animations/combo_trio_ready.png",
+      "frame_size": [
+        304,
+        100
+      ],
+      "columns": 8,
+      "rows": 1,
+      "frame_count": 8,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "frames": [
+        "animations/combo_trio_ready/00.png",
+        "animations/combo_trio_ready/01.png",
+        "animations/combo_trio_ready/02.png",
+        "animations/combo_trio_ready/03.png",
+        "animations/combo_trio_ready/04.png",
+        "animations/combo_trio_ready/05.png",
+        "animations/combo_trio_ready/06.png",
+        "animations/combo_trio_ready/07.png"
+      ],
+      "blend": "alpha",
+      "layer": "above_button",
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "combo_duo_ready": {
+      "file": "animations/combo_duo_ready.png",
+      "frame_size": [
+        304,
+        100
+      ],
+      "columns": 8,
+      "rows": 1,
+      "frame_count": 8,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "frames": [
+        "animations/combo_duo_ready/00.png",
+        "animations/combo_duo_ready/01.png",
+        "animations/combo_duo_ready/02.png",
+        "animations/combo_duo_ready/03.png",
+        "animations/combo_duo_ready/04.png",
+        "animations/combo_duo_ready/05.png",
+        "animations/combo_duo_ready/06.png",
+        "animations/combo_duo_ready/07.png"
+      ],
+      "blend": "alpha",
+      "layer": "above_button",
+      "min_touch_size": [
+        304,
+        100
+      ]
+    },
+    "cooldown_veil": {
+      "file": "animations/cooldown_veil.png",
+      "frame_size": [
+        96,
+        96
+      ],
+      "columns": 17,
+      "rows": 1,
+      "frame_count": 17,
+      "durations_ms": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "loop": false,
+      "frames": [
+        "animations/cooldown_veil/00.png",
+        "animations/cooldown_veil/01.png",
+        "animations/cooldown_veil/02.png",
+        "animations/cooldown_veil/03.png",
+        "animations/cooldown_veil/04.png",
+        "animations/cooldown_veil/05.png",
+        "animations/cooldown_veil/06.png",
+        "animations/cooldown_veil/07.png",
+        "animations/cooldown_veil/08.png",
+        "animations/cooldown_veil/09.png",
+        "animations/cooldown_veil/10.png",
+        "animations/cooldown_veil/11.png",
+        "animations/cooldown_veil/12.png",
+        "animations/cooldown_veil/13.png",
+        "animations/cooldown_veil/14.png",
+        "animations/cooldown_veil/15.png",
+        "animations/cooldown_veil/16.png"
+      ],
+      "progress_binding": "frame=round((1-remaining/total)*16)",
+      "direction": "full_to_empty",
+      "layer": "inside_skill_icon"
+    },
+    "ultimate_ready": {
+      "file": "animations/ultimate_ready.png",
+      "frame_size": [
+        128,
+        128
+      ],
+      "columns": 8,
+      "rows": 1,
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": true,
+      "frames": [
+        "animations/ultimate_ready/00.png",
+        "animations/ultimate_ready/01.png",
+        "animations/ultimate_ready/02.png",
+        "animations/ultimate_ready/03.png",
+        "animations/ultimate_ready/04.png",
+        "animations/ultimate_ready/05.png",
+        "animations/ultimate_ready/06.png",
+        "animations/ultimate_ready/07.png"
+      ]
+    },
+    "target_red": {
+      "file": "animations/target_red.png",
+      "frame_size": [
+        128,
+        48
+      ],
+      "columns": 3,
+      "rows": 1,
+      "frame_count": 3,
+      "durations_ms": [
+        110,
+        110,
+        110
+      ],
+      "loop": true,
+      "frames": [
+        "animations/target_red/00.png",
+        "animations/target_red/01.png",
+        "animations/target_red/02.png"
+      ],
+      "pivot": [
+        64,
+        24
+      ],
+      "layer": "below_fighter"
+    },
+    "active_hero": {
+      "file": "animations/active_hero.png",
+      "frame_size": [
+        128,
+        48
+      ],
+      "columns": 4,
+      "rows": 1,
+      "frame_count": 4,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": true,
+      "frames": [
+        "animations/active_hero/00.png",
+        "animations/active_hero/01.png",
+        "animations/active_hero/02.png",
+        "animations/active_hero/03.png"
+      ],
+      "pivot": [
+        64,
+        24
+      ],
+      "layer": "below_fighter"
+    },
+    "critical_burst": {
+      "file": "animations/critical_burst.png",
+      "frame_size": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 1,
+      "frame_count": 4,
+      "durations_ms": [
+        45,
+        65,
+        80,
+        90
+      ],
+      "loop": false,
+      "frames": [
+        "animations/critical_burst/00.png",
+        "animations/critical_burst/01.png",
+        "animations/critical_burst/02.png",
+        "animations/critical_burst/03.png"
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "layer": "behind_damage_label"
+    },
+    "star_appear": {
+      "file": "animations/star_appear.png",
+      "frame_size": [
+        96,
+        96
+      ],
+      "columns": 6,
+      "rows": 1,
+      "frame_count": 6,
+      "durations_ms": [
+        50,
+        60,
+        70,
+        80,
+        70,
+        100
+      ],
+      "loop": false,
+      "frames": [
+        "animations/star_appear/00.png",
+        "animations/star_appear/01.png",
+        "animations/star_appear/02.png",
+        "animations/star_appear/03.png",
+        "animations/star_appear/04.png",
+        "animations/star_appear/05.png"
+      ],
+      "source": "kit star_full; animated scale only"
+    }
+  },
+  "layout": {
+    "wave": {
+      "rect": [
+        32,
+        28,
+        320,
+        96
+      ],
+      "asset": "wave_cartouche",
+      "text_by_game": true
+    },
+    "top_controls": {
+      "rects": [
+        [
+          1576,
+          28,
+          96,
+          96
+        ],
+        [
+          1680,
+          28,
+          96,
+          96
+        ],
+        [
+          1784,
+          28,
+          96,
+          96
+        ]
+      ],
+      "glyphs": [
+        "glyph_auto",
+        "glyph_speed",
+        "glyph_sound"
+      ],
+      "states": {
+        "normal": "round_button_normal",
+        "active": "round_button_active",
+        "pressed": "round_button_pressed"
+      }
+    },
+    "boss": {
+      "rect": [
+        580,
+        20,
+        760,
+        130
+      ],
+      "asset": "boss_cartouche",
+      "portrait_rect": [
+        590,
+        24,
+        120,
+        120
+      ],
+      "name_rect": [
+        724,
+        38,
+        550,
+        44
+      ],
+      "hp_rect": [
+        724,
+        92,
+        560,
+        24
+      ],
+      "crest": "boss_crest",
+      "visible_when": "boss_alive"
+    },
+    "attack_group": {
+      "rect": [
+        420,
+        885,
+        1090,
+        164
+      ],
+      "asset": "attack_tray",
+      "visible_when": "player_turn && !resolving_action && !modal_open",
+      "hide_duration_ms": 120,
+      "portrait_rect": [
+        444,
+        905,
+        124,
+        124
+      ],
+      "name_rect": [
+        588,
+        912,
+        232,
+        40
+      ],
+      "skill_rects": [
+        [
+          840,
+          903,
+          128,
+          128
+        ],
+        [
+          986,
+          903,
+          128,
+          128
+        ],
+        [
+          1132,
+          903,
+          128,
+          128
+        ]
+      ],
+      "secret_rect": [
+        1294,
+        929,
+        96,
+        96
+      ],
+      "skill_states": {
+        "normal": [
+          "skill_frame_normal"
+        ],
+        "hover": [
+          "skill_frame_hover",
+          "skill_hover_overlay"
+        ],
+        "pressed": [
+          "skill_frame_pressed",
+          "skill_pressed_veil"
+        ],
+        "disabled": [
+          "skill_frame_disabled",
+          "skill_disabled_veil"
+        ]
+      },
+      "secret_states": {
+        "normal": [
+          "secret_frame_normal"
+        ],
+        "hover": [
+          "secret_frame_hover",
+          "skill_hover_overlay"
+        ],
+        "pressed": [
+          "secret_frame_pressed"
+        ],
+        "disabled": [
+          "secret_frame_disabled",
+          "skill_disabled_veil",
+          "kit_lock"
+        ]
+      },
+      "icon_inset_px": 16,
+      "icons_from_existing_skill_pack": true,
+      "ultimate_energy_rect": [
+        1132,
+        1034,
+        128,
+        10
+      ]
+    },
+    "combos": {
+      "rects": [
+        [
+          1588,
+          730,
+          304,
+          100
+        ],
+        [
+          1588,
+          842,
+          304,
+          100
+        ],
+        [
+          1588,
+          954,
+          304,
+          100
+        ]
+      ],
+      "min_touch_size": [
+        304,
+        100
+      ],
+      "types": [
+        "quatuor",
+        "trio",
+        "duo"
+      ],
+      "portrait_offsets": {
+        "quatuor": [
+          [
+            24,
+            16,
+            48,
+            48
+          ],
+          [
+            76,
+            16,
+            48,
+            48
+          ],
+          [
+            128,
+            16,
+            48,
+            48
+          ],
+          [
+            180,
+            16,
+            48,
+            48
+          ]
+        ],
+        "trio": [
+          [
+            24,
+            16,
+            48,
+            48
+          ],
+          [
+            76,
+            16,
+            48,
+            48
+          ],
+          [
+            128,
+            16,
+            48,
+            48
+          ]
+        ],
+        "duo": [
+          [
+            24,
+            16,
+            48,
+            48
+          ],
+          [
+            76,
+            16,
+            48,
+            48
+          ]
+        ]
+      },
+      "visible_when": "available_team_combos",
+      "ready_animation": "combo_<type>_ready"
+    },
+    "fighter_bars": {
+      "hp_size": [
+        110,
+        18
+      ],
+      "boss_size": [
+        180,
+        20
+      ],
+      "hp_frame": "hp_frame",
+      "boss_frame": "hp_boss_frame",
+      "hero_fill": "hp_hero_fill",
+      "enemy_fill": "hp_enemy_fill",
+      "shield_overlay": "shield_fill",
+      "energy_offset": [
+        0,
+        22
+      ],
+      "fill_inset": [
+        4,
+        4
+      ],
+      "shield_blend": "alpha, additive shield amount normalised to same HP maximum; draw over PV; clamp 0..1",
+      "status_sizes": [
+        16,
+        24
+      ],
+      "status_layout": "horizontal below bar; max 4 then game overflow label",
+      "anchor": "above_head_projected_to_ui"
+    },
+    "banners": {
+      "wave_rect": [
+        610,
+        180,
+        700,
+        96
+      ],
+      "special_rect": [
+        510,
+        180,
+        900,
+        96
+      ],
+      "text_by_game": true,
+      "display_duration_ms": 1200
+    },
+    "results": {
+      "window_rect": [
+        90,
+        70,
+        1740,
+        940
+      ],
+      "title_rect": [
+        610,
+        90,
+        700,
+        96
+      ],
+      "stars_rects": [
+        [
+          824,
+          190,
+          80,
+          80
+        ],
+        [
+          920,
+          190,
+          80,
+          80
+        ],
+        [
+          1016,
+          190,
+          80,
+          80
+        ]
+      ],
+      "star_stagger_ms": 180,
+      "rewards": {
+        "slot_rects": [
+          [
+            178,
+            326,
+            120,
+            120
+          ],
+          [
+            398,
+            326,
+            120,
+            120
+          ],
+          [
+            618,
+            326,
+            120,
+            120
+          ],
+          [
+            838,
+            326,
+            120,
+            120
+          ],
+          [
+            1058,
+            326,
+            120,
+            120
+          ],
+          [
+            1278,
+            326,
+            120,
+            120
+          ],
+          [
+            1498,
+            326,
+            120,
+            120
+          ]
+        ],
+        "types": [
+          "gold",
+          "experience",
+          "essences",
+          "relic_fragment",
+          "materials",
+          "gems",
+          "energy"
+        ]
+      },
+      "hunter_cards": {
+        "rects": [
+          [
+            164,
+            490,
+            208,
+            324
+          ],
+          [
+            392,
+            490,
+            208,
+            324
+          ],
+          [
+            620,
+            490,
+            208,
+            324
+          ],
+          [
+            848,
+            490,
+            208,
+            324
+          ],
+          [
+            1076,
+            490,
+            208,
+            324
+          ],
+          [
+            1304,
+            490,
+            208,
+            324
+          ],
+          [
+            1532,
+            490,
+            208,
+            324
+          ]
+        ],
+        "portrait_offset": [
+          50,
+          22,
+          108,
+          108
+        ],
+        "name_offset": [
+          18,
+          130,
+          172,
+          32
+        ],
+        "level_xp_offset": [
+          18,
+          164,
+          172,
+          32
+        ],
+        "xp_bar_offset": [
+          22,
+          200,
+          164,
+          12
+        ],
+        "damage_offset": [
+          26,
+          230
+        ],
+        "healing_offset": [
+          26,
+          258
+        ],
+        "ko_overlay": "ko_veil",
+        "best_hunter_medal": "reward_best_hunter_medal_64",
+        "best_hunter_text_by_game": true
+      },
+      "advice_rect": [
+        230,
+        818,
+        1460,
+        80
+      ],
+      "buttons": {
+        "replay_rect": [
+          602,
+          910,
+          300,
+          100
+        ],
+        "return_rect": [
+          942,
+          910,
+          360,
+          100
+        ]
+      },
+      "texts_and_portraits_by_game": true
+    },
+    "pause": {
+      "window_rect": [
+        580,
+        210,
+        760,
+        650
+      ],
+      "asset": "pause_window",
+      "sliders": {
+        "labels": [
+          "Musique",
+          "Effets",
+          "Voix"
+        ],
+        "rails": [
+          [
+            842,
+            380,
+            410,
+            16
+          ],
+          [
+            842,
+            495,
+            410,
+            16
+          ],
+          [
+            842,
+            610,
+            410,
+            16
+          ]
+        ],
+        "touch_rects": [
+          [
+            842,
+            340,
+            410,
+            96
+          ],
+          [
+            842,
+            455,
+            410,
+            96
+          ],
+          [
+            842,
+            570,
+            410,
+            96
+          ]
+        ],
+        "assets": [
+          "kit_slider_rail",
+          "kit_slider_fill",
+          "kit_slider_knob"
+        ]
+      },
+      "resume_button_rect": [
+        780,
+        735,
+        360,
+        100
+      ]
+    },
+    "preview_fighter_feet": {
+      "left": [
+        [
+          750,
+          590
+        ],
+        [
+          750,
+          820
+        ],
+        [
+          510,
+          480
+        ],
+        [
+          510,
+          665
+        ],
+        [
+          510,
+          850
+        ],
+        [
+          290,
+          580
+        ],
+        [
+          290,
+          800
+        ]
+      ],
+      "right": [
+        [
+          1135,
+          590
+        ],
+        [
+          1135,
+          820
+        ],
+        [
+          1303,
+          480
+        ],
+        [
+          1303,
+          665
+        ],
+        [
+          1303,
+          850
+        ],
+        [
+          1457,
+          580
+        ],
+        [
+          1457,
+          800
+        ]
+      ]
+    }
+  },
+  "status_names": [
+    "burn",
+    "poison",
+    "wet",
+    "mark",
+    "blind",
+    "rooted",
+    "imbalance",
+    "stunned",
+    "taunt",
+    "shield",
+    "guard",
+    "regeneration",
+    "buff",
+    "debuff"
+  ],
+  "reward_names": [
+    "gold",
+    "experience",
+    "essences",
+    "relic_fragment",
+    "materials",
+    "gems",
+    "energy",
+    "best_hunter_medal"
+  ],
+  "button_states": {
+    "combo_quatuor": {
+      "normal": "combo_quatuor_normal",
+      "hover": "combo_quatuor_hover",
+      "pressed": "combo_quatuor_pressed"
+    },
+    "combo_trio": {
+      "normal": "combo_trio_normal",
+      "hover": "combo_trio_hover",
+      "pressed": "combo_trio_pressed"
+    },
+    "combo_duo": {
+      "normal": "combo_duo_normal",
+      "hover": "combo_duo_hover",
+      "pressed": "combo_duo_pressed"
+    },
+    "replay": {
+      "normal": "replay_normal",
+      "hover": "replay_hover",
+      "pressed": "replay_pressed"
+    },
+    "return": {
+      "normal": "return_normal",
+      "hover": "return_hover",
+      "pressed": "return_pressed"
+    },
+    "secret_frame": {
+      "normal": "secret_frame_normal",
+      "hover": "secret_frame_hover",
+      "pressed": "secret_frame_pressed"
+    },
+    "top_controls": {
+      "normal": "round_button_normal",
+      "active": "round_button_active",
+      "pressed": "round_button_pressed"
+    },
+    "skills": {
+      "normal": [
+        "skill_frame_normal"
+      ],
+      "hover": [
+        "skill_frame_hover",
+        "skill_hover_overlay"
+      ],
+      "pressed": [
+        "skill_frame_pressed",
+        "skill_pressed_veil"
+      ],
+      "disabled": [
+        "skill_frame_disabled",
+        "skill_disabled_veil"
+      ]
+    }
+  },
+  "runtime": {
+    "sprite_sheet_index_order": "left_to_right",
+    "hp_and_energy_fill": "clip fill rect horizontally; never scale width of borders",
+    "cooldown": "read frame index from recharge progress, do not play at fixed FPS",
+    "hide_attack_group_outside_player_turn": true,
+    "min_touch_size_px": 96,
+    "portrait_sources": "existing hero/monster assets; circular mask in engine",
+    "world_markers": "project to floor and y-sort below characters",
+    "preview_support_assets_not_runtime_ui": true
+  },
+  "original_kit_sha256": {
+    "window_main": "aa67e6d6910a8d516620973e80d3fd82cdd677672a0bcf5338474e6017696269",
+    "confirmation": "4e54d787d7d7af5f7fc3cb0adc152a79963901f14fcb4ad65030c86b0c824a20",
+    "panel_secondary": "cf88075f2888603270da5108115cadb47e0777a10133ee039cf58efdd294207a",
+    "list_panel": "ccb2338b4c5f5264d5ded8deef2c13c0d3a0e4534dbb01096d1ba7f41933bc7f",
+    "tooltip": "ffce190fcc301beea2ccc8415fb8823f364797406bef454adf3b2ca3255f39a7",
+    "top_resources": "55b757b253d844ef54dc71ed04213b50e9f21cf3ecc46ce0759422d5068ae0a6",
+    "title_ribbon": "29b54e5c2ecfdf5a7d9b9ec59eb89186a669813f9d14ca94bd1bd151f03bce5b",
+    "close_normal": "1247d56aa637d54a2d14815f7f9c64404c358f41d19f05482cca91923ccda0d0",
+    "close_pressed": "c6629f6df2fc5f75214d7b2048b2a63148340ffada1fe65284439fcf2f7bed25",
+    "button_primary_normal": "ef5262bed97d063b578aa85ee057de70acbbf88e24dada995e930ee4c93d8e74",
+    "button_primary_hover": "26b944cbc49b72decf831cadd3fe89060afa765d7087220d71d2d4436bee523e",
+    "button_primary_pressed": "5e5a94fa3fbde63cca0868b50d1757533a240db02c9c008ad68c7737cc5c47e7",
+    "button_secondary_normal": "088ab6a3830f7dfc7b9fb2a7c034b42f8389a4b2e5c88d88b2b038ec40aed764",
+    "button_secondary_hover": "9633d1495854fab659fc47a813a20c3dd958a5eb17c68a6071f1678a03a869e7",
+    "button_secondary_pressed": "2a58445ab4e5af099c78219df3e5df37df53819f325000baad0196ae17876355",
+    "button_danger_normal": "57140b5565312603aa9f00e42df27dda2f5681b12818f4369fa2b3133cbe6662",
+    "button_danger_hover": "e0501b193d6aa58332ec85ec54ae62be627c287313789aa812817abf620aab15",
+    "button_danger_pressed": "d1d93733b989cfb54fd3a310881c79d25b85f9e1628d469853d5b0d57d108b09",
+    "button_disabled_normal": "42366c1932bec26fcbee4628e4c432a6838b274803d0ff7a86ed5521c9d7320b",
+    "button_disabled_hover": "8d912ed7584b0b2a6a4dfe82fcab15a84a110bf8004d75032a85b9b0eb8b25be",
+    "button_disabled_pressed": "191568c803fbb8be6a18dcfb3146b55848ff84c3354f1ca9d84368981a7ef171",
+    "tab_active": "2a9b4c5650af413b572f219b3ffa04de7015a8e19e2c007bc7f5303897fabce1",
+    "tab_inactive": "3e610582829ed35e7a511b228c8a0c7f7c853478e1affaec8516e421c106ac62",
+    "separator": "7ca0af71ccb916b1727ce5b2471a6c925a04fdba45a5f128034e756b4930bba3",
+    "progress_bg": "556b21da8147f8aedaf92080038b252f669d41bacbd50b26df54977f24a50f3d",
+    "xp_fill": "c366db9ad2c613cfdd8fbf7df2f20f33a8a59a91fae46e48b6925a793c36f04a",
+    "pv_fill": "26bcdb2f580edf4cbf1c9ecec49b9892e73dc73fb173c54356f231a558485be3",
+    "energy_fill": "1a4e24539f2508a847c2785e413c585485e75b1b9c46c8c25bcbc48bbada805c",
+    "progress_shine": "f6f37a28511d7e1587a8c4203e2d5514af0ab31fd2390741a414c2d6a655f463",
+    "slot_common": "3e3bd75a0e79462e24e78b887d0625ab94cfc3cf54608c76cf1457dcd627b9b5",
+    "slot_rare": "024625739b98f3b0371622a69238ce35150e887b18d552d7b52b60cbc358c2b5",
+    "slot_epic": "5919e3d2dc57572c8289fe49e47ae6000d086dbfd1a9fe376954a8bf396b11f2",
+    "slot_legendary": "86650c71aaf8fe0573de93dbb11a2773d96a61d0132f2fda2ba161c037b825a1",
+    "slot_mythic": "c71beada08008439175dee2da49316caa899609702920fbf287f580bc3c49175",
+    "portrait_frame": "56243c0dff6edfc5ee88411e01262b49268f7fe593953518fc6fda9d65d5576e",
+    "star_full": "a910bbf90072667f055eb007d8e9ca0e2b7f22bd956a9b009e2e563094ef6975",
+    "star_empty": "3fc119d627535ca8f3e4a60be3ad5c8aa10ef22cfa68bb147724639d3bb72d16",
+    "notification": "6ed7bb1d3f574696b8a1051e7622693d233fcfe0a21c42f200aadfa18fec5f50",
+    "level_circle": "d5b8f29c9606d476487e8124317bdcc9ff19460a6935b894f425669a0904c8ee",
+    "lock": "0c42bdef75836cb446b5148dc8680dc1cc50eb1b295a988b7d44eefd55aebbfc",
+    "check": "835dcd3fee52878d4eff909ac853e3bab66cea1cf85db031688e480eb7474eb7",
+    "slider_rail": "e1e3450f5bf6783dfa7b9e95b0eb7a0ea6b8c52b76632226d7633f7387aae6dd",
+    "slider_fill": "e640d2c666971cb5822d278495af6cdafb17c40f2de2520cfa3eb67cb8ee5c5a",
+    "scroll_rail": "8da8cd17a5434630d93f39ba90579619b1ba144b0b5f3f48317f881450e2fa48",
+    "slider_knob": "dd6eb30d51d94a3346676089810e9286b84b3650aee2d89bd63a001896378115",
+    "scroll_thumb": "ece09520d386aa05818833ffbf6baddf975d642ace8d2f816df6efee849c3b22",
+    "focus_ring": "4528a5997abe2568411d96d42b84dc67884623bbf541dfe5e22898cef1dbdcab"
+  }
+}

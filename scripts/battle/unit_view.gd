@@ -221,15 +221,35 @@ func _draw() -> void:
 	# Ombre au sol.
 	var w := clampf(height * 0.42, 34.0, 120.0)
 	_ellipse(Vector2.ZERO, Vector2(w, w * 0.22), Color(0, 0, 0, 0.28 if not _dead else 0.12))
+	# Anneaux pixel du pack d'interface de combat (assets/ui/combat/anim) : doré sous le héros dont
+	# c'est le tour, rouge sous l'ennemi ciblé, avec un chevron au-dessus de sa tête.
 	if _highlight:
-		var pulse := 0.75 + 0.25 * sin(_time * 6.0)
-		_ring(Vector2.ZERO, Vector2(w + 10, (w + 10) * 0.26), Color(1.0, 0.84, 0.35, pulse), 4.0)
+		_draw_ring("active_hero", 4, w + 14)
 	if _target:
-		_ring(Vector2.ZERO, Vector2(w + 8, (w + 8) * 0.26), Color(0.95, 0.25, 0.22, 0.9), 4.0)
-		var y := -height - 40.0 + sin(_time * 5.0) * 5.0
-		var pts := PackedVector2Array([Vector2(-13, y - 14), Vector2(13, y - 14), Vector2(0, y + 4)])
-		draw_colored_polygon(pts, Color(0.95, 0.25, 0.22))
-		draw_polyline(PackedVector2Array([pts[0], pts[1], pts[2], pts[0]]), Color(0.15, 0.05, 0.07), 3.0, true)
+		_draw_ring("target_red", 3, w + 12)
+		var chev: Texture2D = _ui_tex("glyph_chevron")
+		if chev:
+			var y := -height - 46.0 + sin(_time * 5.0) * 5.0
+			draw_texture_rect(chev, Rect2(Vector2(-20, y - 20), Vector2(40, 40)), false)
+
+
+static var _ui_cache: Dictionary = {}
+
+
+static func _ui_tex(path: String) -> Texture2D:
+	if not _ui_cache.has(path):
+		var full := "res://assets/ui/combat/%s.png" % path
+		_ui_cache[path] = load(full) if ResourceLoader.exists(full) else null
+	return _ui_cache[path]
+
+
+## Anneau animé au sol (planche de `frames` images de 128 × 48), large de 2 × `half_width`.
+func _draw_ring(anim: String, frames: int, half_width: float) -> void:
+	var tex := _ui_tex("anim/%s/%02d" % [anim, int(_time / 0.11) % frames])
+	if tex == null:
+		return
+	var s := half_width * 2.0 / 128.0
+	draw_texture_rect(tex, Rect2(Vector2(-64, -24) * s, Vector2(128, 48) * s), false)
 
 
 func _ellipse(c: Vector2, r: Vector2, color: Color) -> void:
