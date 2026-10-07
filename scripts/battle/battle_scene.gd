@@ -13,15 +13,16 @@ const FRAME := Vector2(1280, 720)
 const QUARTET_SCALE := 2.0
 const QUARTET_ORIGIN := Vector2(82, 176)
 # Formation en losange : devant, haut, bas, arrière (en pixels du cadre, point au sol).
-## Jusqu'à 8 héros et 8 ennemis, sur deux rangs en quinconce (le premier rang devant).
+## Ancien décor de côté : jusqu'à 8 places par camp, sur deux rangs en quinconce (le premier rang devant).
 ## (Dans un même rang, ceux de devant sont un poil plus bas : ils passent devant ceux de derrière.)
 const HERO_SPOTS := [Vector2(575, 554), Vector2(520, 668), Vector2(450, 552), Vector2(395, 666),
 	Vector2(325, 550), Vector2(270, 664), Vector2(200, 548), Vector2(145, 662)]
 const ENEMY_SPOTS := [Vector2(705, 554), Vector2(760, 668), Vector2(830, 552), Vector2(885, 666),
 	Vector2(955, 550), Vector2(1010, 664), Vector2(1080, 548), Vector2(1135, 662)]
 const CROWD_SCALE := 0.78  # combattants un peu plus petits quand il y a plus de 4 héros
-# Arène en plongée : 4 rangées en profondeur, 2 colonnes par camp (devant, derrière), en quinconce.
-const TOP_ROWS := [1, 2, 0, 3]  # ordre de remplissage des rangées (le milieu d'abord)
+# Arène en plongée : formation de 7 par camp, 2 devant, 3 au milieu, 2 à l'arrière.
+# [colonne (0 devant), place dans la colonne (0..1 du haut vers le bas)] pour chaque combattant.
+const TOP_FORMATION := [[0, 0.3], [0, 0.7], [1, 0.5], [1, 0.12], [1, 0.88], [2, 0.3], [2, 0.7]]
 const TOP_SCALE := 0.8
 const BOSS_SPOT := Vector2(1040, 604)
 const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague
@@ -621,12 +622,11 @@ func _spot(team: int, n: int) -> Vector2:
 		var spots: Array = HERO_SPOTS if team == 0 else ENEMY_SPOTS
 		return spots[n % spots.size()]
 	var r := stage.combat_rect
-	var row: int = TOP_ROWS[n % 4]
-	var col := (n / 4) % 2  # 0 devant, 1 derrière
-	var gap := r.size.y / 4.0
-	var y := r.position.y + gap * (row + 0.75)
+	var f: Array = TOP_FORMATION[n % TOP_FORMATION.size()]
+	var top := r.position.y + 70.0  # laisse la place de la tête des combattants du fond
+	var y := top + (r.end.y - 25.0 - top) * float(f[1])
 	var mid := r.position.x + r.size.x / 2.0
-	var x := 130.0 + col * 210.0 + (row % 2) * 45.0  # distance au centre
+	var x := 120.0 + float(f[0]) * 160.0  # distance au centre
 	return Vector2(mid - x if team == 0 else mid + x, y)
 
 

@@ -7,7 +7,7 @@ signal changed
 
 const SAVE_PATH := "user://save.json"
 const SAVE_VERSION := 1
-const TEAM_SIZE := 8
+const TEAM_SIZE := 7  # formation : 2 devant, 3 au milieu, 2 à l'arrière
 
 var state: Dictionary = {}
 var current_dungeon := ""
@@ -79,6 +79,7 @@ func load_game() -> void:
 			if id not in known_heroes:
 				state.heroes.erase(id)
 		state.team = state.get("team", []).filter(func(id: String) -> bool: return id in known_heroes)
+		state.team = state.team.slice(0, TEAM_SIZE)  # anciennes équipes de 8
 	# Nouveaux héros ajoutés au jeu depuis la dernière sauvegarde.
 	for id: String in _start.get("heroes", {}):
 		if not state.heroes.has(id):

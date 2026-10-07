@@ -12,7 +12,7 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 - Autoload `GameData` (`scripts/core/game_data.gd`) charge `data/*.json`.
 - Autoload `PlayerData` (`scripts/core/player_data.gd`) : **la sauvegarde** (`user://save.json`) :
   or, gemmes, énergie (se recharge avec le temps), niveau de la loge, héros possédés (niveau, XP),
-  équipe de chasse (8 max), objets, étoiles par donjon. Règles pures et testées dans
+  équipe de chasse (7 max : 2 devant, 3 au milieu, 2 à l'arrière), objets, étoiles par donjon. Règles pures et testées dans
   `scripts/core/progression.gd`, chiffres dans `data/progression.json`. Les tests et l'outil de
   capture appellent `PlayerData.use_memory_only()` pour ne jamais toucher la vraie sauvegarde.
 - Autoload `GameSettings` (`scripts/core/game_settings.gd`) : volumes Général / Musique / Effets

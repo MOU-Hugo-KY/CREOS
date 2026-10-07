@@ -437,18 +437,18 @@ func test_quartet() -> void:
 
 
 func test_team_combos() -> void:
-	print("Équipe de 8, duos, trios et synergies")
+	print("Équipe de 7, duos, trios et synergies")
 	var gd := _data()
-	var ids := ["corbin", "nyx", "rivet", "aegis", "bastion", "nacre", "valen", "orage"]
+	var ids := ["corbin", "nyx", "rivet", "aegis", "bastion", "nacre", "valen"]
 	var team: Array = ids.map(func(id: String) -> Dictionary:
 		var d: Dictionary = gd.hero(id).duplicate(true)
 		d["id"] = id
 		return d)
 	var waves: Array = gd.dungeon_waves_for("monde01_1", team.size())
-	check(waves[0].size() > gd.dungeon_waves("monde01_1")[0].size(), "une équipe de 8 affronte des vagues plus fournies")
+	check(waves[0].size() > gd.dungeon_waves("monde01_1")[0].size(), "une équipe de 7 affronte des vagues plus fournies")
 	var e := BattleEngine.new()
 	e.setup(team, waves, 3, gd.team_combos(), gd.synergies())
-	check(e.heroes.size() == 8, "8 héros au combat")
+	check(e.heroes.size() == 7, "7 héros au combat")
 	var combo_ids: Array = e.combos.map(func(c: Dictionary) -> String: return c.id)
 	check("crocs_jumeaux" in combo_ids and "nuit_sans_lune" in combo_ids and "aube" in combo_ids,
 		"duos et trios formés par l'équipe")

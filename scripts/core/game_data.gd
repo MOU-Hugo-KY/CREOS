@@ -108,7 +108,7 @@ func dungeon_waves_for(id: String, team_size: int) -> Array:
 			else:
 				grown.append(m)
 				minions.append(m)
-		var want := mini(8, roundi(minions.size() * factor))
+		var want := mini(PlayerData.TEAM_SIZE, roundi(minions.size() * factor))
 		var i := 0
 		while minions.size() > 0 and grown.size() - (wave.size() - minions.size()) < want:
 			grown.append(minions[i % minions.size()])
