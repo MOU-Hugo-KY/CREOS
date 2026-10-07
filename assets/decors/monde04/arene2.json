@@ -1,0 +1,42 @@
+{
+  "nom": "Camp des braises",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      176,
+      195,
+      100,
+      "#FF993D"
+    ],
+    [
+      366,
+      190,
+      60,
+      "#FFB15A"
+    ],
+    [
+      573,
+      176,
+      65,
+      "#FFB15A"
+    ],
+    [
+      912,
+      188,
+      65,
+      "#FFB15A"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}

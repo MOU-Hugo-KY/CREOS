@@ -1,0 +1,30 @@
+{
+  "nom": "Lisière des pillards",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      174,
+      195,
+      75,
+      "#FFB15A"
+    ],
+    [
+      1010,
+      180,
+      75,
+      "#FFB15A"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}
