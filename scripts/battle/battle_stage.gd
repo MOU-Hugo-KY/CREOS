@@ -13,6 +13,14 @@ var info: Dictionary = {}
 ## Arène vue en plongée (`areneN.png` + `areneN.json`) : les combattants se répartissent sur le sol.
 var topdown := false
 var combat_rect := Rect2(80, 300, 1120, 380)
+var arena_life: ArenaAmbience  # halos et particules de l'arène
+
+
+static func _arena_json(path: String) -> Dictionary:
+	if not FileAccess.file_exists(path):
+		return {}
+	var a: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	return a if a is Dictionary else {}
 
 
 ## `dir` : dossier du monde ; `scene` : 1 entrée, 2 profondeur, 3 boss.
@@ -53,9 +61,15 @@ func _setup_arena(dir: String, scene: int) -> void:
 			combat_rect = Rect2(r[0], r[1], r[2], r[3])
 	_layer(dir + "arene%d.png" % scene, -30, true)
 	_layer(dir + "arene%d_avant.png" % scene, 20, true)
+	var life := ArenaAmbience.new()
+	life.z_index = 15  # par-dessus les combattants : halos et particules flottent devant
+	add_child(life)
+	life.setup(dir.trim_suffix("/").get_file(), _arena_json(path))
+	arena_life = life
 	ambience = Ambience.new()  # pas de particules de l'ancien décor ; sert à l'assombrissement des ultimes
 	ambience.z_index = -10
 	add_child(ambience)
+	ambience.arena_life = arena_life
 
 
 func _split_foreground(fg_path: String) -> void:

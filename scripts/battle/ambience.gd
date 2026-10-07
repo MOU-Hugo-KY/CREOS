@@ -93,7 +93,13 @@ func _process(delta: float) -> void:
 		material.set_shader_parameter("strength", intensity * _ultimate_weight)
 	queue_redraw()
 
+## Relais vers les halos et particules d'une arène en plongée (même assombrissement).
+var arena_life: Node2D
+
+
 func set_ultimate_active(active: bool) -> void:
+	if arena_life and arena_life.has_method("set_dim"):
+		arena_life.set_dim(active)
 	_ultimate_target = 0.15 if active else 1.0
 
 func set_quality(level: int) -> void:
