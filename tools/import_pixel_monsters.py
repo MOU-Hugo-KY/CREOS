@@ -16,6 +16,9 @@ MAP = {"idle": "idle", "walk": "walk", "run": "walk", "attack": "attack", "skill
        "hurt": "hurt", "death": "death"}
 SCALE = 1.6
 HIT_EVENTS = ("hit_active", "release", "attack_active")
+# Monstres dessinés trop petits (ou trop grands) par rapport à leur rôle : multiplicateur de taille.
+SIZE_FIX = {"r08_vautour_des_pics": 1.8, "r08_serpent_des_cimes": 1.35, "r08_vipere_des_nuages": 1.35,
+            "r08_matriarche_des_pics": 1.3}
 
 
 def import_monster(src):
@@ -44,7 +47,7 @@ def import_monster(src):
             shutil.copy(files[i], out / dst)
             frames.append([dst, ms / 1000.0])
         effect = {"frames": frames, "pivot": imp["pivot"], "scale": {"attack": 0.8, "skill": 1.2}}
-    sheet = {"hero": mid, "scale": SCALE, "facing": -1, "anchor": data["pivot"], "map": MAP,
+    sheet = {"hero": mid, "scale": SCALE * SIZE_FIX.get(mid, 1.0), "facing": -1, "anchor": data["pivot"], "map": MAP,
              "anims": anims, "effect": effect}
     (out / "sheet.json").write_text(json.dumps(sheet, ensure_ascii=False, indent=1), encoding="utf-8")
     return mid, len(anims)
