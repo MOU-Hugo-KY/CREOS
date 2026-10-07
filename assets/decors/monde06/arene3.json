@@ -1,0 +1,42 @@
+{
+  "nom": "Sanctuaire de la Liche des Marées",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      452,
+      100,
+      100,
+      "#7AF4E6"
+    ],
+    [
+      828,
+      100,
+      100,
+      "#7AF4E6"
+    ],
+    [
+      550,
+      135,
+      40,
+      "#FFD18E"
+    ],
+    [
+      730,
+      135,
+      40,
+      "#FFD18E"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}
