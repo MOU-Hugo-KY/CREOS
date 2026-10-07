@@ -347,6 +347,7 @@ func _on_attack(ev: Dictionary) -> float:
 		aim /= hits.size()
 	var delay := v.play_attack(clip, 0.0, aim)
 	_last_slot[int(ev.src)] = int(ev.slot)
+	_launch_projectiles(v, ev, delay)
 	fx.dust(v.position, 0.8)  # appui au sol au départ de l'attaque
 	var color := Palette.element_color(v.unit.element)
 	if int(ev.slot) == BattleUnit.SLOT_COOLDOWN:
@@ -361,6 +362,34 @@ func _on_attack(ev: Dictionary) -> float:
 			stage.ambience.set_ultimate_active(false))
 		_sfx("ui_ready", -4.0)
 	return delay
+
+
+## Attaque à distance sur des ennemis : un projectile par coup et par cible (3 cibles au plus), qui
+## arrive pile à l'instant d'impact.
+func _launch_projectiles(v: UnitView, ev: Dictionary, delay: float) -> void:
+	if v.unit.range_type != "ranged":
+		return
+	var targets: Array = []
+	for uid: int in ev.get("targets", []):
+		var t: UnitView = views.get(uid)
+		if t and t.unit.team != v.unit.team:
+			targets.append(t)
+	if targets.is_empty():
+		return  # soin, bouclier : pas de projectile
+	var color := Palette.element_color(v.unit.element)
+	var magic := v.unit.attack_kind == "magic"
+	var times: Array = ev.get("hit_times", [])
+	if times.is_empty():
+		times = [0.4]
+	var start := v.chest_position() + Vector2(30.0 * (1 if v.unit.team == 0 else -1), -10)
+	for k in mini(times.size(), 4):
+		for t: UnitView in targets.slice(0, 3):
+			var target := t
+			var land := delay + float(times[k])
+			var travel := clampf(start.distance_to(target.chest_position()) / 1500.0, 0.12, 0.4)
+			_schedule(maxf(0.0, land - travel), func() -> void:
+				if is_instance_valid(target):
+					fx.add_child(Projectile.new().setup(start, target.chest_position(), travel, color, magic)))
 
 
 ## Duo ou trio : chaque membre lance son ultime à sa place, en même temps, vers les ennemis.
@@ -439,6 +468,24 @@ func _on_pixel_quartet(ev: Dictionary) -> float:
 	if not p.play(String(ev.id)):
 		p.queue_free()
 		return 0.0
+	# Les cibles de la scène tombent sur le centre des ennemis vivants.
+	var aim := Vector2.ZERO
+	var n := 0
+	for v: UnitView in views.values():
+		if v.unit.team == 1 and not v.is_dead():
+			aim += v.chest_position()
+			n += 1
+	var targets: Array = p.data.get("preview_targets", [])
+	if n > 0 and not targets.is_empty():
+		var t := Vector2.ZERO
+		for xy: Array in targets:
+			t += Vector2(xy[0], xy[1])
+		t /= targets.size()
+		p.position = aim / n - t * QUARTET_SCALE
+		# La grande explosion finale (dessinée au centre de son cadre) est recentrée sur les cibles.
+		var shift: Vector2 = t - Vector2(256, 144)
+		for key: Dictionary in p.data.final.position_keyframes:
+			key.value = [float(key.value[0]) + shift.x, float(key.value[1]) + shift.y]
 	var members: Array = ev.members
 	for uid: int in members:
 		if views.has(uid):
