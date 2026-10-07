@@ -1,0 +1,30 @@
+{
+  "nom": "Bouche des terriers",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      320,
+      165,
+      70,
+      "#FFB653"
+    ],
+    [
+      990,
+      165,
+      70,
+      "#FFB653"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}

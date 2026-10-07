@@ -1,0 +1,30 @@
+{
+  "nom": "Galeries de soie",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      300,
+      150,
+      80,
+      "#FFB653"
+    ],
+    [
+      980,
+      150,
+      80,
+      "#FFB653"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}

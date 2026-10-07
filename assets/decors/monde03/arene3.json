@@ -1,0 +1,36 @@
+{
+  "nom": "Chambre des Mille-Œufs",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      640,
+      150,
+      130,
+      "#FFD07A"
+    ],
+    [
+      290,
+      165,
+      80,
+      "#FFB653"
+    ],
+    [
+      990,
+      165,
+      80,
+      "#FFB653"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}
