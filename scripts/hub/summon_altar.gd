@@ -169,6 +169,10 @@ func _show_result(hero: Dictionary, r: Dictionary) -> void:
 	else:
 		_result_detail.text = "Déjà recruté : +1 Écho pour %s (%d au total)" % [hero.name, r.echoes]
 		_result_detail.add_theme_color_override("font_color", Palette.TEXT)
+	var traps: Array = r.get("traps", [])
+	if not traps.is_empty():
+		var names: Array = traps.map(func(t: String) -> String: return String(GameData.lodge.traps[t].name))
+		_result_detail.text += "\n+ Piège pour ta Loge : " + ", ".join(names)
 	_result.add_theme_stylebox_override("panel", Palette.stylebox(Color(0, 0, 0, 0.6), rarity[1], 18, 3))
 	_result.visible = true
 	_result.modulate.a = 0.0

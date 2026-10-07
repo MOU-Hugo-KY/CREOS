@@ -51,6 +51,26 @@ func setup(p_unit: BattleUnit, p_data: Dictionary) -> void:
 		ClipPlayer.warm(player.bundle, String(a.get("clip", "")))
 	var r := player.actor_rect(_id + "_idle")
 	height = maxf(60.0, -r.position.y * model_scale)
+	if data.has("structure"):
+		_build_structure()
+
+
+## Défense de Loge (tour, mur, baliste, autel) : une image fixe posée au sol à la place du personnage.
+func _build_structure() -> void:
+	player.show_actor = false
+	var spr := Sprite2D.new()
+	spr.texture = load(String(data.get("prop", "")))
+	if spr.texture == null:
+		return
+	spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	spr.centered = false
+	var s := float(data.get("prop_scale", 2.0))
+	spr.scale = Vector2(s, s)
+	spr.position = Vector2(-spr.texture.get_width() * s / 2.0, -spr.texture.get_height() * s)
+	player.add_child(spr)  # suit les secousses et l'éclair blanc des coups
+	spr.scale /= player.scale
+	spr.position /= player.scale
+	height = spr.texture.get_height() * s
 
 
 ## Point au-dessus de la tête, dans le repère de la scène de combat.

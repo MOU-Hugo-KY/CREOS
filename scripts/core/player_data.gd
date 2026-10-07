@@ -415,7 +415,15 @@ func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomN
 	state.summon_count = count + 1
 	record_event("summon")
 	state.summon_pity = 0 if r.rarity >= int(config.get("pity_min_rarity", 4)) else pity + 1
-	var result := {"id": r.id, "rarity": r.rarity, "new": not state.heroes.has(r.id), "echoes": 0}
+	var result := {"id": r.id, "rarity": r.rarity, "new": not state.heroes.has(r.id), "echoes": 0, "traps": []}
+	# Chaque invocation donne aussi des pièges pour Ma Loge (consommables).
+	var trap_ids: Array = _lodge_cfg().get("traps", {}).keys()
+	trap_ids.sort()
+	for _i in int(config.get("trap_bonus", {}).get("count", 0)):
+		if not trap_ids.is_empty():
+			var t: String = trap_ids[rng.randi_range(0, trap_ids.size() - 1)]
+			_add_trap_item(t, 1)
+			result.traps.append(t)
 	if result.new:
 		state.heroes[r.id] = {"level": 1, "xp": 0}
 	else:
@@ -599,6 +607,8 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 
 func _lodge_cfg() -> Dictionary:
 	var gd: Node = (Engine.get_main_loop() as SceneTree).root.get_node("GameData")
+	if gd.lodge.is_empty():
+		gd.reload()  # autoload pas encore prêt (tests)
 	return gd.lodge
 
 
@@ -608,7 +618,36 @@ func lodge() -> Dictionary:
 	var d: Variant = state.get("lodge_dungeon")
 	if not d is Dictionary or d.get("rooms", []).size() != cfg.get("rooms", []).size():
 		state["lodge_dungeon"] = Lodge.empty_state(cfg)
+	elif not d.has("defenses"):
+		d["defenses"] = Lodge.empty_state(cfg).defenses
 	return state.lodge_dungeon
+
+
+## Pièges possédés (consommables gagnés à la Lanterne) : objets "piege_<id>".
+func trap_count(trap_id: String) -> int:
+	return item_count(String(_lodge_cfg().get("trap_item_prefix", "piege_")) + trap_id)
+
+
+func _add_trap_item(trap_id: String, n: int) -> void:
+	var key := String(_lodge_cfg().get("trap_item_prefix", "piege_")) + trap_id
+	state.items[key] = item_count(key) + n
+
+
+## Construit une défense (payée en or) ; la retirer rend son prix.
+func lodge_add_defense(room: int, defense_id: String) -> bool:
+	var cost := int(_lodge_cfg().get("defenses", {}).get(defense_id, {}).get("cost", 0))
+	if gold() < cost or not Lodge.add_defense(lodge(), _lodge_cfg(), room, defense_id):
+		return false
+	state.gold = gold() - cost
+	_lodge_saved()
+	return true
+
+
+func lodge_remove_defense(room: int, index: int) -> void:
+	var removed := Lodge.remove_defense(lodge(), room, index)
+	if removed != "":
+		state.gold = gold() + int(_lodge_cfg().defenses[removed].get("cost", 0))
+		_lodge_saved()
 
 
 func lodge_add_defender(room: int, id: String) -> bool:
@@ -623,9 +662,14 @@ func lodge_remove_defender(room: int, id: String) -> void:
 	_lodge_saved()
 
 
+## Poser un piège en consomme un de la réserve (il reste armé dans la salle) ; le retirer le rend.
 func lodge_toggle_trap(room: int, trap_id: String) -> bool:
+	var placing: bool = room >= 0 and room < lodge().traps.size() and trap_id not in lodge().traps[room]
+	if placing and trap_count(trap_id) <= 0:
+		return false
 	if not Lodge.toggle_trap(lodge(), _lodge_cfg(), room, trap_id):
 		return false
+	_add_trap_item(trap_id, -1 if placing else 1)
 	_lodge_saved()
 	return true
 
@@ -689,7 +733,8 @@ func start_lodge_battle(rival: Dictionary = {}) -> String:
 		if not Lodge.is_ready(lodge()):
 			return "Place au moins un défenseur dans chaque salle."
 		current_lodge_battle = {"kind": "own", "name": lodge_name(), "rooms": lodge().rooms.duplicate(true),
-			"traps": lodge().traps.duplicate(true), "stake": 0, "fee": 0, "level": 0}
+			"traps": lodge().traps.duplicate(true), "defenses": lodge().defenses.duplicate(true), "stake": 0, "fee": 0,
+			"level": 0}
 		return ""
 	if lodge_rival_done(rival.id):
 		return "Tu as déjà attaqué ce donjon aujourd'hui."
@@ -703,7 +748,8 @@ func start_lodge_battle(rival: Dictionary = {}) -> String:
 	save_game()
 	changed.emit()
 	current_lodge_battle = {"kind": "rival", "id": rival.id, "name": rival.name, "rooms": rival.rooms,
-		"traps": rival.traps, "stake": int(rival.stake), "fee": fee, "level": int(rival.level)}
+		"traps": rival.traps, "defenses": rival.get("defenses", []), "stake": int(rival.stake), "fee": fee,
+		"level": int(rival.level)}
 	return ""
 
 

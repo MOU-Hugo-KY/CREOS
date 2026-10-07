@@ -24,6 +24,7 @@ var unit_class: String
 var range_type: String
 var attack_kind: String
 var is_boss := false
+var structure := ""  # défense de Loge (tour, mur…) : ne bouge pas ; "" pour un combattant
 var attacks: Array[Dictionary] = []
 var cooldowns: Array[float] = []  # temps restant avant de pouvoir relancer chaque attaque
 
@@ -60,6 +61,9 @@ static func from_data(p_uid: int, p_def_id: String, data: Dictionary, p_team: in
 	u.range_type = data.get("range", "melee")
 	u.attack_kind = data.get("attack_kind", "physical")
 	u.is_boss = data.get("boss", false)
+	u.structure = String(data.get("structure", ""))
+	if data.get("wall", false):
+		u.taunt_time = INF  # le mur attire tous les coups ciblés tant qu'il tient
 	for a: Dictionary in data.get("attacks", []):
 		u.attacks.append(a)
 		# Une attaque à recharge n'est pas disponible dès le début du combat.

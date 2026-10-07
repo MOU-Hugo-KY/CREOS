@@ -149,6 +149,20 @@ func _room_card(r: int, room: Dictionary, l: Dictionary) -> Control:
 		else:
 			grid.add_child(_empty_slot("slot_common", "+", func() -> void: _pick_defender(r)))
 
+	var built: Array = l.defenses[r]
+	v.add_child(UiKit.label("Défenses  %d / %d" % [built.size(), int(room.get("defenses", 1))], 18, UiKit.TEXT_SOFT))
+	for i in int(room.get("defenses", 1)):
+		if i < built.size():
+			var did: String = built[i]
+			var idx := i
+			v.add_child(_defense_chip(did, func() -> void:
+				ui_sound.emit("ui_click")
+				PlayerData.lodge_remove_defense(r, idx)))
+		else:
+			var add_def := UiKit.button("Construire une défense", "blue", 18, Vector2(0, 46))
+			add_def.pressed.connect(func() -> void: _pick_defense(r))
+			v.add_child(add_def)
+
 	var traps: Array = l.traps[r]
 	v.add_child(UiKit.label("Pièges  %d / %d" % [traps.size(), int(room.traps)], 18, UiKit.TEXT_SOFT))
 	for i in int(room.traps):
@@ -200,6 +214,17 @@ func _empty_slot(kit_name: String, text: String, on_press: Callable) -> Control:
 	return b
 
 
+func _defense_chip(did: String, on_press: Callable) -> Control:
+	var spec: Dictionary = GameData.lodge.defenses[did]
+	var b := UiKit.button(String(spec.name), "gold", 18, Vector2(0, 46))
+	b.icon = load(String(spec.get("prop", "")))
+	b.expand_icon = false
+	b.add_theme_constant_override("icon_max_width", 30)
+	b.tooltip_text = String(spec.description) + "\n(Toucher pour la démolir : son prix est rendu.)"
+	b.pressed.connect(on_press)
+	return b
+
+
 func _trap_chip(tid: String, on_press: Callable) -> Control:
 	var trap: Dictionary = GameData.lodge.traps[tid]
 	var b := UiKit.button(String(trap.name), "purple", 18, Vector2(0, 46))
@@ -234,11 +259,40 @@ func _pick_defender(room: int) -> void:
 	_open_picker("Choisis un défenseur", grid)
 
 
+func _pick_defense(room: int) -> void:
+	ui_sound.emit("ui_click")
+	var list := VBoxContainer.new()
+	list.add_theme_constant_override("separation", 8)
+	for did: String in GameData.lodge.get("defenses", {}):
+		var spec: Dictionary = GameData.lodge.defenses[did]
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 12)
+		list.add_child(row)
+		var chip := _defense_chip(did, func() -> void:
+			ui_sound.emit("ui_click")
+			_close_picker()
+			PlayerData.lodge_add_defense(room, did))
+		chip.text = "%s · %d or" % [spec.name, int(spec.get("cost", 0))]
+		chip.custom_minimum_size = Vector2(330, 50)
+		chip.tooltip_text = ""
+		chip.disabled = PlayerData.gold() < int(spec.get("cost", 0))
+		row.add_child(chip)
+		var d := UiKit.label(String(spec.description), 18, UiKit.INK)
+		d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		d.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(d)
+	_open_picker("Construire une défense", list)
+
+
 func _pick_trap(room: int) -> void:
 	ui_sound.emit("ui_click")
 	var placed: Array = PlayerData.lodge().traps[room]
 	var list := VBoxContainer.new()
 	list.add_theme_constant_override("separation", 8)
+	var hint := UiKit.label("Les pièges se gagnent à la Lanterne des Serments (un par invocation). Poser un piège le consomme ; le retirer le rend.",
+		17, UiKit.TEXT_SOFT)
+	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	list.add_child(hint)
 	for tid: String in GameData.lodge.traps:
 		if tid in placed:
 			continue
@@ -246,12 +300,15 @@ func _pick_trap(room: int) -> void:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
 		list.add_child(row)
+		var owned := PlayerData.trap_count(tid)
 		var chip := _trap_chip(tid, func() -> void:
 			ui_sound.emit("ui_click")
 			_close_picker()
 			PlayerData.lodge_toggle_trap(room, tid))
+		chip.text = "%s  ×%d" % [trap.name, owned]
 		chip.custom_minimum_size = Vector2(300, 50)
 		chip.tooltip_text = ""
+		chip.disabled = owned <= 0
 		row.add_child(chip)
 		var d := UiKit.label(String(trap.description), 18, UiKit.INK)
 		d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -338,7 +395,13 @@ func _build_rivals() -> void:
 		for room_traps: Array in rival.traps:
 			for tid: String in room_traps:
 				trap_names.append(String(cfg.traps[tid].name))
+		var def_names: Array = []
+		for built: Array in rival.get("defenses", []):
+			for did: String in built:
+				def_names.append(String(cfg.defenses[did].name))
 		v.add_child(UiKit.label("Pièges : " + ", ".join(trap_names), 17, UiKit.TEXT_SOFT))
+		if not def_names.is_empty():
+			v.add_child(UiKit.label("Défenses : " + ", ".join(def_names), 17, UiKit.TEXT_SOFT))
 		var reward := Lodge.win_reward(int(rival.stake), cfg)
 		var fee := Lodge.entry_fee(int(rival.stake), cfg)
 		v.add_child(UiKit.label("Récompense en jeu : %d or  ·  tu emportes %d or si tu gagnes" % [int(rival.stake), reward], 18, UiKit.WOOD))

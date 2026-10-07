@@ -1,59 +1,303 @@
 {
  "title": "Ma Loge",
- "description": "Ta Loge devient ton donjon : place tes héros en défense dans trois salles, arme-les de pièges et mets une récompense en jeu. Seules les équipes moins fortes (ou aussi fortes) que ton donjon peuvent l'attaquer.",
+ "description": "Ta Loge devient ton donjon : place tes héros en défense dans trois salles, construis des défenses, arme-les de pièges (gagnés à la Lanterne des Serments) et mets une récompense en jeu. Seules les équipes moins fortes (ou aussi fortes) que ton donjon peuvent l'attaquer.",
  "rooms": [
-  {"name": "Le vestibule", "defenders": 3, "traps": 2},
-  {"name": "La salle des trophées", "defenders": 3, "traps": 2},
-  {"name": "Le sanctuaire", "defenders": 4, "traps": 2}
+  {
+   "name": "Le vestibule",
+   "defenders": 3,
+   "traps": 2,
+   "defenses": 1
+  },
+  {
+   "name": "La salle des trophées",
+   "defenders": 3,
+   "traps": 2,
+   "defenses": 1
+  },
+  {
+   "name": "Le sanctuaire",
+   "defenders": 4,
+   "traps": 2,
+   "defenses": 2
+  }
  ],
- "arena": {"decor": "res://assets/decors/monde06/", "scene": 2},
+ "arena": {
+  "decor": "res://assets/decors/monde06/",
+  "scene": 2
+ },
  "stake_step": 500,
  "stake_max": 20000,
  "win_share": 0.3,
  "defense_share": 0.5,
  "entry_share": 0.1,
  "rivals_per_day": 3,
- "rival_names": ["Bran l'Écorché", "Mère Ondine", "Les Trois Lanternes", "Sire Calbrun", "Vesna aux Sept Clés", "Le Comptoir Gris", "Olric Mange-Cendre", "Dame Ysolde", "Les Veilleurs du Puits", "Tobias le Rusé"],
+ "rival_names": [
+  "Bran l'Écorché",
+  "Mère Ondine",
+  "Les Trois Lanternes",
+  "Sire Calbrun",
+  "Vesna aux Sept Clés",
+  "Le Comptoir Gris",
+  "Olric Mange-Cendre",
+  "Dame Ysolde",
+  "Les Veilleurs du Puits",
+  "Tobias le Rusé"
+ ],
  "traps": {
   "pieux": {
-   "name": "Pieux cachés", "icon": "⚔", "element": "ombre",
+   "name": "Pieux cachés",
+   "icon": "⚔",
+   "element": "ombre",
    "description": "Des pieux jaillissent sous les héros de devant : 10 % de leurs PV max.",
-   "target": "front", "effects": [{"type": "damage_pct", "amount": 0.10}]
+   "target": "front",
+   "effects": [
+    {
+     "type": "damage_pct",
+     "amount": 0.1
+    }
+   ]
   },
   "flaque": {
-   "name": "Flaque maudite", "icon": "💧", "element": "eau",
+   "name": "Flaque maudite",
+   "icon": "💧",
+   "element": "eau",
    "description": "Toute l'équipe entre mouillée (6 s) : les coups de foudre et de glace font plus mal.",
-   "target": "all", "effects": [{"type": "status", "name": "mouille", "duration": 6.0}]
+   "target": "all",
+   "effects": [
+    {
+     "type": "status",
+     "name": "mouille",
+     "duration": 6.0
+    }
+   ]
   },
   "brasero": {
-   "name": "Brasero piégé", "icon": "🔥", "element": "feu",
+   "name": "Brasero piégé",
+   "icon": "🔥",
+   "element": "feu",
    "description": "Le brasero explose : brûlure sur toute l'équipe, 2 % des PV max par seconde pendant 5 s.",
-   "target": "all", "effects": [{"type": "dot_pct", "name": "brulure", "amount": 0.02, "duration": 5.0}]
+   "target": "all",
+   "effects": [
+    {
+     "type": "dot_pct",
+     "name": "brulure",
+     "amount": 0.02,
+     "duration": 5.0
+    }
+   ]
   },
   "flechettes": {
-   "name": "Fléchettes empoisonnées", "icon": "☠", "element": "nature",
+   "name": "Fléchettes empoisonnées",
+   "icon": "☠",
+   "element": "nature",
    "description": "Deux héros au hasard sont empoisonnés : 3 % des PV max par seconde pendant 6 s.",
-   "target": "random2", "effects": [{"type": "dot_pct", "name": "poison", "amount": 0.03, "duration": 6.0}]
+   "target": "random2",
+   "effects": [
+    {
+     "type": "dot_pct",
+     "name": "poison",
+     "amount": 0.03,
+     "duration": 6.0
+    }
+   ]
   },
   "glu": {
-   "name": "Glu d'araignée", "icon": "🕸", "element": "nature",
+   "name": "Glu d'araignée",
+   "icon": "🕸",
+   "element": "nature",
    "description": "Le sol colle : la vitesse de toute l'équipe baisse de 30 % pendant 6 s.",
-   "target": "all", "effects": [{"type": "buff", "stat": "spd", "amount": -0.3, "duration": 6.0}]
+   "target": "all",
+   "effects": [
+    {
+     "type": "buff",
+     "stat": "spd",
+     "amount": -0.3,
+     "duration": 6.0
+    }
+   ]
   },
   "gaz": {
-   "name": "Gaz aveuglant", "icon": "☁", "element": "ombre",
+   "name": "Gaz aveuglant",
+   "icon": "☁",
+   "element": "ombre",
    "description": "Un nuage aveugle les héros de l'arrière pendant 5 s : ils ratent plus souvent.",
-   "target": "back", "effects": [{"type": "status", "name": "aveugle", "duration": 5.0}]
+   "target": "back",
+   "effects": [
+    {
+     "type": "status",
+     "name": "aveugle",
+     "duration": 5.0
+    }
+   ]
   },
   "rune": {
-   "name": "Rune d'entrave", "icon": "✦", "element": "lumiere",
+   "name": "Rune d'entrave",
+   "icon": "✦",
+   "element": "lumiere",
    "description": "Les héros de devant sont enracinés et déséquilibrés pendant 4 s.",
-   "target": "front", "effects": [{"type": "status", "name": "enracine", "duration": 4.0}, {"type": "status", "name": "desequilibre", "duration": 4.0}]
+   "target": "front",
+   "effects": [
+    {
+     "type": "status",
+     "name": "enracine",
+     "duration": 4.0
+    },
+    {
+     "type": "status",
+     "name": "desequilibre",
+     "duration": 4.0
+    }
+   ]
   },
   "cloche": {
-   "name": "Cloche d'alarme", "icon": "🔔", "element": "lumiere",
+   "name": "Cloche d'alarme",
+   "icon": "🔔",
+   "element": "lumiere",
    "description": "Les défenseurs sont prévenus : leur jauge démarre à 40 % et ils gagnent un bouclier de 8 % de leurs PV.",
-   "target": "defenders", "effects": [{"type": "gauge", "amount": 0.4}, {"type": "shield_pct", "amount": 0.08}]
+   "target": "defenders",
+   "effects": [
+    {
+     "type": "gauge",
+     "amount": 0.4
+    },
+    {
+     "type": "shield_pct",
+     "amount": 0.08
+    }
+   ]
+  }
+ },
+ "trap_item_prefix": "piege_",
+ "defenses": {
+  "tour_mage": {
+   "name": "Tour du mage",
+   "prop": "res://assets/hub_px/props/lamp.png",
+   "prop_scale": 2.4,
+   "cost": 2500,
+   "description": "Un mage perché lance un éclair sur un héros au hasard à chacun de ses tours (100 % de la magie moyenne des défenseurs).",
+   "element": "lumiere",
+   "range": "ranged",
+   "attack_kind": "magic",
+   "class": "arcaniste",
+   "stats": {
+    "hp": 1.0,
+    "atk": 0.6,
+    "mag": 1.0,
+    "def": 0.8,
+    "res": 1.0,
+    "spd": 0.75,
+    "crit": 0.05
+   },
+   "attacks": [
+    {
+     "id": "tour_eclair",
+     "name": "Éclair du mage",
+     "target": "random_enemy",
+     "hit_time": 0.35,
+     "dash": false,
+     "effects": [
+      {
+       "type": "damage",
+       "power": 1.0,
+       "stat": "mag"
+      }
+     ]
+    }
+   ]
+  },
+  "mur": {
+   "name": "Mur de pierre",
+   "prop": "res://assets/hub_px/props/wall.png",
+   "prop_scale": 2.2,
+   "cost": 2000,
+   "description": "Un mur solide qui attire tous les coups ciblés : il faut le faire tomber avant d'atteindre les défenseurs, qui frappent derrière lui.",
+   "element": "nature",
+   "range": "melee",
+   "attack_kind": "physical",
+   "class": "gardien",
+   "wall": true,
+   "stats": {
+    "hp": 2.6,
+    "atk": 0.0,
+    "mag": 0.0,
+    "def": 1.6,
+    "res": 1.6,
+    "spd": 0.0,
+    "crit": 0.0
+   },
+   "attacks": []
+  },
+  "baliste": {
+   "name": "Baliste",
+   "prop": "res://assets/hub_px/props/gate_post.png",
+   "prop_scale": 2.6,
+   "cost": 2500,
+   "description": "Tire un lourd carreau sur le héros le plus blessé (130 % de l'attaque moyenne des défenseurs).",
+   "element": "ombre",
+   "range": "ranged",
+   "attack_kind": "physical",
+   "class": "traqueur",
+   "stats": {
+    "hp": 0.9,
+    "atk": 1.3,
+    "mag": 0.0,
+    "def": 0.9,
+    "res": 0.7,
+    "spd": 0.6,
+    "crit": 0.1
+   },
+   "attacks": [
+    {
+     "id": "baliste_carreau",
+     "name": "Carreau de baliste",
+     "target": "lowest_hp_enemy",
+     "hit_time": 0.35,
+     "dash": false,
+     "effects": [
+      {
+       "type": "damage",
+       "power": 1.3,
+       "stat": "atk"
+      }
+     ]
+    }
+   ]
+  },
+  "autel": {
+   "name": "Autel de soin",
+   "prop": "res://assets/hub_px/props/brazier.png",
+   "prop_scale": 2.6,
+   "cost": 3000,
+   "description": "Soigne le défenseur le plus blessé à chacun de ses tours (60 % de la magie moyenne des défenseurs).",
+   "element": "eau",
+   "range": "ranged",
+   "attack_kind": "magic",
+   "class": "soutien",
+   "stats": {
+    "hp": 0.8,
+    "atk": 0.0,
+    "mag": 1.0,
+    "def": 0.8,
+    "res": 0.8,
+    "spd": 0.6,
+    "crit": 0.0
+   },
+   "attacks": [
+    {
+     "id": "autel_soin",
+     "name": "Flamme apaisante",
+     "target": "lowest_hp_ally",
+     "hit_time": 0.35,
+     "dash": false,
+     "effects": [
+      {
+       "type": "heal",
+       "power": 0.6,
+       "stat": "mag"
+      }
+     ]
+    }
+   ]
   }
  }
 }

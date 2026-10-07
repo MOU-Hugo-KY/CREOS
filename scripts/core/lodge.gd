@@ -1,19 +1,38 @@
 class_name Lodge
 extends RefCounted
 ## Règles pures de « Ma Loge » (données dans data/lodge.json) : le donjon du joueur.
-## Trois salles, chacune avec des héros en défense et des pièges ; une récompense mise en jeu.
+## Trois salles, chacune avec des héros en défense, des défenses construites (tour, mur, baliste, autel)
+## et des pièges ; une récompense mise en jeu.
 ## Seules les équipes dont la Force est inférieure ou égale à celle du donjon peuvent l'attaquer.
 ## Aucun nœud ici : PlayerData garde l'état, le combat lit les vagues et les pièges.
 
 
-## État vide d'une Loge : {rooms: [[ids]…], traps: [[ids]…], stake, rivals_day, rivals_done}.
+## État vide d'une Loge : {rooms: [[ids]…], traps: [[ids]…], defenses: [[ids]…], stake, rivals_day, rivals_done}.
 static func empty_state(cfg: Dictionary) -> Dictionary:
 	var rooms: Array = []
 	var traps: Array = []
+	var defenses: Array = []
 	for _r in cfg.get("rooms", []):
 		rooms.append([])
 		traps.append([])
-	return {"rooms": rooms, "traps": traps, "stake": 0, "rivals_day": "", "rivals_done": []}
+		defenses.append([])
+	return {"rooms": rooms, "traps": traps, "defenses": defenses, "stake": 0, "rivals_day": "", "rivals_done": []}
+
+
+## Construit une défense dans une salle (au plus `defenses` par salle). Renvoie false si impossible.
+static func add_defense(state: Dictionary, cfg: Dictionary, room: int, defense_id: String) -> bool:
+	if room < 0 or room >= state.defenses.size() or not cfg.get("defenses", {}).has(defense_id):
+		return false
+	if state.defenses[room].size() >= int(cfg.rooms[room].get("defenses", 1)):
+		return false
+	state.defenses[room].append(defense_id)
+	return true
+
+
+static func remove_defense(state: Dictionary, room: int, index: int) -> String:
+	if room < 0 or room >= state.defenses.size() or index < 0 or index >= state.defenses[room].size():
+		return ""
+	return state.defenses[room].pop_at(index)
 
 
 ## Ajoute un défenseur dans une salle (un héros ne défend qu'une seule salle). Renvoie false si impossible.
@@ -54,17 +73,47 @@ static func is_ready(state: Dictionary) -> bool:
 	return not state.rooms.is_empty() and state.rooms.all(func(r: Array) -> bool: return not r.is_empty())
 
 
-## Vagues du combat : une par salle, les héros défenseurs (données de combat via `hero_data`).
-static func waves(rooms: Array, hero_data: Callable) -> Array:
+## Vagues du combat : une par salle, les héros défenseurs (données de combat via `hero_data`), puis les
+## défenses construites, dont les stats suivent la moyenne des défenseurs de la salle.
+static func waves(rooms: Array, hero_data: Callable, defenses: Array = [], cfg: Dictionary = {}) -> Array:
 	var out: Array = []
-	for r: Array in rooms:
+	for i in rooms.size():
 		var wave: Array = []
-		for id: String in r:
+		for id: String in rooms[i]:
 			var d: Dictionary = hero_data.call(id)
 			d["id"] = id
 			wave.append(d)
+		var built: Array = defenses[i] if i < defenses.size() else []
+		var heroes_only := wave.duplicate()
+		for def_id: String in built:
+			var u := defense_unit(def_id, heroes_only, cfg)
+			if u.wall:
+				wave.push_front(u)  # le mur se place devant
+			else:
+				wave.append(u)
 		out.append(wave)
 	return out
+
+
+## Données de combat d'une défense : ses stats = coefficients × moyenne des défenseurs de la salle.
+static func defense_unit(def_id: String, defenders: Array, cfg: Dictionary) -> Dictionary:
+	var spec: Dictionary = cfg.defenses[def_id]
+	var avg := {}
+	var heroes := defenders.filter(func(d: Dictionary) -> bool: return not d.has("structure"))
+	for key in ["hp", "atk", "mag", "def", "res", "spd"]:
+		var total := 0.0
+		for d: Dictionary in heroes:
+			total += float(d.get("stats", {}).get(key, 0))
+		avg[key] = total / maxf(1.0, heroes.size()) if not heroes.is_empty() else 500.0
+	var stats := {}
+	for key: String in spec.stats:
+		stats[key] = float(spec.stats[key]) if key == "crit" else round(float(avg.get(key, 0.0)) * float(spec.stats[key]))
+	return {
+		"id": def_id, "name": spec.name, "structure": def_id, "wall": spec.get("wall", false),
+		"element": spec.get("element", ""), "class": spec.get("class", ""), "range": spec.get("range", "ranged"),
+		"attack_kind": spec.get("attack_kind", "physical"), "stats": stats, "attacks": spec.get("attacks", []).duplicate(true),
+		"prop": spec.get("prop", ""), "prop_scale": spec.get("prop_scale", 2.0),
+	}
 
 
 ## Pièges de chaque vague (données complètes, avec "id").
@@ -128,7 +177,15 @@ static func rivals(day: String, team_power: int, hero_ids: Array, cfg: Dictionar
 		pool.sort()
 		var rooms: Array = []
 		var traps: Array = []
+		var defenses: Array = []
+		var defense_ids: Array = cfg.get("defenses", {}).keys()
+		defense_ids.sort()
 		for room: Dictionary in cfg.rooms:
+			var built: Array = []
+			for _k in int(room.get("defenses", 1)):
+				if not defense_ids.is_empty() and rng.randf() < 0.6:
+					built.append(defense_ids[rng.randi_range(0, defense_ids.size() - 1)])
+			defenses.append(built)
 			var r: Array = []
 			for _i in int(room.get("defenders", 3)):
 				if pool.is_empty():
@@ -149,7 +206,7 @@ static func rivals(day: String, team_power: int, hero_ids: Array, cfg: Dictionar
 		var lp := power(rooms, func(id: String) -> int: return power_at.call(id, level))
 		out.append({
 			"id": "rival_%s_%d" % [day, n], "name": names.pop_at(rng.randi_range(0, names.size() - 1)),
-			"rooms": rooms, "traps": traps, "level": level, "power": lp,
+			"rooms": rooms, "traps": traps, "defenses": defenses, "level": level, "power": lp,
 			"stake": int(round(lp * rng.randf_range(6.0, 12.0) / 50.0)) * 50,
 		})
 	return out

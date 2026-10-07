@@ -509,4 +509,35 @@ func test_lodge() -> void:
 	check(r1.all(func(r: Dictionary) -> bool: return Lodge.can_attack(700, int(r.power)) and int(r.stake) > 0),
 		"chaque rival peut être attaqué et met une récompense en jeu")
 	check(Lodge.win_reward(1000, cfg) == 300 and Lodge.entry_fee(1000, cfg) == 100, "parts de la récompense")
+	# Défenses : le mur passe devant et attire les coups, la tour tire, l'autel soigne.
+	check(Lodge.add_defense(st, cfg, 0, "mur") and not Lodge.add_defense(st, cfg, 0, "tour_mage"),
+		"une défense dans la première salle")
+	Lodge.add_defense(st, cfg, 2, "tour_mage")
+	Lodge.add_defense(st, cfg, 2, "autel")
+	var dw := Lodge.waves(st.rooms, hero_data, st.defenses, cfg)
+	check(dw[0][0].get("wall", false) and dw[0].size() == 4, "le mur se place devant les défenseurs")
+	check(float(dw[2][-1].stats.mag) > 0.0 and dw[2].size() == 3, "les défenses suivent la force des défenseurs")
+	var e2 := BattleEngine.new()
+	e2.setup(_team(gd), dw, 5)
+	e2.auto_mode = true
+	var wall := e2.enemies[0]
+	check(wall.structure == "mur" and wall.taunt_time > 1000.0, "le mur provoque tant qu'il tient")
+	for i in 400:
+		e2.step(0.05)
+	check(wall.hp < wall.max_hp, "les héros doivent frapper le mur")
+	e2.simulate()
+	check(e2.finished, "un donjon avec défenses va jusqu'au bout")
+	# Pièges consommables gagnés à la Lanterne.
+	var pd: Node = PlayerDataScript.new()
+	pd.configure(gd.player_start, gd.progression, gd.dungeons)
+	pd.persist = false
+	pd.reset()
+	var cfg_s: Dictionary = gd.summon.duplicate(true)
+	cfg_s["trap_bonus"] = {"count": 1}
+	pd.state.gems = 10000
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 3
+	var res: Dictionary = pd.summon("gems", cfg_s, gd.heroes, rng)
+	check(res.traps.size() == 1 and pd.trap_count(res.traps[0]) == 1, "une invocation donne un piège")
+	pd.free()
 	gd.free()

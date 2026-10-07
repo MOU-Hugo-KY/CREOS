@@ -85,6 +85,8 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
 - **Ma Loge** (bâtiment « Loge privée » du hub, `PrivateLodgeScreen`) : le donjon du joueur. Trois salles
   (`data/lodge.json` : défenseurs et pièges par salle, mises), règles pures dans `scripts/core/lodge.gd`
   (`Lodge`), état dans la sauvegarde (`state.lodge_dungeon`, la clé `lodge` est le nom de la loge).
+  Défenses construites contre de l'or (`defenses` : tour du mage, mur qui provoque, baliste, autel), unités
+  « structure » sans clip (image d'objet du hub). Pièges = consommables gagnés à la Lanterne (objets `piege_<id>`).
   Une équipe n'attaque qu'un donjon de Force moyenne au moins égale à la sienne. Combat : une vague par
   salle, des héros en défense (camp ennemi, retournés), pièges déclenchés à l'entrée
   (`BattleEngine.setup(..., traps)`, événement `trap`). Rivaux du jour générés en attendant le jeu en ligne.

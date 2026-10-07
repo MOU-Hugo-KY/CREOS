@@ -119,7 +119,8 @@ func start_battle(rng_seed: int) -> void:
 			if level <= 0:
 				return PlayerData.hero_for_battle(id)
 			return Progression.hero_for_battle(GameData.hero(id), level, GameData.progression)
-		engine.setup(team_data, Lodge.waves(lodge_battle.rooms, hero_data), rng_seed, GameData.team_combos(),
+		engine.setup(team_data, Lodge.waves(lodge_battle.rooms, hero_data, lodge_battle.get("defenses", []),
+			GameData.lodge), rng_seed, GameData.team_combos(),
 			GameData.synergies(), Lodge.wave_traps(lodge_battle.traps, GameData.lodge))
 	engine.auto_mode = was_auto
 	hud.set_auto(was_auto)
@@ -662,7 +663,11 @@ func _spawn_wave() -> void:
 		if not e.is_boss:
 			spot = _spot(1, k)
 			k += 1
-		var data: Dictionary = GameData.monster(e.def_id) if lodge_battle.is_empty() else GameData.hero(e.def_id)
+		var data: Dictionary
+		if lodge_battle.is_empty():
+			data = GameData.monster(e.def_id)
+		else:
+			data = GameData.hero(e.def_id) if e.structure == "" else Lodge.defense_unit(e.structure, [], GameData.lodge)
 		_spawn(e, data, spot)
 
 

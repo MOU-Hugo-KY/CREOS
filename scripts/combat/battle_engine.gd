@@ -407,6 +407,8 @@ func _tick_statuses(u: BattleUnit, delta: float) -> void:
 
 
 func _ai_act(u: BattleUnit) -> void:
+	if u.attacks.is_empty():  # un mur ne fait rien
+		return
 	var ready := ready_combos() if u.team == 0 else []
 	if not ready.is_empty():
 		_use_combo(u, _combo(ready[0]))

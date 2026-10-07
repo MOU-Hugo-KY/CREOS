@@ -18,5 +18,9 @@
   },
   "pity_every": 10,
   "pity_min_rarity": 4,
-  "first_summon": ""
+  "first_summon": "",
+  "trap_bonus": {
+    "count": 1,
+    "_note": "chaque invocation donne aussi un piège au hasard pour Ma Loge (consommable)"
+  }
 }
