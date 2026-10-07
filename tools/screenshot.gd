@@ -74,7 +74,11 @@ func _process(_delta: float) -> bool:
 	frames += 1
 	if frames == 2 and hour > -2.0 and "town" in scene:
 		scene.town.set_hour(hour)
-	if frames == 5 and action != "":
+	if frames == 5 and action == "summon":  # Lanterne : une invocation avec des gemmes
+		scene.hud.open_altar()
+		root.get_node("PlayerData").state.gems = 1000
+		scene.hud.altar._summon("gems")
+	elif frames == 5 and action != "":
 		if scene.hud.has_method("open_" + action):  # ex. --action=profile, shop, relics, quests, altar
 			scene.hud.call("open_" + action)
 		else:

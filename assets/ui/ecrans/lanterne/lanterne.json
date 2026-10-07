@@ -1,0 +1,1101 @@
+{
+  "canvas_reference": [
+    1920,
+    1080
+  ],
+  "texture_filter": "nearest",
+  "assets": {
+    "fond": {
+      "file": "pieces/fond.png",
+      "size": [
+        1150,
+        860
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "lanterne": {
+      "file": "pieces/lanterne.png",
+      "size": [
+        384,
+        480
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "lanterne_allumee": {
+      "file": "pieces/lanterne_allumee.png",
+      "size": [
+        384,
+        480
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "fragment_serment_64": {
+      "file": "pieces/fragment_serment_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "gemme_64": {
+      "file": "pieces/gemme_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "infos_panel": {
+      "file": "pieces/infos_panel.png",
+      "size": [
+        340,
+        936
+      ],
+      "nine_slice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "heroes_panel": {
+      "file": "pieces/heroes_panel.png",
+      "size": [
+        340,
+        936
+      ],
+      "nine_slice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "hero_row": {
+      "file": "pieces/hero_row.png",
+      "size": [
+        292,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "currency_cartouche": {
+      "file": "pieces/currency_cartouche.png",
+      "size": [
+        210,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "title": {
+      "file": "pieces/title.png",
+      "size": [
+        840,
+        80
+      ],
+      "nine_slice": {
+        "left": 40,
+        "top": 16,
+        "right": 40,
+        "bottom": 16
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        44,
+        18,
+        44,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "reveal_panel": {
+      "file": "pieces/reveal_panel.png",
+      "size": [
+        840,
+        820
+      ],
+      "nine_slice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "reveal_name": {
+      "file": "pieces/reveal_name.png",
+      "size": [
+        620,
+        72
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "reveal_trap": {
+      "file": "pieces/reveal_trap.png",
+      "size": [
+        660,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "invoke_fragments_normal": {
+      "file": "pieces/invoke_fragments_normal.png",
+      "size": [
+        480,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        480,
+        100
+      ]
+    },
+    "invoke_fragments_hover": {
+      "file": "pieces/invoke_fragments_hover.png",
+      "size": [
+        480,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        480,
+        100
+      ]
+    },
+    "invoke_fragments_pressed": {
+      "file": "pieces/invoke_fragments_pressed.png",
+      "size": [
+        480,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        480,
+        100
+      ]
+    },
+    "invoke_gems_normal": {
+      "file": "pieces/invoke_gems_normal.png",
+      "size": [
+        480,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        480,
+        100
+      ]
+    },
+    "invoke_gems_hover": {
+      "file": "pieces/invoke_gems_hover.png",
+      "size": [
+        480,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        480,
+        100
+      ]
+    },
+    "invoke_gems_pressed": {
+      "file": "pieces/invoke_gems_pressed.png",
+      "size": [
+        480,
+        100
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        480,
+        100
+      ]
+    },
+    "return_normal": {
+      "file": "pieces/return_normal.png",
+      "size": [
+        300,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        300,
+        96
+      ]
+    },
+    "return_hover": {
+      "file": "pieces/return_hover.png",
+      "size": [
+        300,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        300,
+        96
+      ]
+    },
+    "return_pressed": {
+      "file": "pieces/return_pressed.png",
+      "size": [
+        300,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        300,
+        96
+      ]
+    },
+    "reveal_liseré_rare": {
+      "file": "pieces/reveal_liseré_rare.png",
+      "size": [
+        840,
+        820
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "reveal_badge_rare": {
+      "file": "pieces/reveal_badge_rare.png",
+      "size": [
+        240,
+        56
+      ],
+      "nine_slice": {
+        "left": 26,
+        "top": 20,
+        "right": 26,
+        "bottom": 20
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        18,
+        30,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "reveal_badge_accent_rare": {
+      "file": "pieces/reveal_badge_accent_rare.png",
+      "size": [
+        240,
+        56
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "reveal_liseré_epic": {
+      "file": "pieces/reveal_liseré_epic.png",
+      "size": [
+        840,
+        820
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "reveal_badge_epic": {
+      "file": "pieces/reveal_badge_epic.png",
+      "size": [
+        240,
+        56
+      ],
+      "nine_slice": {
+        "left": 26,
+        "top": 20,
+        "right": 26,
+        "bottom": 20
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        18,
+        30,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "reveal_badge_accent_epic": {
+      "file": "pieces/reveal_badge_accent_epic.png",
+      "size": [
+        240,
+        56
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "reveal_liseré_legendary": {
+      "file": "pieces/reveal_liseré_legendary.png",
+      "size": [
+        840,
+        820
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "reveal_badge_legendary": {
+      "file": "pieces/reveal_badge_legendary.png",
+      "size": [
+        240,
+        56
+      ],
+      "nine_slice": {
+        "left": 26,
+        "top": 20,
+        "right": 26,
+        "bottom": 20
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        30,
+        18,
+        30,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "reveal_badge_accent_legendary": {
+      "file": "pieces/reveal_badge_accent_legendary.png",
+      "size": [
+        240,
+        56
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "animations": {
+    "lanterne_allumage": {
+      "file": "animations/lanterne_allumage.png",
+      "frame_size": [
+        384,
+        480
+      ],
+      "columns": 4,
+      "rows": 2,
+      "frame_count": 8,
+      "pivot": [
+        192,
+        440
+      ],
+      "durations_ms": [
+        110,
+        110,
+        100,
+        100,
+        100,
+        100,
+        90,
+        190
+      ],
+      "loop": false,
+      "frames": [
+        "animations/lanterne_allumage/00.png",
+        "animations/lanterne_allumage/01.png",
+        "animations/lanterne_allumage/02.png",
+        "animations/lanterne_allumage/03.png",
+        "animations/lanterne_allumage/04.png",
+        "animations/lanterne_allumage/05.png",
+        "animations/lanterne_allumage/06.png",
+        "animations/lanterne_allumage/07.png"
+      ],
+      "index_order": "left_to_right_then_next_row"
+    },
+    "colonne_rare": {
+      "file": "animations/colonne_rare.png",
+      "frame_size": [
+        256,
+        512
+      ],
+      "columns": 4,
+      "rows": 3,
+      "frame_count": 10,
+      "pivot": [
+        128,
+        480
+      ],
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        90,
+        110,
+        100,
+        100,
+        90,
+        90
+      ],
+      "loop": false,
+      "frames": [
+        "animations/colonne_rare/00.png",
+        "animations/colonne_rare/01.png",
+        "animations/colonne_rare/02.png",
+        "animations/colonne_rare/03.png",
+        "animations/colonne_rare/04.png",
+        "animations/colonne_rare/05.png",
+        "animations/colonne_rare/06.png",
+        "animations/colonne_rare/07.png",
+        "animations/colonne_rare/08.png",
+        "animations/colonne_rare/09.png"
+      ],
+      "index_order": "left_to_right_then_next_row"
+    },
+    "colonne_epic": {
+      "file": "animations/colonne_epic.png",
+      "frame_size": [
+        256,
+        512
+      ],
+      "columns": 4,
+      "rows": 3,
+      "frame_count": 10,
+      "pivot": [
+        128,
+        480
+      ],
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        90,
+        110,
+        100,
+        100,
+        90,
+        90
+      ],
+      "loop": false,
+      "frames": [
+        "animations/colonne_epic/00.png",
+        "animations/colonne_epic/01.png",
+        "animations/colonne_epic/02.png",
+        "animations/colonne_epic/03.png",
+        "animations/colonne_epic/04.png",
+        "animations/colonne_epic/05.png",
+        "animations/colonne_epic/06.png",
+        "animations/colonne_epic/07.png",
+        "animations/colonne_epic/08.png",
+        "animations/colonne_epic/09.png"
+      ],
+      "index_order": "left_to_right_then_next_row"
+    },
+    "colonne_legendary": {
+      "file": "animations/colonne_legendary.png",
+      "frame_size": [
+        256,
+        512
+      ],
+      "columns": 4,
+      "rows": 3,
+      "frame_count": 10,
+      "pivot": [
+        128,
+        480
+      ],
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        90,
+        110,
+        100,
+        100,
+        90,
+        90
+      ],
+      "loop": false,
+      "frames": [
+        "animations/colonne_legendary/00.png",
+        "animations/colonne_legendary/01.png",
+        "animations/colonne_legendary/02.png",
+        "animations/colonne_legendary/03.png",
+        "animations/colonne_legendary/04.png",
+        "animations/colonne_legendary/05.png",
+        "animations/colonne_legendary/06.png",
+        "animations/colonne_legendary/07.png",
+        "animations/colonne_legendary/08.png",
+        "animations/colonne_legendary/09.png"
+      ],
+      "index_order": "left_to_right_then_next_row"
+    },
+    "eclat_final": {
+      "file": "animations/eclat_final.png",
+      "frame_size": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "rows": 2,
+      "frame_count": 8,
+      "pivot": [
+        256,
+        256
+      ],
+      "durations_ms": [
+        55,
+        60,
+        65,
+        75,
+        80,
+        85,
+        90,
+        110
+      ],
+      "loop": false,
+      "frames": [
+        "animations/eclat_final/00.png",
+        "animations/eclat_final/01.png",
+        "animations/eclat_final/02.png",
+        "animations/eclat_final/03.png",
+        "animations/eclat_final/04.png",
+        "animations/eclat_final/05.png",
+        "animations/eclat_final/06.png",
+        "animations/eclat_final/07.png"
+      ],
+      "index_order": "left_to_right_then_next_row"
+    },
+    "particules": {
+      "file": "animations/particules.png",
+      "frame_size": [
+        256,
+        512
+      ],
+      "columns": 4,
+      "rows": 2,
+      "frame_count": 8,
+      "pivot": [
+        128,
+        480
+      ],
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "frames": [
+        "animations/particules/00.png",
+        "animations/particules/01.png",
+        "animations/particules/02.png",
+        "animations/particules/03.png",
+        "animations/particules/04.png",
+        "animations/particules/05.png",
+        "animations/particules/06.png",
+        "animations/particules/07.png"
+      ],
+      "index_order": "left_to_right_then_next_row"
+    }
+  },
+  "layout": {
+    "central_scene_rect": [
+      385,
+      100,
+      1150,
+      860
+    ],
+    "lantern_anchor_in_scene": [
+      575,
+      540
+    ],
+    "lantern_sprite_rect_in_scene": [
+      383,
+      100,
+      384,
+      480
+    ],
+    "column_anchor_in_scene": [
+      575,
+      540
+    ],
+    "final_anchor_in_scene": [
+      575,
+      430
+    ],
+    "particles_anchor_in_scene": [
+      575,
+      540
+    ],
+    "infos_rect": [
+      24,
+      104,
+      340,
+      936
+    ],
+    "heroes_rect": [
+      1556,
+      104,
+      340,
+      936
+    ],
+    "hero_rows": [
+      [
+        1580,
+        160,
+        292,
+        96
+      ],
+      [
+        1580,
+        264,
+        292,
+        96
+      ],
+      [
+        1580,
+        368,
+        292,
+        96
+      ],
+      [
+        1580,
+        472,
+        292,
+        96
+      ],
+      [
+        1580,
+        576,
+        292,
+        96
+      ],
+      [
+        1580,
+        680,
+        292,
+        96
+      ],
+      [
+        1580,
+        784,
+        292,
+        96
+      ],
+      [
+        1580,
+        888,
+        292,
+        96
+      ]
+    ],
+    "return_rect": [
+      24,
+      8,
+      300,
+      96
+    ],
+    "title_rect": [
+      370,
+      12,
+      840,
+      80
+    ],
+    "currency_rects": [
+      [
+        1410,
+        8,
+        210,
+        96
+      ],
+      [
+        1640,
+        8,
+        210,
+        96
+      ]
+    ],
+    "invocation_buttons": {
+      "fragments": [
+        440,
+        968,
+        480,
+        100
+      ],
+      "gems": [
+        944,
+        968,
+        480,
+        100
+      ]
+    },
+    "rates_by_game": {
+      "rare": 65,
+      "epic": 28,
+      "legendary": 7
+    },
+    "reveal": {
+      "rect": [
+        540,
+        130,
+        840,
+        820
+      ],
+      "name_rect": [
+        650,
+        690,
+        620,
+        72
+      ],
+      "rarity_rect": [
+        840,
+        760,
+        240,
+        56
+      ],
+      "trap_rect": [
+        630,
+        820,
+        660,
+        96
+      ],
+      "hero_anchor": [
+        960,
+        600
+      ]
+    },
+    "timeline": {
+      "duration_ms": 2600,
+      "tracks": [
+        {
+          "animation": "lanterne_allumage",
+          "start_ms": 0,
+          "anchor": [
+            575,
+            540
+          ]
+        },
+        {
+          "animation": "colonne_<rarity>",
+          "start_ms": 800,
+          "anchor": [
+            575,
+            540
+          ]
+        },
+        {
+          "animation": "eclat_final",
+          "start_ms": 1700,
+          "anchor": [
+            575,
+            430
+          ]
+        },
+        {
+          "animation": "particules",
+          "start_ms": 500,
+          "end_ms": 2600,
+          "anchor": [
+            575,
+            540
+          ]
+        }
+      ],
+      "events": [
+        {
+          "time_ms": 1700,
+          "name": "reveal_flash"
+        },
+        {
+          "time_ms": 2350,
+          "name": "show_hero_reveal"
+        }
+      ]
+    },
+    "runtime": [
+      "column color chooses rarity; do not recolor hero",
+      "render scene effects inside a clipped 1150x860 Control",
+      "hero name, rarity, counters and trap text are game Labels",
+      "no statistical roll defined in assets"
+    ]
+  },
+  "text_by_game": true,
+  "font": "Fredoka supplied by game",
+  "button_states": {
+    "invoke_fragments": {
+      "normal": "invoke_fragments_normal",
+      "hover": "invoke_fragments_hover",
+      "pressed": "invoke_fragments_pressed"
+    },
+    "invoke_gems": {
+      "normal": "invoke_gems_normal",
+      "hover": "invoke_gems_hover",
+      "pressed": "invoke_gems_pressed"
+    },
+    "return": {
+      "normal": "return_normal",
+      "hover": "return_hover",
+      "pressed": "return_pressed"
+    }
+  },
+  "shared_original_kit": "../../kit_ui_actuel/ui_kit.json"
+}

@@ -1,0 +1,565 @@
+{
+  "canvas_reference": [
+    1920,
+    1080
+  ],
+  "texture_filter": "nearest",
+  "assets": {
+    "blason_murim_128": {
+      "file": "pieces/blason_murim_128.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "blason_elements_128": {
+      "file": "pieces/blason_elements_128.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "blason_rempart_128": {
+      "file": "pieces/blason_rempart_128.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "blason_ombres_128": {
+      "file": "pieces/blason_ombres_128.png",
+      "size": [
+        128,
+        128
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "vignette_murim": {
+      "file": "pieces/vignette_murim.png",
+      "size": [
+        480,
+        270
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "vignette_elements": {
+      "file": "pieces/vignette_elements.png",
+      "size": [
+        480,
+        270
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "vignette_rempart": {
+      "file": "pieces/vignette_rempart.png",
+      "size": [
+        480,
+        270
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "vignette_ombres": {
+      "file": "pieces/vignette_ombres.png",
+      "size": [
+        480,
+        270
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "main_window": {
+      "file": "pieces/main_window.png",
+      "size": [
+        1864,
+        945
+      ],
+      "nine_slice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "title": {
+      "file": "pieces/title.png",
+      "size": [
+        1100,
+        80
+      ],
+      "nine_slice": {
+        "left": 40,
+        "top": 16,
+        "right": 40,
+        "bottom": 16
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        44,
+        18,
+        44,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "formation_card": {
+      "file": "pieces/formation_card.png",
+      "size": [
+        880,
+        408
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "bonus_panel": {
+      "file": "pieces/bonus_panel.png",
+      "size": [
+        420,
+        48
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "resonance_panel": {
+      "file": "pieces/resonance_panel.png",
+      "size": [
+        420,
+        48
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        32,
+        18,
+        32,
+        18
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "portrait_slot": {
+      "file": "pieces/portrait_slot.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "source": "original kit; 9-slice assembly"
+    },
+    "return_normal": {
+      "file": "pieces/return_normal.png",
+      "size": [
+        300,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        300,
+        96
+      ]
+    },
+    "return_hover": {
+      "file": "pieces/return_hover.png",
+      "size": [
+        300,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        300,
+        96
+      ]
+    },
+    "return_pressed": {
+      "file": "pieces/return_pressed.png",
+      "size": [
+        300,
+        96
+      ],
+      "nine_slice": {
+        "left": 28,
+        "top": 22,
+        "right": 28,
+        "bottom": 22
+      },
+      "stretch": "stretch",
+      "content_margins": [
+        34,
+        20,
+        34,
+        20
+      ],
+      "source": "original kit; 9-slice assembly",
+      "min_touch_size": [
+        300,
+        96
+      ]
+    },
+    "portrait_locked_veil": {
+      "file": "pieces/portrait_locked_veil.png",
+      "size": [
+        64,
+        64
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "formation_selected_accent": {
+      "file": "pieces/formation_selected_accent.png",
+      "size": [
+        880,
+        408
+      ],
+      "nine_slice": null,
+      "stretch": "stretch",
+      "content_margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "animations": {},
+  "layout": {
+    "main_window_rect": [
+      28,
+      105,
+      1864,
+      945
+    ],
+    "title_rect": [
+      40,
+      15,
+      1100,
+      80
+    ],
+    "return_rect": [
+      1590,
+      10,
+      300,
+      96
+    ],
+    "cards": {
+      "rects": [
+        [
+          60,
+          180,
+          880,
+          408
+        ],
+        [
+          980,
+          180,
+          880,
+          408
+        ],
+        [
+          60,
+          610,
+          880,
+          408
+        ],
+        [
+          980,
+          610,
+          880,
+          408
+        ]
+      ],
+      "min_touch_size": [
+        880,
+        408
+      ],
+      "crest_offset": [
+        20,
+        20,
+        96,
+        96
+      ],
+      "name_offset": [
+        130,
+        24,
+        710,
+        38
+      ],
+      "attack_name_offset": [
+        130,
+        65,
+        710,
+        34
+      ],
+      "portraits_offsets": [
+        [
+          132,
+          108,
+          56,
+          56
+        ],
+        [
+          194,
+          108,
+          56,
+          56
+        ],
+        [
+          256,
+          108,
+          56,
+          56
+        ],
+        [
+          318,
+          108,
+          56,
+          56
+        ]
+      ],
+      "vignette_offset": [
+        18,
+        170,
+        384,
+        216
+      ],
+      "description_offset": [
+        420,
+        176,
+        420,
+        96
+      ],
+      "bonus_rect": [
+        420,
+        282,
+        420,
+        48
+      ],
+      "resonance_rect": [
+        420,
+        342,
+        420,
+        48
+      ],
+      "bonus_and_resonance_texts": "from current game relic/formation data, no new balance values",
+      "unrecruited_portraits": "runtime grayscale shader plus locked veil"
+    },
+    "runtime": [
+      "illustrations are static thumbnails, not combo animations",
+      "four exact hero memberships retained",
+      "entire card has click/touch zone; inspect details in existing game modal",
+      "name, effect, bonus and resonance are written by game"
+    ]
+  },
+  "text_by_game": true,
+  "font": "Fredoka supplied by game",
+  "formations": [
+    {
+      "id": "murim",
+      "name": "Formation des quatre voies",
+      "attack": "Les quatre voies, un seul ciel",
+      "heroes": [
+        "mei_lian",
+        "jin_seok",
+        "yun_tao",
+        "tang_su"
+      ],
+      "description": [
+        "Pétales, onde de cloche,",
+        "courant de Taiji et aiguilles.",
+        "Les quatre énergies se rejoignent."
+      ]
+    },
+    {
+      "id": "elements",
+      "name": "Cycle des éléments",
+      "attack": "La tempête des origines",
+      "heroes": [
+        "brume",
+        "orage",
+        "braise",
+        "sylve"
+      ],
+      "description": [
+        "Racines, vague, foudre et feu.",
+        "Les éléments forment une",
+        "tornade de vapeur et d’étincelles."
+      ]
+    },
+    {
+      "id": "rempart",
+      "name": "Dernière ligne",
+      "attack": "Le rempart avance",
+      "heroes": [
+        "bastion",
+        "kharok",
+        "aegis",
+        "valen"
+      ],
+      "description": [
+        "Un mur de boucliers avance.",
+        "Marteau et lance ouvrent la voie.",
+        "Le grand blason abat le rempart."
+      ]
+    },
+    {
+      "id": "ombres",
+      "name": "Pacte des ombres",
+      "attack": "La nuit aux quatre visages",
+      "heroes": [
+        "saffran",
+        "rivet",
+        "corbin",
+        "nyx"
+      ],
+      "description": [
+        "Masques, carreaux et plumes.",
+        "Les quatre chasseurs surgissent",
+        "dans une embuscade nocturne."
+      ]
+    }
+  ],
+  "button_states": {
+    "return": {
+      "normal": "return_normal",
+      "hover": "return_hover",
+      "pressed": "return_pressed"
+    }
+  },
+  "shared_original_kit": "../../kit_ui_actuel/ui_kit.json"
+}

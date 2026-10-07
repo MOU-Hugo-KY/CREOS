@@ -10,8 +10,8 @@ signal attack_chosen(slot: int)
 const TRAY := Vector2(1090, 164)
 const SKILL_X := [420.0, 566.0, 712.0]
 const SECRET_POS := Vector2(874, 44)
-## Symbole d'élément du badge (en attendant de vraies icônes d'élément : partie 2 du pack ChatGPT).
-const ELEMENT_GLYPHS := {"feu": "burn", "eau": "wet", "nature": "rooted", "lumiere": "stunned", "ombre": "mark"}
+## Icône d'élément du badge (pack partie 2, assets/ui/ecrans/fiche_heros/pieces/element_<nom>_64.png).
+const ELEMENT_ICONS := {"feu": "fire", "eau": "water", "nature": "nature", "lumiere": "light", "ombre": "shadow"}
 
 var unit: BattleUnit
 var _icons: Array[AttackIcon] = []
@@ -127,7 +127,7 @@ func show_for(p_unit: BattleUnit) -> void:
 	badge.position = Vector2(88, 88)
 	badge.size = Vector2(44, 44)
 	var elem_color := Palette.element_color(unit.element).lightened(0.2)
-	var glyph_tex := OverheadBar.tex("status_%s_24" % ELEMENT_GLYPHS.get(unit.element, "mark"))
+	var glyph_tex := ScreenPack.tex("fiche_heros", "element_%s_64" % ELEMENT_ICONS.get(unit.element, "shadow"))
 	# Pastille ronde (maquette) : fond sombre, liseré de la couleur de l'élément, symbole au centre.
 	badge.draw.connect(func() -> void:
 		var c := Vector2(22, 22)
@@ -138,7 +138,7 @@ func show_for(p_unit: BattleUnit) -> void:
 		badge.draw_arc(c, 16.0, 0.0, TAU, 32, elem_color, 3.0)
 		badge.draw_arc(c, 18.5, 0.0, TAU, 32, Color("0e0c12"), 2.0)
 		if glyph_tex:
-			badge.draw_texture_rect(glyph_tex, Rect2(c - Vector2(14, 14), Vector2(28, 28)), false))
+			badge.draw_texture_rect(glyph_tex, Rect2(c - Vector2(16, 16), Vector2(32, 32)), false))
 	badge.z_index = 2
 	_portrait_holder.add_child(badge)
 	var color := Palette.element_color(unit.element)

@@ -11,6 +11,7 @@ var _hero: Dictionary = {}
 var _color := Color.WHITE
 var _time := 0.0
 var _tween: Tween
+var pedestal := true  # socle lumineux sous le héros
 
 
 func _init() -> void:
@@ -90,6 +91,8 @@ func _layout() -> void:
 
 
 func _draw_pedestal() -> void:
+	if not pedestal:
+		return
 	var c := Vector2(size.x * 0.5, size.y * 0.86)
 	var r := Vector2(size.y * 0.3, size.y * 0.075)
 	var pulse := 0.5 + 0.15 * sin(_time * 2.0)
