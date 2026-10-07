@@ -1,0 +1,30 @@
+{
+  "nom": "Racines affamées",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      300,
+      155,
+      85,
+      "#7CF1D1"
+    ],
+    [
+      1000,
+      155,
+      85,
+      "#C887FF"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}

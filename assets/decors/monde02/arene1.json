@@ -1,0 +1,30 @@
+{
+  "nom": "Sentier des spores",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      310,
+      180,
+      65,
+      "#98FFC5"
+    ],
+    [
+      1050,
+      180,
+      65,
+      "#98FFC5"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}
