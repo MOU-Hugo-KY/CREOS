@@ -1,0 +1,36 @@
+{
+  "nom": "Route du dernier cercle",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      640,
+      60,
+      90,
+      "#B17BFF"
+    ],
+    [
+      500,
+      150,
+      65,
+      "#FFD090"
+    ],
+    [
+      780,
+      150,
+      65,
+      "#FFD090"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par2"
+}
