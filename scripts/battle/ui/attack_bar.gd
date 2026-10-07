@@ -128,12 +128,18 @@ func show_for(p_unit: BattleUnit) -> void:
 	badge.size = Vector2(44, 44)
 	var elem_color := Palette.element_color(unit.element).lightened(0.2)
 	var glyph_tex := OverheadBar.tex("status_%s_24" % ELEMENT_GLYPHS.get(unit.element, "mark"))
+	# Pastille ronde (maquette) : fond sombre, liseré de la couleur de l'élément, symbole au centre.
 	badge.draw.connect(func() -> void:
-		var bf := OverheadBar.tex("secret_frame_normal")
-		if bf:
-			badge.draw_texture_rect(bf, Rect2(Vector2.ZERO, Vector2(44, 44)), false, elem_color)
+		var c := Vector2(22, 22)
+		var disc := PackedVector2Array()
+		for i in 32:
+			disc.append(c + Vector2.from_angle(TAU * i / 32.0) * 17.0)
+		badge.draw_colored_polygon(disc, Color("1c1a22"))
+		badge.draw_arc(c, 16.0, 0.0, TAU, 32, elem_color, 3.0)
+		badge.draw_arc(c, 18.5, 0.0, TAU, 32, Color("0e0c12"), 2.0)
 		if glyph_tex:
-			badge.draw_texture_rect(glyph_tex, Rect2(Vector2(10, 10), Vector2(24, 24)), false))
+			badge.draw_texture_rect(glyph_tex, Rect2(c - Vector2(14, 14), Vector2(28, 28)), false))
+	badge.z_index = 2
 	_portrait_holder.add_child(badge)
 	var color := Palette.element_color(unit.element)
 	for i in _icons.size():
