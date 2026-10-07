@@ -13,11 +13,29 @@ signal ui_sound(sfx_name: String)
 const S := "lanterne"
 const CURRENCIES := [["fragments_relique", "fragment_serment_64", "fragments"], ["gems", "gemme_64", "gemmes"]]
 const RARITY_KEYS := {2: "rare", 3: "epic", 4: "legendary"}
+## Couleur de la flamme selon la rareté (le dessin du pack est doré : on ne garde l'or que pour
+## les légendaires).
+const FLAME := {2: Color("4aa8ff"), 3: Color("b76cff")}
+## Recolore seulement les pixels clairs et chauds (la flamme), pas le laiton plus sombre.
+const FLAME_SHADER := """
+shader_type canvas_item;
+uniform vec4 flame : source_color = vec4(1.0);
+uniform float amount = 0.0;
+void fragment() {
+	vec4 c = texture(TEXTURE, UV);
+	float l = dot(c.rgb, vec3(0.3, 0.59, 0.11));
+	float warm = c.r - c.b;
+	float k = smoothstep(0.55, 0.75, l) * step(0.15, warm) * amount;
+	vec3 tinted = flame.rgb * (0.45 + 0.75 * l);
+	COLOR = vec4(mix(c.rgb, tinted, k), c.a);
+}
+"""
 
 var busy := false
 var _scene: Control  # la salle de la lanterne, 1150 × 860, découpée
 var _lantern: TextureRect
 var _lit: Anim
+var _flame: ShaderMaterial
 var _columns: Dictionary = {}  # "rare"… -> Anim
 var _burst: Anim
 var _sparks: Anim
@@ -63,6 +81,11 @@ func _ready() -> void:
 	_sparks = _anim("particules", L.particles_anchor_in_scene)
 	_lantern = ScreenPack.image(_scene, ScreenPack.tex(S, "lanterne"), ScreenPack.rect(L.lantern_sprite_rect_in_scene))
 	_lit = _anim("lanterne_allumage", L.lantern_anchor_in_scene)
+	_flame = ShaderMaterial.new()
+	_flame.shader = Shader.new()
+	_flame.shader.code = FLAME_SHADER
+	_lit.material = _flame
+	_lantern.material = _flame
 	for k: String in ["rare", "epic", "legendary"]:
 		_columns[k] = _anim("colonne_" + k, L.column_anchor_in_scene)
 	_burst = _anim("eclat_final", L.final_anchor_in_scene)
@@ -210,6 +233,8 @@ func _summon(currency: String) -> void:
 
 ## Chronologie du JSON : allumage à 0, colonne à 0,8 s, éclat à 1,7 s, révélation à 2,35 s.
 func _ceremony(rarity: int) -> void:
+	_flame.set_shader_parameter("flame", FLAME.get(rarity, Color.WHITE))
+	_flame.set_shader_parameter("amount", 1.0 if FLAME.has(rarity) else 0.0)
 	_lantern.visible = false
 	_lit.play()
 	await get_tree().create_timer(0.8).timeout
