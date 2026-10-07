@@ -1,0 +1,54 @@
+{
+  "nom": "Puits enchaînés",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      178,
+      46,
+      50,
+      "#FFC782"
+    ],
+    [
+      276,
+      130,
+      50,
+      "#FFC782"
+    ],
+    [
+      536,
+      119,
+      55,
+      "#FFC782"
+    ],
+    [
+      745,
+      116,
+      55,
+      "#FFC782"
+    ],
+    [
+      996,
+      187,
+      50,
+      "#FFC782"
+    ],
+    [
+      1184,
+      80,
+      50,
+      "#FFC782"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+}
