@@ -76,7 +76,7 @@ func _ready() -> void:
 	_combo_box.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	_combo_box.offset_right = -28
 	_combo_box.offset_bottom = -26
-	_combo_box.offset_left = -332
+	_combo_box.offset_left = -264
 	_combo_box.alignment = BoxContainer.ALIGNMENT_END
 	_combo_box.add_theme_constant_override("separation", 12)
 	_root.add_child(_combo_box)
@@ -152,7 +152,7 @@ func set_combos(list: Array) -> void:
 	for c: Dictionary in list.slice(0, 3):
 		var b := _combo_button(c)
 		_combo_box.add_child(b)
-		b.pivot_offset = Vector2(152, 50)
+		b.pivot_offset = Vector2(118, 35)
 		b.scale = Vector2.ONE * 0.7
 		b.create_tween().tween_property(b, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
@@ -163,7 +163,7 @@ func _combo_button(c: Dictionary) -> Button:
 	var kind: String = {4: "quatuor", 3: "trio", 2: "duo"}.get(int(c.size), "duo")
 	var b := Button.new()
 	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(304, 100)
+	b.custom_minimum_size = Vector2(236, 70)
 	b.tooltip_text = "%s : %s" % [kind.capitalize(), c.attack]
 	b.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	for st: String in ["normal", "hover", "pressed"]:
@@ -172,17 +172,15 @@ func _combo_button(c: Dictionary) -> Button:
 	var cid: String = c.id
 	b.pressed.connect(func() -> void: combo_requested.emit(cid))
 	var members: Array = c.get("members", [])
-	for i in members.size():
-		var p := RoundPortrait.new().setup(GameData.hero(String(members[i])), 44, 0.1)
-		p.position = Vector2(24 + i * 52, 14)
-		b.add_child(p)
-	var name := _label(17, 5)
-	name.text = String(c.attack)
-	name.position = Vector2(20, 64)
-	name.size = Vector2(264, 24)
-	name.clip_text = true
-	name.add_theme_color_override("font_color", Color("fff3d0"))
-	b.add_child(name)
+	for i in members.size():  # têtes carrées des membres, comme la maquette
+		var h := TextureRect.new()
+		h.texture = RoundPortrait.portrait_texture(GameData.hero(String(members[i])))
+		h.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		h.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		h.position = Vector2(16 + i * 52, 12)
+		h.size = Vector2(46, 46)
+		h.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(h)
 	var glow := TextureRect.new()
 	glow.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -328,23 +326,24 @@ func _round_button(text: String) -> Button:
 	var b := Button.new()
 	b.toggle_mode = true
 	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(150 if text == "AUTO" else 130, 64)
+	b.custom_minimum_size = Vector2(140 if text == "AUTO" else 124, 60)
 	b.tooltip_text = text
 	for st: String in ["normal", "hover", "pressed", "hover_pressed"]:
 		var sb := AttackBar._nine("wave_cartouche", 20)
-		sb.modulate_color = Color(1.15, 1.0, 0.65) if st.contains("pressed") else (Color(0.85, 0.85, 0.9) if st == "hover" else Color(0.7, 0.7, 0.76))
+		sb.modulate_color = Color(1.25, 1.1, 0.7) if st.contains("pressed") else (Color(1.1, 1.1, 1.1) if st == "hover" else Color.WHITE)
 		b.add_theme_stylebox_override(st, sb)
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	var glyph := TextureRect.new()
 	glyph.texture = OverheadBar.tex(GLYPHS.get(text, "glyph_pause"))
-	glyph.position = Vector2(14, 14)
-	glyph.size = Vector2(36, 36)
+	glyph.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	glyph.position = Vector2(14, 15)
+	glyph.size = Vector2(30, 30)
 	glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	b.add_child(glyph)
-	var cap := _label(24, 6)
+	var cap := _label(22, 5)
 	cap.text = text
-	cap.position = Vector2(56, 0)
-	cap.size = Vector2(b.custom_minimum_size.x - 64, 64)
+	cap.position = Vector2(48, 0)
+	cap.size = Vector2(b.custom_minimum_size.x - 58, 60)
 	cap.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cap.add_theme_color_override("font_color", Color("f6efdf"))
