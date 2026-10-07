@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 MAP = {"idle": "idle", "walk": "walk", "run": "walk", "attack": "attack", "skill": "skill",
        "hurt": "hurt", "death": "death"}
-SCALE = 1.6
+SCALE = 1.5  # = 1 pixel d'écran par pixel de dessin en combat (net), voir TOP_SCALE ; ×2 pour les tout petits
 HIT_EVENTS = ("hit_active", "release", "attack_active")
 # Monstres dessinés trop petits (ou trop grands) par rapport à leur rôle : multiplicateur de taille.
 SIZE_FIX = {"r08_vautour_des_pics": 1.8, "r08_serpent_des_cimes": 1.35, "r08_vipere_des_nuages": 1.35,

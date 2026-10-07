@@ -20,8 +20,7 @@ PlayerData="*res://scripts/core/player_data.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/window_width_override=1280
-window/size/window_height_override=720
+window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=0
@@ -37,5 +36,6 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 renderer/rendering_method="mobile"
+2d/snap/snap_2d_transforms_to_pixel=true
 rendering_device/driver.windows="d3d12"
 textures/vram_compression/import_etc2_astc=true
