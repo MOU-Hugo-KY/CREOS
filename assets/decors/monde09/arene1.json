@@ -1,0 +1,30 @@
+{
+  "nom": "Porte des écailles",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [
+    [
+      330,
+      35,
+      100,
+      "#FFAC4D"
+    ],
+    [
+      950,
+      35,
+      100,
+      "#FFAC4D"
+    ]
+  ],
+  "animations": [],
+  "premier_plan_vide": true,
+  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par2"
+}
