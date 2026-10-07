@@ -8,6 +8,7 @@ extends Node2D
 
 const HUB_SCENE := "res://scenes/hub/hub.tscn"
 const FRAME := Vector2(1280, 720)
+const TRAP_DELAY := 1.0  # un piège se déclenche une seconde après l'annonce de la salle
 # Scène de quatuor (repère 512 × 288) posée sur le combat : ses cibles (≈ 374, 217) tombent sur la
 # ligne ennemie et ses pieds de héros sur la ligne alliée.
 const QUARTET_SCALE := 2.0
@@ -39,6 +40,7 @@ const STATUS_LABELS := {
 
 var engine := BattleEngine.new()
 var dungeon_id := ""  # donjon choisi au hub (PlayerData.current_dungeon)
+var lodge_battle: Dictionary = {}  # combat de Loge (PlayerData.current_lodge_battle), vide pour une chasse
 var team_ids: Array = []  # équipe de chasse (PlayerData.team())
 var views: Dictionary = {}  # uid -> UnitView
 var unit_data: Dictionary = {}  # uid -> Dictionary
@@ -63,6 +65,7 @@ var _last_slot := {}  # uid -> emplacement de sa dernière attaque (coups lourds
 
 func _ready() -> void:
 	dungeon_id = PlayerData.current_dungeon
+	lodge_battle = PlayerData.current_lodge_battle
 	if dungeon_id == "" or not GameData.dungeons.has(dungeon_id):
 		dungeon_id = GameData.hub.get("first_hunt", "monde01_1")
 	_build_world()
@@ -83,6 +86,7 @@ func _ready() -> void:
 			start_battle(randi()))
 	hud.hub_requested.connect(func() -> void:
 		Engine.time_scale = 1.0
+		PlayerData.current_lodge_battle = {}
 		get_tree().change_scene_to_file(HUB_SCENE))
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 	get_viewport().size_changed.connect(_fit_camera)
@@ -105,8 +109,18 @@ func start_battle(rng_seed: int) -> void:
 	team_ids = PlayerData.team()
 	var team_data: Array = team_ids.map(func(id: String) -> Dictionary:
 		return PlayerData.hero_for_battle(id))
-	engine.setup(team_data, GameData.dungeon_waves_for(dungeon_id, team_data.size()), rng_seed,
-		GameData.team_combos(), GameData.synergies())
+	if lodge_battle.is_empty():
+		engine.setup(team_data, GameData.dungeon_waves_for(dungeon_id, team_data.size()), rng_seed,
+			GameData.team_combos(), GameData.synergies())
+	else:
+		# Donjon d'une Loge : une vague par salle, des héros en défense, des pièges à l'entrée.
+		var level := int(lodge_battle.get("level", 0))
+		var hero_data := func(id: String) -> Dictionary:
+			if level <= 0:
+				return PlayerData.hero_for_battle(id)
+			return Progression.hero_for_battle(GameData.hero(id), level, GameData.progression)
+		engine.setup(team_data, Lodge.waves(lodge_battle.rooms, hero_data), rng_seed, GameData.team_combos(),
+			GameData.synergies(), Lodge.wave_traps(lodge_battle.traps, GameData.lodge))
 	engine.auto_mode = was_auto
 	hud.set_auto(was_auto)
 	for i in engine.heroes.size():
@@ -256,6 +270,14 @@ func _handle_events() -> void:
 					times = [0.4]
 				hits_per_dst.clear()
 				last_time.clear()
+			"trap":
+				# Le piège se déclenche juste après l'annonce de la salle ; ses dégâts suivent.
+				offset = TRAP_DELAY
+				times = [0.0]
+				hits_per_dst.clear()
+				last_time.clear()
+				var trap_ev: Dictionary = ev
+				_schedule(TRAP_DELAY, func() -> void: _on_trap(trap_ev))
 			_:
 				var t := 0.0
 				if ev.get("dot", false):
@@ -274,12 +296,30 @@ func _handle_events() -> void:
 				_schedule(t, func() -> void: _on_impact(event))
 
 
+## Piège de Loge : son nom s'affiche et il éclate sur les combattants touchés.
+func _on_trap(ev: Dictionary) -> void:
+	var element := String(ev.get("element", ""))
+	hud.callout(String(ev.name), "Piège", Palette.element_color(element), true)
+	for uid: int in ev.targets:
+		var v: UnitView = views.get(uid)
+		if v and not v.is_dead():
+			fx.element_hit(v.chest_position(), element, true)
+			v.flash(Palette.element_color(element), 0.5)
+	fx.shake(0.3)
+	_sfx("ultimate_impact", -6.0)
+
+
 func _on_wave_start(ev: Dictionary) -> void:
 	_spawn_wave()
 	hud.set_wave(ev.index, ev.count)
 	var has_boss := engine.enemies.any(func(u: BattleUnit) -> bool: return u.is_boss)
 	var sub := "Le boss arrive !" if has_boss else ""
-	hud.banner("Vague %d / %d" % [ev.index + 1, ev.count], sub)
+	var title := "Vague %d / %d" % [ev.index + 1, ev.count]
+	if not lodge_battle.is_empty():  # salles de la Loge
+		var rooms: Array = GameData.lodge.get("rooms", [])
+		title = String(rooms[ev.index].name) if ev.index < rooms.size() else title
+		sub = "Salle %d / %d" % [ev.index + 1, ev.count]
+	hud.banner(title, sub)
 	audio.play("wave_start", -3.0, 0.0)
 	if has_boss:
 		audio.play_music("boss_loop")
@@ -544,8 +584,14 @@ func _end_battle(won: bool) -> void:
 	audio.stop_music(0.4)
 	var stars := engine.stars()
 	var rewards := GameData.dungeon_rewards(dungeon_id, stars)
-	# Le butin et l'XP sont enregistrés dans la sauvegarde.
-	var result := PlayerData.finish_hunt(dungeon_id, won, stars, rewards, team_ids)
+	var result: Dictionary
+	if lodge_battle.is_empty():
+		# Le butin et l'XP sont enregistrés dans la sauvegarde.
+		result = PlayerData.finish_hunt(dungeon_id, won, stars, rewards, team_ids)
+	else:
+		var gain := PlayerData.finish_lodge_battle(won)
+		rewards = {"gold": gain.gold} if gain.gold > 0 else {}
+		result = {"heroes": {}, "player_level_up": false}
 	var stats: Array = []
 	for i in engine.heroes.size():
 		var h := engine.heroes[i]
@@ -559,6 +605,9 @@ func _end_battle(won: bool) -> void:
 	var dungeon_name: String = GameData.dungeon(dungeon_id).get("name", "")
 	var replay := {"cost": PlayerData.hunt_cost(dungeon_id), "possible": PlayerData.can_start_hunt(dungeon_id),
 		"energy": PlayerData.energy(), "player_level_up": result.player_level_up, "player_level": PlayerData.level()}
+	if not lodge_battle.is_empty():
+		dungeon_name = "Loge · " + String(lodge_battle.name)
+		replay.possible = false
 	_schedule(END_DELAY, func() -> void:
 		audio.play_music("victory" if won else "defeat", false)
 		hud.show_end(won, stars, rewards, stats, dungeon_name, replay))
@@ -613,7 +662,8 @@ func _spawn_wave() -> void:
 		if not e.is_boss:
 			spot = _spot(1, k)
 			k += 1
-		_spawn(e, GameData.monster(e.def_id), spot)
+		var data: Dictionary = GameData.monster(e.def_id) if lodge_battle.is_empty() else GameData.hero(e.def_id)
+		_spawn(e, data, spot)
 
 
 ## Place du n-ième combattant d'un camp (0 héros, 1 ennemis).
@@ -660,7 +710,11 @@ func _build_world() -> void:
 	var region: Dictionary = GameData.regions.get(d.get("region", ""), {})
 	stage = BattleStage.new()
 	add_child(stage)
-	stage.setup(String(region.get("decor", "res://assets/decors/monde01/")), int(d.get("decor_scene", 1)))
+	if not lodge_battle.is_empty():
+		var arena: Dictionary = GameData.lodge.get("arena", {})
+		stage.setup(String(arena.get("decor", "res://assets/decors/monde06/")), int(arena.get("scene", 2)))
+	else:
+		stage.setup(String(region.get("decor", "res://assets/decors/monde01/")), int(d.get("decor_scene", 1)))
 
 	camera = Camera2D.new()
 	camera.position = FRAME / 2.0

@@ -22,6 +22,7 @@ func _initialize() -> void:
 	test_hero_upgrades()
 	test_quartet()
 	test_team_combos()
+	test_lodge()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -465,4 +466,47 @@ func test_team_combos() -> void:
 	var evs := e.drain_events()
 	check(evs.any(func(ev: Dictionary) -> bool: return ev.type == "shield"), "le trio de l'aube protège l'équipe")
 	check(not e.combo_ready("aube") and e.combo_ready("crocs_jumeaux"), "chaque combo une fois par combat, les autres restent prêts")
+	gd.free()
+
+
+func test_lodge() -> void:
+	print("Ma Loge : salles, pièges, rivaux")
+	var gd := _data()
+	var cfg: Dictionary = gd.lodge
+	var st := Lodge.empty_state(cfg)
+	check(st.rooms.size() == 3 and not Lodge.is_ready(st), "trois salles vides, donjon pas encore prêt")
+	check(Lodge.add_defender(st, cfg, 0, "bastion") and not Lodge.add_defender(st, cfg, 1, "bastion"),
+		"un héros ne défend qu'une salle")
+	Lodge.add_defender(st, cfg, 0, "aegis")
+	Lodge.add_defender(st, cfg, 0, "kharok")
+	check(not Lodge.add_defender(st, cfg, 0, "nyx"), "salle pleine")
+	Lodge.add_defender(st, cfg, 1, "nyx")
+	Lodge.add_defender(st, cfg, 2, "valen")
+	check(Lodge.is_ready(st), "un défenseur par salle : donjon prêt")
+	check(Lodge.toggle_trap(st, cfg, 0, "pieux") and Lodge.toggle_trap(st, cfg, 0, "brasero")
+		and not Lodge.toggle_trap(st, cfg, 0, "gaz"), "deux pièges au plus par salle")
+	check(Lodge.can_attack(500, 600) and Lodge.can_attack(600, 600) and not Lodge.can_attack(700, 600),
+		"seules les équipes moins fortes ou aussi fortes peuvent attaquer")
+	# Combat : les pièges de la première salle frappent les héros dès l'entrée.
+	var hero_data := func(id: String) -> Dictionary: return gd.hero(id).duplicate(true)
+	var e := BattleEngine.new()
+	e.setup(_team(gd), Lodge.waves(st.rooms, hero_data), 7, {}, {}, Lodge.wave_traps(st.traps, cfg))
+	var evs := e.drain_events()
+	var traps := evs.filter(func(ev: Dictionary) -> bool: return ev.type == "trap")
+	check(traps.size() == 2, "les deux pièges se déclenchent à l'entrée de la salle")
+	check(e.heroes[0].hp < e.heroes[0].max_hp and e.heroes[3].hp == e.heroes[3].max_hp,
+		"les pieux ne touchent que les héros de devant")
+	check(e.heroes.all(func(u: BattleUnit) -> bool: return u.has_status("brulure")), "le brasero brûle toute l'équipe")
+	check(e.enemies.size() == 3 and e.enemies[0].def_id == "bastion", "les défenseurs sont les héros de la salle")
+	e.simulate()
+	check(e.finished, "le combat de Loge va jusqu'au bout")
+	# Rivaux du jour : déterministes et attaquables par l'équipe.
+	var power_at := func(id: String, level: int) -> int:
+		return Progression.power(Progression.hero_stats(gd.hero(id), level, 0, gd.progression))
+	var r1 := Lodge.rivals("2026-10-07", 700, gd.heroes.keys(), cfg, power_at)
+	var r2 := Lodge.rivals("2026-10-07", 700, gd.heroes.keys(), cfg, power_at)
+	check(r1.size() == 3 and r1[0].name == r2[0].name and r1[0].rooms == r2[0].rooms, "les rivaux du jour sont toujours les mêmes")
+	check(r1.all(func(r: Dictionary) -> bool: return Lodge.can_attack(700, int(r.power)) and int(r.stake) > 0),
+		"chaque rival peut être attaqué et met une récompense en jeu")
+	check(Lodge.win_reward(1000, cfg) == 300 and Lodge.entry_fee(1000, cfg) == 100, "parts de la récompense")
 	gd.free()

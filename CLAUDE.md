@@ -82,6 +82,12 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   monde), `unit_view.gd` (un personnage : ClipPlayer, ombre, cible, nombres), `battle_fx.gd`
   (secousses, éclats), `battle_audio.gd` (sons), `ui/` (interface, bouton du quatuor, écran de fin).
   Les instants d'impact (`hit_times`) viennent des repères des clips.
+- **Ma Loge** (bâtiment « Loge privée » du hub, `PrivateLodgeScreen`) : le donjon du joueur. Trois salles
+  (`data/lodge.json` : défenseurs et pièges par salle, mises), règles pures dans `scripts/core/lodge.gd`
+  (`Lodge`), état dans la sauvegarde (`state.lodge_dungeon`, la clé `lodge` est le nom de la loge).
+  Une équipe n'attaque qu'un donjon de Force moyenne au moins égale à la sienne. Combat : une vague par
+  salle, des héros en défense (camp ennemi, retournés), pièges déclenchés à l'entrée
+  (`BattleEngine.setup(..., traps)`, événement `trap`). Rivaux du jour générés en attendant le jeu en ligne.
 - **Les données vont dans `data/*.json`** (héros, monstres, donjons, régions), pas dans le code.
   Un nouveau héros = une entrée JSON (+ un modèle 3D), sans toucher au moteur si ses effets existent.
 - Icônes d'attaque : `assets/ui/attacks/<id>.png`, tirées des clips par

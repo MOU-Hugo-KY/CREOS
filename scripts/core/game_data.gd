@@ -12,6 +12,7 @@ var summon: Dictionary = {}
 var quests: Dictionary = {}
 var relics: Dictionary = {}  # reliques, quatuors et Échos (data/relics.json)
 var combos_data: Dictionary = {}  # duos, trios et synergies (data/combos.json)
+var lodge: Dictionary = {}  # Ma Loge : salles, pièges, mises (data/lodge.json)
 
 
 func _ready() -> void:
@@ -30,6 +31,7 @@ func reload() -> void:
 	quests = load_json("res://data/quests.json")
 	relics = load_json("res://data/relics.json")
 	combos_data = load_json("res://data/combos.json")
+	lodge = load_json("res://data/lodge.json")
 
 
 static func load_json(path: String) -> Dictionary:

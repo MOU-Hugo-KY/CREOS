@@ -22,6 +22,7 @@ extends RefCounted
 ##   status     {dst, status, duration}   taunt / stun / dot / marque, mouille… (fiche de combat)
 ##   miss       {src, dst, reason}        esquive, aveuglement, leurre
 ##   quartet    {id, src, members, targets, hit_times, name, clip}  attaque combinée du quatuor
+##   trap       {id, name, element, targets}  piège de la Loge déclenché au début d'une vague
 ##   death      {dst}
 ##   victory    {}
 ##   defeat     {}
@@ -59,13 +60,15 @@ var combos_used: Dictionary = {}
 var quartet: Dictionary = {}  # le quatuor de l'équipe s'il y en a un (raccourci)
 ## Synergies actives (plusieurs héros du même élément ou de la même classe) : {kind, key, name, count, bonus}
 var synergies: Array = []
+var wave_traps: Array = []  # pièges de chaque vague (donjon d'une Loge), données de data/lodge.json
 
 
 ## heroes_data : Array de Dictionary (données de heroes.json + clé "id").
 ## waves_data  : Array d'Array de Dictionary (données de monsters.json + clé "id").
 func setup(heroes_data: Array, waves_data: Array, rng_seed: int = 0, team_combos: Dictionary = {},
-		synergy_data: Dictionary = {}) -> void:
+		synergy_data: Dictionary = {}, traps: Array = []) -> void:
 	_rng.seed = rng_seed
+	wave_traps = traps
 	heroes.clear()
 	for i in heroes_data.size():
 		var d: Dictionary = heroes_data[i]
@@ -289,6 +292,58 @@ func _start_next_wave() -> void:
 		h.gauge = 0.0
 	focus_uid = -1
 	_emit({"type": "wave_start", "index": wave_index, "count": waves.size()})
+	if wave_index < wave_traps.size():
+		for trap: Dictionary in wave_traps[wave_index]:
+			_trigger_trap(trap)
+
+
+## Piège d'une salle de Loge : il frappe les héros (ou renforce les défenseurs) dès l'entrée.
+func _trigger_trap(trap: Dictionary) -> void:
+	var alive := _alive(heroes)
+	var targets: Array[BattleUnit] = []
+	match String(trap.get("target", "all")):
+		"front":
+			targets.assign(alive.filter(func(u: BattleUnit) -> bool: return u.slot < 2))
+		"back":
+			targets.assign(alive.filter(func(u: BattleUnit) -> bool: return u.slot >= 5))
+		"random2":
+			var pool := alive.duplicate()
+			for _i in 2:
+				if not pool.is_empty():
+					targets.append(pool.pop_at(_rng.randi_range(0, pool.size() - 1)))
+		"defenders":
+			targets = _alive(enemies)
+		_:
+			targets = alive
+	if targets.is_empty() and not alive.is_empty() and trap.get("target", "") != "defenders":
+		targets.append(alive[0])  # personne à la place visée : le piège frappe le premier héros
+	_emit({"type": "trap", "id": trap.get("id", ""), "name": trap.get("name", ""), "element": trap.get("element", ""),
+		"targets": targets.map(func(u: BattleUnit) -> int: return u.uid)})
+	for e: Dictionary in trap.get("effects", []):
+		for t: BattleUnit in targets:
+			var duration := float(e.get("duration", 4.0))
+			match String(e.get("type", "")):
+				"damage_pct":
+					_apply_damage(null, t, t.max_hp * float(e.amount), false, 1.0)
+				"dot_pct":
+					var dot_name := String(e.get("name", "dot"))
+					t.dots.append({"dps": t.max_hp * float(e.amount), "time": duration, "src": -1, "name": dot_name})
+					t.statuses[dot_name] = maxf(t.statuses.get(dot_name, 0.0), duration)
+					_emit({"type": "status", "dst": t.uid, "status": dot_name, "duration": duration})
+				"status":
+					t.statuses[e.name] = maxf(t.statuses.get(e.name, 0.0), duration)
+					_emit({"type": "status", "dst": t.uid, "status": e.name, "duration": duration})
+				"buff":
+					t.mods.append({"stat": e.stat, "amount": float(e.amount), "time": duration})
+					var tag := ("buff_" if float(e.amount) > 0.0 else "debuff_") + String(e.stat)
+					t.statuses[tag] = maxf(t.statuses.get(tag, 0.0), duration)
+					_emit({"type": "status", "dst": t.uid, "status": tag, "duration": duration})
+				"gauge":
+					t.gauge = clampf(t.gauge + float(e.amount) * BattleUnit.GAUGE_MAX, 0.0, BattleUnit.GAUGE_MAX)
+				"shield_pct":
+					var amount := t.max_hp * float(e.amount)
+					t.shield += amount
+					_emit({"type": "shield", "dst": t.uid, "amount": amount})
 
 
 func _check_end() -> bool:

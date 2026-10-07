@@ -1,0 +1,59 @@
+{
+ "title": "Ma Loge",
+ "description": "Ta Loge devient ton donjon : place tes héros en défense dans trois salles, arme-les de pièges et mets une récompense en jeu. Seules les équipes moins fortes (ou aussi fortes) que ton donjon peuvent l'attaquer.",
+ "rooms": [
+  {"name": "Le vestibule", "defenders": 3, "traps": 2},
+  {"name": "La salle des trophées", "defenders": 3, "traps": 2},
+  {"name": "Le sanctuaire", "defenders": 4, "traps": 2}
+ ],
+ "arena": {"decor": "res://assets/decors/monde06/", "scene": 2},
+ "stake_step": 500,
+ "stake_max": 20000,
+ "win_share": 0.3,
+ "defense_share": 0.5,
+ "entry_share": 0.1,
+ "rivals_per_day": 3,
+ "rival_names": ["Bran l'Écorché", "Mère Ondine", "Les Trois Lanternes", "Sire Calbrun", "Vesna aux Sept Clés", "Le Comptoir Gris", "Olric Mange-Cendre", "Dame Ysolde", "Les Veilleurs du Puits", "Tobias le Rusé"],
+ "traps": {
+  "pieux": {
+   "name": "Pieux cachés", "icon": "⚔", "element": "ombre",
+   "description": "Des pieux jaillissent sous les héros de devant : 10 % de leurs PV max.",
+   "target": "front", "effects": [{"type": "damage_pct", "amount": 0.10}]
+  },
+  "flaque": {
+   "name": "Flaque maudite", "icon": "💧", "element": "eau",
+   "description": "Toute l'équipe entre mouillée (6 s) : les coups de foudre et de glace font plus mal.",
+   "target": "all", "effects": [{"type": "status", "name": "mouille", "duration": 6.0}]
+  },
+  "brasero": {
+   "name": "Brasero piégé", "icon": "🔥", "element": "feu",
+   "description": "Le brasero explose : brûlure sur toute l'équipe, 2 % des PV max par seconde pendant 5 s.",
+   "target": "all", "effects": [{"type": "dot_pct", "name": "brulure", "amount": 0.02, "duration": 5.0}]
+  },
+  "flechettes": {
+   "name": "Fléchettes empoisonnées", "icon": "☠", "element": "nature",
+   "description": "Deux héros au hasard sont empoisonnés : 3 % des PV max par seconde pendant 6 s.",
+   "target": "random2", "effects": [{"type": "dot_pct", "name": "poison", "amount": 0.03, "duration": 6.0}]
+  },
+  "glu": {
+   "name": "Glu d'araignée", "icon": "🕸", "element": "nature",
+   "description": "Le sol colle : la vitesse de toute l'équipe baisse de 30 % pendant 6 s.",
+   "target": "all", "effects": [{"type": "buff", "stat": "spd", "amount": -0.3, "duration": 6.0}]
+  },
+  "gaz": {
+   "name": "Gaz aveuglant", "icon": "☁", "element": "ombre",
+   "description": "Un nuage aveugle les héros de l'arrière pendant 5 s : ils ratent plus souvent.",
+   "target": "back", "effects": [{"type": "status", "name": "aveugle", "duration": 5.0}]
+  },
+  "rune": {
+   "name": "Rune d'entrave", "icon": "✦", "element": "lumiere",
+   "description": "Les héros de devant sont enracinés et déséquilibrés pendant 4 s.",
+   "target": "front", "effects": [{"type": "status", "name": "enracine", "duration": 4.0}, {"type": "status", "name": "desequilibre", "duration": 4.0}]
+  },
+  "cloche": {
+   "name": "Cloche d'alarme", "icon": "🔔", "element": "lumiere",
+   "description": "Les défenseurs sont prévenus : leur jauge démarre à 40 % et ils gagnent un bouclier de 8 % de leurs PV.",
+   "target": "defenders", "effects": [{"type": "gauge", "amount": 0.4}, {"type": "shield_pct", "amount": 0.08}]
+  }
+ }
+}

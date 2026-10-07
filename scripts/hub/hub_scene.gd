@@ -36,6 +36,7 @@ func _ready() -> void:
 	hud.action.connect(_do_action)
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 	hud.hunt_prep.start_requested.connect(start_hunt)
+	hud.private_lodge.battle_requested.connect(go_to_battle)
 	hud.time_of_day_requested.connect(func(h: float) -> void: town.set_hour(h))
 
 
@@ -79,6 +80,8 @@ func _do_action(action_name: String, id: String) -> void:
 			hud.open_shop()
 		"relics":
 			hud.open_relics()
+		"lodge":
+			hud.open_private_lodge()
 		_:
 			hud.toast("%s — bientôt disponible !" % _name_of(id))
 

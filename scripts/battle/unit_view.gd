@@ -31,11 +31,15 @@ func setup(p_unit: BattleUnit, p_data: Dictionary) -> void:
 	shown_hp = unit.hp
 	home_position = position
 	_id = String(data.get("id", unit.def_id))
-	model_scale = float(data.get("scale", HERO_SCALE if unit.team == 0 else ENEMY_SCALE))
+	# Un héros peut défendre une Loge (camp ennemi) : il garde la taille des héros.
+	var is_hero := unit.team == 0 or String(data.get("anim", "res://assets/anim/heroes/")).ends_with("heroes/")
+	model_scale = float(data.get("scale", HERO_SCALE if is_hero else ENEMY_SCALE))
 	player = ClipPlayer.new()
 	player.bundle = String(data.get("anim", "res://assets/anim/heroes/"))
 	player.scale = Vector2.ONE * model_scale
-	player.facing = 1.0  # les héros regardent à droite, les ennemis sont dessinés vers la gauche
+	# Les héros regardent à droite, les monstres sont dessinés vers la gauche ; un héros qui défend
+	# une Loge (camp ennemi) est retourné.
+	player.facing = -1.0 if unit.team == 1 and player.bundle.ends_with("heroes/") else 1.0
 	player.idle_clip = _id + "_idle"
 	player.sound_volume_db = -10.0
 	player.effect_color = Palette.element_color(p_unit.element)

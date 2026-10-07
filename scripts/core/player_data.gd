@@ -11,6 +11,8 @@ const TEAM_SIZE := 7  # formation : 2 devant, 3 au milieu, 2 à l'arrière
 
 var state: Dictionary = {}
 var current_dungeon := ""
+## Combat de Loge en cours (non enregistré) : {kind: "own"/"rival", name, rooms, traps, stake, fee, levels}
+var current_lodge_battle: Dictionary = {}
 var persist := true  # false = rien n'est écrit sur le disque (tests, captures)
 
 var _start: Dictionary = {}
@@ -588,6 +590,131 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 	if stars > best_stars(dungeon_id):
 		state.dungeons[dungeon_id] = {"stars": stars}
 		result.best_stars = true
+	save_game()
+	changed.emit()
+	return result
+
+
+# --- Ma Loge (donjon du joueur, règles dans `Lodge`) ---------------------------------
+
+func _lodge_cfg() -> Dictionary:
+	var gd: Node = (Engine.get_main_loop() as SceneTree).root.get_node("GameData")
+	return gd.lodge
+
+
+## Donjon de la Loge (créé vide au premier appel ; "lodge" est le nom de la loge) : {rooms, traps, stake, rivals_day, rivals_done}.
+func lodge() -> Dictionary:
+	var cfg := _lodge_cfg()
+	var d: Variant = state.get("lodge_dungeon")
+	if not d is Dictionary or d.get("rooms", []).size() != cfg.get("rooms", []).size():
+		state["lodge_dungeon"] = Lodge.empty_state(cfg)
+	return state.lodge_dungeon
+
+
+func lodge_add_defender(room: int, id: String) -> bool:
+	if not state.heroes.has(id) or not Lodge.add_defender(lodge(), _lodge_cfg(), room, id):
+		return false
+	_lodge_saved()
+	return true
+
+
+func lodge_remove_defender(room: int, id: String) -> void:
+	Lodge.remove_defender(lodge(), room, id)
+	_lodge_saved()
+
+
+func lodge_toggle_trap(room: int, trap_id: String) -> bool:
+	if not Lodge.toggle_trap(lodge(), _lodge_cfg(), room, trap_id):
+		return false
+	_lodge_saved()
+	return true
+
+
+## Change la récompense mise en jeu : l'or passe du coffre du joueur à la Loge (ou revient).
+func lodge_set_stake(amount: int) -> bool:
+	var cfg := _lodge_cfg()
+	amount = clampi(amount, 0, int(cfg.get("stake_max", 20000)))
+	var diff := amount - int(lodge().stake)
+	if diff > gold():
+		return false
+	state.gold = gold() - diff
+	lodge().stake = amount
+	_lodge_saved()
+	return true
+
+
+func _lodge_saved() -> void:
+	save_game()
+	changed.emit()
+
+
+## Force d'un héros possédé, et Force de l'équipe de chasse.
+func hero_power(id: String) -> int:
+	var gd: Node = (Engine.get_main_loop() as SceneTree).root.get_node("GameData")
+	return Progression.power(hero_stats(id, gd.hero(id)))
+
+
+## Force moyenne par héros de l'équipe de chasse (comparée à celle d'un donjon de Loge).
+func team_power() -> int:
+	return Lodge.average_power(team(), hero_power)
+
+
+func lodge_power() -> int:
+	return Lodge.power(lodge().rooms, hero_power)
+
+
+## Donjons de chasseurs rivaux du jour (attaquables une fois chacun par jour).
+func lodge_rivals() -> Array:
+	var gd: Node = (Engine.get_main_loop() as SceneTree).root.get_node("GameData")
+	var power_at := func(id: String, level: int) -> int:
+		return Progression.power(Progression.hero_stats(gd.hero(id), level, 0, _config))
+	return Lodge.rivals(today(), team_power(), gd.heroes.keys(), _lodge_cfg(), power_at)
+
+
+func lodge_rival_done(rival_id: String) -> bool:
+	var l := lodge()
+	if l.get("rivals_day", "") != today():
+		l.rivals_day = today()
+		l.rivals_done = []
+	return rival_id in l.rivals_done
+
+
+## Prépare un combat de Loge. `rival` vide = tester son propre donjon (gratuit, sans gain).
+## Pour un rival : il faut une équipe pas plus forte que son donjon et payer la mise d'entrée.
+func start_lodge_battle(rival: Dictionary = {}) -> String:
+	var cfg := _lodge_cfg()
+	if team().is_empty():
+		return "Ton équipe de chasse est vide."
+	if rival.is_empty():
+		if not Lodge.is_ready(lodge()):
+			return "Place au moins un défenseur dans chaque salle."
+		current_lodge_battle = {"kind": "own", "name": lodge_name(), "rooms": lodge().rooms.duplicate(true),
+			"traps": lodge().traps.duplicate(true), "stake": 0, "fee": 0, "level": 0}
+		return ""
+	if lodge_rival_done(rival.id):
+		return "Tu as déjà attaqué ce donjon aujourd'hui."
+	if not Lodge.can_attack(team_power(), int(rival.power)):
+		return "Ton équipe est trop forte pour ce donjon (Force %d > %d)." % [team_power(), int(rival.power)]
+	var fee := Lodge.entry_fee(int(rival.stake), cfg)
+	if gold() < fee:
+		return "Il faut %d or de mise pour entrer." % fee
+	state.gold = gold() - fee
+	lodge().rivals_done.append(rival.id)
+	save_game()
+	changed.emit()
+	current_lodge_battle = {"kind": "rival", "id": rival.id, "name": rival.name, "rooms": rival.rooms,
+		"traps": rival.traps, "stake": int(rival.stake), "fee": fee, "level": int(rival.level)}
+	return ""
+
+
+## Fin d'un combat de Loge : l'attaquant victorieux d'un rival gagne une part de sa récompense.
+func finish_lodge_battle(won: bool) -> Dictionary:
+	var b := current_lodge_battle
+	var result := {"gold": 0}
+	if won and b.get("kind", "") == "rival":
+		result.gold = Lodge.win_reward(int(b.stake), _lodge_cfg()) + int(b.fee)
+		state.gold = gold() + result.gold
+		_add_stat("gold_earned", result.gold)
 	save_game()
 	changed.emit()
 	return result

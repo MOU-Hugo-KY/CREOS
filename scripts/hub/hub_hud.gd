@@ -36,6 +36,7 @@ var quests: QuestsScreen
 var hunt_prep: HuntPrepScreen
 var campaign: CampaignScreen
 var shop: ShopScreen
+var private_lodge: PrivateLodgeScreen
 var relics: RelicsScreen
 
 
@@ -91,6 +92,11 @@ func _ready() -> void:
 		if campaign.region != "":
 			campaign.open()
 			campaign.refresh())
+	private_lodge = PrivateLodgeScreen.new()
+	private_lodge.visible = false
+	private_lodge.closed.connect(func() -> void: _set_menus_visible(true))
+	private_lodge.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	_root.add_child(private_lodge)
 	shop = ShopScreen.new()
 	shop.closed.connect(func() -> void: _set_menus_visible(true))
 	shop.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
@@ -169,6 +175,11 @@ func open_campaign() -> void:
 	campaign.open_current()
 
 
+func open_private_lodge() -> void:
+	_set_menus_visible(false)
+	private_lodge.open()
+
+
 func open_shop() -> void:
 	_set_menus_visible(false)
 	shop.open()
@@ -198,7 +209,7 @@ func close_altar() -> void:
 func _set_menus_visible(on: bool) -> void:
 	screen_opened.emit(not on)
 	for c in _root.get_children():
-		if c not in [lodge, altar, profile, quests, hunt_prep, campaign, shop, relics, _toast]:
+		if c not in [lodge, altar, profile, quests, hunt_prep, campaign, shop, relics, private_lodge, _toast]:
 			c.visible = on
 	if on and _sound_panel:
 		_sound_panel.visible = _sound_button.button_pressed
