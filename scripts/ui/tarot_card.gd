@@ -69,7 +69,9 @@ func setup(h: Dictionary, is_owned: bool, still := true) -> TarotCard:
 	if illus:
 		_image(content, illus, Rect2(Vector2.ZERO, WINDOW.size))
 	else:
-		_image(content, pack_tex("cartes/fond_arcane_%s.png" % elem), Rect2(Vector2.ZERO, WINDOW.size))
+		# Décor personnel du héros (fonds_heros/<id>.png), sinon le décor arcane de son élément.
+		var bg := pack_tex("fonds_heros/%s.png" % id)
+		_image(content, bg if bg else pack_tex("cartes/fond_arcane_%s.png" % elem), Rect2(Vector2.ZERO, WINDOW.size))
 		if still:
 			_add_still_hero()
 	_shine = _image(content, pack_tex("cartes/carte_brillance.png"), Rect2(-WINDOW.position - Vector2(SIZE.x, 0), SIZE))
