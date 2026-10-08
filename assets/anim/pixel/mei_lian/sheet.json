@@ -1,6 +1,5 @@
 {
- "hero": "mei_lian",
- "scale": 4.8,
+ "scale": 3.36,
  "anchor": [
   96,
   146
@@ -14,279 +13,14 @@
   "relic": "skill",
   "dodge": "dodge",
   "0": "attack_1",
-  "1": "skill",
+  "1": "attack_2",
   "2": "ultimate",
-  "3": "attack_2",
+  "3": "skill",
   "4": "skill",
-  "5": "ultimate"
+  "5": "skill"
  },
+ "hero": "mei_lian",
  "anims": {
-  "attack_1": {
-   "loop": false,
-   "frames": [
-    [
-     "mei_lian_attack_1_000.png",
-     0.1
-    ],
-    [
-     "mei_lian_attack_1_001.png",
-     0.09
-    ],
-    [
-     "mei_lian_attack_1_002.png",
-     0.07
-    ],
-    [
-     "mei_lian_attack_1_003.png",
-     0.05
-    ],
-    [
-     "mei_lian_attack_1_004.png",
-     0.06
-    ],
-    [
-     "mei_lian_attack_1_005.png",
-     0.08
-    ],
-    [
-     "mei_lian_attack_1_006.png",
-     0.1
-    ],
-    [
-     "mei_lian_attack_1_007.png",
-     0.13
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "attack_2": {
-   "loop": false,
-   "frames": [
-    [
-     "mei_lian_attack_2_000.png",
-     0.1
-    ],
-    [
-     "mei_lian_attack_2_001.png",
-     0.08
-    ],
-    [
-     "mei_lian_attack_2_002.png",
-     0.065
-    ],
-    [
-     "mei_lian_attack_2_003.png",
-     0.05
-    ],
-    [
-     "mei_lian_attack_2_004.png",
-     0.06
-    ],
-    [
-     "mei_lian_attack_2_005.png",
-     0.08
-    ],
-    [
-     "mei_lian_attack_2_006.png",
-     0.105
-    ],
-    [
-     "mei_lian_attack_2_007.png",
-     0.13
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "skill": {
-   "loop": false,
-   "frames": [
-    [
-     "mei_lian_skill_000.png",
-     0.11
-    ],
-    [
-     "mei_lian_skill_001.png",
-     0.1
-    ],
-    [
-     "mei_lian_skill_002.png",
-     0.09
-    ],
-    [
-     "mei_lian_skill_003.png",
-     0.06
-    ],
-    [
-     "mei_lian_skill_004.png",
-     0.075
-    ],
-    [
-     "mei_lian_skill_005.png",
-     0.09
-    ],
-    [
-     "mei_lian_skill_006.png",
-     0.11
-    ],
-    [
-     "mei_lian_skill_007.png",
-     0.14
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "ultimate": {
-   "loop": false,
-   "frames": [
-    [
-     "mei_lian_ultimate_000.png",
-     0.11
-    ],
-    [
-     "mei_lian_ultimate_001.png",
-     0.1
-    ],
-    [
-     "mei_lian_ultimate_002.png",
-     0.09
-    ],
-    [
-     "mei_lian_ultimate_003.png",
-     0.06
-    ],
-    [
-     "mei_lian_ultimate_004.png",
-     0.075
-    ],
-    [
-     "mei_lian_ultimate_005.png",
-     0.09
-    ],
-    [
-     "mei_lian_ultimate_006.png",
-     0.11
-    ],
-    [
-     "mei_lian_ultimate_007.png",
-     0.14
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "dodge": {
-   "loop": false,
-   "frames": [
-    [
-     "mei_lian_dodge_000.png",
-     0.09
-    ],
-    [
-     "mei_lian_dodge_001.png",
-     0.07
-    ],
-    [
-     "mei_lian_dodge_002.png",
-     0.055
-    ],
-    [
-     "mei_lian_dodge_003.png",
-     0.055
-    ],
-    [
-     "mei_lian_dodge_004.png",
-     0.07
-    ],
-    [
-     "mei_lian_dodge_005.png",
-     0.085
-    ],
-    [
-     "mei_lian_dodge_006.png",
-     0.1
-    ],
-    [
-     "mei_lian_dodge_007.png",
-     0.12
-    ]
-   ],
-   "hit_frame": null
-  },
-  "hurt": {
-   "loop": false,
-   "frames": [
-    [
-     "mei_lian_hurt_000.png",
-     0.09
-    ],
-    [
-     "mei_lian_hurt_001.png",
-     0.06
-    ],
-    [
-     "mei_lian_hurt_002.png",
-     0.065
-    ],
-    [
-     "mei_lian_hurt_003.png",
-     0.08
-    ],
-    [
-     "mei_lian_hurt_004.png",
-     0.095
-    ],
-    [
-     "mei_lian_hurt_005.png",
-     0.11
-    ],
-    [
-     "mei_lian_hurt_006.png",
-     0.12
-    ],
-    [
-     "mei_lian_hurt_007.png",
-     0.14
-    ]
-   ],
-   "hit_frame": null
-  },
-  "death": {
-   "loop": false,
-   "frames": [
-    [
-     "mei_lian_death_000.png",
-     0.09
-    ],
-    [
-     "mei_lian_death_001.png",
-     0.09
-    ],
-    [
-     "mei_lian_death_002.png",
-     0.1
-    ],
-    [
-     "mei_lian_death_003.png",
-     0.11
-    ],
-    [
-     "mei_lian_death_004.png",
-     0.12
-    ],
-    [
-     "mei_lian_death_005.png",
-     0.14
-    ],
-    [
-     "mei_lian_death_006.png",
-     0.18
-    ],
-    [
-     "mei_lian_death_007.png",
-     0.7
-    ]
-   ],
-   "hit_frame": null
-  },
   "idle": {
    "loop": true,
    "frames": [
@@ -362,52 +96,310 @@
     ]
    ],
    "hit_frame": null
-  }
- },
- "effect": {
-  "frames": [
-   [
-    "mei_lian_fx_000.png",
-    0.055
+  },
+  "attack_1": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_attack_1_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_attack_1_001.png",
+     0.1
+    ],
+    [
+     "mei_lian_attack_1_002.png",
+     0.08
+    ],
+    [
+     "mei_lian_attack_1_003.png",
+     0.05
+    ],
+    [
+     "mei_lian_attack_1_004.png",
+     0.065
+    ],
+    [
+     "mei_lian_attack_1_005.png",
+     0.07
+    ],
+    [
+     "mei_lian_attack_1_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_attack_1_007.png",
+     0.12
+    ]
    ],
-   [
-    "mei_lian_fx_001.png",
-    0.055
+   "hit_frame": 4
+  },
+  "attack_2": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_attack_2_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_attack_2_001.png",
+     0.085
+    ],
+    [
+     "mei_lian_attack_2_002.png",
+     0.06
+    ],
+    [
+     "mei_lian_attack_2_003.png",
+     0.06
+    ],
+    [
+     "mei_lian_attack_2_004.png",
+     0.065
+    ],
+    [
+     "mei_lian_attack_2_005.png",
+     0.075
+    ],
+    [
+     "mei_lian_attack_2_006.png",
+     0.11
+    ],
+    [
+     "mei_lian_attack_2_007.png",
+     0.12
+    ]
    ],
-   [
-    "mei_lian_fx_002.png",
-    0.055
+   "hit_frame": 4
+  },
+  "ultimate": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_ultimate_000.png",
+     0.11
+    ],
+    [
+     "mei_lian_ultimate_001.png",
+     0.11
+    ],
+    [
+     "mei_lian_ultimate_002.png",
+     0.1
+    ],
+    [
+     "mei_lian_ultimate_003.png",
+     0.075
+    ],
+    [
+     "mei_lian_ultimate_004.png",
+     0.085
+    ],
+    [
+     "mei_lian_ultimate_005.png",
+     0.1
+    ],
+    [
+     "mei_lian_ultimate_006.png",
+     0.11
+    ],
+    [
+     "mei_lian_ultimate_007.png",
+     0.13
+    ]
    ],
-   [
-    "mei_lian_fx_003.png",
-    0.065
+   "hit_frame": 4
+  },
+  "skill": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_skill_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_skill_001.png",
+     0.1
+    ],
+    [
+     "mei_lian_skill_002.png",
+     0.1
+    ],
+    [
+     "mei_lian_skill_003.png",
+     0.07
+    ],
+    [
+     "mei_lian_skill_004.png",
+     0.08
+    ],
+    [
+     "mei_lian_skill_005.png",
+     0.085
+    ],
+    [
+     "mei_lian_skill_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_skill_007.png",
+     0.12
+    ]
    ],
-   [
-    "mei_lian_fx_004.png",
-    0.065
+   "hit_frame": 4
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_hurt_000.png",
+     0.085
+    ],
+    [
+     "mei_lian_hurt_001.png",
+     0.065
+    ],
+    [
+     "mei_lian_hurt_002.png",
+     0.075
+    ],
+    [
+     "mei_lian_hurt_003.png",
+     0.08
+    ],
+    [
+     "mei_lian_hurt_004.png",
+     0.085
+    ],
+    [
+     "mei_lian_hurt_005.png",
+     0.09
+    ],
+    [
+     "mei_lian_hurt_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_hurt_007.png",
+     0.12
+    ]
    ],
-   [
-    "mei_lian_fx_005.png",
-    0.075
+   "hit_frame": null
+  },
+  "dodge": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_dodge_000.png",
+     0.09
+    ],
+    [
+     "mei_lian_dodge_001.png",
+     0.065
+    ],
+    [
+     "mei_lian_dodge_002.png",
+     0.055
+    ],
+    [
+     "mei_lian_dodge_003.png",
+     0.055
+    ],
+    [
+     "mei_lian_dodge_004.png",
+     0.065
+    ],
+    [
+     "mei_lian_dodge_005.png",
+     0.075
+    ],
+    [
+     "mei_lian_dodge_006.png",
+     0.09
+    ],
+    [
+     "mei_lian_dodge_007.png",
+     0.12
+    ]
    ],
-   [
-    "mei_lian_fx_006.png",
-    0.085
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_death_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_001.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_002.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_003.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_004.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_005.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_007.png",
+     0.45
+    ]
    ],
-   [
-    "mei_lian_fx_007.png",
-    0.1
-   ]
-  ],
-  "pivot": [
-   64,
-   64
-  ],
-  "scale": {
-   "attack_1": 0.6,
-   "attack_2": 0.75,
-   "skill": 1,
-   "ultimate": 1.5
+   "hit_frame": null
+  },
+  "fx": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_fx_000.png",
+     0.07
+    ],
+    [
+     "mei_lian_fx_001.png",
+     0.07
+    ],
+    [
+     "mei_lian_fx_002.png",
+     0.07
+    ],
+    [
+     "mei_lian_fx_003.png",
+     0.07
+    ],
+    [
+     "mei_lian_fx_004.png",
+     0.07
+    ],
+    [
+     "mei_lian_fx_005.png",
+     0.07
+    ],
+    [
+     "mei_lian_fx_006.png",
+     0.07
+    ],
+    [
+     "mei_lian_fx_007.png",
+     0.07
+    ]
+   ],
+   "hit_frame": 4
   }
  }
 }
