@@ -75,6 +75,15 @@ const HERO_HEIGHT := 400.0
 
 var _hero_player: ClipPlayer
 var _mage_room: MageRoom
+var _meca_room: MechanicRoom
+var _mode := "heros"  # "heros" (le Mage) ou "pieces" (le Mécanicien)
+var _hero_ui: Array[Control] = []  # ce qui ne sert qu'à l'invocation des héros
+var _meca_ui: Array[Control] = []  # ce qui ne sert qu'à l'atelier
+var _tabs: Dictionary = {}  # mode -> Button
+var _title: Label
+var _gold_label: Label
+var _piece_labels: Dictionary = {}  # pièce -> Label (quantité possédée)
+var _recipe_label: Label
 var _hero_height := HERO_HEIGHT
 var _hero_shadow: Control
 
@@ -95,6 +104,10 @@ func _ready() -> void:
 	if MageRoom.available():
 		_mage_room = MageRoom.new()
 		root.add_child(_mage_room)
+		if MechanicRoom.available():
+			_meca_room = MechanicRoom.new()
+			_meca_room.visible = false
+			root.add_child(_meca_room)
 		_hero_height = 260.0
 	else:
 		# La salle couvre tout l'écran (agrandie à la largeur, recadrée en haut et en bas autour de la lanterne).
@@ -148,17 +161,33 @@ func _ready() -> void:
 		ui_sound.emit("ui_click")
 		closed.emit())
 	var title := ScreenPack.text(root, String(GameData.summon.get("name", "Lanterne des Serments")).to_upper(),
-		Rect2(560, 18, 800, 60), 40, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+		Rect2(560, 14, 800, 56), 38, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	_title = title
 	title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
 	title.add_theme_constant_override("shadow_offset_x", 3)
 	title.add_theme_constant_override("shadow_offset_y", 3)
 	for i in CURRENCIES.size():
 		var c: Array = CURRENCIES[i]
 		var r := Rect2(1630, 24, 186, 72)
-		ScreenPack.panel(root, S, "currency_cartouche", r)
-		ScreenPack.image(root, ScreenPack.tex(S, c[1]), Rect2(r.position + Vector2(18, 16), Vector2(40, 40)))
+		_hero_ui.append(ScreenPack.panel(root, S, "currency_cartouche", r))
+		_hero_ui.append(ScreenPack.image(root, ScreenPack.tex(S, c[1]), Rect2(r.position + Vector2(18, 16), Vector2(40, 40))))
 		_balance[c[0]] = ScreenPack.text(root, "", Rect2(r.position + Vector2(58, 0), Vector2(110, 72)),
 			30, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+		_hero_ui.append(_balance[c[0]])
+	var gr := Rect2(1600, 24, 216, 72)
+	_meca_ui.append(ScreenPack.panel(root, S, "currency_cartouche", gr))
+	_meca_ui.append(ScreenPack.image(root, ScreenPack.tex("combat", "reward_gold_64"), Rect2(gr.position + Vector2(14, 14), Vector2(44, 44))))
+	_gold_label = ScreenPack.text(root, "", Rect2(gr.position + Vector2(58, 0), Vector2(146, 72)), 30, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER)
+	_meca_ui.append(_gold_label)
+	# Onglets : une salle par invocateur.
+	if _meca_room:
+		for i in 2:
+			var mode: String = ["heros", "pieces"][i]
+			var tb := ScreenPack.button(root, S, "return", ["Mage · Héros", "Mécanicien · Pièces"][i],
+				Rect2(640 + i * 330, 74, 310, 60), 22)
+			tb.pressed.connect(func() -> void: _set_mode(mode))
+			_tabs[mode] = tb
 
 	# Droite : la bannière de l'autel, une page par rareté (flèches pour changer) : taux de la rareté,
 	# chance par héros, médaillons (survol = fiche), puis événement et garantie.
@@ -166,6 +195,8 @@ func _ready() -> void:
 	banner.position = Vector2(1586, 120)
 	banner.size = Vector2(310, 760)
 	root.add_child(banner)
+	_hero_ui.append(banner)
+	_build_meca_banner(root)
 	ScreenPack.text(banner, "HÉROS DE L'AUTEL", Rect2(0, 22, 310, 34), 22, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
 	for dir: int in [-1, 1]:
 		var arrow := _Arrow.new()
@@ -200,7 +231,11 @@ func _ready() -> void:
 		var n: int = PACKS[i]
 		var b := ScreenPack.button(root, S, "invoke_gems" if n == 1 else "invoke_fragments", "",
 			Rect2(470 + i * 330, 968, 310, 88), 26, UiKit.WHITE if n == 1 else UiKit.INK)
-		b.pressed.connect(func() -> void: _summon(n))
+		b.pressed.connect(func() -> void:
+			if _mode == "pieces":
+				_pull(n)
+			else:
+				_summon(n))
 		_buttons[n] = b
 
 	_build_reveal(root, L.reveal)
@@ -457,6 +492,8 @@ func open() -> void:
 
 
 func _reset_scene() -> void:
+	if _meca_room:
+		_meca_room.reset()
 	if _mage_room:
 		_mage_room.reset()
 		return
@@ -606,6 +643,9 @@ func _refresh() -> void:
 	_balance[currency].text = str(PlayerData.summon_balance(currency))
 	for n: int in _buttons:
 		_buttons[n].text = "×%d · %d gemmes" % [n, PlayerData.summon_pack_cost(currency, cfg, n)]
+		if _mode == "pieces":
+			_buttons[n].text = "×%d · %d or" % [n, PlayerData.mechanic_cost(cfg, n)]
+	_refresh_meca()
 	_set_buttons_enabled(true)
 	# Événement (optionnel, data/summon.json "event" : {"name", "text"}).
 	var ev: Dictionary = cfg.get("event", {})
@@ -706,3 +746,98 @@ func _set_buttons_enabled(on: bool) -> void:
 	var currency := String(GameData.summon.get("hero_currency", "gems"))
 	for n: int in _buttons:
 		_buttons[n].disabled = not on or not PlayerData.can_summon_pack(currency, GameData.summon, n)
+		if _mode == "pieces":
+			_buttons[n].disabled = not on or PlayerData.gold() < PlayerData.mechanic_cost(GameData.summon, n)
+
+
+# --- Atelier du Mécanicien ---------------------------------------------------------------
+
+## Change de salle (Mage pour les héros, Mécanicien pour les pièces).
+func _set_mode(mode: String) -> void:
+	if busy or mode == _mode:
+		return
+	ui_sound.emit("ui_click")
+	_mode = mode
+	_reveal.visible = false
+	_apply_mode()
+	_reset_scene()
+	_refresh()
+
+
+func _apply_mode() -> void:
+	var meca := _mode == "pieces"
+	if _mage_room:
+		_mage_room.visible = not meca
+	if _meca_room:
+		_meca_room.visible = meca
+	for c in _hero_ui:
+		c.visible = not meca
+	for c in _meca_ui:
+		c.visible = meca
+	_title.text = "ATELIER DU MÉCANICIEN" if meca else String(GameData.summon.get("name", "Lanterne des Serments")).to_upper()
+	for m: String in _tabs:
+		(_tabs[m] as Button).modulate = Color.WHITE if m == _mode else Color(0.6, 0.58, 0.64)
+
+
+## Bannière de l'atelier : les pièces possédées et ce que coûte chaque défense.
+func _build_meca_banner(root: Control) -> void:
+	var banner := _Banner.new()
+	banner.position = Vector2(1586, 120)
+	banner.size = Vector2(310, 760)
+	root.add_child(banner)
+	_meca_ui.append(banner)
+	ScreenPack.text(banner, "PIÈCES DE L'ATELIER", Rect2(0, 22, 310, 34), 22, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	var specs: Dictionary = GameData.summon.get("mechanic", {}).get("pieces", {})
+	var i := 0
+	for id: String in specs:
+		var y := 78.0 + i * 58.0
+		var ic := ScreenPack.image(banner, MageRoom.tex(String(specs[id].get("icon", ""))), Rect2(24, y, 44, 44))
+		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		ScreenPack.text(banner, String(specs[id].name), Rect2(76, y, 160, 44), 18, UiKit.WHITE)
+		_piece_labels[id] = ScreenPack.text(banner, "", Rect2(220, y, 66, 44), 22, Color("ffd27a"), HORIZONTAL_ALIGNMENT_RIGHT)
+		i += 1
+	ScreenPack.text(banner, "DÉFENSES DU DONJON", Rect2(0, 386, 310, 30), 18, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	_recipe_label = ScreenPack.text(banner, "", Rect2(24, 420, 262, 220), 15, UiKit.PARCHMENT_DARK, 0, true)
+	var note := ScreenPack.text(banner, "Construis-les dans Mon donjon.", Rect2(24, 640, 262, 30), 15, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER)
+	note.modulate.a = 0.8
+	_apply_mode()
+
+
+func _refresh_meca() -> void:
+	if _gold_label == null:
+		return
+	_gold_label.text = str(PlayerData.gold())
+	var specs: Dictionary = GameData.summon.get("mechanic", {}).get("pieces", {})
+	for id: String in _piece_labels:
+		_piece_labels[id].text = str(PlayerData.item_count(id))
+	var lines: Array[String] = []
+	for did: String in GameData.lodge.get("defenses", {}):
+		var recipe: Dictionary = PlayerData.defense_recipe(did)
+		var parts: Array[String] = []
+		for k: String in recipe:
+			parts.append("%d %s" % [int(recipe[k]), String(specs.get(k, {}).get("name", k)).split(" ")[0]])
+		lines.append("%s%s : %s" % ["✓ " if PlayerData.can_build_defense(did) else "", GameData.lodge.defenses[did].name,
+			", ".join(parts)])
+	_recipe_label.text = "\n".join(lines)
+
+
+## Tirages de l'atelier : or contre pièces.
+func _pull(count: int) -> void:
+	if busy or _meca_room == null:
+		return
+	if PlayerData.gold() < PlayerData.mechanic_cost(GameData.summon, count):
+		ui_sound.emit("ui_toggle")
+		return
+	busy = true
+	var got := PlayerData.mechanic_pull(GameData.summon, count, _rng)
+	if got.is_empty():
+		busy = false
+		return
+	_set_buttons_enabled(false)
+	ui_sound.emit("magic_cast")
+	await _meca_room.ceremony()
+	ui_sound.emit("ultimate_impact")
+	_meca_room.show_pieces(got, GameData.summon.get("mechanic", {}).get("pieces", {}))
+	busy = false
+	_refresh()

@@ -87,6 +87,11 @@ func _process(_delta: float) -> bool:
 		scene.town.set_hour(hour)
 	if frames == 5 and action == "prep":  # préparation de chasse du premier niveau
 		scene.hud.open_hunt_prep("monde01_1")
+	elif frames == 5 and action == "atelier":  # Lanterne : l'atelier du Mécanicien, un tirage ×10
+		scene.hud.open_altar()
+		root.get_node("PlayerData").state.gold = 20000
+		scene.hud.altar._set_mode("pieces")
+		scene.hud.altar._pull(10)
 	elif frames == 5 and action == "summon":  # Lanterne : une invocation avec des gemmes
 		scene.hud.open_altar()
 		root.get_node("PlayerData").state.gems = 1200

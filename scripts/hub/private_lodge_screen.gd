@@ -272,10 +272,14 @@ func _pick_defense(room: int) -> void:
 			ui_sound.emit("ui_click")
 			_close_picker()
 			PlayerData.lodge_add_defense(room, did))
-		chip.text = "%s · %d or" % [spec.name, int(spec.get("cost", 0))]
+		var recipe: Dictionary = spec.get("pieces", {})
+		var mech: Dictionary = GameData.summon.get("mechanic", {}).get("pieces", {})
+		chip.text = "%s · %s" % [spec.name, " ".join(recipe.keys().map(func(k: String) -> String:
+			return "%d %s" % [int(recipe[k]), String(mech.get(k, {}).get("name", k)).split(" ")[0]]))]
+		chip.tooltip_text = "Pièces du Mécanicien (Lanterne) :\n" + "\n".join(recipe.keys().map(func(k: String) -> String:
+			return "%s : %d / %d" % [mech.get(k, {}).get("name", k), PlayerData.item_count(k), int(recipe[k])]))
 		chip.custom_minimum_size = Vector2(330, 50)
-		chip.tooltip_text = ""
-		chip.disabled = PlayerData.gold() < int(spec.get("cost", 0))
+		chip.disabled = not PlayerData.can_build_defense(did)
 		row.add_child(chip)
 		var d := UiKit.label(String(spec.description), 18, UiKit.INK)
 		d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

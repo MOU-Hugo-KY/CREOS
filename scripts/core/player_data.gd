@@ -806,12 +806,26 @@ func _add_trap_item(trap_id: String, n: int) -> void:
 	state.items[key] = item_count(key) + n
 
 
-## Construit une défense (payée en or) ; la retirer rend son prix.
+## Pièces nécessaires pour construire une défense (lodge.json "pieces").
+func defense_recipe(defense_id: String) -> Dictionary:
+	return _lodge_cfg().get("defenses", {}).get(defense_id, {}).get("pieces", {})
+
+
+func can_build_defense(defense_id: String) -> bool:
+	var recipe := defense_recipe(defense_id)
+	for item: String in recipe:
+		if item_count(item) < int(recipe[item]):
+			return false
+	return true
+
+
+## Construit une défense avec des pièces du Mécanicien ; la retirer rend ses pièces.
 func lodge_add_defense(room: int, defense_id: String) -> bool:
-	var cost := int(_lodge_cfg().get("defenses", {}).get(defense_id, {}).get("cost", 0))
-	if gold() < cost or not Lodge.add_defense(lodge(), _lodge_cfg(), room, defense_id):
+	if not can_build_defense(defense_id) or not Lodge.add_defense(lodge(), _lodge_cfg(), room, defense_id):
 		return false
-	state.gold = gold() - cost
+	var recipe := defense_recipe(defense_id)
+	for item: String in recipe:
+		state.items[item] = item_count(item) - int(recipe[item])
 	_lodge_saved()
 	return true
 
@@ -819,8 +833,49 @@ func lodge_add_defense(room: int, defense_id: String) -> bool:
 func lodge_remove_defense(room: int, index: int) -> void:
 	var removed := Lodge.remove_defense(lodge(), room, index)
 	if removed != "":
-		state.gold = gold() + int(_lodge_cfg().defenses[removed].get("cost", 0))
+		var recipe := defense_recipe(removed)
+		for item: String in recipe:
+			state.items[item] = item_count(item) + int(recipe[item])
 		_lodge_saved()
+
+
+## Atelier du Mécanicien : `count` tirages payés en or (le paquet ×10 en offre un, comme les
+## héros). Chaque tirage donne `pieces_per_pull` pièces au hasard selon leur poids.
+## Renvoie {item: quantité}, vide si le joueur n'a pas assez d'or.
+func mechanic_cost(config: Dictionary, count: int) -> int:
+	var m: Dictionary = config.get("mechanic", {})
+	var pay := count
+	for p: Dictionary in config.get("packs", []):
+		if int(p.get("count", 0)) == count:
+			pay = int(p.get("pay", count))
+	return int(m.get("cost", 0)) * pay
+
+
+func mechanic_pull(config: Dictionary, count: int, rng: RandomNumberGenerator) -> Dictionary:
+	var m: Dictionary = config.get("mechanic", {})
+	var cost := mechanic_cost(config, count)
+	if cost <= 0 or gold() < cost:
+		return {}
+	state.gold = gold() - cost
+	var pieces: Dictionary = m.get("pieces", {})
+	var ids: Array = pieces.keys()
+	ids.sort()
+	var total := 0
+	for id: String in ids:
+		total += int(pieces[id].get("weight", 1))
+	var out := {}
+	for i in count * int(m.get("pieces_per_pull", 1)):
+		var pick := rng.randi_range(1, maxi(1, total))
+		for id: String in ids:
+			pick -= int(pieces[id].get("weight", 1))
+			if pick <= 0:
+				out[id] = int(out.get(id, 0)) + 1
+				break
+	for id: String in out:
+		state.items[id] = item_count(id) + int(out[id])
+	save_game()
+	changed.emit()
+	return out
 
 
 func lodge_add_defender(room: int, id: String) -> bool:

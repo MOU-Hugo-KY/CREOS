@@ -16,7 +16,7 @@
     "3": 29,
     "4": 1
   },
-  "pity_every": 10,
+  "pity_every": 50,
   "pity_min_rarity": 4,
   "first_summon": "",
   "trap_bonus": {
@@ -38,5 +38,38 @@
       "pay": 9,
       "_note": "×10 : une invocation offerte"
     }
-  ]
+  ],
+  "mechanic": {
+    "_note": "Atelier du Mécanicien : de l'or contre des pièces de construction (défenses de Mon donjon).",
+    "currency": "gold",
+    "cost": 500,
+    "pieces_per_pull": 2,
+    "pieces": {
+      "piece_rouages": {
+        "name": "Rouages de laiton",
+        "weight": 30,
+        "icon": "mecanicien/rouage_grand.png"
+      },
+      "piece_pierre": {
+        "name": "Pierre taillée",
+        "weight": 30,
+        "icon": "mecanicien/plaque_rivetee.png"
+      },
+      "piece_bois_ferre": {
+        "name": "Bois ferré",
+        "weight": 22,
+        "icon": "mecanicien/boulon.png"
+      },
+      "piece_ressort": {
+        "name": "Ressort runique",
+        "weight": 12,
+        "icon": "mecanicien/ressort.png"
+      },
+      "piece_cristal": {
+        "name": "Cristal d'arcane",
+        "weight": 6,
+        "icon": "mecanicien/cristal_mecanique.png"
+      }
+    }
+  }
 }
