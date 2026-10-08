@@ -55,15 +55,23 @@ var _page_title: Label
 var _page := 4  # rareté affichée sur la bannière
 var _hover: Control
 var _reveal: Control
-var _reveal_preview: HeroPreview
 var _reveal_name: Label
 var _reveal_rarity: Panel
 var _reveal_rarity_label: Label
 var _reveal_trap: Label
-var _reveal_trap_box: Panel
 var _rng := RandomNumberGenerator.new()
 
 const Anim := ScreenPack.Anim
+## Lanterne : pied du dessin (coordonnées de la salle), où il est posé, et sa taille.
+const LANTERN_FOOT := Vector2(575, 585)
+const LANTERN_AT := Vector2(190, 500)
+const LANTERN_SCALE := 0.6
+## Pied du héros invoqué, au centre du cercle (écran), et sa hauteur.
+const HERO_FEET := Vector2(960, 735)
+const HERO_HEIGHT := 400.0
+
+var _hero_player: ClipPlayer
+var _hero_shadow: Control
 
 
 func _ready() -> void:
@@ -93,8 +101,16 @@ func _ready() -> void:
 	_glow.size = sr.size
 	_scene.add_child(_glow)
 	_sparks = _anim("particules", L.particles_anchor_in_scene)
-	_lantern = ScreenPack.image(_scene, ScreenPack.tex(S, "lanterne"), ScreenPack.rect(L.lantern_sprite_rect_in_scene))
-	_lit = _anim("lanterne_allumage", L.lantern_anchor_in_scene)
+	# La lanterne, réduite, est posée sur le côté gauche ; le cercle du milieu reste libre pour le héros.
+	var box := Control.new()
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.scale = Vector2.ONE * LANTERN_SCALE
+	box.position = LANTERN_AT - LANTERN_FOOT * LANTERN_SCALE
+	_scene.add_child(box)
+	_lantern = ScreenPack.image(box, ScreenPack.tex(S, "lanterne"), ScreenPack.rect(L.lantern_sprite_rect_in_scene))
+	_lit = Anim.new(S, "lanterne_allumage")
+	_lit.position = Vector2(L.lantern_anchor_in_scene[0], L.lantern_anchor_in_scene[1])
+	box.add_child(_lit)
 	_flame = ShaderMaterial.new()
 	_flame.shader = Shader.new()
 	_flame.shader.code = FLAME_SHADER
@@ -197,9 +213,13 @@ func _process(delta: float) -> void:
 ## Ambiance (coordonnées de la salle) : derrière, une lueur qui respire et des runes qui
 ## s'allument tour à tour sur le cercle du sol ; devant (`front`), des braises qui montent.
 class _Ambient extends Control:
-	const CENTER := Vector2(575, 330)
 	const FLOOR := Vector2(578, 509)
-	const GLASS := Vector2(580, 350)
+	var CENTER := _l(Vector2(575, 330))
+	var GLASS := _l(Vector2(580, 350))
+	var k := SummonAltar.LANTERN_SCALE
+
+	static func _l(p: Vector2) -> Vector2:
+		return SummonAltar.LANTERN_AT + (p - SummonAltar.LANTERN_FOOT) * SummonAltar.LANTERN_SCALE
 	var front := false
 	var t := 0.0
 	var motes: Array = []  # [x, y, vitesse, phase, couleur]
@@ -236,7 +256,7 @@ class _Ambient extends Control:
 			var pulse := 0.5 + 0.5 * sin(t * 2.0)
 			for i in 6:
 				var k := 1.0 - i / 6.0
-				draw_set_transform(GLASS + Vector2(0, sin(t * 1.6) * 3.6), 0.0, Vector2(0.6, 1.0))
+				draw_set_transform(GLASS + Vector2(0, sin(t * 1.6) * 3.6 * k), 0.0, Vector2(0.6, 1.0) * k)
 				draw_circle(Vector2.ZERO, 20.0 + i * 14.0, Color(1.0, 0.72, 0.35, (0.05 + 0.04 * pulse) * k))
 			draw_set_transform(Vector2.ZERO)
 			for m: Array in motes:
@@ -249,7 +269,7 @@ class _Ambient extends Control:
 		# Lueur douce derrière la lanterne (cercles empilés, en pixels).
 		var breathe := 0.5 + 0.5 * sin(t * 1.4)
 		for i in 10:
-			var r := 70.0 + i * 22.0 + breathe * 10.0
+			var r := (70.0 + i * 22.0 + breathe * 10.0) * k
 			draw_circle(CENTER, r, Color(1.0, 0.7, 0.3, 0.1 * (1.0 - i / 10.0) * (0.7 + 0.3 * breathe)))
 		# Runes du cercle au sol : une vague de lumière qui tourne.
 		for i in 16:
@@ -364,35 +384,51 @@ func _anim(name: String, anchor: Array) -> Anim:
 	return a
 
 
-func _build_reveal(root: Control, R: Dictionary) -> void:
+## Révélation sans panneau : le héros apparaît debout au centre du cercle, son nom et sa rareté
+## au-dessus, ce qu'il apporte en dessous. Un clic le renvoie (il s'efface).
+func _build_reveal(root: Control, _R: Dictionary) -> void:
 	_reveal = Control.new()
 	_reveal.size = Vector2(1920, 1080)
-	_reveal.mouse_filter = Control.MOUSE_FILTER_STOP  # un clic referme la révélation
+	_reveal.mouse_filter = Control.MOUSE_FILTER_STOP
 	_reveal.gui_input.connect(func(e: InputEvent) -> void:
 		if e is InputEventMouseButton and e.pressed and not busy:
 			_hide_reveal())
 	root.add_child(_reveal)
-	var pr := ScreenPack.rect(R.rect)
-	ScreenPack.panel(_reveal, S, "reveal_panel", pr)
-	var vpc := SubViewportContainer.new()
-	vpc.stretch = true
-	vpc.position = pr.position + Vector2(60, 60)
-	vpc.size = Vector2(pr.size.x - 120, R.name_rect[1] - pr.position.y - 70)
-	vpc.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_reveal.add_child(vpc)
-	_reveal_preview = HeroPreview.new()
-	_reveal_preview.pedestal = false
-	vpc.add_child(_reveal_preview)
-	var nr := ScreenPack.rect(R.name_rect)
+	_hero_shadow = _HeroShadow.new()
+	_hero_shadow.position = HERO_FEET
+	_reveal.add_child(_hero_shadow)
+	var nr := Rect2(660, 150, 600, 84)
 	ScreenPack.panel(_reveal, S, "reveal_name", nr)
 	_reveal_name = ScreenPack.text(_reveal, "", nr, 40, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	var rr := ScreenPack.rect(R.rarity_rect)
+	var rr := Rect2(850, 236, 220, 52)
 	_reveal_rarity = ScreenPack.panel(_reveal, S, "reveal_badge_rare", rr)
 	_reveal_rarity_label = ScreenPack.text(_reveal, "", rr, 26, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	var tr := ScreenPack.rect(R.trap_rect)
-	_reveal_trap_box = ScreenPack.panel(_reveal, S, "reveal_trap", tr)
-	_reveal_trap = ScreenPack.text(_reveal, "", tr, 28, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
+	_reveal_trap = ScreenPack.text(_reveal, "", Rect2(460, 800, 1000, 80), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER, true)
+	_reveal_trap.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
+	_reveal_trap.add_theme_constant_override("shadow_offset_y", 3)
+	ScreenPack.text(_reveal, "Touche pour continuer", Rect2(660, 880, 600, 34), 20, Color(1, 1, 1, 0.65), HORIZONTAL_ALIGNMENT_CENTER)
 	_reveal.visible = false
+
+
+## Ombre et halo de rareté sous les pieds du héros invoqué.
+class _HeroShadow extends Control:
+	var color := Color.WHITE
+	var t := 0.0
+
+	func _ready() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	func _process(delta: float) -> void:
+		t += delta
+		queue_redraw()
+
+	func _draw() -> void:
+		var pulse := 0.5 + 0.5 * sin(t * 2.5)
+		for i in 5:
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0, 0.28))
+			draw_circle(Vector2.ZERO, 90.0 + i * 26.0 + pulse * 8.0, Color(color, 0.16 * (1.0 - i / 5.0)))
+		draw_circle(Vector2.ZERO, 70.0, Color(0, 0, 0, 0.45))
+		draw_set_transform(Vector2.ZERO)
 
 
 func open() -> void:
@@ -412,8 +448,13 @@ func _reset_scene() -> void:
 
 
 func _hide_reveal() -> void:
-	_reveal.visible = false
-	_reveal_preview.clear_hero()
+	var tw := create_tween()
+	tw.tween_property(_reveal, "modulate:a", 0.0, 0.3)
+	tw.tween_callback(func() -> void:
+		_reveal.visible = false
+		if _hero_player:
+			_hero_player.queue_free()
+			_hero_player = null)
 	_reset_scene()
 	_refresh()
 
@@ -474,11 +515,31 @@ func _show_result(hero: Dictionary, r: Dictionary) -> void:
 		lines.append("Nouveau héros ! Il t'attend dans la Loge.")
 	_reveal_trap.text = "\n".join(lines)
 	_reveal_trap.add_theme_font_size_override("font_size", 28 if lines.size() == 1 else 22)
+	var rcol: Color = Palette.RARITIES.get(rarity, ["?", Color.WHITE])[1]
+	(_hero_shadow as _HeroShadow).color = rcol.lightened(0.2)
+	if _hero_player:
+		_hero_player.queue_free()
+	var id := String(hero.id)
+	_hero_player = ClipPlayer.new()
+	_hero_player.bundle = String(hero.get("anim", "res://assets/anim/heroes/"))
+	_hero_player.idle_clip = id + "_idle"
+	_hero_player.position = HERO_FEET
+	_reveal.add_child(_hero_player)
+	_reveal.move_child(_hero_player, 1)
+	_hero_player.play(id + "_idle")
+	var h := maxf(1.0, _hero_player.actor_rect(id + "_idle").size.y)
+	var sc := HERO_HEIGHT / h
+	_hero_player.scale = Vector2(sc, sc) * 0.2
+	_hero_player.flash(Color.WHITE, 1.0)
+	create_tween().tween_property(_hero_player, "scale", Vector2(sc, sc), 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	_reveal.visible = true
 	ScreenPack.fit_all(_reveal)
-	_reveal_preview.show_hero(hero)
 	_reveal.modulate.a = 0.0
-	create_tween().tween_property(_reveal, "modulate:a", 1.0, 0.25)
+	create_tween().tween_property(_reveal, "modulate:a", 1.0, 0.2)
+	if _hero_player.has_clip(id + "_relic"):
+		get_tree().create_timer(0.5).timeout.connect(func() -> void:
+			if is_instance_valid(_hero_player) and _hero_player.has_clip(id + "_relic"):
+				_hero_player.play(id + "_relic"))
 
 
 func _refresh() -> void:
