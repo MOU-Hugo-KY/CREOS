@@ -11,7 +11,9 @@ signal closed
 signal ui_sound(sfx_name: String)
 
 const S := "lanterne"
-const CURRENCIES := [["fragments_relique", "fragment_serment_64", "fragments"], ["gems", "gemme_64", "gemmes"]]
+## Les héros s'invoquent avec les gemmes (les éclats violets iront aux Esprits, l'or aux pièces).
+const CURRENCIES := [["gems", "gemme_64", "gemmes"]]
+const PACKS := [1, 5, 10]
 const RARITY_KEYS := {2: "rare", 3: "epic", 4: "legendary"}
 ## Couleur de la flamme selon la rareté (le dessin du pack est doré : on ne garde l'or que pour
 ## les légendaires).
@@ -45,7 +47,8 @@ var _lantern_y := 0.0
 var _lit_y := 0.0
 var _time := 0.0
 var _balance: Dictionary = {}  # monnaie -> Label
-var _buttons: Dictionary = {}  # monnaie -> Button
+var _buttons: Dictionary = {}  # nombre d'invocations -> Button
+var _results_row: HBoxContainer
 var _odds: Label
 var _pity: Label
 var _rows: Array[Control] = []
@@ -151,7 +154,7 @@ func _ready() -> void:
 	title.add_theme_constant_override("shadow_offset_y", 3)
 	for i in CURRENCIES.size():
 		var c: Array = CURRENCIES[i]
-		var r := Rect2(1500 + i * 200, 24, 186, 72)
+		var r := Rect2(1630, 24, 186, 72)
 		ScreenPack.panel(root, S, "currency_cartouche", r)
 		ScreenPack.image(root, ScreenPack.tex(S, c[1]), Rect2(r.position + Vector2(18, 16), Vector2(40, 40)))
 		_balance[c[0]] = ScreenPack.text(root, "", Rect2(r.position + Vector2(58, 0), Vector2(110, 72)),
@@ -193,14 +196,12 @@ func _ready() -> void:
 	root.add_child(_hover)
 
 	# Bas : les deux boutons d'invocation, sous la lanterne.
-	for i in CURRENCIES.size():
-		var c: Array = CURRENCIES[i]
-		var key := "fragments" if c[0] == "fragments_relique" else "gems"
-		var b := ScreenPack.button(root, S, "invoke_" + key, "", Rect2(540 + i * 440, 968, 400, 88), 28,
-			UiKit.INK if key == "fragments" else UiKit.WHITE)
-		var currency: String = c[0]
-		b.pressed.connect(func() -> void: _summon(currency))
-		_buttons[currency] = b
+	for i in PACKS.size():
+		var n: int = PACKS[i]
+		var b := ScreenPack.button(root, S, "invoke_gems" if n == 1 else "invoke_fragments", "",
+			Rect2(470 + i * 330, 968, 310, 88), 26, UiKit.WHITE if n == 1 else UiKit.INK)
+		b.pressed.connect(func() -> void: _summon(n))
+		_buttons[n] = b
 
 	_build_reveal(root, L.reveal)
 	PlayerData.changed.connect(_refresh)
@@ -213,8 +214,8 @@ func _process(delta: float) -> void:
 	if _lantern:
 		_lantern.position.y = _lantern_y + bob
 		_lit.position.y = _lit_y + bob
-	for currency: String in _buttons:
-		var b: Button = _buttons[currency]
+	for n: int in _buttons:
+		var b: Button = _buttons[n]
 		var g := 1.0 + (0.12 + 0.12 * sin(_time * 3.0)) * (0.0 if b.disabled else 1.0)
 		b.modulate = Color(g, g, g)
 
@@ -413,10 +414,17 @@ func _build_reveal(root: Control, _R: Dictionary) -> void:
 	_reveal_rarity = Panel.new()
 	_reveal_rarity_label = ScreenPack.shadow(ScreenPack.text(_reveal, "", Rect2(660, 230, 600, 44), 30, UiKit.WHITE,
 		HORIZONTAL_ALIGNMENT_CENTER))
-	_reveal_trap = ScreenPack.text(_reveal, "", Rect2(460, 800, 1000, 80), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER, true)
+	_reveal_trap = ScreenPack.text(_reveal, "", Rect2(460, 740, 1000, 60), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER, true)
 	_reveal_trap.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
 	_reveal_trap.add_theme_constant_override("shadow_offset_y", 3)
-	ScreenPack.shadow(ScreenPack.text(_reveal, "Touche pour continuer", Rect2(660, 860, 600, 34), 22, Color(1, 1, 1, 0.8), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	ScreenPack.shadow(ScreenPack.text(_reveal, "Touche pour continuer", Rect2(660, 896, 600, 34), 22, Color(1, 1, 1, 0.8), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	_results_row = HBoxContainer.new()
+	_results_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_results_row.add_theme_constant_override("separation", 10)
+	_results_row.position = Vector2(HERO_FEET.x - 600, HERO_FEET.y + 54)
+	_results_row.size = Vector2(1200, 110)
+	_results_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_reveal.add_child(_results_row)
 	_reveal.visible = false
 
 
@@ -472,27 +480,57 @@ func _hide_reveal() -> void:
 	_refresh()
 
 
-func _summon(currency: String) -> void:
+func _summon(count: int) -> void:
 	if busy:
 		return
 	var cfg: Dictionary = GameData.summon
-	if not PlayerData.can_summon(currency, cfg):
+	var currency := String(cfg.get("hero_currency", "gems"))
+	if not PlayerData.can_summon_pack(currency, cfg, count):
 		ui_sound.emit("ui_toggle")
 		return
 	busy = true  # avant summon() : son signal « changed » ne doit pas montrer le résultat
-	var r := PlayerData.summon(currency, cfg, GameData.heroes, _rng)
-	if r.is_empty():
+	var results := PlayerData.summon_pack(currency, cfg, GameData.heroes, _rng, count)
+	if results.is_empty():
 		busy = false
 		return
 	_reveal.visible = false
 	_set_buttons_enabled(false)
 	ui_sound.emit("magic_cast")
-	var hero := GameData.hero(r.id)
-	await _ceremony(int(r.rarity))
+	# La cérémonie prend la couleur de la meilleure rareté ; ce héros apparaît sur le cercle.
+	var best: Dictionary = results[0]
+	for r: Dictionary in results:
+		if int(r.rarity) > int(best.rarity):
+			best = r
+	await _ceremony(int(best.rarity))
 	ui_sound.emit("ultimate_impact")
-	_show_result(hero, r)
+	_show_result(GameData.hero(best.id), best)
+	_show_results_row(results)
 	busy = false
 	_refresh()
+
+
+## Rangée des héros obtenus (invocations multiples), en bas de la révélation.
+func _show_results_row(results: Array) -> void:
+	for c in _results_row.get_children():
+		c.queue_free()
+	_results_row.visible = results.size() > 1
+	if results.size() <= 1:
+		return
+	var news := 0
+	for i in results.size():
+		var r: Dictionary = results[i]
+		var box := VBoxContainer.new()
+		box.add_theme_constant_override("separation", 0)
+		var p := RoundPortrait.new().setup(GameData.hero(r.id), 76)
+		box.add_child(p)
+		var tag := UiKit.label("Nouveau" if r.new else "+1 Écho", 16, Color("63c8be") if r.new else UiKit.PARCHMENT_DARK)
+		tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		ScreenPack.shadow(tag, 2)
+		box.add_child(tag)
+		_results_row.add_child(box)
+		UiKit.pop_in(box, 0.06 * i)
+		news += 1 if r.new else 0
+	_reveal_trap.text = "%d héros invoqués · %d nouveau%s" % [results.size(), news, "x" if news > 1 else ""]
 
 
 ## Chronologie du JSON : allumage à 0, colonne à 0,8 s, éclat à 1,7 s, révélation à 2,35 s.
@@ -564,11 +602,10 @@ func _refresh() -> void:
 	if not is_inside_tree() or busy:
 		return  # pendant la cérémonie, rien ne doit trahir le résultat
 	var cfg: Dictionary = GameData.summon
-	for c: Array in CURRENCIES:
-		var currency: String = c[0]
-		_balance[currency].text = str(PlayerData.summon_balance(currency))
-		var info: Dictionary = cfg.get("currencies", {}).get(currency, {})
-		_buttons[currency].text = "Invoquer · %d %s" % [int(info.get("cost", 0)), c[2]]
+	var currency := String(cfg.get("hero_currency", "gems"))
+	_balance[currency].text = str(PlayerData.summon_balance(currency))
+	for n: int in _buttons:
+		_buttons[n].text = "×%d · %d gemmes" % [n, PlayerData.summon_pack_cost(currency, cfg, n)]
 	_set_buttons_enabled(true)
 	# Événement (optionnel, data/summon.json "event" : {"name", "text"}).
 	var ev: Dictionary = cfg.get("event", {})
@@ -666,5 +703,6 @@ func _hero_chance(hero: Dictionary) -> float:
 
 
 func _set_buttons_enabled(on: bool) -> void:
-	for currency: String in _buttons:
-		_buttons[currency].disabled = not on or not PlayerData.can_summon(currency, GameData.summon)
+	var currency := String(GameData.summon.get("hero_currency", "gems"))
+	for n: int in _buttons:
+		_buttons[n].disabled = not on or not PlayerData.can_summon_pack(currency, GameData.summon, n)

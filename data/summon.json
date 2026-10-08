@@ -22,5 +22,21 @@
   "trap_bonus": {
     "count": 1,
     "_note": "chaque invocation donne aussi un piège au hasard pour Ma Loge (consommable)"
-  }
+  },
+  "hero_currency": "gems",
+  "packs": [
+    {
+      "count": 1,
+      "pay": 1
+    },
+    {
+      "count": 5,
+      "pay": 5
+    },
+    {
+      "count": 10,
+      "pay": 9,
+      "_note": "×10 : une invocation offerte"
+    }
+  ]
 }

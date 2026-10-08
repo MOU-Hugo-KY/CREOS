@@ -488,6 +488,42 @@ func can_summon(currency: String, config: Dictionary) -> bool:
 	return cost > 0 and summon_balance(currency) >= cost
 
 
+## Prix d'un paquet de `count` invocations (data/summon.json "packs" : le ×10 en offre une).
+func summon_pack_cost(currency: String, config: Dictionary, count: int) -> int:
+	var pay := count
+	for p: Dictionary in config.get("packs", []):
+		if int(p.get("count", 0)) == count:
+			pay = int(p.get("pay", count))
+	return summon_cost(currency, config) * pay
+
+
+func can_summon_pack(currency: String, config: Dictionary, count: int) -> bool:
+	var cost := summon_pack_cost(currency, config, count)
+	return cost > 0 and summon_balance(currency) >= cost
+
+
+## `count` invocations d'un coup (la garantie compte chacune) ; le rabais du paquet est rendu
+## à la fin. Renvoie la liste des résultats de `summon()`, vide si le joueur n'a pas de quoi payer.
+func summon_pack(currency: String, config: Dictionary, pool: Dictionary, rng: RandomNumberGenerator,
+		count: int) -> Array:
+	if not can_summon_pack(currency, config, count):
+		return []
+	var refund := summon_cost(currency, config) * count - summon_pack_cost(currency, config, count)
+	var out: Array = []
+	for i in count:
+		var r := summon(currency, config, pool, rng)
+		if r.is_empty():
+			break
+		out.append(r)
+	if refund > 0:
+		if currency == "gems":
+			state.gems = gems() + refund
+		else:
+			state.items[currency] = item_count(currency) + refund
+		save_game()
+	return out
+
+
 ## Invoque un héros de `pool` (heroes.json). Renvoie {id, rarity, new, echoes}, ou {} si
 ## le joueur n'a pas de quoi payer. Un héros déjà possédé revient en Écho (+1 Écho).
 func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomNumberGenerator) -> Dictionary:

@@ -89,8 +89,8 @@ func _process(_delta: float) -> bool:
 		scene.hud.open_hunt_prep("monde01_1")
 	elif frames == 5 and action == "summon":  # Lanterne : une invocation avec des gemmes
 		scene.hud.open_altar()
-		root.get_node("PlayerData").state.gems = 1000
-		scene.hud.altar._summon("gems")
+		root.get_node("PlayerData").state.gems = 1200
+		scene.hud.altar._summon(10)
 	elif frames == 5 and action != "":
 		if scene.hud.has_method("open_" + action):  # ex. --action=profile, shop, relics, quests, altar
 			scene.hud.call("open_" + action)
