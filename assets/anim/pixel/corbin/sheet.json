@@ -8,7 +8,7 @@
  "map": {
   "idle": "idle",
   "walk": "walk",
-  "run": "run",
+  "run": "walk",
   "hurt": "hurt",
   "death": "death",
   "relic": "skill",
@@ -209,7 +209,7 @@
      0.12
     ]
    ],
-   "hit_frame": 2
+   "hit_frame": 4
   },
   "skill": {
    "loop": false,
