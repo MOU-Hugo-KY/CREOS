@@ -49,6 +49,13 @@ var mods: Array = []  # bonus/malus temporaires [{stat, amount, time}]
 var used_ultimate := false  # a lancé son ultime au moins une fois (condition du quatuor)
 
 
+## Ligne de l'unité dans sa formation : 0 = devant (places 0-1), 1 = milieu (2-4), 2 = arrière (5-6+).
+func line() -> int:
+	if slot < 2:
+		return 0
+	return 1 if slot < 5 else 2
+
+
 static func from_data(p_uid: int, p_def_id: String, data: Dictionary, p_team: int, p_slot: int) -> BattleUnit:
 	var u := BattleUnit.new()
 	u.uid = p_uid

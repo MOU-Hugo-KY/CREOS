@@ -54,6 +54,12 @@ func open_for(p_dungeon: String) -> void:
 	refresh()
 
 
+const LINE_NAMES := ["Devant", "Milieu", "Arrière"]
+const LINE_TIPS := ["Devant : protège les autres (corps-à-corps : -10 % de dégâts subis).",
+	"Milieu : un mage a 15 % de chances d'enchaîner une attaque de base.",
+	"Arrière : soins et boucliers +10 %, dégâts à distance +10 %. Protégé tant que la ligne de devant tient."]
+
+
 func refresh() -> void:
 	var d := GameData.dungeon(dungeon_id)
 	var cost := PlayerData.hunt_cost(dungeon_id)
@@ -66,6 +72,11 @@ func refresh() -> void:
 		var col := VBoxContainer.new()
 		col.custom_minimum_size = Vector2(124, 0)
 		_slots.add_child(col)
+		var line := UiKit.label(LINE_NAMES[0 if i < 2 else (1 if i < 5 else 2)], 17, UiKit.WOOD)
+		line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		line.tooltip_text = LINE_TIPS[0 if i < 2 else (1 if i < 5 else 2)]
+		line.mouse_filter = Control.MOUSE_FILTER_PASS
+		col.add_child(line)
 		var center := CenterContainer.new()
 		col.add_child(center)
 		if i < team.size():
@@ -77,6 +88,17 @@ func refresh() -> void:
 			var lv := UiKit.label("Niv. %d" % PlayerData.hero_level(id), 17, UiKit.TEXT_SOFT)
 			lv.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			col.add_child(lv)
+			var moves := HBoxContainer.new()
+			moves.alignment = BoxContainer.ALIGNMENT_CENTER
+			col.add_child(moves)
+			for dir in [-1, 1]:
+				var m := UiKit.button("◀" if dir < 0 else "▶", "wood", 16, Vector2(44, 34))
+				m.disabled = (dir < 0 and i == 0) or (dir > 0 and i == team.size() - 1)
+				var step: int = dir
+				m.pressed.connect(func() -> void:
+					if PlayerData.move_in_team(id, step):
+						ui_sound.emit("ui_toggle"))
+				moves.add_child(m)
 		else:
 			var empty := Panel.new()
 			empty.custom_minimum_size = Vector2(100, 100)

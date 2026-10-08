@@ -23,6 +23,7 @@ func _initialize() -> void:
 	test_quartet()
 	test_team_combos()
 	test_lodge()
+	test_formation_lines()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -135,7 +136,8 @@ func test_special_attacks() -> void:
 	check(hero.energy_cost(BattleUnit.SLOT_COOLDOWN) == 0.0, "l'attaque à recharge ne coûte pas d'énergie")
 
 	hero = _wait_turn(e)
-	var foe := e.enemies[e.enemies.size() - 1]
+	var reach := e.reachable(hero, e.enemies)
+	var foe := reach[reach.size() - 1]
 	check(e.set_focus(foe.uid), "le joueur peut cibler un ennemi")
 	check(not e.set_focus(hero.uid), "on ne peut pas cibler un allié")
 	e.drain_events()
@@ -541,3 +543,31 @@ func test_lodge() -> void:
 	check(res.traps.size() == 1 and pd.trap_count(res.traps[0]) == 1, "une invocation donne un piège")
 	pd.free()
 	gd.free()
+
+
+## Lignes de la formation : le corps-à-corps frappe d'abord la ligne de devant, la distance
+## atteint le milieu mais pas l'arrière tant que la ligne de devant tient ; bonus de l'arrière.
+func test_formation_lines() -> void:
+	print("
+[Lignes de la formation]")
+	var e := BattleEngine.new()
+	var foes: Array[BattleUnit] = []
+	for i in 7:
+		foes.append(BattleUnit.from_data(100 + i, "m", {"stats": {"hp": 100}}, 1, i))
+	var melee := BattleUnit.from_data(1, "a", {"range": "melee"}, 0, 0)
+	var ranged := BattleUnit.from_data(2, "b", {"range": "ranged"}, 0, 5)
+	check(e.reachable(melee, foes).all(func(f: BattleUnit) -> bool: return f.line() == 0),
+		"le corps-à-corps ne vise que la ligne de devant")
+	check(not e.reachable(ranged, foes).any(func(f: BattleUnit) -> bool: return f.line() == 2),
+		"la distance ne vise pas l'arrière tant que le devant tient")
+	check(e.reachable(ranged, foes).any(func(f: BattleUnit) -> bool: return f.line() == 1),
+		"la distance vise le milieu")
+	foes[0].hp = 0.0
+	foes[1].hp = 0.0
+	check(e.reachable(melee, foes).all(func(f: BattleUnit) -> bool: return f.line() == 1),
+		"devant tombé : le corps-à-corps passe au milieu")
+	check(e.reachable(ranged, foes).any(func(f: BattleUnit) -> bool: return f.line() == 2),
+		"devant tombé : la distance atteint l'arrière")
+	foes[6].taunt_time = 3.0
+	check(e.reachable(melee, foes).has(foes[6]), "une provocation reste atteignable")
+	check(ranged.line() == 2 and e._support_mult(ranged) > 1.0, "soins et boucliers renforcés à l'arrière")

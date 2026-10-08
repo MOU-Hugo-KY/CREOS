@@ -522,6 +522,22 @@ func hunt_cost(dungeon_id: String) -> int:
 # --- Équipe ------------------------------------------------------------------------
 
 ## Ajoute ou retire un héros de l'équipe (4 au plus, au moins 1). Renvoie vrai si ça a changé.
+## Avance (dir = -1) ou recule (dir = +1) un héros d'une place dans la formation (sa place décide
+## de sa ligne : 0-1 devant, 2-4 milieu, 5-6 arrière).
+func move_in_team(id: String, dir: int) -> bool:
+	var t: Array = team()
+	var i := t.find(id)
+	var j := i + dir
+	if i < 0 or j < 0 or j >= t.size():
+		return false
+	t[i] = t[j]
+	t[j] = id
+	state["team"] = t
+	save_game()
+	changed.emit()
+	return true
+
+
 func toggle_team(id: String) -> bool:
 	var t: Array = team()
 	if id in t:

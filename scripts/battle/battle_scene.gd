@@ -21,12 +21,12 @@ const HERO_SPOTS := [Vector2(575, 554), Vector2(520, 668), Vector2(450, 552), Ve
 const ENEMY_SPOTS := [Vector2(705, 554), Vector2(760, 668), Vector2(830, 552), Vector2(885, 666),
 	Vector2(955, 550), Vector2(1010, 664), Vector2(1080, 548), Vector2(1135, 662)]
 const CROWD_SCALE := 0.78  # combattants un peu plus petits quand il y a plus de 4 héros
-# Arène en plongée (maquette ChatGPT) : 7 par camp en trois lignes, 2 en haut, 3 au milieu, 2 en bas ;
-# les ennemis en miroir. Pieds dans le cadre 1280 × 720.
-const TOP_HEROES := [Vector2(237, 340), Vector2(417, 340), Vector2(157, 462), Vector2(329, 462),
-	Vector2(505, 462), Vector2(237, 584), Vector2(429, 584)]
-const TOP_ENEMIES := [Vector2(858, 340), Vector2(1034, 340), Vector2(774, 462), Vector2(946, 462),
-	Vector2(1118, 462), Vector2(850, 584), Vector2(1042, 584)]
+# Formation en colonnes, comme les règles du moteur (BattleUnit.line()) : places 0-1 devant (près
+# de l'adversaire), 2-4 au milieu, 5-6 à l'arrière. Les ennemis en miroir.
+const TOP_HEROES := [Vector2(520, 400), Vector2(520, 540), Vector2(355, 335), Vector2(355, 465),
+	Vector2(355, 595), Vector2(190, 400), Vector2(190, 540)]
+const TOP_ENEMIES := [Vector2(760, 400), Vector2(760, 540), Vector2(925, 335), Vector2(925, 465),
+	Vector2(925, 595), Vector2(1090, 400), Vector2(1090, 540)]
 # Personnages tous à la même taille. Héros : pixel source × 4,8 × 0,5 × TOP_SCALE × 1,5 (cadre 1280 → écran
 # 1920) = exactement 2 pixels d'écran par pixel de dessin, pour un pixel art net.
 const TOP_SCALE := 2.0 / (4.8 * 0.5 * 1.5)
@@ -186,6 +186,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	var click := event as InputEventMouseButton
 	if click and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
 		var enemy := _enemy_at(click.position)
+		# Ligne protégée : le héros dont c'est le tour ne peut pas l'atteindre (corps-à-corps : la ligne
+		# de devant d'abord ; à distance : l'arrière seulement quand la ligne de devant est tombée).
+		if enemy and engine.awaiting_uid != -1 and not engine.can_reach(engine.awaiting_uid, enemy.unit.uid):
+			enemy.popup("Protégé", Color("c9c1d6"))
+			audio.play("ui_toggle", -8.0, 0.0)
+			get_viewport().set_input_as_handled()
+			return
 		if enemy and engine.set_focus(enemy.unit.uid):
 			audio.play("ui_click", -8.0, 0.0)
 			_handle_events()

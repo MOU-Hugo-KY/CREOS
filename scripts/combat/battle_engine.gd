@@ -36,6 +36,14 @@ const CRIT_MULT := 1.5
 const VARIANCE := 0.05
 const WAVE_DELAY := 1.2
 const DOT_TICK := 1.0
+# Bonus de position (ligne de la formation) :
+#  - arrière : soins, régénérations et boucliers +10 %, dégâts à distance +10 % ;
+#  - milieu : un lanceur de magie a 15 % de chances d'enchaîner une attaque de base gratuite ;
+#  - devant : un combattant au corps-à-corps subit 10 % de dégâts en moins.
+const BACK_SUPPORT_BONUS := 0.10
+const BACK_RANGED_BONUS := 0.10
+const MIDDLE_MAGIC_EXTRA_CHANCE := 0.15
+const FRONT_MELEE_GUARD := 0.10
 const DEFAULT_HIT_TIME := 0.35  # instant d'impact dans l'animation (pour l'affichage)
 
 var heroes: Array[BattleUnit] = []
@@ -53,6 +61,7 @@ var _events: Array[Dictionary] = []
 var awaiting_uid := -1  # héros qui attend le choix du joueur (-1 = personne)
 var focus_uid := -1  # ennemi ciblé par le joueur (-1 = choix automatique)
 var _wave_timer := 0.0
+var _bonus_attack := false  # attaque gratuite du milieu en cours (pas d'enchaînement)
 ## Combos d'équipe possibles (quatuors de relics.json, duos et trios de combos.json) : ceux dont tous
 ## les membres sont dans l'équipe. Chacun une seule fois par combat.
 var combos: Array = []
@@ -431,7 +440,40 @@ func _ai_choice(u: BattleUnit) -> int:
 	return BattleUnit.SLOT_BASIC
 
 
+## Ennemis qu'une attaque sur une seule cible peut atteindre :
+##  - corps-à-corps : seulement la ligne la plus avancée encore debout ;
+##  - à distance : devant et milieu, l'arrière seulement quand la ligne de devant est tombée.
+## Une unité qui provoque reste toujours atteignable. Les attaques de zone ne sont pas limitées.
+func reachable(src: BattleUnit, foes: Array[BattleUnit]) -> Array[BattleUnit]:
+	var alive := foes.filter(func(f: BattleUnit) -> bool: return f.is_alive())
+	if alive.is_empty():
+		return alive
+	var front := 2
+	for f: BattleUnit in alive:
+		front = mini(front, f.line())
+	var out: Array[BattleUnit] = []
+	for f: BattleUnit in alive:
+		var ok := f.taunt_time > 0.0
+		if src.range_type == "melee":
+			ok = ok or f.line() == front
+		else:
+			ok = ok or f.line() < 2 or front > 0
+		if ok:
+			out.append(f)
+	return out if not out.is_empty() else alive
+
+
+## Le joueur peut-il viser cet ennemi avec une attaque sur une seule cible de ce héros ?
+func can_reach(src_uid: int, dst_uid: int) -> bool:
+	var src := get_unit(src_uid)
+	var dst := get_unit(dst_uid)
+	if src == null or dst == null:
+		return false
+	return reachable(src, _foes_of(src)).has(dst)
+
+
 func _pick_basic_target(src: BattleUnit, foes: Array[BattleUnit]) -> BattleUnit:
+	foes = reachable(src, foes)
 	for f in foes:
 		if f.taunt_time > 0.0:
 			return f
@@ -461,7 +503,7 @@ func _attack_targets(caster: BattleUnit, target_type: String) -> Array[BattleUni
 			var only: Array[BattleUnit] = [caster]
 			return only
 		"lowest_hp_enemy":
-			return _lowest(foes)
+			return _lowest(reachable(caster, foes))
 		"lowest_hp_ally":
 			return _lowest(allies)
 		"random_enemy":
@@ -543,6 +585,13 @@ func _use_attack(caster: BattleUnit, slot: int) -> void:
 			_heal(caster, caster, dealt * float(e.get("ratio", 0.2)))
 	if slot != BattleUnit.SLOT_ULTIMATE:
 		caster.add_energy(ENERGY_ON_ATTACK)
+	# Milieu : un lanceur de magie peut enchaîner une attaque de base gratuite.
+	if not _bonus_attack and caster.line() == 1 and caster.attack_kind == "magic" and caster.is_alive() \
+			and not _foes_of(caster).is_empty() and _rng.randf() < MIDDLE_MAGIC_EXTRA_CHANCE:
+		_bonus_attack = true
+		_emit({"type": "status", "dst": caster.uid, "status": "elan", "duration": 0.0, "label": "Élan !"})
+		_use_attack(caster, BattleUnit.SLOT_BASIC)
+		_bonus_attack = false
 
 
 ## Applique un effet à ses cibles. Renvoie les dégâts infligés (pour le vol de vie).
@@ -567,9 +616,9 @@ func _apply_effect(caster: BattleUnit, effect: Dictionary, targets: Array, singl
 						t.statuses.erase(bonus_on)
 				dealt += _hit(caster, t, p, effect.get("kind", caster.attack_kind), stat_name, single)
 			"heal":
-				_heal(caster, t, caster.stat(stat_name) * power * _variance())
+				_heal(caster, t, caster.stat(stat_name) * power * _variance() * _support_mult(caster))
 			"shield":
-				var amount := caster.stat(stat_name) * power
+				var amount := caster.stat(stat_name) * power * _support_mult(caster)
 				t.shield += amount
 				_emit({"type": "shield", "dst": t.uid, "amount": amount})
 			"taunt":
@@ -594,7 +643,7 @@ func _apply_effect(caster: BattleUnit, effect: Dictionary, targets: Array, singl
 				_emit({"type": "status", "dst": t.uid, "status": dot_name, "duration": duration})
 			"regen":
 				var duration: float = effect.get("duration", 4.0)
-				t.hots.append({"hps": caster.stat(stat_name) * power / maxf(1.0, duration / 2.0), "time": duration,
+				t.hots.append({"hps": caster.stat(stat_name) * power * _support_mult(caster) / maxf(1.0, duration / 2.0), "time": duration,
 					"src": caster.uid})
 				_emit({"type": "status", "dst": t.uid, "status": "regen", "duration": duration})
 			"status":
@@ -622,6 +671,11 @@ func _apply_effect(caster: BattleUnit, effect: Dictionary, targets: Array, singl
 		if cond != "" and effect.get("consume", false):
 			t.statuses.erase(cond)
 	return dealt
+
+
+## Soins et boucliers d'un lanceur placé à l'arrière : +10 %.
+func _support_mult(caster: BattleUnit) -> float:
+	return 1.0 + (BACK_SUPPORT_BONUS if caster.line() == 2 else 0.0)
 
 
 func _heal(src: BattleUnit, t: BattleUnit, amount: float) -> void:
@@ -696,6 +750,10 @@ func _hit(src: BattleUnit, dst: BattleUnit, power: float, kind: String, stat_nam
 	if dst.has_status("garde"):
 		dst.statuses.erase("garde")
 		dmg *= 0.6
+	if src.line() == 2 and src.range_type != "melee":
+		dmg *= 1.0 + BACK_RANGED_BONUS
+	if dst.line() == 0 and dst.range_type == "melee":
+		dmg *= 1.0 - FRONT_MELEE_GUARD
 	_apply_damage(src, dst, dmg, is_crit, elem)
 	return dmg
 
