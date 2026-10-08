@@ -8,6 +8,7 @@ extends Control
 
 const DIR := "res://assets/ui/invocateurs/"
 const COLORS := {2: "bleu", 3: "violet", 4: "or"}
+const MAGE_SCALE := 1.6  # le mage du pack (~200 px) agrandi pour la salle
 const COLUMNS := {2: "colonne_rune_rare", 3: "colonne_rune_epique", 4: "colonne_rune_legendaire"}
 
 static var _data: Dictionary = {}
@@ -63,6 +64,7 @@ func _ready() -> void:
 	_mage = _sheet("mage_repos")
 	_mage.position = _vec(room.get("sol_personnage", [420, 830]))
 	_mage.play("mage_repos")
+	_mage.scale = Vector2.ONE * MAGE_SCALE
 	# Cercles frontaux (cachés au repos), effets.
 	var zone: Array = room.get("zone_apparition", [880, 310, 400, 430])
 	var mid := Vector2(zone[0] + zone[2] / 2.0, zone[1] + zone[3] * 0.42)
@@ -72,7 +74,7 @@ func _ready() -> void:
 		c.material = _add
 		c.visible = false
 		_front.append(c)
-	_staff_circle = _image(tex("mage/cercle_runique_petit_blanc.png"), Rect2(_mage.position + Vector2(10, -190), Vector2(128, 128)))
+	_staff_circle = _image(tex("mage/cercle_runique_petit_blanc.png"), Rect2(_mage.position + Vector2(30, -330), Vector2(128, 128)))
 	_staff_circle.pivot_offset = Vector2(64, 64)
 	_staff_circle.material = _add
 	_staff_circle.visible = false
