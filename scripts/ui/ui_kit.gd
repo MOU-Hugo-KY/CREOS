@@ -239,12 +239,10 @@ static func icon(name: String, size := 40.0) -> TextureRect:
 
 ## Petite étiquette de récompense : icône + quantité, sur fond crème.
 static func reward_chip(icon_name: String, amount: int) -> PanelContainer:
-	var p := PanelContainer.new()
-	var sb := kit("tooltip", Color.WHITE, true)
-	sb.content_margin_top = 4
-	sb.content_margin_bottom = 4
-	sb.content_margin_left = 6
-	sb.content_margin_right = 10
+	var p := PanelContainer.new()  # sans cadre : l'icône et la quantité posées sur le parchemin
+	var sb := StyleBoxEmpty.new()
+	sb.content_margin_left = 4
+	sb.content_margin_right = 8
 	p.add_theme_stylebox_override("panel", sb)
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var h := HBoxContainer.new()

@@ -397,16 +397,15 @@ func _build_reveal(root: Control, _R: Dictionary) -> void:
 	_hero_shadow = _HeroShadow.new()
 	_hero_shadow.position = HERO_FEET
 	_reveal.add_child(_hero_shadow)
-	var nr := Rect2(660, 150, 600, 84)
-	ScreenPack.panel(_reveal, S, "reveal_name", nr)
-	_reveal_name = ScreenPack.text(_reveal, "", nr, 40, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	var rr := Rect2(850, 236, 220, 52)
-	_reveal_rarity = ScreenPack.panel(_reveal, S, "reveal_badge_rare", rr)
-	_reveal_rarity_label = ScreenPack.text(_reveal, "", rr, 26, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	_reveal_name = ScreenPack.shadow(ScreenPack.text(_reveal, "", Rect2(460, 130, 1000, 100), 76, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER), 5)
+	_reveal_rarity = Panel.new()
+	_reveal_rarity_label = ScreenPack.shadow(ScreenPack.text(_reveal, "", Rect2(660, 230, 600, 44), 30, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER))
 	_reveal_trap = ScreenPack.text(_reveal, "", Rect2(460, 800, 1000, 80), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER, true)
 	_reveal_trap.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
 	_reveal_trap.add_theme_constant_override("shadow_offset_y", 3)
-	ScreenPack.text(_reveal, "Touche pour continuer", Rect2(660, 880, 600, 34), 20, Color(1, 1, 1, 0.65), HORIZONTAL_ALIGNMENT_CENTER)
+	ScreenPack.shadow(ScreenPack.text(_reveal, "Touche pour continuer", Rect2(660, 860, 600, 34), 22, Color(1, 1, 1, 0.8), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	_reveal.visible = false
 
 
@@ -502,8 +501,10 @@ func _show_result(hero: Dictionary, r: Dictionary) -> void:
 	var rarity := int(r.rarity)
 	var key: String = RARITY_KEYS.get(rarity, "rare")
 	_reveal_name.text = String(hero.name).to_upper()
-	_reveal_rarity.add_theme_stylebox_override("panel", ScreenPack.nine(S, "reveal_badge_" + key))
-	_reveal_rarity_label.text = Palette.RARITIES.get(rarity, ["?"])[0]
+	var rc: Color = (Palette.RARITIES.get(rarity, ["?", Color.WHITE])[1] as Color).lightened(0.25)
+	_reveal_name.add_theme_color_override("font_color", rc)
+	_reveal_rarity_label.add_theme_color_override("font_color", rc)
+	_reveal_rarity_label.text = String(Palette.RARITIES.get(rarity, ["?"])[0]).to_upper()
 	var lines: Array[String] = []
 	if not r.new:
 		lines.append("Déjà recruté : +1 Écho (%d)" % r.echoes)

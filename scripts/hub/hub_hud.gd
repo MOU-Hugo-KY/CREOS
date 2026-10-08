@@ -308,7 +308,7 @@ func _build_resources() -> void:
 	_sound_button.focus_mode = Control.FOCUS_NONE
 	_sound_button.custom_minimum_size = Vector2(78, 52)
 	_sound_button.add_theme_font_size_override("font_size", 20)
-	_sound_button.add_theme_stylebox_override("normal", Palette.stylebox(Color(0, 0, 0, 0.4), Color(1, 1, 1, 0.25), 26, 2))
+	_sound_button.add_theme_stylebox_override("normal", _capsule())
 	_sound_button.add_theme_stylebox_override("hover", Palette.stylebox(Color(0, 0, 0, 0.5), Color(1, 1, 1, 0.5), 26, 2))
 	_sound_button.add_theme_stylebox_override("pressed", Palette.stylebox(Color(Palette.GOLD, 0.3), Palette.GOLD, 26, 2))
 	_sound_button.toggled.connect(_toggle_sound)
@@ -317,7 +317,7 @@ func _build_resources() -> void:
 	time_button.focus_mode = Control.FOCUS_NONE
 	time_button.custom_minimum_size = Vector2(190, 52)
 	time_button.add_theme_font_size_override("font_size", 19)
-	time_button.add_theme_stylebox_override("normal", Palette.stylebox(Color(0, 0, 0, 0.4), Color(1, 1, 1, 0.25), 26, 2))
+	time_button.add_theme_stylebox_override("normal", _capsule())
 	time_button.add_theme_stylebox_override("hover", Palette.stylebox(Color(0, 0, 0, 0.5), Color(1, 1, 1, 0.5), 26, 2))
 	time_button.add_theme_stylebox_override("pressed", Palette.stylebox(Color(0, 0, 0, 0.5), Palette.GOLD, 26, 2))
 	time_button.text = TIMES[0][0]
@@ -331,9 +331,20 @@ func _build_resources() -> void:
 	row.add_child(_sound_button)
 
 
+## Capsule sombre semi-transparente, commune aux bourses et aux boutons du haut.
+func _capsule() -> StyleBoxFlat:
+	var sb := Palette.stylebox(Color(0.05, 0.04, 0.08, 0.55), Color(1, 1, 1, 0.16), 26, 2)
+	sb.content_margin_top = 4
+	sb.content_margin_bottom = 4
+	return sb
+
+
 func _pill(icon_name: String, value: String) -> Control:
 	var p := PanelContainer.new()
-	p.add_theme_stylebox_override("panel", UiKit.pill())
+	var sb := _capsule()
+	sb.content_margin_left = 8
+	sb.content_margin_right = 18
+	p.add_theme_stylebox_override("panel", sb)
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var h := HBoxContainer.new()
 	h.add_theme_constant_override("separation", 6)
@@ -341,7 +352,8 @@ func _pill(icon_name: String, value: String) -> Control:
 	var icon := TextureRect.new()
 	icon.texture = _icon(icon_name)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.custom_minimum_size = Vector2(54, 54)
+	icon.custom_minimum_size = Vector2(44, 44)
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	h.add_child(icon)
 	var l := UiKit.title(value + "  ", 24)
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER

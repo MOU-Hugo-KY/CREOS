@@ -144,6 +144,34 @@ static func text(parent: Control, s: String, r: Rect2, size := 28, color := UiKi
 
 
 ## Réajuste tous les textes d'une ligne d'un écran (après avoir changé leur contenu).
+## Ombre portée dure sous un texte posé directement sur un décor (sans cadre).
+static func shadow(l: Label, px := 3) -> Label:
+	l.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
+	l.add_theme_constant_override("shadow_offset_x", px)
+	l.add_theme_constant_override("shadow_offset_y", px)
+	l.add_theme_constant_override("shadow_outline_size", px)
+	return l
+
+
+static var _trim_cache: Dictionary = {}
+
+
+## La même image réduite à ses pixels visibles (centrée dans un carré) : des icônes aux marges
+## différentes s'alignent alors vraiment.
+static func trimmed(t: Texture2D) -> Texture2D:
+	if t == null:
+		return null
+	if _trim_cache.has(t):
+		return _trim_cache[t]
+	var used := t.get_image().get_used_rect()
+	var side := maxi(used.size.x, used.size.y)
+	var at := AtlasTexture.new()
+	at.atlas = t
+	at.region = Rect2(used.get_center().x - side / 2.0, used.get_center().y - side / 2.0, side, side)
+	_trim_cache[t] = at
+	return at
+
+
 static func fit_all(root: Node) -> void:
 	for c in root.get_children():
 		if c is Label and c.has_meta("base_size") and c.autowrap_mode == TextServer.AUTOWRAP_OFF:

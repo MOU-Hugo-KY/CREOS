@@ -188,12 +188,8 @@ func _quest_card(daily: Dictionary, q: Dictionary) -> Control:
 	rewards.add_theme_constant_override("separation", 6)
 	rewards.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	h.add_child(rewards)
-	var pts := PanelContainer.new()
-	var psb := UiKit.box(Color("505e75"), Color("2c3445"), 14, 2)
-	psb.content_margin_left = 10
-	psb.content_margin_right = 10
-	pts.add_theme_stylebox_override("panel", psb)
-	pts.add_child(UiKit.label("+%d pts" % int(q.get("points", 0)), 18, UiKit.WHITE, 4, Color("2c3445")))
+	var pts := UiKit.label("+%d pts" % int(q.get("points", 0)), 20, Color("505e75"))
+	pts.custom_minimum_size.x = 84
 	rewards.add_child(pts)
 	var r: Dictionary = q.get("rewards", {})
 	for key: String in r:

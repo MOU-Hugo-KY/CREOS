@@ -212,7 +212,10 @@ func _hero_card(hero: Dictionary) -> Control:
 	card.custom_minimum_size = Vector2(0, 430)
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var rarity := int(hero.get("rarity", 2))
+	var rcol: Color = (Palette.RARITIES.get(rarity, ["?", Color.WHITE])[1] as Color).lightened(0.25)
 	var frame := ScreenPack.nine(F, "vitrine_frame")
+	frame.modulate_color = Color.WHITE.lerp(rcol, 0.45)
 	card.add_theme_stylebox_override("normal", frame)
 	var hover := ScreenPack.nine(F, "vitrine_frame")
 	hover.modulate_color = Color(1.12, 1.06, 0.9)
@@ -251,25 +254,28 @@ func _hero_card(hero: Dictionary) -> Control:
 	card.add_child(art)
 	var info := Panel.new()
 	info.name = "Info"
-	info.add_theme_stylebox_override("panel", ScreenPack.nine(F, "hero_type_cartouche"))
+	info.add_theme_stylebox_override("panel", Palette.stylebox(Color(0.06, 0.05, 0.08, 0.6), Color.TRANSPARENT, 6))
 	info.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	card.add_child(info)
-	var rarity := int(hero.get("rarity", 2))
-	var badge := ScreenPack.panel(card, F, "badge_" + RARITY_KEYS.get(rarity, "rare"), Rect2(20, 20, 128, 44))
-	badge.name = "Rarity"
-	ScreenPack.text(badge, Palette.RARITIES.get(rarity, ["?"])[0], Rect2(0, 0, 128, 44), 18, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	var cls := _icon_square(ScreenPack.tex(F, "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade")), 52,
-		Palette.CLASS_NAMES.get(hero.get("class"), ""))
-	cls.name = "Class"
-	card.add_child(cls)
-	var el := _icon_square(ScreenPack.tex(F, "element_%s_64" % elem), 52, Palette.ELEMENT_NAMES.get(hero.get("element"), ""))
-	el.name = "Element"
-	card.add_child(el)
+	for e: Array in [["Class", "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade"), Palette.CLASS_NAMES.get(hero.get("class"), "")],
+			["Element", "element_%s_64" % elem, Palette.ELEMENT_NAMES.get(hero.get("element"), "")]]:
+		var holder := Control.new()
+		holder.name = e[0]
+		holder.size = Vector2(44, 44)
+		holder.tooltip_text = e[2]
+		holder.mouse_filter = Control.MOUSE_FILTER_PASS
+		card.add_child(holder)
+		var ic := _emblem(holder, Vector2.ZERO)
+		ic.texture = ScreenPack.trimmed(ScreenPack.tex(F, e[1]))
+		ic.size = Vector2(44, 44)
+		var sh: TextureRect = ic.get_meta("shadow")
+		sh.texture = ic.texture
+		sh.size = Vector2(44, 44)
 	if PlayerData.in_team(id):
-		var t := _badge("ÉQUIPE", Color("1f5f59"))
+		var t := ScreenPack.shadow(ScreenPack.text(card, "ÉQUIPE", Rect2(0, 0, 120, 30), 20, Color("63c8be"),
+			HORIZONTAL_ALIGNMENT_RIGHT), 2)
 		t.name = "Team"
-		card.add_child(t)
-	ScreenPack.text(info, String(hero.name), Rect2(20, 6, 400, 36), 28, UiKit.WHITE).name = "Name"
+	ScreenPack.shadow(ScreenPack.text(info, String(hero.name), Rect2(20, 6, 400, 36), 28, rcol), 2).name = "Name"
 	var sub := "À recruter à la Lanterne" if not owned else "Niv. %d · %s · Force %d" % [PlayerData.hero_level(id),
 		_echo_marks(id), _power(id)]
 	ScreenPack.text(info, sub, Rect2(20, 42, 400, 30), 18, UiKit.PARCHMENT_DARK if owned else Color("f3d9a0")).name = "Sub"
@@ -299,11 +305,11 @@ func _layout_card(card: Control) -> void:
 	for c in info.get_children():
 		c.size.x = w - 50
 	# Classe et élément : carrés dans les coins bas de la salle, de part et d'autre du socle.
-	(card.get_node("Class") as Control).position = Vector2(26, h - 112 - 66)
-	(card.get_node("Element") as Control).position = Vector2(w - 26 - 52, h - 112 - 66)
+	(card.get_node("Class") as Control).position = Vector2(30, h - 112 - 60)
+	(card.get_node("Element") as Control).position = Vector2(w - 30 - 44, h - 112 - 60)
 	if card.has_node("Team"):
 		var t: Control = card.get_node("Team")
-		t.position = Vector2(w - t.size.x - 22, 22)
+		t.position = Vector2(w - t.size.x - 26, 24)
 
 func _build_detail(_page: VBoxContainer) -> void:
 	# Fiche d'un héros, façon scène : la salle d'armes de son élément en fond, le héros en grand à
@@ -338,8 +344,8 @@ func _build_detail(_page: VBoxContainer) -> void:
 	_d_rarity_label.add_theme_constant_override("shadow_offset_y", 2)
 	_d_role = ScreenPack.text(root, "", Rect2(20, 220, 690, 36), 26, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
 	_d_species = ScreenPack.text(root, "", Rect2(20, 254, 690, 30), 20, UiKit.PARCHMENT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
-	_d_class = _emblem(root, Vector2(265, 274))
-	_d_element = _emblem(root, Vector2(375, 274))
+	_d_class = _emblem(root, Vector2(277, 288))
+	_d_element = _emblem(root, Vector2(381, 288))
 	# Le héros, grand, sur son socle.
 	_d_socle = ScreenPack.image(root, null, Rect2(185, 735, 360, 225))
 	var vpc := SubViewportContainer.new()
@@ -480,8 +486,8 @@ func _fill_detail() -> void:
 	# Vitrine
 	_d_room.texture = ScreenPack.tex(F, "fond_" + elem)
 	_d_socle.texture = ScreenPack.tex(F, "socle_" + elem)
-	_d_class.texture = ScreenPack.tex(F, "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade"))
-	_d_element.texture = ScreenPack.tex(F, "element_%s_64" % elem)
+	_d_class.texture = ScreenPack.trimmed(ScreenPack.tex(F, "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade")))
+	_d_element.texture = ScreenPack.trimmed(ScreenPack.tex(F, "element_%s_64" % elem))
 	for e: TextureRect in [_d_class, _d_element]:
 		(e.get_meta("shadow") as TextureRect).texture = e.texture
 	var rcol: Color = (Palette.RARITIES.get(rarity, ["?", Color.WHITE])[1] as Color).lightened(0.25)
@@ -897,7 +903,7 @@ func _emblem(parent: Control, at: Vector2) -> TextureRect:
 	sh.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	sh.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	sh.position = at + Vector2(3, 4)
-	sh.size = Vector2(92, 92)
+	sh.size = Vector2(72, 72)
 	sh.modulate = Color(0, 0, 0, 0.6)
 	sh.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(sh)
@@ -906,7 +912,7 @@ func _emblem(parent: Control, at: Vector2) -> TextureRect:
 	ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	ic.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	ic.position = at
-	ic.size = Vector2(92, 92)
+	ic.size = Vector2(72, 72)
 	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	ic.set_meta("shadow", sh)
 	parent.add_child(ic)

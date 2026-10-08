@@ -126,10 +126,10 @@ func _fill_board(team: Array) -> void:
 		c.queue_free()
 	for line in 3:
 		var x: float = [810.0, 560.0, 310.0][line]
-		var tag := ScreenPack.panel(_board, S, "currency_cartouche", Rect2(x - 90, 140, 180, 64))
+		var tag := ScreenPack.shadow(ScreenPack.text(_board, LINE_NAMES[line].to_upper(), Rect2(x - 120, 146, 240, 52), 32,
+			Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER))
 		tag.mouse_filter = Control.MOUSE_FILTER_PASS
 		tag.tooltip_text = LINE_TIPS[line]
-		ScreenPack.text(tag, LINE_NAMES[line], Rect2(0, 0, 180, 64), 26, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
 	var hint := ScreenPack.text(_board, "Touche deux héros pour échanger leurs places · survole une ligne pour son bonus",
 		Rect2(70, 940, 970, 40), 22, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
 	hint.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
