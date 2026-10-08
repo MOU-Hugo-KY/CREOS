@@ -278,6 +278,7 @@ func _build_detail(_page: VBoxContainer) -> void:
 	_preview = HeroPreview.new()
 	_preview.pedestal = false
 	_preview.zoom = 1.0
+	_preview.pull_back = false  # les techniques se jouent en grand dans la carte
 	_d_vpc.add_child(_preview)
 	for dir: int in [-1, 1]:
 		var arrow := SummonAltar._Arrow.new()

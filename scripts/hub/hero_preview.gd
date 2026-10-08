@@ -12,6 +12,7 @@ var _color := Color.WHITE
 var _time := 0.0
 var _tween: Tween
 var pedestal := true  # socle lumineux sous le héros
+var pull_back := true  # recule la vue pendant les attaques (sinon reste en grand, un peu décalé)
 var zoom := 1.0  # taille du héros (1 : la hauteur de la vue / 470)
 
 
@@ -72,7 +73,10 @@ func play(clip: String) -> void:
 		_tween.kill()
 	_tween = create_tween()
 	var base := _base_scale()
-	if attack:
+	if attack and not pull_back:
+		_tween.tween_property(_stage, "position:x", size.x * 0.34, 0.15)
+		_tween.tween_interval(maxf(0.2, _player.duration(clip) - 0.3))
+	elif attack:
 		_tween.tween_property(_stage, "scale", Vector2.ONE * base * 0.45, 0.25)
 		_tween.parallel().tween_property(_stage, "position:x", size.x * 0.16, 0.25)
 		_tween.tween_interval(maxf(0.2, _player.duration(clip) - 0.5))
