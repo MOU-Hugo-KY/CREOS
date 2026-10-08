@@ -331,19 +331,15 @@ func _build_detail(_page: VBoxContainer) -> void:
 	_d_title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
 	_d_title.add_theme_constant_override("shadow_offset_x", 4)
 	_d_title.add_theme_constant_override("shadow_offset_y", 4)
-	var sq_c := _icon_square(null, 60)
-	sq_c.position = Vector2(205, 200)
-	root.add_child(sq_c)
-	_d_class = sq_c.get_node("Icon")
-	var sq_e := _icon_square(null, 60)
-	sq_e.position = Vector2(275, 200)
-	root.add_child(sq_e)
-	_d_element = sq_e.get_node("Icon")
-	var rr := Rect2(351, 204, 170, 52)
-	_d_rarity = ScreenPack.panel(root, F, "badge_rare", rr)
-	_d_rarity_label = ScreenPack.text(root, "", rr, 22, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	_d_role = ScreenPack.text(root, "", Rect2(20, 272, 690, 36), 26, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
-	_d_species = ScreenPack.text(root, "", Rect2(20, 306, 690, 30), 20, UiKit.PARCHMENT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	# Rareté en lettres de sa couleur, rôle, espèce, puis les emblèmes de classe et d'élément posés sur le fond.
+	_d_rarity = Panel.new()  # (plus de badge : la couleur du nom et du mot suffit)
+	_d_rarity_label = ScreenPack.text(root, "", Rect2(20, 186, 690, 34), 26, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	_d_rarity_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
+	_d_rarity_label.add_theme_constant_override("shadow_offset_y", 2)
+	_d_role = ScreenPack.text(root, "", Rect2(20, 220, 690, 36), 26, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	_d_species = ScreenPack.text(root, "", Rect2(20, 254, 690, 30), 20, UiKit.PARCHMENT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	_d_class = _emblem(root, Vector2(265, 274))
+	_d_element = _emblem(root, Vector2(375, 274))
 	# Le héros, grand, sur son socle.
 	_d_socle = ScreenPack.image(root, null, Rect2(185, 735, 360, 225))
 	var vpc := SubViewportContainer.new()
@@ -486,8 +482,12 @@ func _fill_detail() -> void:
 	_d_socle.texture = ScreenPack.tex(F, "socle_" + elem)
 	_d_class.texture = ScreenPack.tex(F, "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade"))
 	_d_element.texture = ScreenPack.tex(F, "element_%s_64" % elem)
-	_d_rarity.add_theme_stylebox_override("panel", ScreenPack.nine(F, "badge_" + RARITY_KEYS.get(rarity, "rare")))
-	_d_rarity_label.text = Palette.RARITIES.get(rarity, ["?"])[0]
+	for e: TextureRect in [_d_class, _d_element]:
+		(e.get_meta("shadow") as TextureRect).texture = e.texture
+	var rcol: Color = (Palette.RARITIES.get(rarity, ["?", Color.WHITE])[1] as Color).lightened(0.25)
+	_d_rarity_label.text = String(Palette.RARITIES.get(rarity, ["?"])[0]).to_upper()
+	_d_rarity_label.add_theme_color_override("font_color", rcol)
+	_d_title.add_theme_color_override("font_color", rcol)
 	_d_role.text = "%s · %s" % [Palette.CLASS_NAMES.get(hero.get("class"), ""), Palette.ELEMENT_NAMES.get(hero.get("element"), "")]
 	_d_species.text = String(hero.get("species", ""))
 	var tier := PlayerData.hero_echo_tier(id)
@@ -891,6 +891,28 @@ func _tab_button(text: String, active: bool, on_press: Callable) -> Button:
 
 
 ## Carré d'insigne (classe ou élément) : tuile d'encre cerclée de laiton, icône centrée.
+## Emblème posé sur le fond (classe ou élément) : l'icône seule, avec une ombre portée douce.
+func _emblem(parent: Control, at: Vector2) -> TextureRect:
+	var sh := TextureRect.new()
+	sh.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	sh.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	sh.position = at + Vector2(3, 4)
+	sh.size = Vector2(92, 92)
+	sh.modulate = Color(0, 0, 0, 0.6)
+	sh.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(sh)
+	var ic := TextureRect.new()
+	ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	ic.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	ic.position = at
+	ic.size = Vector2(92, 92)
+	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	ic.set_meta("shadow", sh)
+	parent.add_child(ic)
+	return ic
+
+
 func _icon_square(tex: Texture2D, side: float, tip := "") -> Panel:
 	var sq := Panel.new()
 	var sb := StyleBoxFlat.new()
