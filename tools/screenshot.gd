@@ -56,6 +56,8 @@ func _initialize() -> void:
 			hour = float(arg.trim_prefix("--hour="))
 		elif arg.begins_with("--tab="):
 			tab = arg.trim_prefix("--tab=")
+		elif arg.begins_with("--dungeon="):  # ex. --dungeon=monde01_8 (niveau avec boss)
+			root.get_node("PlayerData").current_dungeon = arg.trim_prefix("--dungeon=")
 		elif arg.begins_with("--combo="):
 			combo = arg.trim_prefix("--combo=")
 		elif arg.begins_with("--team="):  # ex. --team=corbin,nyx,rivet,aegis,bastion,nacre,valen,orage

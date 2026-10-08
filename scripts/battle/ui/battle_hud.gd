@@ -26,6 +26,10 @@ var _speed_button: Button
 var _boss_box: Control
 var _boss_bar: StatBar
 var _boss_name: Label
+var _boss_portrait: TextureRect
+var _boss_hp: Control
+var _boss_ratio := 1.0
+var _banner_bg: Panel
 var _boss_view: UnitView
 var _banner: Label
 var _banner_sub: Label
@@ -112,7 +116,10 @@ func add_overhead(view: UnitView) -> void:
 	if view.unit.is_boss:
 		_boss_view = view
 		_boss_name.text = view.unit.display_name
+		_boss_portrait.texture = TurnOrder.head(view.unit.def_id)
 		_boss_box.visible = true
+		turn_order.offset_top = 156.0  # la frise des tours passe sous le cartouche du boss
+		turn_order.offset_bottom = 156.0 + 94.0
 
 
 func remove_overhead(uid: int) -> void:
@@ -126,6 +133,9 @@ func clear_overheads() -> void:
 		remove_overhead(uid)
 	_boss_view = null
 	_boss_box.visible = false
+	if turn_order:
+		turn_order.offset_top = 24.0
+		turn_order.offset_bottom = 24.0 + 94.0
 
 
 func set_auto(on: bool) -> void:
@@ -226,6 +236,8 @@ func refresh(delta: float) -> void:
 	if _boss_view:
 		var u := _boss_view.unit
 		_boss_bar.set_values(_boss_view.shown_hp / u.max_hp, u.shield / u.max_hp)
+		_boss_ratio = clampf(_boss_view.shown_hp / u.max_hp, 0.0, 1.0)
+		_boss_hp.queue_redraw()
 		_boss_box.visible = _boss_view.shown_hp > 0.0
 
 
@@ -233,7 +245,10 @@ func refresh(delta: float) -> void:
 func banner(text: String, sub := "", duration := 1.4) -> void:
 	_banner.text = text
 	_banner_sub.text = sub
-	for l: Label in [_banner, _banner_sub]:
+	_banner_bg.add_theme_stylebox_override("panel", ScreenPack.nine("combat", "banner_special" if text.length() > 14 else "banner_wave"))
+	_banner_bg.offset_left = -450.0 if text.length() > 14 else -350.0
+	_banner_bg.offset_right = -_banner_bg.offset_left
+	for l: Control in [_banner_bg, _banner, _banner_sub]:
 		l.modulate.a = 0.0
 		var tw := create_tween()
 		tw.tween_property(l, "modulate:a", 1.0, 0.25)
@@ -355,37 +370,62 @@ func _round_button(text: String) -> Button:
 	return b
 
 
+## Cartouche du boss (pack de combat) : portrait dans son anneau, blason, nom, barre de vie.
 func _build_boss_bar() -> void:
 	_boss_box = Control.new()
 	_boss_box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-	_boss_box.offset_top = 24
-	_boss_box.offset_left = -300
-	_boss_box.offset_right = 300
-	_boss_box.offset_bottom = 70
+	_boss_box.offset_left = -380
+	_boss_box.offset_right = 380
+	_boss_box.offset_top = 18
+	_boss_box.offset_bottom = 148
 	_boss_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_boss_box.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_boss_box.visible = false
 	_root.add_child(_boss_box)
-	_boss_name = _label(22)
-	_boss_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_boss_name.add_theme_color_override("font_color", Color(0.86, 0.74, 1.0))
-	_boss_name.size = Vector2(600, 28)
-	_boss_box.add_child(_boss_name)
+	ScreenPack.panel(_boss_box, "combat", "boss_cartouche", Rect2(0, 0, 760, 130))
+	_boss_portrait = TextureRect.new()
+	_boss_portrait.position = Vector2(26, 20)
+	_boss_portrait.size = Vector2(92, 92)
+	_boss_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_boss_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_boss_portrait.flip_h = true
+	_boss_box.add_child(_boss_portrait)
+	ScreenPack.image(_boss_box, ScreenPack.tex("combat", "portrait_ring_boss"), Rect2(10, 4, 124, 124))
+	ScreenPack.image(_boss_box, ScreenPack.tex("combat", "boss_crest"), Rect2(348, -22, 64, 64))
+	_boss_name = ScreenPack.text(_boss_box, "", Rect2(144, 22, 560, 44), 30, UiKit.WHITE)
 	_boss_bar = StatBar.new()
-	_boss_bar.fill_color = Color(0.68, 0.3, 0.88)
-	_boss_bar.position = Vector2(0, 32)
-	_boss_bar.size = Vector2(600, 12)
+	_boss_bar.visible = false  # gardé pour l'API ; la barre affichée est dessinée par _boss_hp
 	_boss_box.add_child(_boss_bar)
+	_boss_hp = Control.new()
+	_boss_hp.position = Vector2(144, 76)
+	_boss_hp.size = Vector2(570, 26)
+	_boss_box.add_child(_boss_hp)
+	_boss_hp.draw.connect(func() -> void:
+		var frame := ScreenPack.tex("combat", "hp_boss_frame")
+		var fill := ScreenPack.tex("combat", "hp_boss_fill")
+		if frame:
+			_boss_hp.draw_texture_rect(frame, Rect2(Vector2.ZERO, _boss_hp.size), false)
+		if fill and _boss_ratio > 0.0:
+			var r := Rect2(4, 4, (_boss_hp.size.x - 8) * _boss_ratio, _boss_hp.size.y - 8)
+			_boss_hp.draw_texture_rect_region(fill, r, Rect2(0, 0, fill.get_width() * _boss_ratio, fill.get_height())))
 
 
 func _build_banner() -> void:
-	_banner = _label(64, 16)
+	_banner_bg = ScreenPack.panel(_root, "combat", "banner_wave", Rect2(0, 0, 700, 96))
+	_banner_bg.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	_banner_bg.offset_left = -350
+	_banner_bg.offset_right = 350
+	_banner_bg.offset_top = -258
+	_banner_bg.offset_bottom = -162
+	_banner_bg.modulate.a = 0.0
+	_banner = _label(56, 0)
 	_banner.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	_banner.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_banner.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_banner.offset_top = -250
 	_banner.offset_bottom = -170
 	_banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_banner.add_theme_color_override("font_color", Palette.GOLD)
+	_banner.add_theme_color_override("font_color", UiKit.WHITE)
 	_banner.modulate.a = 0.0
 	_root.add_child(_banner)
 	_banner_sub = _label(28)

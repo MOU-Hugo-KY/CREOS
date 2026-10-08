@@ -662,7 +662,7 @@ func _end_battle(won: bool) -> void:
 		var h := engine.heroes[i]
 		var progress: Dictionary = result.heroes.get(team_ids[i], {})
 		stats.append({
-			"name": h.display_name, "element": h.element, "alive": h.is_alive(),
+			"id": team_ids[i], "name": h.display_name, "element": h.element, "alive": h.is_alive(),
 			"damage": _hero_stats[h.uid].damage, "healing": _hero_stats[h.uid].healing,
 			"level": progress.get("level", PlayerData.hero_level(team_ids[i])),
 			"xp": progress.get("xp", 0), "level_up": progress.get("gained_levels", 0) > 0,

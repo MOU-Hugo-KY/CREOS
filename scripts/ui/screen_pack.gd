@@ -10,9 +10,11 @@ static var _json: Dictionary = {}
 static var _tex: Dictionary = {}
 
 
+## « combat » désigne le pack de l'interface de combat (assets/ui/combat/, combat_ui.json).
 static func data(screen: String) -> Dictionary:
 	if not _json.has(screen):
-		var f := FileAccess.open(DIR + screen + "/" + screen + ".json", FileAccess.READ)
+		var path := "res://assets/ui/combat/combat_ui.json" if screen == "combat" else DIR + screen + "/" + screen + ".json"
+		var f := FileAccess.open(path, FileAccess.READ)
 		_json[screen] = JSON.parse_string(f.get_as_text()) if f else {}
 	return _json[screen]
 
@@ -22,7 +24,7 @@ static func layout(screen: String) -> Dictionary:
 
 
 static func tex(screen: String, name: String) -> Texture2D:
-	var path := DIR + screen + "/pieces/" + name + ".png"
+	var path := ("res://assets/ui/combat/" if screen == "combat" else DIR + screen + "/pieces/") + name + ".png"
 	if not _tex.has(path):
 		_tex[path] = load(path) if ResourceLoader.exists(path) else null
 	return _tex[path]
