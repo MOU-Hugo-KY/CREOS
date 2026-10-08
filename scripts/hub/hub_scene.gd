@@ -80,7 +80,7 @@ func _do_action(action_name: String, id: String) -> void:
 			hud.open_shop()
 		"relics":
 			hud.open_relics()
-		"lodge":
+		"lodge", "base":  # Ma loge = le donjon du joueur (bâtiment et bouton du bas)
 			hud.open_private_lodge()
 		_:
 			hud.toast("%s — bientôt disponible !" % _name_of(id))

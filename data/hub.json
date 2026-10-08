@@ -29,8 +29,8 @@
     "ma_loge": {
       "name": "Ma loge",
       "icon": "ma_loge",
-      "action": "base",
-      "description": "Ta base de chasse, à défendre contre les loges rivales."
+      "action": "lodge",
+      "description": "Ton donjon : place tes défenseurs, tes pièges et tes défenses, puis attaque les loges rivales."
     },
     "tour": {
       "name": "Tour de Morvath",
