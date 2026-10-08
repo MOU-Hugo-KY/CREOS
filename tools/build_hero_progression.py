@@ -17,17 +17,17 @@ D = {"hp": 0.05, "atk": 0.04, "mag": 0.04, "def": 0.03, "res": 0.03, "spd": 0.0,
 GROWTH = {
     "corbin": {"atk": 0.046, "hp": 0.045, "def": 0.025, "spd": 0.0025, "crit": 0.0012},
     "aegis": {"atk": 0.044, "def": 0.036, "hp": 0.052, "spd": 0.001, "crit": 0.0006},
-    "brume": {"mag": 0.047, "hp": 0.048, "res": 0.036, "spd": 0.0015},
-    "orage": {"atk": 0.042, "hp": 0.05, "spd": 0.002, "crit": 0.0008},
+    "brume": {"mag": 0.047, "hp": 0.048, "res": 0.036, "spd": 0.0015, "heal": 0.003},
+    "orage": {"atk": 0.042, "hp": 0.05, "spd": 0.002, "crit": 0.0008, "heal": 0.003},
     "kharok": {"def": 0.042, "hp": 0.056, "res": 0.036, "atk": 0.03},
     "braise": {"mag": 0.048, "atk": 0.03, "hp": 0.045, "crit": 0.0008},
-    "nacre": {"hp": 0.055, "mag": 0.042, "res": 0.035, "spd": 0.002},
+    "nacre": {"hp": 0.055, "mag": 0.042, "res": 0.035, "spd": 0.002, "heal": 0.006},
     "rivet": {"atk": 0.045, "hp": 0.043, "spd": 0.002, "crit": 0.0016},
-    "sylve": {"hp": 0.06, "def": 0.036, "res": 0.036, "mag": 0.035},
+    "sylve": {"hp": 0.06, "def": 0.036, "res": 0.036, "mag": 0.035, "heal": 0.004},
     "valen": {"atk": 0.045, "def": 0.033, "spd": 0.0015, "crit": 0.0008},
-    "bastion": {"def": 0.045, "hp": 0.06, "res": 0.035, "atk": 0.028},
+    "bastion": {"def": 0.045, "hp": 0.06, "res": 0.035, "atk": 0.028, "heal": 0.003},
     "saffran": {"mag": 0.046, "hp": 0.044, "spd": 0.0025, "crit": 0.0008},
-    "oona": {"mag": 0.045, "hp": 0.052, "res": 0.035},
+    "oona": {"mag": 0.045, "hp": 0.052, "res": 0.035, "heal": 0.007},
     "calx": {"mag": 0.042, "def": 0.038, "hp": 0.052},
     "nyx": {"atk": 0.045, "hp": 0.042, "spd": 0.003, "crit": 0.0014},
     "mei_lian": {"atk": 0.045, "hp": 0.044, "spd": 0.0025, "crit": 0.0012},
@@ -44,15 +44,15 @@ def tiers(a, b):
     for p, s in steps:
         d = {}
         for key, v in ((a, p), (b, s)):
-            d[key] = round(v / 5.0, 3) if key == "crit" else (round(v / 2.0, 3) if key == "spd" else v)
+            d[key] = round(v / 5.0, 3) if key == "crit" else round(v, 3) if key == "heal" else (round(v / 2.0, 3) if key == "spd" else v)
         out.append(d)
     return out
 
 RELIC_STATS = {
     "corbin": ("atk", "crit"), "aegis": ("atk", "def"), "brume": ("mag", "hp"), "orage": ("atk", "spd"),
-    "kharok": ("def", "hp"), "braise": ("mag", "crit"), "nacre": ("hp", "res"), "rivet": ("atk", "crit"),
+    "kharok": ("def", "hp"), "braise": ("mag", "crit"), "nacre": ("heal", "hp"), "rivet": ("atk", "crit"),
     "sylve": ("hp", "def"), "valen": ("atk", "def"), "bastion": ("def", "hp"), "saffran": ("mag", "spd"),
-    "oona": ("mag", "hp"), "calx": ("mag", "def"), "nyx": ("crit", "spd"), "mei_lian": ("atk", "spd"),
+    "oona": ("heal", "mag"), "calx": ("mag", "def"), "nyx": ("crit", "spd"), "mei_lian": ("atk", "spd"),
     "jin_seok": ("def", "atk"), "yun_tao": ("def", "spd"), "tang_su": ("atk", "crit"),
 }
 

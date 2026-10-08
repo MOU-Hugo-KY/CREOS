@@ -24,6 +24,7 @@ var action := ""
 var hero := ""
 var tab := ""
 var hour := -2.0
+var force_draw := false  # --draw : montre « Arrêter » puis déclare l'égalité
 var combo := ""  # --combo=ombres : lance ce combo dès le premier tour (membres dans --team)
 
 
@@ -58,6 +59,8 @@ func _initialize() -> void:
 			tab = arg.trim_prefix("--tab=")
 		elif arg.begins_with("--dungeon="):  # ex. --dungeon=monde01_8 (niveau avec boss)
 			root.get_node("PlayerData").current_dungeon = arg.trim_prefix("--dungeon=")
+		elif arg == "--draw":
+			force_draw = true
 		elif arg.begins_with("--combo="):
 			combo = arg.trim_prefix("--combo=")
 		elif arg.begins_with("--team="):  # ex. --team=corbin,nyx,rivet,aegis,bastion,nacre,valen,orage
@@ -109,6 +112,11 @@ func _process(_delta: float) -> bool:
 		scene._on_combo_requested(combo)
 		print("combo lancé à l'image ", frames)
 		combo = ""
+	if force_draw and frames == 100:
+		scene.hud.draw_button.visible = true
+	if force_draw and frames == 160:
+		scene.engine.declare_draw()
+		scene._handle_events()
 	if frames in shots:
 		_save()
 	if wait_end and end_frame < 0 and "end_screen" in scene.hud and scene.hud.end_screen.visible:

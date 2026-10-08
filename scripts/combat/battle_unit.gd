@@ -36,6 +36,7 @@ var def: float
 var res: float
 var spd: float
 var crit: float
+var heal := 0.0  # bonus de soins et de boucliers donnés (0,2 = +20 %)
 
 var gauge := 0.0
 var energy := 0.0
@@ -84,6 +85,7 @@ static func from_data(p_uid: int, p_def_id: String, data: Dictionary, p_team: in
 	u.res = s.get("res", 0)
 	u.spd = s.get("spd", 100)
 	u.crit = s.get("crit", 0.0)
+	u.heal = s.get("heal", 0.0)
 	return u
 
 
@@ -149,10 +151,13 @@ func stat(name: String) -> float:
 		"crit": base = crit
 		"evade": base = 0.0
 		"spd": base = spd
+		"heal": base = heal
 	var bonus := 0.0
 	for m: Dictionary in mods:
 		if m.stat == name:
 			bonus += float(m.amount)
+	if name == "heal":
+		return maxf(0.0, base + bonus)
 	if name in ["crit", "evade"]:
 		return clampf(base + bonus, 0.0, 0.6)
 	return maxf(0.0, base * (1.0 + bonus))

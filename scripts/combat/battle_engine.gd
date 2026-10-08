@@ -53,6 +53,7 @@ var wave_index := -1
 var auto_mode := false
 var finished := false
 var won := false
+var draw := false  # combat arrêté par le joueur (égalité)
 var time := 0.0
 
 var _rng := RandomNumberGenerator.new()
@@ -382,6 +383,17 @@ func _trigger_trap(trap: Dictionary) -> void:
 					_emit({"type": "shield", "dst": t.uid, "amount": amount})
 
 
+## Le joueur arrête un combat qui s'éternise : égalité (ni victoire ni défaite).
+func declare_draw() -> void:
+	if finished:
+		return
+	finished = true
+	won = false
+	draw = true
+	awaiting_uid = -1
+	_emit({"type": "draw"})
+
+
 func _check_end() -> bool:
 	if _alive(heroes).is_empty():
 		finished = true
@@ -702,7 +714,7 @@ func _apply_effect(caster: BattleUnit, effect: Dictionary, targets: Array, singl
 
 ## Soins et boucliers d'un lanceur placé à l'arrière : +10 %.
 func _support_mult(caster: BattleUnit) -> float:
-	return 1.0 + (BACK_SUPPORT_BONUS if caster.line() == 2 else 0.0)
+	return (1.0 + (BACK_SUPPORT_BONUS if caster.line() == 2 else 0.0)) * (1.0 + caster.stat("heal"))
 
 
 func _heal(src: BattleUnit, t: BattleUnit, amount: float) -> void:

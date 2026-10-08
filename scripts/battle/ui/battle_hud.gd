@@ -11,6 +11,7 @@ signal auto_toggled(on: bool)
 signal speed_toggled(fast: bool)
 signal restart_requested
 signal hub_requested
+signal draw_requested
 signal ui_sound(sfx_name: String)
 
 var end_screen: EndScreen
@@ -36,6 +37,7 @@ var _banner_sub: Label
 var _callout: Label
 var _turn_uid := -1
 var _sound_button: Button
+var draw_button: Button
 var _sound_panel: SoundPanel
 var _quartet_button: Button
 var _combo_box: VBoxContainer  # boutons des combos prêts (quatuor, trios, duos)
@@ -319,6 +321,16 @@ func _build_header() -> void:
 	_sound_button = _round_button("SON")
 	_sound_button.toggled.connect(_toggle_sound_panel)
 	right.add_child(_sound_button)
+	# Combat qui s'éternise : « Arrêter » apparaît (égalité, l'énergie est rendue). Caché au début.
+	draw_button = _round_button("ARRÊTER")
+	draw_button.toggle_mode = false
+	draw_button.tooltip_text = "Le combat s'éternise : l'arrêter sur une égalité (pas de butin, énergie rendue)."
+	draw_button.visible = false
+	draw_button.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		draw_requested.emit())
+	right.add_child(draw_button)
+	right.move_child(draw_button, 0)
 
 
 func _toggle_sound_panel(on: bool) -> void:

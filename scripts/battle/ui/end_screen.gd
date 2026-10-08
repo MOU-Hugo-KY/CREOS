@@ -63,7 +63,8 @@ func _ready() -> void:
 func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, dungeon_name: String, replay := {}) -> void:
 	var R: Dictionary = ScreenPack.layout(P).results
 	_window.add_theme_stylebox_override("panel", ScreenPack.nine(P, "result_victory_window" if won else "result_defeat_window"))
-	_title.text = "VICTOIRE" if won else "DÉFAITE"
+	var draw: bool = replay.get("draw", false)
+	_title.text = "ÉGALITÉ" if draw else ("VICTOIRE" if won else "DÉFAITE")
 	for c in _content.get_children():
 		c.queue_free()
 	var ink := UiKit.INK if won else UiKit.WHITE
@@ -102,6 +103,9 @@ func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, 
 		chest_line = ScreenPack.text(_content, "%s !   %s" % [chest.name, "  ·  ".join(bits)], ar, 28,
 			CHEST_COLORS.get(chest.kind, UiKit.WOOD), HORIZONTAL_ALIGNMENT_CENTER)
 		chest_line.modulate.a = 0.0
+	elif draw:
+		ScreenPack.text(_content, "Combat arrêté : pas de butin, ton énergie t'est rendue.", ar, 24, UiKit.WHITE,
+			HORIZONTAL_ALIGNMENT_CENTER, true)
 	elif not won:
 		ScreenPack.text(_content, "Conseil : améliore tes héros chez la Loge, éveille-les avec des Esprits et change ta formation.",
 			ar, 24, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER, true)

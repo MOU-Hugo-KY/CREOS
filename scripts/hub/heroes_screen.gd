@@ -12,7 +12,7 @@ const ATTACK_ICON_DIR := "res://assets/ui/attacks/"
 const BG := Color("19181e")
 const CARD := Color("34323c")
 const STAT_NAMES := [["hp", "Vie"], ["atk", "Attaque"], ["mag", "Magie"], ["def", "Défense"],
-	["spd", "Vitesse"], ["crit", "Critique"]]
+	["spd", "Vitesse"], ["crit", "Critique"], ["heal", "Soins"]]
 const TABS := ["Techniques", "Voies", "Relique", "Échos"]
 const F := "fiche_heros"
 const ELEMENT_KEYS := {"feu": "fire", "eau": "water", "nature": "nature", "lumiere": "light", "ombre": "shadow"}
@@ -443,6 +443,8 @@ func _fill_detail() -> void:
 		var key: String = STAT_NAMES[i][0]
 		var v: float = stats.get(key, 0)
 		_d_stats[i].text = "%d %%" % int(v * 100) if key == "crit" else str(int(v))
+		if key == "heal":
+			_d_stats[i].text = "+%d %%" % roundi(v * 100)
 	var at_max := PlayerData.hero_level(id) >= max_level
 	var cost := PlayerData.hero_level_up_cost(id)
 	_d_upgrade.text = "Niveau max" if at_max else "Améliorer · %d or" % cost
@@ -745,7 +747,7 @@ func _ask_level_up() -> void:
 # --- Petits éléments ----------------------------------------------------------------
 
 const STAT_LABELS := {"hp": "Vie", "atk": "Attaque", "mag": "Magie", "def": "Défense", "res": "Résistance",
-	"spd": "Vitesse", "crit": "Critique"}
+	"spd": "Vitesse", "crit": "Critique", "heal": "Soins"}
 
 
 ## Texte d'un palier de relique propre au héros : « +15 % Attaque, +3 pts Critique · Banquet : un 5e coup ».
@@ -756,7 +758,9 @@ static func relic_tier_text(hero: Dictionary, i: int) -> String:
 	var bits: Array[String] = []
 	var st: Dictionary = tiers[i].get("stats", {})
 	for key: String in st:
-		if key == "crit":
+		if key == "heal":
+			bits.append("+%d %% Soins" % roundi(float(st[key]) * 100))
+		elif key == "crit":
 			bits.append("+%d pts %s" % [roundi(float(st[key]) * 100), STAT_LABELS[key]])
 		else:
 			bits.append("+%d %% %s" % [roundi(float(st[key]) * 100), STAT_LABELS.get(key, key)])

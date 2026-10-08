@@ -891,6 +891,17 @@ func start_lodge_battle(rival: Dictionary = {}) -> String:
 
 
 ## Fin d'un combat de Loge : l'attaquant victorieux d'un rival gagne une part de sa récompense.
+## Égalité (combat arrêté) : rien n'est gagné, l'énergie de la chasse est rendue, la mise d'un
+## combat de Loge aussi.
+func refund_draw(dungeon_id: String, lodge_battle: Dictionary) -> void:
+	if lodge_battle.is_empty():
+		state["energy"] = energy() + hunt_cost(dungeon_id)
+	else:
+		state.gold = gold() + int(current_lodge_battle.get("fee", 0))
+	save_game()
+	changed.emit()
+
+
 func finish_lodge_battle(won: bool) -> Dictionary:
 	var b := current_lodge_battle
 	var result := {"gold": 0}

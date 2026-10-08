@@ -28,13 +28,15 @@ static func add_xp(level: int, xp: int, gained: int, curve: Dictionary, max_leve
 ## Au-delà du niveau 60, chaque niveau compte pour moitié (le surpassement reste un bonus, pas un mur).
 static func stats_at_level(base: Dictionary, level: int, growth: Dictionary) -> Dictionary:
 	var out := base.duplicate()
+	if growth.has("heal") and not out.has("heal"):
+		out["heal"] = 0.0
 	var eff := float(level) if level <= 60 else 60.0 + (level - 60) * 0.5
-	for key: String in base:
+	for key: String in out:
 		var g: float = growth.get(key, 0.0)
-		var v: float = float(base[key]) * (1.0 + g * (eff - 1.0))
-		if key == "crit":
-			v = float(base[key]) + g * (eff - 1.0)  # le critique gagne des points, pas un pourcentage
-		out[key] = v if key == "crit" else round(v)
+		var v: float = float(out[key]) * (1.0 + g * (eff - 1.0))
+		if key == "crit" or key == "heal":
+			v = float(out[key]) + g * (eff - 1.0)  # critique et soins gagnent des points, pas un pourcentage
+		out[key] = v if key in ["crit", "heal"] else round(v)
 	return out
 
 
@@ -95,7 +97,9 @@ static func hero_stats(hero: Dictionary, level: int, echoes: int, config: Dictio
 			for k: String in keys:
 				if not s.has(k):
 					continue
-				if k == "crit":
+				if not s.has(k) and k == "heal":
+					s[k] = 0.0
+				if k == "crit" or k == "heal":
 					s[k] = float(s[k]) + float(bonus[key])
 				else:
 					s[k] = round(float(s[k]) * (1.0 + float(bonus[key])))

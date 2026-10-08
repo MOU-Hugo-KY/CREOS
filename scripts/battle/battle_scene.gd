@@ -86,6 +86,9 @@ func _ready() -> void:
 		if on:
 			_end_turn())
 	hud.speed_toggled.connect(func(fast: bool) -> void: Engine.time_scale = 2.0 if fast else 1.0)
+	hud.draw_requested.connect(func() -> void:
+		engine.declare_draw()
+		_handle_events())
 	hud.restart_requested.connect(func() -> void:
 		if PlayerData.start_hunt(dungeon_id):
 			start_battle(randi()))
@@ -158,6 +161,8 @@ func _process(delta: float) -> void:
 			ready.append({"id": cid, "attack": c.get("attack", ""), "size": c.members.size(), "members": c.members})
 	hud.set_combos(ready)
 	hud.refresh(delta)
+	if not engine.finished and not hud.draw_button.visible and engine.time > draw_after():
+		hud.draw_button.visible = true
 	if not engine.finished:
 		hud.turn_order.update_from(engine)
 
@@ -633,24 +638,36 @@ func _on_impact(ev: Dictionary) -> void:
 			_end_battle(true)
 		"defeat":
 			_end_battle(false)
+		"draw":
+			_end_battle(false, true)
 
 
-func _end_battle(won: bool) -> void:
+## Temps de combat après lequel « Arrêter » (égalité) est proposé : 45 s par vague, au moins 90 s.
+func draw_after() -> float:
+	return maxf(90.0, 45.0 * engine.waves.size())
+
+
+func _end_battle(won: bool, draw := false) -> void:
 	if _ended:
 		return
 	_ended = true
 	_end_turn()
+	hud.draw_button.visible = false
 	if won:
 		for uid in views:
 			var v: UnitView = views[uid]
 			if v.unit.team == 0:
 				v.play_cheer()
-	hud.banner("VICTOIRE !" if won else "DÉFAITE…", "", 0.8)
+	hud.banner("ÉGALITÉ" if draw else ("VICTOIRE !" if won else "DÉFAITE…"), "", 0.8)
 	audio.stop_music(0.4)
 	var stars := engine.stars()
 	var rewards := PlayerData.filter_locked_loot(GameData.dungeon_rewards(dungeon_id, stars), dungeon_id)
 	var result: Dictionary
-	if lodge_battle.is_empty():
+	if draw:
+		rewards = {}
+		result = {"heroes": {}, "player_level_up": false}
+		PlayerData.refund_draw(dungeon_id, lodge_battle)
+	elif lodge_battle.is_empty():
 		# Le butin et l'XP sont enregistrés dans la sauvegarde.
 		result = PlayerData.finish_hunt(dungeon_id, won, stars, rewards, team_ids)
 	else:
@@ -670,7 +687,7 @@ func _end_battle(won: bool) -> void:
 	var dungeon_name: String = GameData.dungeon(dungeon_id).get("name", "")
 	var replay := {"cost": PlayerData.hunt_cost(dungeon_id), "possible": PlayerData.can_start_hunt(dungeon_id),
 		"energy": PlayerData.energy(), "player_level_up": result.player_level_up, "player_level": PlayerData.level(),
-		"chest": result.get("chest", {})}
+		"chest": result.get("chest", {}), "draw": draw}
 	if not lodge_battle.is_empty():
 		dungeon_name = "Loge · " + String(lodge_battle.name)
 		replay.possible = false
