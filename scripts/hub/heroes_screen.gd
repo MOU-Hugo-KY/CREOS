@@ -54,6 +54,7 @@ var _d_xp: Panel
 var _d_xp_text: Label
 var _d_recruit: Label
 var _d_stats: Array[Label] = []
+var _d_bars: Array = []
 var _d_upgrade: Button
 var _d_team: Button
 var _d_tabs: Array[Button] = []
@@ -305,8 +306,9 @@ func _layout_card(card: Control) -> void:
 		t.position = Vector2(w - t.size.x - 22, 22)
 
 func _build_detail(_page: VBoxContainer) -> void:
-	# Fiche d'un héros : pièces pixel du pack partie 2 (assets/ui/ecrans/fiche_heros), placées
-	# d'après fiche_heros.json dans un repère 1920 × 1080.
+	# Fiche d'un héros, façon scène : la salle d'armes de son élément en fond, le héros en grand à
+	# gauche (flèches pour passer au suivant), et à droite un parchemin (statistiques en barres,
+	# actions, onglets marque-pages). Repère 1920 × 1080, pièces du pack fiche_heros.
 	_detail = Control.new()
 	_detail.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_detail.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -314,90 +316,150 @@ func _build_detail(_page: VBoxContainer) -> void:
 	_detail.visible = false
 	add_child(_detail)
 	var root := ScreenPack.frame(_detail)
-	var L := ScreenPack.layout(F)
-	var back := ScreenPack.button(root, F, "collection", "← Collection", Rect2(24, 8, 300, 96), 30)
+	# Fond : la salle d'armes sur tout l'écran, assombrie, plus sombre encore sous le parchemin.
+	_d_room = ScreenPack.image(root, null, Rect2(0, 0, 1920, 1080))
+	_d_room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_d_room.modulate = Color(0.55, 0.52, 0.58)
+	var shade := _DetailShade.new()
+	shade.size = Vector2(1920, 1080)
+	root.add_child(shade)
+	var back := ScreenPack.button(root, F, "collection", "← Collection", Rect2(24, 20, 260, 80), 28)
 	back.pressed.connect(_on_back)
-	_d_title = ScreenPack.text(root, "", Rect2(355, 8, 900, 90), 48, UiKit.WHITE)
-	_d_count = ScreenPack.text(root, "", Rect2(1460, 8, 420, 80), 28, UiKit.WHITE, HORIZONTAL_ALIGNMENT_RIGHT)
-	# Vitrine : salle d'armes de l'élément, socle, héros animé, identité, Échos, niveau.
-	ScreenPack.panel(root, F, "vitrine_frame", ScreenPack.rect(L.vitrine_rect))
-	_d_room = ScreenPack.image(root, null, ScreenPack.rect(L.background_rect))
-	_d_socle = ScreenPack.image(root, null, ScreenPack.rect(L.pedestal_rect))
+	_d_count = ScreenPack.text(root, "", Rect2(300, 20, 400, 80), 22, Color(1, 1, 1, 0.6))
+	# Identité : nom en grand, insignes, rôle.
+	_d_title = ScreenPack.text(root, "", Rect2(20, 108, 690, 84), 66, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	_d_title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
+	_d_title.add_theme_constant_override("shadow_offset_x", 4)
+	_d_title.add_theme_constant_override("shadow_offset_y", 4)
+	var sq_c := _icon_square(null, 60)
+	sq_c.position = Vector2(205, 200)
+	root.add_child(sq_c)
+	_d_class = sq_c.get_node("Icon")
+	var sq_e := _icon_square(null, 60)
+	sq_e.position = Vector2(275, 200)
+	root.add_child(sq_e)
+	_d_element = sq_e.get_node("Icon")
+	var rr := Rect2(351, 204, 170, 52)
+	_d_rarity = ScreenPack.panel(root, F, "badge_rare", rr)
+	_d_rarity_label = ScreenPack.text(root, "", rr, 22, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	_d_role = ScreenPack.text(root, "", Rect2(20, 272, 690, 36), 26, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	_d_species = ScreenPack.text(root, "", Rect2(20, 306, 690, 30), 20, UiKit.PARCHMENT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	# Le héros, grand, sur son socle.
+	_d_socle = ScreenPack.image(root, null, Rect2(185, 735, 360, 225))
 	var vpc := SubViewportContainer.new()
 	vpc.stretch = true
-	var br := ScreenPack.rect(L.background_rect)
-	vpc.position = br.position
-	vpc.size = Vector2(br.size.x, (L.hero_anchor[1] - br.position.y) / 0.86)
+	vpc.position = Vector2(40, 330)
+	vpc.size = Vector2(650, 520)
 	vpc.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(vpc)
 	_preview = HeroPreview.new()
 	_preview.pedestal = false
-	_preview.zoom = 0.62
+	_preview.zoom = 0.85
 	vpc.add_child(_preview)
-	var sq_c := _icon_square(null, 64)
-	var tr0 := ScreenPack.rect(L.hero_type_rect)
-	sq_c.position = tr0.position + Vector2(0, -78)
-	root.add_child(sq_c)
-	_d_class = sq_c.get_node("Icon")
-	var sq_e := _icon_square(null, 64)
-	sq_e.position = tr0.position + Vector2(74, -78)
-	root.add_child(sq_e)
-	_d_element = sq_e.get_node("Icon")
-	var rr := ScreenPack.rect(L.rarity_rect)
-	_d_rarity = ScreenPack.panel(root, F, "badge_rare", rr)
-	_d_rarity_label = ScreenPack.text(root, "", rr, 22, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	var tr := ScreenPack.rect(L.hero_type_rect)
-	ScreenPack.panel(root, F, "hero_type_cartouche", tr)
-	_d_role = ScreenPack.text(root, "", Rect2(tr.position + Vector2(26, 6), Vector2(tr.size.x - 50, 42)), 30, UiKit.WHITE)
-	_d_species = ScreenPack.text(root, "", Rect2(tr.position + Vector2(26, 46), Vector2(tr.size.x - 50, 34)), 22, UiKit.PARCHMENT_DARK)
-	for r: Array in L.echo_rects:
-		_d_echoes.append(ScreenPack.image(root, ScreenPack.tex(F, "echo_empty"), ScreenPack.rect(r)))
-	var er: Array = L.echo_rects[4]
-	_d_echo_count = ScreenPack.text(root, "", Rect2(er[0] + 80, er[1], 260, er[3]), 28)
-	_d_level = ScreenPack.text(root, "", ScreenPack.rect(L.level_rect), 30)
-	_d_force = ScreenPack.text(root, "", ScreenPack.rect(L.force_rect), 30)
-	var xr := ScreenPack.rect(L.xp_rect)
-	var xp_bg := ScreenPack.panel(root, F, "xp_bg", xr)
-	_d_xp = ScreenPack.panel(xp_bg, F, "xp_fill", Rect2(0, 3, xr.size.x, 12))
-	_d_xp_text = ScreenPack.text(root, "", Rect2(xr.position + Vector2(0, 22), Vector2(xr.size.x, 30)), 20)
-	_d_recruit = ScreenPack.text(root, "À recruter à la Lanterne des Serments", Rect2(82, 820, 580, 40), 24, UiKit.WOOD,
+	for dir: int in [-1, 1]:
+		var arrow := SummonAltar._Arrow.new()
+		arrow.dir = dir
+		arrow.scale = Vector2(1.5, 1.5)
+		arrow.position = Vector2(30 if dir < 0 else 640, 540)
+		arrow.pressed.connect(func() -> void:
+			ui_sound.emit("ui_click")
+			_step_hero(dir))
+		root.add_child(arrow)
+	# Sous le héros : Échos, niveau, Force, expérience.
+	for i in 5:
+		_d_echoes.append(ScreenPack.image(root, ScreenPack.tex(F, "echo_empty"), Rect2(150 + i * 52, 900, 44, 44)))
+	_d_echo_count = ScreenPack.text(root, "", Rect2(420, 900, 200, 44), 26, UiKit.WHITE)
+	_d_level = ScreenPack.text(root, "", Rect2(71, 954, 300, 40), 28, UiKit.WHITE)
+	_d_force = ScreenPack.text(root, "", Rect2(359, 954, 300, 40), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_RIGHT)
+	var xp_bg := ScreenPack.panel(root, F, "xp_bg", Rect2(71, 1000, 588, 18))
+	_d_xp = ScreenPack.panel(xp_bg, F, "xp_fill", Rect2(0, 3, 588, 12))
+	_d_xp_text = ScreenPack.text(root, "", Rect2(71, 1022, 588, 26), 18, UiKit.PARCHMENT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	_d_recruit = ScreenPack.text(root, "À recruter à la Lanterne des Serments", Rect2(40, 954, 650, 40), 26, Color("f3d9a0"),
 		HORIZONTAL_ALIGNMENT_CENTER)
-	# Statistiques et actions.
-	var sr := ScreenPack.rect(L.stats_rect)
-	ScreenPack.panel(root, F, "stats_panel", sr)
-	ScreenPack.text(root, "STATISTIQUES", Rect2(sr.position + Vector2(34, 30), Vector2(400, 44)), 32)
+	# Le parchemin : statistiques en barres, actions, onglets, contenu.
+	ScreenPack.panel(root, F, "stats_panel", Rect2(748, 20, 1144, 1040))
 	for i in STAT_NAMES.size():
-		var y := sr.position.y + 80 + i * 27
-		ScreenPack.text(root, STAT_NAMES[i][1], Rect2(sr.position.x + 36, y, 400, 26), 22)
-		_d_stats.append(ScreenPack.text(root, "", Rect2(sr.end.x - 436, y, 400, 26), 22, UiKit.INK, HORIZONTAL_ALIGNMENT_RIGHT))
-	var A: Dictionary = L.actions
-	_d_upgrade = ScreenPack.button(root, F, "upgrade", "", ScreenPack.rect(A.upgrade), 28, UiKit.INK)
+		var y := 66.0 + i * 44.0
+		ScreenPack.text(root, STAT_NAMES[i][1], Rect2(790, y, 190, 36), 24)
+		var bar := _StatBar.new()
+		bar.position = Vector2(990, y + 9)
+		bar.size = Vector2(700, 20)
+		bar.color = STAT_COLORS.get(STAT_NAMES[i][0], UiKit.WOOD)
+		root.add_child(bar)
+		_d_bars.append(bar)
+		_d_stats.append(ScreenPack.text(root, "", Rect2(1700, y, 160, 36), 24, UiKit.INK, HORIZONTAL_ALIGNMENT_RIGHT))
+	_d_upgrade = ScreenPack.button(root, F, "upgrade", "", Rect2(780, 386, 700, 84), 28, UiKit.INK)
 	_d_upgrade.pressed.connect(_ask_level_up)
-	var relic_b := ScreenPack.button(root, F, "relic_button", "Relique", ScreenPack.rect(A.relic), 28)
-	relic_b.pressed.connect(func() -> void: _set_tab("Relique"))
-	_d_team = ScreenPack.button(root, F, "team_button", "", ScreenPack.rect(A.team), 28)
+	_d_team = ScreenPack.button(root, F, "team_button", "", Rect2(1496, 386, 364, 84), 24)
 	_d_team.pressed.connect(func() -> void:
 		if PlayerData.toggle_team(selected):
 			ui_sound.emit("ui_toggle"))
-	# Onglets et contenu.
-	var T: Dictionary = L.tabs
 	for i in TABS.size():
 		var t: String = TABS[i]
-		var b := ScreenPack.button(root, F, "tab_inactive", t, ScreenPack.rect(T.rects[i]), 28)
+		var b := ScreenPack.button(root, F, "tab_inactive", t, Rect2(780 + i * 274, 498, 260, 76), 26)
 		b.pressed.connect(func() -> void: _set_tab(t))
 		_d_tabs.append(b)
-	_path_panel = ScreenPack.panel(root, F, "stats_panel", ScreenPack.rect(L.stats_rect))
+	_path_panel = ScreenPack.panel(root, F, "stats_panel", Rect2(748, 20, 1144, 490))
 	_path_panel.z_index = 5
 	_path_title = ScreenPack.text(_path_panel, "", Rect2(34, 26, 1076, 48), 32)
 	for k in 5:
 		_path_lines.append(ScreenPack.text(_path_panel, "", Rect2(34, 92 + k * 78, 1076, 72), 23, UiKit.INK, 0, true))
 	_path_panel.visible = false
-	var cr := ScreenPack.rect(L.content_rect)
-	ScreenPack.panel(root, F, "content_panel", cr)
+	# Contenu des onglets : dessiné dans le repère de l'ancienne fiche (content_rect), décalé ici.
 	_tab_box = Control.new()
 	_tab_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_tab_box.size = Vector2(1920, 1080)
+	_tab_box.position = Vector2(0, TAB_SHIFT)
 	root.add_child(_tab_box)
+
+
+## Décalage vertical du contenu des onglets par rapport aux rectangles de fiche_heros.json.
+const TAB_SHIFT := -134.0
+const STAT_COLORS := {"hp": Color("b9474f"), "atk": Color("d08a3a"), "mag": Color("7d5bd0"), "def": Color("5a7fa8"),
+	"spd": Color("4fae8a"), "crit": Color("d9b44a"), "heal": Color("6fc06a")}
+
+
+## Ombre du fond : voile sous le parchemin, bandes sombres en haut et en bas de la scène du héros.
+class _DetailShade extends Control:
+	func _ready() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	func _draw() -> void:
+		draw_rect(Rect2(740, 0, 1180, 1080), Color(0.06, 0.05, 0.08, 0.55))
+		for i in 16:
+			draw_rect(Rect2(0, 1080 - (i + 1) * 14, 740, 14), Color(0.06, 0.05, 0.08, 0.75 * (1.0 - i / 16.0)))
+			draw_rect(Rect2(0, i * 8, 740, 8), Color(0.06, 0.05, 0.08, 0.5 * (1.0 - i / 16.0)))
+
+
+## Barre de statistique en pixels : fond d'encre, remplissage coloré avec reflet.
+class _StatBar extends Control:
+	var color := Color.WHITE
+	var ratio := 0.0
+
+	func _ready() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	func _draw() -> void:
+		draw_rect(Rect2(Vector2.ZERO, size), Color("29262e"))
+		var w := floorf((size.x - 6) * clampf(ratio, 0.0, 1.0))
+		if w > 0:
+			draw_rect(Rect2(3, 3, w, size.y - 6), color)
+			draw_rect(Rect2(3, 3, w, 4), color.lightened(0.3))
+		var step := size.x / 10.0
+		for k in range(1, 10):
+			draw_rect(Rect2(k * step, 3, 2, size.y - 6), Color(0, 0, 0, 0.25))
+
+
+## Passe au héros précédent / suivant, dans l'ordre de la collection.
+func _step_hero(dir: int) -> void:
+	var ids: Array = []
+	for c in _grid.get_children():
+		if c.has_meta("id"):
+			ids.append(String(c.get_meta("id")))
+	if ids.is_empty():
+		ids = GameData.heroes.keys()
+	var i := ids.find(selected)
+	show_hero(String(ids[posmod(i + dir, ids.size())]), _tab)
 
 
 func show_hero(id: String, tab := "Techniques") -> void:
@@ -449,6 +511,11 @@ func _fill_detail() -> void:
 		_d_stats[i].text = "%d %%" % int(v * 100) if key == "crit" else str(int(v))
 		if key == "heal":
 			_d_stats[i].text = "+%d %%" % roundi(v * 100)
+		var best := 0.0001
+		for other: String in GameData.heroes:
+			best = maxf(best, float(PlayerData.hero_stats(other, GameData.hero(other)).get(key, 0)))
+		_d_bars[i].ratio = 0.08 + 0.92 * v / best if v > 0 else 0.0
+		_d_bars[i].queue_redraw()
 	var at_max := PlayerData.hero_level(id) >= max_level
 	var cost := PlayerData.hero_level_up_cost(id)
 	_d_upgrade.text = "Niveau max" if at_max else "Améliorer · %d or" % cost
