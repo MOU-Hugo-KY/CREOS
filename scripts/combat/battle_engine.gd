@@ -260,6 +260,33 @@ func step(delta: float) -> void:
 				return
 
 
+## Prochains tours (uids), d'après les jauges actuelles et la Vitesse : le premier joue en premier.
+## Le héros qui attend le choix du joueur est en tête. Prévision seulement (étourdissements ignorés).
+func predict_order(count := 8) -> Array:
+	var order: Array = []
+	if awaiting_uid != -1:
+		order.append(awaiting_uid)
+	var sim: Array = []  # [uid, jauge, vitesse]
+	for u in all_units():
+		if u.is_alive() and not u.attacks.is_empty():
+			sim.append([u.uid, u.gauge, maxf(1.0, u.stat("spd")) * GAUGE_RATE])
+	if sim.is_empty():
+		return order
+	while order.size() < count:
+		var best := 0
+		var best_t := INF
+		for i in sim.size():
+			var t: float = (BattleUnit.GAUGE_MAX - float(sim[i][1])) / float(sim[i][2])
+			if t < best_t:
+				best_t = t
+				best = i
+		for e: Array in sim:
+			e[1] = float(e[1]) + float(e[2]) * best_t
+		sim[best][1] = float(sim[best][1]) - BattleUnit.GAUGE_MAX
+		order.append(sim[best][0])
+	return order
+
+
 ## Étoiles gagnées (0 à 3) : 3 si aucun héros n'est tombé, 2 si un seul est tombé, sinon 1.
 func stars() -> int:
 	if not won:

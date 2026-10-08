@@ -158,6 +158,8 @@ func _process(delta: float) -> void:
 			ready.append({"id": cid, "attack": c.get("attack", ""), "size": c.members.size(), "members": c.members})
 	hud.set_combos(ready)
 	hud.refresh(delta)
+	if not engine.finished:
+		hud.turn_order.update_from(engine)
 
 
 func _on_attack_requested(uid: int, slot: int) -> void:
@@ -453,6 +455,7 @@ func _on_quartet(ev: Dictionary) -> float:
 		if views.has(uid):
 			views[uid].modulate.a = 0.0
 	var dur := maxf(2.0, p.duration(clip))
+	_hold = maxf(_hold, dur)  # le combat attend la fin du quatuor (pas de vague suivante en plein milieu)
 	hud.callout(String(ev.name), "Quatuor", Palette.GOLD, true)
 	stage.ambience.set_ultimate_active(true)
 	_schedule(dur, func() -> void:
@@ -502,6 +505,8 @@ func _on_pixel_quartet(ev: Dictionary) -> float:
 	for uid: int in members:
 		if views.has(uid):
 			views[uid].modulate.a = 0.0
+	# Le combat attend la fin de la scène : la vague suivante n'arrive pas pendant le quatuor.
+	_hold = maxf(_hold, float(p.data.get("duration_ms", 3000)) / 1000.0 + 0.3)
 	hud.callout(String(ev.name), "Quatuor", Palette.GOLD, true)
 	stage.ambience.set_ultimate_active(true)
 	p.hit_active.connect(func(e: Dictionary) -> void:

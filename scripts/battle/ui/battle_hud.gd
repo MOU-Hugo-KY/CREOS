@@ -15,6 +15,7 @@ signal ui_sound(sfx_name: String)
 
 var end_screen: EndScreen
 var attack_bar: AttackBar
+var turn_order: TurnOrder
 
 var _root: Control
 var _overhead_layer: Control
@@ -53,6 +54,8 @@ func _ready() -> void:
 	_build_boss_bar()
 	_build_banner()
 
+	turn_order = TurnOrder.new()
+	_root.add_child(turn_order)
 	attack_bar = AttackBar.new()
 	attack_bar.attack_chosen.connect(func(slot: int) -> void:
 		if _turn_uid != -1:
