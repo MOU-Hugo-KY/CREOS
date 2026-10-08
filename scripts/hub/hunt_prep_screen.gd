@@ -1,138 +1,217 @@
 class_name HuntPrepScreen
-extends UiWindow
-## « Préparer la chasse » : avant chaque combat, le donjon choisi, son coût en énergie, les 4
-## places de l'équipe et tous les héros possédés (toucher un héros l'ajoute ou le retire).
+extends Control
+## « Préparer la chasse », en pixel (pièces des écrans du hub) : l'arène du monde en fond avec la
+## formation telle qu'en combat (2 devant, 3 au milieu, 2 à l'arrière, ligne et bonus de chaque place),
+## les héros animés à leur place ; à droite, tous les héros possédés. Toucher un héros de la liste
+## l'ajoute ou le retire ; toucher deux places de la formation les échange.
 
 signal start_requested(dungeon_id: String)
 signal ui_sound(sfx_name: String)
+signal closed
+
+const S := "lanterne"
+const F := "fiche_heros"
+## Places de la formation à l'écran (pieds), même ordre que le combat : 0-1 devant, 2-4 milieu, 5-6 arrière.
+const SPOTS := [Vector2(810, 520), Vector2(810, 760), Vector2(560, 430), Vector2(560, 640), Vector2(560, 850),
+	Vector2(310, 520), Vector2(310, 760)]
+const LINE_NAMES := ["Devant", "Milieu", "Arrière"]
+const LINE_TIPS := ["Devant : protège les autres ; un combattant au corps-à-corps y subit 10 % de dégâts en moins.",
+	"Milieu : un lanceur de magie a 15 % de chances d'enchaîner une attaque de base.",
+	"Arrière : soins et boucliers +10 %, dégâts à distance +10 % ; protégé tant que la ligne de devant tient."]
 
 var dungeon_id := ""
+var _root: Control
+var _arena: TextureRect
+var _title: Label
 var _info: Label
-var _slots: HBoxContainer
+var _board: Control
 var _pool: GridContainer
 var _go: Button
-
-
-func _init() -> void:
-	setup("Préparer la chasse", Vector2(1240, 800))
+var _picked := -1  # place choisie pour un échange
 
 
 func _ready() -> void:
-	super._ready()
-	_info = UiKit.label("", 22, UiKit.TEXT_SOFT)
-	_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	content.add_child(_info)
-	content.add_child(_section("Équipe de chasse"))
-	_slots = HBoxContainer.new()
-	_slots.alignment = BoxContainer.ALIGNMENT_CENTER
-	_slots.add_theme_constant_override("separation", 24)
-	content.add_child(_slots)
-	content.add_child(_section("Tes héros  ·  touche un héros pour l'ajouter ou le retirer"))
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var bg := ColorRect.new()
+	bg.color = Color("17141c")
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(bg)
+	_root = ScreenPack.frame(self)
+	# Fond : l'arène du monde, assombrie, dans le cadre de la vitrine.
+	ScreenPack.panel(_root, F, "vitrine_frame", Rect2(24, 104, 1060, 952))
+	_arena = ScreenPack.image(_root, null, Rect2(48, 128, 1012, 904))
+	_arena.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_arena.modulate = Color(0.78, 0.76, 0.82)
+	_board = Control.new()
+	_board.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_board.size = Vector2(1920, 1080)
+	_root.add_child(_board)
+	# En-tête.
+	var back := ScreenPack.button(_root, S, "return", "← Retour", Rect2(24, 8, 240, 88), 28)
+	back.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		visible = false
+		closed.emit())
+	ScreenPack.image(_root, ScreenPack.tex(S, "title"), Rect2(290, 12, 800, 80))
+	_title = ScreenPack.text(_root, "", Rect2(290, 12, 800, 80), 34, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	# Droite : informations du niveau et héros possédés.
+	ScreenPack.panel(_root, S, "infos_panel", Rect2(1108, 104, 788, 952))
+	_info = ScreenPack.text(_root, "", Rect2(1146, 136, 712, 150), 23, UiKit.INK, 0, true)
+	ScreenPack.text(_root, "TES HÉROS · touche pour ajouter ou retirer", Rect2(1146, 290, 712, 40), 23, UiKit.WOOD)
 	var scroll := ScrollContainer.new()
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.position = Vector2(1140, 336)
+	scroll.size = Vector2(726, 560)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	content.add_child(scroll)
+	_root.add_child(scroll)
 	_pool = GridContainer.new()
 	_pool.columns = 6
-	_pool.add_theme_constant_override("h_separation", 16)
-	_pool.add_theme_constant_override("v_separation", 12)
+	_pool.add_theme_constant_override("h_separation", 12)
+	_pool.add_theme_constant_override("v_separation", 10)
 	scroll.add_child(_pool)
-	_go = UiKit.button("", "red", 28, Vector2(460, 72))
-	_go.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_go = ScreenPack.button(_root, S, "invoke_gems", "", Rect2(1150, 920, 704, 100), 32)
 	_go.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		start_requested.emit(dungeon_id))
-	content.add_child(_go)
 	PlayerData.changed.connect(func() -> void:
 		if visible:
 			refresh())
+	visible = false
 
 
 func open_for(p_dungeon: String) -> void:
 	dungeon_id = p_dungeon
-	open()
+	_picked = -1
+	visible = true
 	refresh()
 
 
-const LINE_NAMES := ["Devant", "Milieu", "Arrière"]
-const LINE_TIPS := ["Devant : protège les autres (corps-à-corps : -10 % de dégâts subis).",
-	"Milieu : un mage a 15 % de chances d'enchaîner une attaque de base.",
-	"Arrière : soins et boucliers +10 %, dégâts à distance +10 %. Protégé tant que la ligne de devant tient."]
+func close_window() -> void:
+	visible = false
 
 
 func refresh() -> void:
 	var d := GameData.dungeon(dungeon_id)
-	var cost := PlayerData.hunt_cost(dungeon_id)
-	_info.text = "%s  ·  %d vagues  ·  meilleur score : %s" % [d.get("name", dungeon_id),
-		d.get("waves", []).size(), "★".repeat(PlayerData.best_stars(dungeon_id)) if PlayerData.best_stars(dungeon_id) > 0 else "aucun"]
-	for c in _slots.get_children():
-		c.queue_free()
+	var region := dungeon_id.get_slice("_", 0)
+	var arena := "res://assets/decors/%s/arene1.png" % region
+	_arena.texture = load(arena) if ResourceLoader.exists(arena) else null
+	_title.text = String(d.get("name", dungeon_id)).to_upper()
 	var team := PlayerData.team()
-	for i in PlayerData.TEAM_SIZE:
-		var col := VBoxContainer.new()
-		col.custom_minimum_size = Vector2(124, 0)
-		_slots.add_child(col)
-		var line := UiKit.label(LINE_NAMES[0 if i < 2 else (1 if i < 5 else 2)], 17, UiKit.WOOD)
-		line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		line.tooltip_text = LINE_TIPS[0 if i < 2 else (1 if i < 5 else 2)]
-		line.mouse_filter = Control.MOUSE_FILTER_PASS
-		col.add_child(line)
-		var center := CenterContainer.new()
-		col.add_child(center)
-		if i < team.size():
-			var id: String = team[i]
-			center.add_child(_portrait_button(id, 100, true))
-			var n := UiKit.label(String(GameData.hero(id).get("short", GameData.hero(id).name)), 18, UiKit.INK)
-			n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			col.add_child(n)
-			var lv := UiKit.label("Niv. %d" % PlayerData.hero_level(id), 17, UiKit.TEXT_SOFT)
-			lv.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			col.add_child(lv)
-			var moves := HBoxContainer.new()
-			moves.alignment = BoxContainer.ALIGNMENT_CENTER
-			col.add_child(moves)
-			for dir in [-1, 1]:
-				var m := UiKit.button("◀" if dir < 0 else "▶", "wood", 16, Vector2(44, 34))
-				m.disabled = (dir < 0 and i == 0) or (dir > 0 and i == team.size() - 1)
-				var step: int = dir
-				m.pressed.connect(func() -> void:
-					if PlayerData.move_in_team(id, step):
-						ui_sound.emit("ui_toggle"))
-				moves.add_child(m)
-		else:
-			var empty := Panel.new()
-			empty.custom_minimum_size = Vector2(100, 100)
-			empty.add_theme_stylebox_override("panel", UiKit.box(Color(0, 0, 0, 0.08), UiKit.PARCHMENT_DARK.darkened(0.2), 50, 3))
-			center.add_child(empty)
-			var n := UiKit.label("Place libre", 19, UiKit.TEXT_SOFT)
-			n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			col.add_child(n)
-	for c in _pool.get_children():
-		c.queue_free()
-	for id: String in PlayerData.owned_heroes():
-		var col := VBoxContainer.new()
-		var center := CenterContainer.new()
-		center.add_child(_portrait_button(id, 96, false))
-		col.add_child(center)
-		var n := UiKit.label(String(GameData.hero(id).get("short", GameData.hero(id).name)), 18, UiKit.INK if PlayerData.in_team(id) else UiKit.TEXT_SOFT)
-		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		col.add_child(n)
-		_pool.add_child(col)
-	# Combos formés par l'équipe (attaques combinées en combat) et synergies actives.
+	var lines: Array[String] = ["%d vagues · meilleur score : %s" % [d.get("waves", []).size(),
+		"★".repeat(PlayerData.best_stars(dungeon_id)) if PlayerData.best_stars(dungeon_id) > 0 else "aucun"]]
 	var formed: Array = []
 	for cid: String in GameData.team_combos():
 		var c: Dictionary = GameData.team_combos()[cid]
 		if c.members.all(func(m: String) -> bool: return m in team):
 			formed.append("%s (%d)" % [c.name, c.members.size()])
 	if not formed.is_empty():
-		_info.text += "\nCombos : " + ", ".join(formed)
+		lines.append("Combos : " + ", ".join(formed))
 	var active := synergy_lines(team)
 	if not active.is_empty():
-		_info.text += "\nSynergies : " + ", ".join(active)
-	_go.text = "Partir en chasse  ·  %d énergie" % cost
+		lines.append("Synergies : " + ", ".join(active))
+	_info.text = "\n".join(lines)
+	_fill_board(team)
+	_fill_pool(team)
+	var cost := PlayerData.hunt_cost(dungeon_id)
+	_go.text = "Partir en chasse · %d énergie" % cost
 	_go.disabled = team.is_empty() or not PlayerData.can_start_hunt(dungeon_id)
 	if PlayerData.energy() < cost:
 		_go.text = "Pas assez d'énergie (%d / %d)" % [PlayerData.energy(), cost]
+
+
+## La formation : étiquettes des trois lignes, une place par héros (animé), échange en touchant deux places.
+func _fill_board(team: Array) -> void:
+	for c in _board.get_children():
+		c.queue_free()
+	for line in 3:
+		var x: float = [810.0, 560.0, 310.0][line]
+		var tag := ScreenPack.panel(_board, S, "currency_cartouche", Rect2(x - 90, 140, 180, 64))
+		tag.mouse_filter = Control.MOUSE_FILTER_PASS
+		tag.tooltip_text = LINE_TIPS[line]
+		ScreenPack.text(tag, LINE_NAMES[line], Rect2(0, 0, 180, 64), 26, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	var hint := ScreenPack.text(_board, "Touche deux héros pour échanger leurs places · survole une ligne pour son bonus",
+		Rect2(70, 940, 970, 40), 22, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	hint.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
+	hint.add_theme_constant_override("shadow_offset_y", 2)
+	for i in SPOTS.size():
+		var foot: Vector2 = SPOTS[i]
+		var spot := Control.new()
+		spot.position = foot - Vector2(80, 170)
+		spot.size = Vector2(160, 200)
+		spot.mouse_filter = Control.MOUSE_FILTER_STOP
+		spot.tooltip_text = LINE_TIPS[0 if i < 2 else (1 if i < 5 else 2)]
+		_board.add_child(spot)
+		var ring := _Ring.new()
+		ring.position = Vector2(80, 170)
+		ring.picked = i == _picked
+		spot.add_child(ring)
+		if i < team.size():
+			var id: String = team[i]
+			var p := ClipPlayer.new()
+			p.bundle = "res://assets/anim/heroes/"
+			p.idle_clip = id + "_idle"
+			p.position = Vector2(80, 170)
+			p.scale = Vector2.ONE * 0.36
+			spot.add_child(p)
+			p.play(id + "_idle")
+			ScreenPack.text(spot, String(GameData.hero(id).get("short", GameData.hero(id).name)), Rect2(0, 176, 160, 26), 20,
+				UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+		var slot := i
+		spot.gui_input.connect(func(e: InputEvent) -> void:
+			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+				_on_spot(slot, team))
+
+
+func _on_spot(slot: int, team: Array) -> void:
+	if slot >= team.size():
+		_picked = -1
+		refresh()
+		return
+	if _picked == -1:
+		_picked = slot
+		ui_sound.emit("ui_click")
+		refresh()
+		return
+	if _picked != slot:
+		var t: Array = team.duplicate()
+		var a: String = t[_picked]
+		t[_picked] = t[slot]
+		t[slot] = a
+		PlayerData.state["team"] = t
+		PlayerData.save_game()
+		ui_sound.emit("ui_toggle")
+	_picked = -1
+	PlayerData.changed.emit()
+
+
+func _fill_pool(team: Array) -> void:
+	for c in _pool.get_children():
+		c.queue_free()
+	for id: String in PlayerData.owned_heroes():
+		var col := VBoxContainer.new()
+		col.custom_minimum_size = Vector2(110, 0)
+		var b := Button.new()
+		b.flat = true
+		b.focus_mode = Control.FOCUS_NONE
+		b.custom_minimum_size = Vector2(96, 96)
+		var p := RoundPortrait.new().setup(GameData.hero(id), 96, 0.09 if id in team else 0.05)
+		if id in team:
+			p.modulate = Color(1, 1, 1, 0.45)
+		b.add_child(p)
+		var hid := id
+		b.pressed.connect(func() -> void:
+			if PlayerData.toggle_team(hid):
+				_picked = -1
+				ui_sound.emit("ui_toggle"))
+		var center := CenterContainer.new()
+		center.add_child(b)
+		col.add_child(center)
+		var n := UiKit.label("%s · %d" % [String(GameData.hero(id).get("short", GameData.hero(id).name)), PlayerData.hero_level(id)],
+			16, UiKit.INK if id in team else UiKit.TEXT_SOFT)
+		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		col.add_child(n)
+		_pool.add_child(col)
 
 
 ## Synergies que l'équipe déclenche : « Ardeur ×2 », « Rempart ×4 »…
@@ -156,22 +235,15 @@ static func synergy_lines(team: Array) -> Array:
 	return out
 
 
-func _portrait_button(id: String, size: float, in_slot: bool) -> Control:
-	var b := Button.new()
-	b.flat = true
-	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(size, size)
-	var p := RoundPortrait.new().setup(GameData.hero(id), size, 0.09 if (in_slot or PlayerData.in_team(id)) else 0.05)
-	if not in_slot and PlayerData.in_team(id):
-		p.modulate = Color(1, 1, 1, 0.45)
-	b.add_child(p)
-	b.pressed.connect(func() -> void:
-		if PlayerData.toggle_team(id):
-			ui_sound.emit("ui_toggle"))
-	return b
+## Anneau au sol d'une place (doré quand la place est choisie pour un échange).
+class _Ring extends Node2D:
+	var picked := false
 
-
-func _section(text: String) -> Label:
-	var l := UiKit.label(text, 24, UiKit.WOOD)
-	l.add_theme_font_override("font", UiKit.FONT_BOLD)
-	return l
+	func _draw() -> void:
+		var c := Color("f2c75c") if picked else Color(1, 1, 1, 0.35)
+		var pts := PackedVector2Array()
+		for k in 33:
+			var a := TAU * k / 32.0
+			pts.append(Vector2(cos(a) * 62.0, sin(a) * 20.0))
+		draw_colored_polygon(pts, Color(0, 0, 0, 0.3))
+		draw_polyline(pts, c, 3.0 if picked else 2.0)
