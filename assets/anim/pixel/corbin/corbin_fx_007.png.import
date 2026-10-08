@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4b6jdgopcbf0"
-path="res://.godot/imported/corbin_run_007.png-3f887a87e3cb3aed8e7877ab1a4ff764.ctex"
+uid="uid://7fqjk7m5hq14"
+path="res://.godot/imported/corbin_fx_007.png-cb0e516496bf2093c578c1879e37d061.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/anim/pixel/corbin/corbin_run_007.png"
-dest_files=["res://.godot/imported/corbin_run_007.png-3f887a87e3cb3aed8e7877ab1a4ff764.ctex"]
+source_file="res://assets/anim/pixel/corbin/corbin_fx_007.png"
+dest_files=["res://.godot/imported/corbin_fx_007.png-cb0e516496bf2093c578c1879e37d061.ctex"]
 
 [params]
 

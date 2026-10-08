@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://degrpxxs8fed6"
-path="res://.godot/imported/nyx_walk_009.png-2aaf365fc64617c0c3b0e31adc228379.ctex"
+uid="uid://8pcq81lwyoky"
+path="res://.godot/imported/corbin_fx_006.png-4313657276cebd2713a6b6f2743f5c3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/anim/pixel/nyx/nyx_walk_009.png"
-dest_files=["res://.godot/imported/nyx_walk_009.png-2aaf365fc64617c0c3b0e31adc228379.ctex"]
+source_file="res://assets/anim/pixel/corbin/corbin_fx_006.png"
+dest_files=["res://.godot/imported/corbin_fx_006.png-4313657276cebd2713a6b6f2743f5c3b.ctex"]
 
 [params]
 

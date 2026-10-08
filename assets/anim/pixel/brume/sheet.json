@@ -1,6 +1,5 @@
 {
- "hero": "brume",
- "scale": 4.8,
+ "scale": 4.08,
  "anchor": [
   96,
   146
@@ -14,313 +13,48 @@
   "relic": "skill",
   "dodge": "dodge",
   "0": "attack_1",
-  "1": "skill",
+  "1": "attack_2",
   "2": "ultimate",
-  "3": "attack_2",
+  "3": "skill",
   "4": "skill",
-  "5": "ultimate"
+  "5": "skill"
  },
+ "hero": "brume",
  "anims": {
-  "attack_1": {
-   "loop": false,
-   "frames": [
-    [
-     "brume_attack_1_000.png",
-     0.11
-    ],
-    [
-     "brume_attack_1_001.png",
-     0.1
-    ],
-    [
-     "brume_attack_1_002.png",
-     0.09
-    ],
-    [
-     "brume_attack_1_003.png",
-     0.06
-    ],
-    [
-     "brume_attack_1_004.png",
-     0.075
-    ],
-    [
-     "brume_attack_1_005.png",
-     0.09
-    ],
-    [
-     "brume_attack_1_006.png",
-     0.11
-    ],
-    [
-     "brume_attack_1_007.png",
-     0.14
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "attack_2": {
-   "loop": false,
-   "frames": [
-    [
-     "brume_attack_2_000.png",
-     0.11
-    ],
-    [
-     "brume_attack_2_001.png",
-     0.1
-    ],
-    [
-     "brume_attack_2_002.png",
-     0.09
-    ],
-    [
-     "brume_attack_2_003.png",
-     0.06
-    ],
-    [
-     "brume_attack_2_004.png",
-     0.075
-    ],
-    [
-     "brume_attack_2_005.png",
-     0.09
-    ],
-    [
-     "brume_attack_2_006.png",
-     0.11
-    ],
-    [
-     "brume_attack_2_007.png",
-     0.14
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "skill": {
-   "loop": false,
-   "frames": [
-    [
-     "brume_skill_000.png",
-     0.13
-    ],
-    [
-     "brume_skill_001.png",
-     0.15
-    ],
-    [
-     "brume_skill_002.png",
-     0.15
-    ],
-    [
-     "brume_skill_003.png",
-     0.085
-    ],
-    [
-     "brume_skill_004.png",
-     0.11
-    ],
-    [
-     "brume_skill_005.png",
-     0.11
-    ],
-    [
-     "brume_skill_006.png",
-     0.13
-    ],
-    [
-     "brume_skill_007.png",
-     0.16
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "ultimate": {
-   "loop": false,
-   "frames": [
-    [
-     "brume_ultimate_000.png",
-     0.16
-    ],
-    [
-     "brume_ultimate_001.png",
-     0.18
-    ],
-    [
-     "brume_ultimate_002.png",
-     0.18
-    ],
-    [
-     "brume_ultimate_003.png",
-     0.08
-    ],
-    [
-     "brume_ultimate_004.png",
-     0.15
-    ],
-    [
-     "brume_ultimate_005.png",
-     0.16
-    ],
-    [
-     "brume_ultimate_006.png",
-     0.18
-    ],
-    [
-     "brume_ultimate_007.png",
-     0.2
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "dodge": {
-   "loop": false,
-   "frames": [
-    [
-     "brume_dodge_000.png",
-     0.09
-    ],
-    [
-     "brume_dodge_001.png",
-     0.07
-    ],
-    [
-     "brume_dodge_002.png",
-     0.055
-    ],
-    [
-     "brume_dodge_003.png",
-     0.055
-    ],
-    [
-     "brume_dodge_004.png",
-     0.07
-    ],
-    [
-     "brume_dodge_005.png",
-     0.085
-    ],
-    [
-     "brume_dodge_006.png",
-     0.1
-    ],
-    [
-     "brume_dodge_007.png",
-     0.12
-    ]
-   ],
-   "hit_frame": null
-  },
-  "hurt": {
-   "loop": false,
-   "frames": [
-    [
-     "brume_hurt_000.png",
-     0.09
-    ],
-    [
-     "brume_hurt_001.png",
-     0.06
-    ],
-    [
-     "brume_hurt_002.png",
-     0.065
-    ],
-    [
-     "brume_hurt_003.png",
-     0.08
-    ],
-    [
-     "brume_hurt_004.png",
-     0.095
-    ],
-    [
-     "brume_hurt_005.png",
-     0.11
-    ],
-    [
-     "brume_hurt_006.png",
-     0.12
-    ],
-    [
-     "brume_hurt_007.png",
-     0.14
-    ]
-   ],
-   "hit_frame": null
-  },
-  "death": {
-   "loop": false,
-   "frames": [
-    [
-     "brume_death_000.png",
-     0.09
-    ],
-    [
-     "brume_death_001.png",
-     0.09
-    ],
-    [
-     "brume_death_002.png",
-     0.1
-    ],
-    [
-     "brume_death_003.png",
-     0.11
-    ],
-    [
-     "brume_death_004.png",
-     0.12
-    ],
-    [
-     "brume_death_005.png",
-     0.14
-    ],
-    [
-     "brume_death_006.png",
-     0.18
-    ],
-    [
-     "brume_death_007.png",
-     0.7
-    ]
-   ],
-   "hit_frame": null
-  },
   "idle": {
    "loop": true,
    "frames": [
     [
      "brume_idle_000.png",
-     0.325
+     0.3
     ],
     [
      "brume_idle_001.png",
-     0.325
+     0.3
     ],
     [
      "brume_idle_002.png",
-     0.325
+     0.3
     ],
     [
      "brume_idle_003.png",
-     0.325
+     0.3
     ],
     [
      "brume_idle_004.png",
-     0.325
+     0.3
     ],
     [
      "brume_idle_005.png",
-     0.325
+     0.3
     ],
     [
      "brume_idle_006.png",
-     0.325
+     0.3
     ],
     [
      "brume_idle_007.png",
-     0.325
+     0.3
     ]
    ],
    "hit_frame": null
@@ -362,52 +96,310 @@
     ]
    ],
    "hit_frame": null
-  }
- },
- "effect": {
-  "frames": [
-   [
-    "brume_fx_000.png",
-    0.055
+  },
+  "attack_1": {
+   "loop": false,
+   "frames": [
+    [
+     "brume_attack_1_000.png",
+     0.1
+    ],
+    [
+     "brume_attack_1_001.png",
+     0.1
+    ],
+    [
+     "brume_attack_1_002.png",
+     0.08
+    ],
+    [
+     "brume_attack_1_003.png",
+     0.05
+    ],
+    [
+     "brume_attack_1_004.png",
+     0.065
+    ],
+    [
+     "brume_attack_1_005.png",
+     0.07
+    ],
+    [
+     "brume_attack_1_006.png",
+     0.1
+    ],
+    [
+     "brume_attack_1_007.png",
+     0.12
+    ]
    ],
-   [
-    "brume_fx_001.png",
-    0.055
+   "hit_frame": 3
+  },
+  "attack_2": {
+   "loop": false,
+   "frames": [
+    [
+     "brume_attack_2_000.png",
+     0.1
+    ],
+    [
+     "brume_attack_2_001.png",
+     0.085
+    ],
+    [
+     "brume_attack_2_002.png",
+     0.06
+    ],
+    [
+     "brume_attack_2_003.png",
+     0.06
+    ],
+    [
+     "brume_attack_2_004.png",
+     0.065
+    ],
+    [
+     "brume_attack_2_005.png",
+     0.075
+    ],
+    [
+     "brume_attack_2_006.png",
+     0.11
+    ],
+    [
+     "brume_attack_2_007.png",
+     0.12
+    ]
    ],
-   [
-    "brume_fx_002.png",
-    0.055
+   "hit_frame": 4
+  },
+  "ultimate": {
+   "loop": false,
+   "frames": [
+    [
+     "brume_ultimate_000.png",
+     0.11
+    ],
+    [
+     "brume_ultimate_001.png",
+     0.11
+    ],
+    [
+     "brume_ultimate_002.png",
+     0.1
+    ],
+    [
+     "brume_ultimate_003.png",
+     0.075
+    ],
+    [
+     "brume_ultimate_004.png",
+     0.085
+    ],
+    [
+     "brume_ultimate_005.png",
+     0.1
+    ],
+    [
+     "brume_ultimate_006.png",
+     0.11
+    ],
+    [
+     "brume_ultimate_007.png",
+     0.13
+    ]
    ],
-   [
-    "brume_fx_003.png",
-    0.065
+   "hit_frame": 5
+  },
+  "skill": {
+   "loop": false,
+   "frames": [
+    [
+     "brume_skill_000.png",
+     0.1
+    ],
+    [
+     "brume_skill_001.png",
+     0.1
+    ],
+    [
+     "brume_skill_002.png",
+     0.1
+    ],
+    [
+     "brume_skill_003.png",
+     0.07
+    ],
+    [
+     "brume_skill_004.png",
+     0.08
+    ],
+    [
+     "brume_skill_005.png",
+     0.085
+    ],
+    [
+     "brume_skill_006.png",
+     0.1
+    ],
+    [
+     "brume_skill_007.png",
+     0.12
+    ]
    ],
-   [
-    "brume_fx_004.png",
-    0.065
+   "hit_frame": 4
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "brume_hurt_000.png",
+     0.085
+    ],
+    [
+     "brume_hurt_001.png",
+     0.065
+    ],
+    [
+     "brume_hurt_002.png",
+     0.075
+    ],
+    [
+     "brume_hurt_003.png",
+     0.08
+    ],
+    [
+     "brume_hurt_004.png",
+     0.085
+    ],
+    [
+     "brume_hurt_005.png",
+     0.09
+    ],
+    [
+     "brume_hurt_006.png",
+     0.1
+    ],
+    [
+     "brume_hurt_007.png",
+     0.12
+    ]
    ],
-   [
-    "brume_fx_005.png",
-    0.075
+   "hit_frame": null
+  },
+  "dodge": {
+   "loop": false,
+   "frames": [
+    [
+     "brume_dodge_000.png",
+     0.09
+    ],
+    [
+     "brume_dodge_001.png",
+     0.065
+    ],
+    [
+     "brume_dodge_002.png",
+     0.055
+    ],
+    [
+     "brume_dodge_003.png",
+     0.055
+    ],
+    [
+     "brume_dodge_004.png",
+     0.065
+    ],
+    [
+     "brume_dodge_005.png",
+     0.075
+    ],
+    [
+     "brume_dodge_006.png",
+     0.09
+    ],
+    [
+     "brume_dodge_007.png",
+     0.12
+    ]
    ],
-   [
-    "brume_fx_006.png",
-    0.085
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "brume_death_000.png",
+     0.1
+    ],
+    [
+     "brume_death_001.png",
+     0.1
+    ],
+    [
+     "brume_death_002.png",
+     0.1
+    ],
+    [
+     "brume_death_003.png",
+     0.1
+    ],
+    [
+     "brume_death_004.png",
+     0.1
+    ],
+    [
+     "brume_death_005.png",
+     0.1
+    ],
+    [
+     "brume_death_006.png",
+     0.1
+    ],
+    [
+     "brume_death_007.png",
+     0.45
+    ]
    ],
-   [
-    "brume_fx_007.png",
-    0.1
-   ]
-  ],
-  "pivot": [
-   64,
-   64
-  ],
-  "scale": {
-   "attack_1": 0.6,
-   "attack_2": 0.75,
-   "skill": 1,
-   "ultimate": 1.5
+   "hit_frame": null
+  },
+  "fx": {
+   "loop": false,
+   "frames": [
+    [
+     "brume_fx_000.png",
+     0.07
+    ],
+    [
+     "brume_fx_001.png",
+     0.07
+    ],
+    [
+     "brume_fx_002.png",
+     0.07
+    ],
+    [
+     "brume_fx_003.png",
+     0.07
+    ],
+    [
+     "brume_fx_004.png",
+     0.07
+    ],
+    [
+     "brume_fx_005.png",
+     0.07
+    ],
+    [
+     "brume_fx_006.png",
+     0.07
+    ],
+    [
+     "brume_fx_007.png",
+     0.07
+    ]
+   ],
+   "hit_frame": 4
   }
  }
 }
