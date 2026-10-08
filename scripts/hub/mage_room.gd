@@ -125,7 +125,7 @@ func ceremony(rarity: int) -> void:
 	_casting = true
 	_mage.play("mage_incantation", "mage_repos")
 	_staff_circle.texture = tex("mage/cercle_runique_petit_%s.png" % col)
-	_staff_circle.visible = true
+	_staff_circle.visible = false  # retiré : seuls les cercles au-dessus du grand cercle
 	_floor.texture = tex("mage/cercle_sol_perspective_%s.png" % col)
 	_floor_glow.texture = _floor.texture
 	create_tween().tween_property(_floor_glow, "modulate:a", 0.9, 0.8)
