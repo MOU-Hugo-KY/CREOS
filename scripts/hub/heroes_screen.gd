@@ -560,6 +560,12 @@ func _fill_relic(id: String, hero: Dictionary) -> void:
 	if relic.is_empty():
 		ScreenPack.text(_tab_box, "Pas de relique connue.", Rect2(790, 760, 900, 40), 26, UiKit.TEXT_SOFT)
 		return
+	if not PlayerData.relics_unlocked():
+		ScreenPack.image(_tab_box, load("res://assets/ui/kit/lock.png"), Rect2(800, 790, 64, 64))
+		ScreenPack.text(_tab_box, "%s · relique scellée" % relic.get("name", ""), Rect2(890, 770, 940, 44), 28)
+		ScreenPack.text(_tab_box, "Les reliques s'éveillent après la Campagne 1 : bats Morvath au dernier niveau du monde 10 " +
+			"pour ouvrir la Campagne Héroïque, où se trouvent leurs fragments.", Rect2(890, 820, 940, 120), 22, UiKit.TEXT_SOFT, 0, true)
+		return
 	var tier := PlayerData.relic_tier(id)
 	var tiers: Array = GameData.progression.get("relic_tiers", [])
 	var pr := Rect2(780, 752, 420, 210)

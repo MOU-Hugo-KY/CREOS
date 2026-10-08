@@ -285,6 +285,10 @@ func test_save() -> void:
 	check(kinds.has("bois") and kinds.has("or"), "les coffres varient selon la chance")
 	check(Progression.roll_chest(1, cfg, rng, 5, 29, "feu").kind == "serment", "coffre du Serment garanti après 30 coffres")
 	check(Progression.awaken_cost(20, "feu", cfg).get("esprit_oeuf_lumiere", 0) == 2, "l'éveil demande aussi un deuxième élément")
+	pd.state.items["esprit_oeuf_eau"] = 6
+	check(pd.fuse_esprit("esprit_oeuf_eau") and pd.item_count("esprit_petit_eau") >= 1 and pd.item_count("esprit_oeuf_eau") == 1,
+		"fusion : 5 Œufs donnent 1 Petit")
+	check(not pd.fuse_esprit("esprit_oeuf_eau"), "pas de fusion sans 5 Esprits")
 	pd.state.energy = 0
 	check(not pd.start_hunt("monde01_1"), "pas de chasse sans énergie")
 	pd.free()
@@ -415,6 +419,9 @@ func test_hero_upgrades() -> void:
 	check(not pd.upgrade_relic("aegis"), "pas de relique sans fragments")
 	pd.state.items["relique_aegis"] = 110
 	pd.state.items["materiaux_relique"] = 20
+	check(not pd.relics_unlocked() and not pd.upgrade_relic("aegis"), "reliques scellées avant la fin de la Campagne 1")
+	check(not pd.filter_locked_loot({"relique_aegis": 3, "gold": 5}).has("relique_aegis"), "pas de fragments de relique avant la fin")
+	pd.state.dungeons[pd.RELIC_UNLOCK_DUNGEON] = {"stars": 1}
 	check(pd.upgrade_relic("aegis") and pd.relic_tier("aegis") == 1 and pd.relic_fragments("aegis") == 10, "relique retrouvée contre 100 fragments")
 	check(pd.upgrade_relic("aegis") and pd.relic_tier("aegis") == 2 and pd.item_count("materiaux_relique") == 0, "relique restaurée contre fragments et matériaux")
 	var r2 := Progression.hero_stats(h, 1, 0, gd.progression, 2)

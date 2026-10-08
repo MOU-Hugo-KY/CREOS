@@ -187,6 +187,9 @@ func _relic_card(id: String) -> Control:
 	var st_text := "%s · %s" % [hero_name, "◆".repeat(tier) + "◇".repeat(5 - tier)]
 	if tier == 0:
 		st_text = "%s · %d / 100 fragments" % [hero_name, PlayerData.relic_fragments(id)]
+	if not PlayerData.relics_unlocked():
+		st_text = "%s · scellée" % hero_name
+		b.tooltip_text = "Les reliques s'éveillent après la Campagne 1 (dernier niveau du monde 10)."
 	var s := UiKit.label(st_text, 15, UiKit.WOOD if owned else UiKit.TEXT_SOFT)
 	s.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	v.add_child(s)

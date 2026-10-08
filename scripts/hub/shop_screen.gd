@@ -12,6 +12,7 @@ const ITEM_NAMES := {"fragments_relique": "Éclats de serment", "materiaux_reliq
 var _offers: VBoxContainer
 var _loot: VBoxContainer
 var _purse: Label
+var _fusion: VBoxContainer
 
 
 func _init() -> void:
@@ -51,6 +52,10 @@ func _ready() -> void:
 	_offers = VBoxContainer.new()
 	_offers.add_theme_constant_override("separation", 10)
 	right.add_child(_offers)
+	right.add_child(_section("Fusion des Esprits"))
+	_fusion = VBoxContainer.new()
+	_fusion.add_theme_constant_override("separation", 8)
+	right.add_child(_fusion)
 	right.add_child(_section("Il rachète ton butin"))
 	_loot = VBoxContainer.new()
 	_loot.add_theme_constant_override("separation", 8)
@@ -71,6 +76,32 @@ func refresh() -> void:
 		c.queue_free()
 	for offer: Dictionary in GameData.hub.get("shop", []):
 		_offers.add_child(_offer_card(offer))
+	for c in _fusion.get_children():
+		c.queue_free()
+	var fusable := 0
+	for stage: String in Progression.ESPRIT_STAGES.slice(0, 3):
+		for elem: String in Progression.ELEMENTS:
+			var item := Progression.esprit_id(stage, elem)
+			var n := PlayerData.item_count(item)
+			if n <= 0:
+				continue
+			fusable += 1
+			var up := Progression.esprit_id(Progression.ESPRIT_STAGES[Progression.ESPRIT_STAGES.find(stage) + 1], elem)
+			var row := HBoxContainer.new()
+			row.add_theme_constant_override("separation", 12)
+			var name := UiKit.label("%s × %d   →   5 pour 1 %s" % [HeroesScreen.esprit_name(item, true), n,
+				HeroesScreen.esprit_name(up)], 19, UiKit.INK)
+			name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			row.add_child(name)
+			var b := UiKit.button("Fusionner · %d or" % PlayerData.FUSION_GOLD, "blue", 18, Vector2(230, 48))
+			b.disabled = n < PlayerData.FUSION_COUNT or PlayerData.gold() < PlayerData.FUSION_GOLD
+			b.pressed.connect(func() -> void:
+				if PlayerData.fuse_esprit(item):
+					ui_sound.emit("ultimate_impact"))
+			row.add_child(b)
+			_fusion.add_child(row)
+	if fusable == 0:
+		_fusion.add_child(UiKit.label("Tes Esprits apparaîtront ici : 5 du même stade donnent 1 Esprit plus grand.", 18, UiKit.TEXT_SOFT))
 	for c in _loot.get_children():
 		c.queue_free()
 	var price := int(GameData.hub.get("sell_price", 25))

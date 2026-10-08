@@ -23,6 +23,8 @@ var known_heroes: Array = []  # héros existant dans le jeu (les anciens sont re
 var debug_day := ""  # tests : impose la date du jour ("" = la vraie date)
 
 
+const RELIC_UNLOCK_DUNGEON := "monde10_8"
+
 func _ready() -> void:
 	if persist:
 		_autoconfigure()
@@ -318,9 +320,25 @@ func relic_next_cost(id: String) -> Dictionary:
 	return Progression.relic_cost(relic_tier(id), _config)
 
 
+## Les reliques s'ouvrent après la Campagne 1 (dernier niveau du monde 10 gagné).
+func relics_unlocked() -> bool:
+	return best_stars(RELIC_UNLOCK_DUNGEON) > 0
+
+
+## Butin sans les fragments et matériaux de relique tant qu'elles sont verrouillées.
+func filter_locked_loot(rewards: Dictionary) -> Dictionary:
+	if relics_unlocked():
+		return rewards
+	var out := {}
+	for key: String in rewards:
+		if not key.begins_with("relique_") and key != "materiaux_relique":
+			out[key] = rewards[key]
+	return out
+
+
 func can_upgrade_relic(id: String) -> bool:
 	var c := relic_next_cost(id)
-	return state.heroes.has(id) and not c.is_empty() and relic_fragments(id) >= int(c.fragments) \
+	return relics_unlocked() and state.heroes.has(id) and not c.is_empty() and relic_fragments(id) >= int(c.fragments) \
 		and item_count("materiaux_relique") >= int(c.materials)
 
 
@@ -386,6 +404,29 @@ func awaken_hero(id: String, hero: Dictionary) -> bool:
 		state.items[item] = item_count(item) - int(cost[item])
 	state.heroes[id]["awakened"] = hero_level_cap(id)
 	record_event("hero_awakened")
+	save_game()
+	changed.emit()
+	return true
+
+
+## Fusion chez le Marchand : 5 Esprits d'un stade donnent 1 Esprit du stade suivant (même élément).
+const FUSION_COUNT := 5
+const FUSION_GOLD := 100
+
+
+func fuse_esprit(item: String) -> bool:
+	var parts := item.split("_")
+	if parts.size() < 3 or parts[0] != "esprit":
+		return false
+	var stage := Progression.ESPRIT_STAGES.find(parts[1])
+	if stage < 0 or stage >= Progression.ESPRIT_STAGES.size() - 1:
+		return false
+	if item_count(item) < FUSION_COUNT or gold() < FUSION_GOLD:
+		return false
+	state.items[item] = item_count(item) - FUSION_COUNT
+	var up := Progression.esprit_id(Progression.ESPRIT_STAGES[stage + 1], parts[2])
+	state.items[up] = item_count(up) + 1
+	state.gold = gold() - FUSION_GOLD
 	save_game()
 	changed.emit()
 	return true
@@ -631,7 +672,7 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 	if not won:
 		save_game()
 		return result
-	var split := Progression.split_rewards(rewards, _config)
+	var split := Progression.split_rewards(filter_locked_loot(rewards), _config)
 	var max_level: int = _config.get("player_max_level", 60)
 	for id: String in team_ids:
 		if not state.heroes.has(id):
