@@ -259,11 +259,32 @@ func test_save() -> void:
 	check(pd.toggle_team("recrue") and not pd.in_team("recrue"), "retirer un héros de l'équipe")
 	check(pd.start_hunt("monde01_1") and pd.energy() == energy0 - pd.hunt_cost("monde01_1"), "une chasse coûte de l'énergie")
 	var res: Dictionary = pd.finish_hunt("monde01_1", true, 3, {"gold": 250, "xp": 120, "essence_ombre": 3}, pd.team())
-	check(pd.gold() == gold0 + 250 and pd.item_count("essence_ombre") == 3, "victoire : or et essences gagnés")
+	var chest_gold := int(res.get("chest", {}).get("rewards", {}).get("gold", 0))
+	check(pd.gold() == gold0 + 250 + chest_gold and pd.item_count("essence_ombre") == 3, "victoire : or et essences gagnés")
+	check(res.get("chest", {}).get("kind", "") == "fer", "premier coffre de campagne garanti en fer")
 	check(pd.hero_level("corbin") == 2 and res.heroes.corbin.gained_levels == 1, "victoire : les héros gagnent de l'XP et des niveaux")
 	check(pd.best_stars("monde01_1") == 3, "meilleures étoiles retenues")
 	var lost: Dictionary = pd.finish_hunt("monde01_1", false, 0, {}, pd.team())
-	check(lost.gold == 0 and pd.gold() == gold0 + 250, "défaite : rien de gagné")
+	check(lost.gold == 0 and pd.gold() == gold0 + 250 + chest_gold and not lost.has("chest"), "défaite : rien de gagné")
+	# Éveil : au niveau 10, le héros doit nourrir des Esprits pour continuer.
+	pd.state.heroes["recrue"] = {"level": 10, "xp": 0, "awakened": 0}
+	var hero := {"element": "feu"}
+	check(pd.hero_needs_awakening("recrue") and pd.hero_level_cap("recrue") == 10, "niveau 10 : éveil nécessaire")
+	pd.state.gold = 100000
+	check(not pd.level_up_hero("recrue"), "pas de niveau 11 sans éveil")
+	check(not pd.can_awaken("recrue", hero), "pas d'éveil sans Esprits")
+	pd.state.items["esprit_oeuf_feu"] = 3
+	check(pd.awaken_hero("recrue", hero) and pd.item_count("esprit_oeuf_feu") == 0, "éveil avec 3 Œufs de feu")
+	check(pd.level_up_hero("recrue") and pd.hero_level("recrue") == 11, "après l'éveil, le niveau 11")
+	var cfg: Dictionary = pd._config
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 7
+	var kinds := {}
+	for i in 400:
+		kinds[Progression.roll_chest(3, cfg, rng, 5, 0, "feu").kind] = true
+	check(kinds.has("bois") and kinds.has("or"), "les coffres varient selon la chance")
+	check(Progression.roll_chest(1, cfg, rng, 5, 29, "feu").kind == "serment", "coffre du Serment garanti après 30 coffres")
+	check(Progression.awaken_cost(20, "feu", cfg).get("esprit_oeuf_lumiere", 0) == 2, "l'éveil demande aussi un deuxième élément")
 	pd.state.energy = 0
 	check(not pd.start_hunt("monde01_1"), "pas de chasse sans énergie")
 	pd.free()

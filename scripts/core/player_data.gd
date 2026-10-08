@@ -343,9 +343,57 @@ func hero_level_up_cost(id: String) -> int:
 	return Progression.level_up_cost(hero_level(id), _config)
 
 
-## Fait monter un héros d'un niveau contre de l'or (pas au-delà du niveau maximum).
+## Dernier palier d'éveil franchi (0, 10, 20…). Les héros d'avant les éveils gardent leurs niveaux.
+func hero_awakened(id: String) -> int:
+	var h: Dictionary = state.get("heroes", {}).get(id, {})
+	if not h.has("awakened"):
+		return int(h.get("level", 1)) / 10 * 10
+	return int(h.awakened)
+
+
+## Niveau que le héros ne peut pas dépasser avant son prochain éveil.
+func hero_level_cap(id: String) -> int:
+	return Progression.level_cap(hero_awakened(id), _config)
+
+
+## Le héros attend un éveil : il est au palier (10, 20…) et n'a pas encore nourri ses Esprits.
+func hero_needs_awakening(id: String) -> bool:
+	var lv := hero_level(id)
+	return state.heroes.has(id) and lv == hero_level_cap(id) and lv < int(_config.get("max_level", 150))
+
+
+## Esprits demandés par le prochain éveil du héros : {objet: nombre}.
+func awaken_cost(id: String, hero: Dictionary) -> Dictionary:
+	return Progression.awaken_cost(hero_level_cap(id), String(hero.get("element", "")), _config)
+
+
+func can_awaken(id: String, hero: Dictionary) -> bool:
+	if not hero_needs_awakening(id):
+		return false
+	var cost := awaken_cost(id, hero)
+	for item: String in cost:
+		if item_count(item) < int(cost[item]):
+			return false
+	return true
+
+
+## Éveille le héros : consomme les Esprits et ouvre les 10 niveaux suivants.
+func awaken_hero(id: String, hero: Dictionary) -> bool:
+	if not can_awaken(id, hero):
+		return false
+	var cost := awaken_cost(id, hero)
+	for item: String in cost:
+		state.items[item] = item_count(item) - int(cost[item])
+	state.heroes[id]["awakened"] = hero_level_cap(id)
+	record_event("hero_awakened")
+	save_game()
+	changed.emit()
+	return true
+
+
+## Fait monter un héros d'un niveau contre de l'or (pas au-delà de son palier d'éveil).
 func level_up_hero(id: String) -> bool:
-	if not state.heroes.has(id) or hero_level(id) >= int(_config.get("max_level", 30)):
+	if not state.heroes.has(id) or hero_level(id) >= hero_level_cap(id):
 		return false
 	var cost := hero_level_up_cost(id)
 	if gold() < cost:
@@ -584,12 +632,12 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 		save_game()
 		return result
 	var split := Progression.split_rewards(rewards, _config)
-	var max_level: int = _config.get("max_level", 30)
+	var max_level: int = _config.get("player_max_level", 60)
 	for id: String in team_ids:
 		if not state.heroes.has(id):
 			continue
 		var h: Dictionary = state.heroes[id]
-		var r := Progression.add_xp(int(h.level), int(h.xp), split.hero_xp, _config.get("hero_xp", {}), max_level)
+		var r := Progression.add_xp(int(h.level), int(h.xp), split.hero_xp, _config.get("hero_xp", {}), hero_level_cap(id))
 		h.level = r.level
 		h.xp = r.xp
 		if r.gained_levels > 0:
@@ -607,6 +655,9 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 			_add_stat("gold_earned", result.gold)
 		else:
 			state.items[key] = item_count(key) + int(split.loot[key])
+	# Coffre de fin de niveau (campagne) : bois, fer, or ou Serment selon les étoiles et la chance.
+	if dungeon_id.begins_with("monde"):
+		result["chest"] = _open_campaign_chest(dungeon_id, stars)
 	record_event("hunt_win")
 	_add_stat("hunts_won")
 	if stars >= 3:
@@ -617,6 +668,33 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 	save_game()
 	changed.emit()
 	return result
+
+
+## Tire et donne le coffre d'une victoire de campagne. Renvoie {kind, name, rewards}.
+func _open_campaign_chest(dungeon_id: String, stars: int) -> Dictionary:
+	if not state.has("chests"):
+		state["chests"] = {"opened": 0, "since_best": 0}
+	var c: Dictionary = state.chests
+	var gd: Node = (Engine.get_main_loop() as SceneTree).root.get_node("GameData")
+	var region: Dictionary = gd.regions.get(dungeon_id.get_slice("_", 0), {}) if "regions" in gd else {}
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	var chest := Progression.roll_chest(stars, _config, rng, int(c.opened), int(c.since_best),
+		String(region.get("element", "")), 2 if dungeon_id.contains("_h") else 1)
+	c.opened = int(c.opened) + 1
+	c.since_best = 0 if chest.kind == "serment" else int(c.since_best) + 1
+	for key: String in chest.rewards:
+		var n := int(chest.rewards[key])
+		match key:
+			"gold":
+				state.gold = gold() + n
+				_add_stat("gold_earned", n)
+			"gems":
+				state.gems = gems() + n
+			_:
+				state.items[key] = item_count(key) + n
+	chest["name"] = _config.get("chests", {}).get("names", {}).get(chest.kind, chest.kind)
+	return chest
 
 
 # --- Ma Loge (donjon du joueur, règles dans `Lodge`) ---------------------------------

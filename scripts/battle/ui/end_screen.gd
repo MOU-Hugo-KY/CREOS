@@ -125,6 +125,18 @@ func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, 
 	for key: String in rewards:
 		_rewards_box.add_child(_reward_row(_reward_name(key), "+%d" % int(rewards[key]),
 			REWARD_COLORS.get(key, Color(0.8, 0.6, 1.0))))
+	# Coffre de fin de niveau : il s'ouvre après les étoiles.
+	var chest: Dictionary = replay.get("chest", {})
+	var chest_rows: Array[Control] = []
+	if not chest.is_empty():
+		var color: Color = CHEST_COLORS.get(chest.kind, Palette.GOLD)
+		var head := _reward_row(String(chest.name) + " !", "", color)
+		chest_rows.append(head)
+		for key: String in chest.rewards:
+			chest_rows.append(_reward_row("   " + _reward_name(key), "+%d" % int(chest.rewards[key]), color.lightened(0.25)))
+		for r in chest_rows:
+			r.modulate.a = 0.0
+			_rewards_box.add_child(r)
 
 	for c in _heroes_box.get_children():
 		c.queue_free()
@@ -158,6 +170,14 @@ func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, 
 			sound.emit("ui_ready"))
 		seq.tween_property(star, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		seq.tween_interval(0.15)
+	if not chest_rows.is_empty():
+		seq.tween_interval(0.3)
+		seq.tween_callback(func() -> void: sound.emit("ultimate_impact" if chest.kind in ["or", "serment"] else "ui_ready"))
+		for r in chest_rows:
+			seq.tween_property(r, "modulate:a", 1.0, 0.18)
+
+
+const CHEST_COLORS := {"bois": Color("b98a57"), "fer": Color("aab4c4"), "or": Color("f2c75c"), "serment": Color("c78bff")}
 
 
 func _section_title(text: String) -> Label:
@@ -175,6 +195,8 @@ func _reward_name(key: String) -> String:
 	if key.begins_with("relique_"):
 		var relic: Dictionary = GameData.relics.get("relics", {}).get(key.trim_prefix("relique_"), {})
 		return "Fragments · %s" % relic.get("name", key)
+	if key.begins_with("esprit_"):
+		return HeroesScreen.esprit_name(key, true)
 	match key:
 		"materiaux_relique":
 			return "Matériaux de relique"

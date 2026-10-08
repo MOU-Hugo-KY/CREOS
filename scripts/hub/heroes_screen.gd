@@ -390,8 +390,8 @@ func _fill_detail() -> void:
 		_d_echoes[i].texture = ScreenPack.tex(F, "echo_full" if i < tier else "echo_empty")
 	var echoes := PlayerData.hero_echoes(id)
 	_d_echo_count.text = "%d Écho%s" % [echoes, "s" if echoes > 1 else ""]
-	var max_level := int(GameData.progression.get("max_level", 30))
-	_d_level.text = "Niveau %d / %d" % [PlayerData.hero_level(id), max_level]
+	var max_level := int(GameData.progression.get("max_level", 150))
+	_d_level.text = "Niveau %d / %d" % [PlayerData.hero_level(id), PlayerData.hero_level_cap(id)]
 	_d_force.text = "Force %d" % _power(id)
 	var need := maxf(1.0, PlayerData.hero_xp_to_next(id))
 	_d_xp.size.x = maxf(0.0, 588.0 * clampf(PlayerData.hero_xp(id) / need, 0.0, 1.0))
@@ -408,6 +408,20 @@ func _fill_detail() -> void:
 	var cost := PlayerData.hero_level_up_cost(id)
 	_d_upgrade.text = "Niveau max" if at_max else "Améliorer · %d or" % cost
 	_d_upgrade.disabled = at_max or PlayerData.gold() < cost or not owned
+	_d_upgrade.tooltip_text = ""
+	if owned and PlayerData.hero_needs_awakening(id):
+		# Palier d'éveil : nourrir des Esprits pour ouvrir les 10 niveaux suivants.
+		var need_items := PlayerData.awaken_cost(id, hero)
+		_d_upgrade.text = "Éveiller · " + esprit_cost_text(need_items)
+		_d_upgrade.disabled = not PlayerData.can_awaken(id, hero)
+		var have: Array[String] = []
+		for item: String in need_items:
+			have.append("%s : %d / %d" % [esprit_name(item), PlayerData.item_count(item), int(need_items[item])])
+		_d_upgrade.tooltip_text = "Éveil du niveau %d
+%s
+Les Esprits se trouvent dans les coffres de fin de niveau." % [
+			PlayerData.hero_level(id), "
+".join(have)]
 	var in_team := PlayerData.in_team(id)
 	var full := PlayerData.team().size() >= PlayerData.TEAM_SIZE
 	_d_team.text = "Dans l'équipe · retirer" if in_team else ("Équipe complète" if full else "Ajouter à l'équipe")
@@ -649,12 +663,37 @@ func _build_confirm() -> void:
 func _ask_level_up() -> void:
 	ui_sound.emit("ui_click")
 	var hero := GameData.hero(selected)
+	if PlayerData.hero_needs_awakening(selected):
+		if PlayerData.awaken_hero(selected, hero):
+			ui_sound.emit("ultimate_impact")
+			_preview.play("cheer")
+		return
 	var lv := PlayerData.hero_level(selected)
 	_confirm_text.text = "Passer %s du niveau %d au niveau %d pour %d or ?" % [hero.name, lv, lv + 1, PlayerData.hero_level_up_cost(selected)]
 	_confirm.open()
 
 
 # --- Petits éléments ----------------------------------------------------------------
+
+const ESPRIT_NAMES := {"oeuf": ["Œuf", "Œufs"], "petit": ["Petit", "Petits"], "grand": ["Grand", "Grands"],
+	"celeste": ["Céleste", "Célestes"]}
+
+
+## « Œuf de feu » à partir de « esprit_oeuf_feu ».
+static func esprit_name(item: String, plural := false) -> String:
+	var parts := item.split("_")
+	if parts.size() < 3:
+		return item
+	var n: Array = ESPRIT_NAMES.get(parts[1], [parts[1], parts[1]])
+	var elem := String(Palette.ELEMENT_NAMES.get(parts[2], parts[2])).to_lower()
+	return "%s %s%s" % [n[1] if plural else n[0], "d'" if elem.begins_with("e") or elem.begins_with("o") else "de ", elem]
+
+
+static func esprit_cost_text(cost: Dictionary) -> String:
+	var bits: Array[String] = []
+	for item: String in cost:
+		bits.append("%d %s" % [int(cost[item]), esprit_name(item, int(cost[item]) > 1)])
+	return ", ".join(bits)
 
 func _on_back() -> void:
 	ui_sound.emit("ui_click")

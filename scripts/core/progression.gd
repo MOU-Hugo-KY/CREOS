@@ -6,7 +6,10 @@ extends RefCounted
 
 ## XP nécessaire pour passer du niveau `level` au suivant.
 static func xp_to_next(curve: Dictionary, level: int) -> int:
-	return int(round(float(curve.get("base", 100)) * pow(float(curve.get("growth", 1.2)), level - 1)))
+	# Au-delà du niveau 60 (surpassement), la courbe ne s'envole plus : +5 % par niveau.
+	var capped := mini(level, 60)
+	var base := float(curve.get("base", 100)) * pow(float(curve.get("growth", 1.2)), capped - 1)
+	return int(round(base * (1.0 + 0.05 * maxi(0, level - 60))))
 
 
 ## Ajoute de l'XP. Renvoie {level, xp, gained_levels}.
@@ -22,11 +25,13 @@ static func add_xp(level: int, xp: int, gained: int, curve: Dictionary, max_leve
 
 
 ## Stats d'un héros à un niveau donné : base × (1 + croissance × (niveau − 1)).
+## Au-delà du niveau 60, chaque niveau compte pour moitié (le surpassement reste un bonus, pas un mur).
 static func stats_at_level(base: Dictionary, level: int, growth: Dictionary) -> Dictionary:
 	var out := base.duplicate()
+	var eff := float(level) if level <= 60 else 60.0 + (level - 60) * 0.5
 	for key: String in base:
 		var g: float = growth.get(key, 0.0)
-		var v: float = float(base[key]) * (1.0 + g * (level - 1))
+		var v: float = float(base[key]) * (1.0 + g * (eff - 1.0))
 		out[key] = v if key == "crit" else round(v)
 	return out
 
@@ -139,3 +144,72 @@ static func regen_energy(energy: int, energy_max: int, last_time: float, now: fl
 	var new_energy := mini(energy_max, energy + gained)
 	var new_last := now if new_energy >= energy_max else last_time + gained * regen_seconds
 	return {"energy": new_energy, "last_time": new_last}
+
+
+# --- Paliers d'éveil (Esprits) et coffres de fin de niveau ---------------------------------
+# Esprits : objets « esprit_<stade>_<élément> », stades oeuf < petit < grand < celeste.
+
+const ESPRIT_STAGES := ["oeuf", "petit", "grand", "celeste"]
+const ELEMENTS := ["feu", "eau", "nature", "lumiere", "ombre"]
+## Deuxième élément demandé par l'éveil d'un héros (en plus du sien).
+const SECOND_ELEMENT := {"feu": "lumiere", "eau": "nature", "nature": "eau", "lumiere": "ombre", "ombre": "feu"}
+
+
+static func esprit_id(stage: String, element: String) -> String:
+	return "esprit_%s_%s" % [stage, element]
+
+
+## Niveau qu'un héros ne peut pas dépasser sans s'éveiller : le palier suivant (10, 20… 140), ou le maximum.
+static func level_cap(awakened: int, config: Dictionary) -> int:
+	var every := int(config.get("awakening", {}).get("every", 10))
+	return mini(int(config.get("max_level", 150)), awakened + every)
+
+
+## Esprits pour franchir le palier `gate` (10, 20…) : {objet: nombre}. Les clés du JSON « oeuf », « petit »…
+## visent l'élément du héros ; « oeuf2 », « petit2 »… son deuxième élément.
+static func awaken_cost(gate: int, element: String, config: Dictionary) -> Dictionary:
+	var table: Dictionary = config.get("awakening", {}).get("costs", {}).get(str(gate), {})
+	var out := {}
+	for key: String in table:
+		var second := key.ends_with("2")
+		var stage := key.trim_suffix("2")
+		var elem: String = SECOND_ELEMENT.get(element, "feu") if second else element
+		out[esprit_id(stage, elem)] = int(out.get(esprit_id(stage, elem), 0)) + int(table[key])
+	return out
+
+
+## Tire le coffre d'une victoire de campagne. `opened` : coffres déjà ouverts ; `since_best` : coffres
+## depuis le dernier coffre du Serment (garantie). Renvoie {kind, rewards}.
+static func roll_chest(stars: int, config: Dictionary, rng: RandomNumberGenerator, opened: int, since_best: int,
+		world_element: String, campaign := 1) -> Dictionary:
+	var c: Dictionary = config.get("chests", {})
+	var kinds: Array = c.get("kinds", ["bois", "fer", "or", "serment"])
+	var kind: String = kinds[0]
+	if opened == 0:
+		kind = kinds[1]  # le premier coffre est garanti en fer
+	elif since_best + 1 >= int(c.get("pity_every", 30)):
+		kind = kinds[3]
+	else:
+		var odds: Array = c.get("odds", {}).get(str(clampi(stars, 1, 3)), [100, 0, 0, 0])
+		var roll := rng.randf() * 100.0
+		var acc := 0.0
+		for i in kinds.size():
+			acc += float(odds[i]) if i < odds.size() else 0.0
+			if roll < acc:
+				kind = kinds[i]
+				break
+	var table: Dictionary = c.get("campaign%d" % campaign, c.get("campaign1", {})).get(kind, {})
+	var rewards := {}
+	for key: String in table:
+		var v = table[key]
+		var n := rng.randi_range(int(v[0]), int(v[1])) if v is Array else int(v)
+		if n <= 0:
+			continue
+		if key in ESPRIT_STAGES:
+			# Surtout l'élément du monde, parfois un autre (la lumière n'a pas de monde à elle).
+			var elem: String = world_element if world_element != "" and rng.randf() < 0.6 else ELEMENTS[rng.randi_range(0, 4)]
+			var id := esprit_id(key, elem)
+			rewards[id] = int(rewards.get(id, 0)) + n
+		else:
+			rewards[key] = n
+	return {"kind": kind, "rewards": rewards}

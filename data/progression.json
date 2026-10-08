@@ -1,5 +1,5 @@
 {
-  "max_level": 60,
+  "max_level": 150,
   "hero_xp": {
     "base": 80,
     "growth": 1.22
@@ -102,5 +102,216 @@
     "2": 0.0,
     "3": 0.15,
     "4": 0.3
+  },
+  "player_max_level": 60,
+  "awakening": {
+    "_note": "tous les 10 niveaux, le héros doit s'éveiller avec des Esprits ; clés : stade de l'élément du héros, stade+2 = son deuxième élément",
+    "every": 10,
+    "costs": {
+      "10": {
+        "oeuf": 3
+      },
+      "20": {
+        "oeuf": 6,
+        "oeuf2": 2
+      },
+      "30": {
+        "oeuf": 10,
+        "petit": 1
+      },
+      "40": {
+        "petit": 4,
+        "oeuf2": 6
+      },
+      "50": {
+        "petit": 7,
+        "petit2": 2
+      },
+      "60": {
+        "grand": 2,
+        "petit": 8
+      },
+      "70": {
+        "grand": 4,
+        "petit2": 6
+      },
+      "80": {
+        "grand": 6,
+        "grand2": 1
+      },
+      "90": {
+        "grand": 8,
+        "grand2": 3
+      },
+      "100": {
+        "celeste": 1,
+        "grand": 8
+      },
+      "110": {
+        "grand": 12,
+        "grand2": 5
+      },
+      "120": {
+        "celeste": 1,
+        "grand": 12
+      },
+      "130": {
+        "celeste": 2,
+        "grand2": 8
+      },
+      "140": {
+        "celeste": 3,
+        "grand": 15
+      }
+    }
+  },
+  "chests": {
+    "_note": "coffre à chaque victoire de campagne ; taux en % par étoiles [bois, fer, or, serment] ; [min, max] tirés au hasard",
+    "kinds": [
+      "bois",
+      "fer",
+      "or",
+      "serment"
+    ],
+    "names": {
+      "bois": "Coffre de bois",
+      "fer": "Coffre de fer",
+      "or": "Coffre d'or",
+      "serment": "Coffre du Serment"
+    },
+    "odds": {
+      "3": [
+        45,
+        35,
+        17,
+        3
+      ],
+      "2": [
+        60,
+        30,
+        9,
+        1
+      ],
+      "1": [
+        75,
+        22,
+        3,
+        0
+      ]
+    },
+    "pity_every": 30,
+    "campaign1": {
+      "bois": {
+        "gold": [
+          50,
+          90
+        ],
+        "oeuf": [
+          1,
+          2
+        ]
+      },
+      "fer": {
+        "gold": [
+          110,
+          180
+        ],
+        "oeuf": [
+          2,
+          4
+        ]
+      },
+      "or": {
+        "gold": [
+          250,
+          380
+        ],
+        "oeuf": [
+          3,
+          5
+        ],
+        "petit": [
+          1,
+          2
+        ],
+        "gems": [
+          5,
+          10
+        ]
+      },
+      "serment": {
+        "gold": [
+          450,
+          600
+        ],
+        "petit": [
+          3,
+          4
+        ],
+        "gems": [
+          20,
+          30
+        ],
+        "fragments_relique": [
+          5,
+          8
+        ]
+      }
+    },
+    "campaign2": {
+      "bois": {
+        "gold": [
+          150,
+          250
+        ],
+        "petit": [
+          1,
+          2
+        ]
+      },
+      "fer": {
+        "gold": [
+          300,
+          450
+        ],
+        "petit": [
+          2,
+          4
+        ],
+        "grand": [
+          0,
+          1
+        ]
+      },
+      "or": {
+        "gold": [
+          600,
+          900
+        ],
+        "grand": [
+          1,
+          3
+        ],
+        "gems": [
+          10,
+          20
+        ]
+      },
+      "serment": {
+        "gold": [
+          1200,
+          1600
+        ],
+        "grand": [
+          3,
+          4
+        ],
+        "celeste": 1,
+        "gems": [
+          30,
+          50
+        ]
+      }
+    }
   }
 }
