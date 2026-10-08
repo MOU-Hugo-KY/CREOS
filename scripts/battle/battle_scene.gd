@@ -648,7 +648,7 @@ func _end_battle(won: bool) -> void:
 	hud.banner("VICTOIRE !" if won else "DÉFAITE…", "", 0.8)
 	audio.stop_music(0.4)
 	var stars := engine.stars()
-	var rewards := PlayerData.filter_locked_loot(GameData.dungeon_rewards(dungeon_id, stars))
+	var rewards := PlayerData.filter_locked_loot(GameData.dungeon_rewards(dungeon_id, stars), dungeon_id)
 	var result: Dictionary
 	if lodge_battle.is_empty():
 		# Le butin et l'XP sont enregistrés dans la sauvegarde.

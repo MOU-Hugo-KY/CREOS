@@ -423,7 +423,8 @@ func test_hero_upgrades() -> void:
 	pd.state.items["relique_aegis"] = 110
 	pd.state.items["materiaux_relique"] = 20
 	check(not pd.relics_unlocked() and not pd.upgrade_relic("aegis"), "reliques scellées avant la fin de la Campagne 1")
-	check(not pd.filter_locked_loot({"relique_aegis": 3, "gold": 5}).has("relique_aegis"), "pas de fragments de relique avant la fin")
+	check(not pd.filter_locked_loot({"relique_aegis": 3, "gold": 5}, "monde10_8").has("relique_aegis"), "jamais de fragments de relique en Campagne 1")
+	check(pd.filter_locked_loot({"relique_aegis": 3}, "monde01_h1").has("relique_aegis"), "fragments de relique en Campagne 2")
 	pd.state.dungeons[pd.RELIC_UNLOCK_DUNGEON] = {"stars": 1}
 	check(pd.upgrade_relic("aegis") and pd.relic_tier("aegis") == 1 and pd.relic_fragments("aegis") == 10, "relique retrouvée contre 100 fragments")
 	check(pd.upgrade_relic("aegis") and pd.relic_tier("aegis") == 2 and pd.item_count("materiaux_relique") == 0, "relique restaurée contre fragments et matériaux")

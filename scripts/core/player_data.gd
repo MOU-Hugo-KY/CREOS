@@ -325,9 +325,11 @@ func relics_unlocked() -> bool:
 	return best_stars(RELIC_UNLOCK_DUNGEON) > 0
 
 
-## Butin sans les fragments et matériaux de relique tant qu'elles sont verrouillées.
-func filter_locked_loot(rewards: Dictionary) -> Dictionary:
-	if relics_unlocked():
+## Butin de la Campagne 1 : jamais de fragments ni de matériaux de relique (ils tombent seulement
+## dans la Campagne 2, « Héroïque », niveaux « mondeNN_hN »). Finir la Campagne 1 ouvre les reliques,
+## pas leur butin.
+func filter_locked_loot(rewards: Dictionary, dungeon_id := "") -> Dictionary:
+	if dungeon_id.contains("_h"):
 		return rewards
 	var out := {}
 	for key: String in rewards:
@@ -672,7 +674,7 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 	if not won:
 		save_game()
 		return result
-	var split := Progression.split_rewards(filter_locked_loot(rewards), _config)
+	var split := Progression.split_rewards(filter_locked_loot(rewards, dungeon_id), _config)
 	var max_level: int = _config.get("player_max_level", 60)
 	for id: String in team_ids:
 		if not state.heroes.has(id):
