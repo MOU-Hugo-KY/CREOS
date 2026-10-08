@@ -51,7 +51,7 @@ func play(id: String) -> bool:
 	ambient.polygon = PackedVector2Array([Vector2(-512,-288),Vector2(1024,-288),Vector2(1024,576),Vector2(-512,576)])  # voile sur tout l'écran
 	ambient.z_index = 25
 	stage.add_child(ambient)
-	if data.illusion_doubles != null:
+	if data.get("illusion_doubles") != null:
 		var g: Dictionary = data.illusion_doubles
 		var actor: Dictionary = data.actors[0]
 		for pos in g.positions:
@@ -166,7 +166,7 @@ func _update_visuals() -> void:
 		if elapsed_ms > float(a.fade_out_start_ms):
 			opacity *= maxf(0.0,1.0-(elapsed_ms-float(a.fade_out_start_ms))/float(a.fade_out_ms))
 		ambient.color = Color(float(a.color[0])/255.0,float(a.color[1])/255.0,float(a.color[2])/255.0,float(a.max_alpha)*opacity)
-	if data.illusion_doubles != null:
+	if data.get("illusion_doubles") != null:
 		var g: Dictionary = data.illusion_doubles
 		var age := elapsed_ms-float(g.start_ms)
 		var remaining := float(g.end_ms)-elapsed_ms

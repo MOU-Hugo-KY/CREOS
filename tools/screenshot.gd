@@ -24,6 +24,7 @@ var action := ""
 var hero := ""
 var tab := ""
 var hour := -2.0
+var combo := ""  # --combo=ombres : lance ce combo dès le premier tour (membres dans --team)
 
 
 var team: Array = []
@@ -55,6 +56,8 @@ func _initialize() -> void:
 			hour = float(arg.trim_prefix("--hour="))
 		elif arg.begins_with("--tab="):
 			tab = arg.trim_prefix("--tab=")
+		elif arg.begins_with("--combo="):
+			combo = arg.trim_prefix("--combo=")
 		elif arg.begins_with("--team="):  # ex. --team=corbin,nyx,rivet,aegis,bastion,nacre,valen,orage
 			team = Array(arg.trim_prefix("--team=").split(","))
 	var pd := root.get_node("PlayerData")
@@ -93,6 +96,12 @@ func _process(_delta: float) -> bool:
 			if c is Panel:
 				c.mouse_entered.emit()
 				break
+	if combo != "" and frames > 10 and scene.engine.awaiting_uid >= 0:
+		for u in scene.engine.heroes:
+			u.used_ultimate = true
+		scene._on_combo_requested(combo)
+		print("combo lancé à l'image ", frames)
+		combo = ""
 	if frames in shots:
 		_save()
 	if wait_end and end_frame < 0 and "end_screen" in scene.hud and scene.hud.end_screen.visible:

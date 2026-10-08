@@ -1222,7 +1222,7 @@
           512,
           288
         ],
-        "duration_ms": 50,
+        "duration_ms": 140,
         "opacity": 0.7
       },
       {
@@ -1233,7 +1233,7 @@
           512,
           288
         ],
-        "duration_ms": 50,
+        "duration_ms": 140,
         "opacity": 0.9
       },
       {
@@ -1244,7 +1244,7 @@
           512,
           288
         ],
-        "duration_ms": 60,
+        "duration_ms": 150,
         "opacity": 1
       },
       {
@@ -1255,7 +1255,7 @@
           512,
           288
         ],
-        "duration_ms": 60,
+        "duration_ms": 50,
         "opacity": 1
       },
       {
@@ -1266,7 +1266,7 @@
           512,
           288
         ],
-        "duration_ms": 70,
+        "duration_ms": 50,
         "opacity": 1
       },
       {
@@ -1277,7 +1277,7 @@
           512,
           288
         ],
-        "duration_ms": 70,
+        "duration_ms": 50,
         "opacity": 1
       },
       {
@@ -1288,7 +1288,7 @@
           512,
           288
         ],
-        "duration_ms": 70,
+        "duration_ms": 50,
         "opacity": 1
       },
       {
@@ -1299,7 +1299,7 @@
           512,
           288
         ],
-        "duration_ms": 70,
+        "duration_ms": 40,
         "opacity": 1
       },
       {
@@ -1310,7 +1310,7 @@
           512,
           288
         ],
-        "duration_ms": 70,
+        "duration_ms": 40,
         "opacity": 0.85
       },
       {
@@ -1321,7 +1321,7 @@
           512,
           288
         ],
-        "duration_ms": 70,
+        "duration_ms": 30,
         "opacity": 0.65
       },
       {
@@ -1332,7 +1332,7 @@
           512,
           288
         ],
-        "duration_ms": 80,
+        "duration_ms": 30,
         "opacity": 0.35
       },
       {
@@ -1343,7 +1343,7 @@
           512,
           288
         ],
-        "duration_ms": 80,
+        "duration_ms": 30,
         "opacity": 0.12
       }
     ],
@@ -1424,7 +1424,33 @@
       253
     ]
   ],
-  "camera_shake_events": [],
+  "camera_shake_events": [
+    {
+      "time_ms": 800,
+      "duration_ms": 120,
+      "amplitude_px": 2
+    },
+    {
+      "time_ms": 1200,
+      "duration_ms": 120,
+      "amplitude_px": 2
+    },
+    {
+      "time_ms": 1600,
+      "duration_ms": 120,
+      "amplitude_px": 3
+    },
+    {
+      "time_ms": 2000,
+      "duration_ms": 120,
+      "amplitude_px": 3
+    },
+    {
+      "time_ms": 2630,
+      "duration_ms": 120,
+      "amplitude_px": 5
+    }
+  ],
   "ambient_overlay": {
     "color": [
       25,
@@ -1436,26 +1462,11 @@
     "fade_out_start_ms": 2800,
     "fade_out_ms": 600
   },
-  "illusion_doubles": {
-    "actor": "saffran",
-    "frame": 3,
-    "start_ms": 600,
-    "end_ms": 2200,
-    "positions": [
-      [
-        325,
-        158
-      ],
-      [
-        421,
-        234
-      ]
-    ],
-    "scale": 0.82,
-    "opacity": 0.4
-  },
   "notes": [
-    "No damage or cooldown values are defined here; hit_active is a visual timing signal.",
-    "Stage coordinates describe a 512x288 reference presentation; adapt anchors to the real battle layout."
+    "Animation de 3400 ms; sprites officiels conserves sans redessin.",
+    "8 cases temporelles par heros, fondees sur les DEUX poses fournies (garde/attaque), pas huit dessins inedits.",
+    "Effets individuels reutilisent des cellules de la finale; leurs trajectoires distinguent les interventions.",
+    "hit_active est un signal visuel; le controleur du jeu decide des degats.",
+    "Coordonnees locales 512x288; pivot acteurs96,146."
   ]
 }
