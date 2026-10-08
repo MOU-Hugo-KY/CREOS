@@ -1,0 +1,97 @@
+{
+  "elements": [
+    "feu",
+    "eau",
+    "nature",
+    "lumiere",
+    "ombre"
+  ],
+  "stades": [
+    "oeuf",
+    "petit",
+    "grand",
+    "celeste"
+  ],
+  "icons": {
+    "esprit_oeuf_feu": {
+      "64": "esprits/esprit_oeuf_feu_64.png",
+      "128": "esprits/esprit_oeuf_feu_128.png"
+    },
+    "esprit_petit_feu": {
+      "64": "esprits/esprit_petit_feu_64.png",
+      "128": "esprits/esprit_petit_feu_128.png"
+    },
+    "esprit_grand_feu": {
+      "64": "esprits/esprit_grand_feu_64.png",
+      "128": "esprits/esprit_grand_feu_128.png"
+    },
+    "esprit_celeste_feu": {
+      "64": "esprits/esprit_celeste_feu_64.png",
+      "128": "esprits/esprit_celeste_feu_128.png"
+    },
+    "esprit_oeuf_eau": {
+      "64": "esprits/esprit_oeuf_eau_64.png",
+      "128": "esprits/esprit_oeuf_eau_128.png"
+    },
+    "esprit_petit_eau": {
+      "64": "esprits/esprit_petit_eau_64.png",
+      "128": "esprits/esprit_petit_eau_128.png"
+    },
+    "esprit_grand_eau": {
+      "64": "esprits/esprit_grand_eau_64.png",
+      "128": "esprits/esprit_grand_eau_128.png"
+    },
+    "esprit_celeste_eau": {
+      "64": "esprits/esprit_celeste_eau_64.png",
+      "128": "esprits/esprit_celeste_eau_128.png"
+    },
+    "esprit_oeuf_nature": {
+      "64": "esprits/esprit_oeuf_nature_64.png",
+      "128": "esprits/esprit_oeuf_nature_128.png"
+    },
+    "esprit_petit_nature": {
+      "64": "esprits/esprit_petit_nature_64.png",
+      "128": "esprits/esprit_petit_nature_128.png"
+    },
+    "esprit_grand_nature": {
+      "64": "esprits/esprit_grand_nature_64.png",
+      "128": "esprits/esprit_grand_nature_128.png"
+    },
+    "esprit_celeste_nature": {
+      "64": "esprits/esprit_celeste_nature_64.png",
+      "128": "esprits/esprit_celeste_nature_128.png"
+    },
+    "esprit_oeuf_lumiere": {
+      "64": "esprits/esprit_oeuf_lumiere_64.png",
+      "128": "esprits/esprit_oeuf_lumiere_128.png"
+    },
+    "esprit_petit_lumiere": {
+      "64": "esprits/esprit_petit_lumiere_64.png",
+      "128": "esprits/esprit_petit_lumiere_128.png"
+    },
+    "esprit_grand_lumiere": {
+      "64": "esprits/esprit_grand_lumiere_64.png",
+      "128": "esprits/esprit_grand_lumiere_128.png"
+    },
+    "esprit_celeste_lumiere": {
+      "64": "esprits/esprit_celeste_lumiere_64.png",
+      "128": "esprits/esprit_celeste_lumiere_128.png"
+    },
+    "esprit_oeuf_ombre": {
+      "64": "esprits/esprit_oeuf_ombre_64.png",
+      "128": "esprits/esprit_oeuf_ombre_128.png"
+    },
+    "esprit_petit_ombre": {
+      "64": "esprits/esprit_petit_ombre_64.png",
+      "128": "esprits/esprit_petit_ombre_128.png"
+    },
+    "esprit_grand_ombre": {
+      "64": "esprits/esprit_grand_ombre_64.png",
+      "128": "esprits/esprit_grand_ombre_128.png"
+    },
+    "esprit_celeste_ombre": {
+      "64": "esprits/esprit_celeste_ombre_64.png",
+      "128": "esprits/esprit_celeste_ombre_128.png"
+    }
+  }
+}

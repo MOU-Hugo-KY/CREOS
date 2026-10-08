@@ -24,6 +24,7 @@ var action := ""
 var hero := ""
 var tab := ""
 var hour := -2.0
+var end_wait := 150  # --endwait=N : images après l'apparition de l'écran de fin
 var force_draw := false  # --draw : montre « Arrêter » puis déclare l'égalité
 var combo := ""  # --combo=ombres : lance ce combo dès le premier tour (membres dans --team)
 
@@ -59,6 +60,8 @@ func _initialize() -> void:
 			tab = arg.trim_prefix("--tab=")
 		elif arg.begins_with("--dungeon="):  # ex. --dungeon=monde01_8 (niveau avec boss)
 			root.get_node("PlayerData").current_dungeon = arg.trim_prefix("--dungeon=")
+		elif arg.begins_with("--endwait="):
+			end_wait = int(arg.trim_prefix("--endwait="))
 		elif arg == "--draw":
 			force_draw = true
 		elif arg.begins_with("--combo="):
@@ -120,7 +123,7 @@ func _process(_delta: float) -> bool:
 	if frames in shots:
 		_save()
 	if wait_end and end_frame < 0 and "end_screen" in scene.hud and scene.hud.end_screen.visible:
-		end_frame = frames + 150  # laisse le temps aux étoiles d'apparaître
+		end_frame = frames + end_wait  # laisse le temps aux étoiles (et au coffre) d'apparaître
 	if end_frame > 0 and frames == end_frame:
 		_save()
 	var done_shots: bool = frames >= int(shots.max())

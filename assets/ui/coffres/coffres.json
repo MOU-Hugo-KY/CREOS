@@ -1,0 +1,469 @@
+{
+  "version": 1,
+  "units": "ms",
+  "texture_filter": "nearest",
+  "coffres": {
+    "bois": {
+      "ferme": "coffres/coffre_bois_ferme.png",
+      "ouvert": "coffres/coffre_bois_ouvert.png",
+      "icone": "coffres/coffre_bois_icone_64.png",
+      "ouverture": {
+        "size": [
+          256,
+          256
+        ],
+        "pivot": [
+          128,
+          220
+        ],
+        "loop": false,
+        "frames": [
+          {
+            "image": "coffres/coffre_bois_ouverture/00.png",
+            "duration_ms": 120
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/01.png",
+            "duration_ms": 70
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/02.png",
+            "duration_ms": 70
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/03.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/04.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/05.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/06.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/07.png",
+            "duration_ms": 120
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/08.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/09.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/10.png",
+            "duration_ms": 110
+          },
+          {
+            "image": "coffres/coffre_bois_ouverture/11.png",
+            "duration_ms": 250
+          }
+        ]
+      },
+      "eclat": {
+        "size": [
+          384,
+          384
+        ],
+        "pivot": [
+          192,
+          192
+        ],
+        "loop": false,
+        "start_after_ms": 420,
+        "frames": [
+          {
+            "image": "coffres/eclat_rarete_bois/00.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/eclat_rarete_bois/01.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/eclat_rarete_bois/02.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/eclat_rarete_bois/03.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_bois/04.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_bois/05.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_bois/06.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_bois/07.png",
+            "duration_ms": 150
+          }
+        ]
+      }
+    },
+    "fer": {
+      "ferme": "coffres/coffre_fer_ferme.png",
+      "ouvert": "coffres/coffre_fer_ouvert.png",
+      "icone": "coffres/coffre_fer_icone_64.png",
+      "ouverture": {
+        "size": [
+          256,
+          256
+        ],
+        "pivot": [
+          128,
+          220
+        ],
+        "loop": false,
+        "frames": [
+          {
+            "image": "coffres/coffre_fer_ouverture/00.png",
+            "duration_ms": 120
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/01.png",
+            "duration_ms": 70
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/02.png",
+            "duration_ms": 70
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/03.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/04.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/05.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/06.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/07.png",
+            "duration_ms": 120
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/08.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/09.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/10.png",
+            "duration_ms": 110
+          },
+          {
+            "image": "coffres/coffre_fer_ouverture/11.png",
+            "duration_ms": 250
+          }
+        ]
+      },
+      "eclat": {
+        "size": [
+          384,
+          384
+        ],
+        "pivot": [
+          192,
+          192
+        ],
+        "loop": false,
+        "start_after_ms": 420,
+        "frames": [
+          {
+            "image": "coffres/eclat_rarete_fer/00.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/eclat_rarete_fer/01.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/eclat_rarete_fer/02.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/eclat_rarete_fer/03.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_fer/04.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_fer/05.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_fer/06.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_fer/07.png",
+            "duration_ms": 150
+          }
+        ]
+      }
+    },
+    "or": {
+      "ferme": "coffres/coffre_or_ferme.png",
+      "ouvert": "coffres/coffre_or_ouvert.png",
+      "icone": "coffres/coffre_or_icone_64.png",
+      "ouverture": {
+        "size": [
+          256,
+          256
+        ],
+        "pivot": [
+          128,
+          220
+        ],
+        "loop": false,
+        "frames": [
+          {
+            "image": "coffres/coffre_or_ouverture/00.png",
+            "duration_ms": 120
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/01.png",
+            "duration_ms": 70
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/02.png",
+            "duration_ms": 70
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/03.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/04.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/05.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/06.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/07.png",
+            "duration_ms": 120
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/08.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/09.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/10.png",
+            "duration_ms": 110
+          },
+          {
+            "image": "coffres/coffre_or_ouverture/11.png",
+            "duration_ms": 250
+          }
+        ]
+      },
+      "eclat": {
+        "size": [
+          384,
+          384
+        ],
+        "pivot": [
+          192,
+          192
+        ],
+        "loop": false,
+        "start_after_ms": 420,
+        "frames": [
+          {
+            "image": "coffres/eclat_rarete_or/00.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/eclat_rarete_or/01.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/eclat_rarete_or/02.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/eclat_rarete_or/03.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_or/04.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_or/05.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_or/06.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_or/07.png",
+            "duration_ms": 150
+          }
+        ]
+      }
+    },
+    "serment": {
+      "ferme": "coffres/coffre_serment_ferme.png",
+      "ouvert": "coffres/coffre_serment_ouvert.png",
+      "icone": "coffres/coffre_serment_icone_64.png",
+      "ouverture": {
+        "size": [
+          256,
+          256
+        ],
+        "pivot": [
+          128,
+          220
+        ],
+        "loop": false,
+        "frames": [
+          {
+            "image": "coffres/coffre_serment_ouverture/00.png",
+            "duration_ms": 120
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/01.png",
+            "duration_ms": 70
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/02.png",
+            "duration_ms": 70
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/03.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/04.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/05.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/06.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/07.png",
+            "duration_ms": 120
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/08.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/09.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/10.png",
+            "duration_ms": 110
+          },
+          {
+            "image": "coffres/coffre_serment_ouverture/11.png",
+            "duration_ms": 250
+          }
+        ]
+      },
+      "eclat": {
+        "size": [
+          384,
+          384
+        ],
+        "pivot": [
+          192,
+          192
+        ],
+        "loop": false,
+        "start_after_ms": 420,
+        "frames": [
+          {
+            "image": "coffres/eclat_rarete_serment/00.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/eclat_rarete_serment/01.png",
+            "duration_ms": 80
+          },
+          {
+            "image": "coffres/eclat_rarete_serment/02.png",
+            "duration_ms": 90
+          },
+          {
+            "image": "coffres/eclat_rarete_serment/03.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_serment/04.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_serment/05.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_serment/06.png",
+            "duration_ms": 100
+          },
+          {
+            "image": "coffres/eclat_rarete_serment/07.png",
+            "duration_ms": 150
+          }
+        ]
+      },
+      "drop_chance": 0.03
+    }
+  },
+  "panneau": {
+    "image": "coffres/panneau_coffre.png",
+    "size": [
+      600,
+      420
+    ],
+    "nine_slice_margins": {
+      "left": 32,
+      "top": 32,
+      "right": 32,
+      "bottom": 32
+    }
+  }
+}

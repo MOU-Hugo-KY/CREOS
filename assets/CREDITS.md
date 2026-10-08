@@ -46,3 +46,4 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 | Dossier | Police | Auteur | Licence | Source |
 |---|---|---|---|---|
 | `fonts/Fredoka.ttf` | Fredoka (variable) | The Fredoka Project Authors | SIL OFL 1.1 (`fonts/OFL.txt`) | https://github.com/google/fonts/tree/main/ofl/fredoka |
+- Coffres et Esprits : pack ChatGPT « CREOS_Coffres_Esprits » (pixel art créé pour le projet).

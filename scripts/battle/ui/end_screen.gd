@@ -24,6 +24,7 @@ var _stars: Array[StarIcon] = []
 var _content: Control
 var _restart: Button
 var _next: Button
+var _chest_reveal: ChestReveal
 
 
 func _ready() -> void:
@@ -56,6 +57,8 @@ func _ready() -> void:
 	_restart.pressed.connect(func() -> void: restart_pressed.emit())
 	_next = ScreenPack.button(_root, P, "return", "Retour au port", ScreenPack.rect(B.return_rect), 30)
 	_next.pressed.connect(func() -> void: continue_pressed.emit())
+	_chest_reveal = ChestReveal.new()
+	add_child(_chest_reveal)
 
 
 ## hero_stats : Array de {id, name, element, alive, damage, healing, level, xp, level_up}
@@ -136,6 +139,8 @@ func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, 
 		seq.tween_interval(0.18)
 	if chest_line:
 		seq.tween_interval(0.3)
+		# Le coffre s'ouvre en grand par-dessus l'écran ; sa ligne reste ensuite dans le bilan.
+		seq.tween_callback(func() -> void: _chest_reveal.show_chest(chest, _reward_name))
 		seq.tween_callback(func() -> void: sound.emit("ultimate_impact" if chest.kind in ["or", "serment"] else "ui_ready"))
 		chest_line.pivot_offset = chest_line.size / 2.0
 		chest_line.scale = Vector2.ONE * 1.3
@@ -149,7 +154,7 @@ func _reward_slot(r: Rect2, key: String, amount: int, ink: Color) -> void:
 	slot.tooltip_text = _reward_name(key, amount)
 	var icon := ScreenPack.tex(P, _reward_icon(key))
 	if key.begins_with("esprit_"):
-		icon = ScreenPack.tex("fiche_heros", "element_%s_64" % ELEMENT_KEYS.get(key.get_slice("_", 2), "shadow"))
+		icon = ChestReveal.esprit_icon(key)
 	ScreenPack.image(slot, icon, Rect2(28, 18, 64, 64))
 	ScreenPack.text(_content, str(amount), Rect2(r.position.x, r.end.y - 38, r.size.x, 30), 24, UiKit.WHITE,
 		HORIZONTAL_ALIGNMENT_CENTER)

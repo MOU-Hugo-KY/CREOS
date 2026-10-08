@@ -91,6 +91,13 @@ func refresh() -> void:
 			var up := Progression.esprit_id(Progression.ESPRIT_STAGES[Progression.ESPRIT_STAGES.find(stage) + 1], elem)
 			var row := HBoxContainer.new()
 			row.add_theme_constant_override("separation", 12)
+			for it: String in [item, up]:
+				var ic := TextureRect.new()
+				ic.texture = ChestReveal.esprit_icon(it)
+				ic.custom_minimum_size = Vector2(48, 48)
+				ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+				ic.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+				row.add_child(ic)
 			var name := UiKit.label("%s × %d   →   5 pour 1 %s" % [HeroesScreen.esprit_name(item, true), n,
 				HeroesScreen.esprit_name(up)], 19, UiKit.INK)
 			name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
