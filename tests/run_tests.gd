@@ -268,6 +268,9 @@ func test_save() -> void:
 	check(lost.gold == 0 and pd.gold() == gold0 + 250 + chest_gold and not lost.has("chest"), "défaite : rien de gagné")
 	# Éveil : au niveau 10, le héros doit nourrir des Esprits pour continuer.
 	pd.state.heroes["recrue"] = {"level": 10, "xp": 0, "awakened": 0}
+	for item: String in pd.state.items.keys():
+		if item.begins_with("esprit_"):
+			pd.state.items.erase(item)  # le coffre gagné plus haut a pu en donner
 	var hero := {"element": "feu"}
 	check(pd.hero_needs_awakening("recrue") and pd.hero_level_cap("recrue") == 10, "niveau 10 : éveil nécessaire")
 	pd.state.gold = 100000
