@@ -32,9 +32,12 @@ func setup(dir: String, scene: int) -> void:
 			info = parsed
 	# Décors pixel : fond et premier plan propres à chaque scène (decor.json "scenes"), sur le même
 	# canevas que le fond, sol compris. Anciens décors : fondN.jpg + sol + premier plan coupé en deux.
-	if ResourceLoader.exists(dir + "arene%d.png" % scene):
-		_setup_arena(dir, scene)
-		return
+	# Arène vue du dessus ; s'il manque celle de cette scène (monde 9 : seule la première est livrée),
+	# on prend une autre arène du monde plutôt que l'ancien décor de côté.
+	for s in [scene, 1, 2, 3]:
+		if ResourceLoader.exists(dir + "arene%d.png" % s):
+			_setup_arena(dir, s)
+			return
 	var scenes: Array = info.get("scenes", [])
 	var sc: Dictionary = scenes[scene - 1] if scene - 1 < scenes.size() else {}
 	if sc.has("background"):

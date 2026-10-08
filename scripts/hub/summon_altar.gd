@@ -381,6 +381,7 @@ func _show_result(hero: Dictionary, r: Dictionary) -> void:
 	_reveal_trap.text = "\n".join(lines)
 	_reveal_trap.add_theme_font_size_override("font_size", 28 if lines.size() == 1 else 22)
 	_reveal.visible = true
+	ScreenPack.fit_all(_reveal)
 	_reveal_preview.show_hero(hero)
 	_reveal.modulate.a = 0.0
 	create_tween().tween_property(_reveal, "modulate:a", 1.0, 0.25)

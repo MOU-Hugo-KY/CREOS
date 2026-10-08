@@ -723,11 +723,14 @@ func _spawn_wave() -> void:
 			views.erase(uid)
 			hud.remove_overhead(uid)
 	var k := 0
+	var has_boss := engine.enemies.any(func(u: BattleUnit) -> bool: return u.is_boss)
 	for e in engine.enemies:
 		var spot: Vector2 = _boss_spot()
 		if not e.is_boss:
 			spot = _spot(1, k)
 			k += 1
+			if has_boss and k > 5:
+				spot.x -= 70.0  # les derniers sbires se placent devant le boss, pas sur lui
 		var data: Dictionary
 		if lodge_battle.is_empty():
 			data = GameData.monster(e.def_id)
@@ -748,8 +751,8 @@ func _spot(team: int, n: int) -> Vector2:
 func _boss_spot() -> Vector2:
 	if not stage.topdown:
 		return BOSS_SPOT
-	var r := stage.combat_rect
-	return Vector2(r.position.x + r.size.x * 0.82, 470.0)
+	# Au fond de la colonne arrière ennemie, centré entre ses deux places (le boss est plus grand).
+	return Vector2(TOP_ENEMIES[5].x + 30.0, (TOP_ENEMIES[5].y + TOP_ENEMIES[6].y) / 2.0 + 20.0)
 
 
 func _spawn(u: BattleUnit, data: Dictionary, pos: Vector2) -> void:

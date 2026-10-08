@@ -42,7 +42,12 @@ static func head(def_id: String) -> AtlasTexture:
 		return _heads[def_id]
 	var at: AtlasTexture = null
 	var sheet := PixelSheet.for_actor(def_id)
-	if sheet and sheet.anims.has("idle"):
+	var px := RoundPortrait.pixel_head(def_id)
+	if px:
+		at = AtlasTexture.new()
+		at.atlas = px
+		at.region = Rect2(Vector2.ZERO, px.get_size())
+	elif sheet and sheet.anims.has("idle"):
 		var tex: Texture2D = sheet.anims.idle.frames[0][0]
 		var used := tex.get_image().get_used_rect()
 		var side := mini(used.size.x, maxi(28, int(used.size.y * 0.6)))

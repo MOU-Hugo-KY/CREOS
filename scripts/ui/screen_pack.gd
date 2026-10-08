@@ -137,7 +137,31 @@ static func text(parent: Control, s: String, r: Rect2, size := 28, color := UiKi
 	l.size = r.size
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(l)
+	if not wrap:
+		fit(l)
+		l.item_rect_changed.connect(func() -> void: fit(l))
 	return l
+
+
+## Réajuste tous les textes d'une ligne d'un écran (après avoir changé leur contenu).
+static func fit_all(root: Node) -> void:
+	for c in root.get_children():
+		if c is Label and c.has_meta("base_size") and c.autowrap_mode == TextServer.AUTOWRAP_OFF:
+			fit(c)
+		fit_all(c)
+
+
+## Réduit la police d'un texte sur une ligne jusqu'à ce qu'il tienne dans sa case (plus de débordement).
+static func fit(l: Label) -> void:
+	if not l.has_meta("base_size"):
+		l.set_meta("base_size", l.get_theme_font_size("font_size"))
+	var size: int = l.get_meta("base_size")
+	var font := l.get_theme_font("font")
+	var room := l.size.x - 4.0
+	while size > 10 and room > 0.0 and font.get_string_size(l.text, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x > room:
+		size -= 1
+	if l.get_theme_font_size("font_size") != size:
+		l.add_theme_font_size_override("font_size", size)
 
 
 ## Animation image par image d'un JSON d'écran (`animations.<name>`) : un Control dont l'origine

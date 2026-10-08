@@ -51,6 +51,9 @@ func set_grey(on: bool) -> void:
 ## Haut de l'image d'aperçu (la tête et le buste), découpé en carré.
 ## (Une vraie image découpée, pas une AtlasTexture : le masque rond du shader a besoin d'UV de 0 à 1.)
 static func portrait_texture(hero: Dictionary) -> Texture2D:
+	var head := pixel_head(String(hero.get("id", "")))
+	if head:
+		return head
 	var direct := String(hero.get("portrait", ""))
 	if direct.begins_with("res://") and ResourceLoader.exists(direct):
 		return load(direct)
@@ -81,4 +84,34 @@ static func _puppet_portrait(folder: String) -> Texture2D:
 	var img: Image = (load(fiche) as Texture2D).get_image()
 	var tex := ImageTexture.create_from_image(img.get_region(Rect2i(int(r[0]), int(r[1]), int(r[2]), int(r[2]))))
 	_cache[folder] = tex
+	return tex
+
+
+## Tête tirée du sprite de combat pixel (première image de repos) : un carré centré sur le haut du
+## personnage (le centre des rangées du haut, pas de toute la silhouette : capes et armes décalent).
+static func pixel_head(id: String) -> Texture2D:
+	if id == "":
+		return null
+	var key := "px:" + id
+	if _cache.has(key):
+		return _cache[key]
+	var sheet := PixelSheet.for_actor(id)
+	if sheet == null or not sheet.anims.has("idle"):
+		_cache[key] = null
+		return null
+	var img: Image = (sheet.anims.idle.frames[0][0] as Texture2D).get_image()
+	var used := img.get_used_rect()
+	var side := clampi(int(used.size.y * 0.58), 32, used.size.y)
+	var top := used.position.y
+	var xs := 0
+	var count := 0
+	for y in range(top, mini(top + side / 2, img.get_height())):
+		for x in range(used.position.x, used.end.x):
+			if img.get_pixel(x, y).a > 0.5:
+				xs += x
+				count += 1
+	var cx := xs / maxi(1, count)
+	var region := Rect2i(clampi(cx - side / 2, 0, img.get_width() - side), maxi(0, top - 4), side, side)
+	var tex := ImageTexture.create_from_image(img.get_region(region))
+	_cache[key] = tex
 	return tex

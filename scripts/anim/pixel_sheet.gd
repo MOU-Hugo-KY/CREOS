@@ -51,6 +51,7 @@ func _build(data: Dictionary, dir: String) -> void:
 			total += float(f[1])
 			i += 1
 		anims[name] = {"loop": bool(a.loop), "frames": frames, "total": total, "hit_time": hit_time}
+	_center_on_feet()
 	var fx: Variant = data.get("effect")
 	if fx is Dictionary:
 		effect = SpriteFrames.new()
@@ -60,6 +61,26 @@ func _build(data: Dictionary, dir: String) -> void:
 			effect.add_frame("default", ClipPlayer.texture(dir + String(f[0])), float(f[1]))
 		effect_pivot = Vector2(fx.pivot[0], fx.pivot[1])
 		effect_scale = fx.get("scale", {})
+
+
+## Recentre l'ancre sur les pieds réels (milieu des rangées du bas de la première image de repos) :
+## certains dessins ne sont pas centrés dans leur case et paraîtraient à côté de leur cercle au sol.
+func _center_on_feet() -> void:
+	if not anims.has("idle"):
+		return
+	var img: Image = (anims.idle.frames[0][0] as Texture2D).get_image()
+	var used := img.get_used_rect()
+	if used.size == Vector2i.ZERO:
+		return
+	var sum := 0
+	var n := 0
+	for y in range(maxi(used.position.y, used.end.y - 10), used.end.y):
+		for x in range(used.position.x, used.end.x):
+			if img.get_pixel(x, y).a > 0.5:
+				sum += x
+				n += 1
+	if n > 0:
+		anchor.x = round(float(sum) / n)
 
 
 ## Animation pixel qui joue le clip `clip` du jeu ("" si aucune).

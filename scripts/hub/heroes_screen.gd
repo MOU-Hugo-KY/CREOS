@@ -221,6 +221,7 @@ func _hero_card(hero: Dictionary) -> Control:
 	card.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		show_hero(id))
+	card.set_meta("id", id)
 	card.resized.connect(func() -> void: _layout_card(card))
 	var room := TextureRect.new()
 	room.name = "Room"
@@ -256,8 +257,17 @@ func _hero_card(hero: Dictionary) -> Control:
 	var badge := ScreenPack.panel(card, F, "badge_" + RARITY_KEYS.get(rarity, "rare"), Rect2(20, 20, 128, 44))
 	badge.name = "Rarity"
 	ScreenPack.text(badge, Palette.RARITIES.get(rarity, ["?"])[0], Rect2(0, 0, 128, 44), 18, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	ScreenPack.image(card, ScreenPack.tex(F, "classe_%s_32" % CLASS_KEYS.get(hero.get("class"), "blade")), Rect2(20, 70, 32, 32))
-	ScreenPack.image(card, ScreenPack.tex(F, "element_%s_32" % elem), Rect2(56, 70, 32, 32))
+	var icons := HBoxContainer.new()
+	icons.name = "Icons"
+	icons.add_theme_constant_override("separation", 6)
+	icons.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(icons)
+	for path: String in ["classe_%s_32" % CLASS_KEYS.get(hero.get("class"), "blade"), "element_%s_32" % elem]:
+		var ic := TextureRect.new()
+		ic.texture = ScreenPack.tex(F, path)
+		ic.custom_minimum_size = Vector2(32, 32)
+		ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		icons.add_child(ic)
 	if PlayerData.in_team(id):
 		var t := _badge("ÉQUIPE", Color("1f5f59"))
 		t.name = "Team"
@@ -281,12 +291,18 @@ func _layout_card(card: Control) -> void:
 	socle.position = Vector2((w - socle.size.x) / 2.0, h - 210)
 	var art: Control = card.get_node("Art")
 	art.size = Vector2(288, 288)
-	art.position = Vector2((w - 288) / 2.0, h - 112 - 219 - 40)
+	var feet := 96.0
+	var ps := PixelSheet.for_actor(String(card.get_meta("id", "")))
+	if ps:
+		feet = ps.anchor.x  # pieds réels du dessin, posés au centre du socle
+	art.position = Vector2(w / 2.0 - feet * 1.5, h - 112 - 219 - 40)
 	var info: Control = card.get_node("Info")
 	info.position = Vector2(10, h - 92)
 	info.size = Vector2(w - 20, 82)
 	for c in info.get_children():
 		c.size.x = w - 50
+	var icons: Control = card.get_node("Icons")
+	icons.position = Vector2(w - 98, h - 82)
 	if card.has_node("Team"):
 		var t: Control = card.get_node("Team")
 		t.position = Vector2(w - t.size.x - 22, 22)
@@ -458,6 +474,7 @@ Les Esprits se trouvent dans les coffres de fin de niveau." % [
 	_path_panel.visible = false
 	for c in _tab_box.get_children():
 		c.queue_free()
+	ScreenPack.fit_all(_detail)
 	match _tab:
 		"Techniques":
 			_fill_skills(hero)
@@ -498,14 +515,32 @@ func _fill_skills(hero: Dictionary) -> void:
 		if unlocked:
 			name = "%s · Technique secrète" % s.get("name", "")
 			desc = String(s.get("description", desc))
-	var icon: Texture2D = load("res://assets/ui/kit/lock.png") if not unlocked else null
+	# Icône : la pose de technique du héros (image la plus forte de son animation « skill »), grisée tant
+	# qu'elle est verrouillée.
+	var icon: Texture2D = _skill_icon(selected)
 	_technique_row(ScreenPack.rect(rows[3]), icon, name, desc, func() -> void:
 		if clip != "":
 			ui_sound.emit("ui_click")
-			_preview.play(clip))
+			_preview.play(clip), not unlocked)
 
 
-func _technique_row(r: Rect2, icon: Texture2D, title: String, desc: String, on_press: Callable) -> void:
+func _skill_icon(id: String) -> Texture2D:
+	var ps := PixelSheet.for_actor(id)
+	if ps == null or not ps.anims.has("skill"):
+		return load("res://assets/ui/kit/lock.png")
+	var frames: Array = ps.anims.skill.frames
+	var tex: Texture2D = frames[mini(4, frames.size() - 1)][0]
+	var img: Image = tex.get_image()
+	var used := img.get_used_rect()
+	var side := maxi(used.size.x, used.size.y)
+	var c := used.get_center()
+	var at := AtlasTexture.new()
+	at.atlas = tex
+	at.region = Rect2(c.x - side / 2, c.y - side / 2, side, side)
+	return at
+
+
+func _technique_row(r: Rect2, icon: Texture2D, title: String, desc: String, on_press: Callable, locked := false) -> void:
 	var holder := Control.new()
 	holder.position = r.position
 	holder.size = Vector2(64, 64)
@@ -516,7 +551,11 @@ func _technique_row(r: Rect2, icon: Texture2D, title: String, desc: String, on_p
 	_tab_box.add_child(holder)
 	ScreenPack.panel(holder, F, "technique_icon_frame", Rect2(0, 0, 64, 64))
 	if icon:
-		ScreenPack.image(holder, icon, Rect2(6, 6, 52, 52))
+		var ic := ScreenPack.image(holder, icon, Rect2(6, 6, 52, 52))
+		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		if locked:
+			ic.modulate = Color(0.35, 0.33, 0.4)
+			ScreenPack.image(holder, load("res://assets/ui/kit/lock.png"), Rect2(20, 20, 28, 28))
 	ScreenPack.text(_tab_box, title, Rect2(r.position + Vector2(94, 0), Vector2(r.size.x - 100, 34)), 26)
 	var d := ScreenPack.text(_tab_box, desc, Rect2(r.position + Vector2(94, 32), Vector2(r.size.x - 110, 28)), 20, UiKit.TEXT_SOFT)
 	d.clip_text = true
