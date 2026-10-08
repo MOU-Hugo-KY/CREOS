@@ -1,6 +1,5 @@
 {
- "hero": "calx",
- "scale": 4.8,
+ "scale": 3.506,
  "anchor": [
   96,
   146
@@ -14,313 +13,48 @@
   "relic": "skill",
   "dodge": "dodge",
   "0": "attack_1",
-  "1": "skill",
+  "1": "attack_2",
   "2": "ultimate",
-  "3": "attack_2",
+  "3": "skill",
   "4": "skill",
-  "5": "ultimate"
+  "5": "skill"
  },
+ "hero": "calx",
  "anims": {
-  "attack_1": {
-   "loop": false,
-   "frames": [
-    [
-     "calx_attack_1_000.png",
-     0.13
-    ],
-    [
-     "calx_attack_1_001.png",
-     0.15
-    ],
-    [
-     "calx_attack_1_002.png",
-     0.12
-    ],
-    [
-     "calx_attack_1_003.png",
-     0.065
-    ],
-    [
-     "calx_attack_1_004.png",
-     0.1
-    ],
-    [
-     "calx_attack_1_005.png",
-     0.14
-    ],
-    [
-     "calx_attack_1_006.png",
-     0.13
-    ],
-    [
-     "calx_attack_1_007.png",
-     0.16
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "attack_2": {
-   "loop": false,
-   "frames": [
-    [
-     "calx_attack_2_000.png",
-     0.11
-    ],
-    [
-     "calx_attack_2_001.png",
-     0.12
-    ],
-    [
-     "calx_attack_2_002.png",
-     0.085
-    ],
-    [
-     "calx_attack_2_003.png",
-     0.05
-    ],
-    [
-     "calx_attack_2_004.png",
-     0.085
-    ],
-    [
-     "calx_attack_2_005.png",
-     0.1
-    ],
-    [
-     "calx_attack_2_006.png",
-     0.12
-    ],
-    [
-     "calx_attack_2_007.png",
-     0.15
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "skill": {
-   "loop": false,
-   "frames": [
-    [
-     "calx_skill_000.png",
-     0.11
-    ],
-    [
-     "calx_skill_001.png",
-     0.1
-    ],
-    [
-     "calx_skill_002.png",
-     0.09
-    ],
-    [
-     "calx_skill_003.png",
-     0.06
-    ],
-    [
-     "calx_skill_004.png",
-     0.075
-    ],
-    [
-     "calx_skill_005.png",
-     0.09
-    ],
-    [
-     "calx_skill_006.png",
-     0.11
-    ],
-    [
-     "calx_skill_007.png",
-     0.14
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "ultimate": {
-   "loop": false,
-   "frames": [
-    [
-     "calx_ultimate_000.png",
-     0.18
-    ],
-    [
-     "calx_ultimate_001.png",
-     0.17
-    ],
-    [
-     "calx_ultimate_002.png",
-     0.15
-    ],
-    [
-     "calx_ultimate_003.png",
-     0.07
-    ],
-    [
-     "calx_ultimate_004.png",
-     0.14
-    ],
-    [
-     "calx_ultimate_005.png",
-     0.14
-    ],
-    [
-     "calx_ultimate_006.png",
-     0.15
-    ],
-    [
-     "calx_ultimate_007.png",
-     0.18
-    ]
-   ],
-   "hit_frame": 4
-  },
-  "dodge": {
-   "loop": false,
-   "frames": [
-    [
-     "calx_dodge_000.png",
-     0.09
-    ],
-    [
-     "calx_dodge_001.png",
-     0.07
-    ],
-    [
-     "calx_dodge_002.png",
-     0.055
-    ],
-    [
-     "calx_dodge_003.png",
-     0.055
-    ],
-    [
-     "calx_dodge_004.png",
-     0.07
-    ],
-    [
-     "calx_dodge_005.png",
-     0.085
-    ],
-    [
-     "calx_dodge_006.png",
-     0.1
-    ],
-    [
-     "calx_dodge_007.png",
-     0.12
-    ]
-   ],
-   "hit_frame": null
-  },
-  "hurt": {
-   "loop": false,
-   "frames": [
-    [
-     "calx_hurt_000.png",
-     0.09
-    ],
-    [
-     "calx_hurt_001.png",
-     0.06
-    ],
-    [
-     "calx_hurt_002.png",
-     0.065
-    ],
-    [
-     "calx_hurt_003.png",
-     0.08
-    ],
-    [
-     "calx_hurt_004.png",
-     0.095
-    ],
-    [
-     "calx_hurt_005.png",
-     0.11
-    ],
-    [
-     "calx_hurt_006.png",
-     0.12
-    ],
-    [
-     "calx_hurt_007.png",
-     0.14
-    ]
-   ],
-   "hit_frame": null
-  },
-  "death": {
-   "loop": false,
-   "frames": [
-    [
-     "calx_death_000.png",
-     0.09
-    ],
-    [
-     "calx_death_001.png",
-     0.09
-    ],
-    [
-     "calx_death_002.png",
-     0.1
-    ],
-    [
-     "calx_death_003.png",
-     0.11
-    ],
-    [
-     "calx_death_004.png",
-     0.12
-    ],
-    [
-     "calx_death_005.png",
-     0.14
-    ],
-    [
-     "calx_death_006.png",
-     0.18
-    ],
-    [
-     "calx_death_007.png",
-     0.7
-    ]
-   ],
-   "hit_frame": null
-  },
   "idle": {
    "loop": true,
    "frames": [
     [
      "calx_idle_000.png",
-     0.275
+     0.3
     ],
     [
      "calx_idle_001.png",
-     0.275
+     0.3
     ],
     [
      "calx_idle_002.png",
-     0.275
+     0.3
     ],
     [
      "calx_idle_003.png",
-     0.275
+     0.3
     ],
     [
      "calx_idle_004.png",
-     0.275
+     0.3
     ],
     [
      "calx_idle_005.png",
-     0.275
+     0.3
     ],
     [
      "calx_idle_006.png",
-     0.275
+     0.3
     ],
     [
      "calx_idle_007.png",
-     0.275
+     0.3
     ]
    ],
    "hit_frame": null
@@ -362,52 +96,310 @@
     ]
    ],
    "hit_frame": null
-  }
- },
- "effect": {
-  "frames": [
-   [
-    "calx_fx_000.png",
-    0.055
+  },
+  "attack_1": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_attack_1_000.png",
+     0.1
+    ],
+    [
+     "calx_attack_1_001.png",
+     0.1
+    ],
+    [
+     "calx_attack_1_002.png",
+     0.08
+    ],
+    [
+     "calx_attack_1_003.png",
+     0.05
+    ],
+    [
+     "calx_attack_1_004.png",
+     0.065
+    ],
+    [
+     "calx_attack_1_005.png",
+     0.07
+    ],
+    [
+     "calx_attack_1_006.png",
+     0.1
+    ],
+    [
+     "calx_attack_1_007.png",
+     0.12
+    ]
    ],
-   [
-    "calx_fx_001.png",
-    0.055
+   "hit_frame": 3
+  },
+  "attack_2": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_attack_2_000.png",
+     0.1
+    ],
+    [
+     "calx_attack_2_001.png",
+     0.085
+    ],
+    [
+     "calx_attack_2_002.png",
+     0.06
+    ],
+    [
+     "calx_attack_2_003.png",
+     0.06
+    ],
+    [
+     "calx_attack_2_004.png",
+     0.065
+    ],
+    [
+     "calx_attack_2_005.png",
+     0.075
+    ],
+    [
+     "calx_attack_2_006.png",
+     0.11
+    ],
+    [
+     "calx_attack_2_007.png",
+     0.12
+    ]
    ],
-   [
-    "calx_fx_002.png",
-    0.055
+   "hit_frame": 4
+  },
+  "ultimate": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_ultimate_000.png",
+     0.11
+    ],
+    [
+     "calx_ultimate_001.png",
+     0.11
+    ],
+    [
+     "calx_ultimate_002.png",
+     0.1
+    ],
+    [
+     "calx_ultimate_003.png",
+     0.075
+    ],
+    [
+     "calx_ultimate_004.png",
+     0.085
+    ],
+    [
+     "calx_ultimate_005.png",
+     0.1
+    ],
+    [
+     "calx_ultimate_006.png",
+     0.11
+    ],
+    [
+     "calx_ultimate_007.png",
+     0.13
+    ]
    ],
-   [
-    "calx_fx_003.png",
-    0.065
+   "hit_frame": 4
+  },
+  "skill": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_skill_000.png",
+     0.1
+    ],
+    [
+     "calx_skill_001.png",
+     0.1
+    ],
+    [
+     "calx_skill_002.png",
+     0.1
+    ],
+    [
+     "calx_skill_003.png",
+     0.07
+    ],
+    [
+     "calx_skill_004.png",
+     0.08
+    ],
+    [
+     "calx_skill_005.png",
+     0.085
+    ],
+    [
+     "calx_skill_006.png",
+     0.1
+    ],
+    [
+     "calx_skill_007.png",
+     0.12
+    ]
    ],
-   [
-    "calx_fx_004.png",
-    0.065
+   "hit_frame": 4
+  },
+  "hurt": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_hurt_000.png",
+     0.085
+    ],
+    [
+     "calx_hurt_001.png",
+     0.065
+    ],
+    [
+     "calx_hurt_002.png",
+     0.075
+    ],
+    [
+     "calx_hurt_003.png",
+     0.08
+    ],
+    [
+     "calx_hurt_004.png",
+     0.085
+    ],
+    [
+     "calx_hurt_005.png",
+     0.09
+    ],
+    [
+     "calx_hurt_006.png",
+     0.1
+    ],
+    [
+     "calx_hurt_007.png",
+     0.12
+    ]
    ],
-   [
-    "calx_fx_005.png",
-    0.075
+   "hit_frame": null
+  },
+  "dodge": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_dodge_000.png",
+     0.09
+    ],
+    [
+     "calx_dodge_001.png",
+     0.065
+    ],
+    [
+     "calx_dodge_002.png",
+     0.055
+    ],
+    [
+     "calx_dodge_003.png",
+     0.055
+    ],
+    [
+     "calx_dodge_004.png",
+     0.065
+    ],
+    [
+     "calx_dodge_005.png",
+     0.075
+    ],
+    [
+     "calx_dodge_006.png",
+     0.09
+    ],
+    [
+     "calx_dodge_007.png",
+     0.12
+    ]
    ],
-   [
-    "calx_fx_006.png",
-    0.085
+   "hit_frame": null
+  },
+  "death": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_death_000.png",
+     0.1
+    ],
+    [
+     "calx_death_001.png",
+     0.1
+    ],
+    [
+     "calx_death_002.png",
+     0.1
+    ],
+    [
+     "calx_death_003.png",
+     0.1
+    ],
+    [
+     "calx_death_004.png",
+     0.1
+    ],
+    [
+     "calx_death_005.png",
+     0.1
+    ],
+    [
+     "calx_death_006.png",
+     0.1
+    ],
+    [
+     "calx_death_007.png",
+     0.45
+    ]
    ],
-   [
-    "calx_fx_007.png",
-    0.1
-   ]
-  ],
-  "pivot": [
-   64,
-   64
-  ],
-  "scale": {
-   "attack_1": 0.6,
-   "attack_2": 0.75,
-   "skill": 1,
-   "ultimate": 1.5
+   "hit_frame": null
+  },
+  "fx": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_fx_000.png",
+     0.07
+    ],
+    [
+     "calx_fx_001.png",
+     0.07
+    ],
+    [
+     "calx_fx_002.png",
+     0.07
+    ],
+    [
+     "calx_fx_003.png",
+     0.07
+    ],
+    [
+     "calx_fx_004.png",
+     0.07
+    ],
+    [
+     "calx_fx_005.png",
+     0.07
+    ],
+    [
+     "calx_fx_006.png",
+     0.07
+    ],
+    [
+     "calx_fx_007.png",
+     0.07
+    ]
+   ],
+   "hit_frame": 4
   }
  }
 }
