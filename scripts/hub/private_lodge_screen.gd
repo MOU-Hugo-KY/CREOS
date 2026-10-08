@@ -20,7 +20,7 @@ var _picker: Control
 
 
 func _init() -> void:
-	setup(String(GameData.lodge.get("title", "Ma Loge")), Vector2(1500, 880), Color("793b49"))
+	setup(String(GameData.lodge.get("title", "Mon donjon")), Vector2(1500, 880), Color("793b49"))
 
 
 func _ready() -> void:
@@ -118,7 +118,7 @@ func _build_own() -> void:
 		h.add_child(b)
 	var test := UiKit.button("Tester mon donjon", "green", 22, Vector2(260, 54))
 	test.disabled = not Lodge.is_ready(l)
-	test.tooltip_text = "Ton équipe de chasse affronte ta Loge (sans gain ni énergie)."
+	test.tooltip_text = "Ton équipe de chasse affronte ton donjon (sans gain ni énergie)."
 	test.pressed.connect(func() -> void: _start({}))
 	h.add_child(test)
 

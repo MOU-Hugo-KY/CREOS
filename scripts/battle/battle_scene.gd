@@ -689,7 +689,7 @@ func _end_battle(won: bool, draw := false) -> void:
 		"energy": PlayerData.energy(), "player_level_up": result.player_level_up, "player_level": PlayerData.level(),
 		"chest": result.get("chest", {}), "draw": draw}
 	if not lodge_battle.is_empty():
-		dungeon_name = "Loge · " + String(lodge_battle.name)
+		dungeon_name = "Donjon · " + String(lodge_battle.name)
 		replay.possible = false
 	_schedule(END_DELAY, func() -> void:
 		audio.play_music("victory" if won else "defeat", false)

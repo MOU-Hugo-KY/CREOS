@@ -174,7 +174,7 @@
   },
   {
    "id": "private_lodge",
-   "label": "Ma loge",
+   "label": "Mon donjon",
    "file": "res://assets/hub_px/buildings/private_lodge.png",
    "position": [
     1120,

@@ -27,7 +27,7 @@
       "description": "Le marchand de masques : il achète ton butin de chasse et vend ce qu'il faut pour progresser."
     },
     "ma_loge": {
-      "name": "Ma loge",
+      "name": "Mon donjon",
       "icon": "ma_loge",
       "action": "lodge",
       "description": "Ton donjon : place tes défenseurs, tes pièges et tes défenses, puis attaque les loges rivales."

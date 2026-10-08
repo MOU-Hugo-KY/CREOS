@@ -1,6 +1,6 @@
 {
- "title": "Ma Loge",
- "description": "Ta Loge devient ton donjon : place tes héros en défense dans trois salles, construis des défenses, arme-les de pièges (gagnés à la Lanterne des Serments) et mets une récompense en jeu. Seules les équipes moins fortes (ou aussi fortes) que ton donjon peuvent l'attaquer.",
+ "title": "Mon donjon",
+ "description": "Ton donjon : place tes héros en défense dans trois salles, construis des défenses, arme-les de pièges (gagnés à la Lanterne des Serments) et mets une récompense en jeu. Seules les équipes moins fortes (ou aussi fortes) que ton donjon peuvent l'attaquer.",
  "rooms": [
   {
    "name": "Le vestibule",

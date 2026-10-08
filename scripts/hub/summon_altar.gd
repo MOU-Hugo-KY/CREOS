@@ -374,7 +374,7 @@ func _show_result(hero: Dictionary, r: Dictionary) -> void:
 		lines.append("Déjà recruté : +1 Écho (%d)" % r.echoes)
 	var traps: Array = r.get("traps", [])
 	if not traps.is_empty():
-		lines.append("+ Piège pour ta Loge : " + ", ".join(traps.map(func(t: String) -> String:
+		lines.append("+ Piège pour ton donjon : " + ", ".join(traps.map(func(t: String) -> String:
 			return String(GameData.lodge.traps[t].name))))
 	if lines.is_empty():
 		lines.append("Nouveau héros ! Il t'attend dans la Loge.")
