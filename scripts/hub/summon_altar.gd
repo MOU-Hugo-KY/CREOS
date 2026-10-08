@@ -46,6 +46,8 @@ var _pity: Label
 var _rows: Array[Control] = []
 var _pool_box: Control
 var _event: Label
+var _page_title: Label
+var _page := 4  # rareté affichée sur la bannière
 var _hover: Control
 var _reveal: Control
 var _reveal_preview: HeroPreview
@@ -120,29 +122,35 @@ func _ready() -> void:
 		_balance[c[0]] = ScreenPack.text(root, "", Rect2(r.position + Vector2(58, 0), Vector2(110, 72)),
 			30, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
 
-	# Gauche : le tableau d'affichage accroché au mur (taux, garantie, événement).
-	var board := _Board.new()
-	board.position = Vector2(34, 190)
-	board.size = Vector2(300, 520)
-	root.add_child(board)
-	ScreenPack.text(board, "SERMENTS", Rect2(0, 40, 300, 40), 28, UiKit.WOOD, HORIZONTAL_ALIGNMENT_CENTER)
-	_event = ScreenPack.text(board, "", Rect2(30, 88, 240, 64), 20, Color("8a3a20"), HORIZONTAL_ALIGNMENT_CENTER, true)
-	_odds = ScreenPack.text(board, "", Rect2(36, 160, 228, 160), 25, UiKit.INK, 0, true)
-	_pity = ScreenPack.text(board, "", Rect2(36, 330, 228, 80), 21, UiKit.WOOD, 0, true)
-	ScreenPack.text(board, "Un doublon devient un Écho.", Rect2(36, 420, 228, 60), 19, UiKit.TEXT_SOFT, 0, true)
-
-	# Droite : les héros de l'autel en médaillons ; survoler un médaillon montre sa fiche.
+	# Droite : la bannière de l'autel, une page par rareté (flèches pour changer) : taux de la rareté,
+	# chance par héros, médaillons (survol = fiche), puis événement et garantie.
 	var banner := _Banner.new()
-	banner.position = Vector2(1606, 128)
-	banner.size = Vector2(280, 660)
+	banner.position = Vector2(1586, 120)
+	banner.size = Vector2(310, 760)
 	root.add_child(banner)
-	ScreenPack.text(banner, "HÉROS DE L'AUTEL", Rect2(0, 22, 280, 34), 22, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	ScreenPack.text(banner, "HÉROS DE L'AUTEL", Rect2(0, 22, 310, 34), 22, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	for dir: int in [-1, 1]:
+		var arrow := _Arrow.new()
+		arrow.dir = dir
+		arrow.position = Vector2(22 if dir < 0 else 248, 76)
+		arrow.pressed.connect(func() -> void:
+			ui_sound.emit("ui_click")
+			_turn_page(dir))
+		banner.add_child(arrow)
+	_page_title = ScreenPack.text(banner, "", Rect2(70, 76, 170, 40), 28, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	_page_title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+	_page_title.add_theme_constant_override("shadow_offset_y", 3)
+	_odds = ScreenPack.text(banner, "", Rect2(20, 120, 270, 70), 20, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER, true)
 	var grid := GridContainer.new()
 	grid.columns = 3
-	grid.add_theme_constant_override("h_separation", 12)
-	grid.add_theme_constant_override("v_separation", 12)
-	grid.position = Vector2(26, 76)
+	grid.add_theme_constant_override("h_separation", 16)
+	grid.add_theme_constant_override("v_separation", 14)
+	grid.position = Vector2(31, 214)
 	banner.add_child(grid)
+	_event = ScreenPack.text(banner, "", Rect2(24, 480, 262, 56), 18, Color("ffb070"), HORIZONTAL_ALIGNMENT_CENTER, true)
+	_pity = ScreenPack.text(banner, "", Rect2(24, 540, 262, 56), 19, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER, true)
+	ScreenPack.text(banner, "Un doublon devient un Écho.", Rect2(24, 600, 262, 30), 17, UiKit.PARCHMENT_DARK,
+		HORIZONTAL_ALIGNMENT_CENTER, true)
 	_pool_box = grid
 	_hover = _HoverCard.new()
 	_hover.visible = false
@@ -181,32 +189,33 @@ class _SideFade extends Control:
 			draw_rect(Rect2(0, 1080 - (i + 1) * 7, 1920, 7), Color(dark, 0.6 * (1.0 - i / 20.0)))
 
 
-## Tableau d'affichage pendu par deux chaînes : cadre de bois, coins de laiton, parchemin clouté.
-class _Board extends Control:
+## Flèche de laiton (triangle pixel) pour tourner les pages de la bannière.
+class _Arrow extends Control:
+	signal pressed
+	var dir := 1
+	var _hot := false
+
 	func _ready() -> void:
-		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		size = Vector2(40, 40)
+		mouse_filter = Control.MOUSE_FILTER_STOP
+		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		mouse_entered.connect(func() -> void: _hot = true; queue_redraw())
+		mouse_exited.connect(func() -> void: _hot = false; queue_redraw())
+		gui_input.connect(func(e: InputEvent) -> void:
+			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+				pressed.emit())
 
 	func _draw() -> void:
-		var s := size
-		for x in [60.0, s.x - 60.0]:
-			for y in range(-56, 0, 14):
-				draw_rect(Rect2(x - 4, y, 8, 10), Color("6b5636"))
-				draw_rect(Rect2(x - 2, y + 2, 4, 6), Color("2a2218"))
-		draw_rect(Rect2(6, 8, s.x, s.y), Color(0, 0, 0, 0.45))
-		draw_rect(Rect2(Vector2.ZERO, s), Color("2e1d16"))
-		draw_rect(Rect2(6, 6, s.x - 12, s.y - 12), Color("5a3a28"))
-		for i in range(12, int(s.y) - 12, 18):
-			draw_rect(Rect2(8, i, s.x - 16, 2), Color("4a2f22"))
-		var p := Rect2(22, 24, s.x - 44, s.y - 48)
-		draw_rect(p, Color("d9c9a3"))
-		draw_rect(p.grow(-4), Color("eee4cd"))
-		draw_rect(Rect2(p.position.x, p.end.y - 6, p.size.x, 6), Color("c9b68c"))
-		for c in [Vector2(0, 0), Vector2(s.x - 22, 0), Vector2(0, s.y - 22), Vector2(s.x - 22, s.y - 22)]:
-			draw_rect(Rect2(c, Vector2(22, 22)), Color("c6a66c"))
-			draw_rect(Rect2(c + Vector2(4, 4), Vector2(14, 14)), Color("8a6a3a"))
-		for n in [Vector2(40, 40), Vector2(s.x - 40, 40), Vector2(40, s.y - 40), Vector2(s.x - 40, s.y - 40)]:
-			draw_rect(Rect2(n - Vector2(4, 4), Vector2(8, 8)), Color("6b5636"))
-			draw_rect(Rect2(n - Vector2(2, 2), Vector2(3, 3)), Color("e6cf94"))
+		var tip := 34.0 if dir > 0 else 6.0
+		var back := 10.0 if dir > 0 else 30.0
+		var pts := PackedVector2Array([Vector2(back, 4), Vector2(tip, 20), Vector2(back, 36)])
+		var sh := PackedVector2Array()
+		for q in pts:
+			sh.append(q + Vector2(3, 3))
+		draw_colored_polygon(sh, Color(0, 0, 0, 0.5))
+		draw_colored_polygon(pts, Color("f3d9a0") if _hot else Color("c6a66c"))
+		pts.append(pts[0])
+		draw_polyline(pts, Color("29262e"), 2.0)
 
 
 ## Bannière de tissu bordeaux (comme celles de la salle), pointe en bas, liserés dorés.
@@ -397,24 +406,50 @@ func _refresh() -> void:
 		var info: Dictionary = cfg.get("currencies", {}).get(currency, {})
 		_buttons[currency].text = "Invoquer · %d %s" % [int(info.get("cost", 0)), c[2]]
 	_set_buttons_enabled(true)
-	var odds := Summon.odds(GameData.heroes, cfg)
-	var keys := odds.keys()
-	keys.sort()
-	var lines := []
-	for r: int in keys:
-		lines.append("%s : %.0f %%" % [Palette.RARITIES.get(r, ["?"])[0], odds[r]])
-	_odds.text = "\n".join(lines)
-	# Événement (optionnel, data/summon.json "event" : {"name", "text"}) : en tête du tableau.
+	# Événement (optionnel, data/summon.json "event" : {"name", "text"}).
 	var ev: Dictionary = cfg.get("event", {})
-	_event.text = ("%s\n%s" % [ev.get("name", ""), ev.get("text", "")]) if not ev.is_empty() else "Taux d'invocation"
+	_event.text = ("%s · %s" % [ev.get("name", ""), ev.get("text", "")]) if not ev.is_empty() else ""
 	var left := PlayerData.summons_to_pity(cfg)
 	_pity.text = "Légendaire garanti dans %d invocation%s." % [left, "s" if left > 1 else ""]
 	for c in _pool_box.get_children():
 		c.queue_free()
-	var ids := GameData.heroes.keys()
-	ids.sort_custom(func(a: String, b: String) -> bool:
-		return int(GameData.heroes[a].get("rarity", 1)) > int(GameData.heroes[b].get("rarity", 1)))
-	for id: String in ids:
+	_show_page()
+
+
+## Raretés qui ont au moins un héros à l'autel, de la plus rare à la plus commune.
+func _rarities() -> Array:
+	var odds := Summon.odds(GameData.heroes, GameData.summon)
+	var keys: Array = odds.keys().filter(func(r: int) -> bool: return float(odds[r]) > 0.0)
+	keys.sort()
+	keys.reverse()
+	return keys
+
+
+func _turn_page(dir: int) -> void:
+	var keys := _rarities()
+	if keys.is_empty():
+		return
+	var i := keys.find(_page)
+	_page = keys[posmod(i + dir, keys.size())]
+	_show_page()
+
+
+## Remplit la bannière avec la page de la rareté `_page`.
+func _show_page() -> void:
+	var keys := _rarities()
+	if not keys.has(_page) and not keys.is_empty():
+		_page = keys[0]
+	var r: Array = Palette.RARITIES.get(_page, ["?", Color.WHITE])
+	_page_title.text = String(r[0])
+	_page_title.add_theme_color_override("font_color", (r[1] as Color).lightened(0.25))
+	var heroes: Array = GameData.heroes.keys().filter(func(id: String) -> bool:
+		return int(GameData.heroes[id].get("rarity", 2)) == _page)
+	var rate := float(Summon.odds(GameData.heroes, GameData.summon).get(_page, 0.0))
+	_odds.text = "Taux : %.0f %%
+Chaque héros : %.1f %%" % [rate, rate / maxf(1.0, heroes.size())]
+	for c in _pool_box.get_children():
+		c.queue_free()
+	for id: String in heroes:
 		_pool_box.add_child(_pool_row(GameData.hero(id)))
 
 
@@ -422,11 +457,11 @@ func _pool_row(hero: Dictionary) -> Control:
 	var owned := PlayerData.owned_heroes().has(hero.id)
 	var rarity := int(hero.get("rarity", 2))
 	var m := Control.new()
-	m.custom_minimum_size = Vector2(68, 68)
+	m.custom_minimum_size = Vector2(72, 72)
 	m.mouse_filter = Control.MOUSE_FILTER_STOP
-	var portrait := RoundPortrait.new().setup(hero, 68, 0.1)
-	portrait.size = Vector2(68, 68)
-	portrait.pivot_offset = Vector2(34, 34)
+	var portrait := RoundPortrait.new().setup(hero, 72, 0.1)
+	portrait.size = Vector2(72, 72)
+	portrait.pivot_offset = Vector2(36, 36)
 	portrait.set_grey(not owned)
 	m.add_child(portrait)
 	m.mouse_entered.connect(func() -> void:
