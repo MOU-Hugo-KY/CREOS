@@ -69,7 +69,7 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	theme = UiKit.theme()
 	var bg := ColorRect.new()
-	bg.color = Color(BG, 0.97)
+	bg.color = Color("17141c")
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 	var margin := MarginContainer.new()
@@ -201,72 +201,95 @@ func _set_filter(cl: String) -> void:
 
 
 func _hero_card(hero: Dictionary) -> Control:
+	# Carte de collection en pixel : cadre de vitrine, salle d'armes et socle de l'élément, le héros
+	# (première image de son repos de combat), badges de classe, d'élément et de rareté.
 	var id: String = hero.id
+	var owned: bool = PlayerData.state.heroes.has(id)
+	var elem: String = ELEMENT_KEYS.get(hero.get("element"), "shadow")
 	var card := Button.new()
 	card.focus_mode = Control.FOCUS_NONE
 	card.custom_minimum_size = Vector2(0, 430)
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var sb := UiKit.box(CARD, UiKit.INK, 16, 3)
-	sb.border_width_bottom = 10
-	card.add_theme_stylebox_override("normal", sb)
-	var hover: StyleBoxFlat = sb.duplicate()
-	hover.border_color = UiKit.WOOD_LIGHT
-	hover.border_width_bottom = 10
+	card.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var frame := ScreenPack.nine(F, "vitrine_frame")
+	card.add_theme_stylebox_override("normal", frame)
+	var hover := ScreenPack.nine(F, "vitrine_frame")
+	hover.modulate_color = Color(1.12, 1.06, 0.9)
 	card.add_theme_stylebox_override("hover", hover)
 	card.add_theme_stylebox_override("pressed", hover)
-	var owned: bool = PlayerData.state.heroes.has(id)
+	card.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	card.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		show_hero(id))
-	if not owned:
-		card.modulate = Color(0.55, 0.55, 0.6)
-	var m := MarginContainer.new()
-	m.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "right", "top"]:
-		m.add_theme_constant_override("margin_" + side, 14)
-	m.add_theme_constant_override("margin_bottom", 20)
-	m.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	card.add_child(m)
-	var v := VBoxContainer.new()
-	v.add_theme_constant_override("separation", 4)
-	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	m.add_child(v)
+	card.resized.connect(func() -> void: _layout_card(card))
+	var room := TextureRect.new()
+	room.name = "Room"
+	room.texture = ScreenPack.tex(F, "fond_" + elem)
+	room.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	room.clip_contents = true
+	room.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(room)
+	var socle := TextureRect.new()
+	socle.name = "Socle"
+	socle.texture = ScreenPack.tex(F, "socle_" + elem)
+	socle.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	socle.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	socle.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(socle)
 	var art := TextureRect.new()
-	art.texture = _fiche(hero)
+	art.name = "Art"
+	var sheet := PixelSheet.for_actor(id)
+	art.texture = sheet.anims.idle.frames[0][0] if sheet and sheet.anims.has("idle") else _fiche(hero)
 	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	art.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	art.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	v.add_child(art)
-	var rarity: Array = Palette.RARITIES.get(int(hero.get("rarity", 1)), ["", Color.WHITE])
-	var badge := _badge(rarity[0], UiKit.WOOD)
-	badge.position = Vector2(14, 14)
-	card.add_child(badge)
+	if not owned:
+		art.modulate = Color(0.25, 0.23, 0.3)
+	card.add_child(art)
+	var info := Panel.new()
+	info.name = "Info"
+	info.add_theme_stylebox_override("panel", ScreenPack.nine(F, "hero_type_cartouche"))
+	info.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(info)
+	var rarity := int(hero.get("rarity", 2))
+	var badge := ScreenPack.panel(card, F, "badge_" + RARITY_KEYS.get(rarity, "rare"), Rect2(20, 20, 128, 44))
+	badge.name = "Rarity"
+	ScreenPack.text(badge, Palette.RARITIES.get(rarity, ["?"])[0], Rect2(0, 0, 128, 44), 18, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+	ScreenPack.image(card, ScreenPack.tex(F, "classe_%s_32" % CLASS_KEYS.get(hero.get("class"), "blade")), Rect2(20, 70, 32, 32))
+	ScreenPack.image(card, ScreenPack.tex(F, "element_%s_32" % elem), Rect2(56, 70, 32, 32))
 	if PlayerData.in_team(id):
 		var t := _badge("ÉQUIPE", Color("1f5f59"))
-		t.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
-		t.offset_left = -110
-		t.offset_right = -14
-		t.offset_top = 14
+		t.name = "Team"
 		card.add_child(t)
-	var name := UiKit.title(String(hero.name), 28, UiKit.PARCHMENT)
-	v.add_child(name)
-	v.add_child(UiKit.label(_role(hero), 19, UiKit.TEAL))
-	if not owned:
-		v.add_child(UiKit.label("À recruter à la Lanterne", 19, UiKit.WOOD_LIGHT))
-		return card
-	v.add_child(UiKit.label(_echo_marks(id), 22, UiKit.WOOD_LIGHT))
-	var row := HBoxContainer.new()
-	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	v.add_child(row)
-	var lv := UiKit.label("Niv. %d" % PlayerData.hero_level(id), 20, UiKit.PARCHMENT)
-	lv.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(lv)
-	row.add_child(UiKit.label("Force %d" % _power(id), 20, UiKit.PARCHMENT))
+	ScreenPack.text(info, String(hero.name), Rect2(20, 6, 400, 36), 28, UiKit.WHITE).name = "Name"
+	var sub := "À recruter à la Lanterne" if not owned else "Niv. %d · %s · Force %d" % [PlayerData.hero_level(id),
+		_echo_marks(id), _power(id)]
+	ScreenPack.text(info, sub, Rect2(20, 42, 400, 30), 18, UiKit.PARCHMENT_DARK if owned else Color("f3d9a0")).name = "Sub"
 	return card
 
 
-# --- Fiche d'un héros ---------------------------------------------------------------
+## Place les éléments d'une carte de collection selon sa taille (la grille décide de la largeur).
+func _layout_card(card: Control) -> void:
+	var w := card.size.x
+	var h := card.size.y
+	var room: Control = card.get_node("Room")
+	room.position = Vector2(14, 14)
+	room.size = Vector2(w - 28, h - 112)
+	var socle: Control = card.get_node("Socle")
+	socle.size = Vector2(minf(220, w - 60), 120)
+	socle.position = Vector2((w - socle.size.x) / 2.0, h - 210)
+	var art: Control = card.get_node("Art")
+	art.size = Vector2(288, 288)
+	art.position = Vector2((w - 288) / 2.0, h - 112 - 219 - 40)
+	var info: Control = card.get_node("Info")
+	info.position = Vector2(10, h - 92)
+	info.size = Vector2(w - 20, 82)
+	for c in info.get_children():
+		c.size.x = w - 50
+	if card.has_node("Team"):
+		var t: Control = card.get_node("Team")
+		t.position = Vector2(w - t.size.x - 22, 22)
 
 func _build_detail(_page: VBoxContainer) -> void:
 	# Fiche d'un héros : pièces pixel du pack partie 2 (assets/ui/ecrans/fiche_heros), placées

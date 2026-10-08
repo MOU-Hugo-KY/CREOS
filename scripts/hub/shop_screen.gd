@@ -75,6 +75,8 @@ func refresh() -> void:
 	for c in _offers.get_children():
 		c.queue_free()
 	for offer: Dictionary in GameData.hub.get("shop", []):
+		if offer.get("gives", {}).has("materiaux_relique") and not PlayerData.relics_unlocked():
+			continue  # les reliques sont scellées jusqu'à la fin de la Campagne 1
 		_offers.add_child(_offer_card(offer))
 	for c in _fusion.get_children():
 		c.queue_free()
