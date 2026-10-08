@@ -37,6 +37,8 @@ var _detail: Control  # fiche d'un héros (pièces du pack)
 var _preview: HeroPreview
 var _tab_box: Control
 var _d_title: Label
+var _d_card: TarotCard
+var _d_vpc: SubViewportContainer
 var _d_count: Label
 var _d_room: TextureRect
 var _d_socle: TextureRect
@@ -134,7 +136,7 @@ func _build_collection(page: VBoxContainer) -> void:
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_collection.add_child(scroll)
 	_grid = GridContainer.new()
-	_grid.columns = 4
+	_grid.columns = 7
 	_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_grid.add_theme_constant_override("h_separation", 20)
 	_grid.add_theme_constant_override("v_separation", 20)
@@ -202,119 +204,53 @@ func _set_filter(cl: String) -> void:
 
 
 func _hero_card(hero: Dictionary) -> Control:
-	# Carte de collection en pixel : cadre de vitrine, salle d'armes et socle de l'élément, le héros
-	# (première image de son repos de combat), badges de classe, d'élément et de rareté.
+	# Carte de tarot du héros (dos de carte s'il n'est pas recruté), avec niveau et Force dessous.
 	var id: String = hero.id
 	var owned: bool = PlayerData.state.heroes.has(id)
-	var elem: String = ELEMENT_KEYS.get(hero.get("element"), "shadow")
-	var card := Button.new()
-	card.focus_mode = Control.FOCUS_NONE
-	card.custom_minimum_size = Vector2(0, 430)
-	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	card.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	var rarity := int(hero.get("rarity", 2))
-	var rcol: Color = (Palette.RARITIES.get(rarity, ["?", Color.WHITE])[1] as Color).lightened(0.25)
-	var frame := ScreenPack.nine(F, "vitrine_frame")
-	frame.modulate_color = Color.WHITE.lerp(rcol, 0.45)
-	card.add_theme_stylebox_override("normal", frame)
-	var hover := ScreenPack.nine(F, "vitrine_frame")
-	hover.modulate_color = Color(1.12, 1.06, 0.9)
-	card.add_theme_stylebox_override("hover", hover)
-	card.add_theme_stylebox_override("pressed", hover)
-	card.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-	card.pressed.connect(func() -> void:
-		ui_sound.emit("ui_click")
-		show_hero(id))
-	card.set_meta("id", id)
-	card.resized.connect(func() -> void: _layout_card(card))
-	var room := TextureRect.new()
-	room.name = "Room"
-	room.texture = ScreenPack.tex(F, "fond_" + elem)
-	room.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	room.clip_contents = true
-	room.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	card.add_child(room)
-	var socle := TextureRect.new()
-	socle.name = "Socle"
-	socle.texture = ScreenPack.tex(F, "socle_" + elem)
-	socle.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	socle.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	socle.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	card.add_child(socle)
-	var art := TextureRect.new()
-	art.name = "Art"
-	var sheet := PixelSheet.for_actor(id)
-	art.texture = sheet.anims.idle.frames[0][0] if sheet and sheet.anims.has("idle") else _fiche(hero)
-	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	art.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if not owned:
-		art.modulate = Color(0.25, 0.23, 0.3)
-	card.add_child(art)
-	var info := Panel.new()
-	info.name = "Info"
-	info.add_theme_stylebox_override("panel", Palette.stylebox(Color(0.06, 0.05, 0.08, 0.6), Color.TRANSPARENT, 6))
-	info.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	card.add_child(info)
-	for e: Array in [["Class", "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade"), Palette.CLASS_NAMES.get(hero.get("class"), "")],
-			["Element", "element_%s_64" % elem, Palette.ELEMENT_NAMES.get(hero.get("element"), "")]]:
-		var holder := Control.new()
-		holder.name = e[0]
-		holder.size = Vector2(44, 44)
-		holder.tooltip_text = e[2]
-		holder.mouse_filter = Control.MOUSE_FILTER_PASS
-		card.add_child(holder)
-		var ic := _emblem(holder, Vector2.ZERO)
-		ic.texture = ScreenPack.trimmed(ScreenPack.tex(F, e[1]))
-		ic.size = Vector2(44, 44)
-		var sh: TextureRect = ic.get_meta("shadow")
-		sh.texture = ic.texture
-		sh.size = Vector2(44, 44)
+	var holder := Control.new()
+	holder.custom_minimum_size = Vector2(TarotCard.SIZE.x * CARD_SCALE, TarotCard.SIZE.y * CARD_SCALE + 66)
+	holder.mouse_filter = Control.MOUSE_FILTER_STOP
+	holder.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	holder.set_meta("id", id)
+	var card := TarotCard.new().setup(hero, owned)
+	card.scale = Vector2.ONE * CARD_SCALE
+	card.pivot_offset = Vector2.ZERO
+	holder.add_child(card)
+	var sub := "À recruter à la Lanterne" if not owned else "Niv. %d · Force %d" % [PlayerData.hero_level(id), _power(id)]
+	var rcol: Color = (Palette.RARITIES.get(int(hero.get("rarity", 2)), ["?", Color.WHITE])[1] as Color).lightened(0.3)
+	ScreenPack.shadow(ScreenPack.text(holder, String(TarotCard.arcane(id).title) if owned else "", Rect2(0, TarotCard.SIZE.y * CARD_SCALE + 4,
+		TarotCard.SIZE.x * CARD_SCALE, 28), 20, rcol, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var info := ScreenPack.shadow(ScreenPack.text(holder, sub, Rect2(0, TarotCard.SIZE.y * CARD_SCALE + 32,
+		TarotCard.SIZE.x * CARD_SCALE, 30), 19, UiKit.PARCHMENT_DARK if owned else Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	if PlayerData.in_team(id):
-		var t := ScreenPack.shadow(ScreenPack.text(card, "ÉQUIPE", Rect2(0, 0, 120, 30), 20, Color("63c8be"),
-			HORIZONTAL_ALIGNMENT_RIGHT), 2)
-		t.name = "Team"
-	ScreenPack.shadow(ScreenPack.text(info, String(hero.name), Rect2(20, 6, 400, 36), 28, rcol), 2).name = "Name"
-	var sub := "À recruter à la Lanterne" if not owned else "Niv. %d · %s · Force %d" % [PlayerData.hero_level(id),
-		_echo_marks(id), _power(id)]
-	ScreenPack.text(info, sub, Rect2(20, 42, 400, 30), 18, UiKit.PARCHMENT_DARK if owned else Color("f3d9a0")).name = "Sub"
-	return card
+		info.text = "◆ Équipe · " + sub
+		info.add_theme_color_override("font_color", Color("63c8be"))
+	# Survol : la carte se soulève ; clic : elle se retourne et ouvre la fiche.
+	holder.mouse_entered.connect(func() -> void:
+		create_tween().tween_property(card, "position:y", -14.0, 0.12)
+		card.modulate = Color(1.12, 1.08, 1.0)
+		card.shine())
+	holder.mouse_exited.connect(func() -> void:
+		create_tween().tween_property(card, "position:y", 0.0, 0.12)
+		card.modulate = Color.WHITE)
+	holder.gui_input.connect(func(e: InputEvent) -> void:
+		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+			ui_sound.emit("ui_click")
+			card.pivot_offset = TarotCard.SIZE / 2.0
+			card.flip(func() -> void: card.set_face_up(true), 0.24)
+			get_tree().create_timer(0.26).timeout.connect(func() -> void: show_hero(id)))
+	return holder
 
 
-## Place les éléments d'une carte de collection selon sa taille (la grille décide de la largeur).
-func _layout_card(card: Control) -> void:
-	var w := card.size.x
-	var h := card.size.y
-	var room: Control = card.get_node("Room")
-	room.position = Vector2(14, 14)
-	room.size = Vector2(w - 28, h - 112)
-	var socle: Control = card.get_node("Socle")
-	socle.size = Vector2(minf(220, w - 60), 120)
-	socle.position = Vector2((w - socle.size.x) / 2.0, h - 210)
-	var art: Control = card.get_node("Art")
-	art.size = Vector2(288, 288)
-	var feet := 96.0
-	var ps := PixelSheet.for_actor(String(card.get_meta("id", "")))
-	if ps:
-		feet = ps.anchor.x  # pieds réels du dessin, posés au centre du socle
-	art.position = Vector2(w / 2.0 - feet * 1.5, h - 112 - 219 - 40)
-	var info: Control = card.get_node("Info")
-	info.position = Vector2(10, h - 92)
-	info.size = Vector2(w - 20, 82)
-	for c in info.get_children():
-		c.size.x = w - 50
-	# Classe et élément : carrés dans les coins bas de la salle, de part et d'autre du socle.
-	(card.get_node("Class") as Control).position = Vector2(30, h - 112 - 60)
-	(card.get_node("Element") as Control).position = Vector2(w - 30 - 44, h - 112 - 60)
-	if card.has_node("Team"):
-		var t: Control = card.get_node("Team")
-		t.position = Vector2(w - t.size.x - 26, 24)
+## Taille des cartes de la collection.
+const CARD_SCALE := 0.62
+
 
 func _build_detail(_page: VBoxContainer) -> void:
-	# Fiche d'un héros, façon scène : la salle d'armes de son élément en fond, le héros en grand à
-	# gauche (flèches pour passer au suivant), et à droite un parchemin (statistiques en barres,
-	# actions, onglets marque-pages). Repère 1920 × 1080, pièces du pack fiche_heros.
+	# Fiche d'un héros façon cartomancienne : la salle d'armes de son élément en fond, sa carte de
+	# tarot en grand à gauche (le héros animé dans la fenêtre, flèches pour passer au suivant), et
+	# à droite un grimoire ouvert (pack « Arcanes ») : statistiques et actions sur la page de
+	# gauche, onglet choisi sur la page de droite, marque-pages sur la tranche. Repère 1920 × 1080.
 	_detail = Control.new()
 	_detail.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_detail.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -322,7 +258,6 @@ func _build_detail(_page: VBoxContainer) -> void:
 	_detail.visible = false
 	add_child(_detail)
 	var root := ScreenPack.frame(_detail)
-	# Fond : la salle d'armes sur tout l'écran, assombrie, plus sombre encore sous le parchemin.
 	_d_room = ScreenPack.image(root, null, Rect2(0, 0, 1920, 1080))
 	_d_room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	_d_room.modulate = Color(0.55, 0.52, 0.58)
@@ -331,106 +266,146 @@ func _build_detail(_page: VBoxContainer) -> void:
 	root.add_child(shade)
 	var back := ScreenPack.button(root, F, "collection", "← Collection", Rect2(24, 20, 260, 80), 28)
 	back.pressed.connect(_on_back)
-	_d_count = ScreenPack.text(root, "", Rect2(300, 20, 400, 80), 22, Color(1, 1, 1, 0.6))
-	# Identité : nom en grand, insignes, rôle.
-	_d_title = ScreenPack.text(root, "", Rect2(20, 108, 690, 84), 66, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	_d_title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
-	_d_title.add_theme_constant_override("shadow_offset_x", 4)
-	_d_title.add_theme_constant_override("shadow_offset_y", 4)
-	# Rareté en lettres de sa couleur, rôle, espèce, puis les emblèmes de classe et d'élément posés sur le fond.
-	_d_rarity = Panel.new()  # (plus de badge : la couleur du nom et du mot suffit)
-	_d_rarity_label = ScreenPack.text(root, "", Rect2(20, 186, 690, 34), 26, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	_d_rarity_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
-	_d_rarity_label.add_theme_constant_override("shadow_offset_y", 2)
-	_d_role = ScreenPack.text(root, "", Rect2(20, 220, 690, 36), 26, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
-	_d_species = ScreenPack.text(root, "", Rect2(20, 254, 690, 30), 20, UiKit.PARCHMENT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
-	_d_class = _emblem(root, Vector2(277, 288))
-	_d_element = _emblem(root, Vector2(381, 288))
-	# Le héros, grand, sur son socle.
-	_d_socle = ScreenPack.image(root, null, Rect2(185, 735, 360, 225))
-	var vpc := SubViewportContainer.new()
-	vpc.stretch = true
-	vpc.position = Vector2(40, 330)
-	vpc.size = Vector2(650, 520)
-	vpc.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	root.add_child(vpc)
+	_d_count = ScreenPack.text(root, "", Rect2(300, 20, 360, 80), 22, Color(1, 1, 1, 0.6))
+	# La carte de tarot, en grand ; le héros animé vit dans sa fenêtre.
+	_d_card = TarotCard.new()
+	_d_card.position = Vector2(147, 70)
+	root.add_child(_d_card)
+	_d_vpc = SubViewportContainer.new()
+	_d_vpc.stretch = true
+	_d_vpc.size = TarotCard.WINDOW.size
+	_d_vpc.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_preview = HeroPreview.new()
 	_preview.pedestal = false
-	_preview.zoom = 0.85
-	vpc.add_child(_preview)
+	_preview.zoom = 1.0
+	_d_vpc.add_child(_preview)
 	for dir: int in [-1, 1]:
 		var arrow := SummonAltar._Arrow.new()
 		arrow.dir = dir
 		arrow.scale = Vector2(1.5, 1.5)
-		arrow.position = Vector2(30 if dir < 0 else 640, 540)
+		arrow.position = Vector2(48 if dir < 0 else 570, 360)
 		arrow.pressed.connect(func() -> void:
 			ui_sound.emit("ui_click")
 			_step_hero(dir))
 		root.add_child(arrow)
-	# Sous le héros : Échos, niveau, Force, expérience.
+	# Sous la carte : rareté et titre, rôle, Échos, niveau, Force, expérience.
+	_d_rarity_label = ScreenPack.shadow(ScreenPack.text(root, "", Rect2(20, 734, 638, 32), 24, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER), 2)
+	_d_role = ScreenPack.shadow(ScreenPack.text(root, "", Rect2(20, 766, 638, 30), 20, Color("f3d9a0"),
+		HORIZONTAL_ALIGNMENT_CENTER), 2)
 	for i in 5:
-		_d_echoes.append(ScreenPack.image(root, ScreenPack.tex(F, "echo_empty"), Rect2(150 + i * 52, 900, 44, 44)))
-	_d_echo_count = ScreenPack.text(root, "", Rect2(420, 900, 200, 44), 26, UiKit.WHITE)
-	_d_level = ScreenPack.text(root, "", Rect2(71, 954, 300, 40), 28, UiKit.WHITE)
-	_d_force = ScreenPack.text(root, "", Rect2(359, 954, 300, 40), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_RIGHT)
-	var xp_bg := ScreenPack.panel(root, F, "xp_bg", Rect2(71, 1000, 588, 18))
-	_d_xp = ScreenPack.panel(xp_bg, F, "xp_fill", Rect2(0, 3, 588, 12))
-	_d_xp_text = ScreenPack.text(root, "", Rect2(71, 1022, 588, 26), 18, UiKit.PARCHMENT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
-	_d_recruit = ScreenPack.text(root, "À recruter à la Lanterne des Serments", Rect2(40, 954, 650, 40), 26, Color("f3d9a0"),
-		HORIZONTAL_ALIGNMENT_CENTER)
-	# Le parchemin : statistiques en barres, actions, onglets, contenu.
-	ScreenPack.panel(root, F, "stats_panel", Rect2(748, 20, 1144, 1040))
+		_d_echoes.append(ScreenPack.image(root, ScreenPack.tex(F, "echo_empty"), Rect2(150 + i * 52, 812, 44, 44)))
+	_d_echo_count = ScreenPack.shadow(ScreenPack.text(root, "", Rect2(420, 812, 200, 44), 24, UiKit.WHITE), 2)
+	_d_level = ScreenPack.shadow(ScreenPack.text(root, "", Rect2(60, 872, 300, 40), 28, UiKit.WHITE), 2)
+	_d_force = ScreenPack.shadow(ScreenPack.text(root, "", Rect2(318, 872, 300, 40), 28, Color("f3d9a0"),
+		HORIZONTAL_ALIGNMENT_RIGHT), 2)
+	var xp_bg := ScreenPack.panel(root, F, "xp_bg", Rect2(60, 920, XP_W, 18))
+	_d_xp = ScreenPack.panel(xp_bg, F, "xp_fill", Rect2(0, 3, XP_W, 12))
+	_d_xp_text = ScreenPack.shadow(ScreenPack.text(root, "", Rect2(60, 942, XP_W, 26), 18, UiKit.PARCHMENT_DARK,
+		HORIZONTAL_ALIGNMENT_CENTER), 2)
+	_d_recruit = ScreenPack.shadow(ScreenPack.text(root, "À recruter à la Lanterne des Serments", Rect2(20, 872, 638, 40), 26,
+		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Le grimoire.
+	ScreenPack.image(root, TarotCard.pack_tex("grimoire/grimoire.png"), Rect2(BOOK, Vector2(1100, 1000)))
+	for i in TABS.size():
+		var t: String = TABS[i]
+		var b := Button.new()
+		b.text = t
+		b.focus_mode = Control.FOCUS_NONE
+		b.position = BOOK + Vector2(1052, 172 + i * 128)
+		b.size = Vector2(160, 64)
+		b.add_theme_font_override("font", UiKit.FONT)
+		b.add_theme_font_size_override("font_size", 18)
+		b.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		b.pressed.connect(func() -> void: _set_tab(t))
+		root.add_child(b)
+		_d_tabs.append(b)
+	# Page de gauche : statistiques avec icônes et barres, puis les actions.
+	_page_title(root, PAGE_L, "Statistiques")
 	for i in STAT_NAMES.size():
-		var y := 66.0 + i * 44.0
-		ScreenPack.text(root, STAT_NAMES[i][1], Rect2(790, y, 190, 36), 24)
+		var y := PAGE_L.position.y + 62.0 + i * 54.0
+		var key: String = STAT_NAMES[i][0]
+		ScreenPack.image(root, TarotCard.pack_tex("icones/stat_%s_32.png" % STAT_ICONS.get(key, "vie")),
+			Rect2(PAGE_L.position.x, y + 4, 32, 32))
+		ScreenPack.text(root, STAT_NAMES[i][1], Rect2(PAGE_L.position.x + 42, y - 2, 200, 28), 21)
+		_d_stats.append(ScreenPack.text(root, "", Rect2(PAGE_L.end.x - 150, y - 2, 150, 28), 21, UiKit.INK,
+			HORIZONTAL_ALIGNMENT_RIGHT))
 		var bar := _StatBar.new()
-		bar.position = Vector2(990, y + 9)
-		bar.size = Vector2(700, 20)
-		bar.color = STAT_COLORS.get(STAT_NAMES[i][0], UiKit.WOOD)
+		bar.position = Vector2(PAGE_L.position.x + 42, y + 28)
+		bar.size = Vector2(PAGE_L.size.x - 42, 12)
+		bar.color = STAT_COLORS.get(key, UiKit.WOOD)
 		root.add_child(bar)
 		_d_bars.append(bar)
-		_d_stats.append(ScreenPack.text(root, "", Rect2(1700, y, 160, 36), 24, UiKit.INK, HORIZONTAL_ALIGNMENT_RIGHT))
-	_d_upgrade = ScreenPack.button(root, F, "upgrade", "", Rect2(780, 386, 700, 84), 28, UiKit.INK)
+	_separator(root, PAGE_L.position.y + 460)
+	_d_upgrade = ScreenPack.button(root, F, "upgrade", "", Rect2(PAGE_L.position.x, PAGE_L.position.y + 500, PAGE_L.size.x, 76),
+		24, UiKit.INK)
 	_d_upgrade.pressed.connect(_ask_level_up)
-	_d_team = ScreenPack.button(root, F, "team_button", "", Rect2(1496, 386, 364, 84), 24)
+	_d_team = ScreenPack.button(root, F, "team_button", "", Rect2(PAGE_L.position.x, PAGE_L.position.y + 592, PAGE_L.size.x, 64), 22)
 	_d_team.pressed.connect(func() -> void:
 		if PlayerData.toggle_team(selected):
 			ui_sound.emit("ui_toggle"))
-	for i in TABS.size():
-		var t: String = TABS[i]
-		var b := ScreenPack.button(root, F, "tab_inactive", t, Rect2(780 + i * 274, 498, 260, 76), 26)
-		b.pressed.connect(func() -> void: _set_tab(t))
-		_d_tabs.append(b)
-	_path_panel = ScreenPack.panel(root, F, "stats_panel", Rect2(748, 20, 1144, 490))
+	# Détail d'une voie survolée : recouvre la page de gauche.
+	_path_panel = Panel.new()
+	var psb := Palette.stylebox(Color("efe3c8"), Color("c6a66c"), 4, 3)
+	_path_panel.add_theme_stylebox_override("panel", psb)
+	_path_panel.position = PAGE_L.position - Vector2(14, 14)
+	_path_panel.size = PAGE_L.size + Vector2(28, 28)
 	_path_panel.z_index = 5
-	_path_title = ScreenPack.text(_path_panel, "", Rect2(34, 26, 1076, 48), 32)
+	_path_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_path_panel)
+	_path_title = ScreenPack.text(_path_panel, "", Rect2(14, 14, PAGE_L.size.x, 64), 22, UiKit.INK, 0, true)
 	for k in 5:
-		_path_lines.append(ScreenPack.text(_path_panel, "", Rect2(34, 92 + k * 78, 1076, 72), 23, UiKit.INK, 0, true))
+		_path_lines.append(ScreenPack.text(_path_panel, "", Rect2(14, 92 + k * 124, PAGE_L.size.x, 116), 18, UiKit.INK, 0, true))
 	_path_panel.visible = false
-	# Contenu des onglets : dessiné dans le repère de l'ancienne fiche (content_rect), décalé ici.
+	# Page de droite : le contenu de l'onglet.
 	_tab_box = Control.new()
 	_tab_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_tab_box.size = Vector2(1920, 1080)
-	_tab_box.position = Vector2(0, TAB_SHIFT)
+	_tab_box.position = PAGE_R.position
+	_tab_box.size = PAGE_R.size
 	root.add_child(_tab_box)
 
 
-## Décalage vertical du contenu des onglets par rapport aux rectangles de fiche_heros.json.
-const TAB_SHIFT := -134.0
+## Grimoire et ses pages écrivables (arcanes.json : writable_left / writable_right).
+const BOOK := Vector2(660, 40)
+const PAGE_L := Rect2(768, 168, 384, 728)
+const PAGE_R := Rect2(1268, 168, 384, 728)
+const XP_W := 558.0
+const STAT_ICONS := {"hp": "vie", "atk": "attaque", "mag": "magie", "def": "defense", "spd": "vitesse",
+	"crit": "critique", "heal": "soins"}
 const STAT_COLORS := {"hp": Color("b9474f"), "atk": Color("d08a3a"), "mag": Color("7d5bd0"), "def": Color("5a7fa8"),
 	"spd": Color("4fae8a"), "crit": Color("d9b44a"), "heal": Color("6fc06a")}
 
 
-## Ombre du fond : voile sous le parchemin, bandes sombres en haut et en bas de la scène du héros.
+## Titre de page du grimoire, avec la frise dessous.
+func _page_title(parent: Control, page: Rect2, text: String) -> void:
+	ScreenPack.text(parent, text.to_upper(), Rect2(page.position, Vector2(page.size.x, 34)), 26, Color("793b49"),
+		HORIZONTAL_ALIGNMENT_CENTER)
+	_separator(parent, page.position.y + 36, page.position.x)
+
+
+func _separator(parent: Control, y: float, x := PAGE_L.position.x) -> void:
+	ScreenPack.image(parent, TarotCard.pack_tex("grimoire/separateur_grimoire.png"), Rect2(x - 8, y, PAGE_L.size.x + 16, 16))
+
+
+## Style d'un marque-page (actif ou non).
+func _bookmark_style(active: bool) -> StyleBoxTexture:
+	var sb := StyleBoxTexture.new()
+	sb.texture = TarotCard.pack_tex("grimoire/marque_page_%s.png" % ("actif" if active else "inactif"))
+	sb.content_margin_left = 18
+	sb.content_margin_right = 26
+	return sb
+
+
+## Ombre du fond : voile derrière le grimoire, bandes sombres en haut et en bas de la carte.
 class _DetailShade extends Control:
 	func _ready() -> void:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	func _draw() -> void:
-		draw_rect(Rect2(740, 0, 1180, 1080), Color(0.06, 0.05, 0.08, 0.55))
+		draw_rect(Rect2(640, 0, 1280, 1080), Color(0.06, 0.05, 0.08, 0.55))
 		for i in 16:
-			draw_rect(Rect2(0, 1080 - (i + 1) * 14, 740, 14), Color(0.06, 0.05, 0.08, 0.75 * (1.0 - i / 16.0)))
-			draw_rect(Rect2(0, i * 8, 740, 8), Color(0.06, 0.05, 0.08, 0.5 * (1.0 - i / 16.0)))
+			draw_rect(Rect2(0, 1080 - (i + 1) * 16, 640, 16), Color(0.06, 0.05, 0.08, 0.8 * (1.0 - i / 16.0)))
+			draw_rect(Rect2(0, i * 8, 640, 8), Color(0.06, 0.05, 0.08, 0.5 * (1.0 - i / 16.0)))
 
 
 ## Barre de statistique en pixels : fond d'encre, remplissage coloré avec reflet.
@@ -443,13 +418,10 @@ class _StatBar extends Control:
 
 	func _draw() -> void:
 		draw_rect(Rect2(Vector2.ZERO, size), Color("29262e"))
-		var w := floorf((size.x - 6) * clampf(ratio, 0.0, 1.0))
+		var w := floorf((size.x - 4) * clampf(ratio, 0.0, 1.0))
 		if w > 0:
-			draw_rect(Rect2(3, 3, w, size.y - 6), color)
-			draw_rect(Rect2(3, 3, w, 4), color.lightened(0.3))
-		var step := size.x / 10.0
-		for k in range(1, 10):
-			draw_rect(Rect2(k * step, 3, 2, size.y - 6), Color(0, 0, 0, 0.25))
+			draw_rect(Rect2(2, 2, w, size.y - 4), color)
+			draw_rect(Rect2(2, 2, w, 2), color.lightened(0.3))
 
 
 ## Passe au héros précédent / suivant, dans l'ordre de la collection.
@@ -470,8 +442,10 @@ func show_hero(id: String, tab := "Techniques") -> void:
 	_collection.visible = false
 	_page.visible = false
 	_detail.visible = true
+	refresh()  # pose d'abord la carte (et le héros animé dans sa fenêtre)
 	_preview.show_hero(GameData.hero(id))
-	refresh()
+	_d_card.scale = Vector2(0.0, 1.0)
+	create_tween().tween_property(_d_card, "scale:x", 1.0, 0.22).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
 func _fill_detail() -> void:
@@ -481,21 +455,19 @@ func _fill_detail() -> void:
 	var rarity := int(hero.get("rarity", 2))
 	var elem: String = ELEMENT_KEYS.get(hero.get("element"), "shadow")
 	var owned: bool = PlayerData.state.heroes.has(id)
-	_d_title.text = String(hero.name).to_upper()
 	_d_count.text = _count.text
-	# Vitrine
 	_d_room.texture = ScreenPack.tex(F, "fond_" + elem)
-	_d_socle.texture = ScreenPack.tex(F, "socle_" + elem)
-	_d_class.texture = ScreenPack.trimmed(ScreenPack.tex(F, "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade")))
-	_d_element.texture = ScreenPack.trimmed(ScreenPack.tex(F, "element_%s_64" % elem))
-	for e: TextureRect in [_d_class, _d_element]:
-		(e.get_meta("shadow") as TextureRect).texture = e.texture
+	# La carte : reconstruite, le héros animé replacé dans sa fenêtre.
+	if _d_vpc.get_parent():
+		_d_vpc.get_parent().remove_child(_d_vpc)
+	_d_card.setup(hero, owned, false)
+	_d_card.content.add_child(_d_vpc)
 	var rcol: Color = (Palette.RARITIES.get(rarity, ["?", Color.WHITE])[1] as Color).lightened(0.25)
-	_d_rarity_label.text = String(Palette.RARITIES.get(rarity, ["?"])[0]).to_upper()
+	_d_rarity_label.text = "%s · %s" % [String(Palette.RARITIES.get(rarity, ["?"])[0]).to_upper(),
+		TarotCard.arcane(id).get("title", "")]
 	_d_rarity_label.add_theme_color_override("font_color", rcol)
-	_d_title.add_theme_color_override("font_color", rcol)
-	_d_role.text = "%s · %s" % [Palette.CLASS_NAMES.get(hero.get("class"), ""), Palette.ELEMENT_NAMES.get(hero.get("element"), "")]
-	_d_species.text = String(hero.get("species", ""))
+	_d_role.text = "%s · %s · %s" % [Palette.CLASS_NAMES.get(hero.get("class"), ""),
+		Palette.ELEMENT_NAMES.get(hero.get("element"), ""), hero.get("species", "")]
 	var tier := PlayerData.hero_echo_tier(id)
 	for i in _d_echoes.size():
 		_d_echoes[i].texture = ScreenPack.tex(F, "echo_full" if i < tier else "echo_empty")
@@ -505,7 +477,7 @@ func _fill_detail() -> void:
 	_d_level.text = "Niveau %d / %d" % [PlayerData.hero_level(id), PlayerData.hero_level_cap(id)]
 	_d_force.text = "Force %d" % _power(id)
 	var need := maxf(1.0, PlayerData.hero_xp_to_next(id))
-	_d_xp.size.x = maxf(0.0, 588.0 * clampf(PlayerData.hero_xp(id) / need, 0.0, 1.0))
+	_d_xp.size.x = maxf(0.0, XP_W * clampf(PlayerData.hero_xp(id) / need, 0.0, 1.0))
 	_d_xp.visible = _d_xp.size.x >= 12.0
 	_d_xp_text.text = "Expérience %d / %d · gagnée en chasse" % [PlayerData.hero_xp(id), PlayerData.hero_xp_to_next(id)]
 	_d_recruit.visible = not owned
@@ -547,9 +519,11 @@ Les Esprits se trouvent dans les coffres de fin de niveau." % [
 	# Onglets
 	for i in TABS.size():
 		var b: Button = _d_tabs[i]
-		var base := "tab_active" if TABS[i] == _tab else "tab_inactive"
+		var active: bool = TABS[i] == _tab
 		for st in ["normal", "hover", "pressed", "focus"]:
-			b.add_theme_stylebox_override(st, ScreenPack.nine(F, base))
+			b.add_theme_stylebox_override(st, _bookmark_style(active or st == "hover"))
+		for st in ["font_color", "font_hover_color", "font_pressed_color"]:
+			b.add_theme_color_override(st, Color("793b49") if active else UiKit.INK)
 	_path_panel.visible = false
 	for c in _tab_box.get_children():
 		c.queue_free()
@@ -566,18 +540,17 @@ Les Esprits se trouvent dans les coffres de fin de niveau." % [
 
 
 func _fill_skills(hero: Dictionary) -> void:
-	var rows: Array = ScreenPack.layout(F).techniques.row_rects
+	_page_title(_tab_box, Rect2(Vector2.ZERO, PAGE_R.size), "Techniques")
 	var attacks: Array = hero.get("attacks", [])
 	for i in mini(attacks.size(), 3):
 		var a: Dictionary = attacks[i]
-		var r := ScreenPack.rect(rows[i])
 		var kind := "Attaque de base"
 		if i == BattleUnit.SLOT_COOLDOWN:
 			kind = "Recharge %d s" % int(a.get("cooldown", 0))
 		elif i == BattleUnit.SLOT_ULTIMATE:
 			kind = "Ultime"
 		var anim: String = a.get("clip", a.get("anim", ""))
-		_technique_row(r, _attack_icon(a), "%s · %s" % [a.get("name", ""), kind], String(a.get("description", "")),
+		_technique_row(62.0 + i * 166.0, _attack_icon(a), String(a.get("name", "")), kind, String(a.get("description", "")),
 			func() -> void:
 				ui_sound.emit("ui_click")
 				_preview.play(anim))
@@ -585,19 +558,18 @@ func _fill_skills(hero: Dictionary) -> void:
 	var secrets: Array = hero.get("secret_techniques", [])
 	var path := PlayerData.hero_path(selected)
 	var unlocked := PlayerData.hero_echo_tier(selected) >= 3
-	var name := "Technique secrète · 6 Échos"
+	var name := "Technique secrète"
+	var kind2 := "6 Échos"
 	var desc := "Débloquée par la voie d'Héritage."
 	var clip := ""
 	if path < secrets.size():
 		var s: Dictionary = secrets[path]
 		clip = String(s.get("clip", ""))
 		if unlocked:
-			name = "%s · Technique secrète" % s.get("name", "")
+			name = String(s.get("name", ""))
+			kind2 = "Technique secrète"
 			desc = String(s.get("description", desc))
-	# Icône : la pose de technique du héros (image la plus forte de son animation « skill »), grisée tant
-	# qu'elle est verrouillée.
-	var icon: Texture2D = _skill_icon(selected)
-	_technique_row(ScreenPack.rect(rows[3]), icon, name, desc, func() -> void:
+	_technique_row(62.0 + 3 * 166.0, _skill_icon(selected), name, kind2, desc, func() -> void:
 		if clip != "":
 			ui_sound.emit("ui_click")
 			_preview.play(clip), not unlocked)
@@ -619,11 +591,14 @@ func _skill_icon(id: String) -> Texture2D:
 	return at
 
 
-func _technique_row(r: Rect2, icon: Texture2D, title: String, desc: String, on_press: Callable, locked := false) -> void:
+## Une technique sur la page : icône (clic = la voir jouée sur la carte), nom, type, description.
+func _technique_row(y: float, icon: Texture2D, title: String, kind: String, desc: String, on_press: Callable,
+		locked := false) -> void:
 	var holder := Control.new()
-	holder.position = r.position
+	holder.position = Vector2(0, y)
 	holder.size = Vector2(64, 64)
 	holder.tooltip_text = "Voir l'attaque"
+	holder.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	holder.gui_input.connect(func(e: InputEvent) -> void:
 		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 			on_press.call())
@@ -635,18 +610,15 @@ func _technique_row(r: Rect2, icon: Texture2D, title: String, desc: String, on_p
 		if locked:
 			ic.modulate = Color(0.35, 0.33, 0.4)
 			ScreenPack.image(holder, load("res://assets/ui/kit/lock.png"), Rect2(20, 20, 28, 28))
-	ScreenPack.text(_tab_box, title, Rect2(r.position + Vector2(94, 0), Vector2(r.size.x - 100, 34)), 26)
-	var d := ScreenPack.text(_tab_box, desc, Rect2(r.position + Vector2(94, 32), Vector2(r.size.x - 110, 28)), 20, UiKit.TEXT_SOFT)
-	d.clip_text = true
-	d.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	d.tooltip_text = desc
-	d.mouse_filter = Control.MOUSE_FILTER_PASS
+	ScreenPack.text(_tab_box, title, Rect2(76, y, 308, 32), 22)
+	ScreenPack.text(_tab_box, kind, Rect2(76, y + 32, 308, 26), 17, Color("793b49"))
+	ScreenPack.text(_tab_box, desc, Rect2(0, y + 70, 384, 84), 16, UiKit.TEXT_SOFT, 0, true)
 
 
 ## Les trois voies d'Héritage : une seule active (changement gratuit hors combat), toutes
-## progressent ensemble avec les Échos. Au palier 3 (6 Échos), une quatrième technique.
+## progressent ensemble avec les Échos. Survoler une voie montre ses 5 paliers sur l'autre page.
 func _fill_paths(id: String, hero: Dictionary) -> void:
-	var V: Dictionary = ScreenPack.layout(F).voies
+	_page_title(_tab_box, Rect2(Vector2.ZERO, PAGE_R.size), "Voies d'Héritage")
 	var tier := PlayerData.hero_echo_tier(id)
 	var active := PlayerData.hero_path(id)
 	var owned: bool = PlayerData.state.heroes.has(id)
@@ -654,7 +626,7 @@ func _fill_paths(id: String, hero: Dictionary) -> void:
 	var paths: Array = hero.get("paths", [])
 	for i in mini(paths.size(), 3):
 		var path: Dictionary = paths[i]
-		var r := ScreenPack.rect(V.cards[i])
+		var r := Rect2(0, 60 + i * 222, 384, 206)
 		var state := "voie_active" if i == active else ("voie_inactive" if owned else "voie_locked")
 		var card := ScreenPack.panel(_tab_box, F, state, r)
 		var lines: Array[String] = []
@@ -674,14 +646,14 @@ func _fill_paths(id: String, hero: Dictionary) -> void:
 			if e is InputEventScreenTouch and e.pressed:
 				show.call())
 		var light := state == "voie_locked"
-		ScreenPack.text(card, String(path.get("name", "")), Rect2(16, 18, r.size.x - 32, 36), 25,
+		ScreenPack.text(card, String(path.get("name", "")), Rect2(16, 16, r.size.x - 32, 32), 22,
 			UiKit.WHITE if light else UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
-		ScreenPack.text(card, String(path.get("focus", "")) if owned else "Recrute le héros", Rect2(16, 58, r.size.x - 32, 30), 20,
+		ScreenPack.text(card, String(path.get("focus", "")) if owned else "Recrute le héros", Rect2(16, 50, r.size.x - 32, 26), 18,
 			UiKit.PARCHMENT_DARK if light else UiKit.TEXT_SOFT, HORIZONTAL_ALIGNMENT_CENTER)
-		ScreenPack.text(card, "Paliers : %d / 5 · survole pour voir" % tier, Rect2(16, 94, r.size.x - 32, 26), 17,
+		ScreenPack.text(card, "Paliers : %d / 5 · survole pour voir" % tier, Rect2(16, 78, r.size.x - 32, 24), 15,
 			UiKit.PARCHMENT_DARK if light else UiKit.WOOD, HORIZONTAL_ALIGNMENT_CENTER)
 		var label := "Active" if i == active else ("Choisir" if owned else "Verrouillée")
-		var cb := ScreenPack.button(_tab_box, F, "voie_choose", label, ScreenPack.rect(V.choose_touch_rects[i]), 26, UiKit.INK)
+		var cb := ScreenPack.button(_tab_box, F, "voie_choose", label, Rect2(72, r.position.y + 112, 240, 76), 22, UiKit.INK)
 		cb.disabled = i == active or not owned
 		if i == active:
 			cb.add_theme_stylebox_override("disabled", ScreenPack.nine(F, "voie_choose_normal"))
@@ -696,53 +668,49 @@ func _fill_paths(id: String, hero: Dictionary) -> void:
 
 ## La relique ancienne du héros : cinq paliers, fragments gagnés en chasse.
 func _fill_relic(id: String, hero: Dictionary) -> void:
-	var R: Dictionary = ScreenPack.layout(F).relic
+	_page_title(_tab_box, Rect2(Vector2.ZERO, PAGE_R.size), "Relique")
 	var relic: Dictionary = GameData.relics.get("relics", {}).get(id, {})
 	if relic.is_empty():
-		ScreenPack.text(_tab_box, "Pas de relique connue.", Rect2(790, 760, 900, 40), 26, UiKit.TEXT_SOFT)
+		ScreenPack.text(_tab_box, "Pas de relique connue.", Rect2(0, 70, 384, 40), 22, UiKit.TEXT_SOFT)
 		return
 	if not PlayerData.relics_unlocked():
-		ScreenPack.image(_tab_box, load("res://assets/ui/kit/lock.png"), Rect2(800, 790, 64, 64))
-		ScreenPack.text(_tab_box, "%s · relique scellée" % relic.get("name", ""), Rect2(890, 770, 940, 44), 28)
+		ScreenPack.image(_tab_box, load("res://assets/ui/kit/lock.png"), Rect2(160, 80, 64, 64))
+		ScreenPack.text(_tab_box, "%s · relique scellée" % relic.get("name", ""), Rect2(0, 160, 384, 64), 22, UiKit.INK,
+			HORIZONTAL_ALIGNMENT_CENTER, true)
 		ScreenPack.text(_tab_box, "Les reliques s'éveillent après la Campagne 1 : bats Morvath au dernier niveau du monde 10 " +
-			"pour ouvrir la Campagne Héroïque, où se trouvent leurs fragments.", Rect2(890, 820, 940, 120), 22, UiKit.TEXT_SOFT, 0, true)
+			"pour ouvrir la Campagne Héroïque, où se trouvent leurs fragments.", Rect2(0, 236, 384, 200), 18, UiKit.TEXT_SOFT,
+			HORIZONTAL_ALIGNMENT_CENTER, true)
 		return
 	var tier := PlayerData.relic_tier(id)
 	var tiers: Array = GameData.progression.get("relic_tiers", [])
-	var pr := Rect2(780, 752, 420, 210)
-	var p := ScreenPack.panel(_tab_box, F, "relic_panel", pr)
-	p.mouse_filter = Control.MOUSE_FILTER_PASS
-	p.tooltip_text = "\n".join([
-		"Où la trouver : %s (%s)" % [relic.get("dungeon", ""), relic.get("material", "")],
-		"III · Éveillée : %s" % relic.get("awakening", ""), "IV · Accordée : %s" % relic.get("accord", ""),
-		"V · Héritage : %s" % relic.get("contribution", ""), "Épreuve du palier V : %s" % relic.get("trial", "")])
-	var img := ScreenPack.image(p, load(String(relic.sprite)) if ResourceLoader.exists(String(relic.get("sprite", ""))) else null,
-		Rect2(pr.size.x - 112, 64, 84, 84))
+	var img := ScreenPack.image(_tab_box, load(String(relic.sprite)) if ResourceLoader.exists(String(relic.get("sprite", ""))) else null,
+		Rect2(0, 56, 96, 96))
 	img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	img.tooltip_text = "\n".join([
+		"Où la trouver : %s (%s)" % [relic.get("dungeon", ""), relic.get("material", "")],
+		"Épreuve du palier V : %s" % relic.get("trial", "")])
+	img.mouse_filter = Control.MOUSE_FILTER_PASS
 	if tier == 0:
 		img.modulate = Color(0.35, 0.33, 0.38)
-	ScreenPack.text(p, String(relic.name), Rect2(20, 16, pr.size.x - 40, 34), 24, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
+	ScreenPack.text(_tab_box, String(relic.name), Rect2(108, 56, 276, 56), 20, UiKit.INK, 0, true)
 	var state_name := "Pas encore retrouvée" if tier == 0 else "Palier %d · %s" % [tier, tiers[tier - 1].get("name", "")]
-	ScreenPack.text(p, state_name, Rect2(20, 52, pr.size.x - 40, 30), 21, UiKit.WOOD, HORIZONTAL_ALIGNMENT_CENTER)
+	ScreenPack.text(_tab_box, state_name, Rect2(108, 112, 276, 26), 17, Color("793b49"))
 	var cost := PlayerData.relic_next_cost(id)
 	var need := int(cost.get("fragments", 0))
-	ScreenPack.text(p, "Fragments : %d / %d" % [PlayerData.relic_fragments(id), need], Rect2(24, 128, 300, 28), 20)
-	ScreenPack.text(p, String(relic.get("dungeon", "")), Rect2(24, 158, 300, 28), 20)
-	# Les cinq paliers, chacun avec son bonus propre au héros (statistiques + effet sur ses attaques).
-	ScreenPack.text(_tab_box, "LES CINQ PALIERS", Rect2(1234, 758, 500, 34), 24)
+	ScreenPack.text(_tab_box, "Fragments : %d / %d · %s" % [PlayerData.relic_fragments(id), need, relic.get("dungeon", "")],
+		Rect2(0, 160, 384, 48), 16, UiKit.TEXT_SOFT, 0, true)
+	_separator(_tab_box, 214, 0)
 	for i in 5:
-		var y := 796.0 + i * 31.0
+		var y := 240.0 + i * 70.0
 		var st := "relic_step_full" if i < tier else ("relic_step_active" if i == tier else "relic_step_empty")
-		ScreenPack.image(_tab_box, ScreenPack.tex(F, st), Rect2(1234, y, 28, 28))
-		ScreenPack.text(_tab_box, str(i + 1), Rect2(1234, y, 28, 28), 15, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-		var line := ScreenPack.text(_tab_box, relic_tier_text(hero, i), Rect2(1270, y - 1, 584, 30), 17,
-			UiKit.INK if i < tier else UiKit.TEXT_SOFT)
-		line.tooltip_text = "Palier %d : %s" % [i + 1, relic_tier_text(hero, i)]
-		line.mouse_filter = Control.MOUSE_FILTER_PASS
+		ScreenPack.image(_tab_box, ScreenPack.tex(F, st), Rect2(0, y, 28, 28))
+		ScreenPack.text(_tab_box, str(i + 1), Rect2(0, y, 28, 28), 15, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+		ScreenPack.text(_tab_box, relic_tier_text(hero, i), Rect2(38, y - 2, 346, 66), 16,
+			UiKit.INK if i < tier else UiKit.TEXT_SOFT, 0, true)
 	if not cost.is_empty():
 		var label := "Retrouver" if tier == 0 else "Améliorer"
 		var b := ScreenPack.button(_tab_box, F, "upgrade", "%s · %d fragments%s" % [label, need,
-			"" if int(cost.materials) == 0 else " + %d matériaux" % int(cost.materials)], Rect2(1234, 956, 620, 66), 24, UiKit.INK)
+			"" if int(cost.materials) == 0 else " + %d mat." % int(cost.materials)], Rect2(0, 600, 384, 72), 20, UiKit.INK)
 		b.disabled = not PlayerData.can_upgrade_relic(id)
 		b.pressed.connect(func() -> void:
 			if PlayerData.upgrade_relic(id):
@@ -750,33 +718,30 @@ func _fill_relic(id: String, hero: Dictionary) -> void:
 				_preview.play("cheer"))
 
 
-## Les Échos (doublons du même héros) : paliers 1, 3, 6, 9, 12 et leurs gains de statistiques.
+## Les Échos (doublons du même héros) : paliers 1, 3, 6, 9, 12, leurs statistiques et leur bonus.
 func _fill_echoes(id: String, hero: Dictionary) -> void:
-	var rows: Array = ScreenPack.layout(F).echoes.row_rects
+	_page_title(_tab_box, Rect2(Vector2.ZERO, PAGE_R.size), "Échos")
 	var e: Dictionary = GameData.progression.get("echoes", {})
 	var tier := PlayerData.hero_echo_tier(id)
 	var thresholds: Array = e.get("thresholds", [])
 	var unlocks: Array = e.get("unlocks", [])
-	for k in mini(thresholds.size(), rows.size()):
-		var r := ScreenPack.rect(rows[k])
+	var mods: Array = Progression.personal(hero, GameData.progression).get("echoes", [])
+	for k in mini(thresholds.size(), 5):
+		var y := 58.0 + k * 122.0
 		var reached := tier > k
-		ScreenPack.image(_tab_box, ScreenPack.tex(F, "echo_full" if reached else "echo_empty"), Rect2(r.position + Vector2(0, 2), Vector2(36, 36)))
 		var col := UiKit.INK if reached else UiKit.TEXT_SOFT
+		ScreenPack.image(_tab_box, ScreenPack.tex(F, "echo_full" if reached else "echo_empty"), Rect2(0, y, 32, 32))
 		ScreenPack.text(_tab_box, "%d Échos · %s" % [int(thresholds[k]), unlocks[k] if k < unlocks.size() else ""],
-			Rect2(r.position + Vector2(44, 0), Vector2(300, r.size.y)), 19, col)
+			Rect2(40, y, 344, 30), 19, col)
 		ScreenPack.text(_tab_box, "+%d %% %s, +%d %% %s, +%d %% autres" % [int(float(e.primary[k]) * 100), hero.get("primary", ""),
 			int(float(e.secondary[k]) * 100), hero.get("secondary", ""), int(float(e.other[k]) * 100)],
-			Rect2(r.position + Vector2(350, 0), Vector2(300, r.size.y)), 17, col)
-		# Bonus de compétence propre au héros à ce palier.
-		var mods: Array = Progression.personal(hero, GameData.progression).get("echoes", [])
+			Rect2(40, y + 30, 344, 26), 15, col)
 		var bonus := ""
 		if k < mods.size():
 			bonus = " · ".join((mods[k] as Array).map(func(m: Dictionary) -> String: return String(m.get("text", ""))))
-		var bl := ScreenPack.text(_tab_box, bonus, Rect2(r.position + Vector2(660, 0), Vector2(r.size.x - 660, r.size.y)), 17,
-			UiKit.WOOD if reached else UiKit.TEXT_SOFT)
-		bl.tooltip_text = bonus
-		bl.mouse_filter = Control.MOUSE_FILTER_PASS
-	ScreenPack.text(_tab_box, "Un doublon donne un Écho. Aucune autre source.", Rect2(780, 998, 1072, 30), 19, UiKit.TEXT_SOFT)
+		ScreenPack.text(_tab_box, bonus, Rect2(40, y + 56, 344, 56), 15, Color("793b49") if reached else UiKit.TEXT_SOFT, 0, true)
+	ScreenPack.text(_tab_box, "Un doublon donne un Écho. Aucune autre source.", Rect2(0, 680, 384, 30), 15, UiKit.TEXT_SOFT,
+		HORIZONTAL_ALIGNMENT_CENTER)
 
 
 func _set_tab(t: String) -> void:

@@ -1,0 +1,407 @@
+{
+  "version": 1,
+  "texture_filter": "nearest",
+  "mipmaps": false,
+  "card": {
+    "size": [
+      384,
+      640
+    ],
+    "window": [
+      32,
+      112,
+      320,
+      400
+    ],
+    "roman_cartouche": [
+      124,
+      64,
+      136,
+      28
+    ],
+    "name_ribbon": [
+      128,
+      536,
+      128,
+      24
+    ],
+    "medallions": {
+      "class": {
+        "center": [
+          46,
+          558
+        ],
+        "radius": 20,
+        "icon_rect": [
+          30,
+          542,
+          32,
+          32
+        ]
+      },
+      "element": {
+        "center": [
+          338,
+          558
+        ],
+        "radius": 20,
+        "icon_rect": [
+          322,
+          542,
+          32,
+          32
+        ]
+      }
+    },
+    "hero_feet_in_window": [
+      160,
+      344
+    ],
+    "hero_feet_in_card": [
+      192,
+      456
+    ],
+    "shine_size": [
+      384,
+      640
+    ],
+    "shadow_size": [
+      384,
+      640
+    ]
+  },
+  "grimoire": {
+    "size": [
+      1100,
+      1000
+    ],
+    "writable_left": [
+      108,
+      128,
+      384,
+      728
+    ],
+    "writable_right": [
+      608,
+      128,
+      384,
+      728
+    ],
+    "book_nine_slice_margins": [
+      96,
+      112,
+      96,
+      112
+    ],
+    "recommended_resize": "split_pages_and_spine",
+    "parts": {
+      "left": {
+        "image": "grimoire/page_gauche_9slice.png",
+        "rect": [
+          0,
+          0,
+          532,
+          1000
+        ],
+        "margins": [
+          96,
+          112,
+          32,
+          112
+        ]
+      },
+      "spine": {
+        "image": "grimoire/reliure_9slice.png",
+        "rect": [
+          532,
+          0,
+          36,
+          1000
+        ],
+        "margins": [
+          0,
+          112,
+          0,
+          112
+        ]
+      },
+      "right": {
+        "image": "grimoire/page_droite_9slice.png",
+        "rect": [
+          568,
+          0,
+          532,
+          1000
+        ],
+        "margins": [
+          32,
+          112,
+          96,
+          112
+        ]
+      }
+    },
+    "bookmark_size": [
+      160,
+      64
+    ],
+    "bookmarks": [
+      {
+        "index": 1,
+        "rect": [
+          1052,
+          172,
+          160,
+          64
+        ],
+        "active_image": "grimoire/marque_page_01_actif.png",
+        "inactive_image": "grimoire/marque_page_01_inactif.png"
+      },
+      {
+        "index": 2,
+        "rect": [
+          1052,
+          300,
+          160,
+          64
+        ],
+        "active_image": "grimoire/marque_page_02_actif.png",
+        "inactive_image": "grimoire/marque_page_02_inactif.png"
+      },
+      {
+        "index": 3,
+        "rect": [
+          1052,
+          428,
+          160,
+          64
+        ],
+        "active_image": "grimoire/marque_page_03_actif.png",
+        "inactive_image": "grimoire/marque_page_03_inactif.png"
+      },
+      {
+        "index": 4,
+        "rect": [
+          1052,
+          556,
+          160,
+          64
+        ],
+        "active_image": "grimoire/marque_page_04_actif.png",
+        "inactive_image": "grimoire/marque_page_04_inactif.png"
+      },
+      {
+        "index": 5,
+        "rect": [
+          1052,
+          684,
+          160,
+          64
+        ],
+        "active_image": "grimoire/marque_page_05_actif.png",
+        "inactive_image": "grimoire/marque_page_05_inactif.png"
+      }
+    ]
+  },
+  "heroes": [
+    {
+      "id": "aegis",
+      "roman": "I",
+      "name": "Aegis",
+      "arcane_title": "Le Rempart",
+      "rarity": "rare",
+      "class": "Gardien",
+      "element": "lumiere",
+      "species": "Humain, briseur aux coups lourds"
+    },
+    {
+      "id": "kharok",
+      "roman": "II",
+      "name": "Kharok",
+      "arcane_title": "Le Scarabée",
+      "rarity": "rare",
+      "class": "Gardien",
+      "element": "nature",
+      "species": "Scarabée humanoïde, protecteur"
+    },
+    {
+      "id": "rivet",
+      "roman": "III",
+      "name": "Rivet",
+      "arcane_title": "Le Franc-Tireur",
+      "rarity": "rare",
+      "class": "Traqueur",
+      "element": "ombre",
+      "species": "Rat humanoïde, tireur"
+    },
+    {
+      "id": "oona",
+      "roman": "IV",
+      "name": "Oona",
+      "arcane_title": "La Marée",
+      "rarity": "rare",
+      "class": "Soutien",
+      "element": "eau",
+      "species": "Pieuvre terrestre, soigneuse"
+    },
+    {
+      "id": "calx",
+      "roman": "V",
+      "name": "Calx",
+      "arcane_title": "L'Horloge",
+      "rarity": "rare",
+      "class": "Automate",
+      "element": "feu",
+      "species": "Automate de pierre et laiton"
+    },
+    {
+      "id": "nyx",
+      "roman": "VI",
+      "name": "Nyx",
+      "arcane_title": "La Nuit",
+      "rarity": "rare",
+      "class": "Lame",
+      "element": "ombre",
+      "species": "Chauve-souris humanoïde, vol de vie"
+    },
+    {
+      "id": "corbin",
+      "roman": "VII",
+      "name": "Corbin",
+      "arcane_title": "Le Corbeau",
+      "rarity": "epique",
+      "class": "Lame",
+      "element": "ombre",
+      "species": "Humain masqué, assassin"
+    },
+    {
+      "id": "brume",
+      "roman": "VIII",
+      "name": "Brume",
+      "arcane_title": "La Brume",
+      "rarity": "epique",
+      "class": "Arcaniste",
+      "element": "eau",
+      "species": "Être encapuchonné, mage de l'eau"
+    },
+    {
+      "id": "nacre",
+      "roman": "IX",
+      "name": "Nacre",
+      "arcane_title": "La Phalène",
+      "rarity": "epique",
+      "class": "Soutien",
+      "element": "lumiere",
+      "species": "Phalène humanoïde, sommeil"
+    },
+    {
+      "id": "sylve",
+      "roman": "X",
+      "name": "Sylve",
+      "arcane_title": "La Forêt",
+      "rarity": "epique",
+      "class": "Gardien",
+      "element": "nature",
+      "species": "Arbre vivant, entraves"
+    },
+    {
+      "id": "bastion",
+      "roman": "XI",
+      "name": "Bastion",
+      "arcane_title": "La Forteresse",
+      "rarity": "epique",
+      "class": "Gardien",
+      "element": "lumiere",
+      "species": "Humain, tank qui provoque"
+    },
+    {
+      "id": "saffran",
+      "roman": "XII",
+      "name": "Saffran",
+      "arcane_title": "L'Illusionniste",
+      "rarity": "epique",
+      "class": "Illusionniste",
+      "element": "feu",
+      "species": "Renard humanoïde, sceaux"
+    },
+    {
+      "id": "jin_seok",
+      "roman": "XIII",
+      "name": "Jin Seok",
+      "arcane_title": "Le Moine",
+      "rarity": "epique",
+      "class": "Moine",
+      "element": "lumiere",
+      "species": "Humain, moine de Shaolin"
+    },
+    {
+      "id": "orage",
+      "roman": "XIV",
+      "name": "Orage",
+      "arcane_title": "La Tempête",
+      "rarity": "legendaire",
+      "class": "Moine",
+      "element": "lumiere",
+      "species": "Être encapuchonné, foudre et soins"
+    },
+    {
+      "id": "braise",
+      "roman": "XV",
+      "name": "Braise",
+      "arcane_title": "Le Brasier",
+      "rarity": "legendaire",
+      "class": "Arcaniste",
+      "element": "feu",
+      "species": "Salamandre humanoïde"
+    },
+    {
+      "id": "valen",
+      "roman": "XVI",
+      "name": "Valen",
+      "arcane_title": "La Lance",
+      "rarity": "legendaire",
+      "class": "Lancier",
+      "element": "lumiere",
+      "species": "Humain, lancier"
+    },
+    {
+      "id": "mei_lian",
+      "roman": "XVII",
+      "name": "Mei Lian",
+      "arcane_title": "L'Épéiste",
+      "rarity": "legendaire",
+      "class": "Lame",
+      "element": "nature",
+      "species": "Humaine du mont Hua, pétales"
+    },
+    {
+      "id": "yun_tao",
+      "roman": "XVIII",
+      "name": "Yun Tao",
+      "arcane_title": "Le Courant",
+      "rarity": "legendaire",
+      "class": "Moine",
+      "element": "eau",
+      "species": "Humain de Wudang, parade"
+    },
+    {
+      "id": "tang_su",
+      "roman": "XIX",
+      "name": "Tang Su",
+      "arcane_title": "Le Poison",
+      "rarity": "legendaire",
+      "class": "Traqueur",
+      "element": "ombre",
+      "species": "Humaine du clan Tang"
+    }
+  ],
+  "illustrations": {
+    "provided": [
+      "corbin",
+      "aegis",
+      "orage"
+    ],
+    "technique": "exact original idle sprites composited into elemental backgrounds",
+    "remaining": 16
+  }
+}

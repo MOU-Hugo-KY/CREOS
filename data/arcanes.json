@@ -1,0 +1,24 @@
+{
+  "_note": "Arcane de chaque héros pour les cartes de tarot de la Loge : numéro romain et titre.",
+  "arcanes": {
+    "aegis": {"number": "I", "title": "Le Rempart"},
+    "kharok": {"number": "II", "title": "Le Scarabée"},
+    "rivet": {"number": "III", "title": "Le Franc-Tireur"},
+    "oona": {"number": "IV", "title": "La Marée"},
+    "calx": {"number": "V", "title": "L'Horloge"},
+    "nyx": {"number": "VI", "title": "La Nuit"},
+    "corbin": {"number": "VII", "title": "Le Corbeau"},
+    "brume": {"number": "VIII", "title": "La Brume"},
+    "nacre": {"number": "IX", "title": "La Phalène"},
+    "sylve": {"number": "X", "title": "La Forêt"},
+    "bastion": {"number": "XI", "title": "La Forteresse"},
+    "saffran": {"number": "XII", "title": "L'Illusionniste"},
+    "jin_seok": {"number": "XIII", "title": "Le Moine"},
+    "orage": {"number": "XIV", "title": "La Tempête"},
+    "braise": {"number": "XV", "title": "Le Brasier"},
+    "valen": {"number": "XVI", "title": "La Lance"},
+    "mei_lian": {"number": "XVII", "title": "L'Épéiste"},
+    "yun_tao": {"number": "XVIII", "title": "Le Courant"},
+    "tang_su": {"number": "XIX", "title": "Le Poison"}
+  }
+}
