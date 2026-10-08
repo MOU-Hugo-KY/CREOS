@@ -101,17 +101,26 @@ static func pixel_head(id: String) -> Texture2D:
 		return null
 	var img: Image = (sheet.anims.idle.frames[0][0] as Texture2D).get_image()
 	var used := img.get_used_rect()
-	var side := clampi(int(used.size.y * 0.58), 32, used.size.y)
-	var top := used.position.y
-	var xs := 0
-	var count := 0
-	for y in range(top, mini(top + side / 2, img.get_height())):
+	var h := used.size.y
+	# Axe du corps : le milieu des pieds ; la tête : le haut de la silhouette, près de cet axe.
+	var feet := 0.0
+	var n := 0
+	for y in range(maxi(used.position.y, used.end.y - 10), used.end.y):
 		for x in range(used.position.x, used.end.x):
 			if img.get_pixel(x, y).a > 0.5:
-				xs += x
-				count += 1
-	var cx := xs / maxi(1, count)
-	var region := Rect2i(clampi(cx - side / 2, 0, img.get_width() - side), maxi(0, top - 4), side, side)
+				feet += x
+				n += 1
+	feet = feet / maxi(1, n) if n > 0 else used.get_center().x
+	var head := 0.0
+	var m := 0
+	for y in range(used.position.y + int(h * 0.12), used.position.y + int(h * 0.4)):
+		for x in range(used.position.x, used.end.x):
+			if img.get_pixel(x, y).a > 0.5 and absf(x - feet) < h * 0.26:
+				head += x
+				m += 1
+	var cx := int(((head / m) + feet) / 2.0) if m > 0 else int(feet)
+	var side := clampi(int(h * 0.74), 32, img.get_height())
+	var region := Rect2i(clampi(cx - side / 2, 0, img.get_width() - side), maxi(0, used.position.y - 3), side, side)
 	var tex := ImageTexture.create_from_image(img.get_region(region))
 	_cache[key] = tex
 	return tex
