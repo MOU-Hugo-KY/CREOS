@@ -391,7 +391,9 @@ func _separator(parent: Control, y: float, x := PAGE_L.position.x) -> void:
 ## Style d'un marque-page (actif ou non).
 func _bookmark_style(active: bool) -> StyleBoxTexture:
 	var sb := StyleBoxTexture.new()
-	sb.texture = TarotCard.pack_tex("grimoire/marque_page_%s.png" % ("actif" if active else "inactif"))
+	sb.texture = TarotCard.pack_tex("grimoire/marque_page_actif.png")  # même ruban, assombri s'il est inactif
+	if not active:
+		sb.modulate_color = Color(0.62, 0.56, 0.62)
 	sb.content_margin_left = 18
 	sb.content_margin_right = 26
 	return sb
@@ -525,6 +527,7 @@ Les Esprits se trouvent dans les coffres de fin de niveau." % [
 			b.add_theme_stylebox_override(st, _bookmark_style(active or st == "hover"))
 		for st in ["font_color", "font_hover_color", "font_pressed_color"]:
 			b.add_theme_color_override(st, Color("793b49") if active else UiKit.INK)
+		b.position.x = BOOK.x + (1052.0 if active else 1036.0)  # le marque-page actif dépasse davantage
 	_path_panel.visible = false
 	for c in _tab_box.get_children():
 		c.queue_free()
