@@ -257,17 +257,13 @@ func _hero_card(hero: Dictionary) -> Control:
 	var badge := ScreenPack.panel(card, F, "badge_" + RARITY_KEYS.get(rarity, "rare"), Rect2(20, 20, 128, 44))
 	badge.name = "Rarity"
 	ScreenPack.text(badge, Palette.RARITIES.get(rarity, ["?"])[0], Rect2(0, 0, 128, 44), 18, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	var icons := HBoxContainer.new()
-	icons.name = "Icons"
-	icons.add_theme_constant_override("separation", 6)
-	icons.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	card.add_child(icons)
-	for path: String in ["classe_%s_32" % CLASS_KEYS.get(hero.get("class"), "blade"), "element_%s_32" % elem]:
-		var ic := TextureRect.new()
-		ic.texture = ScreenPack.tex(F, path)
-		ic.custom_minimum_size = Vector2(32, 32)
-		ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		icons.add_child(ic)
+	var cls := _icon_square(ScreenPack.tex(F, "classe_%s_64" % CLASS_KEYS.get(hero.get("class"), "blade")), 52,
+		Palette.CLASS_NAMES.get(hero.get("class"), ""))
+	cls.name = "Class"
+	card.add_child(cls)
+	var el := _icon_square(ScreenPack.tex(F, "element_%s_64" % elem), 52, Palette.ELEMENT_NAMES.get(hero.get("element"), ""))
+	el.name = "Element"
+	card.add_child(el)
 	if PlayerData.in_team(id):
 		var t := _badge("ÉQUIPE", Color("1f5f59"))
 		t.name = "Team"
@@ -301,8 +297,9 @@ func _layout_card(card: Control) -> void:
 	info.size = Vector2(w - 20, 82)
 	for c in info.get_children():
 		c.size.x = w - 50
-	var icons: Control = card.get_node("Icons")
-	icons.position = Vector2(w - 98, h - 82)
+	# Classe et élément : carrés dans les coins bas de la salle, de part et d'autre du socle.
+	(card.get_node("Class") as Control).position = Vector2(26, h - 112 - 66)
+	(card.get_node("Element") as Control).position = Vector2(w - 26 - 52, h - 112 - 66)
 	if card.has_node("Team"):
 		var t: Control = card.get_node("Team")
 		t.position = Vector2(w - t.size.x - 22, 22)
@@ -337,8 +334,15 @@ func _build_detail(_page: VBoxContainer) -> void:
 	_preview.pedestal = false
 	_preview.zoom = 0.62
 	vpc.add_child(_preview)
-	_d_class = ScreenPack.image(root, null, ScreenPack.rect(L.class_badge_rect))
-	_d_element = ScreenPack.image(root, null, ScreenPack.rect(L.element_badge_rect))
+	var sq_c := _icon_square(null, 64)
+	var tr0 := ScreenPack.rect(L.hero_type_rect)
+	sq_c.position = tr0.position + Vector2(0, -78)
+	root.add_child(sq_c)
+	_d_class = sq_c.get_node("Icon")
+	var sq_e := _icon_square(null, 64)
+	sq_e.position = tr0.position + Vector2(74, -78)
+	root.add_child(sq_e)
+	_d_element = sq_e.get_node("Icon")
 	var rr := ScreenPack.rect(L.rarity_rect)
 	_d_rarity = ScreenPack.panel(root, F, "badge_rare", rr)
 	_d_rarity_label = ScreenPack.text(root, "", rr, 22, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
@@ -817,6 +821,33 @@ func _tab_button(text: String, active: bool, on_press: Callable) -> Button:
 		b.add_theme_color_override(state, UiKit.INK if active else UiKit.PARCHMENT)
 	b.pressed.connect(on_press)
 	return b
+
+
+## Carré d'insigne (classe ou élément) : tuile d'encre cerclée de laiton, icône centrée.
+func _icon_square(tex: Texture2D, side: float, tip := "") -> Panel:
+	var sq := Panel.new()
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color("29262e")
+	sb.border_color = Color("c6a66c")
+	sb.set_border_width_all(3)
+	sb.shadow_color = Color(0, 0, 0, 0.5)
+	sb.shadow_offset = Vector2(3, 3)
+	sb.shadow_size = 1
+	sq.add_theme_stylebox_override("panel", sb)
+	sq.size = Vector2(side, side)
+	sq.tooltip_text = tip
+	sq.mouse_filter = Control.MOUSE_FILTER_PASS if tip != "" else Control.MOUSE_FILTER_IGNORE
+	var ic := TextureRect.new()
+	ic.name = "Icon"
+	ic.texture = tex
+	ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	ic.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	ic.position = Vector2(3, 3)
+	ic.size = Vector2(side - 6, side - 6)
+	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	sq.add_child(ic)
+	return sq
 
 
 func _badge(text: String, color: Color) -> PanelContainer:
