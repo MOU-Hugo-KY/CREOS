@@ -77,16 +77,26 @@ func frame_at(name: String, t: float, clip_dur: float, clip_hit: float) -> Textu
 	if a.loop:
 		p = fposmod(t, total)
 	else:
+		# Vitesse proche de celle du dessin (au plus 25 % plus lente) : si le clip du jeu est plus
+		# long, l'animation démarre plus tard (le héros respire en attendant) pour que sa frappe
+		# tombe sur l'impact, et il revient au repos une fois finie.
 		var hit: float = a.hit_time
+		var k := 1.0
+		var start := 0.0
 		if hit > 0.0 and clip_hit > 0.0:
-			var after_clip := maxf(0.05, clip_dur - clip_hit)
-			if t <= clip_hit:
-				p = t / clip_hit * hit
-			else:
-				p = hit + (t - clip_hit) / after_clip * (total - hit) * 1.4
+			k = clampf(clip_hit / hit, 0.6, 1.25)
+			start = maxf(0.0, clip_hit - hit * k)
 		elif clip_dur > total:
-			p = t * total / clip_dur
-		p = minf(p, total - 0.001)
+			k = minf(clip_dur / total, 1.25)
+		p = (t - start) / k
+		if (p < 0.0 or p >= total) and anims.has("idle") and name != "death":
+			var idle: Dictionary = anims.idle
+			return _frame_in(idle, fposmod(t, idle.total))
+		p = clampf(p, 0.0, total - 0.001)
+	return _frame_in(a, p)
+
+
+func _frame_in(a: Dictionary, p: float) -> Texture2D:
 	var acc := 0.0
 	for f: Array in a.frames:
 		acc += float(f[1])
