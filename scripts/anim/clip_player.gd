@@ -148,9 +148,7 @@ func actor_rect(id := "") -> Rect2:
 	var cut := cid.rfind("_")
 	if cut > 0 and _pixel_bundle() and PixelSheet.for_actor(cid.substr(0, cut)):
 		var ps := PixelSheet.for_actor(cid.substr(0, cut))
-		if ps.facing < 0.0:
-			return ps.body_rect()  # monstre : taille propre à chacun
-		return Rect2(Vector2(-36, -72) * ps.scale, Vector2(72, 72) * ps.scale)
+		return ps.body_rect()  # taille réelle du dessin (héros et monstres)
 	if cut > 0 and bundle.ends_with("heroes/"):
 		var rig := Rig.for_actor(cid.substr(0, cut))
 		if rig:
