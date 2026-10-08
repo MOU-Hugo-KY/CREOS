@@ -39,6 +39,11 @@ var _flame: ShaderMaterial
 var _columns: Dictionary = {}  # "rare"… -> Anim
 var _burst: Anim
 var _sparks: Anim
+var _glow: Control
+var _embers: Control
+var _lantern_y := 0.0
+var _lit_y := 0.0
+var _time := 0.0
 var _balance: Dictionary = {}  # monnaie -> Label
 var _buttons: Dictionary = {}  # monnaie -> Button
 var _odds: Label
@@ -84,6 +89,9 @@ func _ready() -> void:
 	_scene.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(_scene)
 	ScreenPack.image(_scene, ScreenPack.tex(S, "fond"), Rect2(Vector2.ZERO, sr.size))
+	_glow = _Ambient.new()  # lueur qui respire et cercle de runes, derrière la lanterne
+	_glow.size = sr.size
+	_scene.add_child(_glow)
 	_sparks = _anim("particules", L.particles_anchor_in_scene)
 	_lantern = ScreenPack.image(_scene, ScreenPack.tex(S, "lanterne"), ScreenPack.rect(L.lantern_sprite_rect_in_scene))
 	_lit = _anim("lanterne_allumage", L.lantern_anchor_in_scene)
@@ -95,6 +103,12 @@ func _ready() -> void:
 	for c: String in ["rare", "epic", "legendary"]:
 		_columns[c] = _anim("colonne_" + c, L.column_anchor_in_scene)
 	_burst = _anim("eclat_final", L.final_anchor_in_scene)
+	_embers = _Ambient.new()  # braises et poussières dorées qui montent devant
+	_embers.front = true
+	_embers.size = sr.size
+	_scene.add_child(_embers)
+	_lantern_y = _lantern.position.y
+	_lit_y = _lit.position.y
 	var fade := _SideFade.new()  # bandes sombres en haut et en bas pour le texte
 	fade.size = Vector2(1920, 1080)
 	root.add_child(fade)
@@ -166,6 +180,85 @@ func _ready() -> void:
 
 	_build_reveal(root, L.reveal)
 	PlayerData.changed.connect(_refresh)
+
+
+## Vie de la salle : la lanterne flotte doucement et les boutons d'invocation disponibles brillent.
+func _process(delta: float) -> void:
+	_time += delta
+	var bob := sin(_time * 1.6) * 6.0 if not busy else 0.0
+	_lantern.position.y = _lantern_y + bob
+	_lit.position.y = _lit_y + bob
+	for currency: String in _buttons:
+		var b: Button = _buttons[currency]
+		var g := 1.0 + (0.12 + 0.12 * sin(_time * 3.0)) * (0.0 if b.disabled else 1.0)
+		b.modulate = Color(g, g, g)
+
+
+## Ambiance (coordonnées de la salle) : derrière, une lueur qui respire et des runes qui
+## s'allument tour à tour sur le cercle du sol ; devant (`front`), des braises qui montent.
+class _Ambient extends Control:
+	const CENTER := Vector2(575, 330)
+	const FLOOR := Vector2(578, 509)
+	const GLASS := Vector2(580, 350)
+	var front := false
+	var t := 0.0
+	var motes: Array = []  # [x, y, vitesse, phase, couleur]
+	var rng := RandomNumberGenerator.new()
+
+	func _ready() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var add := CanvasItemMaterial.new()
+		add.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+		material = add
+		rng.seed = 7
+		if front:
+			for i in 90:
+				motes.append(_mote(rng.randf_range(0, size.y)))
+
+	func _mote(y: float) -> Array:
+		var near := rng.randf() < 0.6
+		var x := FLOOR.x + rng.randf_range(-200, 200) if near else rng.randf_range(0, size.x)
+		var col := Color("ffd27a") if rng.randf() < 0.7 else Color("c9a0ff")
+		return [x, y, rng.randf_range(10, 28), rng.randf() * TAU, col]
+
+	func _process(delta: float) -> void:
+		t += delta
+		for m: Array in motes:
+			m[1] -= m[2] * delta
+			m[0] += sin(t * 1.3 + m[3]) * 6.0 * delta
+			if m[1] < -10:
+				m.assign(_mote(size.y + 10))
+		queue_redraw()
+
+	func _draw() -> void:
+		if front:
+			# Une lumière attend dans le verre de la lanterne, elle palpite doucement.
+			var pulse := 0.5 + 0.5 * sin(t * 2.0)
+			for i in 6:
+				var k := 1.0 - i / 6.0
+				draw_set_transform(GLASS + Vector2(0, sin(t * 1.6) * 3.6), 0.0, Vector2(0.6, 1.0))
+				draw_circle(Vector2.ZERO, 20.0 + i * 14.0, Color(1.0, 0.72, 0.35, (0.05 + 0.04 * pulse) * k))
+			draw_set_transform(Vector2.ZERO)
+			for m: Array in motes:
+				var a := 0.55 + 0.45 * sin(t * 2.5 + m[3])
+				var fade := clampf(m[1] / size.y * 1.6, 0.0, 1.0)
+				var c: Color = m[4]
+				var big := 4.0 if int(m[3] * 10) % 3 == 0 else 3.0
+				draw_rect(Rect2(Vector2(m[0], m[1]).floor(), Vector2(big, big)), Color(c, a * fade))
+			return
+		# Lueur douce derrière la lanterne (cercles empilés, en pixels).
+		var breathe := 0.5 + 0.5 * sin(t * 1.4)
+		for i in 10:
+			var r := 70.0 + i * 22.0 + breathe * 10.0
+			draw_circle(CENTER, r, Color(1.0, 0.7, 0.3, 0.1 * (1.0 - i / 10.0) * (0.7 + 0.3 * breathe)))
+		# Runes du cercle au sol : une vague de lumière qui tourne.
+		for i in 16:
+			var ang := i * TAU / 16.0
+			var p := FLOOR + Vector2(cos(ang) * 195.0, sin(ang) * 37.0)
+			var wave := pow(0.5 + 0.5 * cos(ang - t * 1.2), 6.0)
+			draw_rect(Rect2(p.floor() - Vector2(2, 2), Vector2(4, 4)), Color(1.0, 0.85, 0.45, 0.1 + 0.9 * wave))
+			if wave > 0.5:
+				draw_circle(p, 14.0, Color(1.0, 0.75, 0.35, 0.3 * wave))
 
 
 ## Fondu des bords de la salle vers les côtés assombris, et des bandes haut / bas pour le texte.
