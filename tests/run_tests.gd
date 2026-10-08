@@ -24,6 +24,7 @@ func _initialize() -> void:
 	test_team_combos()
 	test_lodge()
 	test_formation_lines()
+	test_hero_progression()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -603,3 +604,26 @@ func test_formation_lines() -> void:
 	foes[6].taunt_time = 3.0
 	check(e.reachable(melee, foes).has(foes[6]), "une provocation reste atteignable")
 	check(ranged.line() == 2 and e._support_mult(ranged) > 1.0, "soins et boucliers renforcés à l'arrière")
+
+
+## Progression propre à chaque héros : courbe de niveau et reliques avec effets sur ses attaques.
+func test_hero_progression() -> void:
+	print("
+[Progression propre à chaque héros]")
+	var gd := _data()
+	var mei: Dictionary = gd.hero("mei_lian")
+	var base_hits: int = mei.attacks[2].effects.size()
+	var r5 := Progression.hero_for_battle(mei, 30, gd.progression, 0, 5)
+	check(r5.attacks[2].effects.size() == base_hits + 4, "relique V de Mei Lian : 4 coups de plus à l'ultime")
+	check(r5.attacks[2].hit_times.size() == mei.attacks[2].get("hit_times", []).size() + 4, "un instant d'impact par coup ajouté")
+	check(gd.hero("mei_lian").attacks[2].effects.size() == base_hits, "les données du héros ne sont pas modifiées")
+	var nyx1 := Progression.hero_stats(gd.hero("nyx"), 1, 0, gd.progression)
+	var nyx60 := Progression.hero_stats(gd.hero("nyx"), 60, 0, gd.progression)
+	var bas60 := Progression.hero_stats(gd.hero("bastion"), 60, 0, gd.progression)
+	check(nyx60.crit > nyx1.crit and nyx60.spd > nyx1.spd, "Nyx gagne du critique et de la vitesse en montant")
+	check(bas60.spd == gd.hero("bastion").stats.spd, "Bastion ne gagne pas de vitesse")
+	var c3 := Progression.hero_for_battle(gd.hero("aegis"), 1, gd.progression, 0, 4)
+	check(float(c3.attacks[1].cooldown) < float(gd.hero("aegis").attacks[1].cooldown), "relique IV d'Aegis : recharge plus courte")
+	var e := BattleEngine.new()
+	e.setup([r5], [[{"id": "m", "stats": {"hp": 50000}}]], 3)
+	check(e.heroes[0].attacks[2].effects.size() == base_hits + 4, "le combat utilise l'ultime renforcé")

@@ -27,6 +27,7 @@ func reload() -> void:
 	hub = load_json("res://data/hub.json")
 	player_start = load_json("res://data/player_start.json")
 	progression = load_json("res://data/progression.json")
+	progression["heroes"] = load_json("res://data/hero_progression.json").get("heroes", {})
 	summon = load_json("res://data/summon.json")
 	quests = load_json("res://data/quests.json")
 	relics = load_json("res://data/relics.json")

@@ -659,13 +659,14 @@ func _fill_relic(id: String, hero: Dictionary) -> void:
 			con.z_index = 0
 		var st := "relic_step_full" if i < tier else ("relic_step_active" if i == tier else "relic_step_empty")
 		ScreenPack.image(_tab_box, ScreenPack.tex(F, st), r)
-		ScreenPack.text(_tab_box, str(i + 1), r, 28, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	var bonus := "Palier 1 : la relique est retrouvée."
-	if tier > 0:
-		var tt: Dictionary = tiers[tier - 1]
-		bonus = "+%d %% %s · +%d %% %s" % [int(float(tt.primary) * 100), hero.get("primary", ""),
-			int(float(tt.secondary) * 100), hero.get("secondary", "")]
-	ScreenPack.text(_tab_box, bonus, Rect2(1234, 912, 620, 32), 22)
+		var num := ScreenPack.text(_tab_box, str(i + 1), r, 28, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+		num.mouse_filter = Control.MOUSE_FILTER_PASS
+		num.tooltip_text = "Palier %d
+%s" % [i + 1, relic_tier_text(hero, i)]
+	# Ce que donne le palier actuel (ou le prochain) : statistiques et effet sur ses attaques.
+	var shown := maxi(0, tier - 1) if tier >= 5 else tier
+	var head := ("Palier %d : " if shown < tier else "Prochain palier (%d) : ") % (shown + 1)
+	ScreenPack.text(_tab_box, head + relic_tier_text(hero, shown), Rect2(1234, 896, 620, 54), 18, UiKit.INK, 0, true)
 	if not cost.is_empty():
 		var label := "Retrouver" if tier == 0 else "Améliorer"
 		var b := ScreenPack.button(_tab_box, F, "upgrade", "%s · %d fragments%s" % [label, need,
@@ -742,6 +743,28 @@ func _ask_level_up() -> void:
 
 
 # --- Petits éléments ----------------------------------------------------------------
+
+const STAT_LABELS := {"hp": "Vie", "atk": "Attaque", "mag": "Magie", "def": "Défense", "res": "Résistance",
+	"spd": "Vitesse", "crit": "Critique"}
+
+
+## Texte d'un palier de relique propre au héros : « +15 % Attaque, +3 pts Critique · Banquet : un 5e coup ».
+static func relic_tier_text(hero: Dictionary, i: int) -> String:
+	var tiers: Array = Progression.personal(hero, GameData.progression).get("relic", [])
+	if i < 0 or i >= tiers.size():
+		return ""
+	var bits: Array[String] = []
+	var st: Dictionary = tiers[i].get("stats", {})
+	for key: String in st:
+		if key == "crit":
+			bits.append("+%d pts %s" % [roundi(float(st[key]) * 100), STAT_LABELS[key]])
+		else:
+			bits.append("+%d %% %s" % [roundi(float(st[key]) * 100), STAT_LABELS.get(key, key)])
+	var text := ", ".join(bits)
+	for m: Dictionary in tiers[i].get("mods", []):
+		text += " · " + String(m.get("text", ""))
+	return text
+
 
 const ESPRIT_NAMES := {"oeuf": ["Œuf", "Œufs"], "petit": ["Petit", "Petits"], "grand": ["Grand", "Grands"],
 	"celeste": ["Céleste", "Célestes"]}

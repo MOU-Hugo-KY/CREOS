@@ -93,6 +93,9 @@ func _process(_delta: float) -> bool:
 		if action == "relics" and tab != "":
 			scene.hud.relics._tab = tab
 			scene.hud.relics.refresh()
+		if hero != "" and tab == "Relique":  # relics_open : ouvre les reliques pour la capture
+			root.get_node("PlayerData").state.dungeons["monde10_8"] = {"stars": 3}
+			root.get_node("PlayerData").state.relics = {hero: 2}
 		if hero != "":
 			scene.hud.lodge.show_hero(hero, tab if tab != "" else "Techniques")
 	if frames == 30 and hero != "" and tab == "Voies":  # montre le détail de la première voie

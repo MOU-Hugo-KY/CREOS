@@ -32,6 +32,8 @@ static func stats_at_level(base: Dictionary, level: int, growth: Dictionary) -> 
 	for key: String in base:
 		var g: float = growth.get(key, 0.0)
 		var v: float = float(base[key]) * (1.0 + g * (eff - 1.0))
+		if key == "crit":
+			v = float(base[key]) + g * (eff - 1.0)  # le critique gagne des points, pas un pourcentage
 		out[key] = v if key == "crit" else round(v)
 	return out
 
@@ -44,6 +46,7 @@ static func hero_for_battle(hero: Dictionary, level: int, config: Dictionary, ec
 	d["level"] = level
 	d["echoes"] = echoes
 	d["stats"] = hero_stats(hero, level, echoes, config, relic_tier)
+	apply_relic_mods(d.attacks, relic_mods(hero, config, relic_tier))
 	var secrets: Array = hero.get("secret_techniques", [])
 	if echo_tier(echoes, config) >= 3 and path < secrets.size() and secrets[path].has("effects"):
 		d.attacks.append(secrets[path].duplicate(true))
@@ -58,7 +61,8 @@ const SHEET_STATS := {"PV": ["hp"], "ATQ": ["atk"], "MAG": ["mag"], "DEF": ["def
 ## relique). Les Échos renforcent surtout la statistique principale du héros, puis la secondaire ;
 ## la relique aussi. La vitesse et le critique ne changent pas.
 static func hero_stats(hero: Dictionary, level: int, echoes: int, config: Dictionary, relic_tier := 0) -> Dictionary:
-	var s := stats_at_level(hero.get("stats", {}), level, config.get("stat_growth", {}))
+	var own := personal(hero, config)
+	var s := stats_at_level(hero.get("stats", {}), level, own.get("growth", config.get("stat_growth", {})))
 	# Rareté : un mythique est plus fort qu'un légendaire, lui-même plus fort qu'un épique.
 	var rarity := float(config.get("rarity_bonus", {}).get(str(int(hero.get("rarity", 3))), 0.0))
 	for key: String in ["hp", "atk", "mag", "def", "res"]:
@@ -75,12 +79,75 @@ static func hero_stats(hero: Dictionary, level: int, echoes: int, config: Dictio
 			rank = "secondary"
 		var echo_bonus := float(e.get(rank, [])[tier - 1]) if tier > 0 else 0.0
 		var relic_bonus := 0.0
-		if relic_tier > 0 and relic_tier <= relics.size() and rank != "other":
+		if own.has("relic"):
+			pass  # relique propre au héros : appliquée plus bas
+		elif relic_tier > 0 and relic_tier <= relics.size() and rank != "other":
 			relic_bonus = float(relics[relic_tier - 1].get(rank, 0.0))
 		for key: String in SHEET_STATS[sheet]:
 			if s.has(key):
 				s[key] = round(float(s[key]) * (1.0 + echo_bonus) * (1.0 + relic_bonus))
+	# Relique propre au héros : statistiques de son palier (critique en points, le reste en %).
+	var own_tiers: Array = own.get("relic", [])
+	if relic_tier > 0 and relic_tier <= own_tiers.size():
+		var bonus: Dictionary = own_tiers[relic_tier - 1].get("stats", {})
+		for key: String in bonus:
+			var keys: Array = ["def", "res"] if key == "def" else [key]
+			for k: String in keys:
+				if not s.has(k):
+					continue
+				if k == "crit":
+					s[k] = float(s[k]) + float(bonus[key])
+				else:
+					s[k] = round(float(s[k]) * (1.0 + float(bonus[key])))
 	return s
+
+
+## Progression propre au héros (data/hero_progression.json, chargée dans config "heroes").
+static func personal(hero: Dictionary, config: Dictionary) -> Dictionary:
+	return config.get("heroes", {}).get(String(hero.get("id", "")), {})
+
+
+## Effets de gameplay de la relique jusqu'au palier `relic_tier` : [{type, slot, text…}].
+static func relic_mods(hero: Dictionary, config: Dictionary, relic_tier: int) -> Array:
+	var out: Array = []
+	var tiers: Array = personal(hero, config).get("relic", [])
+	for i in mini(relic_tier, tiers.size()):
+		out.append_array(tiers[i].get("mods", []))
+	return out
+
+
+## Applique les effets de relique aux attaques (copie) d'un héros prêt pour le combat.
+static func apply_relic_mods(attacks: Array, mods: Array) -> void:
+	for m: Dictionary in mods:
+		var slot := int(m.get("slot", 0))
+		if slot >= attacks.size():
+			continue
+		var a: Dictionary = attacks[slot]
+		match String(m.get("type", "")):
+			"power":
+				for e: Dictionary in a.get("effects", []):
+					if e.has("power"):
+						e.power = float(e.power) * (1.0 + float(m.mult))
+			"extra_hits":
+				if not a.has("effects"):
+					a["effects"] = [{"type": "damage", "power": 1.0}]
+				var stat := "atk"
+				for e: Dictionary in a.effects:
+					if e.get("type") == "damage":
+						stat = String(e.get("stat", stat))
+				var times: Array = a.get("hit_times", [float(a.get("hit_time", 0.35))])
+				var last := float(times[-1]) if not times.is_empty() else 0.35
+				for i in int(m.count):
+					a.effects.append({"type": "damage", "power": float(m.power), "stat": stat})
+					last += 0.12
+					times.append(last)
+				a["hit_times"] = times
+			"cooldown":
+				a["cooldown"] = maxf(1.0, float(a.get("cooldown", 0.0)) - float(m.seconds))
+			"add_effect":
+				if not a.has("effects"):
+					a["effects"] = [{"type": "damage", "power": 1.0}]
+				a.effects.append((m.effect as Dictionary).duplicate(true))
 
 
 ## Palier d'Échos atteint (0 à 5) pour un nombre d'Échos (doublons du même héros).

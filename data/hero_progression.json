@@ -1,0 +1,1371 @@
+{
+ "_note": "Généré par tools/build_hero_progression.py : progression propre à chaque héros.",
+ "heroes": {
+  "corbin": {
+   "growth": {
+    "hp": 0.045,
+    "atk": 0.046,
+    "mag": 0.04,
+    "def": 0.025,
+    "res": 0.03,
+    "spd": 0.0025,
+    "crit": 0.0012
+   },
+   "relic": [
+    {
+     "stats": {
+      "atk": 0.05,
+      "crit": 0.004
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.1,
+      "crit": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.15,
+      "crit": 0.014
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.2,
+       "text": "Lame du corbeau : +20 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.2,
+      "crit": 0.02
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 1,
+       "power": 0.4,
+       "text": "Banquet des corbeaux : un 5e coup."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.25,
+      "crit": 0.024
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 2,
+       "effect": {
+        "type": "status",
+        "name": "armure_reduite",
+        "duration": 4.0
+       },
+       "text": "Banquet des corbeaux : Armure réduite."
+      }
+     ]
+    }
+   ]
+  },
+  "aegis": {
+   "growth": {
+    "hp": 0.052,
+    "atk": 0.044,
+    "mag": 0.04,
+    "def": 0.036,
+    "res": 0.03,
+    "spd": 0.001,
+    "crit": 0.0006
+   },
+   "relic": [
+    {
+     "stats": {
+      "atk": 0.05,
+      "def": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.1,
+      "def": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.15,
+      "def": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.15,
+       "text": "Ultime : +15 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.2,
+      "def": 0.1
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Technique : recharge -1,5 s."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.25,
+      "def": 0.12
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "status",
+        "name": "desequilibre",
+        "duration": 4.0
+       },
+       "text": "Attaque de base : Déséquilibre."
+      }
+     ]
+    }
+   ]
+  },
+  "brume": {
+   "growth": {
+    "hp": 0.048,
+    "atk": 0.04,
+    "mag": 0.047,
+    "def": 0.03,
+    "res": 0.036,
+    "spd": 0.0015,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "mag": 0.05,
+      "hp": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.1,
+      "hp": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.15,
+      "hp": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.15,
+       "text": "Ultime : +15 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.2,
+      "hp": 0.1
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.25,
+       "text": "Bouclier d'eau : +25 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.25,
+      "hp": 0.12
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Bouclier d'eau : recharge -1,5 s."
+      }
+     ]
+    }
+   ]
+  },
+  "orage": {
+   "growth": {
+    "hp": 0.05,
+    "atk": 0.042,
+    "mag": 0.04,
+    "def": 0.03,
+    "res": 0.03,
+    "spd": 0.002,
+    "crit": 0.0008
+   },
+   "relic": [
+    {
+     "stats": {
+      "atk": 0.05,
+      "spd": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.1,
+      "spd": 0.025
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.15,
+      "spd": 0.035
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 0,
+       "count": 1,
+       "power": 0.35,
+       "text": "Trois poings : un 4e poing."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.2,
+      "spd": 0.05
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 2,
+       "power": 0.25,
+       "text": "Ultime : 2 éclairs de plus."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.25,
+      "spd": 0.06
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.25,
+       "text": "Soin collectif : +25 %."
+      }
+     ]
+    }
+   ]
+  },
+  "kharok": {
+   "growth": {
+    "hp": 0.056,
+    "atk": 0.03,
+    "mag": 0.04,
+    "def": 0.042,
+    "res": 0.036,
+    "spd": 0.0,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "def": 0.05,
+      "hp": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "def": 0.1,
+      "hp": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "def": 0.15,
+      "hp": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.25,
+       "text": "Carapace partagée : bouclier +25 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "def": 0.2,
+      "hp": 0.1
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.2,
+       "text": "Carapace royale : +20 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "def": 0.25,
+      "hp": 0.12
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Carapace partagée : recharge -1,5 s."
+      }
+     ]
+    }
+   ]
+  },
+  "braise": {
+   "growth": {
+    "hp": 0.045,
+    "atk": 0.03,
+    "mag": 0.048,
+    "def": 0.03,
+    "res": 0.03,
+    "spd": 0.0,
+    "crit": 0.0008
+   },
+   "relic": [
+    {
+     "stats": {
+      "mag": 0.05,
+      "crit": 0.004
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.1,
+      "crit": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.15,
+      "crit": 0.014
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.5,
+       "text": "Brûlure de base : +50 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.2,
+      "crit": 0.02
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.2,
+       "text": "Technique : +20 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.25,
+      "crit": 0.024
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "dot",
+        "name": "brulure",
+        "power": 0.1,
+        "duration": 4.0
+       },
+       "text": "Technique : brûle aussi."
+      }
+     ]
+    }
+   ]
+  },
+  "nacre": {
+   "growth": {
+    "hp": 0.055,
+    "atk": 0.04,
+    "mag": 0.042,
+    "def": 0.03,
+    "res": 0.035,
+    "spd": 0.002,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "hp": 0.05,
+      "res": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "hp": 0.1,
+      "res": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "hp": 0.15,
+      "res": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.3,
+       "text": "Régénération : +30 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "hp": 0.2,
+      "res": 0.1
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Régénération : recharge -1,5 s."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "hp": 0.25,
+      "res": 0.12
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.3,
+       "text": "Attaque de base : +30 % de dégâts."
+      }
+     ]
+    }
+   ]
+  },
+  "rivet": {
+   "growth": {
+    "hp": 0.043,
+    "atk": 0.045,
+    "mag": 0.04,
+    "def": 0.03,
+    "res": 0.03,
+    "spd": 0.002,
+    "crit": 0.0016
+   },
+   "relic": [
+    {
+     "stats": {
+      "atk": 0.05,
+      "crit": 0.004
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.1,
+      "crit": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.15,
+      "crit": 0.014
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 1,
+       "power": 0.7,
+       "text": "Casse du siècle : un ricochet de plus."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.2,
+      "crit": 0.02
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.2,
+       "text": "Tir de contrebande : +20 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.25,
+      "crit": 0.024
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "status",
+        "name": "marque",
+        "duration": 4.0
+       },
+       "text": "Attaque de base : Marque."
+      }
+     ]
+    }
+   ]
+  },
+  "sylve": {
+   "growth": {
+    "hp": 0.06,
+    "atk": 0.04,
+    "mag": 0.035,
+    "def": 0.036,
+    "res": 0.036,
+    "spd": 0.0,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "hp": 0.05,
+      "def": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "hp": 0.1,
+      "def": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "hp": 0.15,
+      "def": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.3,
+       "text": "Régénération : +30 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "hp": 0.2,
+      "def": 0.1
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Régénération : recharge -1,5 s."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "hp": 0.25,
+      "def": 0.12
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 2,
+       "effect": {
+        "type": "shield",
+        "power": 0.6,
+        "stat": "def",
+        "target": "all_allies"
+       },
+       "text": "Ultime : bouclier sur toute l'équipe."
+      }
+     ]
+    }
+   ]
+  },
+  "valen": {
+   "growth": {
+    "hp": 0.05,
+    "atk": 0.045,
+    "mag": 0.04,
+    "def": 0.033,
+    "res": 0.03,
+    "spd": 0.0015,
+    "crit": 0.0008
+   },
+   "relic": [
+    {
+     "stats": {
+      "atk": 0.05,
+      "def": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.1,
+      "def": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.15,
+      "def": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.15,
+       "text": "Ultime : +15 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.2,
+      "def": 0.1
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 2,
+       "effect": {
+        "type": "status",
+        "name": "desequilibre",
+        "duration": 4.0
+       },
+       "text": "Ultime : Déséquilibre sur tous."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.25,
+      "def": 0.12
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Balayage : recharge -1,5 s."
+      }
+     ]
+    }
+   ]
+  },
+  "bastion": {
+   "growth": {
+    "hp": 0.06,
+    "atk": 0.028,
+    "mag": 0.04,
+    "def": 0.045,
+    "res": 0.035,
+    "spd": 0.0,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "def": 0.05,
+      "hp": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "def": 0.1,
+      "hp": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "def": 0.15,
+      "hp": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.2,
+       "text": "Mur collectif : bouclier +20 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "def": 0.2,
+      "hp": 0.1
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Provocation : recharge -1,5 s."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "def": 0.25,
+      "hp": 0.12
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "taunt",
+        "self_only": true,
+        "duration": 3.0
+       },
+       "text": "Attaque de base : provoque."
+      }
+     ]
+    }
+   ]
+  },
+  "saffran": {
+   "growth": {
+    "hp": 0.044,
+    "atk": 0.04,
+    "mag": 0.046,
+    "def": 0.03,
+    "res": 0.03,
+    "spd": 0.0025,
+    "crit": 0.0008
+   },
+   "relic": [
+    {
+     "stats": {
+      "mag": 0.05,
+      "spd": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.1,
+      "spd": 0.025
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.15,
+      "spd": 0.035
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.15,
+       "text": "Ultime : +15 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.2,
+      "spd": 0.05
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Leurre : recharge -1,5 s."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.25,
+      "spd": 0.06
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 0,
+       "count": 1,
+       "power": 0.4,
+       "text": "Trait trompeur : un second trait."
+      }
+     ]
+    }
+   ]
+  },
+  "oona": {
+   "growth": {
+    "hp": 0.052,
+    "atk": 0.04,
+    "mag": 0.045,
+    "def": 0.03,
+    "res": 0.035,
+    "spd": 0.0,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "mag": 0.05,
+      "hp": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.1,
+      "hp": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.15,
+      "hp": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.25,
+       "text": "Élixir : +25 % de soin."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.2,
+      "hp": 0.1
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Élixir : recharge -1,5 s."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.25,
+      "hp": 0.12
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.3,
+       "text": "Ultime : soin collectif +30 %."
+      }
+     ]
+    }
+   ]
+  },
+  "calx": {
+   "growth": {
+    "hp": 0.052,
+    "atk": 0.04,
+    "mag": 0.042,
+    "def": 0.038,
+    "res": 0.03,
+    "spd": 0.0,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "mag": 0.05,
+      "def": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.1,
+      "def": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "mag": 0.15,
+      "def": 0.07
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.15,
+       "text": "Ultime : +15 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.2,
+      "def": 0.1
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Alarme : recharge -1,5 s."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "mag": 0.25,
+      "def": 0.12
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "gauge",
+        "amount": -0.05
+       },
+       "text": "Attaque de base : retarde la cible."
+      }
+     ]
+    }
+   ]
+  },
+  "nyx": {
+   "growth": {
+    "hp": 0.042,
+    "atk": 0.045,
+    "mag": 0.04,
+    "def": 0.03,
+    "res": 0.03,
+    "spd": 0.003,
+    "crit": 0.0014
+   },
+   "relic": [
+    {
+     "stats": {
+      "crit": 0.01,
+      "spd": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "crit": 0.02,
+      "spd": 0.025
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "crit": 0.03,
+      "spd": 0.035
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 1,
+       "power": 0.5,
+       "text": "Ultime : une 5e morsure."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "crit": 0.04,
+      "spd": 0.05
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.15,
+       "text": "Attaque de base : +15 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "crit": 0.05,
+      "spd": 0.06
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 1,
+       "power": 0.5,
+       "text": "Ultime : une 6e morsure."
+      }
+     ]
+    }
+   ]
+  },
+  "mei_lian": {
+   "growth": {
+    "hp": 0.044,
+    "atk": 0.045,
+    "mag": 0.04,
+    "def": 0.03,
+    "res": 0.03,
+    "spd": 0.0025,
+    "crit": 0.0012
+   },
+   "relic": [
+    {
+     "stats": {
+      "atk": 0.05,
+      "spd": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.1,
+      "spd": 0.025
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.15,
+      "spd": 0.035
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 1,
+       "power": 0.3,
+       "text": "Les 24 mouvements : un 7e coup."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.2,
+      "spd": 0.05
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 1,
+       "power": 0.3,
+       "text": "Les 24 mouvements : un 8e coup."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.25,
+      "spd": 0.06
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 2,
+       "power": 0.3,
+       "text": "Les 24 mouvements : 2 coups de plus (10)."
+      }
+     ]
+    }
+   ]
+  },
+  "jin_seok": {
+   "growth": {
+    "hp": 0.055,
+    "atk": 0.036,
+    "mag": 0.04,
+    "def": 0.04,
+    "res": 0.03,
+    "spd": 0.0,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "def": 0.05,
+      "atk": 0.02
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "def": 0.1,
+      "atk": 0.05
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "def": 0.15,
+      "atk": 0.07
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 1,
+       "power": 0.35,
+       "text": "Cent paumes : une paume de plus."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "def": 0.2,
+      "atk": 0.1
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.25,
+       "text": "Cloche d'or : bouclier +25 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "def": 0.25,
+      "atk": 0.12
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 2,
+       "power": 0.35,
+       "text": "Cent paumes : 2 paumes de plus."
+      }
+     ]
+    }
+   ]
+  },
+  "yun_tao": {
+   "growth": {
+    "hp": 0.05,
+    "atk": 0.04,
+    "mag": 0.04,
+    "def": 0.036,
+    "res": 0.03,
+    "spd": 0.002,
+    "crit": 0.0
+   },
+   "relic": [
+    {
+     "stats": {
+      "def": 0.05,
+      "spd": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "def": 0.1,
+      "spd": 0.025
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "def": 0.15,
+      "spd": 0.035
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.15,
+       "text": "Ultime : +15 % de dégâts."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "def": 0.2,
+      "spd": 0.05
+     },
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.5,
+       "text": "Cercle du Taiji : recharge -1,5 s."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "def": 0.25,
+      "spd": 0.06
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "status",
+        "name": "desequilibre",
+        "duration": 4.0
+       },
+       "text": "Attaque de base : Déséquilibre."
+      }
+     ]
+    }
+   ]
+  },
+  "tang_su": {
+   "growth": {
+    "hp": 0.05,
+    "atk": 0.044,
+    "mag": 0.035,
+    "def": 0.03,
+    "res": 0.03,
+    "spd": 0.0025,
+    "crit": 0.0012
+   },
+   "relic": [
+    {
+     "stats": {
+      "atk": 0.05,
+      "crit": 0.004
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.1,
+      "crit": 0.01
+     },
+     "mods": []
+    },
+    {
+     "stats": {
+      "atk": 0.15,
+      "crit": 0.014
+     },
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.5,
+       "text": "Poison de base : +50 %."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.2,
+      "crit": 0.02
+     },
+     "mods": [
+      {
+       "type": "extra_hits",
+       "slot": 2,
+       "count": 1,
+       "power": 0.5,
+       "text": "Pluie d'aiguilles : une vague de plus."
+      }
+     ]
+    },
+    {
+     "stats": {
+      "atk": 0.25,
+      "crit": 0.024
+     },
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "dot",
+        "name": "poison",
+        "power": 0.12,
+        "duration": 4.0
+       },
+       "text": "Méridiens fermés : empoisonne."
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
