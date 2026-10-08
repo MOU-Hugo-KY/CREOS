@@ -49,6 +49,7 @@ static func hero_for_battle(hero: Dictionary, level: int, config: Dictionary, ec
 	d["echoes"] = echoes
 	d["stats"] = hero_stats(hero, level, echoes, config, relic_tier)
 	apply_relic_mods(d.attacks, relic_mods(hero, config, relic_tier))
+	apply_relic_mods(d.attacks, echo_mods(hero, config, echo_tier(echoes, config)))
 	var secrets: Array = hero.get("secret_techniques", [])
 	if echo_tier(echoes, config) >= 3 and path < secrets.size() and secrets[path].has("effects"):
 		d.attacks.append(secrets[path].duplicate(true))
@@ -117,6 +118,15 @@ static func relic_mods(hero: Dictionary, config: Dictionary, relic_tier: int) ->
 	var tiers: Array = personal(hero, config).get("relic", [])
 	for i in mini(relic_tier, tiers.size()):
 		out.append_array(tiers[i].get("mods", []))
+	return out
+
+
+## Bonus de compétences des Échos jusqu'au palier `tier` (1 à 5).
+static func echo_mods(hero: Dictionary, config: Dictionary, tier: int) -> Array:
+	var out: Array = []
+	var tiers: Array = personal(hero, config).get("echoes", [])
+	for i in mini(tier, tiers.size()):
+		out.append_array(tiers[i])
 	return out
 
 

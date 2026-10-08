@@ -93,6 +93,55 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Lame du corbeau : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 1,
+      "effect": {
+       "type": "buff",
+       "stat": "crit",
+       "amount": 0.08,
+       "duration": 4.0,
+       "self_only": true
+      },
+      "text": "Fumée noire : +8 pts de critique 4 s."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Banquet des corbeaux : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Fumée noire : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 1,
+      "power": 0.4,
+      "text": "Banquet des corbeaux : un coup de plus."
+     }
+    ]
    ]
   },
   "aegis": {
@@ -185,6 +234,57 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Coup de base : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 1,
+      "effect": {
+       "type": "shield",
+       "power": 0.3,
+       "stat": "def",
+       "self_only": true
+      },
+      "text": "Technique : bouclier sur lui."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Ultime : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Technique : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 2,
+      "effect": {
+       "type": "status",
+       "name": "armure_reduite",
+       "duration": 4.0
+      },
+      "text": "Ultime : Armure réduite."
+     }
+    ]
    ]
   },
   "brume": {
@@ -274,6 +374,53 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Attaque de base : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.15,
+      "text": "Bouclier d'eau : +15 %."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Ultime : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Bouclier d'eau : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 2,
+      "effect": {
+       "type": "shield",
+       "power": 0.4,
+       "stat": "mag",
+       "target": "all_allies"
+      },
+      "text": "Ultime : bouclier sur toute l'équipe."
+     }
+    ]
    ]
   },
   "orage": {
@@ -365,6 +512,50 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Trois poings : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.15,
+      "text": "Soin collectif : +15 %."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 1,
+      "power": 0.25,
+      "text": "Ultime : un éclair de plus."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Soin collectif : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 0,
+      "count": 1,
+      "power": 0.35,
+      "text": "Trois poings : un poing de plus."
+     }
+    ]
    ]
   },
   "kharok": {
@@ -457,6 +648,57 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "shield",
+       "power": 0.2,
+       "stat": "def",
+       "self_only": true
+      },
+      "text": "Percée de garde : petit bouclier."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.15,
+      "text": "Carapace partagée : +15 %."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Carapace royale : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Carapace partagée : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "taunt",
+       "self_only": true,
+       "duration": 2.0
+      },
+      "text": "Percée de garde : provoque 2 s."
+     }
+    ]
    ]
   },
   "braise": {
@@ -551,6 +793,53 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Attaque de base : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.1,
+      "text": "Technique : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Ultime : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Technique : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 2,
+      "effect": {
+       "type": "dot",
+       "name": "brulure",
+       "power": 0.15,
+       "duration": 4.0
+      },
+      "text": "Ultime : brûlure renforcée."
+     }
+    ]
    ]
   },
   "nacre": {
@@ -640,6 +929,58 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.1,
+      "text": "Régénération : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "heal",
+       "power": 0.25,
+       "stat": "mag",
+       "target": "lowest_hp_ally"
+      },
+      "text": "Attaque de base : soigne un allié."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Régénération : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.15,
+      "text": "Régénération : +15 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 2,
+      "effect": {
+       "type": "heal",
+       "power": 0.5,
+       "stat": "mag",
+       "target": "all_allies"
+      },
+      "text": "Ultime : soigne toute l'équipe."
+     }
+    ]
    ]
   },
   "rivet": {
@@ -734,6 +1075,55 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Carreau sournois : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "buff",
+       "stat": "crit",
+       "amount": 0.06,
+       "duration": 4.0,
+       "self_only": true
+      },
+      "text": "Attaque de base : +6 pts de critique 4 s."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Casse du siècle : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Tir de contrebande : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 1,
+      "power": 0.7,
+      "text": "Casse du siècle : un ricochet de plus."
+     }
+    ]
    ]
   },
   "sylve": {
@@ -832,6 +1222,62 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.1,
+      "text": "Régénération : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "shield",
+       "power": 0.25,
+       "stat": "def",
+       "self_only": true
+      },
+      "text": "Attaque de base : bouclier sur elle."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Régénération : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 1,
+      "effect": {
+       "type": "heal",
+       "power": 0.3,
+       "stat": "mag",
+       "target": "all_allies"
+      },
+      "text": "Régénération : soin immédiat."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "taunt",
+       "self_only": true,
+       "duration": 2.0
+      },
+      "text": "Attaque de base : provoque 2 s."
+     }
+    ]
    ]
   },
   "valen": {
@@ -919,6 +1365,52 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Pointe de garde : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.1,
+      "text": "Balayage : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Ultime : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Balayage : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 2,
+      "effect": {
+       "type": "status",
+       "name": "armure_reduite",
+       "duration": 4.0
+      },
+      "text": "Ultime : Armure réduite."
+     }
+    ]
    ]
   },
   "bastion": {
@@ -1012,6 +1504,57 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Mur collectif : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 1,
+      "effect": {
+       "type": "shield",
+       "power": 0.3,
+       "stat": "def",
+       "self_only": true
+      },
+      "text": "Provocation : bouclier sur lui."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Provocation : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.15,
+      "text": "Mur collectif : +15 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "status",
+       "name": "desequilibre",
+       "duration": 4.0
+      },
+      "text": "Attaque de base : Déséquilibre."
+     }
+    ]
    ]
   },
   "saffran": {
@@ -1101,6 +1644,52 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Trait trompeur : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 0.5,
+      "text": "Leurre : recharge -0,5 s."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Ultime : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Leurre : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 2,
+      "effect": {
+       "type": "status",
+       "name": "scelle",
+       "duration": 4.0
+      },
+      "text": "Ultime : Scellé sur tous."
+     }
+    ]
    ]
   },
   "oona": {
@@ -1190,6 +1779,57 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.1,
+      "text": "Élixir : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "heal",
+       "power": 0.25,
+       "stat": "mag",
+       "target": "lowest_hp_ally"
+      },
+      "text": "Jet d'encre : soigne un allié."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Élixir : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.15,
+      "text": "Ultime : soin +15 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 1,
+      "effect": {
+       "type": "shield",
+       "power": 0.5,
+       "stat": "mag"
+      },
+      "text": "Élixir : bouclier en plus."
+     }
+    ]
    ]
   },
   "calx": {
@@ -1280,6 +1920,55 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Attaque de base : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 1,
+      "effect": {
+       "type": "shield",
+       "power": 0.3,
+       "stat": "mag"
+      },
+      "text": "Alarme : bouclier sur l'allié."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Ultime : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Alarme : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 2,
+      "effect": {
+       "type": "gauge",
+       "amount": -0.1
+      },
+      "text": "Ultime : retarde encore les ennemis."
+     }
+    ]
    ]
   },
   "nyx": {
@@ -1371,6 +2060,55 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Morsure : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 1,
+      "effect": {
+       "type": "buff",
+       "stat": "crit",
+       "amount": 0.08,
+       "duration": 4.0,
+       "self_only": true
+      },
+      "text": "Technique : +8 pts de critique 4 s."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Ultime : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Technique : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 1,
+      "power": 0.5,
+      "text": "Ultime : une morsure de plus."
+     }
+    ]
    ]
   },
   "mei_lian": {
@@ -1457,6 +2195,50 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Pétale tranchant : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 0.5,
+      "text": "Pas du prunier : recharge -0,5 s."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 1,
+      "power": 0.3,
+      "text": "Les 24 mouvements : un coup de plus."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Les 24 mouvements : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 2,
+      "power": 0.3,
+      "text": "Les 24 mouvements : 2 coups de plus."
+     }
+    ]
    ]
   },
   "jin_seok": {
@@ -1547,6 +2329,55 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "shield",
+       "power": 0.2,
+       "stat": "def",
+       "self_only": true
+      },
+      "text": "Poing de bronze : petit bouclier."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 1,
+      "mult": 0.15,
+      "text": "Cloche d'or : +15 %."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 1,
+      "power": 0.35,
+      "text": "Cent paumes : une paume de plus."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Cloche d'or : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 2,
+      "power": 0.35,
+      "text": "Cent paumes : 2 paumes de plus."
+     }
+    ]
    ]
   },
   "yun_tao": {
@@ -1638,6 +2469,55 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.08,
+      "text": "Fil du courant : +8 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 1,
+      "effect": {
+       "type": "shield",
+       "power": 0.3,
+       "stat": "def"
+      },
+      "text": "Cercle du Taiji : bouclier."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Ultime : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Cercle du Taiji : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 2,
+      "effect": {
+       "type": "gauge",
+       "amount": -0.1
+      },
+      "text": "Ultime : retarde encore les ennemis."
+     }
+    ]
    ]
   },
   "tang_su": {
@@ -1733,6 +2613,55 @@
       }
      ]
     }
+   ],
+   "echoes": [
+    [
+     {
+      "type": "power",
+      "slot": 0,
+      "mult": 0.1,
+      "text": "Poison de base : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "add_effect",
+      "slot": 0,
+      "effect": {
+       "type": "buff",
+       "stat": "crit",
+       "amount": 0.06,
+       "duration": 4.0,
+       "self_only": true
+      },
+      "text": "Aiguille : +6 pts de critique 4 s."
+     }
+    ],
+    [
+     {
+      "type": "power",
+      "slot": 2,
+      "mult": 0.1,
+      "text": "Pluie d'aiguilles : +10 %."
+     }
+    ],
+    [
+     {
+      "type": "cooldown",
+      "slot": 1,
+      "seconds": 1.0,
+      "text": "Méridiens fermés : recharge -1 s."
+     }
+    ],
+    [
+     {
+      "type": "extra_hits",
+      "slot": 2,
+      "count": 1,
+      "power": 0.5,
+      "text": "Pluie d'aiguilles : une vague de plus."
+     }
+    ]
    ]
   }
  }

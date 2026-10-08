@@ -637,6 +637,8 @@ func test_hero_progression() -> void:
 	var tiers_ok: bool = gd.progression.heroes.values().all(func(h: Dictionary) -> bool:
 		return h.relic.size() == 5 and h.relic.all(func(t: Dictionary) -> bool: return not t.mods.is_empty()))
 	check(tiers_ok, "les 5 paliers de chaque relique donnent un bonus propre au héros")
+	var mei12 := Progression.hero_for_battle(mei, 30, gd.progression, 12, 0)
+	check(mei12.attacks[2].effects.size() == base_hits + 3, "Échos de Mei Lian : 3 coups de plus à 12 Échos")
 	e.declare_draw()
 	check(e.finished and e.draw and not e.won, "un combat arrêté finit sur une égalité")
 	var oona60 := Progression.hero_stats(gd.hero("oona"), 60, 0, gd.progression)

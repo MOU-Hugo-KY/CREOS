@@ -363,9 +363,9 @@ func _build_detail(_page: VBoxContainer) -> void:
 	ScreenPack.panel(root, F, "stats_panel", sr)
 	ScreenPack.text(root, "STATISTIQUES", Rect2(sr.position + Vector2(34, 30), Vector2(400, 44)), 32)
 	for i in STAT_NAMES.size():
-		var y := sr.position.y + 86 + i * 30
-		ScreenPack.text(root, STAT_NAMES[i][1], Rect2(sr.position.x + 36, y, 400, 30), 25)
-		_d_stats.append(ScreenPack.text(root, "", Rect2(sr.end.x - 436, y, 400, 30), 25, UiKit.INK, HORIZONTAL_ALIGNMENT_RIGHT))
+		var y := sr.position.y + 80 + i * 27
+		ScreenPack.text(root, STAT_NAMES[i][1], Rect2(sr.position.x + 36, y, 400, 26), 22)
+		_d_stats.append(ScreenPack.text(root, "", Rect2(sr.end.x - 436, y, 400, 26), 22, UiKit.INK, HORIZONTAL_ALIGNMENT_RIGHT))
 	var A: Dictionary = L.actions
 	_d_upgrade = ScreenPack.button(root, F, "upgrade", "", ScreenPack.rect(A.upgrade), 28, UiKit.INK)
 	_d_upgrade.pressed.connect(_ask_level_up)
@@ -684,11 +684,21 @@ func _fill_echoes(id: String, hero: Dictionary) -> void:
 		var r := ScreenPack.rect(rows[k])
 		var reached := tier > k
 		ScreenPack.image(_tab_box, ScreenPack.tex(F, "echo_full" if reached else "echo_empty"), Rect2(r.position + Vector2(0, 2), Vector2(36, 36)))
+		var col := UiKit.INK if reached else UiKit.TEXT_SOFT
 		ScreenPack.text(_tab_box, "%d Échos · %s" % [int(thresholds[k]), unlocks[k] if k < unlocks.size() else ""],
-			Rect2(r.position + Vector2(52, 0), Vector2(520, r.size.y)), 25, UiKit.INK if reached else UiKit.TEXT_SOFT)
+			Rect2(r.position + Vector2(44, 0), Vector2(300, r.size.y)), 19, col)
 		ScreenPack.text(_tab_box, "+%d %% %s, +%d %% %s, +%d %% autres" % [int(float(e.primary[k]) * 100), hero.get("primary", ""),
 			int(float(e.secondary[k]) * 100), hero.get("secondary", ""), int(float(e.other[k]) * 100)],
-			Rect2(r.position + Vector2(560, 0), Vector2(r.size.x - 560, r.size.y)), 21, UiKit.TEXT_SOFT, HORIZONTAL_ALIGNMENT_RIGHT)
+			Rect2(r.position + Vector2(350, 0), Vector2(300, r.size.y)), 17, col)
+		# Bonus de compétence propre au héros à ce palier.
+		var mods: Array = Progression.personal(hero, GameData.progression).get("echoes", [])
+		var bonus := ""
+		if k < mods.size():
+			bonus = " · ".join((mods[k] as Array).map(func(m: Dictionary) -> String: return String(m.get("text", ""))))
+		var bl := ScreenPack.text(_tab_box, bonus, Rect2(r.position + Vector2(660, 0), Vector2(r.size.x - 660, r.size.y)), 17,
+			UiKit.WOOD if reached else UiKit.TEXT_SOFT)
+		bl.tooltip_text = bonus
+		bl.mouse_filter = Control.MOUSE_FILTER_PASS
 	ScreenPack.text(_tab_box, "Un doublon donne un Écho. Aucune autre source.", Rect2(780, 998, 1072, 30), 19, UiKit.TEXT_SOFT)
 
 

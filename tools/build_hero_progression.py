@@ -169,6 +169,67 @@ FIRST = {
     "tang_su": [P(1, 0.15, "Méridiens fermés : +15 % de dégâts."), B(0, "crit", 0.1, "Aiguille silencieuse : +10 pts de critique 4 s.")],
 }
 
+# Échos (1, 3, 6, 9, 12 doublons) : en plus des statistiques, un bonus de compétence par palier.
+ECHOES = {
+    "corbin": [P(0, 0.08, "Lame du corbeau : +8 %."), B(1, "crit", 0.08, "Fumée noire : +8 pts de critique 4 s."),
+               P(2, 0.1, "Banquet des corbeaux : +10 %."), C(1, 1.0, "Fumée noire : recharge -1 s."),
+               H(2, 1, 0.4, "Banquet des corbeaux : un coup de plus.")],
+    "aegis": [P(0, 0.08, "Coup de base : +8 %."), SH(1, 0.3, "def", "Technique : bouclier sur lui.", self_only=True),
+              P(2, 0.1, "Ultime : +10 %."), C(1, 1.0, "Technique : recharge -1 s."),
+              E(2, {"type": "status", "name": "armure_reduite", "duration": 4.0}, "Ultime : Armure réduite.")],
+    "brume": [P(0, 0.08, "Attaque de base : +8 %."), P(1, 0.15, "Bouclier d'eau : +15 %."),
+              P(2, 0.1, "Ultime : +10 %."), C(1, 1.0, "Bouclier d'eau : recharge -1 s."),
+              SH(2, 0.4, "mag", "Ultime : bouclier sur toute l'équipe.", "all_allies")],
+    "orage": [P(0, 0.08, "Trois poings : +8 %."), P(1, 0.15, "Soin collectif : +15 %."),
+              H(2, 1, 0.25, "Ultime : un éclair de plus."), C(1, 1.0, "Soin collectif : recharge -1 s."),
+              H(0, 1, 0.35, "Trois poings : un poing de plus.")],
+    "kharok": [SH(0, 0.2, "def", "Percée de garde : petit bouclier.", self_only=True), P(1, 0.15, "Carapace partagée : +15 %."),
+               P(2, 0.1, "Carapace royale : +10 %."), C(1, 1.0, "Carapace partagée : recharge -1 s."),
+               E(0, {"type": "taunt", "self_only": True, "duration": 2.0}, "Percée de garde : provoque 2 s.")],
+    "braise": [P(0, 0.08, "Attaque de base : +8 %."), P(1, 0.1, "Technique : +10 %."),
+               P(2, 0.1, "Ultime : +10 %."), C(1, 1.0, "Technique : recharge -1 s."),
+               E(2, {"type": "dot", "name": "brulure", "power": 0.15, "duration": 4.0}, "Ultime : brûlure renforcée.")],
+    "nacre": [P(1, 0.1, "Régénération : +10 %."), HE(0, 0.25, "mag", "Attaque de base : soigne un allié.", "lowest_hp_ally"),
+              C(1, 1.0, "Régénération : recharge -1 s."), P(1, 0.15, "Régénération : +15 %."),
+              HE(2, 0.5, "mag", "Ultime : soigne toute l'équipe.", "all_allies")],
+    "rivet": [P(0, 0.08, "Carreau sournois : +8 %."), B(0, "crit", 0.06, "Attaque de base : +6 pts de critique 4 s."),
+              P(2, 0.1, "Casse du siècle : +10 %."), C(1, 1.0, "Tir de contrebande : recharge -1 s."),
+              H(2, 1, 0.7, "Casse du siècle : un ricochet de plus.")],
+    "sylve": [P(1, 0.1, "Régénération : +10 %."), SH(0, 0.25, "def", "Attaque de base : bouclier sur elle.", self_only=True),
+              C(1, 1.0, "Régénération : recharge -1 s."), HE(1, 0.3, "mag", "Régénération : soin immédiat.", "all_allies"),
+              E(0, {"type": "taunt", "self_only": True, "duration": 2.0}, "Attaque de base : provoque 2 s.")],
+    "valen": [P(0, 0.08, "Pointe de garde : +8 %."), P(1, 0.1, "Balayage : +10 %."),
+              P(2, 0.1, "Ultime : +10 %."), C(1, 1.0, "Balayage : recharge -1 s."),
+              E(2, {"type": "status", "name": "armure_reduite", "duration": 4.0}, "Ultime : Armure réduite.")],
+    "bastion": [P(2, 0.1, "Mur collectif : +10 %."), SH(1, 0.3, "def", "Provocation : bouclier sur lui.", self_only=True),
+                C(1, 1.0, "Provocation : recharge -1 s."), P(2, 0.15, "Mur collectif : +15 %."),
+                E(0, {"type": "status", "name": "desequilibre", "duration": 4.0}, "Attaque de base : Déséquilibre.")],
+    "saffran": [P(0, 0.08, "Trait trompeur : +8 %."), C(1, 0.5, "Leurre : recharge -0,5 s."),
+                P(2, 0.1, "Ultime : +10 %."), C(1, 1.0, "Leurre : recharge -1 s."),
+                E(2, {"type": "status", "name": "scelle", "duration": 4.0}, "Ultime : Scellé sur tous.")],
+    "oona": [P(1, 0.1, "Élixir : +10 %."), HE(0, 0.25, "mag", "Jet d'encre : soigne un allié.", "lowest_hp_ally"),
+             C(1, 1.0, "Élixir : recharge -1 s."), P(2, 0.15, "Ultime : soin +15 %."),
+             SH(1, 0.5, "mag", "Élixir : bouclier en plus.")],
+    "calx": [P(0, 0.08, "Attaque de base : +8 %."), SH(1, 0.3, "mag", "Alarme : bouclier sur l'allié."),
+             P(2, 0.1, "Ultime : +10 %."), C(1, 1.0, "Alarme : recharge -1 s."),
+             E(2, {"type": "gauge", "amount": -0.1}, "Ultime : retarde encore les ennemis.")],
+    "nyx": [P(0, 0.08, "Morsure : +8 %."), B(1, "crit", 0.08, "Technique : +8 pts de critique 4 s."),
+            P(2, 0.1, "Ultime : +10 %."), C(1, 1.0, "Technique : recharge -1 s."),
+            H(2, 1, 0.5, "Ultime : une morsure de plus.")],
+    "mei_lian": [P(0, 0.08, "Pétale tranchant : +8 %."), C(1, 0.5, "Pas du prunier : recharge -0,5 s."),
+                 H(2, 1, 0.3, "Les 24 mouvements : un coup de plus."), P(2, 0.1, "Les 24 mouvements : +10 %."),
+                 H(2, 2, 0.3, "Les 24 mouvements : 2 coups de plus.")],
+    "jin_seok": [SH(0, 0.2, "def", "Poing de bronze : petit bouclier.", self_only=True), P(1, 0.15, "Cloche d'or : +15 %."),
+                 H(2, 1, 0.35, "Cent paumes : une paume de plus."), C(1, 1.0, "Cloche d'or : recharge -1 s."),
+                 H(2, 2, 0.35, "Cent paumes : 2 paumes de plus.")],
+    "yun_tao": [P(0, 0.08, "Fil du courant : +8 %."), SH(1, 0.3, "def", "Cercle du Taiji : bouclier."),
+                P(2, 0.1, "Ultime : +10 %."), C(1, 1.0, "Cercle du Taiji : recharge -1 s."),
+                E(2, {"type": "gauge", "amount": -0.1}, "Ultime : retarde encore les ennemis.")],
+    "tang_su": [P(0, 0.1, "Poison de base : +10 %."), B(0, "crit", 0.06, "Aiguille : +6 pts de critique 4 s."),
+                P(2, 0.1, "Pluie d'aiguilles : +10 %."), C(1, 1.0, "Méridiens fermés : recharge -1 s."),
+                H(2, 1, 0.5, "Pluie d'aiguilles : une vague de plus.")],
+}
+
 out = {"_note": "Généré par tools/build_hero_progression.py : progression propre à chaque héros.", "heroes": {}}
 for hero in GROWTH:
     g = dict(D)
@@ -178,6 +239,6 @@ for hero in GROWTH:
     for i in range(5):
         mod = FIRST[hero][i] if i < 2 else MODS[hero][i - 2]
         relic.append({"stats": stats[i], "mods": [mod]})
-    out["heroes"][hero] = {"growth": g, "relic": relic}
+    out["heroes"][hero] = {"growth": g, "relic": relic, "echoes": [[m] for m in ECHOES[hero]]}
 json.dump(out, open("data/hero_progression.json", "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 print(len(out["heroes"]), "héros")
