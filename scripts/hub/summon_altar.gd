@@ -73,15 +73,13 @@ func _ready() -> void:
 	add_child(bg)
 	var root := ScreenPack.frame(self)
 
-	# La salle prend tout l'écran : une copie assombrie remplit les côtés, la salle nette au centre.
+	# La salle couvre tout l'écran (agrandie à la largeur, recadrée en haut et en bas autour de la lanterne).
 	var sr := ScreenPack.rect(L.central_scene_rect)
-	var k := 1080.0 / sr.size.y
-	var wide := ScreenPack.image(root, ScreenPack.tex(S, "fond"), Rect2(Vector2(0, -260), Vector2(1920, 1436)))
-	wide.modulate = Color(0.32, 0.29, 0.36)
+	var k := 1920.0 / sr.size.x
 	_scene = Control.new()
 	_scene.size = sr.size
 	_scene.scale = Vector2(k, k)
-	_scene.position = Vector2(round((1920.0 - sr.size.x * k) / 2.0), 0)
+	_scene.position = Vector2(0, -140)
 	_scene.clip_contents = true
 	_scene.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(_scene)
@@ -97,8 +95,7 @@ func _ready() -> void:
 	for c: String in ["rare", "epic", "legendary"]:
 		_columns[c] = _anim("colonne_" + c, L.column_anchor_in_scene)
 	_burst = _anim("eclat_final", L.final_anchor_in_scene)
-	var fade := _SideFade.new()  # fondu entre la salle et ses bords assombris
-	fade.inner = Rect2(_scene.position, sr.size * k)
+	var fade := _SideFade.new()  # bandes sombres en haut et en bas pour le texte
 	fade.size = Vector2(1920, 1080)
 	root.add_child(fade)
 
@@ -173,17 +170,12 @@ func _ready() -> void:
 
 ## Fondu des bords de la salle vers les côtés assombris, et des bandes haut / bas pour le texte.
 class _SideFade extends Control:
-	var inner := Rect2()
 
 	func _ready() -> void:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	func _draw() -> void:
 		var dark := Color(0.09, 0.08, 0.11)
-		for side in [0, 1]:
-			for i in 24:
-				var x: float = inner.position.x + i * 6.0 if side == 0 else inner.end.x - (i + 1) * 6.0
-				draw_rect(Rect2(x, 0, 6, 1080), Color(dark, 0.6 * (1.0 - i / 24.0)))
 		for i in 20:
 			draw_rect(Rect2(0, i * 6, 1920, 6), Color(dark, 0.55 * (1.0 - i / 20.0)))
 			draw_rect(Rect2(0, 1080 - (i + 1) * 7, 1920, 7), Color(dark, 0.6 * (1.0 - i / 20.0)))
