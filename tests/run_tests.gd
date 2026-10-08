@@ -627,6 +627,16 @@ func test_hero_progression() -> void:
 	var e := BattleEngine.new()
 	e.setup([r5], [[{"id": "m", "stats": {"hp": 50000}}]], 3)
 	check(e.heroes[0].attacks[2].effects.size() == base_hits + 4, "le combat utilise l'ultime renforcé")
+	# Chaque héros, relique au palier V : un combat complet tourne sans erreur avec tous ses bonus.
+	for hid: String in gd.heroes:
+		if gd.progression.get("heroes", {}).has(hid):
+			var hd := Progression.hero_for_battle(gd.hero(hid), 20, gd.progression, 0, 5)
+			var eng := BattleEngine.new()
+			eng.setup([hd, hd.duplicate(true)], gd.dungeon_waves("monde01_1"), 5)
+			eng.simulate(60.0)
+	var tiers_ok: bool = gd.progression.heroes.values().all(func(h: Dictionary) -> bool:
+		return h.relic.size() == 5 and h.relic.all(func(t: Dictionary) -> bool: return not t.mods.is_empty()))
+	check(tiers_ok, "les 5 paliers de chaque relique donnent un bonus propre au héros")
 	e.declare_draw()
 	check(e.finished and e.draw and not e.won, "un combat arrêté finit sur une égalité")
 	var oona60 := Progression.hero_stats(gd.hero("oona"), 60, 0, gd.progression)

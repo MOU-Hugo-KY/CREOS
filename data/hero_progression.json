@@ -17,14 +17,34 @@
       "atk": 0.05,
       "crit": 0.004
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.0,
+       "text": "Fumée noire : recharge -1 s."
+      }
+     ]
     },
     {
      "stats": {
       "atk": 0.1,
       "crit": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "buff",
+        "stat": "crit",
+        "amount": 0.1,
+        "duration": 4.0,
+        "self_only": true
+       },
+       "text": "Lame du corbeau : +10 pts de critique 4 s."
+      }
+     ]
     },
     {
      "stats": {
@@ -91,14 +111,33 @@
       "atk": 0.05,
       "def": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Coup de base : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "atk": 0.1,
       "def": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "shield",
+        "power": 0.5,
+        "stat": "def",
+        "self_only": true
+       },
+       "text": "Technique : se couvre d'un bouclier."
+      }
+     ]
     },
     {
      "stats": {
@@ -165,14 +204,33 @@
       "mag": 0.05,
       "hp": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Attaque de base : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "mag": 0.1,
       "hp": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "shield",
+        "power": 0.3,
+        "stat": "mag",
+        "target": "lowest_hp_ally"
+       },
+       "text": "Attaque de base : petit bouclier sur l'allié le plus blessé."
+      }
+     ]
     },
     {
      "stats": {
@@ -235,14 +293,33 @@
       "atk": 0.05,
       "spd": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Trois poings : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "atk": 0.1,
       "spd": 0.025
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "heal",
+        "power": 0.3,
+        "stat": "atk",
+        "target": "self"
+       },
+       "text": "Trois poings : se soigne un peu."
+      }
+     ]
     },
     {
      "stats": {
@@ -306,14 +383,37 @@
       "def": 0.05,
       "hp": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "shield",
+        "power": 0.3,
+        "stat": "def",
+        "self_only": true
+       },
+       "text": "Percée de garde : petit bouclier sur lui."
+      }
+     ]
     },
     {
      "stats": {
       "def": 0.1,
       "hp": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 2,
+       "effect": {
+        "type": "status",
+        "name": "desequilibre",
+        "duration": 4.0
+       },
+       "text": "Carapace royale : Déséquilibre."
+      }
+     ]
     },
     {
      "stats": {
@@ -375,14 +475,34 @@
       "mag": 0.05,
       "crit": 0.004
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.1,
+       "text": "Ultime : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "mag": 0.1,
       "crit": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "buff",
+        "stat": "mag",
+        "amount": 0.1,
+        "duration": 4.0,
+        "self_only": true
+       },
+       "text": "Attaque de base : +10 % de magie 4 s."
+      }
+     ]
     },
     {
      "stats": {
@@ -450,14 +570,33 @@
       "heal": 0.05,
       "hp": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.15,
+       "text": "Régénération : +15 %."
+      }
+     ]
     },
     {
      "stats": {
       "heal": 0.1,
       "hp": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "heal",
+        "power": 0.4,
+        "stat": "mag",
+        "target": "lowest_hp_ally"
+       },
+       "text": "Attaque de base : soigne l'allié le plus blessé."
+      }
+     ]
     },
     {
      "stats": {
@@ -519,14 +658,34 @@
       "atk": 0.05,
       "crit": 0.004
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Carreau sournois : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "atk": 0.1,
       "crit": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "buff",
+        "stat": "crit",
+        "amount": 0.1,
+        "duration": 4.0,
+        "self_only": true
+       },
+       "text": "Attaque de base : +10 pts de critique 4 s."
+      }
+     ]
     },
     {
      "stats": {
@@ -594,14 +753,37 @@
       "hp": 0.05,
       "def": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "taunt",
+        "self_only": true,
+        "duration": 2.0
+       },
+       "text": "Attaque de base : provoque 2 s."
+      }
+     ]
     },
     {
      "stats": {
       "hp": 0.1,
       "def": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "heal",
+        "power": 0.4,
+        "stat": "mag",
+        "target": "all_allies"
+       },
+       "text": "Régénération : un soin immédiat en plus."
+      }
+     ]
     },
     {
      "stats": {
@@ -668,14 +850,28 @@
       "atk": 0.05,
       "def": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Pointe de garde : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "atk": 0.1,
       "def": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.15,
+       "text": "Balayage : +15 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
@@ -742,14 +938,33 @@
       "def": 0.05,
       "hp": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "shield",
+        "power": 0.6,
+        "stat": "def",
+        "self_only": true
+       },
+       "text": "Provocation : bouclier sur lui."
+      }
+     ]
     },
     {
      "stats": {
       "def": 0.1,
       "hp": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.15,
+       "text": "Attaque de base : +15 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
@@ -815,14 +1030,33 @@
       "mag": 0.05,
       "spd": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Trait trompeur : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "mag": 0.1,
       "spd": 0.025
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "buff",
+        "stat": "res",
+        "amount": 0.15,
+        "duration": 4.0
+       },
+       "text": "Leurre : +15 % de résistance à l'allié."
+      }
+     ]
     },
     {
      "stats": {
@@ -886,14 +1120,33 @@
       "heal": 0.05,
       "mag": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.15,
+       "text": "Jet d'encre : +15 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "heal": 0.1,
       "mag": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "heal",
+        "power": 0.4,
+        "stat": "mag",
+        "target": "lowest_hp_ally"
+       },
+       "text": "Jet d'encre : soigne l'allié le plus blessé."
+      }
+     ]
     },
     {
      "stats": {
@@ -955,14 +1208,32 @@
       "mag": 0.05,
       "def": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Attaque de base : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "mag": 0.1,
       "def": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "shield",
+        "power": 0.5,
+        "stat": "mag"
+       },
+       "text": "Alarme : bouclier sur l'allié."
+      }
+     ]
     },
     {
      "stats": {
@@ -1027,14 +1298,34 @@
       "crit": 0.01,
       "spd": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Morsure : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "crit": 0.02,
       "spd": 0.025
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "buff",
+        "stat": "atk",
+        "amount": 0.15,
+        "duration": 4.0,
+        "self_only": true
+       },
+       "text": "Technique : +15 % d'attaque 4 s."
+      }
+     ]
     },
     {
      "stats": {
@@ -1098,14 +1389,28 @@
       "atk": 0.05,
       "spd": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 2,
+       "mult": 0.1,
+       "text": "Les 24 mouvements : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "atk": 0.1,
       "spd": 0.025
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.0,
+       "text": "Pas du prunier : recharge -1 s."
+      }
+     ]
     },
     {
      "stats": {
@@ -1170,14 +1475,33 @@
       "def": 0.05,
       "atk": 0.02
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "shield",
+        "power": 0.3,
+        "stat": "def",
+        "self_only": true
+       },
+       "text": "Poing de bronze : petit bouclier sur lui."
+      }
+     ]
     },
     {
      "stats": {
       "def": 0.1,
       "atk": 0.05
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "cooldown",
+       "slot": 1,
+       "seconds": 1.0,
+       "text": "Cloche d'or : recharge -1 s."
+      }
+     ]
     },
     {
      "stats": {
@@ -1241,14 +1565,32 @@
       "def": 0.05,
       "spd": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 0,
+       "mult": 0.1,
+       "text": "Fil du courant : +10 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "def": 0.1,
       "spd": 0.025
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 1,
+       "effect": {
+        "type": "shield",
+        "power": 0.4,
+        "stat": "def"
+       },
+       "text": "Cercle du Taiji : bouclier sur l'allié."
+      }
+     ]
     },
     {
      "stats": {
@@ -1314,14 +1656,34 @@
       "atk": 0.05,
       "crit": 0.004
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "power",
+       "slot": 1,
+       "mult": 0.15,
+       "text": "Méridiens fermés : +15 % de dégâts."
+      }
+     ]
     },
     {
      "stats": {
       "atk": 0.1,
       "crit": 0.01
      },
-     "mods": []
+     "mods": [
+      {
+       "type": "add_effect",
+       "slot": 0,
+       "effect": {
+        "type": "buff",
+        "stat": "crit",
+        "amount": 0.1,
+        "duration": 4.0,
+        "self_only": true
+       },
+       "text": "Aiguille silencieuse : +10 pts de critique 4 s."
+      }
+     ]
     },
     {
      "stats": {

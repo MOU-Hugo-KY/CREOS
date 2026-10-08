@@ -129,6 +129,46 @@ MODS = {
                 E(1, {"type": "dot", "name": "poison", "power": 0.12, "duration": 4.0}, "Méridiens fermés : empoisonne.")],
 }
 
+def B(slot, stat, amount, text):  # bonus temporaire sur soi
+    return E(slot, {"type": "buff", "stat": stat, "amount": amount, "duration": 4.0, "self_only": True}, text)
+
+def SH(slot, power, stat, text, target=None, self_only=False):
+    e = {"type": "shield", "power": power, "stat": stat}
+    if target:
+        e["target"] = target
+    if self_only:
+        e["self_only"] = True
+    return E(slot, e, text)
+
+def HE(slot, power, stat, text, target):
+    return E(slot, {"type": "heal", "power": power, "stat": stat, "target": target}, text)
+
+# Paliers I et II : un premier bonus propre au rôle du héros.
+FIRST = {
+    "corbin": [C(1, 1.0, "Fumée noire : recharge -1 s."), B(0, "crit", 0.1, "Lame du corbeau : +10 pts de critique 4 s.")],
+    "aegis": [P(0, 0.1, "Coup de base : +10 % de dégâts."), SH(1, 0.5, "def", "Technique : se couvre d'un bouclier.", self_only=True)],
+    "brume": [P(0, 0.1, "Attaque de base : +10 % de dégâts."), SH(0, 0.3, "mag", "Attaque de base : petit bouclier sur l'allié le plus blessé.", "lowest_hp_ally")],
+    "orage": [P(0, 0.1, "Trois poings : +10 % de dégâts."), HE(0, 0.3, "atk", "Trois poings : se soigne un peu.", "self")],
+    "kharok": [SH(0, 0.3, "def", "Percée de garde : petit bouclier sur lui.", self_only=True),
+               E(2, {"type": "status", "name": "desequilibre", "duration": 4.0}, "Carapace royale : Déséquilibre.")],
+    "braise": [P(2, 0.1, "Ultime : +10 % de dégâts."), B(0, "mag", 0.1, "Attaque de base : +10 % de magie 4 s.")],
+    "nacre": [P(1, 0.15, "Régénération : +15 %."), HE(0, 0.4, "mag", "Attaque de base : soigne l'allié le plus blessé.", "lowest_hp_ally")],
+    "rivet": [P(0, 0.1, "Carreau sournois : +10 % de dégâts."), B(0, "crit", 0.1, "Attaque de base : +10 pts de critique 4 s.")],
+    "sylve": [E(0, {"type": "taunt", "self_only": True, "duration": 2.0}, "Attaque de base : provoque 2 s."),
+              HE(1, 0.4, "mag", "Régénération : un soin immédiat en plus.", "all_allies")],
+    "valen": [P(0, 0.1, "Pointe de garde : +10 % de dégâts."), P(1, 0.15, "Balayage : +15 % de dégâts.")],
+    "bastion": [SH(1, 0.6, "def", "Provocation : bouclier sur lui.", self_only=True), P(0, 0.15, "Attaque de base : +15 % de dégâts.")],
+    "saffran": [P(0, 0.1, "Trait trompeur : +10 % de dégâts."),
+                E(1, {"type": "buff", "stat": "res", "amount": 0.15, "duration": 4.0}, "Leurre : +15 % de résistance à l'allié.")],
+    "oona": [P(0, 0.15, "Jet d'encre : +15 % de dégâts."), HE(0, 0.4, "mag", "Jet d'encre : soigne l'allié le plus blessé.", "lowest_hp_ally")],
+    "calx": [P(0, 0.1, "Attaque de base : +10 % de dégâts."), SH(1, 0.5, "mag", "Alarme : bouclier sur l'allié.")],
+    "nyx": [P(0, 0.1, "Morsure : +10 % de dégâts."), B(1, "atk", 0.15, "Technique : +15 % d'attaque 4 s.")],
+    "mei_lian": [P(2, 0.1, "Les 24 mouvements : +10 % de dégâts."), C(1, 1.0, "Pas du prunier : recharge -1 s.")],
+    "jin_seok": [SH(0, 0.3, "def", "Poing de bronze : petit bouclier sur lui.", self_only=True), C(1, 1.0, "Cloche d'or : recharge -1 s.")],
+    "yun_tao": [P(0, 0.1, "Fil du courant : +10 % de dégâts."), SH(1, 0.4, "def", "Cercle du Taiji : bouclier sur l'allié.")],
+    "tang_su": [P(1, 0.15, "Méridiens fermés : +15 % de dégâts."), B(0, "crit", 0.1, "Aiguille silencieuse : +10 pts de critique 4 s.")],
+}
+
 out = {"_note": "Généré par tools/build_hero_progression.py : progression propre à chaque héros.", "heroes": {}}
 for hero in GROWTH:
     g = dict(D)
@@ -136,7 +176,8 @@ for hero in GROWTH:
     stats = tiers(*RELIC_STATS[hero])
     relic = []
     for i in range(5):
-        relic.append({"stats": stats[i], "mods": [MODS[hero][i - 2]] if i >= 2 else []})
+        mod = FIRST[hero][i] if i < 2 else MODS[hero][i - 2]
+        relic.append({"stats": stats[i], "mods": [mod]})
     out["heroes"][hero] = {"growth": g, "relic": relic}
 json.dump(out, open("data/hero_progression.json", "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 print(len(out["heroes"]), "héros")

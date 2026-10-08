@@ -651,28 +651,21 @@ func _fill_relic(id: String, hero: Dictionary) -> void:
 	var need := int(cost.get("fragments", 0))
 	ScreenPack.text(p, "Fragments : %d / %d" % [PlayerData.relic_fragments(id), need], Rect2(24, 128, 300, 28), 20)
 	ScreenPack.text(p, String(relic.get("dungeon", "")), Rect2(24, 158, 300, 28), 20)
-	ScreenPack.text(_tab_box, "LES CINQ PALIERS", Rect2(1234, 770, 500, 40), 26)
-	var steps: Array = R.step_rects
-	for i in steps.size():
-		var r := ScreenPack.rect(steps[i])
-		if i > 0:
-			var prev := ScreenPack.rect(steps[i - 1])
-			var con := ScreenPack.panel(_tab_box, F, "relic_connector", Rect2(prev.end.x - 2, r.position.y + 32, r.position.x - prev.end.x + 4, 8))
-			con.z_index = 0
+	# Les cinq paliers, chacun avec son bonus propre au héros (statistiques + effet sur ses attaques).
+	ScreenPack.text(_tab_box, "LES CINQ PALIERS", Rect2(1234, 758, 500, 34), 24)
+	for i in 5:
+		var y := 796.0 + i * 31.0
 		var st := "relic_step_full" if i < tier else ("relic_step_active" if i == tier else "relic_step_empty")
-		ScreenPack.image(_tab_box, ScreenPack.tex(F, st), r)
-		var num := ScreenPack.text(_tab_box, str(i + 1), r, 28, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-		num.mouse_filter = Control.MOUSE_FILTER_PASS
-		num.tooltip_text = "Palier %d
-%s" % [i + 1, relic_tier_text(hero, i)]
-	# Ce que donne le palier actuel (ou le prochain) : statistiques et effet sur ses attaques.
-	var shown := maxi(0, tier - 1) if tier >= 5 else tier
-	var head := ("Palier %d : " if shown < tier else "Prochain palier (%d) : ") % (shown + 1)
-	ScreenPack.text(_tab_box, head + relic_tier_text(hero, shown), Rect2(1234, 896, 620, 54), 18, UiKit.INK, 0, true)
+		ScreenPack.image(_tab_box, ScreenPack.tex(F, st), Rect2(1234, y, 28, 28))
+		ScreenPack.text(_tab_box, str(i + 1), Rect2(1234, y, 28, 28), 15, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+		var line := ScreenPack.text(_tab_box, relic_tier_text(hero, i), Rect2(1270, y - 1, 584, 30), 17,
+			UiKit.INK if i < tier else UiKit.TEXT_SOFT)
+		line.tooltip_text = "Palier %d : %s" % [i + 1, relic_tier_text(hero, i)]
+		line.mouse_filter = Control.MOUSE_FILTER_PASS
 	if not cost.is_empty():
 		var label := "Retrouver" if tier == 0 else "Améliorer"
 		var b := ScreenPack.button(_tab_box, F, "upgrade", "%s · %d fragments%s" % [label, need,
-			"" if int(cost.materials) == 0 else " + %d matériaux" % int(cost.materials)], Rect2(1234, 950, 620, 72), 24, UiKit.INK)
+			"" if int(cost.materials) == 0 else " + %d matériaux" % int(cost.materials)], Rect2(1234, 956, 620, 66), 24, UiKit.INK)
 		b.disabled = not PlayerData.can_upgrade_relic(id)
 		b.pressed.connect(func() -> void:
 			if PlayerData.upgrade_relic(id):
