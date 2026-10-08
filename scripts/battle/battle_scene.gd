@@ -23,10 +23,10 @@ const ENEMY_SPOTS := [Vector2(705, 554), Vector2(760, 668), Vector2(830, 552), V
 const CROWD_SCALE := 0.78  # combattants un peu plus petits quand il y a plus de 4 héros
 # Arène en plongée (maquette ChatGPT) : 7 par camp en trois lignes, 2 en haut, 3 au milieu, 2 en bas ;
 # les ennemis en miroir. Pieds dans le cadre 1280 × 720.
-const TOP_HEROES := [Vector2(237, 300), Vector2(417, 300), Vector2(157, 434), Vector2(329, 434),
-	Vector2(505, 434), Vector2(237, 568), Vector2(429, 568)]
-const TOP_ENEMIES := [Vector2(858, 300), Vector2(1034, 300), Vector2(774, 434), Vector2(946, 434),
-	Vector2(1118, 434), Vector2(850, 568), Vector2(1042, 568)]
+const TOP_HEROES := [Vector2(237, 340), Vector2(417, 340), Vector2(157, 462), Vector2(329, 462),
+	Vector2(505, 462), Vector2(237, 584), Vector2(429, 584)]
+const TOP_ENEMIES := [Vector2(858, 340), Vector2(1034, 340), Vector2(774, 462), Vector2(946, 462),
+	Vector2(1118, 462), Vector2(850, 584), Vector2(1042, 584)]
 # Personnages tous à la même taille. Héros : pixel source × 4,8 × 0,5 × TOP_SCALE × 1,5 (cadre 1280 → écran
 # 1920) = exactement 2 pixels d'écran par pixel de dessin, pour un pixel art net.
 const TOP_SCALE := 2.0 / (4.8 * 0.5 * 1.5)
