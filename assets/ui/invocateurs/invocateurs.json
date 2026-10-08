@@ -1,0 +1,425 @@
+{
+  "version": 1,
+  "etape": "mage_validation",
+  "canvas": [
+    1920,
+    1080
+  ],
+  "filter": "nearest",
+  "animations": {
+    "mage_repos": {
+      "file": "mage/mage_repos.png",
+      "frame_size": [
+        384,
+        384
+      ],
+      "frame_count": 8,
+      "duration_ms": 140,
+      "frame_durations_ms": [
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140
+      ],
+      "loop": true,
+      "pivot": [
+        192,
+        360
+      ],
+      "layout": "horizontal"
+    },
+    "mage_incantation": {
+      "file": "mage/mage_incantation.png",
+      "frame_size": [
+        384,
+        384
+      ],
+      "frame_count": 12,
+      "duration_ms": 100,
+      "frame_durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": false,
+      "pivot": [
+        192,
+        360
+      ],
+      "layout": "horizontal"
+    },
+    "eclats_runiques": {
+      "file": "mage/eclats_runiques.png",
+      "frame_size": [
+        384,
+        384
+      ],
+      "frame_count": 10,
+      "duration_ms": 70,
+      "frame_durations_ms": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": false,
+      "pivot": [
+        192,
+        368
+      ],
+      "layout": "horizontal"
+    },
+    "apparition_finale": {
+      "file": "mage/apparition_finale.png",
+      "frame_size": [
+        384,
+        384
+      ],
+      "frame_count": 10,
+      "duration_ms": 70,
+      "frame_durations_ms": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": false,
+      "pivot": [
+        192,
+        368
+      ],
+      "layout": "horizontal"
+    },
+    "colonne_rune_rare": {
+      "file": "mage/colonne_rune_rare.png",
+      "frame_size": [
+        384,
+        512
+      ],
+      "frame_count": 12,
+      "duration_ms": 80,
+      "frame_durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "loop": false,
+      "pivot": [
+        192,
+        496
+      ],
+      "layout": "horizontal"
+    },
+    "colonne_rune_epique": {
+      "file": "mage/colonne_rune_epique.png",
+      "frame_size": [
+        384,
+        512
+      ],
+      "frame_count": 12,
+      "duration_ms": 80,
+      "frame_durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "loop": false,
+      "pivot": [
+        192,
+        496
+      ],
+      "layout": "horizontal"
+    },
+    "colonne_rune_legendaire": {
+      "file": "mage/colonne_rune_legendaire.png",
+      "frame_size": [
+        384,
+        512
+      ],
+      "frame_count": 12,
+      "duration_ms": 80,
+      "frame_durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "loop": false,
+      "pivot": [
+        192,
+        496
+      ],
+      "layout": "horizontal"
+    }
+  },
+  "assets": {
+    "mage/salle_mage.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "alpha": false
+    },
+    "mage/cercle_runique_grand_or.png": {
+      "size": [
+        512,
+        512
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_moyen_or.png": {
+      "size": [
+        256,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_petit_or.png": {
+      "size": [
+        128,
+        128
+      ],
+      "alpha": true
+    },
+    "mage/cercle_sol_perspective_or.png": {
+      "size": [
+        768,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_grand_bleu.png": {
+      "size": [
+        512,
+        512
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_moyen_bleu.png": {
+      "size": [
+        256,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_petit_bleu.png": {
+      "size": [
+        128,
+        128
+      ],
+      "alpha": true
+    },
+    "mage/cercle_sol_perspective_bleu.png": {
+      "size": [
+        768,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_grand_violet.png": {
+      "size": [
+        512,
+        512
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_moyen_violet.png": {
+      "size": [
+        256,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_petit_violet.png": {
+      "size": [
+        128,
+        128
+      ],
+      "alpha": true
+    },
+    "mage/cercle_sol_perspective_violet.png": {
+      "size": [
+        768,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_grand_blanc.png": {
+      "size": [
+        512,
+        512
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_moyen_blanc.png": {
+      "size": [
+        256,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/cercle_runique_petit_blanc.png": {
+      "size": [
+        128,
+        128
+      ],
+      "alpha": true
+    },
+    "mage/cercle_sol_perspective_blanc.png": {
+      "size": [
+        768,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/cercle_sol_perspective.png": {
+      "size": [
+        768,
+        256
+      ],
+      "alpha": true
+    },
+    "mage/runes/rune_01.png": {
+      "size": [
+        32,
+        32
+      ],
+      "alpha": true
+    },
+    "mage/runes/rune_02.png": {
+      "size": [
+        32,
+        32
+      ],
+      "alpha": true
+    },
+    "mage/runes/rune_03.png": {
+      "size": [
+        32,
+        32
+      ],
+      "alpha": true
+    },
+    "mage/runes/rune_04.png": {
+      "size": [
+        32,
+        32
+      ],
+      "alpha": true
+    },
+    "mage/runes/rune_05.png": {
+      "size": [
+        32,
+        32
+      ],
+      "alpha": true
+    },
+    "mage/runes/rune_06.png": {
+      "size": [
+        32,
+        32
+      ],
+      "alpha": true
+    },
+    "mage/runes/rune_07.png": {
+      "size": [
+        32,
+        32
+      ],
+      "alpha": true
+    },
+    "mage/runes/rune_08.png": {
+      "size": [
+        32,
+        32
+      ],
+      "alpha": true
+    }
+  },
+  "salles": {
+    "mage": {
+      "fond": "mage/salle_mage.png",
+      "sol_personnage": [
+        420,
+        830
+      ],
+      "centre_cercle": [
+        1080,
+        710
+      ],
+      "sol_heros": [
+        1080,
+        735
+      ],
+      "zone_apparition": [
+        880,
+        310,
+        400,
+        430
+      ]
+    }
+  },
+  "atlases": {
+    "runes_flottantes": {
+      "file": "mage/runes_flottantes.png",
+      "cell_size": [
+        32,
+        32
+      ],
+      "cell_count": 8,
+      "layout": "horizontal",
+      "type": "glyphes_independants"
+    }
+  }
+}

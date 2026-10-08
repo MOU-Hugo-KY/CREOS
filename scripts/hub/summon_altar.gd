@@ -71,6 +71,8 @@ const HERO_FEET := Vector2(960, 735)
 const HERO_HEIGHT := 400.0
 
 var _hero_player: ClipPlayer
+var _mage_room: MageRoom
+var _hero_height := HERO_HEIGHT
 var _hero_shadow: Control
 
 
@@ -86,45 +88,51 @@ func _ready() -> void:
 	add_child(bg)
 	var root := ScreenPack.frame(self)
 
-	# La salle couvre tout l'écran (agrandie à la largeur, recadrée en haut et en bas autour de la lanterne).
-	var sr := ScreenPack.rect(L.central_scene_rect)
-	var k := 1920.0 / sr.size.x
-	_scene = Control.new()
-	_scene.size = sr.size
-	_scene.scale = Vector2(k, k)
-	_scene.position = Vector2(0, -140)
-	_scene.clip_contents = true
-	_scene.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	root.add_child(_scene)
-	ScreenPack.image(_scene, ScreenPack.tex(S, "fond"), Rect2(Vector2.ZERO, sr.size))
-	_glow = _Ambient.new()  # lueur qui respire et cercle de runes, derrière la lanterne
-	_glow.size = sr.size
-	_scene.add_child(_glow)
-	_sparks = _anim("particules", L.particles_anchor_in_scene)
-	# La lanterne, réduite, est posée sur le côté gauche ; le cercle du milieu reste libre pour le héros.
-	var box := Control.new()
-	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	box.scale = Vector2.ONE * LANTERN_SCALE
-	box.position = LANTERN_AT - LANTERN_FOOT * LANTERN_SCALE
-	_scene.add_child(box)
-	_lantern = ScreenPack.image(box, ScreenPack.tex(S, "lanterne"), ScreenPack.rect(L.lantern_sprite_rect_in_scene))
-	_lit = Anim.new(S, "lanterne_allumage")
-	_lit.position = Vector2(L.lantern_anchor_in_scene[0], L.lantern_anchor_in_scene[1])
-	box.add_child(_lit)
-	_flame = ShaderMaterial.new()
-	_flame.shader = Shader.new()
-	_flame.shader.code = FLAME_SHADER
-	_lit.material = _flame
-	_lantern.material = _flame
-	for c: String in ["rare", "epic", "legendary"]:
-		_columns[c] = _anim("colonne_" + c, L.column_anchor_in_scene)
-	_burst = _anim("eclat_final", L.final_anchor_in_scene)
-	_embers = _Ambient.new()  # braises et poussières dorées qui montent devant
-	_embers.front = true
-	_embers.size = sr.size
-	_scene.add_child(_embers)
-	_lantern_y = _lantern.position.y
-	_lit_y = _lit.position.y
+	# Salle du Mage runique (pack « Invocateurs ») si elle est là, sinon l'ancienne salle de la lanterne.
+	if MageRoom.available():
+		_mage_room = MageRoom.new()
+		root.add_child(_mage_room)
+		_hero_height = 260.0
+	else:
+		# La salle couvre tout l'écran (agrandie à la largeur, recadrée en haut et en bas autour de la lanterne).
+		var sr := ScreenPack.rect(L.central_scene_rect)
+		var k := 1920.0 / sr.size.x
+		_scene = Control.new()
+		_scene.size = sr.size
+		_scene.scale = Vector2(k, k)
+		_scene.position = Vector2(0, -140)
+		_scene.clip_contents = true
+		_scene.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		root.add_child(_scene)
+		ScreenPack.image(_scene, ScreenPack.tex(S, "fond"), Rect2(Vector2.ZERO, sr.size))
+		_glow = _Ambient.new()  # lueur qui respire et cercle de runes, derrière la lanterne
+		_glow.size = sr.size
+		_scene.add_child(_glow)
+		_sparks = _anim("particules", L.particles_anchor_in_scene)
+		# La lanterne, réduite, est posée sur le côté gauche ; le cercle du milieu reste libre pour le héros.
+		var box := Control.new()
+		box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		box.scale = Vector2.ONE * LANTERN_SCALE
+		box.position = LANTERN_AT - LANTERN_FOOT * LANTERN_SCALE
+		_scene.add_child(box)
+		_lantern = ScreenPack.image(box, ScreenPack.tex(S, "lanterne"), ScreenPack.rect(L.lantern_sprite_rect_in_scene))
+		_lit = Anim.new(S, "lanterne_allumage")
+		_lit.position = Vector2(L.lantern_anchor_in_scene[0], L.lantern_anchor_in_scene[1])
+		box.add_child(_lit)
+		_flame = ShaderMaterial.new()
+		_flame.shader = Shader.new()
+		_flame.shader.code = FLAME_SHADER
+		_lit.material = _flame
+		_lantern.material = _flame
+		for c: String in ["rare", "epic", "legendary"]:
+			_columns[c] = _anim("colonne_" + c, L.column_anchor_in_scene)
+		_burst = _anim("eclat_final", L.final_anchor_in_scene)
+		_embers = _Ambient.new()  # braises et poussières dorées qui montent devant
+		_embers.front = true
+		_embers.size = sr.size
+		_scene.add_child(_embers)
+		_lantern_y = _lantern.position.y
+		_lit_y = _lit.position.y
 	var fade := _SideFade.new()  # bandes sombres en haut et en bas pour le texte
 	fade.size = Vector2(1920, 1080)
 	root.add_child(fade)
@@ -202,8 +210,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_time += delta
 	var bob := sin(_time * 1.6) * 6.0 if not busy else 0.0
-	_lantern.position.y = _lantern_y + bob
-	_lit.position.y = _lit_y + bob
+	if _lantern:
+		_lantern.position.y = _lantern_y + bob
+		_lit.position.y = _lit_y + bob
 	for currency: String in _buttons:
 		var b: Button = _buttons[currency]
 		var g := 1.0 + (0.12 + 0.12 * sin(_time * 3.0)) * (0.0 if b.disabled else 1.0)
@@ -396,6 +405,8 @@ func _build_reveal(root: Control, _R: Dictionary) -> void:
 	root.add_child(_reveal)
 	_hero_shadow = _HeroShadow.new()
 	_hero_shadow.position = HERO_FEET
+	if _mage_room:
+		_reveal.position = _mage_room.hero_feet - HERO_FEET  # toute la révélation suit le cercle du mage
 	_reveal.add_child(_hero_shadow)
 	_reveal_name = ScreenPack.shadow(ScreenPack.text(_reveal, "", Rect2(460, 130, 1000, 100), 76, UiKit.WHITE,
 		HORIZONTAL_ALIGNMENT_CENTER), 5)
@@ -438,6 +449,9 @@ func open() -> void:
 
 
 func _reset_scene() -> void:
+	if _mage_room:
+		_mage_room.reset()
+		return
 	for a: Anim in [_lit, _burst] + _columns.values():
 		a.stop()
 	_lantern.texture = ScreenPack.tex(S, "lanterne")
@@ -483,6 +497,9 @@ func _summon(currency: String) -> void:
 
 ## Chronologie du JSON : allumage à 0, colonne à 0,8 s, éclat à 1,7 s, révélation à 2,35 s.
 func _ceremony(rarity: int) -> void:
+	if _mage_room:
+		await _mage_room.ceremony(rarity)
+		return
 	_flame.set_shader_parameter("flame", FLAME.get(rarity, Color.WHITE))
 	_flame.set_shader_parameter("amount", 1.0 if FLAME.has(rarity) else 0.0)
 	_lantern.visible = false
@@ -529,7 +546,7 @@ func _show_result(hero: Dictionary, r: Dictionary) -> void:
 	_reveal.move_child(_hero_player, 1)
 	_hero_player.play(id + "_idle")
 	var h := maxf(1.0, _hero_player.actor_rect(id + "_idle").size.y)
-	var sc := HERO_HEIGHT / h
+	var sc := _hero_height / h
 	_hero_player.scale = Vector2(sc, sc) * 0.2
 	_hero_player.flash(Color.WHITE, 1.0)
 	create_tween().tween_property(_hero_player, "scale", Vector2(sc, sc), 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
