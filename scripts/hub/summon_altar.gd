@@ -80,6 +80,7 @@ var _druid_room: DruidRoom
 var _druid_ui: Array[Control] = []
 var _fusion_layer: Control
 var _fuse_pick := ""
+var _fuse_times := 1  # nombre de fusions d'un coup
 var _shard_label: Label
 var _mode := "heros"  # "heros" (le Mage) ou "pieces" (le Mécanicien)
 var _hero_ui: Array[Control] = []  # ce qui ne sert qu'à l'invocation des héros
@@ -1013,22 +1014,40 @@ func _fill_fusion() -> void:
 	var out := ScreenPack.image(_fusion_layer, ChestReveal.esprit_icon(up, 128), Rect2(c + Vector2(-64, -250), Vector2(128, 128)))
 	if n < PlayerData.FUSION_COUNT:
 		out.modulate = Color(0.4, 0.38, 0.45, 0.8)
-	ScreenPack.shadow(ScreenPack.text(_fusion_layer, "5 %s  →  1 %s" % [HeroesScreen.esprit_name(_fuse_pick, true),
-		HeroesScreen.esprit_name(up)], Rect2(360, 880, 1200, 40), 26, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 3)
-	var b := ScreenPack.button(_fusion_layer, S, "invoke_fragments", "Fusionner · %d or" % PlayerData.FUSION_GOLD,
-		Rect2(760, 960, 400, 88), 26, UiKit.INK)
-	b.disabled = n < PlayerData.FUSION_COUNT or PlayerData.gold() < PlayerData.FUSION_GOLD
+	# Combien de fusions d'un coup : limité par le stock et par l'or.
+	var most := mini(n / PlayerData.FUSION_COUNT, PlayerData.gold() / maxi(1, PlayerData.FUSION_GOLD))
+	_fuse_times = clampi(_fuse_times, 1, maxi(1, most))
+	ScreenPack.shadow(ScreenPack.text(_fusion_layer, "%d × 5 %s  →  %d %s" % [_fuse_times, HeroesScreen.esprit_name(_fuse_pick, true),
+		_fuse_times, HeroesScreen.esprit_name(up, _fuse_times > 1)], Rect2(360, 880, 1200, 40), 26, Color("f3d9a0"),
+		HORIZONTAL_ALIGNMENT_CENTER), 3)
+	for k in 3:
+		var label: String = ["−", "+", "Max"][k]
+		var sb := ScreenPack.button(_fusion_layer, S, "return", label, Rect2([600, 1180, 1270][k], 968, [70, 70, 110][k], 72), 28)
+		sb.disabled = most <= 1
+		sb.pressed.connect(func() -> void:
+			ui_sound.emit("ui_click")
+			_fuse_times = [_fuse_times - 1, _fuse_times + 1, most][k]
+			_fill_fusion())
+	var b := ScreenPack.button(_fusion_layer, S, "invoke_fragments", "Fusionner ×%d · %d or" % [_fuse_times,
+		_fuse_times * PlayerData.FUSION_GOLD], Rect2(690, 960, 470, 88), 26, UiKit.INK)
+	b.disabled = most < 1
 	b.pressed.connect(func() -> void:
 		if busy:
 			return
 		var pick := _fuse_pick
-		if not PlayerData.fuse_esprit(pick):
+		var done := 0
+		for _i in _fuse_times:
+			if not PlayerData.fuse_esprit(pick):
+				break
+			done += 1
+		if done == 0:
 			ui_sound.emit("ui_toggle")
 			return
+		_fuse_times = 1
 		busy = true
 		ui_sound.emit("magic_cast")
 		await _druid_room.ceremony([pick.get_slice("_", 2)])
 		ui_sound.emit("ultimate_impact")
-		_druid_room.show_esprits({up: 1})
+		_druid_room.show_esprits({up: done})
 		busy = false
 		_refresh())
