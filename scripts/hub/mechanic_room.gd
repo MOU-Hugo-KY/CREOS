@@ -18,6 +18,7 @@ var _fx: Dictionary = {}
 var _t := 0.0
 var _gather := 0.0  # 0 : au repos, 1 : toutes les pièces au point d'assemblage
 var _add: CanvasItemMaterial
+var _ambiance: RoomAmbiance
 var _shown: Array[Control] = []
 
 
@@ -34,6 +35,8 @@ func _ready() -> void:
 	var room: Dictionary = MageRoom.data().get("salles", {}).get("mecanicien", {})
 	appear = MageRoom._vec(room.get("centre_apparition", [985, 555]))
 	_image(MageRoom.tex("mecanicien/salle_mecanicien.png"), Rect2(0, 0, 1920, 1080))
+	_ambiance = RoomAmbiance.make("mecanicien")
+	add_child(_ambiance)
 	_particles = _sheet("particules_magie_ancienne")
 	_particles.position = appear + Vector2(0, 20)
 	_particles.scale = Vector2(2.2, 1.4)
@@ -75,6 +78,8 @@ func _process(delta: float) -> void:
 
 
 func reset() -> void:
+	if _ambiance:
+		_ambiance.dim(false)
 	_gather = 0.0
 	for fx: MageRoom.Sheet in _fx.values():
 		fx.visible = false
@@ -86,6 +91,7 @@ func reset() -> void:
 
 ## L'assemblage (~2,3 s), à attendre avec `await`.
 func ceremony() -> void:
+	_ambiance.dim(true)
 	reset()
 	_worker.play("mecanicien_travail", "mecanicien_repos")
 	_play_fx("etincelles")

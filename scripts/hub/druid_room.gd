@@ -19,6 +19,7 @@ var _wave_to := Vector2(960, 675)
 var _corners: Dictionary = {}  # élément -> Sheet
 var _hatch: MageRoom.Sheet
 var _add: CanvasItemMaterial
+var _ambiance: RoomAmbiance
 var _flies: Array = []  # [ColorRect, phase, centre]
 var _t := 0.0
 var _shown: Array[Control] = []
@@ -45,6 +46,8 @@ func _ready() -> void:
 	bg.size = size
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bg)
+	_ambiance = RoomAmbiance.make("druide")
+	add_child(_ambiance)
 	for elem: String in CORNERS:
 		var c: Dictionary = room.get("coins_elements", {}).get(CORNERS[elem], {})
 		if c.is_empty():
@@ -88,6 +91,8 @@ func _process(delta: float) -> void:
 
 
 func reset() -> void:
+	if _ambiance:
+		_ambiance.dim(false)
 	for c in _shown:
 		c.queue_free()
 	_shown.clear()
@@ -100,6 +105,7 @@ func reset() -> void:
 
 ## L'appel (~2,4 s) ; `elements` : les éléments des Esprits obtenus (leurs alcôves s'éveillent).
 func ceremony(elements: Array) -> void:
+	_ambiance.dim(true)
 	reset()
 	_druid.play("druide_appel", "druide_repos")
 	await get_tree().create_timer(0.6).timeout

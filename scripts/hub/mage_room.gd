@@ -26,6 +26,7 @@ var _motes: Array = []  # [TextureRect, vitesse, dérive]
 var _t := 0.0
 var _casting := false
 var _add: CanvasItemMaterial
+var _ambiance: RoomAmbiance
 
 
 static func available() -> bool:
@@ -52,6 +53,8 @@ func _ready() -> void:
 	hero_feet = _vec(room.get("sol_heros", [1080, 735]))
 	_circle_center = _vec(room.get("centre_cercle", [1080, 710]))
 	_image(tex("mage/salle_mage.png"), Rect2(0, 0, 1920, 1080))
+	_ambiance = RoomAmbiance.make("mage")
+	add_child(_ambiance)
 	# Cercle au sol (calque aplati) : or au repos, couleur de la rareté pendant l'invocation.
 	_floor = _image(tex("mage/cercle_sol_perspective_or.png"), Rect2(_circle_center - Vector2(384, 128), Vector2(768, 256)))
 	_floor.material = _add
@@ -108,6 +111,8 @@ func _process(delta: float) -> void:
 
 ## Remet la salle au repos.
 func reset() -> void:
+	if _ambiance:
+		_ambiance.dim(false)
 	_casting = false
 	_floor.texture = tex("mage/cercle_sol_perspective_or.png")
 	_floor_glow.modulate.a = 0.0
@@ -121,6 +126,7 @@ func reset() -> void:
 
 ## L'invocation (~2,4 s), à attendre avec `await`.
 func ceremony(rarity: int) -> void:
+	_ambiance.dim(true)
 	var col: String = COLORS.get(rarity, "bleu")
 	_casting = true
 	_mage.play("mage_incantation", "mage_repos")

@@ -1,0 +1,640 @@
+{
+  "version": 1,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "coordinates": "position = pivot anchor in room pixels, top-left origin",
+  "filter": "nearest",
+  "animations": {
+    "commun/flamme_bougie": {
+      "file": "commun/flamme_bougie.png",
+      "frame_size": [
+        64,
+        64
+      ],
+      "frame_count": 8,
+      "duration_ms": 120,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        32,
+        56
+      ],
+      "blend": "normal"
+    },
+    "mage/poussiere_arcane": {
+      "file": "mage/poussiere_arcane.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 8,
+      "duration_ms": 240,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        128,
+        128
+      ],
+      "blend": "normal"
+    },
+    "mage/orbe_scintille": {
+      "file": "mage/orbe_scintille.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 8,
+      "duration_ms": 180,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        128,
+        128
+      ],
+      "blend": "normal"
+    },
+    "mecanicien/vapeur": {
+      "file": "mecanicien/vapeur.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 8,
+      "duration_ms": 180,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        128,
+        232
+      ],
+      "blend": "normal"
+    },
+    "mecanicien/etincelles": {
+      "file": "mecanicien/etincelles.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 8,
+      "duration_ms": 110,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        128,
+        232
+      ],
+      "blend": "normal"
+    },
+    "mecanicien/bulles_ether": {
+      "file": "mecanicien/bulles_ether.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 8,
+      "duration_ms": 200,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        128,
+        128
+      ],
+      "blend": "normal"
+    },
+    "druide/lucioles_spores": {
+      "file": "druide/lucioles_spores.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 8,
+      "duration_ms": 260,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        128,
+        128
+      ],
+      "blend": "normal"
+    },
+    "druide/ondes_eau": {
+      "file": "druide/ondes_eau.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 8,
+      "duration_ms": 190,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        128,
+        208
+      ],
+      "blend": "normal"
+    },
+    "druide/feuilles_derivantes": {
+      "file": "druide/feuilles_derivantes.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 8,
+      "duration_ms": 300,
+      "loop": true,
+      "layout": "horizontal",
+      "pivot": [
+        128,
+        128
+      ],
+      "blend": "normal"
+    }
+  },
+  "salles": {
+    "mage": [
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          251,
+          195
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          316,
+          364
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 1,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          761,
+          332
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 2,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          1339,
+          334
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 3,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          1758,
+          197
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 4,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "mage/poussiere_arcane",
+        "position": [
+          400,
+          450
+        ],
+        "scale": [
+          1.2,
+          1.2
+        ],
+        "opacity": 0.28,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mage/poussiere_arcane",
+        "position": [
+          1440,
+          460
+        ],
+        "scale": [
+          1.2,
+          1.2
+        ],
+        "opacity": 0.28,
+        "phase": 3,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mage/poussiere_arcane",
+        "position": [
+          1040,
+          340
+        ],
+        "scale": [
+          1.2,
+          1.2
+        ],
+        "opacity": 0.28,
+        "phase": 6,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mage/orbe_scintille",
+        "position": [
+          390,
+          168
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.25,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mage/orbe_scintille",
+        "position": [
+          578,
+          276
+        ],
+        "scale": [
+          0.35,
+          0.35
+        ],
+        "opacity": 0.25,
+        "phase": 2,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mage/orbe_scintille",
+        "position": [
+          1530,
+          222
+        ],
+        "scale": [
+          0.32,
+          0.32
+        ],
+        "opacity": 0.25,
+        "phase": 4,
+        "z_index": 0,
+        "dim_during_invocation": true
+      }
+    ],
+    "mecanicien": [
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          447,
+          360
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          672,
+          466
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 1,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          1475,
+          451
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 2,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "mecanicien/vapeur",
+        "position": [
+          711,
+          153
+        ],
+        "scale": [
+          0.65,
+          0.65
+        ],
+        "opacity": 0.24,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mecanicien/vapeur",
+        "position": [
+          1230,
+          275
+        ],
+        "scale": [
+          0.65,
+          0.65
+        ],
+        "opacity": 0.24,
+        "phase": 4,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mecanicien/etincelles",
+        "position": [
+          1615,
+          565
+        ],
+        "scale": [
+          0.42,
+          0.42
+        ],
+        "opacity": 0.55,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mecanicien/bulles_ether",
+        "position": [
+          596,
+          365
+        ],
+        "scale": [
+          0.3,
+          0.8
+        ],
+        "opacity": 0.36,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mecanicien/bulles_ether",
+        "position": [
+          786,
+          190
+        ],
+        "scale": [
+          0.24,
+          0.75
+        ],
+        "opacity": 0.36,
+        "phase": 2,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mecanicien/bulles_ether",
+        "position": [
+          1353,
+          236
+        ],
+        "scale": [
+          0.2,
+          0.65
+        ],
+        "opacity": 0.36,
+        "phase": 4,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "mecanicien/bulles_ether",
+        "position": [
+          1157,
+          451
+        ],
+        "scale": [
+          0.18,
+          0.36
+        ],
+        "opacity": 0.36,
+        "phase": 6,
+        "z_index": 0,
+        "dim_during_invocation": true
+      }
+    ],
+    "druide": [
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          682,
+          410
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          1196,
+          428
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 1,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "commun/flamme_bougie",
+        "position": [
+          1091,
+          575
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "opacity": 0.7,
+        "phase": 2,
+        "z_index": 0,
+        "dim_during_invocation": false
+      },
+      {
+        "animation": "druide/lucioles_spores",
+        "position": [
+          330,
+          520
+        ],
+        "scale": [
+          0.9,
+          0.9
+        ],
+        "opacity": 0.35,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "druide/lucioles_spores",
+        "position": [
+          690,
+          320
+        ],
+        "scale": [
+          0.9,
+          0.9
+        ],
+        "opacity": 0.35,
+        "phase": 2,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "druide/lucioles_spores",
+        "position": [
+          1290,
+          510
+        ],
+        "scale": [
+          0.9,
+          0.9
+        ],
+        "opacity": 0.35,
+        "phase": 4,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "druide/lucioles_spores",
+        "position": [
+          1770,
+          820
+        ],
+        "scale": [
+          0.9,
+          0.9
+        ],
+        "opacity": 0.35,
+        "phase": 6,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "druide/ondes_eau",
+        "position": [
+          1515,
+          361
+        ],
+        "scale": [
+          0.85,
+          0.55
+        ],
+        "opacity": 0.35,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "druide/feuilles_derivantes",
+        "position": [
+          600,
+          500
+        ],
+        "scale": [
+          1.4,
+          1.4
+        ],
+        "opacity": 0.65,
+        "phase": 0,
+        "z_index": 0,
+        "dim_during_invocation": true
+      },
+      {
+        "animation": "druide/feuilles_derivantes",
+        "position": [
+          1270,
+          400
+        ],
+        "scale": [
+          1.4,
+          1.4
+        ],
+        "opacity": 0.65,
+        "phase": 4,
+        "z_index": 0,
+        "dim_during_invocation": true
+      }
+    ]
+  },
+  "integration": {
+    "layer_order": [
+      "existing_background",
+      "ambient_fx",
+      "existing_characters",
+      "summoning_fx",
+      "UI"
+    ],
+    "on_invocation": "call set_invocation_active(true); ambient opacity falls to40percent except candles",
+    "on_invocation_end": "call set_invocation_active(false)",
+    "backgrounds_replaced": false
+  }
+}
