@@ -87,6 +87,12 @@ func _process(_delta: float) -> bool:
 		scene.town.set_hour(hour)
 	if frames == 5 and action == "prep":  # préparation de chasse du premier niveau
 		scene.hud.open_hunt_prep("monde01_1")
+	elif frames == 5 and action.begins_with("shop_"):  # Marchand sur un onglet : shop_fusion, shop_rachat
+		var pd: Node = root.get_node("PlayerData")
+		pd.state.items["esprit_oeuf_feu"] = 7
+		pd.state.items["esprit_petit_eau"] = 2
+		scene.hud.open_shop()
+		scene.hud.shop._set_mode(action.trim_prefix("shop_"))
 	elif frames == 5 and action == "druide":  # Lanterne : le sanctuaire du Druide, un appel ×10
 		scene.hud.open_altar()
 		var pd: Node = root.get_node("PlayerData")

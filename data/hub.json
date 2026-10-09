@@ -109,7 +109,7 @@
     {
       "id": "eclats",
       "name": "Éclats de serment",
-      "description": "10 fragments pour une invocation à la Lanterne.",
+      "description": "10 éclats violets : un appel au Sanctuaire du Druide (Esprits).",
       "cost": {
         "gold": 2500
       },
@@ -137,6 +137,61 @@
       },
       "gives": {
         "essence_ombre": 5
+      }
+    },
+    {
+      "id": "piece_rouages",
+      "name": "Rouages de laiton",
+      "description": "3 rouages pour bâtir les défenses de ton donjon.",
+      "cost": {
+        "gold": 700
+      },
+      "gives": {
+        "piece_rouages": 3
+      }
+    },
+    {
+      "id": "piece_pierre",
+      "name": "Pierre taillée",
+      "description": "3 pierres pour bâtir les défenses de ton donjon.",
+      "cost": {
+        "gold": 700
+      },
+      "gives": {
+        "piece_pierre": 3
+      }
+    },
+    {
+      "id": "piece_bois_ferre",
+      "name": "Bois ferré",
+      "description": "2 bois ferrés pour bâtir les défenses de ton donjon.",
+      "cost": {
+        "gold": 800
+      },
+      "gives": {
+        "piece_bois_ferre": 2
+      }
+    },
+    {
+      "id": "piece_ressort",
+      "name": "Ressort runique",
+      "description": "Un ressort runique, rare à l'atelier.",
+      "cost": {
+        "gems": 20
+      },
+      "gives": {
+        "piece_ressort": 1
+      }
+    },
+    {
+      "id": "piece_cristal",
+      "name": "Cristal d'arcane",
+      "description": "Un cristal d'arcane, très rare à l'atelier.",
+      "cost": {
+        "gems": 40
+      },
+      "gives": {
+        "piece_cristal": 1
       }
     }
   ],

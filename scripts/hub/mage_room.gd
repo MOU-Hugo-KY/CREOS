@@ -206,6 +206,7 @@ static func _vec(a: Array) -> Vector2:
 class Sheet extends Node2D:
 	signal finished
 	var anims: Dictionary = {}
+	var base_dir := MageRoom.DIR  # dossier des planches (autre pack possible)
 	var _a: Dictionary = {}
 	var _tex: Texture2D
 	var _frame := 0
@@ -215,7 +216,8 @@ class Sheet extends Node2D:
 
 	func load_anim(name: String) -> void:
 		_a = anims.get(name, {})
-		_tex = MageRoom.tex(String(_a.get("file", "")).trim_prefix(""))
+		var path := base_dir + String(_a.get("file", ""))
+		_tex = load(path) if ResourceLoader.exists(path) else null
 		texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
 	func play(name: String, then := "") -> void:
