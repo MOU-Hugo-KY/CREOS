@@ -65,7 +65,8 @@ func setup(h: Dictionary, is_owned: bool, still := true) -> TarotCard:
 	content.clip_contents = true
 	content.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_face.add_child(content)
-	var illus := pack_tex("illustrations/%s.png" % id) if still else null
+	# Le décor personnel (fonds_heros) passe avant l'ancienne illustration de validation.
+	var illus := pack_tex("illustrations/%s.png" % id) if still and pack_tex("fonds_heros/%s.png" % id) == null else null
 	if illus:
 		_image(content, illus, Rect2(Vector2.ZERO, WINDOW.size))
 	else:

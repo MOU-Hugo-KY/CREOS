@@ -463,7 +463,7 @@ func _fill_detail() -> void:
 	# La carte : reconstruite, le héros animé replacé dans sa fenêtre.
 	if _d_vpc.get_parent():
 		_d_vpc.get_parent().remove_child(_d_vpc)
-	_d_card.setup(hero, owned, false)
+	_d_card.setup(hero, true, false)  # la fiche montre toujours la carte face visible
 	_d_card.content.add_child(_d_vpc)
 	var rcol: Color = (Palette.RARITIES.get(rarity, ["?", Color.WHITE])[1] as Color).lightened(0.25)
 	_d_rarity_label.text = "%s · %s" % [String(Palette.RARITIES.get(rarity, ["?"])[0]).to_upper(),
@@ -484,6 +484,8 @@ func _fill_detail() -> void:
 	_d_xp.visible = _d_xp.size.x >= 12.0
 	_d_xp_text.text = "Expérience %d / %d · gagnée en chasse" % [PlayerData.hero_xp(id), PlayerData.hero_xp_to_next(id)]
 	_d_recruit.visible = not owned
+	for c: Control in [_d_level, _d_force, _d_xp_text, _d_xp.get_parent()]:
+		c.visible = owned
 	# Statistiques et actions
 	var stats := PlayerData.hero_stats(id, hero)
 	for i in STAT_NAMES.size():

@@ -47,6 +47,6 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 |---|---|---|---|---|
 | `fonts/Fredoka.ttf` | Fredoka (variable) | The Fredoka Project Authors | SIL OFL 1.1 (`fonts/OFL.txt`) | https://github.com/google/fonts/tree/main/ofl/fredoka |
 - Coffres et Esprits : pack ChatGPT « CREOS_Coffres_Esprits » (pixel art créé pour le projet).
-- Arcanes de la Loge (cartes de tarot, grimoire, icônes de statistiques, illustrations) : pack ChatGPT « CREOS_Arcanes » (pixel art créé pour le projet).
+- Arcanes de la Loge (cartes de tarot, grimoire, icônes de statistiques, illustrations) : pack ChatGPT « CREOS_Arcanes » et décors personnels « CREOS_Fonds_Heros » (pixel art créé pour le projet).
 - Les trois invocateurs, salles du Mage runique, du Mécanicien et du Druide, et leurs effets d'ambiance (décors, personnages animés, cercles runiques, rouages, effets) : pack ChatGPT « CREOS_Invocateurs » (pixel art créé pour le projet).
 - Échoppe des masques et Reliquaire (décors, niches, lutrin, étal, socles, étiquettes, onglets, balance de fusion, comptoir de rachat, éléments communs) : pack ChatGPT « CREOS_Echoppe_Reliquaire » (pixel art créé pour le projet).
