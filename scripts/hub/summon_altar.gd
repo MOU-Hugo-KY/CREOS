@@ -914,7 +914,7 @@ func _refresh_druid_banner() -> void:
 			var out: Array[String] = ["Chaque appel : %d Esprits d'un élément au hasard.\n" % int(dr.get("esprits_per_pull", 1))]
 			for st: String in Progression.ESPRIT_STAGES:
 				var pct := 100.0 * float(w.get(st, 0)) / maxf(1.0, total)
-				out.append("%s : %s" % [names[st], ("%.0f %%" % pct) if pct > 0 else "Campagne 2"])
+				out.append("%s : %s" % [names[st], (("%.0f %%" if pct >= 1.0 else "%s %%") % (pct if pct >= 1.0 else String.num(pct, 2))) if pct > 0 else "Campagne 2"])
 			out.append("\nTes Esprits :")
 			for st: String in Progression.ESPRIT_STAGES:
 				var n := 0
