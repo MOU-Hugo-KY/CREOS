@@ -62,7 +62,7 @@ func _ready() -> void:
 	var mr := _rect(E.get("masks_rect", [180, 140, 384, 256]))
 	masks.position = mr.position + Vector2(192, 12)
 	_root.add_child(masks)
-	masks.play("masques_balancent")
+	masks.visible = false  # les masques animés juraient avec le décor (déjà plein de masques)
 	# La marchande, derrière le comptoir.
 	var fiche := "res://assets/npcs2d/marchand_masques/fiche.png"
 	var m := _img(_root, load(fiche) if ResourceLoader.exists(fiche) else null, _rect(E.get("merchant_rect", [120, 400, 440, 480])))
