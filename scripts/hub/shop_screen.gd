@@ -72,7 +72,9 @@ func _ready() -> void:
 	# Bulle de dialogue.
 	var dr := _rect(E.get("dialogue_rect", [90, 860, 520, 210]))
 	_nine(_root, "echoppe/bulle_marchande.png", dr)
-	_talk = ScreenPack.text(_root, "", _rect(E.get("dialogue_writing_rect", [190, 888, 380, 130])), 22, UiKit.INK, 0, true)
+	_talk = ScreenPack.text(_root, "", Rect2(dr.position + Vector2(56, 34), Vector2(dr.size.x - 96, dr.size.y - 92)), 22, UiKit.INK,
+		HORIZONTAL_ALIGNMENT_CENTER, true)
+	_talk.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	# Haut : retour, titre, bourses.
 	var back := TextureButton.new()
 	back.texture_normal = tex("commun/retour_normal.png")
@@ -102,7 +104,9 @@ func _ready() -> void:
 		_nine(_root, "commun/cartouche_monnaie.png", r)
 		var ic := _img(_root, icons[i], Rect2(r.position + Vector2(14, 14), Vector2(44, 44)))
 		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		labels.append(ScreenPack.text(_root, "", _rect(cws[i]), 26, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER))
+		var wr := _rect(cws[i])
+		labels.append(ScreenPack.shadow(ScreenPack.text(_root, "", Rect2(wr.position.x - 6, r.position.y, wr.size.x + 12, r.size.y), 24,
+			Color("ffe7a8"), HORIZONTAL_ALIGNMENT_CENTER), 2))
 	_gold = labels[0]
 	_gems = labels[1]
 	# Enseignes (onglets).
@@ -207,8 +211,11 @@ func _article(offer: Dictionary, slot: Dictionary) -> void:
 	var gives: Dictionary = offer.get("gives", {})
 	var key: String = gives.keys()[0] if not gives.is_empty() else ""
 	var ar := _rect(slot.article_rect)
-	var item := _img(_layer, _item_icon(key), ar.grow(-24))
-	item.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	# Échelle entière (pixel net) : la plus grande qui tient dans la place de l'article.
+	var t := ScreenPack.trimmed(_item_icon(key))
+	var ks := maxf(1.0, floorf(96.0 / maxf(1.0, maxf(t.get_width(), t.get_height())))) if t else 1.0
+	var isz := (t.get_size() * ks) if t else Vector2(96, 96)
+	var item := _img(_layer, t, Rect2(Vector2(ar.get_center().x - isz.x / 2.0, ar.end.y - 26 - isz.y), isz))
 	if not can:
 		item.modulate = Color(0.55, 0.52, 0.58)
 	if not gives.is_empty():
