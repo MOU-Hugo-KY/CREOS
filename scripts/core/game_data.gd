@@ -61,8 +61,33 @@ func monster(id: String) -> Dictionary:
 func dungeon_waves(id: String) -> Array:
 	var waves: Array = []
 	for wave: Array in dungeons[id]["waves"]:
-		waves.append(wave.map(func(mid: String) -> Dictionary: return monster(mid)))
+		waves.append(wave.map(func(mid: String) -> Dictionary: return _toughen(monster(mid), id)))
 	return waves
+
+
+## Difficulté (progression.json "enemy_difficulty") : ennemis plus solides monde après monde, boss
+## nettement plus résistants et plus durs, le boss final encore davantage.
+func _toughen(m: Dictionary, dungeon_id: String) -> Dictionary:
+	var cfg: Dictionary = progression.get("enemy_difficulty", {})
+	if cfg.is_empty() or not m.has("stats"):
+		return m
+	var out := m.duplicate(true)
+	var world := int(String(dungeons.get(dungeon_id, {}).get("region", "monde01")).trim_prefix("monde"))
+	var k := 1.0 + float(cfg.get("per_world", 0.0)) * maxi(0, world - 1)
+	var hp := k
+	var power := k
+	if out.get("boss", false):
+		hp *= float(cfg.get("boss_hp", 1.0))
+		power *= float(cfg.get("boss_power", 1.0))
+		if dungeon_id == String(cfg.get("final_dungeon", "")):
+			hp *= float(cfg.get("final_boss_hp", 1.0))
+	var st: Dictionary = out.stats
+	st["hp"] = float(st.get("hp", 100)) * hp
+	for key: String in ["atk", "mag"]:
+		st[key] = float(st.get(key, 0)) * power
+	for key: String in ["def", "res"]:
+		st[key] = float(st.get(key, 0)) * k
+	return out
 
 
 func dungeon(id: String) -> Dictionary:
