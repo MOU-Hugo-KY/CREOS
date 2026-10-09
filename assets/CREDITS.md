@@ -48,4 +48,4 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 | `fonts/Fredoka.ttf` | Fredoka (variable) | The Fredoka Project Authors | SIL OFL 1.1 (`fonts/OFL.txt`) | https://github.com/google/fonts/tree/main/ofl/fredoka |
 - Coffres et Esprits : pack ChatGPT « CREOS_Coffres_Esprits » (pixel art créé pour le projet).
 - Arcanes de la Loge (cartes de tarot, grimoire, icônes de statistiques, illustrations) : pack ChatGPT « CREOS_Arcanes » (pixel art créé pour le projet).
-- Les trois invocateurs, salles du Mage runique et du Mécanicien (décors, personnages animés, cercles runiques, rouages, effets) : pack ChatGPT « CREOS_Invocateurs » (pixel art créé pour le projet).
+- Les trois invocateurs, salles du Mage runique, du Mécanicien et du Druide (décors, personnages animés, cercles runiques, rouages, effets) : pack ChatGPT « CREOS_Invocateurs » (pixel art créé pour le projet).

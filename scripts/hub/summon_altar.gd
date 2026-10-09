@@ -76,6 +76,9 @@ const HERO_HEIGHT := 400.0
 var _hero_player: ClipPlayer
 var _mage_room: MageRoom
 var _meca_room: MechanicRoom
+var _druid_room: DruidRoom
+var _druid_ui: Array[Control] = []
+var _shard_label: Label
 var _mode := "heros"  # "heros" (le Mage) ou "pieces" (le Mécanicien)
 var _hero_ui: Array[Control] = []  # ce qui ne sert qu'à l'invocation des héros
 var _meca_ui: Array[Control] = []  # ce qui ne sert qu'à l'atelier
@@ -104,6 +107,10 @@ func _ready() -> void:
 	if MageRoom.available():
 		_mage_room = MageRoom.new()
 		root.add_child(_mage_room)
+		if DruidRoom.available():
+			_druid_room = DruidRoom.new()
+			_druid_room.visible = false
+			root.add_child(_druid_room)
 		if MechanicRoom.available():
 			_meca_room = MechanicRoom.new()
 			_meca_room.visible = false
@@ -180,12 +187,18 @@ func _ready() -> void:
 	_gold_label = ScreenPack.text(root, "", Rect2(gr.position + Vector2(58, 0), Vector2(146, 72)), 30, UiKit.WHITE,
 		HORIZONTAL_ALIGNMENT_CENTER)
 	_meca_ui.append(_gold_label)
+	var sr := Rect2(1600, 24, 216, 72)
+	_druid_ui.append(ScreenPack.panel(root, S, "currency_cartouche", sr))
+	_druid_ui.append(ScreenPack.image(root, ScreenPack.tex(S, "fragment_serment_64"), Rect2(sr.position + Vector2(14, 14), Vector2(44, 44))))
+	_shard_label = ScreenPack.text(root, "", Rect2(sr.position + Vector2(58, 0), Vector2(146, 72)), 30, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER)
+	_druid_ui.append(_shard_label)
 	# Onglets : une salle par invocateur.
 	if _meca_room:
-		for i in 2:
-			var mode: String = ["heros", "pieces"][i]
-			var tb := ScreenPack.button(root, S, "return", ["Mage · Héros", "Mécanicien · Pièces"][i],
-				Rect2(640 + i * 330, 74, 310, 60), 22)
+		for i in 3:
+			var mode: String = ["heros", "esprits", "pieces"][i]
+			var tb := ScreenPack.button(root, S, "return", ["Mage · Héros", "Druide · Esprits", "Mécanicien · Pièces"][i],
+				Rect2(470 + i * 330, 74, 310, 60), 22)
 			tb.pressed.connect(func() -> void: _set_mode(mode))
 			_tabs[mode] = tb
 
@@ -196,6 +209,7 @@ func _ready() -> void:
 	banner.size = Vector2(310, 760)
 	root.add_child(banner)
 	_hero_ui.append(banner)
+	_build_druid_banner(root)
 	_build_meca_banner(root)
 	ScreenPack.text(banner, "HÉROS DE L'AUTEL", Rect2(0, 22, 310, 34), 22, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
 	for dir: int in [-1, 1]:
@@ -234,6 +248,8 @@ func _ready() -> void:
 		b.pressed.connect(func() -> void:
 			if _mode == "pieces":
 				_pull(n)
+			elif _mode == "esprits":
+				_call_esprits(n)
 			else:
 				_summon(n))
 		_buttons[n] = b
@@ -492,6 +508,8 @@ func open() -> void:
 
 
 func _reset_scene() -> void:
+	if _druid_room:
+		_druid_room.reset()
 	if _meca_room:
 		_meca_room.reset()
 	if _mage_room:
@@ -645,7 +663,10 @@ func _refresh() -> void:
 		_buttons[n].text = "×%d · %d gemmes" % [n, PlayerData.summon_pack_cost(currency, cfg, n)]
 		if _mode == "pieces":
 			_buttons[n].text = "×%d · %d or" % [n, PlayerData.mechanic_cost(cfg, n)]
+		elif _mode == "esprits":
+			_buttons[n].text = "×%d · %d éclats" % [n, PlayerData.druid_cost(cfg, n)]
 	_refresh_meca()
+	_refresh_druid_banner()
 	_set_buttons_enabled(true)
 	# Événement (optionnel, data/summon.json "event" : {"name", "text"}).
 	var ev: Dictionary = cfg.get("event", {})
@@ -748,6 +769,8 @@ func _set_buttons_enabled(on: bool) -> void:
 		_buttons[n].disabled = not on or not PlayerData.can_summon_pack(currency, GameData.summon, n)
 		if _mode == "pieces":
 			_buttons[n].disabled = not on or PlayerData.gold() < PlayerData.mechanic_cost(GameData.summon, n)
+		elif _mode == "esprits":
+			_buttons[n].disabled = not on or PlayerData.item_count("fragments_relique") < PlayerData.druid_cost(GameData.summon, n)
 
 
 # --- Atelier du Mécanicien ---------------------------------------------------------------
@@ -766,15 +789,21 @@ func _set_mode(mode: String) -> void:
 
 func _apply_mode() -> void:
 	var meca := _mode == "pieces"
+	var druid := _mode == "esprits"
 	if _mage_room:
-		_mage_room.visible = not meca
+		_mage_room.visible = _mode == "heros"
 	if _meca_room:
 		_meca_room.visible = meca
+	if _druid_room:
+		_druid_room.visible = druid
 	for c in _hero_ui:
-		c.visible = not meca
+		c.visible = _mode == "heros"
 	for c in _meca_ui:
 		c.visible = meca
-	_title.text = "ATELIER DU MÉCANICIEN" if meca else String(GameData.summon.get("name", "Lanterne des Serments")).to_upper()
+	for c in _druid_ui:
+		c.visible = druid
+	_title.text = "ATELIER DU MÉCANICIEN" if meca else ("SANCTUAIRE DU DRUIDE" if druid
+		else String(GameData.summon.get("name", "Lanterne des Serments")).to_upper())
 	for m: String in _tabs:
 		(_tabs[m] as Button).modulate = Color.WHITE if m == _mode else Color(0.6, 0.58, 0.64)
 
@@ -808,6 +837,8 @@ func _refresh_meca() -> void:
 	if _gold_label == null:
 		return
 	_gold_label.text = str(PlayerData.gold())
+	if _shard_label:
+		_shard_label.text = str(PlayerData.item_count("fragments_relique"))
 	var specs: Dictionary = GameData.summon.get("mechanic", {}).get("pieces", {})
 	for id: String in _piece_labels:
 		_piece_labels[id].text = str(PlayerData.item_count(id))
@@ -839,5 +870,67 @@ func _pull(count: int) -> void:
 	await _meca_room.ceremony()
 	ui_sound.emit("ultimate_impact")
 	_meca_room.show_pieces(got, GameData.summon.get("mechanic", {}).get("pieces", {}))
+	busy = false
+	_refresh()
+
+
+# --- Sanctuaire du Druide ------------------------------------------------------------------
+
+## Bannière du sanctuaire : les chances de chaque stade d'Esprit et ce que l'on possède.
+func _build_druid_banner(root: Control) -> void:
+	var banner := _Banner.new()
+	banner.position = Vector2(1586, 120)
+	banner.size = Vector2(310, 760)
+	root.add_child(banner)
+	_druid_ui.append(banner)
+	ScreenPack.text(banner, "ESPRITS DU SANCTUAIRE", Rect2(0, 22, 310, 34), 21, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	var dr: Dictionary = GameData.summon.get("druid", {})
+	var lines := ScreenPack.text(banner, "", Rect2(24, 78, 262, 560), 17, UiKit.WHITE, 0, true)
+	lines.name = "Lines"
+	_druid_ui.append(lines)
+	lines.set_meta("cfg", dr)
+
+
+func _refresh_druid_banner() -> void:
+	for c in _druid_ui:
+		if c is Label and c.name == "Lines":
+			var dr: Dictionary = GameData.summon.get("druid", {})
+			var w: Dictionary = dr.get("stages_after_campaign1" if PlayerData.relics_unlocked() else "stages", {})
+			var total := 0.0
+			for st: String in w:
+				total += float(w[st])
+			var names := {"oeuf": "Œuf", "petit": "Petit Esprit", "grand": "Grand Esprit", "celeste": "Esprit céleste"}
+			var out: Array[String] = ["Chaque appel : %d Esprits d'un élément au hasard.\n" % int(dr.get("esprits_per_pull", 1))]
+			for st: String in Progression.ESPRIT_STAGES:
+				var pct := 100.0 * float(w.get(st, 0)) / maxf(1.0, total)
+				out.append("%s : %s" % [names[st], ("%.0f %%" % pct) if pct > 0 else "Campagne 2"])
+			out.append("\nTes Esprits :")
+			for st: String in Progression.ESPRIT_STAGES:
+				var n := 0
+				for e: String in Progression.ELEMENTS:
+					n += PlayerData.item_count(Progression.esprit_id(st, e))
+				out.append("%s : %d" % [names[st], n])
+			out.append("\nIls éveillent les héros (tous les 10 niveaux). 5 identiques fusionnent chez le Marchand.")
+			(c as Label).text = "\n".join(out)
+
+
+## Appels du sanctuaire : éclats violets contre Esprits.
+func _call_esprits(count: int) -> void:
+	if busy or _druid_room == null:
+		return
+	if PlayerData.item_count("fragments_relique") < PlayerData.druid_cost(GameData.summon, count):
+		ui_sound.emit("ui_toggle")
+		return
+	busy = true
+	var got := PlayerData.druid_pull(GameData.summon, count, _rng)
+	if got.is_empty():
+		busy = false
+		return
+	_set_buttons_enabled(false)
+	ui_sound.emit("magic_cast")
+	var elems: Array = got.keys().map(func(id: String) -> String: return id.get_slice("_", 2))
+	await _druid_room.ceremony(elems)
+	ui_sound.emit("ultimate_impact")
+	_druid_room.show_esprits(got)
 	busy = false
 	_refresh()

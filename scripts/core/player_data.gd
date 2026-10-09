@@ -851,6 +851,48 @@ func mechanic_cost(config: Dictionary, count: int) -> int:
 	return int(m.get("cost", 0)) * pay
 
 
+## Sanctuaire du Druide : `count` appels payés en Éclats de serment (le ×10 en offre un). Chaque
+## appel donne `esprits_per_pull` Esprits d'un élément au hasard ; les Grands et Célestes ne sortent
+## qu'une fois la Campagne 1 finie. Renvoie {esprit: quantité}, vide si pas assez d'éclats.
+func druid_cost(config: Dictionary, count: int) -> int:
+	var dr: Dictionary = config.get("druid", {})
+	var pay := count
+	for p: Dictionary in config.get("packs", []):
+		if int(p.get("count", 0)) == count:
+			pay = int(p.get("pay", count))
+	return int(dr.get("cost", 0)) * pay
+
+
+func druid_pull(config: Dictionary, count: int, rng: RandomNumberGenerator) -> Dictionary:
+	var dr: Dictionary = config.get("druid", {})
+	var currency := String(dr.get("currency", "fragments_relique"))
+	var cost := druid_cost(config, count)
+	if cost <= 0 or item_count(currency) < cost:
+		return {}
+	state.items[currency] = item_count(currency) - cost
+	var weights: Dictionary = dr.get("stages_after_campaign1" if relics_unlocked() else "stages", {})
+	var total := 0
+	for st: String in Progression.ESPRIT_STAGES:
+		total += int(weights.get(st, 0))
+	var out := {}
+	for i in count * int(dr.get("esprits_per_pull", 1)):
+		var pick := rng.randi_range(1, maxi(1, total))
+		var stage := "oeuf"
+		for st: String in Progression.ESPRIT_STAGES:
+			pick -= int(weights.get(st, 0))
+			if pick <= 0:
+				stage = st
+				break
+		var elem: String = Progression.ELEMENTS[rng.randi_range(0, Progression.ELEMENTS.size() - 1)]
+		var id := Progression.esprit_id(stage, elem)
+		out[id] = int(out.get(id, 0)) + 1
+	for id: String in out:
+		state.items[id] = item_count(id) + int(out[id])
+	save_game()
+	changed.emit()
+	return out
+
+
 func mechanic_pull(config: Dictionary, count: int, rng: RandomNumberGenerator) -> Dictionary:
 	var m: Dictionary = config.get("mechanic", {})
 	var cost := mechanic_cost(config, count)

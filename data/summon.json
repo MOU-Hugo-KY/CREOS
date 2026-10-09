@@ -71,5 +71,23 @@
         "icon": "mecanicien/cristal_mecanique.png"
       }
     }
+  },
+  "druid": {
+    "_note": "Sanctuaire du Druide : des Éclats de serment (cristaux violets) contre des Esprits. Les Grands et Célestes n'apparaissent qu'après la Campagne 1.",
+    "currency": "fragments_relique",
+    "cost": 10,
+    "esprits_per_pull": 2,
+    "stages": {
+      "oeuf": 78,
+      "petit": 22,
+      "grand": 0,
+      "celeste": 0
+    },
+    "stages_after_campaign1": {
+      "oeuf": 60,
+      "petit": 32,
+      "grand": 7,
+      "celeste": 1
+    }
   }
 }

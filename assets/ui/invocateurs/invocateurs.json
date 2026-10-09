@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "etape": "mage_et_mecanicien",
+  "version": 3,
+  "etape": "trois_salles",
   "canvas": [
     1920,
     1080
@@ -363,6 +363,249 @@
         192
       ],
       "layout": "horizontal"
+    },
+    "druide_repos": {
+      "file": "druide/druide_repos.png",
+      "frame_size": [
+        384,
+        384
+      ],
+      "frame_count": 8,
+      "duration_ms": 140,
+      "frame_durations_ms": [
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140
+      ],
+      "loop": true,
+      "pivot": [
+        192,
+        360
+      ],
+      "layout": "horizontal"
+    },
+    "druide_appel": {
+      "file": "druide/druide_appel.png",
+      "frame_size": [
+        384,
+        384
+      ],
+      "frame_count": 12,
+      "duration_ms": 100,
+      "frame_durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": false,
+      "pivot": [
+        192,
+        360
+      ],
+      "layout": "horizontal"
+    },
+    "eveil_feu": {
+      "file": "druide/eveil_feu.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 10,
+      "duration_ms": 90,
+      "frame_durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": false,
+      "pivot": [
+        128,
+        232
+      ],
+      "layout": "horizontal"
+    },
+    "eveil_eau": {
+      "file": "druide/eveil_eau.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 10,
+      "duration_ms": 90,
+      "frame_durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": false,
+      "pivot": [
+        128,
+        232
+      ],
+      "layout": "horizontal"
+    },
+    "eveil_nature": {
+      "file": "druide/eveil_nature.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 10,
+      "duration_ms": 90,
+      "frame_durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": false,
+      "pivot": [
+        128,
+        232
+      ],
+      "layout": "horizontal"
+    },
+    "eveil_lumiere": {
+      "file": "druide/eveil_lumiere.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 10,
+      "duration_ms": 90,
+      "frame_durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": false,
+      "pivot": [
+        128,
+        232
+      ],
+      "layout": "horizontal"
+    },
+    "eveil_ombre": {
+      "file": "druide/eveil_ombre.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 10,
+      "duration_ms": 90,
+      "frame_durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": false,
+      "pivot": [
+        128,
+        232
+      ],
+      "layout": "horizontal"
+    },
+    "eclosion_esprit": {
+      "file": "druide/eclosion_esprit.png",
+      "frame_size": [
+        384,
+        384
+      ],
+      "frame_count": 12,
+      "duration_ms": 90,
+      "frame_durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": false,
+      "pivot": [
+        192,
+        360
+      ],
+      "layout": "horizontal"
+    },
+    "onde_nature": {
+      "file": "druide/onde_nature.png",
+      "frame_size": [
+        256,
+        128
+      ],
+      "frame_count": 8,
+      "duration_ms": 90,
+      "frame_durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": false,
+      "pivot": [
+        24,
+        64
+      ],
+      "layout": "horizontal"
     }
   },
   "assets": {
@@ -631,6 +874,13 @@
         48,
         48
       ]
+    },
+    "druide/salle_druide.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "alpha": false
     }
   },
   "salles": {
@@ -726,6 +976,87 @@
           ]
         }
       ]
+    },
+    "druide": {
+      "fond": "druide/salle_druide.png",
+      "sol_personnage": [
+        460,
+        890
+      ],
+      "centre_autel": [
+        960,
+        800
+      ],
+      "sol_esprit": [
+        960,
+        740
+      ],
+      "zone_apparition": [
+        768,
+        400,
+        384,
+        400
+      ],
+      "coins_elements": {
+        "feu": {
+          "position": [
+            280,
+            235
+          ],
+          "animation": "eveil_feu"
+        },
+        "eau": {
+          "position": [
+            1515,
+            365
+          ],
+          "animation": "eveil_eau"
+        },
+        "nature": {
+          "position": [
+            265,
+            665
+          ],
+          "animation": "eveil_nature"
+        },
+        "lumiere": {
+          "position": [
+            960,
+            405
+          ],
+          "animation": "eveil_lumiere"
+        },
+        "ombre": {
+          "position": [
+            1730,
+            610
+          ],
+          "animation": "eveil_ombre"
+        }
+      },
+      "onde_nature_path": {
+        "depart": [
+          535,
+          800
+        ],
+        "arrivee": [
+          960,
+          675
+        ],
+        "duration_ms": 720
+      },
+      "sequence_suggeree": {
+        "appel_ms": 0,
+        "onde_ms": 600,
+        "eclosion_ms": 1320,
+        "revelation_esprit_ms": 1950,
+        "fin_ms": 2400
+      },
+      "eclosion_origin": [
+        960,
+        800
+      ],
+      "preview_note": "Le GIF éclosion utilise l’esprit eau existant du pack de références, conservé intact ; l’asset éclosion ne contient aucun esprit."
     }
   },
   "atlases": {
