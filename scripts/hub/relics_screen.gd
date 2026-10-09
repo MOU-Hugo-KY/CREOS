@@ -15,6 +15,8 @@ var _relic_scroll: ScrollContainer
 var _quartet_scroll: ScrollContainer
 var _quartet_page: Control  # écran Quatuors en pixel (pack partie 2, assets/ui/ecrans/quatuors)
 var _quartet_box: Control
+var _q_title: Label
+var _q_desc: Label
 var _reliquary: Control  # le Reliquaire en plein écran (pack « Échoppe et Reliquaire »)
 var _niches: Control
 var _lectern: Label
@@ -58,6 +60,9 @@ func _ready() -> void:
 const Q := "quatuors"
 
 
+## Table des Quatuors (pack « Table des Quatuors ») : salle du conseil, 4 formations posées sur
+## la table ; chaque formation = un blason (allumé si les quatre héros sont recrutés), 4 médaillons
+## reliés par des fils, et le parchemin du bas décrit la formation survolée.
 func _build_quartet_page() -> void:
 	_quartet_page = Control.new()
 	_quartet_page.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -65,63 +70,124 @@ func _build_quartet_page() -> void:
 	_quartet_page.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	add_child(_quartet_page)
 	var bg := ColorRect.new()
-	bg.color = Color("2a2530")
+	bg.color = Color("17141c")
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_quartet_page.add_child(bg)
 	var root := ScreenPack.frame(_quartet_page)
-	var L := ScreenPack.layout(Q)
-	var tr := ScreenPack.rect(L.title_rect)
-	ScreenPack.image(root, ScreenPack.tex(Q, "title"), tr)
-	ScreenPack.text(root, "RELIQUES ET QUATUORS", tr, 36, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	var back := ScreenPack.button(root, Q, "return", "← Reliques", ScreenPack.rect(L.return_rect), 28)
+	var T: Dictionary = ShopScreen.L().get("quatuors", {})
+	ScreenPack.image(root, _rtex(String(T.get("background", "quatuors/table_quatuors_fond.png"))), Rect2(0, 0, 1920, 1080))
+	_quartet_box = Control.new()
+	_quartet_box.size = Vector2(1920, 1080)
+	_quartet_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_quartet_box)
+	var back := TextureButton.new()
+	back.texture_normal = _rtex("commun/retour_normal.png")
+	back.texture_hover = _rtex("commun/retour_survol.png")
+	back.texture_pressed = _rtex("commun/retour_appuye.png")
+	var br := _r(T.get("return_rect", [40, 30, 220, 80]))
+	back.position = br.position
+	back.size = br.size
+	back.ignore_texture_size = true
+	back.stretch_mode = TextureButton.STRETCH_SCALE
 	back.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		_tab = "Reliques"
 		refresh())
-	var wr := ScreenPack.rect(L.main_window_rect)
-	ScreenPack.panel(root, Q, "main_window", wr)
-	ScreenPack.text(root, "QUATUORS · QUATRE HÉROS, UNE ATTAQUE", Rect2(wr.position + Vector2(42, 14), Vector2(1200, 44)), 28)
-	_quartet_box = Control.new()
-	_quartet_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	root.add_child(_quartet_box)
+	root.add_child(back)
+	ScreenPack.shadow(ScreenPack.text(back, "Reliques", Rect2(64, 0, 150, br.size.y), 24, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var tr := _r(T.get("title_rect", [610, 24, 700, 90]))
+	root.add_child(_nine("commun/bandeau_titre.png", [130, 24, 130, 28], tr))
+	ScreenPack.shadow(ScreenPack.text(root, "TABLE DES QUATUORS", Rect2(tr.position + Vector2(0, 24), Vector2(tr.size.x, 36)), 30,
+		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var dr := _r(T.get("description_rect", [430, 927, 1060, 140]))
+	root.add_child(_nine("quatuors/parchemin_quatuor.png", [140, 24, 140, 24], dr))
+	var wr := _r(T.get("description_write_rect", [570, 953, 780, 86]))
+	_q_title = ScreenPack.text(root, "", Rect2(wr.position + Vector2(0, 8), Vector2(wr.size.x, 28)), 20, Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER)
+	_q_desc = ScreenPack.text(root, "", Rect2(wr.position + Vector2(-40, 34), Vector2(wr.size.x + 80, wr.size.y - 40)), 14, UiKit.INK,
+		HORIZONTAL_ALIGNMENT_CENTER, true)
+
+
+func _nine(path: String, m: Array, r: Rect2) -> NinePatchRect:
+	var np := NinePatchRect.new()
+	np.texture = _rtex(path)
+	np.patch_margin_left = m[0]
+	np.patch_margin_top = m[1]
+	np.patch_margin_right = m[2]
+	np.patch_margin_bottom = m[3]
+	np.position = r.position
+	np.size = r.size
+	np.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return np
 
 
 func _fill_quartet_page() -> void:
 	for c in _quartet_box.get_children():
+		_quartet_box.remove_child(c)
 		c.queue_free()
-	var C: Dictionary = ScreenPack.layout(Q).cards
-	var forms: Array = ScreenPack.data(Q).get("formations", [])
-	for i in mini(forms.size(), C.rects.size()):
-		var f: Dictionary = forms[i]
-		var q: Dictionary = GameData.quartets().get(f.id, {})
-		var r := ScreenPack.rect(C.rects[i])
-		var card := ScreenPack.panel(_quartet_box, Q, "formation_card", r)
-		var at := func(o: Array) -> Rect2: return Rect2(Vector2(o[0], o[1]), Vector2(o[2], o[3]))
-		ScreenPack.image(card, ScreenPack.tex(Q, "blason_%s_128" % f.id), at.call(C.crest_offset))
-		ScreenPack.text(card, String(q.get("name", f.name)), at.call(C.name_offset), 30)
-		ScreenPack.text(card, String(q.get("attack", f.attack)), at.call(C.attack_name_offset), 24, UiKit.TEXT_SOFT)
-		var members: Array = q.get("members", f.heroes)
-		var all_owned := true
-		for k in mini(members.size(), 4):
-			var pr: Rect2 = at.call(C.portraits_offsets[k])
-			var portrait := RoundPortrait.new().setup(GameData.hero(members[k]), pr.size.x)
+	var forms: Dictionary = ShopScreen.L().get("quatuors", {}).get("formations", {})
+	_describe_quartet("")
+	for fid: String in forms:
+		var f: Dictionary = forms[fid]
+		var q: Dictionary = GameData.quartets().get(fid, {})
+		var complete := true
+		for m: Dictionary in f.medallions:
+			if not PlayerData.state.heroes.has(String(m.hero)):
+				complete = false
+		# Fils entre les médaillons (allumés si la formation est complète).
+		for l: Dictionary in f.links:
+			var a := Vector2(l.from[0], l.from[1])
+			var b := Vector2(l.to[0], l.to[1])
+			var w := _nine("quatuors/fil_liaison.png", [24, 6, 24, 6], Rect2(Vector2.ZERO, Vector2(a.distance_to(b), 24)))
+			w.position = a + Vector2(0, -12).rotated(a.angle_to_point(b))
+			w.rotation = a.angle_to_point(b)
+			w.modulate = Color(1.2, 1.1, 0.8) if complete else Color(0.55, 0.5, 0.5, 0.6)
+			_quartet_box.add_child(w)
+		for m: Dictionary in f.medallions:
+			var hid := String(m.hero)
+			var owned: bool = PlayerData.state.heroes.has(hid)
+			ScreenPack.image(_quartet_box, _rtex("quatuors/siege_heros_%s.png" % ("present" if owned else "vide")), _r(m.rect))
+			var pr := _r(m.portrait_rect)
+			var portrait := RoundPortrait.new().setup(GameData.hero(hid), pr.size.x)
 			portrait.position = pr.position
 			portrait.size = pr.size
-			if not PlayerData.state.heroes.has(members[k]):
-				portrait.set_grey(true)
-				all_owned = false
-			card.add_child(portrait)
-		ScreenPack.image(card, ScreenPack.tex(Q, "vignette_" + f.id), at.call(C.vignette_offset))
-		var d := ScreenPack.text(card, " ".join(f.description), at.call(C.description_offset), 21, UiKit.INK, 0, true)
-		d.tooltip_text = String(q.get("effect", ""))
-		d.mouse_filter = Control.MOUSE_FILTER_PASS
-		for row: Array in [["bonus_rect", "bonus_panel", "Bonus · " + ("prêt" if all_owned else "recrute les quatre"), "bonus"],
-				["resonance_rect", "resonance_panel", "Résonance · reliques au palier V", "resonance"]]:
-			var rr: Rect2 = at.call(C[row[0]])
-			var box := ScreenPack.panel(card, Q, row[1], rr)
-			box.mouse_filter = Control.MOUSE_FILTER_PASS
-			box.tooltip_text = String(q.get(row[3], ""))
-			ScreenPack.text(box, row[2], Rect2(30, 0, rr.size.x - 60, rr.size.y), 21, UiKit.WHITE)
+			portrait.set_grey(not owned)
+			if not owned:
+				portrait.modulate.a = 0.55
+			portrait.tooltip_text = String(GameData.hero(hid).get("name", hid)) + ("" if owned else " · à recruter")
+			_quartet_box.add_child(portrait)
+		var crest := ScreenPack.image(_quartet_box, _rtex("quatuors/blason_%s_%s.png" % [fid, "allume" if complete else "eteint"]),
+			_r(f.crest.rect))
+		crest.mouse_filter = Control.MOUSE_FILTER_STOP
+		crest.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		crest.mouse_entered.connect(_describe_quartet.bind(fid))
+		ScreenPack.shadow(ScreenPack.text(_quartet_box, String(q.get("name", f.name)),
+			Rect2(_r(f.crest.rect).get_center() + Vector2(-220, -96), Vector2(440, 30)), 21, Color("fff1cf") if complete else Color("cbbfae"),
+			HORIZONTAL_ALIGNMENT_CENTER), 2)
+		if complete:
+			var spark := MageRoom.Sheet.new()
+			spark.base_dir = RDIR
+			spark.anims = {"etincelle": {"file": "quatuors/etincelle_quatuor.png", "frame_size": [256, 256], "frame_count": 10,
+				"frame_durations_ms": [100, 100, 100, 90, 90, 110, 100, 100, 110, 140], "loop": false, "pivot": [128, 128]}}
+			var mat := CanvasItemMaterial.new()
+			mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+			spark.material = mat
+			spark.position = _r(f.crest.rect).get_center()
+			_quartet_box.add_child(spark)
+			spark.play("etincelle")
+			spark.finished.connect(func() -> void: spark.visible = false, CONNECT_ONE_SHOT)
+
+
+## Le parchemin du bas : la formation survolée (ou une aide si rien n'est survolé).
+func _describe_quartet(fid: String) -> void:
+	if fid == "":
+		_q_title.text = "Quatre héros, une attaque"
+		_q_desc.text = "Les quatre membres dans l'équipe, chacun lance son ultime : l'attaque combinée se débloque. Survole un blason."
+		return
+	var q: Dictionary = GameData.quartets().get(fid, {})
+	var names: Array = (q.get("members", []) as Array).map(func(h: String) -> String: return String(GameData.hero(h).get("name", h)))
+	_q_title.text = "%s · %s" % [q.get("name", fid), q.get("attack", "")]
+	_q_desc.text = " · ".join(names) + "
+" + String(q.get("effect", "")).get_slice(".", 0) + "."
 
 
 func open() -> void:

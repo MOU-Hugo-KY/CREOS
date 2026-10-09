@@ -50,3 +50,4 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 - Arcanes de la Loge (cartes de tarot, grimoire, icônes de statistiques, illustrations) : pack ChatGPT « CREOS_Arcanes » et décors personnels « CREOS_Fonds_Heros » (pixel art créé pour le projet).
 - Les trois invocateurs, salles du Mage runique, du Mécanicien et du Druide, et leurs effets d'ambiance (décors, personnages animés, cercles runiques, rouages, effets) : pack ChatGPT « CREOS_Invocateurs » (pixel art créé pour le projet).
 - Échoppe des masques et Reliquaire (décors, niches, lutrin, étal, socles, étiquettes, onglets, balance de fusion, comptoir de rachat, éléments communs) : pack ChatGPT « CREOS_Echoppe_Reliquaire » (pixel art créé pour le projet).
+- Table des Quatuors (assets/ui/echoppe/quatuors/) : pack ChatGPT « Table des Quatuors », créé pour CREOS (ImageGen).

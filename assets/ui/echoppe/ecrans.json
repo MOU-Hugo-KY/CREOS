@@ -3,10 +3,8 @@
     1920,
     1080
   ],
-  "stage": "echoppe_reliquaire_complete",
-  "remaining": [
-    "table_quatuors"
-  ],
+  "stage": "complet",
+  "remaining": [],
   "coordinates": "pixels, origin top-left, rect=[x,y,width,height]",
   "nine_slice_order": [
     "left",
@@ -44,6 +42,18 @@
       24,
       130,
       28
+    ],
+    "quatuors/parchemin_quatuor.png": [
+      140,
+      24,
+      140,
+      24
+    ],
+    "quatuors/fil_liaison.png": [
+      24,
+      6,
+      24,
+      6
     ]
   },
   "animations": {
@@ -98,6 +108,35 @@
         768,
         768
       ]
+    },
+    "etincelle_quatuor": {
+      "file": "quatuors/etincelle_quatuor.png",
+      "frame_size": [
+        256,
+        256
+      ],
+      "frame_count": 10,
+      "columns": 10,
+      "rows": 1,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        90,
+        90,
+        110,
+        100,
+        100,
+        110,
+        140
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "loop": false,
+      "blend_mode": "additive",
+      "trigger": "all four required heroes present; play once on activation"
     }
   },
   "echoppe": {
@@ -1563,5 +1602,614 @@
       "FX"
     ],
     "hero_assignment": "Assign the 19 existing hero IDs in game order; reference did not specify their ordering."
+  },
+  "quatuors": {
+    "background": "quatuors/table_quatuors_fond.png",
+    "table_center": [
+      960,
+      550
+    ],
+    "table_bounds": [
+      250,
+      305,
+      1420,
+      520
+    ],
+    "formations": {
+      "murim": {
+        "name": "Formation des quatre voies",
+        "heroes": [
+          "mei_lian",
+          "jin_seok",
+          "yun_tao",
+          "tang_su"
+        ],
+        "crest": {
+          "rect": [
+            596,
+            376,
+            128,
+            128
+          ],
+          "asset_size": [
+            256,
+            256
+          ]
+        },
+        "medallions": [
+          {
+            "hero": "mei_lian",
+            "center": [
+              490,
+              440
+            ],
+            "rect": [
+              440,
+              390,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              456,
+              406,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "jin_seok",
+            "center": [
+              580,
+              525
+            ],
+            "rect": [
+              530,
+              475,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              546,
+              491,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "yun_tao",
+            "center": [
+              740,
+              525
+            ],
+            "rect": [
+              690,
+              475,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              706,
+              491,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "tang_su",
+            "center": [
+              830,
+              440
+            ],
+            "rect": [
+              780,
+              390,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              796,
+              406,
+              68,
+              68
+            ]
+          }
+        ],
+        "links": [
+          {
+            "from": [
+              490,
+              440
+            ],
+            "to": [
+              580,
+              525
+            ]
+          },
+          {
+            "from": [
+              580,
+              525
+            ],
+            "to": [
+              740,
+              525
+            ]
+          },
+          {
+            "from": [
+              740,
+              525
+            ],
+            "to": [
+              830,
+              440
+            ]
+          },
+          {
+            "from": [
+              830,
+              440
+            ],
+            "to": [
+              490,
+              440
+            ]
+          }
+        ]
+      },
+      "elements": {
+        "name": "Cycle des éléments",
+        "heroes": [
+          "brume",
+          "orage",
+          "braise",
+          "sylve"
+        ],
+        "crest": {
+          "rect": [
+            1196,
+            376,
+            128,
+            128
+          ],
+          "asset_size": [
+            256,
+            256
+          ]
+        },
+        "medallions": [
+          {
+            "hero": "brume",
+            "center": [
+              1090,
+              440
+            ],
+            "rect": [
+              1040,
+              390,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              1056,
+              406,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "orage",
+            "center": [
+              1180,
+              525
+            ],
+            "rect": [
+              1130,
+              475,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              1146,
+              491,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "braise",
+            "center": [
+              1340,
+              525
+            ],
+            "rect": [
+              1290,
+              475,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              1306,
+              491,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "sylve",
+            "center": [
+              1430,
+              440
+            ],
+            "rect": [
+              1380,
+              390,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              1396,
+              406,
+              68,
+              68
+            ]
+          }
+        ],
+        "links": [
+          {
+            "from": [
+              1090,
+              440
+            ],
+            "to": [
+              1180,
+              525
+            ]
+          },
+          {
+            "from": [
+              1180,
+              525
+            ],
+            "to": [
+              1340,
+              525
+            ]
+          },
+          {
+            "from": [
+              1340,
+              525
+            ],
+            "to": [
+              1430,
+              440
+            ]
+          },
+          {
+            "from": [
+              1430,
+              440
+            ],
+            "to": [
+              1090,
+              440
+            ]
+          }
+        ]
+      },
+      "rempart": {
+        "name": "Dernière ligne",
+        "heroes": [
+          "bastion",
+          "kharok",
+          "aegis",
+          "valen"
+        ],
+        "crest": {
+          "rect": [
+            596,
+            596,
+            128,
+            128
+          ],
+          "asset_size": [
+            256,
+            256
+          ]
+        },
+        "medallions": [
+          {
+            "hero": "bastion",
+            "center": [
+              490,
+              660
+            ],
+            "rect": [
+              440,
+              610,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              456,
+              626,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "kharok",
+            "center": [
+              580,
+              745
+            ],
+            "rect": [
+              530,
+              695,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              546,
+              711,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "aegis",
+            "center": [
+              740,
+              745
+            ],
+            "rect": [
+              690,
+              695,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              706,
+              711,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "valen",
+            "center": [
+              830,
+              660
+            ],
+            "rect": [
+              780,
+              610,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              796,
+              626,
+              68,
+              68
+            ]
+          }
+        ],
+        "links": [
+          {
+            "from": [
+              490,
+              660
+            ],
+            "to": [
+              580,
+              745
+            ]
+          },
+          {
+            "from": [
+              580,
+              745
+            ],
+            "to": [
+              740,
+              745
+            ]
+          },
+          {
+            "from": [
+              740,
+              745
+            ],
+            "to": [
+              830,
+              660
+            ]
+          },
+          {
+            "from": [
+              830,
+              660
+            ],
+            "to": [
+              490,
+              660
+            ]
+          }
+        ]
+      },
+      "ombres": {
+        "name": "Pacte des ombres",
+        "heroes": [
+          "corbin",
+          "rivet",
+          "saffran",
+          "nyx"
+        ],
+        "crest": {
+          "rect": [
+            1196,
+            596,
+            128,
+            128
+          ],
+          "asset_size": [
+            256,
+            256
+          ]
+        },
+        "medallions": [
+          {
+            "hero": "corbin",
+            "center": [
+              1090,
+              660
+            ],
+            "rect": [
+              1040,
+              610,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              1056,
+              626,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "rivet",
+            "center": [
+              1180,
+              745
+            ],
+            "rect": [
+              1130,
+              695,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              1146,
+              711,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "saffran",
+            "center": [
+              1340,
+              745
+            ],
+            "rect": [
+              1290,
+              695,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              1306,
+              711,
+              68,
+              68
+            ]
+          },
+          {
+            "hero": "nyx",
+            "center": [
+              1430,
+              660
+            ],
+            "rect": [
+              1380,
+              610,
+              100,
+              100
+            ],
+            "portrait_rect": [
+              1396,
+              626,
+              68,
+              68
+            ]
+          }
+        ],
+        "links": [
+          {
+            "from": [
+              1090,
+              660
+            ],
+            "to": [
+              1180,
+              745
+            ]
+          },
+          {
+            "from": [
+              1180,
+              745
+            ],
+            "to": [
+              1340,
+              745
+            ]
+          },
+          {
+            "from": [
+              1340,
+              745
+            ],
+            "to": [
+              1430,
+              660
+            ]
+          },
+          {
+            "from": [
+              1430,
+              660
+            ],
+            "to": [
+              1090,
+              660
+            ]
+          }
+        ]
+      }
+    },
+    "title_rect": [
+      610,
+      24,
+      700,
+      90
+    ],
+    "return_rect": [
+      40,
+      30,
+      220,
+      80
+    ],
+    "currency_rect": [
+      1620,
+      34,
+      220,
+      72
+    ],
+    "description_rect": [
+      430,
+      927,
+      1060,
+      140
+    ],
+    "description_write_rect": [
+      570,
+      953,
+      780,
+      86
+    ]
   }
 }
