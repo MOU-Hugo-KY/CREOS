@@ -58,7 +58,7 @@
       "piece_bois_ferre": {
         "name": "Bois ferré",
         "weight": 22,
-        "icon": "mecanicien/boulon.png"
+        "icon": "pieces/bois_ferre.png"
       },
       "piece_ressort": {
         "name": "Ressort runique",

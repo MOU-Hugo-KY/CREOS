@@ -102,7 +102,8 @@ func _ready() -> void:
 	for i in 2:
 		var r := _rect(crs[i])
 		_nine(_root, "commun/cartouche_monnaie.png", r)
-		var ic := _img(_root, icons[i], Rect2(r.position + Vector2(14, 14), Vector2(44, 44)))
+		# Symbole centré dans le médaillon rond du cartouche (centre ≈ 40, 36).
+		var ic := _img(_root, ScreenPack.trimmed(icons[i]), Rect2(r.position + Vector2(40, 36) - Vector2(17, 17), Vector2(34, 34)))
 		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		var wr := _rect(cws[i])
 		labels.append(ScreenPack.shadow(ScreenPack.text(_root, "", Rect2(wr.position.x - 6, r.position.y, wr.size.x + 12, r.size.y), 24,
