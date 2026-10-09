@@ -113,7 +113,11 @@ func _ready() -> void:
 	# Enseignes (onglets).
 	for t: Dictionary in E.get("tabs", []):
 		var id := String(t.id)
+		if id == "fusion":
+			continue  # la fusion des Esprits se fait chez le Druide (Lanterne)
+		var shift := Vector2(170 if id == "articles" else -170, 0)
 		var r := _rect(t.rect)
+		r.position += shift
 		var sign := _img(_root, null, r)
 		sign.mouse_filter = Control.MOUSE_FILTER_STOP
 		sign.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -124,7 +128,9 @@ func _ready() -> void:
 		for x: Array in TABS:
 			if x[0] == id:
 				name = x[1]
-		var l := ScreenPack.shadow(ScreenPack.text(_root, name, _rect(t.writing_rect), 24, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+		var wr := _rect(t.writing_rect)
+		wr.position += shift
+		var l := ScreenPack.shadow(ScreenPack.text(_root, name, wr, 24, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
 		_tabs[id] = [sign, l]
 	_layer = Control.new()
 	_layer.size = Vector2(1920, 1080)
@@ -178,8 +184,6 @@ func refresh() -> void:
 		_layer.remove_child(c)
 		c.queue_free()
 	match _mode:
-		"fusion":
-			_fill_fusion()
 		"rachat":
 			_fill_rachat()
 		_:
