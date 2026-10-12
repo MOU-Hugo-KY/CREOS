@@ -245,7 +245,7 @@ func _article(offer: Dictionary, slot: Dictionary) -> void:
 		if can:
 			socle.texture = tex("echoppe/socle_article_survol.png")
 			tag.texture = tex("echoppe/etiquette_prix_survol.png")
-		_talk.text = "%s — %s" % [offer.get("name", ""), offer.get("description", "")]
+		_talk.text = "%s · %s" % [offer.get("name", ""), offer.get("description", "")]
 		_talk.visible_ratio = 1.0)
 	hit.mouse_exited.connect(func() -> void:
 		if can:

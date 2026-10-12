@@ -99,11 +99,12 @@ func _build_quartet_page() -> void:
 	root.add_child(_nine("commun/bandeau_titre.png", [130, 24, 130, 28], tr))
 	ScreenPack.shadow(ScreenPack.text(root, "TABLE DES QUATUORS", Rect2(tr.position + Vector2(0, 24), Vector2(tr.size.x, 36)), 30,
 		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
-	var dr := _r(T.get("description_rect", [430, 927, 1060, 140]))
+	# Parchemin agrandi pour que la description se lise bien.
+	var dr := Rect2(300, 836, 1320, 236)
 	root.add_child(_nine("quatuors/parchemin_quatuor.png", [140, 24, 140, 24], dr))
-	var wr := _r(T.get("description_write_rect", [570, 953, 780, 86]))
-	_q_title = ScreenPack.text(root, "", Rect2(wr.position + Vector2(0, 8), Vector2(wr.size.x, 28)), 20, Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER)
-	_q_desc = ScreenPack.text(root, "", Rect2(wr.position + Vector2(-40, 34), Vector2(wr.size.x + 80, wr.size.y - 40)), 14, UiKit.INK,
+	var wr := Rect2(470, 866, 980, 180)
+	_q_title = ScreenPack.text(root, "", Rect2(wr.position, Vector2(wr.size.x, 34)), 25, Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER)
+	_q_desc = ScreenPack.text(root, "", Rect2(wr.position + Vector2(0, 40), Vector2(wr.size.x, wr.size.y - 44)), 19, UiKit.INK,
 		HORIZONTAL_ALIGNMENT_CENTER, true)
 
 

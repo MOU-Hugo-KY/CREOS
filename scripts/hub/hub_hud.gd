@@ -269,7 +269,6 @@ const PF_BUTTONS := {
 
 var _hud_frame: Control
 var _xp_gauge: FinPack.Gauge
-var _energy_gauge: FinPack.Gauge
 var _recharge: Label
 var _badges: Dictionary = {}  # id -> Control (pastille)
 var _tip: Control
@@ -287,7 +286,14 @@ func _build_pack_hud() -> void:
 	_root.add_child(_hud_frame)
 	var root := ScreenPack.frame(_hud_frame)
 	root.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	FinPack.nine(root, "port_franc/ruban_haut.png", FinPack.rect(P.ruban_haut), FinPack.margins(PF, "port_franc/ruban_haut.png"))
+	# Pas de ruban rouge : les cartouches flottent sur le port. Une zone invisible arrête quand même
+	# les clics (sinon ils traversent jusqu'aux bâtiments en dessous).
+	for blocker: Rect2 in [Rect2(20, 10, 1880, 140), Rect2(100, 880, 1720, 190)]:
+		var stop := Control.new()
+		stop.position = blocker.position
+		stop.size = blocker.size
+		stop.mouse_filter = Control.MOUSE_FILTER_STOP
+		root.add_child(stop)
 	# Profil : médaillon, portrait, nom, loge, niveau, XP. Un clic ouvre le profil.
 	var pr := FinPack.rect(P.profil)
 	var prof := Control.new()
@@ -309,9 +315,12 @@ func _build_pack_hud() -> void:
 	_avatar_holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	prof.add_child(_avatar_holder)
 	FinPack.image(prof, "port_franc/medaillon_profil.png", Rect2(Vector2.ZERO, pr.size))
-	_name_label = ScreenPack.shadow(ScreenPack.text(prof, "", Rect2(FinPack.rect(P.nom).position + off, FinPack.rect(P.nom).size), 22,
-		UiKit.WHITE), 2)
-	_lodge_label = ScreenPack.text(prof, "", Rect2(FinPack.rect(P.loge).position + off, FinPack.rect(P.loge).size), 15, Color("f3d9a0"))
+	_name_label = ScreenPack.shadow(ScreenPack.text(prof, "", Rect2(FinPack.rect(P.nom).position + off + Vector2(4, -10),
+		FinPack.rect(P.nom).size - Vector2(14, 0)), 19, UiKit.WHITE), 2)
+	_name_label.clip_text = true
+	_lodge_label = ScreenPack.text(prof, "", Rect2(FinPack.rect(P.loge).position + off + Vector2(4, -10), FinPack.rect(P.loge).size - Vector2(14, 0)),
+		13, Color("f3d9a0"))
+	_lodge_label.clip_text = true
 	_level_label = ScreenPack.shadow(ScreenPack.text(prof, "", Rect2(FinPack.rect(P.niveau).position + off - Vector2(6, 2),
 		FinPack.rect(P.niveau).size + Vector2(12, 4)), 18, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
 	_xp_gauge = FinPack.Gauge.new().setup("port_franc/jauge_xp_fond.png", FinPack.rect(P.xp_fond), [4, 4, 4, 4],
@@ -328,9 +337,6 @@ func _build_pack_hud() -> void:
 		var l := ScreenPack.shadow(ScreenPack.text(root, "", FinPack.rect(c.value_rect), 28, UiKit.WHITE), 2)
 		l.mouse_filter = Control.MOUSE_FILTER_PASS
 		_values[keys[k]] = l
-	_energy_gauge = FinPack.Gauge.new().setup("port_franc/jauge_energie_fond.png", FinPack.rect(P.energie_jauge), [3, 3, 3, 3],
-		"port_franc/jauge_energie_remplissage.png", FinPack.rect(P.energie_jauge).grow(-3))
-	root.add_child(_energy_gauge)
 	FinPack.image(root, "port_franc/icones/horloge.png", FinPack.rect(P.horloge))
 	_recharge = ScreenPack.shadow(ScreenPack.text(root, "", FinPack.rect(P.recharge_texte), 15, Color("f3d9a0"),
 		HORIZONTAL_ALIGNMENT_CENTER), 2)
@@ -356,7 +362,7 @@ func _build_pack_hud() -> void:
 		var r := FinPack.rect(info.rect)
 		var b := FinPack.button(root, "port_franc/boutons/" + id, r)
 		ScreenPack.shadow(ScreenPack.text(root, String({"heros": "Héros", "chasse": "Chasse", "lanterne": "Lanterne", "echoppe": "Échoppe",
-			"reliques": "Reliques", "primes": "Primes", "ma_loge": "Ma Loge", "parametres": "Paramètres", "jour_nuit": "Jour / nuit"}.get(id, name)), Rect2(r.position + Vector2(-40, r.size.y - 6),
+			"reliques": "Reliques", "primes": "Primes", "ma_loge": "Mon donjon", "parametres": "Paramètres", "jour_nuit": "Jour / nuit"}.get(id, name)), Rect2(r.position + Vector2(-40, r.size.y - 6),
 			Vector2(r.size.x + 80, 30)), 19, Color("fff1cf"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 		b.mouse_entered.connect(func() -> void:
 			_tip_title.text = name
@@ -426,9 +432,8 @@ func _refresh_pack_hud() -> void:
 	_values["gemmes"].text = _fmt(PlayerData.gems())
 	_values["eclats"].text = _fmt(PlayerData.item_count("fragments_relique"))
 	_values["energie"].text = "%d / %d" % [PlayerData.energy(), PlayerData.energy_max()]
-	_energy_gauge.set_ratio(float(PlayerData.energy()) / maxf(1.0, PlayerData.energy_max()))
 	var next := PlayerData.seconds_to_next_energy()
-	_recharge.text = "Énergie pleine" if next <= 0 else "Recharge : %d:%02d" % [next / 60, next % 60]
+	_recharge.text = "" if next <= 0 else "Recharge : %d:%02d" % [next / 60, next % 60]
 	_set_badge("primes", PlayerData.claimable_quests())
 
 

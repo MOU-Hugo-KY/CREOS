@@ -56,6 +56,7 @@ func _ready() -> void:
 ## Pose l'Esprit `item` sur les 5 coupelles (grisées au-delà de `have`) et `up` au sommet.
 func show_offer(item: String, have: int, up: String) -> void:
 	_clear()
+	reset()  # l'Esprit de la fusion précédente ne reste pas au sommet
 	if item == "":
 		return
 	var cups: Array = _P.get("coupelles", [])

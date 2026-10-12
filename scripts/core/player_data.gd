@@ -112,7 +112,8 @@ func player_name() -> String:
 
 
 func lodge_name() -> String:
-	return String(state.get("lodge", "Ma loge"))
+	var n := String(state.get("lodge", "Mon donjon"))
+	return "Donjon de " + n.trim_prefix("Loge de ") if n.begins_with("Loge de ") else n
 
 
 ## Renomme le joueur et sa loge (textes nettoyés, 3 à 16 caractères).

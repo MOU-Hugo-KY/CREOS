@@ -40,7 +40,7 @@
   "corbin": {
    "name": "Broche du Premier Corbeau",
    "hero": "corbin",
-   "dungeon": "Crypte des Veilleurs — Brumenoire",
+   "dungeon": "Crypte des Veilleurs, Brumenoire",
    "material": "Plumes sépulcrales",
    "trial": "Terminer trois salles de la crypte en consommant au moins trois marques par salle.",
    "awakening": "Une marque consommée laisse une plume ; maximum 4. L’ultime dépense les plumes pour 20 % ATQ supplémentaires chacune.",
@@ -53,7 +53,7 @@
   "aegis": {
    "name": "Éclat de l’Enclume Royale",
    "hero": "aegis",
-   "dungeon": "Forge ensevelie — Cendrefer",
+   "dungeon": "Forge ensevelie, Cendrefer",
    "material": "Scories royales",
    "trial": "Briser cinq boucliers dans la forge puis vaincre son gardien.",
    "awakening": "Les coups lourds posent une fracture, maximum 3 par cible ; l’ultime les consomme et retire 10 % du bouclier actuel par fracture.",
@@ -66,7 +66,7 @@
   "brume": {
    "name": "Conque de la Marée Oubliée",
    "hero": "brume",
-   "dungeon": "Sanctuaire englouti — Sel-Brisé",
+   "dungeon": "Sanctuaire englouti, Sel-Brisé",
    "material": "Nacres abyssales",
    "trial": "Déclencher six réactions eau/foudre dans le sanctuaire.",
    "awakening": "Mouillé accumule Pression à chaque application, maximum 2 ; une réaction de foudre la dépense pour +15 % dégâts par charge.",
@@ -105,7 +105,7 @@
   "braise": {
    "name": "Braise du Premier Four",
    "hero": "braise",
-   "dungeon": "Four ancestral — Cendrefer",
+   "dungeon": "Four ancestral, Cendrefer",
    "material": "Charbons ancestraux",
    "trial": "Consommer douze charges de brûlure pendant les runs du four.",
    "awakening": "Brûlure consommée donne Chaleur, maximum 3 ; à 3, l’ultime dépense tout et laisse Braises 1 tour.",
@@ -144,7 +144,7 @@
   "sylve": {
    "name": "Gland du Premier Chêne",
    "hero": "sylve",
-   "dungeon": "Cœur ancien — Sylvecroc",
+   "dungeon": "Cœur ancien, Sylvecroc",
    "material": "Graines millénaires",
    "trial": "Résister à dix contrôles sous une protection de Sylve dans la forêt.",
    "awakening": "Ses protections posent une Graine, maximum 1 par allié ; résistance à un contrôle la consomme pour un bouclier 6 % PV max de Sylve.",
@@ -248,7 +248,7 @@
   "jin_seok": {
    "name": "Fragment de la Cloche d’Or",
    "hero": "jin_seok",
-   "dungeon": "Salle des Cent Épreuves — Shaolin",
+   "dungeon": "Salle des Cent Épreuves, Shaolin",
    "material": "Bronzes sacrés",
    "trial": "Absorber vingt impacts avec Cloche et réussir l’épreuve sans perdre l’allié protégé.",
    "awakening": "Les dégâts absorbés par Cloche donnent Charge de cloche, maximum 3 ; l’ultime la consomme pour poser Déséquilibré avant ses frappes sur une cible par charge.",
@@ -261,7 +261,7 @@
   "yun_tao": {
    "name": "Anneau du Courant immobile",
    "hero": "yun_tao",
-   "dungeon": "Pavillon suspendu — Wudang",
+   "dungeon": "Pavillon suspendu, Wudang",
    "material": "Anneaux de jade ancien",
    "trial": "Réussir douze parades dans le pavillon puis vaincre le maître du courant.",
    "awakening": "Une parade conserve une Ouverture en réserve ; l’ultime la transmet à une autre cible, maximum une réserve.",
@@ -274,7 +274,7 @@
   "tang_su": {
    "name": "Étui des Aiguilles sans Ombre",
    "hero": "tang_su",
-   "dungeon": "Caveau des Mécanismes — clan Tang",
+   "dungeon": "Caveau des Mécanismes, clan Tang",
    "material": "Aiguilles anciennes",
    "trial": "Déclencher six réactions sur Ouverture puis empêcher trois soins dans le caveau.",
    "awakening": "Poison consommé charge une aiguille cachée, maximum 1 par cible ; prochain soin ou bonus tenté déclenche 80 % ATQ puis consomme l’aiguille.",

@@ -3152,7 +3152,7 @@
  "mei_lian": {
   "name": "Mei Lian",
   "short": "Mei Lian",
-  "species": "Humaine — mont Hua",
+  "species": "Humaine, mont Hua",
   "role": "Épéiste / pétales",
   "class": "lame",
   "element": "nature",
@@ -3162,7 +3162,7 @@
   "attack_kind": "physical",
   "primary": "ATQ",
   "secondary": "DEF",
-  "description": "Humaine — mont Hua. Épéiste / pétales.",
+  "description": "Humaine, mont Hua. Épéiste / pétales.",
   "anim": "res://assets/anim/heroes/",
   "portrait": "res://assets/anim/heroes/portraits/mei_lian.png",
   "fiche": "res://assets/anim/heroes/fiches/mei_lian.png",
@@ -3285,7 +3285,7 @@
     "stages": {
      "1": "+10 % dégâts contre Marque de pétale.",
      "3": "Frappes répétées sur une même cible : +5 % chacune, maximum +20 %, reset au changement de cible.",
-     "6": "Douzième mouvement — Pétale perçant : 190 % ATQ ; consomme les marques pour +15 % dégâts chacune.",
+     "6": "Douzième mouvement, Pétale perçant : 190 % ATQ ; consomme les marques pour +15 % dégâts chacune.",
      "9": "+30 % dégâts des techniques du prunier.",
      "12": "Pétale perçant prépare une frappe 80 % ATQ si sa cible survit, une fois par tour."
     },
@@ -3297,7 +3297,7 @@
     "stages": {
      "1": "Consommer une marque donne au plus blessé un bouclier 60 % ATQ.",
      "3": "+20 % puissance des boucliers issus des pétales.",
-     "6": "Douzième mouvement — Jardin clos : bouclier 150 % ATQ sur un allié ; prochaine attaque contre lui prépare une riposte 100 % ATQ.",
+     "6": "Douzième mouvement, Jardin clos : bouclier 150 % ATQ sur un allié ; prochaine attaque contre lui prépare une riposte 100 % ATQ.",
      "9": "+30 % puissance des protections du prunier.",
      "12": "50 % chance de riposter après parade ou blocage réussi, une fois par tour ; Pas compte comme parade uniquement pendant sa garde."
     },
@@ -3309,7 +3309,7 @@
     "stages": {
      "1": "+10 % dégâts contre Déséquilibré.",
      "3": "Consommer une marque sur Déséquilibré retire 10 % de jauge, une fois par action.",
-     "6": "Douzième mouvement — Branche gelée : 140 % ATQ ; consomme les marques pour tenter Étourdi 1 action.",
+     "6": "Douzième mouvement, Branche gelée : 140 % ATQ ; consomme les marques pour tenter Étourdi 1 action.",
      "9": "+15 points précision de contrôle ; +30 % dégâts contre cible contrôlée.",
      "12": "Premier contrôle réussi du tour prépare une frappe 60 % ATQ qui pose une marque."
     },
@@ -3319,7 +3319,7 @@
   "secret_techniques": [
    {
     "id": "mei_lian_3",
-    "name": "Douzième mouvement — Pétale perçant",
+    "name": "Douzième mouvement, Pétale perçant",
     "clip": "mei_lian_3",
     "description": "190 % ATQ ; consomme les marques pour +15 % dégâts chacune.",
     "target": "single_enemy",
@@ -3337,7 +3337,7 @@
    },
    {
     "id": "mei_lian_4",
-    "name": "Douzième mouvement — Jardin clos",
+    "name": "Douzième mouvement, Jardin clos",
     "clip": "mei_lian_4",
     "description": "bouclier 150 % ATQ sur un allié ; prochaine attaque contre lui prépare une riposte 100 % ATQ.",
     "target": "lowest_hp_ally",
@@ -3355,7 +3355,7 @@
    },
    {
     "id": "mei_lian_5",
-    "name": "Douzième mouvement — Branche gelée",
+    "name": "Douzième mouvement, Branche gelée",
     "clip": "mei_lian_5",
     "description": "140 % ATQ ; consomme les marques pour tenter Étourdi 1 action.",
     "target": "single_enemy",
@@ -3383,7 +3383,7 @@
  "jin_seok": {
   "name": "Jin Seok",
   "short": "Jin Seok",
-  "species": "Humain — Shaolin",
+  "species": "Humain, Shaolin",
   "role": "Protection / déséquilibre",
   "class": "moine",
   "element": "lumiere",
@@ -3393,7 +3393,7 @@
   "attack_kind": "physical",
   "primary": "DEF",
   "secondary": "ATQ",
-  "description": "Humain — Shaolin. Protection / déséquilibre.",
+  "description": "Humain, Shaolin. Protection / déséquilibre.",
   "anim": "res://assets/anim/heroes/",
   "portrait": "res://assets/anim/heroes/portraits/jin_seok.png",
   "fiche": "res://assets/anim/heroes/fiches/jin_seok.png",
@@ -3605,7 +3605,7 @@
  "yun_tao": {
   "name": "Yun Tao",
   "short": "Yun Tao",
-  "species": "Humain — Wudang",
+  "species": "Humain, Wudang",
   "role": "Parade / redirection",
   "class": "moine",
   "element": "eau",
@@ -3615,7 +3615,7 @@
   "attack_kind": "physical",
   "primary": "DEF",
   "secondary": "ATQ",
-  "description": "Humain — Wudang. Parade / redirection.",
+  "description": "Humain, Wudang. Parade / redirection.",
   "anim": "res://assets/anim/heroes/",
   "portrait": "res://assets/anim/heroes/portraits/yun_tao.png",
   "fiche": "res://assets/anim/heroes/fiches/yun_tao.png",
@@ -3799,7 +3799,7 @@
  "tang_su": {
   "name": "Tang Su",
   "short": "Tang Su",
-  "species": "Humaine — clan Tang",
+  "species": "Humaine, clan Tang",
   "role": "Poison / anti-soin",
   "class": "traqueur",
   "element": "ombre",
@@ -3809,7 +3809,7 @@
   "attack_kind": "physical",
   "primary": "ATQ",
   "secondary": "MAG",
-  "description": "Humaine — clan Tang. Poison / anti-soin.",
+  "description": "Humaine, clan Tang. Poison / anti-soin.",
   "anim": "res://assets/anim/heroes/",
   "portrait": "res://assets/anim/heroes/portraits/tang_su.png",
   "fiche": "res://assets/anim/heroes/fiches/tang_su.png",

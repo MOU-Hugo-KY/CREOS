@@ -473,7 +473,7 @@ func _build_crypt() -> void:
 	FinPack.image(root, String(D.get("background", "ma_loge/loge_coupe.png")), Rect2(0, 0, 1920, 1080))
 	var tr := FinPack.rect(P.titre)
 	FinPack.nine(root, "ma_loge/commun/bandeau_titre.png", tr, [130, 24, 130, 28])
-	ScreenPack.shadow(ScreenPack.text(root, "MA LOGE", Rect2(tr.position + Vector2(0, 24), Vector2(tr.size.x, 36)), 30,
+	ScreenPack.shadow(ScreenPack.text(root, "MON DONJON", Rect2(tr.position + Vector2(0, 24), Vector2(tr.size.x, 36)), 30,
 		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	var back := FinPack.button(root, "ma_loge/commun/retour", FinPack.rect(P.retour), "Port", 26)
 	back.get_node("Label").position.x = 30
@@ -544,37 +544,32 @@ func _fill_crypt() -> void:
 					"+ Défense", 17)
 				add.modulate.a = 0.85
 				add.pressed.connect(func() -> void: _pick_defense(r))
-		# Pièges.
+		# Pièges : une rangée de cases sous la salle (ce qui est posé, et où), pas sur le sol des héros.
 		var traps: Array = l.traps[r]
-		var tslots: Array = room.get("traps", [])
-		for k in mini(int(spec.traps), tslots.size()):
-			var ts: Dictionary = tslots[k]
-			var tr2 := FinPack.rect(ts.rect)
+		var nt := int(spec.traps)
+		var cx := rr.get_center().x
+		ScreenPack.shadow(ScreenPack.text(_crypt_box, "Pièges", Rect2(cx - nt * 44.0 - 130, 662, 120, 30), 19, Color("cbbfae"),
+			HORIZONTAL_ALIGNMENT_RIGHT), 2)
+		for k in nt:
+			var cell := Rect2(cx - nt * 44.0 + k * 88.0, 646, 72, 72)
 			var on := k < traps.size()
-			var mat := FinPack.image(_crypt_box, "ma_loge/emplacements/piege_%s.png" % ("occupe" if on else "vide"), tr2)
-			mat.mouse_filter = Control.MOUSE_FILTER_STOP
-			mat.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+			var frame := FinPack.image(_crypt_box, "preparation_chasse/portrait_%s.png" % ("choisi" if on else "grise"), cell)
+			frame.mouse_filter = Control.MOUSE_FILTER_STOP
+			frame.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 			if on:
 				var tid: String = traps[k]
-				var art := String(TRAP_ART.get(tid, "pointes"))
-				FinPack.image(_crypt_box, "ma_loge/icones/piege_%s.png" % art, Rect2(tr2.get_center() - Vector2(24, 36), Vector2(48, 48)))
-				mat.tooltip_text = "%s\n%s\n(Toucher pour le retirer.)" % [cfg.traps[tid].name, cfg.traps[tid].description]
-				var ar := FinPack.rect(ts.animation_rect)
-				var fx := FinPack.sheet(anims.get("piege_" + art, {}))
-				fx.position = ar.position + Vector2(96, 154)
-				fx.visible = false
-				_crypt_box.add_child(fx)
-				mat.mouse_entered.connect(func() -> void:
-					fx.visible = true
-					fx.play("a"))
-				mat.mouse_exited.connect(func() -> void: fx.visible = false)
-				mat.gui_input.connect(func(e: InputEvent) -> void:
+				FinPack.image(_crypt_box, "ma_loge/icones/piege_%s.png" % String(TRAP_ART.get(tid, "pointes")), cell.grow(-12))
+				frame.tooltip_text = "%s
+%s
+(Toucher pour le retirer.)" % [cfg.traps[tid].name, cfg.traps[tid].description]
+				frame.gui_input.connect(func(e: InputEvent) -> void:
 					if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 						ui_sound.emit("ui_click")
 						PlayerData.lodge_toggle_trap(r, tid))
 			else:
-				mat.tooltip_text = "Poser un piège"
-				mat.gui_input.connect(func(e: InputEvent) -> void:
+				ScreenPack.shadow(ScreenPack.text(_crypt_box, "+", cell, 34, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+				frame.tooltip_text = "Poser un piège"
+				frame.gui_input.connect(func(e: InputEvent) -> void:
 					if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 						_pick_trap(r))
 		# Défenseurs (la dernière salle peut en avoir 4 : places réparties entre la première et la dernière).
@@ -602,6 +597,7 @@ func _fill_crypt() -> void:
 				p.scale = Vector2(-0.3, 0.3)  # tournés vers l'entrée (les assaillants viennent de la gauche)
 				_crypt_box.add_child(p)
 				p.play(id + "_idle")
+				p.speed = 0.0
 				var hit := Control.new()
 				hit.position = dr.position + Vector2(0, -120)
 				hit.size = Vector2(dr.size.x, 176)
@@ -632,12 +628,12 @@ func _fill_crypt() -> void:
 		HORIZONTAL_ALIGNMENT_CENTER)
 	# Mise, Force et essai, à droite.
 	var x0 := 1440.0
-	ScreenPack.shadow(ScreenPack.text(_crypt_box, "Mise du trésor : %s or" % HubHud._fmt(stake), Rect2(x0, 690, 440, 32), 22,
+	ScreenPack.shadow(ScreenPack.text(_crypt_box, "Mise du trésor : %s or" % HubHud._fmt(stake), Rect2(x0, 724, 440, 32), 22,
 		Color("ffd27a"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	var step := int(cfg.get("stake_step", 500))
 	for d in [-step, step]:
 		var b := FinPack.button(_crypt_box, "stele/bouton_%s" % ("moins" if d < 0 else "plus"),
-			Rect2(x0 + (110 if d < 0 else 234), 730, 96, 80))
+			Rect2(x0 + (110 if d < 0 else 234), 760, 96, 80))
 		b.texture_normal = MageRoom.tex("stele/bouton_%s_normal.png" % ("moins" if d < 0 else "plus"))
 		b.texture_hover = MageRoom.tex("stele/bouton_%s_survol.png" % ("moins" if d < 0 else "plus"))
 		b.texture_pressed = MageRoom.tex("stele/bouton_%s_appuye.png" % ("moins" if d < 0 else "plus"))
@@ -648,8 +644,8 @@ func _fill_crypt() -> void:
 			ui_sound.emit("ui_click")
 			PlayerData.lodge_set_stake(stake + d))
 	ScreenPack.shadow(ScreenPack.text(_crypt_box, "Force du donjon : %d\nForce de ton équipe : %d" % [PlayerData.lodge_power(),
-		PlayerData.team_power()], Rect2(x0, 820, 440, 60), 19, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
-	var test := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(x0 + 30, 890, 380, 84), "Tester mon donjon", 22)
+		PlayerData.team_power()], Rect2(x0, 846, 440, 60), 19, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var test := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(x0 + 30, 912, 380, 84), "Tester mon donjon", 22)
 	test.disabled = not Lodge.is_ready(l)
 	test.tooltip_text = "Ton équipe de chasse affronte ton donjon (sans gain ni énergie)."
 	test.pressed.connect(func() -> void: _start({}))
@@ -661,14 +657,14 @@ func _fill_rivals_board() -> void:
 	var D := FinPack.data(ML)
 	var P: Dictionary = D.get("positions", {})
 	var cfg: Dictionary = GameData.lodge
-	var board := FinPack.rect(P.rivaux)
+	var board := Rect2(430, 730, 970, 262)
 	FinPack.image(_crypt_box, "ma_loge/panneau_rivaux.png", board)
 	var rivals: Array = PlayerData.lodge_rivals()
 	_rival_pick = clampi(_rival_pick, 0, maxi(0, rivals.size() - 1))
 	var team_power := PlayerData.team_power()
 	for i in mini(3, rivals.size()):
 		var rv: Dictionary = rivals[i]
-		var pr := Rect2(board.position + Vector2(168 + i * 225, 82), Vector2(190, 190))
+		var pr := Rect2(board.position + Vector2(168 + i * 225, 64), Vector2(190, 150))
 		var card := Control.new()
 		card.position = pr.position
 		card.size = pr.size
@@ -705,7 +701,7 @@ func _fill_rivals_board() -> void:
 				_rival_pick = idx
 				_fill_crypt())
 	var ab: Dictionary = D.get("buttons", {}).get("attaquer", {})
-	var go := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", FinPack.rect(ab.get("rect", [700, 966, 420, 96])), "Attaquer", 26)
+	var go := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(720, 990, 380, 84), "Attaquer", 26)
 	if rivals.is_empty():
 		go.disabled = true
 		return

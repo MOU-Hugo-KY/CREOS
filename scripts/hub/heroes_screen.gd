@@ -638,7 +638,7 @@ func _fill_paths(id: String, hero: Dictionary) -> void:
 		var lines: Array[String] = []
 		var stages: Dictionary = path.get("stages", {})
 		for k in thresholds.size():
-			lines.append("%s %d Échos — %s" % ["◆" if tier > k else "◇", int(thresholds[k]), stages.get(str(int(thresholds[k])), "")])
+			lines.append("%s %d Échos · %s" % ["◆" if tier > k else "◇", int(thresholds[k]), stages.get(str(int(thresholds[k])), "")])
 		card.mouse_filter = Control.MOUSE_FILTER_PASS
 		var show := func() -> void:
 			_path_title.text = "%s · %s%s" % [path.get("name", ""), path.get("focus", ""), "  (active)" if i == active else ""]

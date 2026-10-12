@@ -405,7 +405,7 @@ def build_campaign():
             g = (region - 1) * 8 + lvl - 1
             scene = 1 if lvl <= 3 else (2 if lvl <= 7 else 3)
             dungeons["%s_%d" % (rid, lvl)] = {
-                "name": "%s — %d" % (d_info["name"], lvl), "region": rid, "level": lvl, "decor_scene": scene,
+                "name": "%s · %d" % (d_info["name"], lvl), "region": rid, "level": lvl, "decor_scene": scene,
                 "waves": [[n, n, prev], [n, prev, n], [n, b, n]],
                 "rewards": {"gold": 120 + 15 * g, "xp": 60 + 8 * g, "essence_ombre": 1 + g // 10,
                             monsters[n]["drop"] or "fragments_relique": 2,

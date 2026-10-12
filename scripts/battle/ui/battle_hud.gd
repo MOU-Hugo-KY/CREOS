@@ -402,24 +402,32 @@ func _round_button(text: String) -> Button:
 	var b := Button.new()
 	b.toggle_mode = true
 	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(140 if text == "AUTO" else 124, 60)
+	b.custom_minimum_size = Vector2(170 if text == "AUTO" else 150, 64)
 	b.tooltip_text = text
 	for st: String in ["normal", "hover", "pressed", "hover_pressed"]:
-		var sb := AttackBar._nine("wave_cartouche", 20)
-		sb.modulate_color = Color(1.25, 1.1, 0.7) if st.contains("pressed") else (Color(1.1, 1.1, 1.1) if st == "hover" else Color.WHITE)
+		var sb: StyleBox = AttackBar._nine("wave_cartouche", 20)
+		if FinPack.available("port_franc"):  # cartouche laiton du Port-Franc, glyphe dans le médaillon
+			var t := StyleBoxTexture.new()
+			t.texture = FinPack.tex("port_franc/cartouche_ressource.png")
+			t.texture_margin_left = 74
+			t.texture_margin_top = 18
+			t.texture_margin_right = 22
+			t.texture_margin_bottom = 18
+			sb = t
+		(sb as StyleBoxTexture).modulate_color = Color(1.25, 1.1, 0.7) if st.contains("pressed") else (Color(1.1, 1.1, 1.1) if st == "hover" else Color.WHITE)
 		b.add_theme_stylebox_override(st, sb)
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	var glyph := TextureRect.new()
 	glyph.texture = OverheadBar.tex(GLYPHS.get(text, "glyph_pause"))
 	glyph.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	glyph.position = Vector2(14, 15)
+	glyph.position = Vector2(20, 17)
 	glyph.size = Vector2(30, 30)
 	glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	b.add_child(glyph)
 	var cap := _label(22, 5)
 	cap.text = text
-	cap.position = Vector2(48, 0)
-	cap.size = Vector2(b.custom_minimum_size.x - 58, 60)
+	cap.position = Vector2(66, 0)
+	cap.size = Vector2(b.custom_minimum_size.x - 80, 64)
 	cap.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cap.add_theme_color_override("font_color", Color("f6efdf"))

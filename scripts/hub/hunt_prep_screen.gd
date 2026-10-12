@@ -51,10 +51,14 @@ func _ready() -> void:
 	var P: Dictionary = D.get("positions", {})
 	FinPack.image(_root, String(D.get("background", "preparation_chasse/campement.png")), Rect2(0, 0, 1920, 1080))
 	var fire: Dictionary = D.get("animations", {}).get("feu_camp", {})
+	# Le décor a sa fosse vide : on y pose seulement les flammes et les bûches (pierres de la planche retirées).
 	if not fire.is_empty():
-		var s := FinPack.sheet(fire)
-		var fr := FinPack.rect(fire.get("rect", [165, 320, 224, 224]))
-		s.position = fr.position + Vector2(fire.pivot[0], fire.pivot[1])
+		var f2 := fire.duplicate()
+		f2.file = "preparation_chasse/animations/feu_camp_flammes.png"
+		f2.frame_size = [224, 170]
+		f2.pivot = [112, 160]
+		var s := FinPack.sheet(f2)
+		s.position = Vector2(270, 506)
 		_root.add_child(s)
 		s.play("a")
 	var tr := FinPack.rect(P.titre)
@@ -207,6 +211,7 @@ func _fill_board(team: Array) -> void:
 			p.scale = Vector2.ONE * 0.36
 			spot.add_child(p)
 			p.play(id + "_idle")
+			p.speed = 0.0  # pose fixe
 		var slot := i
 		spot.gui_input.connect(func(e: InputEvent) -> void:
 			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:

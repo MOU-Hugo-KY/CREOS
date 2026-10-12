@@ -44,7 +44,7 @@ func _ready() -> void:
 		var id := String(s.id)
 		ScreenPack.shadow(ScreenPack.text(root, NAMES.get(id, id), FinPack.rect(s.label_rect), 26, Color("f3d9a0")), 2)
 		var g := FinPack.Gauge.new().setup("parametres/curseur_rail.png", FinPack.rect(s.rail_rect), [36, 14, 36, 14],
-			"parametres/curseur_remplissage.png", FinPack.rect(s.fill_rect))
+			"parametres/curseur_remplissage.png", FinPack.rect(s.fill_rect).grow_individual(-10, -3, -6, -3))
 		root.add_child(g)
 		var hit := Control.new()  # zone de saisie : toute la largeur du rail
 		hit.position = g.position + Vector2(0, -10)

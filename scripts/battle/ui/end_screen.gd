@@ -298,6 +298,7 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 		_p_box.remove_child(c)
 		c.queue_free()
 	for h in _p_stars:
+		h.get_child(0).visible = true
 		for k in range(h.get_child_count() - 1, 0, -1):
 			h.get_child(k).queue_free()
 	ScreenPack.shadow(ScreenPack.text(_p_box, dungeon_name, Rect2(560, 268, 800, 34), 24, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
@@ -343,7 +344,8 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 		ir.position.x += 40.0
 		var t: Texture2D = FinPack.tex(PACK_REWARD_ICONS[key]) if PACK_REWARD_ICONS.has(key) else (
 			ChestReveal.esprit_icon(key) if key.begins_with("esprit_") else ScreenPack.tex(P, _reward_icon(key)))
-		var img := ScreenPack.image(_p_box, t, ir)
+		var img := ScreenPack.image(_p_box, ScreenPack.trimmed(t), ir.grow(-6))
+		img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		img.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		img.mouse_filter = Control.MOUSE_FILTER_PASS
 		img.tooltip_text = _reward_name(key, int(rewards[key]))
@@ -386,6 +388,7 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 		get_tree().create_timer(delay).timeout.connect(func() -> void:
 			if not is_instance_valid(holder):
 				return
+			holder.get_child(0).visible = false  # l'étoile vide s'efface derrière celle qui s'allume
 			var s := FinPack.sheet(anim)
 			s.position = holder.size / 2.0
 			holder.add_child(s)
