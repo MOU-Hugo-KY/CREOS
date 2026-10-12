@@ -1,33 +1,41 @@
 class_name HuntPrepScreen
 extends Control
-## « Préparer la chasse », en pixel (pièces des écrans du hub) : l'arène du monde en fond avec la
-## formation telle qu'en combat (2 devant, 3 au milieu, 2 à l'arrière, ligne et bonus de chaque place),
-## les héros animés à leur place ; à droite, tous les héros possédés. Toucher un héros de la liste
-## l'ajoute ou le retire ; toucher deux places de la formation les échange.
+## « Préparer la chasse » : le campement des chasseurs (pack « Finitions », assets/ui/finitions/
+## preparation_chasse/). Au milieu, la formation en losange telle qu'en combat (2 devant à droite,
+## 3 au milieu, 2 à l'arrière), les héros animés sur leurs tapis ; en bas, le tiroir des héros
+## possédés (toucher = ajouter ou retirer) ; à droite, le niveau, la Force d'équipe, les synergies et
+## le bouton « Partir en chasse ». Toucher deux places de la formation les échange.
 
 signal start_requested(dungeon_id: String)
 signal ui_sound(sfx_name: String)
 signal closed
 
-const S := "lanterne"
-const F := "fiche_heros"
-## Places de la formation à l'écran (pieds), même ordre que le combat : 0-1 devant, 2-4 milieu, 5-6 arrière.
-const SPOTS := [Vector2(810, 520), Vector2(810, 760), Vector2(560, 430), Vector2(560, 640), Vector2(560, 850),
-	Vector2(310, 520), Vector2(310, 760)]
-const LINE_NAMES := ["Devant", "Milieu", "Arrière"]
+const PC := "preparation_chasse"
+## Place de la formation (ordre du combat : 0-1 devant, 2-4 milieu, 5-6 arrière) -> id du pack.
+const SPOT_IDS := ["avant_1", "avant_2", "milieu_1", "milieu_2", "milieu_3", "arriere_1", "arriere_2"]
 const LINE_TIPS := ["Devant : protège les autres ; un combattant au corps-à-corps y subit 10 % de dégâts en moins.",
 	"Milieu : un lanceur de magie a 15 % de chances d'enchaîner une attaque de base.",
 	"Arrière : soins et boucliers +10 %, dégâts à distance +10 % ; protégé tant que la ligne de devant tient."]
+## Pastilles de synergie : 5 éléments puis 5 classes (icône du pack -> clé de combos.json).
+const PASTILLES := [["feu", "element", "feu"], ["eau", "element", "eau"], ["nature", "element", "nature"],
+	["lumiere", "element", "lumiere"], ["ombre", "element", "ombre"], ["tank", "class", "gardien"],
+	["guerrier", "class", "lame"], ["archer", "class", "traqueur"], ["mage", "class", "arcaniste"],
+	["soigneur", "class", "soutien"]]
 
 var dungeon_id := ""
 var _root: Control
-var _arena: TextureRect
 var _title: Label
 var _info: Label
+var _energy: Label
 var _board: Control
-var _pool: GridContainer
-var _go: Button
+var _drawer: Control
+var _force_label: Label
+var _force: FinPack.Gauge
+var _pastilles: Array[TextureRect] = []
+var _go: TextureButton
+var _go_label: Label
 var _picked := -1  # place choisie pour un échange
+var _page := 0
 
 
 func _ready() -> void:
@@ -39,38 +47,56 @@ func _ready() -> void:
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 	_root = ScreenPack.frame(self)
-	# Fond : l'arène du monde, assombrie, dans le cadre de la vitrine.
-	ScreenPack.panel(_root, F, "vitrine_frame", Rect2(24, 104, 1060, 952))
-	_arena = ScreenPack.image(_root, null, Rect2(48, 128, 1012, 904))
-	_arena.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	_arena.modulate = Color(0.78, 0.76, 0.82)
-	_board = Control.new()
-	_board.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_board.size = Vector2(1920, 1080)
-	_root.add_child(_board)
-	# En-tête.
-	var back := ScreenPack.button(_root, S, "return", "← Retour", Rect2(24, 8, 240, 88), 28)
+	var D := FinPack.data(PC)
+	var P: Dictionary = D.get("positions", {})
+	FinPack.image(_root, String(D.get("background", "preparation_chasse/campement.png")), Rect2(0, 0, 1920, 1080))
+	var fire: Dictionary = D.get("animations", {}).get("feu_camp", {})
+	if not fire.is_empty():
+		var s := FinPack.sheet(fire)
+		var fr := FinPack.rect(fire.get("rect", [165, 320, 224, 224]))
+		s.position = fr.position + Vector2(fire.pivot[0], fire.pivot[1])
+		_root.add_child(s)
+		s.play("a")
+	var tr := FinPack.rect(P.titre)
+	FinPack.nine(_root, "preparation_chasse/commun/bandeau_titre.png", tr, [130, 24, 130, 28])
+	_title = ScreenPack.shadow(ScreenPack.text(_root, "", Rect2(tr.position + Vector2(40, 24), Vector2(tr.size.x - 80, 36)), 28,
+		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var back := FinPack.button(_root, "preparation_chasse/commun/retour", FinPack.rect(P.retour), "Retour", 24)
+	back.get_node("Label").position.x = 30
 	back.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		visible = false
 		closed.emit())
-	ScreenPack.image(_root, ScreenPack.tex(S, "title"), Rect2(290, 12, 800, 80))
-	_title = ScreenPack.text(_root, "", Rect2(290, 12, 800, 80), 34, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	# Droite : informations du niveau et héros possédés.
-	ScreenPack.panel(_root, S, "infos_panel", Rect2(1108, 104, 788, 952))
-	_info = ScreenPack.text(_root, "", Rect2(1146, 136, 712, 150), 23, UiKit.INK, 0, true)
-	ScreenPack.text(_root, "TES HÉROS · touche pour ajouter ou retirer", Rect2(1146, 290, 712, 40), 23, UiKit.WOOD)
-	var scroll := ScrollContainer.new()
-	scroll.position = Vector2(1140, 336)
-	scroll.size = Vector2(726, 560)
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_root.add_child(scroll)
-	_pool = GridContainer.new()
-	_pool.columns = 6
-	_pool.add_theme_constant_override("h_separation", 12)
-	_pool.add_theme_constant_override("v_separation", 10)
-	scroll.add_child(_pool)
-	_go = ScreenPack.button(_root, S, "invoke_gems", "", Rect2(1150, 920, 704, 100), 32)
+	var mr := FinPack.rect(P.monnaie)
+	FinPack.nine(_root, "preparation_chasse/commun/cartouche_monnaie.png", mr, [74, 18, 22, 18])
+	FinPack.image(_root, "port_franc/icones/energie.png", Rect2(mr.position + Vector2(14, 12), Vector2(48, 48)))
+	_energy = ScreenPack.shadow(ScreenPack.text(_root, "", Rect2(mr.position + Vector2(66, 0), mr.size - Vector2(80, 0)), 28,
+		UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Le niveau : un parchemin à droite.
+	var ir := Rect2(1410, 500, 490, 230)
+	FinPack.nine(_root, "preparation_chasse/commun/parchemin.png", ir, [140, 24, 140, 24])
+	_info = ScreenPack.text(_root, "", Rect2(ir.position + Vector2(84, 40), ir.size - Vector2(168, 80)), 18, UiKit.INK,
+		HORIZONTAL_ALIGNMENT_CENTER, true)
+	_board = Control.new()
+	_board.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_board.size = Vector2(1920, 1080)
+	_root.add_child(_board)
+	FinPack.nine(_root, "preparation_chasse/tiroir_heros.png", FinPack.rect(P.tiroir), [79, 22, 79, 22])
+	_drawer = Control.new()
+	_drawer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_drawer.size = Vector2(1920, 1080)
+	_root.add_child(_drawer)
+	_force_label = ScreenPack.shadow(ScreenPack.text(_root, "", FinPack.rect(P.force_label), 24, Color("f3d9a0")), 2)
+	_force = FinPack.Gauge.new().setup("preparation_chasse/jauge_force_fond.png", FinPack.rect(P.force_fond), [12, 12, 12, 12],
+		"preparation_chasse/jauge_force_remplissage.png", FinPack.rect(P.force_remplissage))
+	_root.add_child(_force)
+	for i in mini(PASTILLES.size(), P.synergies.size()):
+		var t := FinPack.image(_root, "", FinPack.rect(P.synergies[i]))
+		t.mouse_filter = Control.MOUSE_FILTER_STOP
+		_pastilles.append(t)
+	var go: Dictionary = D.get("buttons", {}).get("partir", {})
+	_go = FinPack.button(_root, "preparation_chasse/bouton_partir", FinPack.rect(go.get("rect", [1450, 920, 420, 96])), " ", 24)
+	_go_label = _go.get_node("Label")
 	_go.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		start_requested.emit(dungeon_id))
@@ -93,10 +119,8 @@ func close_window() -> void:
 
 func refresh() -> void:
 	var d := GameData.dungeon(dungeon_id)
-	var region := dungeon_id.get_slice("_", 0)
-	var arena := "res://assets/decors/%s/arene1.png" % region
-	_arena.texture = load(arena) if ResourceLoader.exists(arena) else null
 	_title.text = String(d.get("name", dungeon_id)).to_upper()
+	_energy.text = "%d / %d" % [PlayerData.energy(), PlayerData.energy_max()]
 	var team := PlayerData.team()
 	var lines: Array[String] = ["%d vagues · meilleur score : %s" % [d.get("waves", []).size(),
 		"★".repeat(PlayerData.best_stars(dungeon_id)) if PlayerData.best_stars(dungeon_id) > 0 else "aucun"]]
@@ -104,59 +128,85 @@ func refresh() -> void:
 	for cid: String in GameData.team_combos():
 		var c: Dictionary = GameData.team_combos()[cid]
 		if c.members.all(func(m: String) -> bool: return m in team):
-			formed.append("%s (%d)" % [c.name, c.members.size()])
+			formed.append(String(c.name))
 	if not formed.is_empty():
 		lines.append("Combos : " + ", ".join(formed))
 	var active := synergy_lines(team)
 	if not active.is_empty():
 		lines.append("Synergies : " + ", ".join(active))
 	_info.text = "\n".join(lines)
+	# Force : celle de l'équipe, comparée aux 7 meilleurs héros possédés.
+	var best: Array = PlayerData.owned_heroes().map(func(h: String) -> int: return PlayerData.hero_power(h))
+	best.sort()
+	best.reverse()
+	var top := 0
+	for k in mini(7, best.size()):
+		top += int(best[k])
+	var tp := PlayerData.team_power()
+	_force_label.text = "Force d'équipe : %s" % HubHud._fmt(tp)
+	_force.set_ratio(float(tp) / maxf(1.0, top))
+	_fill_pastilles(team)
 	_fill_board(team)
-	_fill_pool(team)
+	_fill_drawer(team)
 	var cost := PlayerData.hunt_cost(dungeon_id)
-	_go.text = "Partir en chasse · %d énergie" % cost
+	_go_label.text = "Partir · %d énergie" % cost
 	_go.disabled = team.is_empty() or not PlayerData.can_start_hunt(dungeon_id)
 	if PlayerData.energy() < cost:
-		_go.text = "Pas assez d'énergie (%d / %d)" % [PlayerData.energy(), cost]
+		_go_label.text = "Énergie : %d / %d" % [PlayerData.energy(), cost]
+	_go_label.modulate = Color(0.7, 0.68, 0.64) if _go.disabled else Color.WHITE
 
 
-## La formation : étiquettes des trois lignes, une place par héros (animé), échange en touchant deux places.
+## Pastilles allumées quand l'équipe atteint un palier de synergie (survol : le détail).
+func _fill_pastilles(team: Array) -> void:
+	var table := GameData.synergies()
+	for i in _pastilles.size():
+		var p: Array = PASTILLES[i]
+		var n := 0
+		for id: String in team:
+			if String(GameData.hero(id).get(p[1], "")) == p[2]:
+				n += 1
+		var info: Dictionary = table.get(p[1], {}).get(p[2], {})
+		var on := false
+		for level: Array in info.get("levels", []):
+			if n >= int(level[0]):
+				on = true
+		_pastilles[i].texture = FinPack.tex("preparation_chasse/synergies/%s_%s.png" % [p[0], "allume" if on else "eteint"])
+		_pastilles[i].tooltip_text = "%s · %d héros" % [info.get("name", p[2]), n]
+
+
+## La formation : un tapis par place (occupé / vide), le héros animé dessus, échange en touchant deux places.
 func _fill_board(team: Array) -> void:
 	for c in _board.get_children():
 		c.queue_free()
-	for line in 3:
-		var x: float = [810.0, 560.0, 310.0][line]
-		var tag := ScreenPack.shadow(ScreenPack.text(_board, LINE_NAMES[line].to_upper(), Rect2(x - 120, 146, 240, 52), 32,
-			Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER))
-		tag.mouse_filter = Control.MOUSE_FILTER_PASS
-		tag.tooltip_text = LINE_TIPS[line]
-	var hint := ScreenPack.text(_board, "Touche deux héros pour échanger leurs places · survole une ligne pour son bonus",
-		Rect2(70, 940, 970, 40), 22, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	hint.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
-	hint.add_theme_constant_override("shadow_offset_y", 2)
-	for i in SPOTS.size():
-		var foot: Vector2 = SPOTS[i]
+	var spots := {}
+	for f: Dictionary in FinPack.data(PC).get("formation", []):
+		spots[String(f.id)] = f
+	for i in SPOT_IDS.size():
+		var f: Dictionary = spots.get(SPOT_IDS[i], {})
+		if f.is_empty():
+			continue
+		var r := FinPack.rect(f.rect)
+		var feet := Vector2(f.hero_feet[0], f.hero_feet[1])
 		var spot := Control.new()
-		spot.position = foot - Vector2(80, 170)
-		spot.size = Vector2(160, 200)
+		spot.position = r.position
+		spot.size = r.size
 		spot.mouse_filter = Control.MOUSE_FILTER_STOP
+		spot.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		spot.tooltip_text = LINE_TIPS[0 if i < 2 else (1 if i < 5 else 2)]
 		_board.add_child(spot)
-		var ring := _Ring.new()
-		ring.position = Vector2(80, 170)
-		ring.picked = i == _picked
-		spot.add_child(ring)
+		var mat := FinPack.image(spot, "preparation_chasse/formation_%s.png" % ("occupee" if i < team.size() else "vide"),
+			Rect2(Vector2.ZERO, r.size))
+		if i == _picked:
+			mat.modulate = Color(1.5, 1.35, 0.8)
 		if i < team.size():
 			var id: String = team[i]
 			var p := ClipPlayer.new()
 			p.bundle = "res://assets/anim/heroes/"
 			p.idle_clip = id + "_idle"
-			p.position = Vector2(80, 170)
+			p.position = feet - r.position
 			p.scale = Vector2.ONE * 0.36
 			spot.add_child(p)
 			p.play(id + "_idle")
-			ScreenPack.text(spot, String(GameData.hero(id).get("short", GameData.hero(id).name)), Rect2(0, 176, 160, 26), 20,
-				UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
 		var slot := i
 		spot.gui_input.connect(func(e: InputEvent) -> void:
 			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
@@ -185,33 +235,65 @@ func _on_spot(slot: int, team: Array) -> void:
 	PlayerData.changed.emit()
 
 
-func _fill_pool(team: Array) -> void:
-	for c in _pool.get_children():
+## Le tiroir : les héros possédés, 11 par page (flèches aux bords s'il y en a plus).
+func _fill_drawer(team: Array) -> void:
+	for c in _drawer.get_children():
 		c.queue_free()
-	for id: String in PlayerData.owned_heroes():
-		var col := VBoxContainer.new()
-		col.custom_minimum_size = Vector2(110, 0)
-		var b := Button.new()
-		b.flat = true
-		b.focus_mode = Control.FOCUS_NONE
-		b.custom_minimum_size = Vector2(96, 96)
-		var p := RoundPortrait.new().setup(GameData.hero(id), 96, 0.09 if id in team else 0.05)
-		if id in team:
-			p.modulate = Color(1, 1, 1, 0.45)
-		b.add_child(p)
+	var P: Dictionary = FinPack.data(PC).get("positions", {})
+	var rects: Array = P.get("portraits", [])
+	var owned := PlayerData.owned_heroes()
+	var pages := maxi(1, ceili(float(owned.size()) / rects.size()))
+	_page = clampi(_page, 0, pages - 1)
+	for k in rects.size():
+		var idx := _page * rects.size() + k
+		if idx >= owned.size():
+			break
+		var id: String = owned[idx]
+		var r := FinPack.rect(rects[k])
+		var in_team := id in team
+		var b := Control.new()
+		b.position = r.position
+		b.size = r.size
+		b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		b.tooltip_text = "%s · niveau %d · Force %d" % [GameData.hero(id).name, PlayerData.hero_level(id), PlayerData.hero_power(id)]
+		_drawer.add_child(b)
+		var full := team.size() >= 7 and not in_team
+		var port := RoundPortrait.new().setup(GameData.hero(id), r.size.x - 20, 0.0)
+		port.position = Vector2(10, 10)
+		b.add_child(port)
+		if full:
+			port.set_grey(true)
+		FinPack.image(b, "preparation_chasse/portrait_%s.png" % ("choisi" if in_team else ("grise" if full else "normal")),
+			Rect2(Vector2.ZERO, r.size))
+		ScreenPack.shadow(ScreenPack.text(b, str(PlayerData.hero_level(id)), Rect2(r.size.x - 34, r.size.y - 28, 30, 24), 16,
+			UiKit.WHITE, HORIZONTAL_ALIGNMENT_RIGHT), 2)
 		var hid := id
-		b.pressed.connect(func() -> void:
-			if PlayerData.toggle_team(hid):
-				_picked = -1
-				ui_sound.emit("ui_toggle"))
-		var center := CenterContainer.new()
-		center.add_child(b)
-		col.add_child(center)
-		var n := UiKit.label("%s · %d" % [String(GameData.hero(id).get("short", GameData.hero(id).name)), PlayerData.hero_level(id)],
-			16, UiKit.INK if id in team else UiKit.TEXT_SOFT)
-		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		col.add_child(n)
-		_pool.add_child(col)
+		b.gui_input.connect(func(e: InputEvent) -> void:
+			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+				if PlayerData.toggle_team(hid):
+					_picked = -1
+					ui_sound.emit("ui_toggle"))
+	var tr := FinPack.rect(P.tiroir)
+	ScreenPack.shadow(ScreenPack.text(_drawer, "Choisis tes chasseurs · %d / 7  ·  touche deux héros de la formation pour les échanger" % team.size(),
+		Rect2(tr.position + Vector2(50, tr.size.y - 50), Vector2(1000, 30)), 19, Color("f3d9a0")), 2)
+	if pages > 1:
+		for dir: int in [-1, 1]:
+			var a := TextureButton.new()
+			var side := "precedente" if dir < 0 else "suivante"
+			a.texture_normal = MageRoom.tex("jardin/fleche_salle_%s_normal.png" % side)
+			a.texture_hover = MageRoom.tex("jardin/fleche_salle_%s_survol.png" % side)
+			a.ignore_texture_size = true
+			a.stretch_mode = TextureButton.STRETCH_SCALE
+			a.size = Vector2(80, 60)
+			a.position = Vector2(tr.position.x + tr.size.x - 190 + (0 if dir < 0 else 92), tr.end.y - 64)
+			a.disabled = (_page == 0 and dir < 0) or (_page == pages - 1 and dir > 0)
+			a.modulate.a = 0.35 if a.disabled else 1.0
+			a.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+			a.pressed.connect(func() -> void:
+				ui_sound.emit("ui_click")
+				_page += dir
+				refresh())
+			_drawer.add_child(a)
 
 
 ## Synergies que l'équipe déclenche : « Ardeur ×2 », « Rempart ×4 »…
@@ -233,17 +315,3 @@ static func synergy_lines(team: Array) -> Array:
 			if reached > 0:
 				out.append("%s ×%d" % [table[kind][key].name, counts[key]])
 	return out
-
-
-## Anneau au sol d'une place (doré quand la place est choisie pour un échange).
-class _Ring extends Node2D:
-	var picked := false
-
-	func _draw() -> void:
-		var c := Color("f2c75c") if picked else Color(1, 1, 1, 0.35)
-		var pts := PackedVector2Array()
-		for k in 33:
-			var a := TAU * k / 32.0
-			pts.append(Vector2(cos(a) * 62.0, sin(a) * 20.0))
-		draw_colored_polygon(pts, Color(0, 0, 0, 0.3))
-		draw_polyline(pts, c, 3.0 if picked else 2.0)

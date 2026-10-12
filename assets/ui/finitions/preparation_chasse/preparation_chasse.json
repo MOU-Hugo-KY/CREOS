@@ -1,0 +1,707 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "background": "preparation_chasse/campement.png",
+  "coordinates": "rect=[x,y,width,height], origine haut gauche",
+  "images": {
+    "preparation_chasse/campement.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "preparation_chasse/formation_vide.png": {
+      "size": [
+        140,
+        140
+      ]
+    },
+    "preparation_chasse/formation_occupee.png": {
+      "size": [
+        140,
+        140
+      ]
+    },
+    "preparation_chasse/portrait_normal.png": {
+      "size": [
+        96,
+        96
+      ]
+    },
+    "preparation_chasse/portrait_choisi.png": {
+      "size": [
+        96,
+        96
+      ]
+    },
+    "preparation_chasse/portrait_grise.png": {
+      "size": [
+        96,
+        96
+      ]
+    },
+    "preparation_chasse/synergies/feu_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/feu_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/eau_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/eau_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/nature_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/nature_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/lumiere_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/lumiere_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/ombre_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/ombre_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/guerrier_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/guerrier_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/tank_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/tank_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/archer_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/archer_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/mage_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/mage_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/soigneur_allume.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/synergies/soigneur_eteint.png": {
+      "size": [
+        40,
+        40
+      ]
+    },
+    "preparation_chasse/tiroir_heros.png": {
+      "size": [
+        660,
+        100
+      ]
+    },
+    "preparation_chasse/commun/cartouche_monnaie.png": {
+      "size": [
+        220,
+        72
+      ]
+    },
+    "preparation_chasse/commun/retour_normal.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "preparation_chasse/commun/retour_appuye.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "preparation_chasse/commun/parchemin.png": {
+      "size": [
+        1060,
+        140
+      ]
+    },
+    "preparation_chasse/commun/bandeau_titre.png": {
+      "size": [
+        700,
+        90
+      ]
+    },
+    "preparation_chasse/commun/retour_survol.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "preparation_chasse/bouton_partir_normal.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "preparation_chasse/bouton_partir_survol.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "preparation_chasse/bouton_partir_appuye.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "preparation_chasse/bouton_partir_desactive.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "preparation_chasse/jauge_force_fond.png": {
+      "size": [
+        440,
+        36
+      ]
+    },
+    "preparation_chasse/jauge_force_remplissage.png": {
+      "size": [
+        420,
+        16
+      ]
+    },
+    "preparation_chasse/animations/feu_00.png": {
+      "size": [
+        224,
+        224
+      ]
+    },
+    "preparation_chasse/animations/feu_01.png": {
+      "size": [
+        224,
+        224
+      ]
+    },
+    "preparation_chasse/animations/feu_02.png": {
+      "size": [
+        224,
+        224
+      ]
+    },
+    "preparation_chasse/animations/feu_03.png": {
+      "size": [
+        224,
+        224
+      ]
+    },
+    "preparation_chasse/animations/feu_04.png": {
+      "size": [
+        224,
+        224
+      ]
+    },
+    "preparation_chasse/animations/feu_05.png": {
+      "size": [
+        224,
+        224
+      ]
+    },
+    "preparation_chasse/animations/feu_06.png": {
+      "size": [
+        224,
+        224
+      ]
+    },
+    "preparation_chasse/animations/feu_07.png": {
+      "size": [
+        224,
+        224
+      ]
+    },
+    "preparation_chasse/animations/feu_camp.png": {
+      "size": [
+        1792,
+        224
+      ]
+    }
+  },
+  "animations": {
+    "feu_camp": {
+      "file": "preparation_chasse/animations/feu_camp.png",
+      "frame_size": [
+        224,
+        224
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "pivot": [
+        112,
+        218
+      ],
+      "loop": true,
+      "rect": [
+        165,
+        320,
+        224,
+        224
+      ]
+    }
+  },
+  "nine_slice": {
+    "preparation_chasse/tiroir_heros.png": [
+      79,
+      22,
+      79,
+      22
+    ],
+    "preparation_chasse/jauge_force_fond.png": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "preparation_chasse/commun/bandeau_titre.png": [
+      130,
+      24,
+      130,
+      28
+    ],
+    "preparation_chasse/commun/cartouche_monnaie.png": [
+      74,
+      18,
+      22,
+      18
+    ]
+  },
+  "formation": [
+    {
+      "id": "arriere_1",
+      "rang": "arriere",
+      "rect": [
+        665,
+        320,
+        140,
+        140
+      ],
+      "hero_feet": [
+        735,
+        421
+      ],
+      "hero_max_size": [
+        135,
+        160
+      ],
+      "pivot": [
+        70,
+        101
+      ]
+    },
+    {
+      "id": "arriere_2",
+      "rang": "arriere",
+      "rect": [
+        800,
+        510,
+        140,
+        140
+      ],
+      "hero_feet": [
+        870,
+        611
+      ],
+      "hero_max_size": [
+        135,
+        160
+      ],
+      "pivot": [
+        70,
+        101
+      ]
+    },
+    {
+      "id": "milieu_1",
+      "rang": "milieu",
+      "rect": [
+        870,
+        300,
+        140,
+        140
+      ],
+      "hero_feet": [
+        940,
+        401
+      ],
+      "hero_max_size": [
+        135,
+        160
+      ],
+      "pivot": [
+        70,
+        101
+      ]
+    },
+    {
+      "id": "milieu_2",
+      "rang": "milieu",
+      "rect": [
+        1020,
+        425,
+        140,
+        140
+      ],
+      "hero_feet": [
+        1090,
+        526
+      ],
+      "hero_max_size": [
+        135,
+        160
+      ],
+      "pivot": [
+        70,
+        101
+      ]
+    },
+    {
+      "id": "milieu_3",
+      "rang": "milieu",
+      "rect": [
+        995,
+        580,
+        140,
+        140
+      ],
+      "hero_feet": [
+        1065,
+        681
+      ],
+      "hero_max_size": [
+        135,
+        160
+      ],
+      "pivot": [
+        70,
+        101
+      ]
+    },
+    {
+      "id": "avant_1",
+      "rang": "avant",
+      "rect": [
+        1180,
+        345,
+        140,
+        140
+      ],
+      "hero_feet": [
+        1250,
+        446
+      ],
+      "hero_max_size": [
+        135,
+        160
+      ],
+      "pivot": [
+        70,
+        101
+      ]
+    },
+    {
+      "id": "avant_2",
+      "rang": "avant",
+      "rect": [
+        1290,
+        525,
+        140,
+        140
+      ],
+      "hero_feet": [
+        1360,
+        626
+      ],
+      "hero_max_size": [
+        135,
+        160
+      ],
+      "pivot": [
+        70,
+        101
+      ]
+    }
+  ],
+  "buttons": {
+    "partir": {
+      "rect": [
+        1450,
+        920,
+        420,
+        96
+      ],
+      "states": {
+        "normal": "preparation_chasse/bouton_partir_normal.png",
+        "survol": "preparation_chasse/bouton_partir_survol.png",
+        "appuye": "preparation_chasse/bouton_partir_appuye.png",
+        "desactive": "preparation_chasse/bouton_partir_desactive.png"
+      }
+    }
+  },
+  "positions": {
+    "titre": [
+      610,
+      24,
+      700,
+      90
+    ],
+    "retour": [
+      40,
+      30,
+      220,
+      80
+    ],
+    "monnaie": [
+      1620,
+      34,
+      220,
+      72
+    ],
+    "tiroir": [
+      60,
+      830,
+      1320,
+      200
+    ],
+    "force_label": [
+      1450,
+      788,
+      420,
+      35
+    ],
+    "force_fond": [
+      1440,
+      832,
+      440,
+      36
+    ],
+    "force_remplissage": [
+      1450,
+      842,
+      420,
+      16
+    ],
+    "synergies": [
+      [
+        1450,
+        882,
+        40,
+        40
+      ],
+      [
+        1495,
+        882,
+        40,
+        40
+      ],
+      [
+        1540,
+        882,
+        40,
+        40
+      ],
+      [
+        1585,
+        882,
+        40,
+        40
+      ],
+      [
+        1630,
+        882,
+        40,
+        40
+      ],
+      [
+        1675,
+        882,
+        40,
+        40
+      ],
+      [
+        1720,
+        882,
+        40,
+        40
+      ],
+      [
+        1765,
+        882,
+        40,
+        40
+      ],
+      [
+        1810,
+        882,
+        40,
+        40
+      ],
+      [
+        1855,
+        882,
+        40,
+        40
+      ]
+    ],
+    "feu": [
+      165,
+      320,
+      224,
+      224
+    ],
+    "portraits": [
+      [
+        100,
+        874,
+        96,
+        96
+      ],
+      [
+        212,
+        874,
+        96,
+        96
+      ],
+      [
+        324,
+        874,
+        96,
+        96
+      ],
+      [
+        436,
+        874,
+        96,
+        96
+      ],
+      [
+        548,
+        874,
+        96,
+        96
+      ],
+      [
+        660,
+        874,
+        96,
+        96
+      ],
+      [
+        772,
+        874,
+        96,
+        96
+      ],
+      [
+        884,
+        874,
+        96,
+        96
+      ],
+      [
+        996,
+        874,
+        96,
+        96
+      ],
+      [
+        1108,
+        874,
+        96,
+        96
+      ],
+      [
+        1220,
+        874,
+        96,
+        96
+      ]
+    ]
+  }
+}
