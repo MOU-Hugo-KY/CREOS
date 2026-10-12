@@ -1,0 +1,860 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "coordinates": "rect=[x,y,width,height], origine haut gauche",
+  "images": {
+    "port_franc/boutons/heros_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/heros_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/heros_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/heros_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/chasse_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/chasse_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/chasse_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/chasse_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/lanterne_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/lanterne_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/lanterne_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/lanterne_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/echoppe_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/echoppe_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/echoppe_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/echoppe_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/reliques_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/reliques_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/reliques_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/reliques_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/primes_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/primes_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/primes_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/primes_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/ma_loge_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/ma_loge_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/ma_loge_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/ma_loge_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/parametres_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/parametres_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/parametres_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/parametres_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/jour_nuit_normal.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/jour_nuit_survol.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/jour_nuit_appuye.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/boutons/jour_nuit_desactive.png": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "port_franc/ruban_haut.png": {
+      "size": [
+        600,
+        80
+      ]
+    },
+    "port_franc/medaillon_profil.png": {
+      "size": [
+        460,
+        150
+      ]
+    },
+    "port_franc/cartouche_ressource.png": {
+      "size": [
+        220,
+        72
+      ]
+    },
+    "port_franc/icones/or.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "port_franc/icones/gemme.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "port_franc/icones/energie.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "port_franc/icones/eclat.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "port_franc/jauge_xp_fond.png": {
+      "size": [
+        176,
+        10
+      ]
+    },
+    "port_franc/jauge_xp_remplissage.png": {
+      "size": [
+        170,
+        4
+      ]
+    },
+    "port_franc/jauge_energie_fond.png": {
+      "size": [
+        295,
+        12
+      ]
+    },
+    "port_franc/jauge_energie_remplissage.png": {
+      "size": [
+        289,
+        6
+      ]
+    },
+    "port_franc/icones/horloge.png": {
+      "size": [
+        24,
+        24
+      ]
+    },
+    "port_franc/infobulle.png": {
+      "size": [
+        320,
+        160
+      ]
+    },
+    "port_franc/animations/notification_00.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "port_franc/animations/notification_01.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "port_franc/animations/notification_02.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "port_franc/animations/notification_03.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "port_franc/animations/notification_04.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "port_franc/animations/notification_05.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "port_franc/animations/notification_06.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "port_franc/animations/notification_07.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "port_franc/animations/notification.png": {
+      "size": [
+        256,
+        32
+      ]
+    },
+    "port_franc/interface_complete_sans_texte.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    }
+  },
+  "buttons": {
+    "heros": {
+      "states": {
+        "normal": "port_franc/boutons/heros_normal.png",
+        "survol": "port_franc/boutons/heros_survol.png",
+        "appuye": "port_franc/boutons/heros_appuye.png",
+        "desactive": "port_franc/boutons/heros_desactive.png"
+      },
+      "rect": [
+        140,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        140,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        200,
+        884
+      ],
+      "notification_rect": [
+        232,
+        898,
+        32,
+        32
+      ]
+    },
+    "chasse": {
+      "states": {
+        "normal": "port_franc/boutons/chasse_normal.png",
+        "survol": "port_franc/boutons/chasse_survol.png",
+        "appuye": "port_franc/boutons/chasse_appuye.png",
+        "desactive": "port_franc/boutons/chasse_desactive.png"
+      },
+      "rect": [
+        330,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        330,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        390,
+        884
+      ],
+      "notification_rect": [
+        422,
+        898,
+        32,
+        32
+      ]
+    },
+    "lanterne": {
+      "states": {
+        "normal": "port_franc/boutons/lanterne_normal.png",
+        "survol": "port_franc/boutons/lanterne_survol.png",
+        "appuye": "port_franc/boutons/lanterne_appuye.png",
+        "desactive": "port_franc/boutons/lanterne_desactive.png"
+      },
+      "rect": [
+        520,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        520,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        580,
+        884
+      ],
+      "notification_rect": [
+        612,
+        898,
+        32,
+        32
+      ]
+    },
+    "echoppe": {
+      "states": {
+        "normal": "port_franc/boutons/echoppe_normal.png",
+        "survol": "port_franc/boutons/echoppe_survol.png",
+        "appuye": "port_franc/boutons/echoppe_appuye.png",
+        "desactive": "port_franc/boutons/echoppe_desactive.png"
+      },
+      "rect": [
+        710,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        710,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        770,
+        884
+      ],
+      "notification_rect": [
+        802,
+        898,
+        32,
+        32
+      ]
+    },
+    "reliques": {
+      "states": {
+        "normal": "port_franc/boutons/reliques_normal.png",
+        "survol": "port_franc/boutons/reliques_survol.png",
+        "appuye": "port_franc/boutons/reliques_appuye.png",
+        "desactive": "port_franc/boutons/reliques_desactive.png"
+      },
+      "rect": [
+        900,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        900,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        960,
+        884
+      ],
+      "notification_rect": [
+        992,
+        898,
+        32,
+        32
+      ]
+    },
+    "primes": {
+      "states": {
+        "normal": "port_franc/boutons/primes_normal.png",
+        "survol": "port_franc/boutons/primes_survol.png",
+        "appuye": "port_franc/boutons/primes_appuye.png",
+        "desactive": "port_franc/boutons/primes_desactive.png"
+      },
+      "rect": [
+        1090,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        1090,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        1150,
+        884
+      ],
+      "notification_rect": [
+        1182,
+        898,
+        32,
+        32
+      ]
+    },
+    "ma_loge": {
+      "states": {
+        "normal": "port_franc/boutons/ma_loge_normal.png",
+        "survol": "port_franc/boutons/ma_loge_survol.png",
+        "appuye": "port_franc/boutons/ma_loge_appuye.png",
+        "desactive": "port_franc/boutons/ma_loge_desactive.png"
+      },
+      "rect": [
+        1280,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        1280,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        1340,
+        884
+      ],
+      "notification_rect": [
+        1372,
+        898,
+        32,
+        32
+      ]
+    },
+    "parametres": {
+      "states": {
+        "normal": "port_franc/boutons/parametres_normal.png",
+        "survol": "port_franc/boutons/parametres_survol.png",
+        "appuye": "port_franc/boutons/parametres_appuye.png",
+        "desactive": "port_franc/boutons/parametres_desactive.png"
+      },
+      "rect": [
+        1470,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        1470,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        1530,
+        884
+      ],
+      "notification_rect": [
+        1562,
+        898,
+        32,
+        32
+      ]
+    },
+    "jour_nuit": {
+      "states": {
+        "normal": "port_franc/boutons/jour_nuit_normal.png",
+        "survol": "port_franc/boutons/jour_nuit_survol.png",
+        "appuye": "port_franc/boutons/jour_nuit_appuye.png",
+        "desactive": "port_franc/boutons/jour_nuit_desactive.png"
+      },
+      "rect": [
+        1660,
+        900,
+        120,
+        120
+      ],
+      "hit_rect": [
+        1660,
+        900,
+        120,
+        120
+      ],
+      "tooltip_anchor": [
+        1720,
+        884
+      ],
+      "notification_rect": [
+        1752,
+        898,
+        32,
+        32
+      ]
+    }
+  },
+  "animations": {
+    "notification": {
+      "file": "port_franc/animations/notification.png",
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "pivot": [
+        16,
+        16
+      ],
+      "loop": true,
+      "count_rect": [
+        5,
+        5,
+        22,
+        22
+      ]
+    }
+  },
+  "nine_slice": {
+    "port_franc/ruban_haut.png": [
+      100,
+      24,
+      100,
+      24
+    ],
+    "port_franc/cartouche_ressource.png": [
+      74,
+      18,
+      22,
+      18
+    ],
+    "port_franc/jauge_xp_fond.png": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "port_franc/jauge_energie_fond.png": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "port_franc/infobulle.png": [
+      48,
+      36,
+      48,
+      44
+    ]
+  },
+  "positions": {
+    "ruban_haut": [
+      20,
+      14,
+      1880,
+      150
+    ],
+    "profil": [
+      38,
+      15,
+      460,
+      150
+    ],
+    "avatar": [
+      135,
+      43,
+      82,
+      82
+    ],
+    "nom": [
+      242,
+      77,
+      166,
+      24
+    ],
+    "loge": [
+      242,
+      102,
+      166,
+      18
+    ],
+    "niveau": [
+      117,
+      128,
+      26,
+      24
+    ],
+    "xp_fond": [
+      218,
+      126,
+      176,
+      10
+    ],
+    "xp_remplissage": [
+      221,
+      129,
+      170,
+      4
+    ],
+    "energie_jauge": [
+      1210,
+      124,
+      295,
+      12
+    ],
+    "horloge": [
+      1482,
+      76,
+      24,
+      24
+    ],
+    "recharge_texte": [
+      1290,
+      141,
+      220,
+      22
+    ],
+    "infobulle_exemple": [
+      760,
+      699,
+      400,
+      168
+    ],
+    "infobulle_texte": [
+      795,
+      730,
+      330,
+      85
+    ]
+  },
+  "currency": {
+    "or": {
+      "rect": [
+        535,
+        44,
+        305,
+        76
+      ],
+      "icon_rect": [
+        550,
+        58,
+        48,
+        48
+      ],
+      "value_rect": [
+        612,
+        68,
+        208,
+        34
+      ]
+    },
+    "gemme": {
+      "rect": [
+        870,
+        44,
+        305,
+        76
+      ],
+      "icon_rect": [
+        885,
+        58,
+        48,
+        48
+      ],
+      "value_rect": [
+        947,
+        68,
+        208,
+        34
+      ]
+    },
+    "energie": {
+      "rect": [
+        1205,
+        44,
+        305,
+        76
+      ],
+      "icon_rect": [
+        1220,
+        58,
+        48,
+        48
+      ],
+      "value_rect": [
+        1282,
+        68,
+        208,
+        34
+      ]
+    },
+    "eclat": {
+      "rect": [
+        1540,
+        44,
+        305,
+        76
+      ],
+      "icon_rect": [
+        1555,
+        58,
+        48,
+        48
+      ],
+      "value_rect": [
+        1617,
+        68,
+        208,
+        34
+      ]
+    }
+  }
+}

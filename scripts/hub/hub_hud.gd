@@ -46,9 +46,12 @@ func _ready() -> void:
 	_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_root)
-	_build_profile()
-	_build_resources()
-	_build_main_buttons()
+	if FinPack.available(PF):
+		_build_pack_hud()
+	else:
+		_build_profile()
+		_build_resources()
+		_build_main_buttons()
 	_build_side("side_left", true)
 	_build_side("side_right", false)
 	_build_toast()
@@ -111,6 +114,8 @@ func _ready() -> void:
 		lodge.open()
 		lodge.show_hero(id, "Relique"))
 	_root.add_child(relics)
+	if settings:
+		_root.add_child(settings)
 	PlayerData.changed.connect(refresh)
 	refresh()
 	var timer := Timer.new()
@@ -122,20 +127,16 @@ func _ready() -> void:
 
 ## Met à jour le profil et les ressources depuis la sauvegarde.
 func refresh() -> void:
+	if _hud_frame:
+		_refresh_pack_hud()
+		_refresh_avatar()
+		return
 	_level_label.text = str(PlayerData.level())
 	_name_label.text = PlayerData.player_name()
 	_lodge_label.text = PlayerData.lodge_name()
 	_xp_bar.max_value = maxf(1.0, PlayerData.xp_to_next())
 	_xp_bar.value = PlayerData.xp()
-	if PlayerData.avatar() != _avatar_id:
-		_avatar_id = PlayerData.avatar()
-		for c in _avatar_holder.get_children():
-			if c is RoundPortrait:
-				c.queue_free()
-		if _avatar_id != "":
-			var p := RoundPortrait.new().setup(GameData.hero(_avatar_id), 84, 0.08)
-			_avatar_holder.add_child(p)
-			_avatar_holder.move_child(p, 0)
+	_refresh_avatar()
 	if _side_buttons.has("primes"):
 		var n := PlayerData.claimable_quests()
 		var b: IconButton = _side_buttons.primes
@@ -146,7 +147,20 @@ func refresh() -> void:
 	_values["gemmes"].text = str(PlayerData.gems()) + "  "
 	_values["energie"].text = "%d/%d  " % [PlayerData.energy(), PlayerData.energy_max()]
 	var next := PlayerData.seconds_to_next_energy()
-	_values["energie"].get_parent().get_parent().tooltip_text = "Énergie pleine" if next <= 0 else 		"+1 énergie dans %d min %02d s" % [next / 60, next % 60]
+	_values["energie"].get_parent().get_parent().tooltip_text = "Énergie pleine" if next <= 0 else \
+		"+1 énergie dans %d min %02d s" % [next / 60, next % 60]
+
+
+func _refresh_avatar() -> void:
+	if PlayerData.avatar() != _avatar_id:
+		_avatar_id = PlayerData.avatar()
+		for c in _avatar_holder.get_children():
+			if c is RoundPortrait:
+				c.queue_free()
+		if _avatar_id != "":
+			var p := RoundPortrait.new().setup(GameData.hero(_avatar_id), _avatar_holder.size.x if _hud_frame else 84.0, 0.08)
+			_avatar_holder.add_child(p)
+			_avatar_holder.move_child(p, 0)
 
 
 func open_lodge() -> void:
@@ -209,9 +223,9 @@ func close_altar() -> void:
 func _set_menus_visible(on: bool) -> void:
 	screen_opened.emit(not on)
 	for c in _root.get_children():
-		if c not in [lodge, altar, profile, quests, hunt_prep, campaign, shop, relics, private_lodge, _toast]:
+		if c not in [lodge, altar, profile, quests, hunt_prep, campaign, shop, relics, private_lodge, settings, _toast]:
 			c.visible = on
-	if on and _sound_panel:
+	if on and _sound_panel and _sound_button:
 		_sound_panel.visible = _sound_button.button_pressed
 
 
@@ -243,6 +257,181 @@ func _label(size: int, outline := 7) -> Label:
 
 
 ## Profil en haut à gauche : héros fétiche, niveau, nom, loge et XP. Un clic ouvre le profil.
+## Interface du Port-Franc (pack « Finitions », assets/ui/finitions/port_franc/) : ruban du haut avec
+## le médaillon du profil et les 4 bourses (or, gemmes, énergie + jauge et recharge, éclats), et
+## 9 boutons ronds en bas avec pastille de notification et bulle d'aide au survol.
+const PF := "port_franc"
+## Boutons du bas : id du pack -> [action, bâtiment, nom, aide]
+const PF_BUTTONS := {
+	"heros": ["heroes", "loge_des_heros"], "chasse": ["campaign", "table_des_chasses"], "lanterne": ["altar", "autel"],
+	"echoppe": ["shop", "echoppe_masques"], "reliques": ["relics", "reliques"], "primes": ["quests", "primes"],
+	"ma_loge": ["lodge", "ma_loge"], "parametres": ["settings", ""], "jour_nuit": ["time", ""]}
+
+var _hud_frame: Control
+var _xp_gauge: FinPack.Gauge
+var _energy_gauge: FinPack.Gauge
+var _recharge: Label
+var _badges: Dictionary = {}  # id -> Control (pastille)
+var _tip: Control
+var _tip_title: Label
+var _tip_text: Label
+var settings: SettingsScreen
+
+
+func _build_pack_hud() -> void:
+	var D := FinPack.data(PF)
+	var P: Dictionary = D.get("positions", {})
+	_hud_frame = Control.new()
+	_hud_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_hud_frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_root.add_child(_hud_frame)
+	var root := ScreenPack.frame(_hud_frame)
+	root.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	FinPack.nine(root, "port_franc/ruban_haut.png", FinPack.rect(P.ruban_haut), FinPack.margins(PF, "port_franc/ruban_haut.png"))
+	# Profil : médaillon, portrait, nom, loge, niveau, XP. Un clic ouvre le profil.
+	var pr := FinPack.rect(P.profil)
+	var prof := Control.new()
+	prof.position = pr.position
+	prof.size = pr.size
+	prof.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	prof.tooltip_text = "Voir mon profil"
+	prof.gui_input.connect(func(e: InputEvent) -> void:
+		var mb := e as InputEventMouseButton
+		if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
+			ui_sound.emit("ui_click")
+			open_profile())
+	root.add_child(prof)
+	var off := -pr.position
+	var ar := FinPack.rect(P.avatar)
+	_avatar_holder = Control.new()
+	_avatar_holder.position = ar.position + off
+	_avatar_holder.size = ar.size
+	_avatar_holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	prof.add_child(_avatar_holder)
+	FinPack.image(prof, "port_franc/medaillon_profil.png", Rect2(Vector2.ZERO, pr.size))
+	_name_label = ScreenPack.shadow(ScreenPack.text(prof, "", Rect2(FinPack.rect(P.nom).position + off, FinPack.rect(P.nom).size), 22,
+		UiKit.WHITE), 2)
+	_lodge_label = ScreenPack.text(prof, "", Rect2(FinPack.rect(P.loge).position + off, FinPack.rect(P.loge).size), 15, Color("f3d9a0"))
+	_level_label = ScreenPack.shadow(ScreenPack.text(prof, "", Rect2(FinPack.rect(P.niveau).position + off - Vector2(6, 2),
+		FinPack.rect(P.niveau).size + Vector2(12, 4)), 18, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	_xp_gauge = FinPack.Gauge.new().setup("port_franc/jauge_xp_fond.png", FinPack.rect(P.xp_fond), [4, 4, 4, 4],
+		"port_franc/jauge_xp_remplissage.png", FinPack.rect(P.xp_remplissage))
+	_xp_gauge.position += off
+	prof.add_child(_xp_gauge)
+	# Bourses.
+	var icons := {"or": "or", "gemme": "gemme", "energie": "energie", "eclat": "eclat"}
+	var keys := {"or": "or", "gemme": "gemmes", "energie": "energie", "eclat": "eclats"}
+	for k: String in D.get("currency", {}):
+		var c: Dictionary = D.currency[k]
+		FinPack.nine(root, "port_franc/cartouche_ressource.png", FinPack.rect(c.rect), FinPack.margins(PF, "port_franc/cartouche_ressource.png"))
+		FinPack.image(root, "port_franc/icones/%s.png" % icons.get(k, k), FinPack.rect(c.icon_rect))
+		var l := ScreenPack.shadow(ScreenPack.text(root, "", FinPack.rect(c.value_rect), 28, UiKit.WHITE), 2)
+		l.mouse_filter = Control.MOUSE_FILTER_PASS
+		_values[keys[k]] = l
+	_energy_gauge = FinPack.Gauge.new().setup("port_franc/jauge_energie_fond.png", FinPack.rect(P.energie_jauge), [3, 3, 3, 3],
+		"port_franc/jauge_energie_remplissage.png", FinPack.rect(P.energie_jauge).grow(-3))
+	root.add_child(_energy_gauge)
+	FinPack.image(root, "port_franc/icones/horloge.png", FinPack.rect(P.horloge))
+	_recharge = ScreenPack.shadow(ScreenPack.text(root, "", FinPack.rect(P.recharge_texte), 15, Color("f3d9a0"),
+		HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Bulle d'aide (au survol d'un bouton).
+	_tip = Control.new()
+	_tip.size = Vector2(400, 168)
+	_tip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_tip.visible = false
+	root.add_child(_tip)
+	FinPack.nine(_tip, "port_franc/infobulle.png", Rect2(Vector2.ZERO, _tip.size), FinPack.margins(PF, "port_franc/infobulle.png"))
+	_tip_title = ScreenPack.text(_tip, "", Rect2(35, 30, 330, 34), 24, UiKit.INK)
+	_tip_text = ScreenPack.text(_tip, "", Rect2(35, 68, 330, 60), 18, Color("793b49"), 0, true)
+	# Boutons ronds.
+	var buildings: Dictionary = GameData.hub.get("buildings", {})
+	var anim: Dictionary = D.get("animations", {}).get("notification", {})
+	for id: String in D.get("buttons", {}):
+		var info: Dictionary = D.buttons[id]
+		var map: Array = PF_BUTTONS.get(id, ["", ""])
+		var bld: Dictionary = buildings.get(map[1], {})
+		var name := String(bld.get("name", {"primes": "Primes du jour", "parametres": "Paramètres", "jour_nuit": "Jour / nuit"}.get(id, id)))
+		var desc := String(bld.get("description", {"primes": "Les chasses du jour et leurs coffres.",
+			"parametres": "Le volume de la musique et des effets.", "jour_nuit": "Change le moment de la journée sur le port."}.get(id, "")))
+		var r := FinPack.rect(info.rect)
+		var b := FinPack.button(root, "port_franc/boutons/" + id, r)
+		ScreenPack.shadow(ScreenPack.text(root, String({"heros": "Héros", "chasse": "Chasse", "lanterne": "Lanterne", "echoppe": "Échoppe",
+			"reliques": "Reliques", "primes": "Primes", "ma_loge": "Ma Loge", "parametres": "Paramètres", "jour_nuit": "Jour / nuit"}.get(id, name)), Rect2(r.position + Vector2(-40, r.size.y - 6),
+			Vector2(r.size.x + 80, 30)), 19, Color("fff1cf"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+		b.mouse_entered.connect(func() -> void:
+			_tip_title.text = name
+			_tip_text.text = desc
+			var a: Array = info.get("tooltip_anchor", [r.get_center().x, r.position.y])
+			_tip.position = Vector2(clampf(a[0] - _tip.size.x / 2.0, 10, 1910 - _tip.size.x), a[1] - _tip.size.y - 4)
+			_tip.visible = true)
+		b.mouse_exited.connect(func() -> void: _tip.visible = false)
+		b.pressed.connect(_pack_button.bind(id))
+		var badge := Control.new()
+		var nr := FinPack.rect(info.notification_rect)
+		badge.position = nr.position
+		badge.size = nr.size
+		badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		badge.visible = false
+		root.add_child(badge)
+		var s := FinPack.sheet(anim)
+		s.position = nr.size / 2.0
+		badge.add_child(s)
+		s.play("a")
+		var cr: Array = anim.get("count_rect", [5, 5, 22, 22])
+		var cl := ScreenPack.text(badge, "", Rect2(cr[0], cr[1] - 2, cr[2], cr[3]), 15, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+		cl.name = "Count"
+		_badges[id] = badge
+	settings = SettingsScreen.new()
+	settings.closed.connect(func() -> void: _set_menus_visible(true))
+	settings.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+
+
+func _pack_button(id: String) -> void:
+	_tip.visible = false
+	match id:
+		"parametres":
+			ui_sound.emit("ui_click")
+			_set_menus_visible(false)
+			settings.open()
+		"jour_nuit":
+			_time_index = (_time_index + 1) % TIMES.size()
+			ui_sound.emit("ui_toggle")
+			toast(TIMES[_time_index][0])
+			time_of_day_requested.emit(float(TIMES[_time_index][1]))
+		_:
+			ui_sound.emit("ui_click")
+			var map: Array = PF_BUTTONS[id]
+			action.emit(map[0], map[1])
+
+
+func open_settings() -> void:
+	_set_menus_visible(false)
+	settings.open()
+
+
+func _set_badge(id: String, n: int) -> void:
+	var b: Control = _badges.get(id)
+	if b == null:
+		return
+	b.visible = n > 0
+	(b.get_node("Count") as Label).text = str(n) if n < 10 else "9+"
+
+
+func _refresh_pack_hud() -> void:
+	_level_label.text = str(PlayerData.level())
+	_name_label.text = PlayerData.player_name()
+	_lodge_label.text = PlayerData.lodge_name()
+	_xp_gauge.set_ratio(float(PlayerData.xp()) / maxf(1.0, PlayerData.xp_to_next()))
+	_values["or"].text = _fmt(PlayerData.gold())
+	_values["gemmes"].text = _fmt(PlayerData.gems())
+	_values["eclats"].text = _fmt(PlayerData.item_count("fragments_relique"))
+	_values["energie"].text = "%d / %d" % [PlayerData.energy(), PlayerData.energy_max()]
+	_energy_gauge.set_ratio(float(PlayerData.energy()) / maxf(1.0, PlayerData.energy_max()))
+	var next := PlayerData.seconds_to_next_energy()
+	_recharge.text = "Énergie pleine" if next <= 0 else "Recharge : %d:%02d" % [next / 60, next % 60]
+	_set_badge("primes", PlayerData.claimable_quests())
+
+
 func _build_profile() -> void:
 	var panel := PanelContainer.new()
 	var sb := UiKit.pill()
@@ -425,7 +614,7 @@ func _build_title() -> void:
 	_title.text = GameData.hub.get("name", "")
 	_title.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	_title.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_title.offset_top = 110
+	_title.offset_top = 200
 	_title.offset_left = -500
 	_title.offset_right = 500
 	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

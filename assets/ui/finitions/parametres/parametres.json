@@ -1,0 +1,338 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "background": "parametres/boite_musique.png",
+  "coordinates": "rect=[x,y,width,height], origine haut gauche",
+  "images": {
+    "parametres/boite_musique.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "parametres/curseur_rail.png": {
+      "size": [
+        480,
+        44
+      ]
+    },
+    "parametres/curseur_bouton.png": {
+      "size": [
+        60,
+        60
+      ]
+    },
+    "parametres/curseur_remplissage.png": {
+      "size": [
+        440,
+        14
+      ]
+    },
+    "parametres/interrupteur_on.png": {
+      "size": [
+        112,
+        52
+      ]
+    },
+    "parametres/interrupteur_off.png": {
+      "size": [
+        112,
+        52
+      ]
+    },
+    "parametres/commun/cartouche_monnaie.png": {
+      "size": [
+        220,
+        72
+      ]
+    },
+    "parametres/commun/retour_normal.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "parametres/commun/retour_appuye.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "parametres/commun/parchemin.png": {
+      "size": [
+        1060,
+        140
+      ]
+    },
+    "parametres/commun/bandeau_titre.png": {
+      "size": [
+        700,
+        90
+      ]
+    },
+    "parametres/commun/retour_survol.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "parametres/fermer_normal.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "parametres/fermer_survol.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "parametres/fermer_appuye.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "parametres/fermer_desactive.png": {
+      "size": [
+        48,
+        48
+      ]
+    }
+  },
+  "animations": {},
+  "nine_slice": {
+    "parametres/curseur_rail.png": [
+      36,
+      14,
+      36,
+      14
+    ],
+    "parametres/commun/bandeau_titre.png": [
+      130,
+      24,
+      130,
+      28
+    ],
+    "parametres/commun/cartouche_monnaie.png": [
+      74,
+      18,
+      22,
+      18
+    ]
+  },
+  "positions": {
+    "titre": [
+      610,
+      24,
+      700,
+      90
+    ],
+    "retour": [
+      40,
+      30,
+      220,
+      80
+    ],
+    "monnaie": [
+      1620,
+      34,
+      220,
+      72
+    ]
+  },
+  "buttons": {
+    "fermer": {
+      "rect": [
+        1360,
+        200,
+        48,
+        48
+      ],
+      "states": {
+        "normal": "parametres/fermer_normal.png",
+        "survol": "parametres/fermer_survol.png",
+        "appuye": "parametres/fermer_appuye.png",
+        "desactive": "parametres/fermer_desactive.png"
+      }
+    }
+  },
+  "sliders": [
+    {
+      "id": "general",
+      "label_rect": [
+        630,
+        522,
+        360,
+        32
+      ],
+      "rail_rect": [
+        630,
+        565,
+        600,
+        44
+      ],
+      "fill_rect": [
+        656,
+        580,
+        548,
+        14
+      ],
+      "knob_size": [
+        60,
+        60
+      ],
+      "knob_pivot": [
+        30,
+        30
+      ],
+      "knob_center_range": [
+        [
+          656,
+          587
+        ],
+        [
+          1204,
+          587
+        ]
+      ],
+      "value_range": [
+        0,
+        1
+      ],
+      "example_value": 0.8
+    },
+    {
+      "id": "musique",
+      "label_rect": [
+        630,
+        607,
+        360,
+        32
+      ],
+      "rail_rect": [
+        630,
+        650,
+        600,
+        44
+      ],
+      "fill_rect": [
+        656,
+        665,
+        548,
+        14
+      ],
+      "knob_size": [
+        60,
+        60
+      ],
+      "knob_pivot": [
+        30,
+        30
+      ],
+      "knob_center_range": [
+        [
+          656,
+          672
+        ],
+        [
+          1204,
+          672
+        ]
+      ],
+      "value_range": [
+        0,
+        1
+      ],
+      "example_value": 0.6
+    },
+    {
+      "id": "effets",
+      "label_rect": [
+        630,
+        692,
+        360,
+        32
+      ],
+      "rail_rect": [
+        630,
+        735,
+        600,
+        44
+      ],
+      "fill_rect": [
+        656,
+        750,
+        548,
+        14
+      ],
+      "knob_size": [
+        60,
+        60
+      ],
+      "knob_pivot": [
+        30,
+        30
+      ],
+      "knob_center_range": [
+        [
+          656,
+          757
+        ],
+        [
+          1204,
+          757
+        ]
+      ],
+      "value_range": [
+        0,
+        1
+      ],
+      "example_value": 0.9
+    }
+  ],
+  "switches": [
+    {
+      "id": "general_active",
+      "rect": [
+        1260,
+        562,
+        112,
+        52
+      ],
+      "states": {
+        "on": "parametres/interrupteur_on.png",
+        "off": "parametres/interrupteur_off.png"
+      }
+    },
+    {
+      "id": "musique_active",
+      "rect": [
+        1260,
+        647,
+        112,
+        52
+      ],
+      "states": {
+        "on": "parametres/interrupteur_on.png",
+        "off": "parametres/interrupteur_off.png"
+      }
+    },
+    {
+      "id": "effets_active",
+      "rect": [
+        1260,
+        732,
+        112,
+        52
+      ],
+      "states": {
+        "on": "parametres/interrupteur_on.png",
+        "off": "parametres/interrupteur_off.png"
+      }
+    }
+  ]
+}
