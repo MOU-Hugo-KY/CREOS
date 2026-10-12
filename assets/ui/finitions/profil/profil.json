@@ -1,0 +1,845 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "background": "profil/bureau_chasseur.png",
+  "coordinates": "rect=[x,y,width,height], origine haut gauche",
+  "images": {
+    "profil/bureau_chasseur.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "profil/cadres/base.png": {
+      "size": [
+        256,
+        256
+      ]
+    },
+    "profil/cadres/commun.png": {
+      "size": [
+        256,
+        256
+      ]
+    },
+    "profil/cadres/inhabituel.png": {
+      "size": [
+        256,
+        256
+      ]
+    },
+    "profil/cadres/rare.png": {
+      "size": [
+        256,
+        256
+      ]
+    },
+    "profil/cadres/epique.png": {
+      "size": [
+        256,
+        256
+      ]
+    },
+    "profil/cadres/legendaire.png": {
+      "size": [
+        256,
+        256
+      ]
+    },
+    "profil/cadres/mythique.png": {
+      "size": [
+        256,
+        256
+      ]
+    },
+    "profil/cartouches/nom.png": {
+      "size": [
+        320,
+        100
+      ]
+    },
+    "profil/cartouches/loge.png": {
+      "size": [
+        320,
+        100
+      ]
+    },
+    "profil/cartouches/stat_ardoise.png": {
+      "size": [
+        320,
+        100
+      ]
+    },
+    "profil/cartouches/stat_bordeaux.png": {
+      "size": [
+        320,
+        100
+      ]
+    },
+    "profil/trophees/lames_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/lames_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/couronne_slime_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/couronne_slime_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/ancre_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/ancre_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/dragon_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/dragon_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/bouclier_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/bouclier_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/grimoire_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/grimoire_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/lanterne_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/lanterne_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/gemme_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/gemme_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/relique_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/relique_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/calice_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/calice_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/forteresse_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/forteresse_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/sablier_debloque.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/trophees/sablier_verrouille.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "profil/commun/cartouche_monnaie.png": {
+      "size": [
+        220,
+        72
+      ]
+    },
+    "profil/commun/retour_normal.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "profil/commun/retour_appuye.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "profil/commun/parchemin.png": {
+      "size": [
+        1060,
+        140
+      ]
+    },
+    "profil/commun/bandeau_titre.png": {
+      "size": [
+        700,
+        90
+      ]
+    },
+    "profil/commun/retour_survol.png": {
+      "size": [
+        220,
+        80
+      ]
+    }
+  },
+  "animations": {},
+  "nine_slice": {
+    "profil/cartouches/nom.png": [
+      62,
+      26,
+      62,
+      26
+    ],
+    "profil/cartouches/loge.png": [
+      62,
+      26,
+      62,
+      26
+    ],
+    "profil/cartouches/stat_ardoise.png": [
+      62,
+      26,
+      62,
+      26
+    ],
+    "profil/cartouches/stat_bordeaux.png": [
+      62,
+      26,
+      62,
+      26
+    ],
+    "profil/commun/bandeau_titre.png": [
+      130,
+      24,
+      130,
+      28
+    ],
+    "profil/commun/cartouche_monnaie.png": [
+      74,
+      18,
+      22,
+      18
+    ]
+  },
+  "frames": {
+    "base": {
+      "file": "profil/cadres/base.png",
+      "size": [
+        256,
+        256
+      ],
+      "avatar_rect": [
+        52,
+        52,
+        152,
+        152
+      ]
+    },
+    "commun": {
+      "file": "profil/cadres/commun.png",
+      "size": [
+        256,
+        256
+      ],
+      "avatar_rect": [
+        52,
+        52,
+        152,
+        152
+      ]
+    },
+    "inhabituel": {
+      "file": "profil/cadres/inhabituel.png",
+      "size": [
+        256,
+        256
+      ],
+      "avatar_rect": [
+        52,
+        52,
+        152,
+        152
+      ]
+    },
+    "rare": {
+      "file": "profil/cadres/rare.png",
+      "size": [
+        256,
+        256
+      ],
+      "avatar_rect": [
+        52,
+        52,
+        152,
+        152
+      ]
+    },
+    "epique": {
+      "file": "profil/cadres/epique.png",
+      "size": [
+        256,
+        256
+      ],
+      "avatar_rect": [
+        52,
+        52,
+        152,
+        152
+      ]
+    },
+    "legendaire": {
+      "file": "profil/cadres/legendaire.png",
+      "size": [
+        256,
+        256
+      ],
+      "avatar_rect": [
+        52,
+        52,
+        152,
+        152
+      ]
+    },
+    "mythique": {
+      "file": "profil/cadres/mythique.png",
+      "size": [
+        256,
+        256
+      ],
+      "avatar_rect": [
+        52,
+        52,
+        152,
+        152
+      ]
+    }
+  },
+  "trophies": [
+    {
+      "id": "lames",
+      "states": {
+        "debloque": "profil/trophees/lames_debloque.png",
+        "verrouille": "profil/trophees/lames_verrouille.png"
+      },
+      "rect": [
+        982,
+        197,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1030,
+        301
+      ]
+    },
+    {
+      "id": "couronne_slime",
+      "states": {
+        "debloque": "profil/trophees/couronne_slime_debloque.png",
+        "verrouille": "profil/trophees/couronne_slime_verrouille.png"
+      },
+      "rect": [
+        1212,
+        197,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1260,
+        301
+      ]
+    },
+    {
+      "id": "ancre",
+      "states": {
+        "debloque": "profil/trophees/ancre_debloque.png",
+        "verrouille": "profil/trophees/ancre_verrouille.png"
+      },
+      "rect": [
+        1442,
+        197,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1490,
+        301
+      ]
+    },
+    {
+      "id": "dragon",
+      "states": {
+        "debloque": "profil/trophees/dragon_debloque.png",
+        "verrouille": "profil/trophees/dragon_verrouille.png"
+      },
+      "rect": [
+        1672,
+        197,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1720,
+        301
+      ]
+    },
+    {
+      "id": "bouclier",
+      "states": {
+        "debloque": "profil/trophees/bouclier_debloque.png",
+        "verrouille": "profil/trophees/bouclier_verrouille.png"
+      },
+      "rect": [
+        982,
+        422,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1030,
+        526
+      ]
+    },
+    {
+      "id": "grimoire",
+      "states": {
+        "debloque": "profil/trophees/grimoire_debloque.png",
+        "verrouille": "profil/trophees/grimoire_verrouille.png"
+      },
+      "rect": [
+        1212,
+        422,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1260,
+        526
+      ]
+    },
+    {
+      "id": "lanterne",
+      "states": {
+        "debloque": "profil/trophees/lanterne_debloque.png",
+        "verrouille": "profil/trophees/lanterne_verrouille.png"
+      },
+      "rect": [
+        1442,
+        422,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1490,
+        526
+      ]
+    },
+    {
+      "id": "gemme",
+      "states": {
+        "debloque": "profil/trophees/gemme_debloque.png",
+        "verrouille": "profil/trophees/gemme_verrouille.png"
+      },
+      "rect": [
+        1672,
+        422,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1720,
+        526
+      ]
+    },
+    {
+      "id": "relique",
+      "states": {
+        "debloque": "profil/trophees/relique_debloque.png",
+        "verrouille": "profil/trophees/relique_verrouille.png"
+      },
+      "rect": [
+        982,
+        647,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1030,
+        751
+      ]
+    },
+    {
+      "id": "calice",
+      "states": {
+        "debloque": "profil/trophees/calice_debloque.png",
+        "verrouille": "profil/trophees/calice_verrouille.png"
+      },
+      "rect": [
+        1212,
+        647,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1260,
+        751
+      ]
+    },
+    {
+      "id": "forteresse",
+      "states": {
+        "debloque": "profil/trophees/forteresse_debloque.png",
+        "verrouille": "profil/trophees/forteresse_verrouille.png"
+      },
+      "rect": [
+        1442,
+        647,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1490,
+        751
+      ]
+    },
+    {
+      "id": "sablier",
+      "states": {
+        "debloque": "profil/trophees/sablier_debloque.png",
+        "verrouille": "profil/trophees/sablier_verrouille.png"
+      },
+      "rect": [
+        1672,
+        647,
+        96,
+        96
+      ],
+      "native_size": [
+        64,
+        64
+      ],
+      "tooltip_anchor": [
+        1720,
+        751
+      ]
+    }
+  ],
+  "stats": [
+    {
+      "id": "combats_gagnes",
+      "rect": [
+        320,
+        485,
+        290,
+        116
+      ],
+      "label_rect": [
+        355,
+        509,
+        230,
+        30
+      ],
+      "value_rect": [
+        355,
+        549,
+        230,
+        35
+      ],
+      "asset": "profil/cartouches/stat_ardoise.png"
+    },
+    {
+      "id": "heros",
+      "rect": [
+        630,
+        485,
+        290,
+        116
+      ],
+      "label_rect": [
+        665,
+        509,
+        230,
+        30
+      ],
+      "value_rect": [
+        665,
+        549,
+        230,
+        35
+      ],
+      "asset": "profil/cartouches/stat_bordeaux.png"
+    },
+    {
+      "id": "etoiles",
+      "rect": [
+        320,
+        640,
+        290,
+        116
+      ],
+      "label_rect": [
+        355,
+        664,
+        230,
+        30
+      ],
+      "value_rect": [
+        355,
+        704,
+        230,
+        35
+      ],
+      "asset": "profil/cartouches/stat_ardoise.png"
+    },
+    {
+      "id": "chasses",
+      "rect": [
+        630,
+        640,
+        290,
+        116
+      ],
+      "label_rect": [
+        665,
+        664,
+        230,
+        30
+      ],
+      "value_rect": [
+        665,
+        704,
+        230,
+        35
+      ],
+      "asset": "profil/cartouches/stat_bordeaux.png"
+    },
+    {
+      "id": "invocations",
+      "rect": [
+        320,
+        795,
+        290,
+        116
+      ],
+      "label_rect": [
+        355,
+        819,
+        230,
+        30
+      ],
+      "value_rect": [
+        355,
+        859,
+        230,
+        35
+      ],
+      "asset": "profil/cartouches/stat_ardoise.png"
+    },
+    {
+      "id": "niveau_loge",
+      "rect": [
+        630,
+        795,
+        290,
+        116
+      ],
+      "label_rect": [
+        665,
+        819,
+        230,
+        30
+      ],
+      "value_rect": [
+        665,
+        859,
+        230,
+        35
+      ],
+      "asset": "profil/cartouches/stat_bordeaux.png"
+    }
+  ],
+  "positions": {
+    "titre": [
+      610,
+      24,
+      700,
+      90
+    ],
+    "retour": [
+      40,
+      30,
+      220,
+      80
+    ],
+    "monnaie": [
+      1620,
+      34,
+      220,
+      72
+    ],
+    "portrait": [
+      350,
+      175,
+      256,
+      256
+    ],
+    "avatar": [
+      402,
+      227,
+      152,
+      152
+    ],
+    "nom": [
+      610,
+      235,
+      310,
+      100
+    ],
+    "nom_texte": [
+      672,
+      262,
+      186,
+      45
+    ],
+    "loge": [
+      610,
+      348,
+      310,
+      84
+    ],
+    "loge_texte": [
+      663,
+      374,
+      204,
+      30
+    ],
+    "trophees_titre": [
+      1070,
+      844,
+      690,
+      50
+    ]
+  },
+  "buttons": {}
+}

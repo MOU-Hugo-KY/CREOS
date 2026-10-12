@@ -1,0 +1,512 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "background": "primes/tableau_primes.png",
+  "coordinates": "rect=[x,y,width,height], origine haut gauche",
+  "images": {
+    "primes/tableau_primes.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "primes/affiche_en_cours.png": {
+      "size": [
+        280,
+        380
+      ]
+    },
+    "primes/affiche_terminee.png": {
+      "size": [
+        280,
+        380
+      ]
+    },
+    "primes/affiche_reclamee.png": {
+      "size": [
+        280,
+        380
+      ]
+    },
+    "primes/commun/cartouche_monnaie.png": {
+      "size": [
+        220,
+        72
+      ]
+    },
+    "primes/commun/retour_normal.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "primes/commun/retour_appuye.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "primes/commun/parchemin.png": {
+      "size": [
+        1060,
+        140
+      ]
+    },
+    "primes/commun/bandeau_titre.png": {
+      "size": [
+        700,
+        90
+      ]
+    },
+    "primes/commun/retour_survol.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "primes/bouton_reclamer_normal.png": {
+      "size": [
+        260,
+        66
+      ]
+    },
+    "primes/bouton_reclamer_survol.png": {
+      "size": [
+        260,
+        66
+      ]
+    },
+    "primes/bouton_reclamer_appuye.png": {
+      "size": [
+        260,
+        66
+      ]
+    },
+    "primes/bouton_reclamer_desactive.png": {
+      "size": [
+        260,
+        66
+      ]
+    },
+    "primes/progression_fond.png": {
+      "size": [
+        360,
+        28
+      ]
+    },
+    "primes/progression_remplissage.png": {
+      "size": [
+        348,
+        16
+      ]
+    },
+    "primes/coffre_ferme.png": {
+      "size": [
+        160,
+        160
+      ]
+    },
+    "primes/coffre_pret.png": {
+      "size": [
+        160,
+        160
+      ]
+    },
+    "primes/coffre_ouvert.png": {
+      "size": [
+        160,
+        160
+      ]
+    },
+    "primes/animations/coffre_pret_00.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "primes/animations/coffre_pret_01.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "primes/animations/coffre_pret_02.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "primes/animations/coffre_pret_03.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "primes/animations/coffre_pret_04.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "primes/animations/coffre_pret_05.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "primes/animations/coffre_pret_06.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "primes/animations/coffre_pret_07.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "primes/animations/coffre_pret.png": {
+      "size": [
+        1536,
+        192
+      ]
+    },
+    "primes/icones/or.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "primes/icones/gemme.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "primes/icones/eclat.png": {
+      "size": [
+        48,
+        48
+      ]
+    }
+  },
+  "animations": {
+    "coffre_pret": {
+      "file": "primes/animations/coffre_pret.png",
+      "frame_size": [
+        192,
+        192
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "pivot": [
+        96,
+        176
+      ],
+      "loop": true
+    }
+  },
+  "nine_slice": {
+    "primes/affiche_en_cours.png": [
+      44,
+      56,
+      62,
+      96
+    ],
+    "primes/affiche_terminee.png": [
+      44,
+      56,
+      62,
+      96
+    ],
+    "primes/affiche_reclamee.png": [
+      44,
+      56,
+      62,
+      96
+    ],
+    "primes/progression_fond.png": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "primes/commun/bandeau_titre.png": [
+      130,
+      24,
+      130,
+      28
+    ],
+    "primes/commun/cartouche_monnaie.png": [
+      74,
+      18,
+      22,
+      18
+    ]
+  },
+  "posters": [
+    {
+      "id": "prime_1",
+      "rect": [
+        465,
+        255,
+        280,
+        430
+      ],
+      "title_rect": [
+        493,
+        310,
+        224,
+        45
+      ],
+      "body_rect": [
+        493,
+        375,
+        224,
+        160
+      ],
+      "progress_rect": [
+        495,
+        555,
+        220,
+        28
+      ],
+      "progress_fill_rect": [
+        499,
+        561,
+        212,
+        16
+      ],
+      "reward_rect": [
+        490,
+        600,
+        165,
+        42
+      ],
+      "button_rect": [
+        475,
+        692,
+        260,
+        66
+      ]
+    },
+    {
+      "id": "prime_2",
+      "rect": [
+        825,
+        255,
+        280,
+        430
+      ],
+      "title_rect": [
+        853,
+        310,
+        224,
+        45
+      ],
+      "body_rect": [
+        853,
+        375,
+        224,
+        160
+      ],
+      "progress_rect": [
+        855,
+        555,
+        220,
+        28
+      ],
+      "progress_fill_rect": [
+        859,
+        561,
+        212,
+        16
+      ],
+      "reward_rect": [
+        850,
+        600,
+        165,
+        42
+      ],
+      "button_rect": [
+        835,
+        692,
+        260,
+        66
+      ]
+    },
+    {
+      "id": "prime_3",
+      "rect": [
+        1185,
+        255,
+        280,
+        430
+      ],
+      "title_rect": [
+        1213,
+        310,
+        224,
+        45
+      ],
+      "body_rect": [
+        1213,
+        375,
+        224,
+        160
+      ],
+      "progress_rect": [
+        1215,
+        555,
+        220,
+        28
+      ],
+      "progress_fill_rect": [
+        1219,
+        561,
+        212,
+        16
+      ],
+      "reward_rect": [
+        1210,
+        600,
+        165,
+        42
+      ],
+      "button_rect": [
+        1195,
+        692,
+        260,
+        66
+      ]
+    }
+  ],
+  "chests": [
+    {
+      "id": "palier_1",
+      "rect": [
+        570,
+        888,
+        160,
+        160
+      ],
+      "glow_rect": [
+        554,
+        872,
+        192,
+        192
+      ],
+      "label_rect": [
+        570,
+        858,
+        160,
+        28
+      ],
+      "threshold_example": 20
+    },
+    {
+      "id": "palier_2",
+      "rect": [
+        880,
+        888,
+        160,
+        160
+      ],
+      "glow_rect": [
+        864,
+        872,
+        192,
+        192
+      ],
+      "label_rect": [
+        880,
+        858,
+        160,
+        28
+      ],
+      "threshold_example": 50
+    },
+    {
+      "id": "palier_3",
+      "rect": [
+        1190,
+        888,
+        160,
+        160
+      ],
+      "glow_rect": [
+        1174,
+        872,
+        192,
+        192
+      ],
+      "label_rect": [
+        1190,
+        858,
+        160,
+        28
+      ],
+      "threshold_example": 80
+    }
+  ],
+  "buttons": {
+    "reclamer": {
+      "states": {
+        "normal": "primes/bouton_reclamer_normal.png",
+        "survol": "primes/bouton_reclamer_survol.png",
+        "appuye": "primes/bouton_reclamer_appuye.png",
+        "desactive": "primes/bouton_reclamer_desactive.png"
+      }
+    }
+  },
+  "positions": {
+    "titre": [
+      610,
+      24,
+      700,
+      90
+    ],
+    "retour": [
+      40,
+      30,
+      220,
+      80
+    ],
+    "monnaie": [
+      1620,
+      34,
+      220,
+      72
+    ],
+    "progression_label": [
+      450,
+      778,
+      1020,
+      34
+    ],
+    "progression_jour_fond": [
+      450,
+      824,
+      1040,
+      28
+    ],
+    "progression_jour_remplissage": [
+      454,
+      830,
+      1032,
+      16
+    ]
+  }
+}

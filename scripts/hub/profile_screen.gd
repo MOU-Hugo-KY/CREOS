@@ -137,6 +137,8 @@ func _ready() -> void:
 	PlayerData.changed.connect(func() -> void:
 		if visible:
 			refresh())
+	if FinPack.available(PF_DIR):
+		_build_desk()
 
 
 func open() -> void:
@@ -148,6 +150,9 @@ func open() -> void:
 
 
 func refresh() -> void:
+	if _desk:
+		_desk_picker.visible = false
+		_fill_desk()
 	for c in _avatar_box.get_children():
 		c.queue_free()
 	var avatar := PlayerData.avatar()
@@ -313,3 +318,200 @@ static func _fmt(n: int) -> String:
 		out = " " + s.right(3) + out
 		s = s.left(s.length() - 3)
 	return s + out
+
+
+# --- Le bureau du chasseur (pack « Finitions ») -------------------------------------------------
+
+## Bureau en plein écran (assets/ui/finitions/profil/) : portrait dans un cadre qui s'embellit avec le
+## niveau (toucher = changer de héros), nom et loge modifiables dans leurs cartouches, 6 plaques de
+## statistiques, mur de 12 trophées (verrouillés tant que l'exploit n'est pas fait).
+const PF_DIR := "profil"
+## Trophées du mur : id du pack -> [nom, exploit]
+const TROPHIES := {
+	"lames": ["Premier sang", "Gagner une chasse."], "couronne_slime": ["Roi des slimes", "Gagner 25 chasses."],
+	"ancre": ["Fidèle au port", "Venir au port 7 jours."], "dragon": ["Tueur de boss", "Vaincre le boss du monde 1."],
+	"bouclier": ["Sans faute", "Gagner 3 étoiles."], "grimoire": ["Érudit", "Réveiller 5 héros."],
+	"lanterne": ["Invocateur", "Faire une invocation."], "gemme": ["Collectionneur", "Réveiller 10 héros."],
+	"relique": ["Gardien des reliques", "Ouvrir les reliques (finir la Campagne 1)."],
+	"calice": ["Maître chasseur", "Gagner 60 étoiles."], "forteresse": ["Conquérant", "Vaincre le boss du monde 5."],
+	"sablier": ["Vétéran", "Venir au port 30 jours."]}
+const FRAME_LEVELS := [[60, "mythique"], [50, "legendaire"], [40, "epique"], [30, "rare"], [20, "inhabituel"], [10, "commun"]]
+
+var _desk: Control
+var _desk_box: Control
+var _desk_picker: Control
+var _desk_name: LineEdit
+var _desk_lodge: LineEdit
+
+
+func _build_desk() -> void:
+	_desk = Control.new()
+	_desk.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_desk.mouse_filter = Control.MOUSE_FILTER_STOP
+	_desk.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	add_child(_desk)
+	var bg := ColorRect.new()
+	bg.color = Color("17141c")
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_desk.add_child(bg)
+	var root := ScreenPack.frame(_desk)
+	var D := FinPack.data(PF_DIR)
+	var P: Dictionary = D.get("positions", {})
+	FinPack.image(root, String(D.get("background", "profil/bureau_chasseur.png")), Rect2(0, 0, 1920, 1080))
+	var tr := FinPack.rect(P.titre)
+	FinPack.nine(root, "profil/commun/bandeau_titre.png", tr, [130, 24, 130, 28])
+	ScreenPack.shadow(ScreenPack.text(root, "PROFIL DU CHASSEUR", Rect2(tr.position + Vector2(0, 24), Vector2(tr.size.x, 36)), 30,
+		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var back := FinPack.button(root, "profil/commun/retour", FinPack.rect(P.retour), "Port", 26)
+	back.get_node("Label").position.x = 30
+	back.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		close_window())
+	# Nom et loge : cartouches où l'on écrit directement (Entrée ou clic ailleurs pour garder).
+	for k: String in ["nom", "loge"]:
+		FinPack.nine(root, "profil/cartouches/%s.png" % k, FinPack.rect(P[k]), [62, 26, 62, 26])
+		var e := LineEdit.new()
+		var er := FinPack.rect(P[k + "_texte"])
+		e.position = er.position
+		e.size = er.size
+		e.flat = true
+		e.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		e.add_theme_font_override("font", UiKit.FONT_BOLD)
+		e.add_theme_font_size_override("font_size", 28 if k == "nom" else 19)
+		e.add_theme_color_override("font_color", UiKit.WHITE if k == "nom" else UiKit.INK)
+		e.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
+		e.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+		e.max_length = 16 if k == "nom" else 24
+		e.tooltip_text = "Toucher pour renommer"
+		e.text_submitted.connect(func(_t: String) -> void: e.release_focus())
+		e.focus_exited.connect(_desk_rename)
+		root.add_child(e)
+		if k == "nom":
+			_desk_name = e
+		else:
+			_desk_lodge = e
+	_desk_box = Control.new()
+	_desk_box.size = Vector2(1920, 1080)
+	_desk_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_desk_box)
+	root.move_child(_desk_box, 2)
+	_desk_picker = Control.new()
+	_desk_picker.visible = false
+	root.add_child(_desk_picker)
+
+
+func _desk_rename() -> void:
+	if _desk_name.text == PlayerData.player_name() and _desk_lodge.text == PlayerData.lodge_name():
+		return
+	if PlayerData.rename(_desk_name.text, _desk_lodge.text):
+		ui_sound.emit("ui_ready")
+	else:
+		ui_sound.emit("ui_toggle")
+		_desk_name.text = PlayerData.player_name()
+		_desk_lodge.text = PlayerData.lodge_name()
+
+
+func _trophy_unlocked(id: String) -> bool:
+	var won := func(d: String) -> bool: return int(PlayerData.state.get("dungeons", {}).get(d, {}).get("stars", 0)) > 0
+	match id:
+		"lames": return PlayerData.stat("hunts_won") >= 1
+		"couronne_slime": return PlayerData.stat("hunts_won") >= 25
+		"ancre": return PlayerData.stat("days_played") >= 7
+		"dragon": return won.call("monde01_8")
+		"bouclier": return PlayerData.total_stars() >= 3
+		"grimoire": return PlayerData.owned_heroes().size() >= 5
+		"lanterne": return int(PlayerData.state.get("summon_count", 0)) >= 1
+		"gemme": return PlayerData.owned_heroes().size() >= 10
+		"relique": return PlayerData.relics_unlocked()
+		"calice": return PlayerData.total_stars() >= 60
+		"forteresse": return won.call("monde05_8")
+		"sablier": return PlayerData.stat("days_played") >= 30
+	return false
+
+
+func _fill_desk() -> void:
+	for c in _desk_box.get_children():
+		_desk_box.remove_child(c)
+		c.queue_free()
+	var D := FinPack.data(PF_DIR)
+	var P: Dictionary = D.get("positions", {})
+	_desk_name.text = PlayerData.player_name()
+	_desk_lodge.text = PlayerData.lodge_name()
+	# Portrait et cadre selon le niveau.
+	var frame := "base"
+	for fl: Array in FRAME_LEVELS:
+		if PlayerData.level() >= int(fl[0]):
+			frame = fl[1]
+			break
+	var ar := FinPack.rect(P.avatar)
+	var avatar := PlayerData.avatar()
+	if avatar != "":
+		var p := RoundPortrait.new().setup(GameData.hero(avatar), ar.size.x, 0.0)
+		p.position = ar.position
+		_desk_box.add_child(p)
+	var pr := FinPack.rect(P.portrait)
+	var fr := FinPack.image(_desk_box, String(D.frames[frame].file), pr)
+	fr.mouse_filter = Control.MOUSE_FILTER_STOP
+	fr.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	fr.tooltip_text = "Changer de héros"
+	fr.gui_input.connect(func(e: InputEvent) -> void:
+		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+			ui_sound.emit("ui_click")
+			_desk_picker.visible = not _desk_picker.visible
+			_fill_desk_picker())
+	ScreenPack.shadow(ScreenPack.text(_desk_box, "Niveau %d" % PlayerData.level(), Rect2(pr.position + Vector2(0, pr.size.y - 6),
+		Vector2(pr.size.x, 30)), 22, Color("ffd27a"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Statistiques.
+	var values := {"combats_gagnes": ["Combats gagnés", str(PlayerData.stat("hunts_won"))],
+		"heros": ["Héros recrutés", "%d / %d" % [PlayerData.owned_heroes().size(), GameData.heroes.size()]],
+		"etoiles": ["Étoiles obtenues", str(PlayerData.total_stars())],
+		"chasses": ["Chasses terminées", str(PlayerData.state.get("dungeons", {}).size())],
+		"invocations": ["Invocations", str(int(PlayerData.state.get("summon_count", 0)))],
+		"niveau_loge": ["Niveau de la loge", str(PlayerData.level())]}
+	for s: Dictionary in D.get("stats", []):
+		FinPack.nine(_desk_box, String(s.asset), FinPack.rect(s.rect), [62, 26, 62, 26])
+		var v: Array = values.get(String(s.id), [String(s.id), ""])
+		ScreenPack.text(_desk_box, v[0], FinPack.rect(s.label_rect), 20, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
+		ScreenPack.shadow(ScreenPack.text(_desk_box, v[1], FinPack.rect(s.value_rect), 28, Color("ffd27a"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Mur des trophées.
+	var got := 0
+	for t: Dictionary in D.get("trophies", []):
+		var id := String(t.id)
+		var on := _trophy_unlocked(id)
+		got += 1 if on else 0
+		var ti := FinPack.image(_desk_box, String(t.states["debloque" if on else "verrouille"]), FinPack.rect(t.rect))
+		ti.mouse_filter = Control.MOUSE_FILTER_STOP
+		var info: Array = TROPHIES.get(id, [id, ""])
+		ti.tooltip_text = "%s\n%s%s" % [info[0], info[1], "" if on else "  (à faire)"]
+	ScreenPack.shadow(ScreenPack.text(_desk_box, "TROPHÉES · %d / %d" % [got, D.get("trophies", []).size()],
+		FinPack.rect(P.trophees_titre), 30, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+
+
+## Choix du héros fétiche : une planche de portraits posée sur le mur des trophées.
+func _fill_desk_picker() -> void:
+	for c in _desk_picker.get_children():
+		c.queue_free()
+	if not _desk_picker.visible:
+		return
+	var owned := PlayerData.owned_heroes()
+	var cols := 6
+	var rows := ceili(owned.size() / float(cols))
+	var r := Rect2(960, 170, 830, 120 + rows * 124)
+	FinPack.nine(_desk_picker, "profil/commun/parchemin.png", r, [140, 24, 140, 24])
+	ScreenPack.text(_desk_picker, "Ton héros fétiche", Rect2(r.position + Vector2(0, 26), Vector2(r.size.x, 34)), 24,
+		Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER)
+	for i in owned.size():
+		var id: String = owned[i]
+		var b := Button.new()
+		b.flat = true
+		b.focus_mode = Control.FOCUS_NONE
+		b.position = r.position + Vector2(55 + (i % cols) * 124, 74 + (i / cols) * 124)
+		b.size = Vector2(110, 110)
+		b.tooltip_text = String(GameData.hero(id).get("name", id))
+		b.add_child(RoundPortrait.new().setup(GameData.hero(id), 104, 0.1 if id == PlayerData.avatar() else 0.05))
+		b.pressed.connect(func() -> void:
+			ui_sound.emit("ui_click")
+			PlayerData.set_avatar(id)
+			_desk_picker.visible = false
+			_fill_desk())
+		_desk_picker.add_child(b)

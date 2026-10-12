@@ -68,6 +68,8 @@ func _ready() -> void:
 	timer.autostart = true
 	timer.timeout.connect(_refresh_timer)
 	add_child(timer)
+	if FinPack.available(PR):
+		_build_board()
 
 
 func open() -> void:
@@ -86,6 +88,9 @@ func refresh() -> void:
 	_points_bar.value = pts
 	_build_chests(daily, cfg, max_points)
 	_refresh_timer()
+	if _board:
+		_fill_board()
+		return
 	for c in _list.get_children():
 		c.queue_free()
 	var quests: Array = cfg.get("quests", []).duplicate()
@@ -238,6 +243,9 @@ func _refresh_timer() -> void:
 	var now := Time.get_datetime_dict_from_system()
 	var left := 86400 - (int(now.hour) * 3600 + int(now.minute) * 60 + int(now.second))
 	_timer_label.text = "Nouvelles primes dans %d h %02d min" % [left / 3600, (left % 3600) / 60]
+	if _board_timer:
+		_board_timer.text = "%d h %02d" % [left / 3600, (left % 3600) / 60]
+		_board_timer.tooltip_text = "Nouvelles primes dans %d h %02d min" % [left / 3600, (left % 3600) / 60]
 
 
 func _rewards_text(r: Dictionary) -> String:
@@ -246,3 +254,175 @@ func _rewards_text(r: Dictionary) -> String:
 	for key: String in r:
 		parts.append("%d %s" % [int(r[key]), names.get(key, key)])
 	return ", ".join(parts)
+
+
+# --- Le tableau des primes (pack « Finitions ») ----------------------------------------------------
+
+## Taverne et tableau d'avis (assets/ui/finitions/primes/) : 3 affiches de prime par page (flèches
+## s'il y en a plus), la barre des points du jour et ses coffres posés à leur seuil.
+const PR := "primes"
+const PR_ICONS := {"gold": "primes/icones/or.png", "gems": "primes/icones/gemme.png", "fragments_relique": "primes/icones/eclat.png"}
+
+var _board: Control
+var _board_box: Control
+var _board_timer: Label
+var _page := 0
+
+
+func _build_board() -> void:
+	_board = Control.new()
+	_board.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_board.mouse_filter = Control.MOUSE_FILTER_STOP
+	_board.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	add_child(_board)
+	var bg := ColorRect.new()
+	bg.color = Color("17141c")
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_board.add_child(bg)
+	var root := ScreenPack.frame(_board)
+	var D := FinPack.data(PR)
+	var P: Dictionary = D.get("positions", {})
+	FinPack.image(root, String(D.get("background", "primes/tableau_primes.png")), Rect2(0, 0, 1920, 1080))
+	var tr := FinPack.rect(P.titre)
+	FinPack.nine(root, "primes/commun/bandeau_titre.png", tr, [130, 24, 130, 28])
+	ScreenPack.shadow(ScreenPack.text(root, "PRIMES DU JOUR", Rect2(tr.position + Vector2(0, 24), Vector2(tr.size.x, 36)), 30,
+		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var back := FinPack.button(root, "primes/commun/retour", FinPack.rect(P.retour), "Port", 26)
+	back.get_node("Label").position.x = 30
+	back.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		close_window())
+	var mr := FinPack.rect(P.monnaie)
+	FinPack.nine(root, "primes/commun/cartouche_monnaie.png", mr, [74, 18, 22, 18])
+	_board_timer = ScreenPack.text(root, "", Rect2(mr.position + Vector2(60, 0), mr.size - Vector2(70, 0)), 24, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER)
+	FinPack.image(root, "port_franc/icones/horloge.png", Rect2(mr.position + Vector2(22, 24), Vector2(24, 24)))
+	_board_box = Control.new()
+	_board_box.size = Vector2(1920, 1080)
+	_board_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_board_box)
+
+
+func _fill_board() -> void:
+	for c in _board_box.get_children():
+		_board_box.remove_child(c)
+		c.queue_free()
+	var D := FinPack.data(PR)
+	var P: Dictionary = D.get("positions", {})
+	var cfg: Dictionary = GameData.quests
+	var daily := PlayerData.daily()
+	var quests: Array = cfg.get("quests", []).duplicate()
+	quests.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return _rank(daily, a) < _rank(daily, b))
+	var posters: Array = D.get("posters", [])
+	var pages := maxi(1, ceili(float(quests.size()) / posters.size()))
+	_page = clampi(_page, 0, pages - 1)
+	for i in posters.size():
+		var k := _page * posters.size() + i
+		if k < quests.size():
+			_poster(posters[i], daily, quests[k])
+	if pages > 1:
+		for dir: int in [-1, 1]:
+			var a := TextureButton.new()
+			var side := "precedente" if dir < 0 else "suivante"
+			a.texture_normal = MageRoom.tex("jardin/fleche_salle_%s_normal.png" % side)
+			a.texture_hover = MageRoom.tex("jardin/fleche_salle_%s_survol.png" % side)
+			a.ignore_texture_size = true
+			a.stretch_mode = TextureButton.STRETCH_SCALE
+			a.size = Vector2(120, 90)
+			a.position = Vector2(320 if dir < 0 else 1480, 425)
+			a.disabled = (_page == 0 and dir < 0) or (_page == pages - 1 and dir > 0)
+			a.modulate.a = 0.35 if a.disabled else 1.0
+			a.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+			a.pressed.connect(func() -> void:
+				ui_sound.emit("ui_click")
+				_page += dir
+				_fill_board())
+			_board_box.add_child(a)
+		ScreenPack.shadow(ScreenPack.text(_board_box, "%d / %d" % [_page + 1, pages], Rect2(1480, 520, 120, 30), 20, Color("f3d9a0"),
+			HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Points du jour et coffres posés à leur seuil.
+	var chests: Array = cfg.get("chests", [])
+	var max_points := _max_points()
+	var pts := Quests.points(daily, cfg)
+	ScreenPack.shadow(ScreenPack.text(_board_box, "Points du jour : %d / %d" % [mini(pts, max_points), max_points],
+		FinPack.rect(P.progression_label), 24, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var fr := FinPack.rect(P.progression_jour_remplissage)
+	var g := FinPack.Gauge.new().setup("primes/progression_fond.png", FinPack.rect(P.progression_jour_fond), [8, 8, 8, 8],
+		"primes/progression_remplissage.png", fr)
+	g.set_ratio(float(pts) / max_points)
+	_board_box.add_child(g)
+	var anim: Dictionary = D.get("animations", {}).get("coffre_pret", {})
+	for i in chests.size():
+		var need := int(chests[i].points)
+		var opened: bool = daily.get("chests", []).has(i)
+		var ready := Quests.can_open_chest(daily, cfg, i)
+		var cx := fr.position.x + fr.size.x * (i + 0.5) / chests.size()
+		var box := Control.new()
+		box.size = Vector2(120, 120)
+		box.position = Vector2(cx - 60, 900)
+		box.tooltip_text = _rewards_text(chests[i].get("rewards", {}))
+		box.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		var index := i
+		box.gui_input.connect(func(e: InputEvent) -> void:
+			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+				_open_chest(index))
+		_board_box.add_child(box)
+		if ready:
+			var s := FinPack.sheet(anim)
+			s.position = Vector2(60, 112)
+			s.scale = Vector2.ONE * 0.75
+			box.add_child(s)
+			s.play("a")
+		else:
+			FinPack.image(box, "primes/coffre_%s.png" % ("ouvert" if opened else "ferme"), Rect2(Vector2.ZERO, box.size))
+		ScreenPack.shadow(ScreenPack.text(_board_box, "✓" if opened else str(need), Rect2(cx - 40, 864, 80, 30), 22,
+			Color("ffd27a") if ready else UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	_refresh_timer()
+
+
+## Une affiche : en cours, terminée (sceau, à réclamer) ou réclamée (pliée, grisée).
+func _poster(p: Dictionary, daily: Dictionary, q: Dictionary) -> void:
+	var available := Quests.is_available(q)
+	var claimed := Quests.is_claimed(daily, q)
+	var ready := Quests.can_claim(daily, q)
+	var state := "reclamee" if claimed else ("terminee" if ready else "en_cours")
+	var file := "primes/affiche_%s.png" % state
+	var card := FinPack.nine(_board_box, file, FinPack.rect(p.rect), FinPack.margins(PR, file))
+	if not available:
+		card.modulate = Color(0.8, 0.78, 0.75)
+	var o := -FinPack.rect(p.rect).position
+	var at := func(a: Array) -> Rect2: return Rect2(FinPack.rect(a).position + o, FinPack.rect(a).size)
+	ScreenPack.text(card, String(q.get("name", "")), at.call(p.title_rect), 22, Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER, true)
+	var desc := String(q.get("description", ""))
+	if not available:
+		desc += "\n(bientôt disponible)"
+	ScreenPack.text(card, desc + "\n\n+%d points" % int(q.get("points", 0)), at.call(p.body_rect), 18, UiKit.INK,
+		HORIZONTAL_ALIGNMENT_CENTER, true)
+	var target := int(q.get("target", 1))
+	var done := target if claimed else mini(Quests.progress(daily, q), target)
+	var pr: Rect2 = at.call(p.progress_rect)
+	var fr: Rect2 = at.call(p.progress_fill_rect)
+	var g := FinPack.Gauge.new().setup("primes/progression_fond.png", pr, [8, 8, 8, 8], "primes/progression_remplissage.png", fr)
+	g.set_ratio(float(done) / target)
+	card.add_child(g)
+	ScreenPack.shadow(ScreenPack.text(card, "%d / %d" % [done, target], pr, 16, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var rr: Rect2 = at.call(p.reward_rect)
+	var x := rr.position.x
+	var r: Dictionary = q.get("rewards", {})
+	for key: String in r:
+		var t := ScreenPack.image(card, FinPack.tex(PR_ICONS[key]) if PR_ICONS.has(key) else UiKit.icon(REWARD_ICONS.get(key, "recompenses")).texture,
+			Rect2(x, rr.position.y + 3, 36, 36))
+		t.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		ScreenPack.text(card, str(int(r[key])), Rect2(x + 38, rr.position.y, 70, rr.size.y), 20, UiKit.INK)
+		x += 100
+	var label := "Réclamer" if ready else ("Fait" if claimed else ("Bientôt" if not available else "Y aller"))
+	var b := FinPack.button(card, "primes/bouton_reclamer", at.call(p.button_rect), label, 24)
+	b.disabled = claimed or not available or (not ready and String(q.get("action", "")) == "")
+	if ready:
+		b.pressed.connect(func() -> void: _claim(q.id))
+	else:
+		var act: String = q.get("action", "")
+		b.pressed.connect(func() -> void:
+			ui_sound.emit("ui_click")
+			close_window()
+			go_to.emit(act))
