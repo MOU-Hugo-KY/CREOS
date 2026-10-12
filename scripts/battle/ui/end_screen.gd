@@ -59,11 +59,16 @@ func _ready() -> void:
 	_next.pressed.connect(func() -> void: continue_pressed.emit())
 	_chest_reveal = ChestReveal.new()
 	add_child(_chest_reveal)
+	if FinPack.available(FC):
+		_ready_pack()
 
 
 ## hero_stats : Array de {id, name, element, alive, damage, healing, level, xp, level_up}
 ## replay : {cost, possible, energy, player_level_up, player_level, chest}
 func show_result(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, dungeon_name: String, replay := {}) -> void:
+	if _pack:
+		_show_pack(won, stars, rewards, hero_stats, dungeon_name, replay)
+		return
 	var R: Dictionary = ScreenPack.layout(P).results
 	_window.add_theme_stylebox_override("panel", ScreenPack.nine(P, "result_victory_window" if won else "result_defeat_window"))
 	var draw: bool = replay.get("draw", false)
@@ -225,3 +230,171 @@ func _reward_name(key: String, amount := 1) -> String:
 		var relic: Dictionary = GameData.relics.get("relics", {}).get(key.trim_prefix("relique_"), {})
 		return "Fragments · %s" % relic.get("name", key)
 	return key.replace("_", " ").capitalize()
+
+
+# --- Victoire / Défaite en plein écran (pack « Finitions ») -------------------------------------
+
+## Décor de victoire (port en fête) ou de défaite, ruban du titre, 3 étoiles qui s'allument l'une
+## après l'autre, rangée des chasseurs (portrait, niveau, survol = dégâts et soins), butin sur un
+## parchemin, coffre de fin de niveau, boutons Rejouer et Retour au port.
+const FC := "combat"
+const PACK_REWARD_ICONS := {"gold": "combat/icones/or.png", "gems": "combat/icones/gemme.png",
+	"fragments_relique": "combat/icones/eclat.png", "materiaux_relique": "combat/icones/fragment_relique.png"}
+
+var _pack := false
+var _p_bg: TextureRect
+var _p_title: Label
+var _p_stars: Array[Control] = []
+var _p_box: Control
+var _p_restart: TextureButton
+var _p_next: TextureButton
+
+
+func _ready_pack() -> void:
+	_pack = true
+	for c in get_children():
+		if c != _chest_reveal:
+			c.visible = false
+	var root := ScreenPack.frame(self)
+	move_child(root, 0)
+	var bg := ColorRect.new()
+	bg.color = Color("17141c")
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(bg)
+	move_child(bg, 0)
+	var S: Dictionary = FinPack.data(FC).get("screens", {}).get("victoire", {})
+	_p_bg = FinPack.image(root, "combat/victoire_fond.png", Rect2(0, 0, 1920, 1080))
+	var br := FinPack.rect(S.get("banner_rect", [560, 150, 800, 110]))
+	FinPack.nine(root, "combat/commun/bandeau_titre.png", br, [130, 24, 130, 28])
+	_p_title = ScreenPack.shadow(ScreenPack.text(root, "", Rect2(br.position + Vector2(0, 28), Vector2(br.size.x, 50)), 42,
+		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 3)
+	for st: Dictionary in S.get("stars", []):
+		var r := FinPack.rect(st.rect)
+		var holder := Control.new()
+		holder.position = r.position
+		holder.size = r.size
+		holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		root.add_child(holder)
+		FinPack.image(holder, "combat/etoile_vide.png", Rect2(r.size / 2.0 - Vector2(72, 72), Vector2(144, 144)))
+		_p_stars.append(holder)
+	_p_box = Control.new()
+	_p_box.size = Vector2(1920, 1080)
+	_p_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_p_box)
+	var cr := FinPack.rect(S.get("continue_rect", [750, 900, 420, 96]))
+	_p_restart = FinPack.button(root, "combat/bouton_continuer", Rect2(cr.position - Vector2(250, 0), cr.size), "Rejouer", 26)
+	_p_restart.pressed.connect(func() -> void: restart_pressed.emit())
+	_p_next = FinPack.button(root, "combat/bouton_continuer", Rect2(cr.position + Vector2(250, 0), cr.size), "Retour au port", 26)
+	_p_next.pressed.connect(func() -> void: continue_pressed.emit())
+	move_child(_chest_reveal, get_child_count() - 1)
+
+
+func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, dungeon_name: String, replay: Dictionary) -> void:
+	var S: Dictionary = FinPack.data(FC).get("screens", {}).get("victoire" if won else "defaite", {})
+	_p_bg.texture = FinPack.tex(String(S.get("background", "combat/victoire_fond.png")))
+	var draw: bool = replay.get("draw", false)
+	_p_title.text = "ÉGALITÉ" if draw else ("VICTOIRE" if won else "DÉFAITE")
+	for c in _p_box.get_children():
+		_p_box.remove_child(c)
+		c.queue_free()
+	for h in _p_stars:
+		for k in range(h.get_child_count() - 1, 0, -1):
+			h.get_child(k).queue_free()
+	ScreenPack.shadow(ScreenPack.text(_p_box, dungeon_name, Rect2(560, 268, 800, 34), 24, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Les chasseurs : une petite rangée de portraits sous les étoiles.
+	var best := 0.0
+	for h: Dictionary in hero_stats:
+		best = maxf(best, float(h.damage))
+	var n := hero_stats.size()
+	for k in n:
+		var h: Dictionary = hero_stats[k]
+		var hero := GameData.hero(String(h.get("id", "")))
+		var x := 960.0 - n * 52.0 + k * 104.0
+		var cell := Control.new()
+		cell.position = Vector2(x, 524)
+		cell.size = Vector2(96, 96)
+		var tip := "%s · niveau %d\nDégâts : %d" % [h.name, int(h.level), int(h.damage)]
+		if float(h.healing) > 0.0:
+			tip += "\nSoins : %d" % int(h.healing)
+		cell.tooltip_text = tip + ("" if h.alive else "\nK.O.")
+		_p_box.add_child(cell)
+		if not hero.is_empty():
+			var p := RoundPortrait.new().setup(hero, 72, 0.08)
+			p.position = Vector2(12, 0)
+			p.set_grey(not h.alive)
+			cell.add_child(p)
+		var up: bool = h.get("level_up", false)
+		ScreenPack.shadow(ScreenPack.text(cell, ("Niv. %d ▲" if up else "+%d XP") % (int(h.level) if up else int(h.xp)),
+			Rect2(-10, 70, 116, 24), 15, Color("63c8be") if up else UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+		if float(h.damage) > 0.0 and float(h.damage) == best:
+			FinPack.image(cell, "combat/etoile_pleine.png", Rect2(64, -6, 30, 30))
+	# Butin sur le parchemin.
+	var rr := FinPack.rect(S.get("rewards_rect", [550, 610, 820, 220]))
+	FinPack.nine(_p_box, "combat/commun/parchemin.png", rr, [140, 50, 140, 50])
+	var icons: Array = S.get("reward_icons", [])
+	var values: Array = S.get("reward_values", [])
+	if rewards.is_empty():
+		ScreenPack.text(_p_box, "Aucun butin", rr, 26, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
+	var i := 0
+	for key: String in rewards:
+		if i >= icons.size():
+			break
+		var ir := FinPack.rect(icons[i])
+		ir.position.x += 40.0
+		var t: Texture2D = FinPack.tex(PACK_REWARD_ICONS[key]) if PACK_REWARD_ICONS.has(key) else (
+			ChestReveal.esprit_icon(key) if key.begins_with("esprit_") else ScreenPack.tex(P, _reward_icon(key)))
+		var img := ScreenPack.image(_p_box, t, ir)
+		img.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		img.mouse_filter = Control.MOUSE_FILTER_PASS
+		img.tooltip_text = _reward_name(key, int(rewards[key]))
+		ScreenPack.text(_p_box, str(int(rewards[key])), FinPack.rect(values[i]).grow_individual(-20, 0, 60, 0), 24, UiKit.INK,
+			HORIZONTAL_ALIGNMENT_CENTER)
+		i += 1
+	# Ligne du coffre, niveau de la loge, ou conseil.
+	var chest: Dictionary = replay.get("chest", {})
+	var line := ""
+	var color := UiKit.WHITE
+	if not chest.is_empty():
+		var bits: Array[String] = []
+		for key: String in chest.rewards:
+			bits.append("+%d %s" % [int(chest.rewards[key]), _reward_name(key, int(chest.rewards[key])).to_lower()])
+		line = "%s !   %s" % [chest.name, "  ·  ".join(bits)]
+		color = CHEST_COLORS.get(chest.kind, UiKit.WOOD).lightened(0.4)
+	elif replay.get("player_level_up", false):
+		line = "Ta loge passe au niveau %d !" % int(replay.player_level)
+		color = Color("63c8be")
+	elif draw:
+		line = "Combat arrêté : pas de butin, ton énergie t'est rendue."
+	elif not won:
+		line = "Conseil : améliore tes héros, éveille-les avec des Esprits et change ta formation."
+	var cl: Label = null
+	if line != "":
+		cl = ScreenPack.shadow(ScreenPack.text(_p_box, line, Rect2(360, 842, 1200, 40), 24, color, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var cost: int = replay.get("cost", 0)
+	(_p_restart.get_node("Label") as Label).text = "Rejouer" if cost <= 0 else "Rejouer · %d énergie" % cost
+	_p_restart.disabled = not replay.get("possible", true)
+	_p_restart.tooltip_text = "" if not _p_restart.disabled else "Pas assez d'énergie (%d)." % int(replay.get("energy", 0))
+	visible = true
+	modulate.a = 0.0
+	create_tween().tween_property(self, "modulate:a", 1.0, 0.3)
+	# Les étoiles s'allument l'une après l'autre (décalage du pack).
+	var anim: Dictionary = FinPack.data(FC).get("animations", {}).get("etoile_allumage", {})
+	var stars_def: Array = S.get("stars", [])
+	for k in mini(stars, _p_stars.size()):
+		var holder := _p_stars[k]
+		var delay := 0.5 + float(stars_def[k].get("start_delay_ms", k * 180)) / 1000.0 * 2.0
+		get_tree().create_timer(delay).timeout.connect(func() -> void:
+			if not is_instance_valid(holder):
+				return
+			var s := FinPack.sheet(anim)
+			s.position = holder.size / 2.0
+			holder.add_child(s)
+			s.play("a")
+			sound.emit("ui_ready"))
+	if not chest.is_empty():
+		get_tree().create_timer(0.9 + stars * 0.4).timeout.connect(func() -> void:
+			_chest_reveal.show_chest(chest, _reward_name)
+			sound.emit("ultimate_impact" if chest.kind in ["or", "serment"] else "ui_ready"))
+	if cl:
+		cl.modulate.a = 0.0
+		create_tween().tween_property(cl, "modulate:a", 1.0, 0.3).set_delay(1.0 + stars * 0.4)

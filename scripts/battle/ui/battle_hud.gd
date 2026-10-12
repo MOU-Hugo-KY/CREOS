@@ -245,6 +245,9 @@ func refresh(delta: float) -> void:
 
 ## Grande annonce au centre (« Vague 2 / 3 », « Le boss arrive ! »…).
 func banner(text: String, sub := "", duration := 1.4) -> void:
+	if FinPack.available("combat"):
+		_pack_banner(text, sub, duration)
+		return
 	_banner.text = text
 	_banner_sub.text = sub
 	_banner_bg.add_theme_stylebox_override("panel", ScreenPack.nine("combat", "banner_special" if text.length() > 14 else "banner_wave"))
@@ -256,6 +259,49 @@ func banner(text: String, sub := "", duration := 1.4) -> void:
 		tw.tween_property(l, "modulate:a", 1.0, 0.25)
 		tw.tween_interval(duration)
 		tw.tween_property(l, "modulate:a", 0.0, 0.5)
+
+
+## Bannière du pack « Finitions » : ruban de vague, ou arrivée du boss (crâne) quand `sub` l'annonce.
+var _pack_banner_node: Control
+
+
+func _pack_banner(text: String, sub: String, duration: float) -> void:
+	if is_instance_valid(_pack_banner_node):
+		_pack_banner_node.queue_free()
+	var boss := sub.to_lower().contains("boss")
+	var a: Dictionary = FinPack.data("combat").get("animations", {}).get("arrivee_boss" if boss else "arrivee_vague", {})
+	var vs := get_viewport().get_visible_rect().size
+	var k := vs.y / 1080.0
+	var box := Control.new()
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var fs := Vector2(a.frame_size[0], a.frame_size[1])
+	box.size = fs
+	box.scale = Vector2.ONE * k
+	box.position = Vector2(vs.x / 2.0, vs.y * (440.0 if boss else 430.0) / 1080.0) - fs * k / 2.0
+	add_child(box)
+	_pack_banner_node = box
+	var s := FinPack.sheet(a)
+	s.position = Vector2(a.pivot[0], a.pivot[1])
+	box.add_child(s)
+	s.play("a")
+	var tr: Array = a.get("text_rect", [215, 78, 470, 55])
+	var t := ScreenPack.shadow(ScreenPack.text(box, text, Rect2(tr[0], tr[1] - 4, tr[2], tr[3]), 38, Color("f3d9a0"),
+		HORIZONTAL_ALIGNMENT_CENTER), 3)
+	var parts: Array[Control] = [t]
+	if sub != "" and not boss:
+		parts.append(ScreenPack.shadow(ScreenPack.text(box, sub, Rect2(tr[0], tr[1] + tr[3], tr[2], 34), 22, UiKit.WHITE,
+			HORIZONTAL_ALIGNMENT_CENTER), 2))
+	elif boss:
+		parts.append(ScreenPack.shadow(ScreenPack.text(box, "Le boss arrive !", Rect2(tr[0], tr[1] + tr[3] + 4, tr[2], 34), 24,
+			Color("ffb070"), HORIZONTAL_ALIGNMENT_CENTER), 2))
+	for p in parts:
+		p.modulate.a = 0.0
+		create_tween().tween_property(p, "modulate:a", 1.0, 0.25).set_delay(0.35)
+	var tw := create_tween()
+	tw.tween_interval(0.8 + duration)
+	tw.tween_property(box, "modulate:a", 0.0, 0.5)
+	tw.tween_callback(box.queue_free)
 
 
 ## Nom d'une attaque ultime, affiché brièvement en haut au centre.

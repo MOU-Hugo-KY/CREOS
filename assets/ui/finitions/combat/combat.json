@@ -1,0 +1,1163 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "background": "combat/victoire_fond.png",
+  "coordinates": "rect=[x,y,width,height], origine haut gauche",
+  "images": {
+    "combat/victoire_fond.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "combat/defaite_fond.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "combat/etats/brulure.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/poison.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/etourdi.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/marque.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/mouille.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/desequilibre.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/aveugle.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/scelle.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/enracine.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/leurre.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/garde.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/bouclier.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/regeneration.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/provocation.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/attaque_bonus.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/attaque_malus.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/defense_bonus.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/defense_malus.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/vitesse_bonus.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/etats/vitesse_malus.png": {
+      "size": [
+        32,
+        32
+      ]
+    },
+    "combat/animations/critique_rouge/00.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_rouge/01.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_rouge/02.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_rouge/03.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_rouge/04.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_rouge/05.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_rouge.png": {
+      "size": [
+        1920,
+        180
+      ]
+    },
+    "combat/animations/soin_vert/00.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/soin_vert/01.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/soin_vert/02.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/soin_vert/03.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/soin_vert/04.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/soin_vert/05.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/soin_vert.png": {
+      "size": [
+        1920,
+        180
+      ]
+    },
+    "combat/animations/critique_or/00.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_or/01.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_or/02.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_or/03.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_or/04.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_or/05.png": {
+      "size": [
+        320,
+        180
+      ]
+    },
+    "combat/animations/critique_or.png": {
+      "size": [
+        1920,
+        180
+      ]
+    },
+    "combat/animations/etoile_allumage/00.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/animations/etoile_allumage/01.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/animations/etoile_allumage/02.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/animations/etoile_allumage/03.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/animations/etoile_allumage/04.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/animations/etoile_allumage/05.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/animations/etoile_allumage/06.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/animations/etoile_allumage/07.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/animations/etoile_allumage.png": {
+      "size": [
+        1536,
+        192
+      ]
+    },
+    "combat/etoile_vide.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/etoile_pleine.png": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "combat/banniere_vague.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/00.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/01.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/02.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/03.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/04.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/05.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/06.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/07.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/08.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague/09.png": {
+      "size": [
+        900,
+        180
+      ]
+    },
+    "combat/animations/arrivee_vague.png": {
+      "size": [
+        9000,
+        180
+      ]
+    },
+    "combat/banniere_boss.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/00.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/01.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/02.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/03.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/04.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/05.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/06.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/07.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/08.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss/09.png": {
+      "size": [
+        900,
+        420
+      ]
+    },
+    "combat/animations/arrivee_boss.png": {
+      "size": [
+        9000,
+        420
+      ]
+    },
+    "combat/commun/cartouche_monnaie.png": {
+      "size": [
+        220,
+        72
+      ]
+    },
+    "combat/commun/retour_normal.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "combat/commun/retour_appuye.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "combat/commun/parchemin.png": {
+      "size": [
+        1060,
+        140
+      ]
+    },
+    "combat/commun/bandeau_titre.png": {
+      "size": [
+        700,
+        90
+      ]
+    },
+    "combat/commun/retour_survol.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "combat/icones/or.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "combat/icones/gemme.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "combat/icones/eclat.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "combat/icones/fragment_relique.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "combat/icones/coffre.png": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "combat/bouton_continuer_normal.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "combat/bouton_continuer_survol.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "combat/bouton_continuer_appuye.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "combat/bouton_continuer_desactive.png": {
+      "size": [
+        420,
+        96
+      ]
+    }
+  },
+  "animations": {
+    "critique_rouge": {
+      "file": "combat/animations/critique_rouge.png",
+      "frame_size": [
+        320,
+        180
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "pivot": [
+        160,
+        90
+      ],
+      "loop": false,
+      "number_rect": [
+        70,
+        48,
+        180,
+        75
+      ]
+    },
+    "soin_vert": {
+      "file": "combat/animations/soin_vert.png",
+      "frame_size": [
+        320,
+        180
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "pivot": [
+        160,
+        90
+      ],
+      "loop": false,
+      "number_rect": [
+        70,
+        48,
+        180,
+        75
+      ]
+    },
+    "critique_or": {
+      "file": "combat/animations/critique_or.png",
+      "frame_size": [
+        320,
+        180
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "pivot": [
+        160,
+        90
+      ],
+      "loop": false,
+      "number_rect": [
+        70,
+        48,
+        180,
+        75
+      ]
+    },
+    "etoile_allumage": {
+      "file": "combat/animations/etoile_allumage.png",
+      "frame_size": [
+        192,
+        192
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        96,
+        96
+      ],
+      "loop": false
+    },
+    "arrivee_vague": {
+      "file": "combat/animations/arrivee_vague.png",
+      "frame_size": [
+        900,
+        180
+      ],
+      "frame_count": 10,
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "pivot": [
+        450,
+        90
+      ],
+      "loop": false,
+      "text_rect": [
+        215,
+        78,
+        470,
+        55
+      ],
+      "rect": [
+        510,
+        340,
+        900,
+        180
+      ]
+    },
+    "arrivee_boss": {
+      "file": "combat/animations/arrivee_boss.png",
+      "frame_size": [
+        900,
+        420
+      ],
+      "frame_count": 10,
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "pivot": [
+        450,
+        210
+      ],
+      "loop": false,
+      "text_rect": [
+        215,
+        205,
+        470,
+        55
+      ],
+      "rect": [
+        510,
+        230,
+        900,
+        420
+      ]
+    }
+  },
+  "nine_slice": {
+    "combat/commun/parchemin.png": [
+      140,
+      50,
+      140,
+      50
+    ],
+    "combat/commun/bandeau_titre.png": [
+      130,
+      24,
+      130,
+      28
+    ]
+  },
+  "positions": {},
+  "buttons": {
+    "continuer": {
+      "states": {
+        "normal": "combat/bouton_continuer_normal.png",
+        "survol": "combat/bouton_continuer_survol.png",
+        "appuye": "combat/bouton_continuer_appuye.png",
+        "desactive": "combat/bouton_continuer_desactive.png"
+      },
+      "rect": [
+        750,
+        900,
+        420,
+        96
+      ]
+    }
+  },
+  "statuses": {
+    "brulure": {
+      "file": "combat/etats/brulure.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "poison": {
+      "file": "combat/etats/poison.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "etourdi": {
+      "file": "combat/etats/etourdi.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "marque": {
+      "file": "combat/etats/marque.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "mouille": {
+      "file": "combat/etats/mouille.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "desequilibre": {
+      "file": "combat/etats/desequilibre.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "aveugle": {
+      "file": "combat/etats/aveugle.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "scelle": {
+      "file": "combat/etats/scelle.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "enracine": {
+      "file": "combat/etats/enracine.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "leurre": {
+      "file": "combat/etats/leurre.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "garde": {
+      "file": "combat/etats/garde.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "bouclier": {
+      "file": "combat/etats/bouclier.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "regeneration": {
+      "file": "combat/etats/regeneration.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "provocation": {
+      "file": "combat/etats/provocation.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "attaque_bonus": {
+      "file": "combat/etats/attaque_bonus.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "attaque_malus": {
+      "file": "combat/etats/attaque_malus.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "defense_bonus": {
+      "file": "combat/etats/defense_bonus.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "defense_malus": {
+      "file": "combat/etats/defense_malus.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "vitesse_bonus": {
+      "file": "combat/etats/vitesse_bonus.png",
+      "size": [
+        32,
+        32
+      ]
+    },
+    "vitesse_malus": {
+      "file": "combat/etats/vitesse_malus.png",
+      "size": [
+        32,
+        32
+      ]
+    }
+  },
+  "screens": {
+    "victoire": {
+      "background": "combat/victoire_fond.png",
+      "banner_rect": [
+        560,
+        150,
+        800,
+        110
+      ],
+      "stars": [
+        {
+          "id": 1,
+          "rect": [
+            600,
+            330,
+            192,
+            192
+          ],
+          "animation": "etoile_allumage",
+          "start_delay_ms": 0
+        },
+        {
+          "id": 2,
+          "rect": [
+            860,
+            330,
+            192,
+            192
+          ],
+          "animation": "etoile_allumage",
+          "start_delay_ms": 180
+        },
+        {
+          "id": 3,
+          "rect": [
+            1120,
+            330,
+            192,
+            192
+          ],
+          "animation": "etoile_allumage",
+          "start_delay_ms": 360
+        }
+      ],
+      "rewards_rect": [
+        550,
+        610,
+        820,
+        220
+      ],
+      "reward_icons": [
+        [
+          630,
+          672,
+          64,
+          64
+        ],
+        [
+          775,
+          672,
+          64,
+          64
+        ],
+        [
+          920,
+          672,
+          64,
+          64
+        ],
+        [
+          1065,
+          672,
+          64,
+          64
+        ],
+        [
+          1210,
+          672,
+          64,
+          64
+        ]
+      ],
+      "reward_values": [
+        [
+          625,
+          748,
+          75,
+          36
+        ],
+        [
+          770,
+          748,
+          75,
+          36
+        ],
+        [
+          915,
+          748,
+          75,
+          36
+        ],
+        [
+          1060,
+          748,
+          75,
+          36
+        ],
+        [
+          1205,
+          748,
+          75,
+          36
+        ]
+      ],
+      "continue_rect": [
+        750,
+        900,
+        420,
+        96
+      ]
+    },
+    "defaite": {
+      "background": "combat/defaite_fond.png",
+      "banner_rect": [
+        560,
+        150,
+        800,
+        110
+      ],
+      "stars": [
+        {
+          "id": 1,
+          "rect": [
+            600,
+            330,
+            192,
+            192
+          ],
+          "animation": "etoile_allumage",
+          "start_delay_ms": 0
+        },
+        {
+          "id": 2,
+          "rect": [
+            860,
+            330,
+            192,
+            192
+          ],
+          "animation": "etoile_allumage",
+          "start_delay_ms": 180
+        },
+        {
+          "id": 3,
+          "rect": [
+            1120,
+            330,
+            192,
+            192
+          ],
+          "animation": "etoile_allumage",
+          "start_delay_ms": 360
+        }
+      ],
+      "rewards_rect": [
+        550,
+        610,
+        820,
+        220
+      ],
+      "reward_icons": [
+        [
+          630,
+          672,
+          64,
+          64
+        ],
+        [
+          775,
+          672,
+          64,
+          64
+        ],
+        [
+          920,
+          672,
+          64,
+          64
+        ],
+        [
+          1065,
+          672,
+          64,
+          64
+        ],
+        [
+          1210,
+          672,
+          64,
+          64
+        ]
+      ],
+      "reward_values": [
+        [
+          625,
+          748,
+          75,
+          36
+        ],
+        [
+          770,
+          748,
+          75,
+          36
+        ],
+        [
+          915,
+          748,
+          75,
+          36
+        ],
+        [
+          1060,
+          748,
+          75,
+          36
+        ],
+        [
+          1205,
+          748,
+          75,
+          36
+        ]
+      ],
+      "continue_rect": [
+        750,
+        900,
+        420,
+        96
+      ]
+    }
+  }
+}

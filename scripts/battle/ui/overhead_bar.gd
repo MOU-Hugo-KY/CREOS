@@ -20,6 +20,11 @@ var _hp_ratio := 1.0
 var _shield_ratio := 0.0
 var _energy_ratio := 0.0
 var _icon: Texture2D
+## États du moteur -> icônes 32 px du pack « Finitions » (assets/ui/finitions/combat/etats/).
+const PACK_ICONS := {"brulure": "brulure", "poison": "poison", "mouille": "mouille", "marque": "marque",
+	"aveugle": "aveugle", "enracine": "enracine", "desequilibre": "desequilibre", "garde": "garde", "scelle": "scelle",
+	"leurre": "leurre", "regen": "regeneration", "armure_reduite": "defense_malus"}
+const STAT_ICONS := {"atk": "attaque", "mag": "attaque", "def": "defense", "spd": "vitesse", "speed": "vitesse"}
 var _feet := Vector2.ZERO  # position des pieds dans le repère de cette barre
 
 static var _tex: Dictionary = {}
@@ -49,7 +54,9 @@ func follow(_delta: float) -> void:
 	_shield_ratio = clampf(u.shield / u.max_hp, 0.0, 1.0)
 	_energy_ratio = clampf(u.energy / BattleUnit.ENERGY_MAX, 0.0, 1.0)
 	_icon = null
-	if u.stun_time > 0.0:
+	if FinPack.available("combat"):
+		_icon = _pack_icon(u)
+	elif u.stun_time > 0.0:
 		_icon = tex("status_stunned_24")
 	elif u.taunt_time > 0.0 and u.taunt_time < 1000.0:
 		_icon = tex("status_taunt_24")
@@ -66,6 +73,29 @@ func follow(_delta: float) -> void:
 					_icon = tex("status_buff_24")
 					break
 	queue_redraw()
+
+
+## Icône d'état du pack : étourdi, provocation, puis les états, bouclier, bonus et malus.
+func _pack_icon(u: BattleUnit) -> Texture2D:
+	var name := ""
+	if u.stun_time > 0.0:
+		name = "etourdi"
+	elif u.taunt_time > 0.0 and u.taunt_time < 1000.0:
+		name = "provocation"
+	else:
+		for key: String in PACK_ICONS:
+			if u.has_status(key):
+				name = PACK_ICONS[key]
+				break
+		if name == "" and u.shield > 0.0:
+			name = "bouclier"
+		if name == "":
+			for key: String in u.statuses:
+				if u.has_status(key) and (String(key).begins_with("buff_") or String(key).begins_with("debuff_")):
+					var up := String(key).begins_with("buff_")
+					name = "%s_%s" % [STAT_ICONS.get(String(key).get_slice("_", 1), "attaque"), "bonus" if up else "malus"]
+					break
+	return FinPack.tex("combat/etats/%s.png" % name) if name != "" else null
 
 
 func _draw() -> void:
