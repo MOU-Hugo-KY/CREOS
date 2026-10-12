@@ -1,0 +1,1658 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "coordinates": "pixels, origine haut-gauche; rect=[x,y,largeur,hauteur]",
+  "carte_rect": [
+    320,
+    390,
+    1040,
+    440
+  ],
+  "regions": [
+    {
+      "monde": 1,
+      "nom": "Port-Franc",
+      "rect": [
+        320,
+        390,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_01.png",
+      "brouillard": "table_chasses/regions/brouillard_01.png",
+      "eclaire": "table_chasses/regions/eclaire_01.png",
+      "chemin": "table_chasses/regions/chemin_01.png",
+      "chemin_points": [
+        {
+          "id": "01_01",
+          "numero": 1,
+          "center": [
+            347,
+            559
+          ],
+          "rect": [
+            331,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "01_02",
+          "numero": 2,
+          "center": [
+            379,
+            532
+          ],
+          "rect": [
+            363,
+            516,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "01_03",
+          "numero": 3,
+          "center": [
+            411,
+            559
+          ],
+          "rect": [
+            395,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "01_04",
+          "numero": 4,
+          "center": [
+            445,
+            533
+          ],
+          "rect": [
+            429,
+            517,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "01_05",
+          "numero": 5,
+          "center": [
+            479,
+            506
+          ],
+          "rect": [
+            463,
+            490,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "01_06",
+          "numero": 6,
+          "center": [
+            449,
+            477
+          ],
+          "rect": [
+            433,
+            461,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "01_07",
+          "numero": 7,
+          "center": [
+            418,
+            448
+          ],
+          "rect": [
+            402,
+            432,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "01_08",
+          "numero": 8,
+          "center": [
+            471,
+            422
+          ],
+          "rect": [
+            447,
+            398,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 2,
+      "nom": "Forêt ancienne",
+      "rect": [
+        528,
+        390,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_02.png",
+      "brouillard": "table_chasses/regions/brouillard_02.png",
+      "eclaire": "table_chasses/regions/eclaire_02.png",
+      "chemin": "table_chasses/regions/chemin_02.png",
+      "chemin_points": [
+        {
+          "id": "02_01",
+          "numero": 1,
+          "center": [
+            555,
+            559
+          ],
+          "rect": [
+            539,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "02_02",
+          "numero": 2,
+          "center": [
+            587,
+            532
+          ],
+          "rect": [
+            571,
+            516,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "02_03",
+          "numero": 3,
+          "center": [
+            619,
+            559
+          ],
+          "rect": [
+            603,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "02_04",
+          "numero": 4,
+          "center": [
+            653,
+            533
+          ],
+          "rect": [
+            637,
+            517,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "02_05",
+          "numero": 5,
+          "center": [
+            687,
+            506
+          ],
+          "rect": [
+            671,
+            490,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "02_06",
+          "numero": 6,
+          "center": [
+            657,
+            477
+          ],
+          "rect": [
+            641,
+            461,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "02_07",
+          "numero": 7,
+          "center": [
+            626,
+            448
+          ],
+          "rect": [
+            610,
+            432,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "02_08",
+          "numero": 8,
+          "center": [
+            679,
+            422
+          ],
+          "rect": [
+            655,
+            398,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 3,
+      "nom": "Marais brumeux",
+      "rect": [
+        736,
+        390,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_03.png",
+      "brouillard": "table_chasses/regions/brouillard_03.png",
+      "eclaire": "table_chasses/regions/eclaire_03.png",
+      "chemin": "table_chasses/regions/chemin_03.png",
+      "chemin_points": [
+        {
+          "id": "03_01",
+          "numero": 1,
+          "center": [
+            763,
+            559
+          ],
+          "rect": [
+            747,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "03_02",
+          "numero": 2,
+          "center": [
+            795,
+            532
+          ],
+          "rect": [
+            779,
+            516,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "03_03",
+          "numero": 3,
+          "center": [
+            827,
+            559
+          ],
+          "rect": [
+            811,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "03_04",
+          "numero": 4,
+          "center": [
+            861,
+            533
+          ],
+          "rect": [
+            845,
+            517,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "03_05",
+          "numero": 5,
+          "center": [
+            895,
+            506
+          ],
+          "rect": [
+            879,
+            490,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "03_06",
+          "numero": 6,
+          "center": [
+            865,
+            477
+          ],
+          "rect": [
+            849,
+            461,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "03_07",
+          "numero": 7,
+          "center": [
+            834,
+            448
+          ],
+          "rect": [
+            818,
+            432,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "03_08",
+          "numero": 8,
+          "center": [
+            887,
+            422
+          ],
+          "rect": [
+            863,
+            398,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 4,
+      "nom": "Désert des serments",
+      "rect": [
+        944,
+        390,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_04.png",
+      "brouillard": "table_chasses/regions/brouillard_04.png",
+      "eclaire": "table_chasses/regions/eclaire_04.png",
+      "chemin": "table_chasses/regions/chemin_04.png",
+      "chemin_points": [
+        {
+          "id": "04_01",
+          "numero": 1,
+          "center": [
+            971,
+            559
+          ],
+          "rect": [
+            955,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "04_02",
+          "numero": 2,
+          "center": [
+            1003,
+            532
+          ],
+          "rect": [
+            987,
+            516,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "04_03",
+          "numero": 3,
+          "center": [
+            1035,
+            559
+          ],
+          "rect": [
+            1019,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "04_04",
+          "numero": 4,
+          "center": [
+            1069,
+            533
+          ],
+          "rect": [
+            1053,
+            517,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "04_05",
+          "numero": 5,
+          "center": [
+            1103,
+            506
+          ],
+          "rect": [
+            1087,
+            490,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "04_06",
+          "numero": 6,
+          "center": [
+            1073,
+            477
+          ],
+          "rect": [
+            1057,
+            461,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "04_07",
+          "numero": 7,
+          "center": [
+            1042,
+            448
+          ],
+          "rect": [
+            1026,
+            432,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "04_08",
+          "numero": 8,
+          "center": [
+            1095,
+            422
+          ],
+          "rect": [
+            1071,
+            398,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 5,
+      "nom": "Montagnes enneigées",
+      "rect": [
+        1152,
+        390,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_05.png",
+      "brouillard": "table_chasses/regions/brouillard_05.png",
+      "eclaire": "table_chasses/regions/eclaire_05.png",
+      "chemin": "table_chasses/regions/chemin_05.png",
+      "chemin_points": [
+        {
+          "id": "05_01",
+          "numero": 1,
+          "center": [
+            1179,
+            559
+          ],
+          "rect": [
+            1163,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "05_02",
+          "numero": 2,
+          "center": [
+            1211,
+            532
+          ],
+          "rect": [
+            1195,
+            516,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "05_03",
+          "numero": 3,
+          "center": [
+            1243,
+            559
+          ],
+          "rect": [
+            1227,
+            543,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "05_04",
+          "numero": 4,
+          "center": [
+            1277,
+            533
+          ],
+          "rect": [
+            1261,
+            517,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "05_05",
+          "numero": 5,
+          "center": [
+            1311,
+            506
+          ],
+          "rect": [
+            1295,
+            490,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "05_06",
+          "numero": 6,
+          "center": [
+            1281,
+            477
+          ],
+          "rect": [
+            1265,
+            461,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "05_07",
+          "numero": 7,
+          "center": [
+            1250,
+            448
+          ],
+          "rect": [
+            1234,
+            432,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "05_08",
+          "numero": 8,
+          "center": [
+            1303,
+            422
+          ],
+          "rect": [
+            1279,
+            398,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 6,
+      "nom": "Ruines englouties",
+      "rect": [
+        320,
+        610,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_06.png",
+      "brouillard": "table_chasses/regions/brouillard_06.png",
+      "eclaire": "table_chasses/regions/eclaire_06.png",
+      "chemin": "table_chasses/regions/chemin_06.png",
+      "chemin_points": [
+        {
+          "id": "06_01",
+          "numero": 1,
+          "center": [
+            347,
+            779
+          ],
+          "rect": [
+            331,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "06_02",
+          "numero": 2,
+          "center": [
+            379,
+            752
+          ],
+          "rect": [
+            363,
+            736,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "06_03",
+          "numero": 3,
+          "center": [
+            411,
+            779
+          ],
+          "rect": [
+            395,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "06_04",
+          "numero": 4,
+          "center": [
+            445,
+            753
+          ],
+          "rect": [
+            429,
+            737,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "06_05",
+          "numero": 5,
+          "center": [
+            479,
+            726
+          ],
+          "rect": [
+            463,
+            710,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "06_06",
+          "numero": 6,
+          "center": [
+            449,
+            697
+          ],
+          "rect": [
+            433,
+            681,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "06_07",
+          "numero": 7,
+          "center": [
+            418,
+            668
+          ],
+          "rect": [
+            402,
+            652,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "06_08",
+          "numero": 8,
+          "center": [
+            471,
+            642
+          ],
+          "rect": [
+            447,
+            618,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 7,
+      "nom": "Terres volcaniques",
+      "rect": [
+        528,
+        610,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_07.png",
+      "brouillard": "table_chasses/regions/brouillard_07.png",
+      "eclaire": "table_chasses/regions/eclaire_07.png",
+      "chemin": "table_chasses/regions/chemin_07.png",
+      "chemin_points": [
+        {
+          "id": "07_01",
+          "numero": 1,
+          "center": [
+            555,
+            779
+          ],
+          "rect": [
+            539,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "07_02",
+          "numero": 2,
+          "center": [
+            587,
+            752
+          ],
+          "rect": [
+            571,
+            736,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "07_03",
+          "numero": 3,
+          "center": [
+            619,
+            779
+          ],
+          "rect": [
+            603,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "07_04",
+          "numero": 4,
+          "center": [
+            653,
+            753
+          ],
+          "rect": [
+            637,
+            737,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "07_05",
+          "numero": 5,
+          "center": [
+            687,
+            726
+          ],
+          "rect": [
+            671,
+            710,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "07_06",
+          "numero": 6,
+          "center": [
+            657,
+            697
+          ],
+          "rect": [
+            641,
+            681,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "07_07",
+          "numero": 7,
+          "center": [
+            626,
+            668
+          ],
+          "rect": [
+            610,
+            652,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "07_08",
+          "numero": 8,
+          "center": [
+            679,
+            642
+          ],
+          "rect": [
+            655,
+            618,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 8,
+      "nom": "Îles flottantes",
+      "rect": [
+        736,
+        610,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_08.png",
+      "brouillard": "table_chasses/regions/brouillard_08.png",
+      "eclaire": "table_chasses/regions/eclaire_08.png",
+      "chemin": "table_chasses/regions/chemin_08.png",
+      "chemin_points": [
+        {
+          "id": "08_01",
+          "numero": 1,
+          "center": [
+            763,
+            779
+          ],
+          "rect": [
+            747,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "08_02",
+          "numero": 2,
+          "center": [
+            795,
+            752
+          ],
+          "rect": [
+            779,
+            736,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "08_03",
+          "numero": 3,
+          "center": [
+            827,
+            779
+          ],
+          "rect": [
+            811,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "08_04",
+          "numero": 4,
+          "center": [
+            861,
+            753
+          ],
+          "rect": [
+            845,
+            737,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "08_05",
+          "numero": 5,
+          "center": [
+            895,
+            726
+          ],
+          "rect": [
+            879,
+            710,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "08_06",
+          "numero": 6,
+          "center": [
+            865,
+            697
+          ],
+          "rect": [
+            849,
+            681,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "08_07",
+          "numero": 7,
+          "center": [
+            834,
+            668
+          ],
+          "rect": [
+            818,
+            652,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "08_08",
+          "numero": 8,
+          "center": [
+            887,
+            642
+          ],
+          "rect": [
+            863,
+            618,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 9,
+      "nom": "Terres d’ombre",
+      "rect": [
+        944,
+        610,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_09.png",
+      "brouillard": "table_chasses/regions/brouillard_09.png",
+      "eclaire": "table_chasses/regions/eclaire_09.png",
+      "chemin": "table_chasses/regions/chemin_09.png",
+      "chemin_points": [
+        {
+          "id": "09_01",
+          "numero": 1,
+          "center": [
+            971,
+            779
+          ],
+          "rect": [
+            955,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "09_02",
+          "numero": 2,
+          "center": [
+            1003,
+            752
+          ],
+          "rect": [
+            987,
+            736,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "09_03",
+          "numero": 3,
+          "center": [
+            1035,
+            779
+          ],
+          "rect": [
+            1019,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "09_04",
+          "numero": 4,
+          "center": [
+            1069,
+            753
+          ],
+          "rect": [
+            1053,
+            737,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "09_05",
+          "numero": 5,
+          "center": [
+            1103,
+            726
+          ],
+          "rect": [
+            1087,
+            710,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "09_06",
+          "numero": 6,
+          "center": [
+            1073,
+            697
+          ],
+          "rect": [
+            1057,
+            681,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "09_07",
+          "numero": 7,
+          "center": [
+            1042,
+            668
+          ],
+          "rect": [
+            1026,
+            652,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "09_08",
+          "numero": 8,
+          "center": [
+            1095,
+            642
+          ],
+          "rect": [
+            1071,
+            618,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    },
+    {
+      "monde": 10,
+      "nom": "Citadelle de Morvath",
+      "rect": [
+        1152,
+        610,
+        208,
+        220
+      ],
+      "image": "table_chasses/regions/region_10.png",
+      "brouillard": "table_chasses/regions/brouillard_10.png",
+      "eclaire": "table_chasses/regions/eclaire_10.png",
+      "chemin": "table_chasses/regions/chemin_10.png",
+      "chemin_points": [
+        {
+          "id": "10_01",
+          "numero": 1,
+          "center": [
+            1179,
+            779
+          ],
+          "rect": [
+            1163,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "10_02",
+          "numero": 2,
+          "center": [
+            1211,
+            752
+          ],
+          "rect": [
+            1195,
+            736,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "10_03",
+          "numero": 3,
+          "center": [
+            1243,
+            779
+          ],
+          "rect": [
+            1227,
+            763,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "10_04",
+          "numero": 4,
+          "center": [
+            1277,
+            753
+          ],
+          "rect": [
+            1261,
+            737,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "10_05",
+          "numero": 5,
+          "center": [
+            1311,
+            726
+          ],
+          "rect": [
+            1295,
+            710,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "10_06",
+          "numero": 6,
+          "center": [
+            1281,
+            697
+          ],
+          "rect": [
+            1265,
+            681,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "10_07",
+          "numero": 7,
+          "center": [
+            1250,
+            668
+          ],
+          "rect": [
+            1234,
+            652,
+            32,
+            32
+          ],
+          "boss": false
+        },
+        {
+          "id": "10_08",
+          "numero": 8,
+          "center": [
+            1303,
+            642
+          ],
+          "rect": [
+            1279,
+            618,
+            48,
+            48
+          ],
+          "boss": true
+        }
+      ]
+    }
+  ],
+  "animations": {
+    "pion_courant": {
+      "file": "table_chasses/animations/pion_courant.png",
+      "frame_size": [
+        96,
+        96
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "pivot": [
+        32,
+        88
+      ],
+      "loop": true,
+      "draw_size": [
+        48,
+        48
+      ],
+      "placement": "au centre du niveau courant"
+    }
+  },
+  "nine_slice": {
+    "table_chasses/bouton_chasser_normal.png": [
+      105,
+      26,
+      105,
+      26
+    ],
+    "table_chasses/bouton_chasser_survol.png": [
+      105,
+      26,
+      105,
+      26
+    ],
+    "table_chasses/bouton_chasser_appuye.png": [
+      105,
+      26,
+      105,
+      26
+    ],
+    "table_chasses/bouton_chasser_desactive.png": [
+      105,
+      26,
+      105,
+      26
+    ],
+    "table_chasses/commun/parchemin.png": [
+      140,
+      50,
+      140,
+      50
+    ],
+    "table_chasses/commun/bandeau_titre.png": [
+      130,
+      24,
+      130,
+      28
+    ],
+    "table_chasses/commun/cartouche_monnaie.png": [
+      74,
+      18,
+      22,
+      18
+    ]
+  },
+  "positions": {
+    "titre": [
+      610,
+      24,
+      700,
+      90
+    ],
+    "retour": [
+      40,
+      30,
+      220,
+      80
+    ],
+    "monnaie": [
+      1620,
+      34,
+      220,
+      72
+    ],
+    "panneau_niveau": [
+      1430,
+      180,
+      440,
+      690
+    ],
+    "contenu_panneau": [
+      1525,
+      240,
+      250,
+      490
+    ],
+    "bouton_chasser": [
+      1450,
+      880,
+      420,
+      96
+    ]
+  },
+  "marqueurs": {
+    "verrouille": {
+      "file": "table_chasses/marqueurs/verrouille.png",
+      "size": [
+        64,
+        64
+      ],
+      "draw_size": [
+        32,
+        32
+      ]
+    },
+    "ouvert": {
+      "file": "table_chasses/marqueurs/ouvert.png",
+      "size": [
+        64,
+        64
+      ],
+      "draw_size": [
+        32,
+        32
+      ]
+    },
+    "gagne_base": {
+      "file": "table_chasses/marqueurs/gagne_base.png",
+      "size": [
+        64,
+        64
+      ],
+      "draw_size": [
+        32,
+        32
+      ]
+    },
+    "boss": {
+      "file": "table_chasses/marqueurs/boss.png",
+      "size": [
+        96,
+        96
+      ],
+      "draw_size": [
+        48,
+        48
+      ]
+    },
+    "boss_vaincu": {
+      "file": "table_chasses/marqueurs/boss_vaincu.png",
+      "size": [
+        96,
+        96
+      ],
+      "draw_size": [
+        48,
+        48
+      ]
+    },
+    "gagne_1_etoiles": {
+      "file": "table_chasses/marqueurs/gagne_1_etoiles.png",
+      "size": [
+        64,
+        64
+      ],
+      "draw_size": [
+        32,
+        32
+      ]
+    },
+    "gagne_2_etoiles": {
+      "file": "table_chasses/marqueurs/gagne_2_etoiles.png",
+      "size": [
+        64,
+        64
+      ],
+      "draw_size": [
+        32,
+        32
+      ]
+    },
+    "gagne_3_etoiles": {
+      "file": "table_chasses/marqueurs/gagne_3_etoiles.png",
+      "size": [
+        64,
+        64
+      ],
+      "draw_size": [
+        32,
+        32
+      ]
+    }
+  },
+  "background": "table_chasses/carte_monde.png",
+  "nine_slice_order": [
+    "left",
+    "top",
+    "right",
+    "bottom"
+  ],
+  "buttons": {
+    "chasser": {
+      "states": {
+        "normal": "table_chasses/bouton_chasser_normal.png",
+        "survol": "table_chasses/bouton_chasser_survol.png",
+        "appuye": "table_chasses/bouton_chasser_appuye.png",
+        "desactive": "table_chasses/bouton_chasser_desactive.png"
+      },
+      "rect": [
+        1450,
+        880,
+        420,
+        96
+      ]
+    }
+  },
+  "icons": {
+    "energie": {
+      "file": "table_chasses/icones/energie.png",
+      "size": [
+        48,
+        48
+      ]
+    },
+    "or": {
+      "file": "table_chasses/icones/or.png",
+      "size": [
+        48,
+        48
+      ]
+    },
+    "gemme": {
+      "file": "table_chasses/icones/gemme.png",
+      "size": [
+        48,
+        48
+      ]
+    },
+    "eclat": {
+      "file": "table_chasses/icones/eclat.png",
+      "size": [
+        48,
+        48
+      ]
+    },
+    "fragment_relique": {
+      "file": "table_chasses/icones/fragment_relique.png",
+      "size": [
+        48,
+        48
+      ]
+    },
+    "coffre": {
+      "file": "table_chasses/icones/coffre.png",
+      "size": [
+        48,
+        48
+      ]
+    },
+    "etoile_pleine": {
+      "file": "table_chasses/icones/etoile_pleine.png",
+      "size": [
+        48,
+        48
+      ]
+    },
+    "etoile_vide": {
+      "file": "table_chasses/icones/etoile_vide.png",
+      "size": [
+        48,
+        48
+      ]
+    }
+  }
+}

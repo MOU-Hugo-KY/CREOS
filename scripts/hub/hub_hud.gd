@@ -231,6 +231,9 @@ func _set_menus_visible(on: bool) -> void:
 
 ## Petit message en bas de l'écran (« Bientôt : … »).
 func toast(text: String) -> void:
+	if FinPack.available("popups"):
+		_pack_toast(text)
+		return
 	_toast.text = text
 	if _toast_tween:
 		_toast_tween.kill()
@@ -239,6 +242,34 @@ func toast(text: String) -> void:
 	_toast_tween.tween_property(_toast, "modulate:a", 1.0, 0.15)
 	_toast_tween.tween_interval(2.0)
 	_toast_tween.tween_property(_toast, "modulate:a", 0.0, 0.4)
+
+
+## Bannière qui glisse du haut (pack « Pop-ups »), reste 2 s puis repart.
+var _toast_box: Control
+
+
+func _pack_toast(text: String) -> void:
+	if is_instance_valid(_toast_box):
+		_toast_box.queue_free()
+	var T: Dictionary = FinPack.data("popups").get("toast", {})
+	var r := FinPack.rect(T.get("rect", [650, 170, 620, 90]))
+	var k := get_viewport().get_visible_rect().size.y / 1080.0
+	var box := Control.new()
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	box.size = r.size
+	box.scale = Vector2(k, k)
+	var x := get_viewport().get_visible_rect().size.x / 2.0 - r.size.x * k / 2.0
+	box.position = Vector2(x, -r.size.y * k)
+	_root.add_child(box)
+	_toast_box = box
+	FinPack.nine(box, "popups/toast.png", Rect2(Vector2.ZERO, r.size), [100, 24, 100, 24])
+	ScreenPack.text(box, text, Rect2(90, 0, r.size.x - 180, r.size.y), 22, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER, true)
+	var tw := create_tween()
+	tw.tween_property(box, "position:y", r.position.y * k, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_interval(2.0)
+	tw.tween_property(box, "position:y", -r.size.y * k, 0.25)
+	tw.tween_callback(box.queue_free)
 
 
 # --- Construction ---------------------------------------------------------------
