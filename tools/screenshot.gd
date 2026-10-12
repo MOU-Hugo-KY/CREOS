@@ -95,7 +95,8 @@ func _process(_delta: float) -> bool:
 		scene.hud.shop._set_mode(action.trim_prefix("shop_"))
 	elif frames == 5 and action == "fusion":  # Lanterne : fusion des Esprits chez le Druide
 		var pd2: Node = root.get_node("PlayerData")
-		pd2.state.items["esprit_oeuf_feu"] = 7
+		pd2.state.items["esprit_oeuf_feu"] = 12
+		pd2.state.gold = 5000
 		pd2.state.items["esprit_petit_eau"] = 2
 		pd2.state.items["esprit_oeuf_nature"] = 3
 		scene.hud.open_altar()

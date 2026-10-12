@@ -51,3 +51,4 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 - Les trois invocateurs, salles du Mage runique, du Mécanicien et du Druide, et leurs effets d'ambiance (décors, personnages animés, cercles runiques, rouages, effets) : pack ChatGPT « CREOS_Invocateurs » (pixel art créé pour le projet).
 - Échoppe des masques et Reliquaire (décors, niches, lutrin, étal, socles, étiquettes, onglets, balance de fusion, comptoir de rachat, éléments communs) : pack ChatGPT « CREOS_Echoppe_Reliquaire » (pixel art créé pour le projet).
 - Table des Quatuors (assets/ui/echoppe/quatuors/) : pack ChatGPT « Table des Quatuors », créé pour CREOS (ImageGen).
+- Jardin des Esprits, Stèle des Fusions et animations d'invocation des 20 Esprits (assets/ui/invocateurs/jardin, stele, esprits) : packs ChatGPT créés pour CREOS (ImageGen).

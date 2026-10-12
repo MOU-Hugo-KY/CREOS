@@ -79,7 +79,10 @@ var _meca_room: MechanicRoom
 var _druid_room: DruidRoom
 var _druid_ui: Array[Control] = []
 var _fusion_layer: Control
+var _stele_room: SteleRoom
+var _fusion_ui: Array[Control] = []
 var _fuse_pick := ""
+var _fusion_gold: Label
 var _fuse_times := 1  # nombre de fusions d'un coup
 var _shard_label: Label
 var _mode := "heros"  # "heros" (le Mage) ou "pieces" (le Mécanicien)
@@ -114,6 +117,12 @@ func _ready() -> void:
 			_druid_room = DruidRoom.new()
 			_druid_room.visible = false
 			root.add_child(_druid_room)
+			_druid_room.next_room.connect(func() -> void: _set_mode("fusion"))
+		if SteleRoom.available():
+			_stele_room = SteleRoom.new()
+			_stele_room.visible = false
+			root.add_child(_stele_room)
+			_stele_room.previous_room.connect(func() -> void: _set_mode("esprits"))
 		if MechanicRoom.available():
 			_meca_room = MechanicRoom.new()
 			_meca_room.visible = false
@@ -198,10 +207,10 @@ func _ready() -> void:
 	_druid_ui.append(_shard_label)
 	# Onglets : une salle par invocateur.
 	if _meca_room:
-		for i in 4:
-			var mode: String = ["heros", "esprits", "fusion", "pieces"][i]
-			var tb := ScreenPack.button(root, S, "return", ["Mage · Héros", "Druide · Esprits", "Druide · Fusion",
-				"Mécanicien · Pièces"][i], Rect2(330 + i * 300, 74, 284, 60), 21)
+		for i in 3:
+			var mode: String = ["heros", "esprits", "pieces"][i]
+			var tb := ScreenPack.button(root, S, "return", ["Mage · Héros", "Jardin · Esprits", "Mécanicien · Pièces"][i],
+				Rect2(470 + i * 330, 74, 310, 60), 22)
 			tb.pressed.connect(func() -> void: _set_mode(mode))
 			_tabs[mode] = tb
 
@@ -218,6 +227,12 @@ func _ready() -> void:
 	_fusion_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_fusion_layer.visible = false
 	root.add_child(_fusion_layer)
+	var fr := Rect2(1600, 24, 216, 72)
+	_fusion_ui.append(ScreenPack.panel(root, S, "currency_cartouche", fr))
+	_fusion_ui.append(ScreenPack.image(root, ScreenPack.tex("combat", "reward_gold_64"), Rect2(fr.position + Vector2(14, 14), Vector2(44, 44))))
+	_fusion_gold = ScreenPack.text(root, "", Rect2(fr.position + Vector2(58, 0), Vector2(146, 72)), 30, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER)
+	_fusion_ui.append(_fusion_gold)
 	_build_meca_banner(root)
 	ScreenPack.text(banner, "HÉROS DE L'AUTEL", Rect2(0, 22, 310, 34), 22, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
 	for dir: int in [-1, 1]:
@@ -516,6 +531,8 @@ func open() -> void:
 
 
 func _reset_scene() -> void:
+	if _stele_room:
+		_stele_room.reset()
 	if _druid_room:
 		_druid_room.reset()
 	if _meca_room:
@@ -798,8 +815,12 @@ func _set_mode(mode: String) -> void:
 
 func _apply_mode() -> void:
 	var meca := _mode == "pieces"
-	var druid := _mode == "esprits" or _mode == "fusion"
+	var druid := _mode == "esprits"
 	_fusion_layer.visible = _mode == "fusion"
+	if _stele_room:
+		_stele_room.visible = _mode == "fusion"
+	for c in _fusion_ui:
+		c.visible = _mode == "fusion"
 	for n: int in _buttons:
 		(_buttons[n] as Button).visible = _mode != "fusion"
 	if _mage_room:
@@ -814,10 +835,10 @@ func _apply_mode() -> void:
 		c.visible = meca
 	for c in _druid_ui:
 		c.visible = druid
-	_title.text = "ATELIER DU MÉCANICIEN" if meca else ("FUSION DES ESPRITS" if _mode == "fusion" else "SANCTUAIRE DU DRUIDE" if druid
+	_title.text = "ATELIER DU MÉCANICIEN" if meca else ("STÈLE DES FUSIONS" if _mode == "fusion" else "JARDIN DES ESPRITS" if druid
 		else String(GameData.summon.get("name", "Lanterne des Serments")).to_upper())
 	for m: String in _tabs:
-		(_tabs[m] as Button).modulate = Color.WHITE if m == _mode else Color(0.6, 0.58, 0.64)
+		(_tabs[m] as Button).modulate = Color.WHITE if m == _mode or (m == "esprits" and _mode == "fusion") else Color(0.6, 0.58, 0.64)
 
 
 ## Bannière de l'atelier : les pièces possédées et ce que coûte chaque défense.
@@ -895,7 +916,7 @@ func _build_druid_banner(root: Control) -> void:
 	banner.size = Vector2(310, 760)
 	root.add_child(banner)
 	_druid_ui.append(banner)
-	ScreenPack.text(banner, "ESPRITS DU SANCTUAIRE", Rect2(0, 22, 310, 34), 21, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+	ScreenPack.text(banner, "ESPRITS DU JARDIN", Rect2(0, 22, 310, 34), 21, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
 	var dr: Dictionary = GameData.summon.get("druid", {})
 	var lines := ScreenPack.text(banner, "", Rect2(24, 78, 262, 560), 17, UiKit.WHITE, 0, true)
 	lines.name = "Lines"
@@ -922,7 +943,7 @@ func _refresh_druid_banner() -> void:
 				for e: String in Progression.ELEMENTS:
 					n += PlayerData.item_count(Progression.esprit_id(st, e))
 				out.append("%s : %d" % [names[st], n])
-			out.append("\nIls éveillent les héros (tous les 10 niveaux). 5 identiques fusionnent sur l'autel (onglet Fusion).")
+			out.append("\nIls éveillent les héros (tous les 10 niveaux). 5 identiques fusionnent à la Stèle (flèche en bas à droite).")
 			(c as Label).text = "\n".join(out)
 
 
@@ -948,16 +969,26 @@ func _call_esprits(count: int) -> void:
 	_refresh()
 
 
-# --- Fusion des Esprits (chez le Druide) --------------------------------------------------------
+# --- Stèle des Fusions (à côté du Jardin) ------------------------------------------------------
 
-## Sur l'autel du druide : choisis un Esprit (rangée du haut) ; ses 5 exemplaires tournent en
-## cercle autour de l'autel, l'Esprit du stade suivant flotte au-dessus. 5 + 100 or → 1.
+## Bannière de droite : les Esprits possédés (stades Œuf à Grand), à choisir ; la Stèle pose l'Esprit
+## choisi sur ses 5 coupelles et le stade suivant au sommet. Bas : − quantité + Max, Fusionner.
 func _fill_fusion() -> void:
-	if _fusion_layer == null or _druid_room == null:
+	if _fusion_layer == null or _stele_room == null:
 		return
 	for c in _fusion_layer.get_children():
 		_fusion_layer.remove_child(c)
 		c.queue_free()
+	if _fusion_gold:
+		_fusion_gold.text = str(PlayerData.gold())
+	var P: Dictionary = DruidRoom.layout().get("positions", {}).get("stele", {})
+	var C: Dictionary = P.get("commandes", {})
+	var br: Array = P.get("banniere", {}).get("rect", [1560, 150, 340, 720])
+	var banner := _Banner.new()
+	banner.position = Vector2(br[0], br[1])
+	banner.size = Vector2(br[2], br[3])
+	_fusion_layer.add_child(banner)
+	ScreenPack.text(banner, "TES ESPRITS", Rect2(0, 22, br[2], 34), 22, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
 	var have: Array[String] = []
 	for stage: String in Progression.ESPRIT_STAGES.slice(0, 3):
 		for elem: String in Progression.ELEMENTS:
@@ -965,8 +996,9 @@ func _fill_fusion() -> void:
 			if PlayerData.item_count(item) > 0:
 				have.append(item)
 	if have.is_empty():
-		ScreenPack.shadow(ScreenPack.text(_fusion_layer, "Tu n'as pas encore d'Esprit : appelle-en au Druide ou ouvre des coffres.",
-			Rect2(360, 420, 1200, 50), 26, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 3)
+		ScreenPack.text(banner, "Aucun Esprit : appelle-en au Jardin ou ouvre des coffres.", Rect2(24, 80, br[2] - 48, 120), 18,
+			UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER, true)
+		_stele_room.show_offer("", 0, "")
 		return
 	if _fuse_pick not in have:
 		_fuse_pick = have[0]
@@ -974,63 +1006,62 @@ func _fill_fusion() -> void:
 			if PlayerData.item_count(it) >= PlayerData.FUSION_COUNT:
 				_fuse_pick = it
 				break
-	# Rangée des Esprits possédés.
-	var w := 104.0
-	var x0 := 960.0 - have.size() * w / 2.0
 	for i in have.size():
 		var it: String = have[i]
 		var sel := it == _fuse_pick
 		var b := Control.new()
-		b.position = Vector2(x0 + i * w, 160)
-		b.size = Vector2(96, 120)
+		b.position = Vector2(22 + (i % 3) * 100, 70 + (i / 3) * 112)
+		b.size = Vector2(96, 108)
 		b.mouse_filter = Control.MOUSE_FILTER_STOP
 		b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		b.tooltip_text = HeroesScreen.esprit_name(it)
-		_fusion_layer.add_child(b)
-		var fr := ScreenPack.image(b, ChestReveal.esprit_frame(it), Rect2(4, 0, 88, 88))
-		fr.modulate = Color.WHITE if sel else Color(0.6, 0.58, 0.62)
-		ScreenPack.image(b, ChestReveal.esprit_icon(it, 128), Rect2(12, 8, 72, 72))
-		ScreenPack.shadow(ScreenPack.text(b, "×%d" % PlayerData.item_count(it), Rect2(0, 88, 96, 30), 22,
+		banner.add_child(b)
+		var fr := ScreenPack.image(b, ChestReveal.esprit_frame(it), Rect2(10, 0, 76, 76))
+		fr.modulate = Color.WHITE if sel else Color(0.55, 0.53, 0.58)
+		ScreenPack.image(b, ChestReveal.esprit_icon(it, 128), Rect2(16, 6, 64, 64))
+		ScreenPack.shadow(ScreenPack.text(b, "×%d" % PlayerData.item_count(it), Rect2(0, 76, 96, 28), 20,
 			Color("ffd27a") if sel else UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
-		if sel:
-			b.scale = Vector2(1.12, 1.12)
-			b.pivot_offset = b.size / 2.0
 		b.gui_input.connect(func(e: InputEvent) -> void:
-			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT and not busy:
 				ui_sound.emit("ui_click")
 				_fuse_pick = it
+				_fuse_times = 1
 				_fill_fusion())
-	# Autour de l'autel : les 5 Esprits donnés ; au-dessus : l'Esprit obtenu.
 	var n := PlayerData.item_count(_fuse_pick)
 	var parts := _fuse_pick.split("_")
-	var up := Progression.esprit_id(Progression.ESPRIT_STAGES[Progression.ESPRIT_STAGES.find(parts[1]) + 1], parts[2])
-	var c := _druid_room.altar + Vector2(0, -40)
-	for i in PlayerData.FUSION_COUNT:
-		var a := PI + i * PI / (PlayerData.FUSION_COUNT - 1)
-		var pos := c + Vector2(cos(a) * 250.0, sin(a) * 120.0 + 40.0)
-		var ic := ScreenPack.image(_fusion_layer, ChestReveal.esprit_icon(_fuse_pick, 128), Rect2(pos - Vector2(40, 40), Vector2(80, 80)))
-		if i >= n:
-			ic.modulate = Color(0.15, 0.15, 0.2, 0.5)
-	var out := ScreenPack.image(_fusion_layer, ChestReveal.esprit_icon(up, 128), Rect2(c + Vector2(-64, -250), Vector2(128, 128)))
-	if n < PlayerData.FUSION_COUNT:
-		out.modulate = Color(0.4, 0.38, 0.45, 0.8)
+	var up_stage: String = Progression.ESPRIT_STAGES[Progression.ESPRIT_STAGES.find(parts[1]) + 1]
+	var up := Progression.esprit_id(up_stage, parts[2])
+	if not busy:
+		_stele_room.show_offer(_fuse_pick, n, up)
 	# Combien de fusions d'un coup : limité par le stock et par l'or.
 	var most := mini(n / PlayerData.FUSION_COUNT, PlayerData.gold() / maxi(1, PlayerData.FUSION_GOLD))
 	_fuse_times = clampi(_fuse_times, 1, maxi(1, most))
-	ScreenPack.shadow(ScreenPack.text(_fusion_layer, "%d × 5 %s  →  %d %s" % [_fuse_times, HeroesScreen.esprit_name(_fuse_pick, true),
-		_fuse_times, HeroesScreen.esprit_name(up, _fuse_times > 1)], Rect2(360, 880, 1200, 40), 26, Color("f3d9a0"),
-		HORIZONTAL_ALIGNMENT_CENTER), 3)
-	for k in 3:
-		var label: String = ["−", "+", "Max"][k]
-		var sb := ScreenPack.button(_fusion_layer, S, "return", label, Rect2([600, 1180, 1270][k], 968, [70, 70, 110][k], 72), 28)
-		sb.disabled = most <= 1
-		sb.pressed.connect(func() -> void:
+	ScreenPack.shadow(ScreenPack.text(_fusion_layer, "5 %s  →  1 %s" % [HeroesScreen.esprit_name(_fuse_pick, true),
+		HeroesScreen.esprit_name(up)], Rect2(460, 896, 1000, 40), 24, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 3)
+	var steps := {"moins": _fuse_times - 1, "plus": _fuse_times + 1, "max": most}
+	for k: String in steps:
+		var tb := _stone_button(k, _cmd_rect(C, k, [540, 950, 96, 80]))
+		tb.disabled = most <= 1 or (k == "moins" and _fuse_times <= 1) or (k != "moins" and _fuse_times >= most)
+		var to: int = steps[k]
+		tb.pressed.connect(func() -> void:
 			ui_sound.emit("ui_click")
-			_fuse_times = [_fuse_times - 1, _fuse_times + 1, most][k]
+			_fuse_times = to
 			_fill_fusion())
-	var b := ScreenPack.button(_fusion_layer, S, "invoke_fragments", "Fusionner ×%d · %d or" % [_fuse_times,
-		_fuse_times * PlayerData.FUSION_GOLD], Rect2(690, 960, 470, 88), 26, UiKit.INK)
-	b.disabled = most < 1
+	var qr := _cmd_rect(C, "quantite", [650, 950, 160, 80])
+	var q := NinePatchRect.new()
+	q.texture = MageRoom.tex("stele/cartouche_quantite.png")
+	q.patch_margin_left = 32
+	q.patch_margin_right = 32
+	q.patch_margin_top = 22
+	q.patch_margin_bottom = 22
+	q.position = qr.position
+	q.size = qr.size
+	_fusion_layer.add_child(q)
+	ScreenPack.shadow(ScreenPack.text(q, "×%d" % _fuse_times, Rect2(Vector2.ZERO, qr.size), 30, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var b := _stone_button("fusion", _cmd_rect(C, "fusion", [1050, 942, 420, 96]))
+	b.disabled = most < 1 or busy
+	ScreenPack.shadow(ScreenPack.text(b, "Fusionner · %d or" % (_fuse_times * PlayerData.FUSION_GOLD), Rect2(Vector2.ZERO, b.size),
+		26, Color("f3d9a0") if not b.disabled else Color("9a9488"), HORIZONTAL_ALIGNMENT_CENTER), 3)
 	b.pressed.connect(func() -> void:
 		if busy:
 			return
@@ -1045,9 +1076,34 @@ func _fill_fusion() -> void:
 			return
 		_fuse_times = 1
 		busy = true
+		for c in _fusion_layer.get_children():
+			if c is TextureButton:
+				(c as TextureButton).disabled = true
 		ui_sound.emit("magic_cast")
-		await _druid_room.ceremony([pick.get_slice("_", 2)])
+		await _stele_room.ceremony(up_stage)
 		ui_sound.emit("ultimate_impact")
-		_druid_room.show_esprits({up: done})
+		_stele_room.show_result(up, done)
+		await get_tree().create_timer(1.6).timeout
 		busy = false
 		_refresh())
+
+
+func _cmd_rect(C: Dictionary, k: String, d: Array) -> Rect2:
+	var a: Array = C.get(k, d)
+	return Rect2(a[0], a[1], a[2], a[3])
+
+
+## Bouton de pierre runique du pack (normal / survol / appuyé / désactivé).
+func _stone_button(kind: String, r: Rect2) -> TextureButton:
+	var b := TextureButton.new()
+	b.texture_normal = MageRoom.tex("stele/bouton_%s_normal.png" % kind)
+	b.texture_hover = MageRoom.tex("stele/bouton_%s_survol.png" % kind)
+	b.texture_pressed = MageRoom.tex("stele/bouton_%s_appuye.png" % kind)
+	b.texture_disabled = MageRoom.tex("stele/bouton_%s_desactive.png" % kind)
+	b.ignore_texture_size = true
+	b.stretch_mode = TextureButton.STRETCH_SCALE
+	b.position = r.position
+	b.size = r.size
+	b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	_fusion_layer.add_child(b)
+	return b

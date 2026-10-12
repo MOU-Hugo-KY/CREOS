@@ -1,0 +1,643 @@
+{
+  "version": 2,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "etat": "deux_salles_completes",
+  "positions": {
+    "stele": {
+      "stele": {
+        "rect": [
+          560,
+          130,
+          800,
+          800
+        ],
+        "pierre_rect": [
+          780,
+          190,
+          360,
+          620
+        ],
+        "base": "stele/stele_mecanisme.png"
+      },
+      "calques": {
+        "rect": [
+          560,
+          130,
+          800,
+          800
+        ]
+      },
+      "coupelles": [
+        {
+          "id": 1,
+          "pieds_esprit": [
+            660,
+            600
+          ],
+          "rect": [
+            615,
+            582,
+            90,
+            90
+          ]
+        },
+        {
+          "id": 2,
+          "pieds_esprit": [
+            790,
+            725
+          ],
+          "rect": [
+            745,
+            707,
+            90,
+            90
+          ]
+        },
+        {
+          "id": 3,
+          "pieds_esprit": [
+            960,
+            840
+          ],
+          "rect": [
+            915,
+            822,
+            90,
+            90
+          ]
+        },
+        {
+          "id": 4,
+          "pieds_esprit": [
+            1130,
+            725
+          ],
+          "rect": [
+            1085,
+            707,
+            90,
+            90
+          ]
+        },
+        {
+          "id": 5,
+          "pieds_esprit": [
+            1260,
+            600
+          ],
+          "rect": [
+            1215,
+            582,
+            90,
+            90
+          ]
+        }
+      ],
+      "sommet": {
+        "centre": [
+          960,
+          340
+        ],
+        "rect": [
+          880,
+          260,
+          160,
+          160
+        ],
+        "pieds_esprit": [
+          960,
+          410
+        ]
+      },
+      "banniere": {
+        "rect": [
+          1560,
+          150,
+          340,
+          720
+        ]
+      },
+      "commandes": {
+        "moins": [
+          540,
+          950,
+          96,
+          80
+        ],
+        "quantite": [
+          650,
+          950,
+          160,
+          80
+        ],
+        "plus": [
+          824,
+          950,
+          96,
+          80
+        ],
+        "max": [
+          934,
+          950,
+          96,
+          80
+        ],
+        "fusion": [
+          1050,
+          942,
+          420,
+          96
+        ],
+        "precedente": [
+          90,
+          900,
+          160,
+          120
+        ]
+      }
+    },
+    "jardin": {
+      "gardien": {
+        "pieds": [
+          460,
+          890
+        ]
+      },
+      "nid": {
+        "rect": [
+          750,
+          640,
+          420,
+          220
+        ],
+        "pieds_esprit": [
+          960,
+          740
+        ],
+        "zone_esprit": [
+          760,
+          340,
+          400,
+          400
+        ]
+      },
+      "elements": {
+        "feu": [
+          170,
+          510
+        ],
+        "eau": [
+          350,
+          790
+        ],
+        "nature": [
+          1380,
+          830
+        ],
+        "lumiere": [
+          1360,
+          400
+        ],
+        "ombre": [
+          450,
+          190
+        ]
+      },
+      "banniere": {
+        "rect": [
+          1560,
+          150,
+          340,
+          720
+        ]
+      },
+      "fleche_suivante": {
+        "rect": [
+          1700,
+          930,
+          160,
+          120
+        ]
+      }
+    }
+  },
+  "planches": {
+    "stele_repos": {
+      "fichier": "stele/stele_repos.png",
+      "taille_image": [
+        800,
+        800
+      ],
+      "nombre": 8,
+      "duree_ms": 130,
+      "pivot": [
+        0,
+        0
+      ],
+      "position": [
+        560,
+        130
+      ],
+      "boucle": true,
+      "ordre": "horizontal"
+    },
+    "stele_charge": {
+      "fichier": "stele/stele_charge.png",
+      "taille_image": [
+        800,
+        800
+      ],
+      "nombre": 10,
+      "duree_ms": 90,
+      "pivot": [
+        0,
+        0
+      ],
+      "position": [
+        560,
+        130
+      ],
+      "boucle": false,
+      "ordre": "horizontal"
+    },
+    "stele_fusion": {
+      "fichier": "stele/stele_fusion.png",
+      "taille_image": [
+        800,
+        800
+      ],
+      "nombre": 14,
+      "duree_ms": 90,
+      "pivot": [
+        0,
+        0
+      ],
+      "position": [
+        560,
+        130
+      ],
+      "boucle": false,
+      "ordre": "horizontal"
+    },
+    "eclat_stade_petit": {
+      "fichier": "stele/eclat_stade_petit.png",
+      "taille_image": [
+        800,
+        800
+      ],
+      "nombre": 10,
+      "duree_ms": 80,
+      "pivot": [
+        0,
+        0
+      ],
+      "position": [
+        560,
+        130
+      ],
+      "boucle": false,
+      "ordre": "horizontal"
+    },
+    "eclat_stade_grand": {
+      "fichier": "stele/eclat_stade_grand.png",
+      "taille_image": [
+        800,
+        800
+      ],
+      "nombre": 10,
+      "duree_ms": 80,
+      "pivot": [
+        0,
+        0
+      ],
+      "position": [
+        560,
+        130
+      ],
+      "boucle": false,
+      "ordre": "horizontal"
+    },
+    "eclat_stade_celeste": {
+      "fichier": "stele/eclat_stade_celeste.png",
+      "taille_image": [
+        800,
+        800
+      ],
+      "nombre": 10,
+      "duree_ms": 80,
+      "pivot": [
+        0,
+        0
+      ],
+      "position": [
+        560,
+        130
+      ],
+      "boucle": false,
+      "ordre": "horizontal"
+    },
+    "eclat_stade_oeuf": {
+      "fichier": "stele/eclat_stade_oeuf.png",
+      "taille_image": [
+        800,
+        800
+      ],
+      "nombre": 10,
+      "duree_ms": 80,
+      "pivot": [
+        0,
+        0
+      ],
+      "position": [
+        560,
+        130
+      ],
+      "boucle": false,
+      "ordre": "horizontal"
+    },
+    "gardien_repos": {
+      "fichier": "jardin/gardien_repos.png",
+      "taille_image": [
+        256,
+        256
+      ],
+      "nombre": 8,
+      "duree_ms": 140,
+      "pivot": [
+        110,
+        240
+      ],
+      "position": [
+        460,
+        890
+      ],
+      "boucle": true,
+      "ordre": "horizontal",
+      "mode": "personnage"
+    },
+    "gardien_appel": {
+      "fichier": "jardin/gardien_appel.png",
+      "taille_image": [
+        256,
+        256
+      ],
+      "nombre": 12,
+      "duree_ms": 110,
+      "pivot": [
+        110,
+        240
+      ],
+      "position": [
+        460,
+        890
+      ],
+      "boucle": false,
+      "ordre": "horizontal",
+      "mode": "personnage"
+    },
+    "eveil_feu": {
+      "fichier": "jardin/eveil_feu.png",
+      "taille_image": [
+        256,
+        256
+      ],
+      "nombre": 10,
+      "duree_ms": 90,
+      "pivot": [
+        128,
+        210
+      ],
+      "position": [
+        170,
+        510
+      ],
+      "boucle": false,
+      "ordre": "horizontal",
+      "mode": "calque"
+    },
+    "eveil_eau": {
+      "fichier": "jardin/eveil_eau.png",
+      "taille_image": [
+        256,
+        256
+      ],
+      "nombre": 10,
+      "duree_ms": 90,
+      "pivot": [
+        128,
+        210
+      ],
+      "position": [
+        350,
+        790
+      ],
+      "boucle": false,
+      "ordre": "horizontal",
+      "mode": "calque"
+    },
+    "eveil_nature": {
+      "fichier": "jardin/eveil_nature.png",
+      "taille_image": [
+        256,
+        256
+      ],
+      "nombre": 10,
+      "duree_ms": 90,
+      "pivot": [
+        128,
+        210
+      ],
+      "position": [
+        1380,
+        830
+      ],
+      "boucle": false,
+      "ordre": "horizontal",
+      "mode": "calque"
+    },
+    "eveil_lumiere": {
+      "fichier": "jardin/eveil_lumiere.png",
+      "taille_image": [
+        256,
+        256
+      ],
+      "nombre": 10,
+      "duree_ms": 90,
+      "pivot": [
+        128,
+        210
+      ],
+      "position": [
+        1360,
+        400
+      ],
+      "boucle": false,
+      "ordre": "horizontal",
+      "mode": "calque"
+    },
+    "eveil_ombre": {
+      "fichier": "jardin/eveil_ombre.png",
+      "taille_image": [
+        256,
+        256
+      ],
+      "nombre": 10,
+      "duree_ms": 90,
+      "pivot": [
+        128,
+        210
+      ],
+      "position": [
+        450,
+        190
+      ],
+      "boucle": false,
+      "ordre": "horizontal",
+      "mode": "calque"
+    },
+    "nid_ouverture": {
+      "fichier": "jardin/nid_ouverture.png",
+      "taille_image": [
+        512,
+        512
+      ],
+      "nombre": 12,
+      "duree_ms": 100,
+      "pivot": [
+        256,
+        512
+      ],
+      "position": [
+        960,
+        860
+      ],
+      "boucle": false,
+      "ordre": "horizontal",
+      "mode": "remplace_nid"
+    },
+    "lueurs_montantes": {
+      "fichier": "jardin/lueurs_montantes.png",
+      "taille_image": [
+        600,
+        360
+      ],
+      "nombre": 8,
+      "duree_ms": 100,
+      "pivot": [
+        0,
+        0
+      ],
+      "position": [
+        490,
+        490
+      ],
+      "boucle": false,
+      "ordre": "horizontal",
+      "mode": "calque"
+    }
+  },
+  "nine_slice": {
+    "bouton_fusion": {
+      "marges": [
+        105,
+        26,
+        105,
+        26
+      ],
+      "ordre": "gauche_haut_droite_bas"
+    },
+    "cartouche_quantite": {
+      "marges": [
+        32,
+        22,
+        32,
+        22
+      ],
+      "ordre": "gauche_haut_droite_bas"
+    }
+  },
+  "fusion": {
+    "entrees": 5,
+    "identiques": true,
+    "cout": "or",
+    "stades": {
+      "oeuf": "petit",
+      "petit": "grand",
+      "grand": "celeste"
+    }
+  },
+  "boutons": {
+    "moins": {
+      "taille": [
+        96,
+        80
+      ],
+      "fichiers": {
+        "normal": "stele/bouton_moins_normal.png",
+        "survol": "stele/bouton_moins_survol.png",
+        "appuye": "stele/bouton_moins_appuye.png",
+        "desactive": "stele/bouton_moins_desactive.png"
+      }
+    },
+    "plus": {
+      "taille": [
+        96,
+        80
+      ],
+      "fichiers": {
+        "normal": "stele/bouton_plus_normal.png",
+        "survol": "stele/bouton_plus_survol.png",
+        "appuye": "stele/bouton_plus_appuye.png",
+        "desactive": "stele/bouton_plus_desactive.png"
+      }
+    },
+    "max": {
+      "taille": [
+        96,
+        80
+      ],
+      "fichiers": {
+        "normal": "stele/bouton_max_normal.png",
+        "survol": "stele/bouton_max_survol.png",
+        "appuye": "stele/bouton_max_appuye.png",
+        "desactive": "stele/bouton_max_desactive.png"
+      }
+    },
+    "fusion": {
+      "taille": [
+        420,
+        96
+      ],
+      "fichiers": {
+        "normal": "stele/bouton_fusion_normal.png",
+        "survol": "stele/bouton_fusion_survol.png",
+        "appuye": "stele/bouton_fusion_appuye.png",
+        "desactive": "stele/bouton_fusion_desactive.png"
+      }
+    }
+  },
+  "navigation": {
+    "mode": "fleches",
+    "jardin": {
+      "droite": "stele"
+    },
+    "stele": {
+      "gauche": "jardin"
+    }
+  },
+  "animations_appel": {
+    "cout": "eclats_de_serment",
+    "sequence": [
+      "gardien_appel",
+      "lueurs_montantes",
+      "eveil_element",
+      "nid_ouverture",
+      "apparition_esprit"
+    ],
+    "esprit_redessine": false
+  }
+}
