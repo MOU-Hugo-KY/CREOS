@@ -1,0 +1,1576 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "background": "ma_loge/loge_coupe.png",
+  "coordinates": "origine haut gauche; rect=[x,y,width,height]; pivots en pixels locaux",
+  "animations": {
+    "tour_mage_repos": {
+      "file": "ma_loge/animations/tour_mage_repos.png",
+      "frame_size": [
+        224,
+        192
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        140,
+        140,
+        140,
+        140,
+        140,
+        140
+      ],
+      "pivot": [
+        112,
+        186
+      ],
+      "loop": true,
+      "draw_size": [
+        186,
+        160
+      ]
+    },
+    "tour_mage_action": {
+      "file": "ma_loge/animations/tour_mage_action.png",
+      "frame_size": [
+        224,
+        192
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        112,
+        186
+      ],
+      "loop": false,
+      "draw_size": [
+        186,
+        160
+      ]
+    },
+    "mur_provocateur_repos": {
+      "file": "ma_loge/animations/mur_provocateur_repos.png",
+      "frame_size": [
+        224,
+        192
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        140,
+        140,
+        140,
+        140,
+        140,
+        140
+      ],
+      "pivot": [
+        112,
+        186
+      ],
+      "loop": true,
+      "draw_size": [
+        186,
+        160
+      ]
+    },
+    "mur_provocateur_action": {
+      "file": "ma_loge/animations/mur_provocateur_action.png",
+      "frame_size": [
+        224,
+        192
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        112,
+        186
+      ],
+      "loop": false,
+      "draw_size": [
+        186,
+        160
+      ]
+    },
+    "baliste_repos": {
+      "file": "ma_loge/animations/baliste_repos.png",
+      "frame_size": [
+        224,
+        192
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        140,
+        140,
+        140,
+        140,
+        140,
+        140
+      ],
+      "pivot": [
+        112,
+        186
+      ],
+      "loop": true,
+      "draw_size": [
+        186,
+        160
+      ]
+    },
+    "baliste_action": {
+      "file": "ma_loge/animations/baliste_action.png",
+      "frame_size": [
+        224,
+        192
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        112,
+        186
+      ],
+      "loop": false,
+      "draw_size": [
+        186,
+        160
+      ]
+    },
+    "autel_repos": {
+      "file": "ma_loge/animations/autel_repos.png",
+      "frame_size": [
+        224,
+        192
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        140,
+        140,
+        140,
+        140,
+        140,
+        140
+      ],
+      "pivot": [
+        112,
+        186
+      ],
+      "loop": true,
+      "draw_size": [
+        186,
+        160
+      ]
+    },
+    "autel_action": {
+      "file": "ma_loge/animations/autel_action.png",
+      "frame_size": [
+        224,
+        192
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        112,
+        186
+      ],
+      "loop": false,
+      "draw_size": [
+        186,
+        160
+      ]
+    },
+    "piege_pointes": {
+      "file": "ma_loge/animations/piege_pointes.png",
+      "frame_size": [
+        192,
+        160
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        96,
+        154
+      ],
+      "loop": false,
+      "layout": "horizontal",
+      "draw_size": [
+        192,
+        160
+      ]
+    },
+    "piege_fosse": {
+      "file": "ma_loge/animations/piege_fosse.png",
+      "frame_size": [
+        192,
+        160
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        96,
+        154
+      ],
+      "loop": false,
+      "layout": "horizontal",
+      "draw_size": [
+        192,
+        160
+      ]
+    },
+    "piege_rune_feu": {
+      "file": "ma_loge/animations/piege_rune_feu.png",
+      "frame_size": [
+        192,
+        160
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        96,
+        154
+      ],
+      "loop": false,
+      "layout": "horizontal",
+      "draw_size": [
+        192,
+        160
+      ]
+    },
+    "piege_filet": {
+      "file": "ma_loge/animations/piege_filet.png",
+      "frame_size": [
+        192,
+        160
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        96,
+        154
+      ],
+      "loop": false,
+      "layout": "horizontal",
+      "draw_size": [
+        192,
+        160
+      ]
+    },
+    "piege_gaz_poison": {
+      "file": "ma_loge/animations/piege_gaz_poison.png",
+      "frame_size": [
+        192,
+        160
+      ],
+      "frame_count": 8,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "pivot": [
+        96,
+        154
+      ],
+      "loop": false,
+      "layout": "horizontal",
+      "draw_size": [
+        192,
+        160
+      ]
+    }
+  },
+  "images": {
+    "ma_loge/loge_coupe.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "ma_loge/animations/tour_mage_repos/00.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_repos/01.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_repos/02.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_repos/03.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_repos/04.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_repos/05.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_repos.png": {
+      "size": [
+        1344,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action/00.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action/01.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action/02.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action/03.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action/04.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action/05.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action/06.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action/07.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/tour_mage_action.png": {
+      "size": [
+        1792,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_repos/00.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_repos/01.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_repos/02.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_repos/03.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_repos/04.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_repos/05.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_repos.png": {
+      "size": [
+        1344,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action/00.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action/01.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action/02.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action/03.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action/04.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action/05.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action/06.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action/07.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/mur_provocateur_action.png": {
+      "size": [
+        1792,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_repos/00.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_repos/01.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_repos/02.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_repos/03.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_repos/04.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_repos/05.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_repos.png": {
+      "size": [
+        1344,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action/00.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action/01.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action/02.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action/03.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action/04.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action/05.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action/06.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action/07.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/baliste_action.png": {
+      "size": [
+        1792,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_repos/00.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_repos/01.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_repos/02.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_repos/03.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_repos/04.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_repos/05.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_repos.png": {
+      "size": [
+        1344,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action/00.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action/01.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action/02.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action/03.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action/04.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action/05.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action/06.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action/07.png": {
+      "size": [
+        224,
+        192
+      ]
+    },
+    "ma_loge/animations/autel_action.png": {
+      "size": [
+        1792,
+        192
+      ]
+    },
+    "ma_loge/animations/piege_pointes/00.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_pointes/01.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_pointes/02.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_pointes/03.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_pointes/04.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_pointes/05.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_pointes/06.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_pointes/07.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_pointes.png": {
+      "size": [
+        1536,
+        160
+      ]
+    },
+    "ma_loge/icones/piege_pointes.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "ma_loge/animations/piege_fosse/00.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_fosse/01.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_fosse/02.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_fosse/03.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_fosse/04.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_fosse/05.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_fosse/06.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_fosse/07.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_fosse.png": {
+      "size": [
+        1536,
+        160
+      ]
+    },
+    "ma_loge/icones/piege_fosse.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu/00.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu/01.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu/02.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu/03.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu/04.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu/05.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu/06.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu/07.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_rune_feu.png": {
+      "size": [
+        1536,
+        160
+      ]
+    },
+    "ma_loge/icones/piege_rune_feu.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "ma_loge/animations/piege_filet/00.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_filet/01.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_filet/02.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_filet/03.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_filet/04.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_filet/05.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_filet/06.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_filet/07.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_filet.png": {
+      "size": [
+        1536,
+        160
+      ]
+    },
+    "ma_loge/icones/piege_filet.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison/00.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison/01.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison/02.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison/03.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison/04.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison/05.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison/06.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison/07.png": {
+      "size": [
+        192,
+        160
+      ]
+    },
+    "ma_loge/animations/piege_gaz_poison.png": {
+      "size": [
+        1536,
+        160
+      ]
+    },
+    "ma_loge/icones/piege_gaz_poison.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "ma_loge/coffre_plein.png": {
+      "size": [
+        176,
+        176
+      ]
+    },
+    "ma_loge/coffre_moitie.png": {
+      "size": [
+        176,
+        176
+      ]
+    },
+    "ma_loge/coffre_vide.png": {
+      "size": [
+        176,
+        176
+      ]
+    },
+    "ma_loge/emplacements/defenseur_vide.png": {
+      "size": [
+        120,
+        56
+      ]
+    },
+    "ma_loge/emplacements/defenseur_occupe.png": {
+      "size": [
+        120,
+        56
+      ]
+    },
+    "ma_loge/emplacements/piege_vide.png": {
+      "size": [
+        120,
+        56
+      ]
+    },
+    "ma_loge/emplacements/piege_occupe.png": {
+      "size": [
+        120,
+        56
+      ]
+    },
+    "ma_loge/blason.png": {
+      "size": [
+        250,
+        250
+      ]
+    },
+    "ma_loge/panneau_rivaux.png": {
+      "size": [
+        970,
+        340
+      ]
+    },
+    "ma_loge/commun/cartouche_monnaie.png": {
+      "size": [
+        220,
+        72
+      ]
+    },
+    "ma_loge/commun/retour_normal.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "ma_loge/commun/retour_appuye.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "ma_loge/commun/parchemin.png": {
+      "size": [
+        1060,
+        140
+      ]
+    },
+    "ma_loge/commun/bandeau_titre.png": {
+      "size": [
+        700,
+        90
+      ]
+    },
+    "ma_loge/commun/retour_survol.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "ma_loge/bouton_attaquer_normal.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "ma_loge/bouton_attaquer_survol.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "ma_loge/bouton_attaquer_appuye.png": {
+      "size": [
+        420,
+        96
+      ]
+    },
+    "ma_loge/bouton_attaquer_desactive.png": {
+      "size": [
+        420,
+        96
+      ]
+    }
+  },
+  "rooms": [
+    {
+      "id": "entree",
+      "rect": [
+        30,
+        145,
+        590,
+        455
+      ],
+      "defenders": [
+        {
+          "id": "entree_1",
+          "rect": [
+            105,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            165,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        },
+        {
+          "id": "entree_2",
+          "rect": [
+            260,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            320,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        },
+        {
+          "id": "entree_3",
+          "rect": [
+            415,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            475,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        }
+      ],
+      "traps": [
+        {
+          "id": "entree_piege_1",
+          "rect": [
+            170,
+            500,
+            120,
+            56
+          ],
+          "animation_rect": [
+            134,
+            398,
+            192,
+            160
+          ]
+        },
+        {
+          "id": "entree_piege_2",
+          "rect": [
+            350,
+            500,
+            120,
+            56
+          ],
+          "animation_rect": [
+            314,
+            398,
+            192,
+            160
+          ]
+        }
+      ],
+      "construction_anchor": [
+        320,
+        540
+      ]
+    },
+    {
+      "id": "galerie",
+      "rect": [
+        670,
+        145,
+        590,
+        455
+      ],
+      "defenders": [
+        {
+          "id": "galerie_1",
+          "rect": [
+            745,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            805,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        },
+        {
+          "id": "galerie_2",
+          "rect": [
+            900,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            960,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        },
+        {
+          "id": "galerie_3",
+          "rect": [
+            1055,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            1115,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        }
+      ],
+      "traps": [
+        {
+          "id": "galerie_piege_1",
+          "rect": [
+            810,
+            500,
+            120,
+            56
+          ],
+          "animation_rect": [
+            774,
+            398,
+            192,
+            160
+          ]
+        },
+        {
+          "id": "galerie_piege_2",
+          "rect": [
+            990,
+            500,
+            120,
+            56
+          ],
+          "animation_rect": [
+            954,
+            398,
+            192,
+            160
+          ]
+        }
+      ],
+      "construction_anchor": [
+        960,
+        540
+      ]
+    },
+    {
+      "id": "tresor",
+      "rect": [
+        1310,
+        145,
+        590,
+        455
+      ],
+      "defenders": [
+        {
+          "id": "tresor_1",
+          "rect": [
+            1385,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            1445,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        },
+        {
+          "id": "tresor_2",
+          "rect": [
+            1540,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            1600,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        },
+        {
+          "id": "tresor_3",
+          "rect": [
+            1695,
+            550,
+            120,
+            56
+          ],
+          "pivot": [
+            60,
+            42
+          ],
+          "hero_foot_position": [
+            1755,
+            588
+          ],
+          "sprite_max_size": [
+            130,
+            160
+          ]
+        }
+      ],
+      "traps": [
+        {
+          "id": "tresor_piege_1",
+          "rect": [
+            1450,
+            500,
+            120,
+            56
+          ],
+          "animation_rect": [
+            1414,
+            398,
+            192,
+            160
+          ]
+        },
+        {
+          "id": "tresor_piege_2",
+          "rect": [
+            1630,
+            500,
+            120,
+            56
+          ],
+          "animation_rect": [
+            1594,
+            398,
+            192,
+            160
+          ]
+        }
+      ],
+      "construction_anchor": [
+        1600,
+        540
+      ]
+    }
+  ],
+  "nine_slice": {
+    "ma_loge/commun/parchemin.png": [
+      140,
+      50,
+      140,
+      50
+    ],
+    "ma_loge/commun/bandeau_titre.png": [
+      130,
+      24,
+      130,
+      28
+    ],
+    "ma_loge/commun/cartouche_monnaie.png": [
+      74,
+      18,
+      22,
+      18
+    ]
+  },
+  "buttons": {
+    "attaquer": {
+      "states": {
+        "normal": "ma_loge/bouton_attaquer_normal.png",
+        "survol": "ma_loge/bouton_attaquer_survol.png",
+        "appuye": "ma_loge/bouton_attaquer_appuye.png",
+        "desactive": "ma_loge/bouton_attaquer_desactive.png"
+      },
+      "rect": [
+        700,
+        966,
+        420,
+        96
+      ]
+    }
+  },
+  "positions": {
+    "titre": [
+      610,
+      24,
+      700,
+      90
+    ],
+    "retour": [
+      40,
+      30,
+      220,
+      80
+    ],
+    "monnaie": [
+      1620,
+      34,
+      220,
+      72
+    ],
+    "blason": [
+      60,
+      775,
+      250,
+      250
+    ],
+    "nom_loge": [
+      80,
+      950,
+      210,
+      35
+    ],
+    "rivaux": [
+      430,
+      645,
+      970,
+      340
+    ],
+    "coffre": [
+      1660,
+      418,
+      176,
+      176
+    ]
+  }
+}
