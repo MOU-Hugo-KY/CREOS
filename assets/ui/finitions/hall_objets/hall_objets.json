@@ -1,0 +1,1115 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "background": "hall_objets/hall_invocateurs.png",
+  "coordinates": "rect=[x,y,width,height], origine haut gauche",
+  "images": {
+    "hall_objets/hall_invocateurs.png": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "hall_objets/arches/mage_survol.png": {
+      "size": [
+        420,
+        700
+      ]
+    },
+    "hall_objets/arches/mecanicien_survol.png": {
+      "size": [
+        420,
+        700
+      ]
+    },
+    "hall_objets/arches/jardin_survol.png": {
+      "size": [
+        420,
+        700
+      ]
+    },
+    "hall_objets/commun/cartouche_monnaie.png": {
+      "size": [
+        220,
+        72
+      ]
+    },
+    "hall_objets/commun/retour_normal.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "hall_objets/commun/retour_appuye.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "hall_objets/commun/parchemin.png": {
+      "size": [
+        1060,
+        140
+      ]
+    },
+    "hall_objets/commun/bandeau_titre.png": {
+      "size": [
+        700,
+        90
+      ]
+    },
+    "hall_objets/commun/retour_survol.png": {
+      "size": [
+        220,
+        80
+      ]
+    },
+    "hall_objets/objets/64/piece_rouage_moyen.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piece_rouage_moyen.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piece_boulon.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piece_boulon.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piece_ressort.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piece_ressort.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piece_cristal_mecanique.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piece_cristal_mecanique.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piece_plaque_rivetee.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piece_plaque_rivetee.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piege_pointes.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piege_pointes.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piege_fosse.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piege_fosse.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piege_rune_feu.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piege_rune_feu.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piege_filet.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piege_filet.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/piege_gaz_poison.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/piege_gaz_poison.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/defense_tour_mage.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/defense_tour_mage.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/defense_mur_provocateur.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/defense_mur_provocateur.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/defense_baliste.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/defense_baliste.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/defense_autel.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/defense_autel.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/coffre_commun.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/coffre_commun.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/coffre_rare.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/coffre_rare.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/coffre_epique.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/coffre_epique.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/coffre_legendaire.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/coffre_legendaire.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/coffre_esprits_bois.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/coffre_esprits_bois.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/coffre_esprits_fer.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/coffre_esprits_fer.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/coffre_esprits_or.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/coffre_esprits_or.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/coffre_esprits_serment.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/coffre_esprits_serment.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/eclat_serment.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/eclat_serment.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/minerai_ancien.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/minerai_ancien.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/cristal_relique.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/cristal_relique.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/essence_relique.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/essence_relique.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/pierre_runique.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/pierre_runique.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/xp_commun.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/xp_commun.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/xp_rare.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/xp_rare.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/xp_epique.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/xp_epique.png": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "hall_objets/objets/64/xp_legendaire.png": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "hall_objets/objets/128/xp_legendaire.png": {
+      "size": [
+        128,
+        128
+      ]
+    }
+  },
+  "animations": {},
+  "nine_slice": {
+    "hall_objets/commun/bandeau_titre.png": [
+      130,
+      24,
+      130,
+      28
+    ],
+    "hall_objets/commun/cartouche_monnaie.png": [
+      74,
+      18,
+      22,
+      18
+    ]
+  },
+  "positions": {
+    "titre": [
+      610,
+      24,
+      700,
+      90
+    ],
+    "retour": [
+      40,
+      30,
+      220,
+      80
+    ],
+    "monnaie": [
+      1620,
+      34,
+      220,
+      72
+    ]
+  },
+  "buttons": {},
+  "icons": {
+    "piece_rouage_moyen": {
+      "category": "piece_mecanicien",
+      "files": {
+        "64": "hall_objets/objets/64/piece_rouage_moyen.png",
+        "128": "hall_objets/objets/128/piece_rouage_moyen.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Composant du pack Invocateurs, conservé"
+    },
+    "piece_boulon": {
+      "category": "piece_mecanicien",
+      "files": {
+        "64": "hall_objets/objets/64/piece_boulon.png",
+        "128": "hall_objets/objets/128/piece_boulon.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Composant du pack Invocateurs, conservé"
+    },
+    "piece_ressort": {
+      "category": "piece_mecanicien",
+      "files": {
+        "64": "hall_objets/objets/64/piece_ressort.png",
+        "128": "hall_objets/objets/128/piece_ressort.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Composant du pack Invocateurs, conservé"
+    },
+    "piece_cristal_mecanique": {
+      "category": "piece_mecanicien",
+      "files": {
+        "64": "hall_objets/objets/64/piece_cristal_mecanique.png",
+        "128": "hall_objets/objets/128/piece_cristal_mecanique.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Composant du pack Invocateurs, conservé"
+    },
+    "piece_plaque_rivetee": {
+      "category": "piece_mecanicien",
+      "files": {
+        "64": "hall_objets/objets/64/piece_plaque_rivetee.png",
+        "128": "hall_objets/objets/128/piece_plaque_rivetee.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Composant du pack Invocateurs, conservé"
+    },
+    "piege_pointes": {
+      "category": "piege",
+      "files": {
+        "64": "hall_objets/objets/64/piege_pointes.png",
+        "128": "hall_objets/objets/128/piege_pointes.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "piege_fosse": {
+      "category": "piege",
+      "files": {
+        "64": "hall_objets/objets/64/piege_fosse.png",
+        "128": "hall_objets/objets/128/piege_fosse.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "piege_rune_feu": {
+      "category": "piege",
+      "files": {
+        "64": "hall_objets/objets/64/piege_rune_feu.png",
+        "128": "hall_objets/objets/128/piege_rune_feu.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "piege_filet": {
+      "category": "piege",
+      "files": {
+        "64": "hall_objets/objets/64/piege_filet.png",
+        "128": "hall_objets/objets/128/piege_filet.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "piege_gaz_poison": {
+      "category": "piege",
+      "files": {
+        "64": "hall_objets/objets/64/piege_gaz_poison.png",
+        "128": "hall_objets/objets/128/piege_gaz_poison.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "defense_tour_mage": {
+      "category": "defense",
+      "files": {
+        "64": "hall_objets/objets/64/defense_tour_mage.png",
+        "128": "hall_objets/objets/128/defense_tour_mage.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "defense_mur_provocateur": {
+      "category": "defense",
+      "files": {
+        "64": "hall_objets/objets/64/defense_mur_provocateur.png",
+        "128": "hall_objets/objets/128/defense_mur_provocateur.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "defense_baliste": {
+      "category": "defense",
+      "files": {
+        "64": "hall_objets/objets/64/defense_baliste.png",
+        "128": "hall_objets/objets/128/defense_baliste.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "defense_autel": {
+      "category": "defense",
+      "files": {
+        "64": "hall_objets/objets/64/defense_autel.png",
+        "128": "hall_objets/objets/128/defense_autel.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Ma Loge"
+    },
+    "coffre_commun": {
+      "category": "coffre",
+      "files": {
+        "64": "hall_objets/objets/64/coffre_commun.png",
+        "128": "hall_objets/objets/128/coffre_commun.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Coffres des Esprits"
+    },
+    "coffre_rare": {
+      "category": "coffre",
+      "files": {
+        "64": "hall_objets/objets/64/coffre_rare.png",
+        "128": "hall_objets/objets/128/coffre_rare.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Pop-ups"
+    },
+    "coffre_epique": {
+      "category": "coffre",
+      "files": {
+        "64": "hall_objets/objets/64/coffre_epique.png",
+        "128": "hall_objets/objets/128/coffre_epique.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Pop-ups"
+    },
+    "coffre_legendaire": {
+      "category": "coffre",
+      "files": {
+        "64": "hall_objets/objets/64/coffre_legendaire.png",
+        "128": "hall_objets/objets/128/coffre_legendaire.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Pop-ups"
+    },
+    "coffre_esprits_bois": {
+      "category": "coffre_esprits",
+      "files": {
+        "64": "hall_objets/objets/64/coffre_esprits_bois.png",
+        "128": "hall_objets/objets/128/coffre_esprits_bois.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Coffres des Esprits"
+    },
+    "coffre_esprits_fer": {
+      "category": "coffre_esprits",
+      "files": {
+        "64": "hall_objets/objets/64/coffre_esprits_fer.png",
+        "128": "hall_objets/objets/128/coffre_esprits_fer.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Coffres des Esprits"
+    },
+    "coffre_esprits_or": {
+      "category": "coffre_esprits",
+      "files": {
+        "64": "hall_objets/objets/64/coffre_esprits_or.png",
+        "128": "hall_objets/objets/128/coffre_esprits_or.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Coffres des Esprits"
+    },
+    "coffre_esprits_serment": {
+      "category": "coffre_esprits",
+      "files": {
+        "64": "hall_objets/objets/64/coffre_esprits_serment.png",
+        "128": "hall_objets/objets/128/coffre_esprits_serment.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Pack Coffres des Esprits"
+    },
+    "eclat_serment": {
+      "category": "serment",
+      "files": {
+        "64": "hall_objets/objets/64/eclat_serment.png",
+        "128": "hall_objets/objets/128/eclat_serment.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Icône de serment fournie dans le projet"
+    },
+    "minerai_ancien": {
+      "category": "materiau_relique",
+      "files": {
+        "64": "hall_objets/objets/64/minerai_ancien.png",
+        "128": "hall_objets/objets/128/minerai_ancien.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Créé pour ce pack"
+    },
+    "cristal_relique": {
+      "category": "materiau_relique",
+      "files": {
+        "64": "hall_objets/objets/64/cristal_relique.png",
+        "128": "hall_objets/objets/128/cristal_relique.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Créé pour ce pack"
+    },
+    "essence_relique": {
+      "category": "materiau_relique",
+      "files": {
+        "64": "hall_objets/objets/64/essence_relique.png",
+        "128": "hall_objets/objets/128/essence_relique.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Créé pour ce pack"
+    },
+    "pierre_runique": {
+      "category": "materiau_relique",
+      "files": {
+        "64": "hall_objets/objets/64/pierre_runique.png",
+        "128": "hall_objets/objets/128/pierre_runique.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Créé pour ce pack"
+    },
+    "xp_commun": {
+      "category": "parchemin_xp",
+      "files": {
+        "64": "hall_objets/objets/64/xp_commun.png",
+        "128": "hall_objets/objets/128/xp_commun.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Créé pour ce pack"
+    },
+    "xp_rare": {
+      "category": "parchemin_xp",
+      "files": {
+        "64": "hall_objets/objets/64/xp_rare.png",
+        "128": "hall_objets/objets/128/xp_rare.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Créé pour ce pack"
+    },
+    "xp_epique": {
+      "category": "parchemin_xp",
+      "files": {
+        "64": "hall_objets/objets/64/xp_epique.png",
+        "128": "hall_objets/objets/128/xp_epique.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Créé pour ce pack"
+    },
+    "xp_legendaire": {
+      "category": "parchemin_xp",
+      "files": {
+        "64": "hall_objets/objets/64/xp_legendaire.png",
+        "128": "hall_objets/objets/128/xp_legendaire.png"
+      },
+      "sizes": [
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "origin": "Créé pour ce pack"
+    }
+  },
+  "portals": [
+    {
+      "id": "mage",
+      "rect": [
+        130,
+        70,
+        420,
+        700
+      ],
+      "hit_rect": [
+        155,
+        160,
+        370,
+        590
+      ],
+      "hover_file": "hall_objets/arches/mage_survol.png",
+      "label_rect": [
+        115,
+        869,
+        450,
+        40
+      ],
+      "destination": "salle_mage"
+    },
+    {
+      "id": "mecanicien",
+      "rect": [
+        750,
+        70,
+        420,
+        700
+      ],
+      "hit_rect": [
+        775,
+        160,
+        370,
+        590
+      ],
+      "hover_file": "hall_objets/arches/mecanicien_survol.png",
+      "label_rect": [
+        735,
+        869,
+        450,
+        40
+      ],
+      "destination": "salle_mecanicien"
+    },
+    {
+      "id": "jardin",
+      "rect": [
+        1365,
+        70,
+        420,
+        700
+      ],
+      "hit_rect": [
+        1390,
+        160,
+        370,
+        590
+      ],
+      "hover_file": "hall_objets/arches/jardin_survol.png",
+      "label_rect": [
+        1350,
+        869,
+        450,
+        40
+      ],
+      "destination": "jardin_esprits"
+    }
+  ],
+  "source_reuse": {
+    "invocateurs": "CREOS_Invocateurs.zip, version 2",
+    "loge": "CREOS_Ma_Loge.zip",
+    "coffres": "CREOS_Popups et CREOS_Coffres_Esprits",
+    "serment": "fragment_serment_64.png"
+  }
+}

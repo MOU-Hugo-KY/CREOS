@@ -173,12 +173,16 @@ func _ready() -> void:
 	root.add_child(fade)
 
 	# Haut : retour discret, nom gravé, bourses.
-	var back := ScreenPack.button(root, S, "return", "← Port", Rect2(28, 24, 190, 72), 26)
+	var back := ScreenPack.button(root, S, "return", "← Hall" if FinPack.available(HALL) else "← Port",
+		Rect2(28, 24, 190, 72), 26)
 	back.pressed.connect(func() -> void:
 		if busy:
 			return
 		ui_sound.emit("ui_click")
-		closed.emit())
+		if _hall:
+			_hall.visible = true  # retour au hall des invocateurs
+		else:
+			closed.emit())
 	var title := ScreenPack.text(root, String(GameData.summon.get("name", "Lanterne des Serments")).to_upper(),
 		Rect2(560, 14, 800, 56), 38, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
 	_title = title
@@ -278,6 +282,8 @@ func _ready() -> void:
 		_buttons[n] = b
 
 	_build_reveal(root, L.reveal)
+	if _meca_room and FinPack.available(HALL):
+		_build_hall()
 	PlayerData.changed.connect(_refresh)
 
 
@@ -525,6 +531,8 @@ class _HeroShadow extends Control:
 
 func open() -> void:
 	visible = true
+	if _hall:
+		_hall.visible = true
 	_reset_scene()
 	_reveal.visible = false
 	_refresh()
@@ -803,6 +811,8 @@ func _set_buttons_enabled(on: bool) -> void:
 
 ## Change de salle (Mage pour les héros, Mécanicien pour les pièces).
 func _set_mode(mode: String) -> void:
+	if _hall:
+		_hall.visible = false
 	if busy or mode == _mode:
 		return
 	ui_sound.emit("ui_click")
@@ -1107,3 +1117,64 @@ func _stone_button(kind: String, r: Rect2) -> TextureButton:
 	b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	_fusion_layer.add_child(b)
 	return b
+
+
+# --- Le Hall des Invocateurs (pack « Finitions ») -----------------------------------------------
+
+## Entrée de la Lanterne : un hall et trois arches (Mage, Mécanicien, Jardin des Esprits), qui
+## s'illuminent au survol ; en toucher une ouvre la salle. Le retour d'une salle ramène au hall.
+const HALL := "hall_objets"
+const HALL_MODES := {"mage": "heros", "mecanicien": "pieces", "jardin": "esprits"}
+const HALL_NAMES := {"mage": "Le Mage · Héros", "mecanicien": "Le Mécanicien · Pièces", "jardin": "Le Jardin des Esprits"}
+
+var _hall: Control
+
+
+func _build_hall() -> void:
+	_hall = Control.new()
+	_hall.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_hall.mouse_filter = Control.MOUSE_FILTER_STOP
+	_hall.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	add_child(_hall)
+	var bg := ColorRect.new()
+	bg.color = Color("17141c")
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_hall.add_child(bg)
+	var root := ScreenPack.frame(_hall)
+	var D := FinPack.data(HALL)
+	var P: Dictionary = D.get("positions", {})
+	FinPack.image(root, String(D.get("background", "hall_objets/hall_invocateurs.png")), Rect2(0, 0, 1920, 1080))
+	for p: Dictionary in D.get("portals", []):
+		var id := String(p.id)
+		var glow := FinPack.image(root, String(p.hover_file), FinPack.rect(p.rect))
+		glow.visible = false
+		var hit := Control.new()
+		var hr := FinPack.rect(p.hit_rect)
+		hit.position = hr.position
+		hit.size = hr.size
+		hit.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		root.add_child(hit)
+		hit.mouse_entered.connect(func() -> void: glow.visible = true)
+		hit.mouse_exited.connect(func() -> void: glow.visible = false)
+		hit.gui_input.connect(func(e: InputEvent) -> void:
+			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+				glow.visible = false
+				_hall.visible = false
+				var mode: String = HALL_MODES.get(id, "heros")
+				if mode == _mode:
+					ui_sound.emit("ui_click")
+				else:
+					_set_mode(mode))
+		ScreenPack.shadow(ScreenPack.text(root, HALL_NAMES.get(id, id), FinPack.rect(p.label_rect), 26, Color("f3d9a0"),
+			HORIZONTAL_ALIGNMENT_CENTER), 3)
+	var tr := FinPack.rect(P.titre)
+	FinPack.nine(root, "hall_objets/commun/bandeau_titre.png", tr, [130, 24, 130, 28])
+	ScreenPack.shadow(ScreenPack.text(root, String(GameData.summon.get("name", "Lanterne des Serments")).to_upper(),
+		Rect2(tr.position + Vector2(0, 24), Vector2(tr.size.x, 36)), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	var back := FinPack.button(root, "hall_objets/commun/retour", FinPack.rect(P.retour), "Port", 26)
+	back.get_node("Label").position.x = 30
+	back.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		closed.emit())
+	ScreenPack.shadow(ScreenPack.text(root, "Choisis un invocateur", Rect2(560, 990, 800, 40), 24, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER), 2)

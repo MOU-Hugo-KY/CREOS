@@ -115,6 +115,7 @@ func _process(_delta: float) -> bool:
 	elif frames == 5 and action == "summon":  # Lanterne : une invocation avec des gemmes
 		scene.hud.open_altar()
 		root.get_node("PlayerData").state.gems = 1200
+		scene.hud.altar._set_mode("heros")
 		scene.hud.altar._summon(10)
 	elif frames == 5 and action != "":
 		if scene.hud.has_method("open_" + action):  # ex. --action=profile, shop, relics, quests, altar
