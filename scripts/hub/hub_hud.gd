@@ -219,6 +219,14 @@ func close_altar() -> void:
 	_set_menus_visible(true)
 
 
+## Vrai si un écran plein (Loge, Lanterne, Échoppe…) est ouvert par-dessus le port.
+func any_screen_open() -> bool:
+	for c in [lodge, altar, profile, quests, hunt_prep, campaign, shop, relics, private_lodge, settings]:
+		if c and (c as Control).visible:
+			return true
+	return false
+
+
 ## Cache les menus du port pendant qu'un écran plein (comme la Loge) est ouvert.
 func _set_menus_visible(on: bool) -> void:
 	screen_opened.emit(not on)

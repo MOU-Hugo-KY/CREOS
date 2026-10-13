@@ -451,6 +451,21 @@ func level_up_hero(id: String) -> bool:
 	return true
 
 
+## Lit un parchemin d'expérience sur un héros (pas au-delà de son palier d'éveil).
+func use_xp_scroll(id: String, scroll: String) -> bool:
+	var spec: Dictionary = _config.get("xp_scrolls", {}).get(scroll, {})
+	if spec.is_empty() or not state.heroes.has(id) or item_count(scroll) <= 0 or hero_level(id) >= hero_level_cap(id):
+		return false
+	state.items[scroll] = item_count(scroll) - 1
+	var h: Dictionary = state.heroes[id]
+	var r := Progression.add_xp(int(h.level), int(h.get("xp", 0)), int(spec.xp), _config.get("hero_xp", {}), hero_level_cap(id))
+	h.level = r.level
+	h.xp = r.xp
+	save_game()
+	changed.emit()
+	return true
+
+
 func hero_xp(id: String) -> int:
 	return int(state.get("heroes", {}).get(id, {}).get("xp", 0))
 

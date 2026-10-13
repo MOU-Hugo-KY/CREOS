@@ -283,6 +283,10 @@ static func roll_chest(stars: int, config: Dictionary, rng: RandomNumberGenerato
 	var rewards := {}
 	for key: String in table:
 		var v = table[key]
+		if v is Dictionary:  # {chance: %, n: [min, max]} : ne tombe qu'avec cette chance
+			if rng.randf() * 100.0 >= float(v.get("chance", 100)):
+				continue
+			v = v.get("n", 1)
 		var n := rng.randi_range(int(v[0]), int(v[1])) if v is Array else int(v)
 		if n <= 0:
 			continue

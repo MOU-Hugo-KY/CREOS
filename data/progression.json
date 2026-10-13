@@ -166,7 +166,7 @@
     }
   },
   "chests": {
-    "_note": "coffre à chaque victoire de campagne ; taux en % par étoiles [bois, fer, or, serment] ; [min, max] tirés au hasard",
+    "_note": "coffre à chaque victoire de campagne ; taux en % par étoiles [bois, fer, or, serment] ; [min, max] tirés au hasard ; une valeur {chance: %, n: [min, max]} ne tombe qu'avec cette chance. parchemin_xp_* : expérience pour un héros (data 'xp_scrolls').",
     "kinds": [
       "bois",
       "fer",
@@ -209,7 +209,18 @@
         "oeuf": [
           1,
           2
-        ]
+        ],
+        "parchemin_xp_commun": [
+          1,
+          2
+        ],
+        "petit": {
+          "chance": 8,
+          "n": [
+            1,
+            1
+          ]
+        }
       },
       "fer": {
         "gold": [
@@ -219,7 +230,25 @@
         "oeuf": [
           2,
           4
-        ]
+        ],
+        "parchemin_xp_commun": [
+          2,
+          3
+        ],
+        "parchemin_xp_rare": {
+          "chance": 25,
+          "n": [
+            1,
+            1
+          ]
+        },
+        "petit": {
+          "chance": 20,
+          "n": [
+            1,
+            1
+          ]
+        }
       },
       "or": {
         "gold": [
@@ -237,7 +266,18 @@
         "gems": [
           5,
           10
-        ]
+        ],
+        "parchemin_xp_rare": [
+          1,
+          2
+        ],
+        "parchemin_xp_epique": {
+          "chance": 20,
+          "n": [
+            1,
+            1
+          ]
+        }
       },
       "serment": {
         "gold": [
@@ -255,7 +295,18 @@
         "fragments_relique": [
           5,
           8
-        ]
+        ],
+        "parchemin_xp_epique": [
+          1,
+          2
+        ],
+        "parchemin_xp_legendaire": {
+          "chance": 25,
+          "n": [
+            1,
+            1
+          ]
+        }
       }
     },
     "campaign2": {
@@ -267,7 +318,18 @@
         "petit": [
           1,
           2
-        ]
+        ],
+        "parchemin_xp_rare": [
+          1,
+          2
+        ],
+        "grand": {
+          "chance": 8,
+          "n": [
+            1,
+            1
+          ]
+        }
       },
       "fer": {
         "gold": [
@@ -281,7 +343,18 @@
         "grand": [
           0,
           1
-        ]
+        ],
+        "parchemin_xp_rare": [
+          2,
+          3
+        ],
+        "parchemin_xp_epique": {
+          "chance": 25,
+          "n": [
+            1,
+            1
+          ]
+        }
       },
       "or": {
         "gold": [
@@ -295,7 +368,18 @@
         "gems": [
           10,
           20
-        ]
+        ],
+        "parchemin_xp_epique": [
+          1,
+          2
+        ],
+        "parchemin_xp_legendaire": {
+          "chance": 15,
+          "n": [
+            1,
+            1
+          ]
+        }
       },
       "serment": {
         "gold": [
@@ -306,10 +390,20 @@
           3,
           4
         ],
-        "celeste": 1,
+        "celeste": {
+          "chance": 10,
+          "n": [
+            1,
+            1
+          ]
+        },
         "gems": [
           30,
           50
+        ],
+        "parchemin_xp_legendaire": [
+          1,
+          2
         ]
       }
     }
@@ -321,5 +415,24 @@
     "boss_power": 1.3,
     "final_boss_hp": 2.0,
     "final_dungeon": "monde10_8"
+  },
+  "xp_scrolls": {
+    "_note": "Parchemins d'expérience : XP donnée à un héros (Loge des héros, onglet Techniques).",
+    "parchemin_xp_commun": {
+      "name": "Parchemin d'expérience commun",
+      "xp": 300
+    },
+    "parchemin_xp_rare": {
+      "name": "Parchemin d'expérience rare",
+      "xp": 1500
+    },
+    "parchemin_xp_epique": {
+      "name": "Parchemin d'expérience épique",
+      "xp": 6000
+    },
+    "parchemin_xp_legendaire": {
+      "name": "Parchemin d'expérience légendaire",
+      "xp": 25000
+    }
   }
 }

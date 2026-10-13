@@ -50,6 +50,8 @@ func _fit() -> void:
 
 ## Toucher un bâtiment l'ouvre.
 func _unhandled_input(event: InputEvent) -> void:
+	if hud.any_screen_open():
+		return  # un écran est ouvert : les clics ne doivent jamais atteindre les bâtiments en dessous
 	var mb := event as InputEventMouseButton
 	if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
 		town.tap(get_global_mouse_position())

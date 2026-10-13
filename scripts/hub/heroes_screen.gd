@@ -58,6 +58,7 @@ var _d_recruit: Label
 var _d_stats: Array[Label] = []
 var _d_bars: Array = []
 var _d_upgrade: Button
+var _d_scrolls: Control
 var _d_team: Button
 var _d_tabs: Array[Button] = []
 var _path_panel: Panel  # détail d'une voie (ses 5 paliers), par-dessus les statistiques
@@ -345,6 +346,11 @@ func _build_detail(_page: VBoxContainer) -> void:
 	_d_team.pressed.connect(func() -> void:
 		if PlayerData.toggle_team(selected):
 			ui_sound.emit("ui_toggle"))
+	# Parchemins d'expérience (coffres de campagne) : toucher = lire sur ce héros.
+	_d_scrolls = Control.new()
+	_d_scrolls.position = Vector2(PAGE_L.position.x, PAGE_L.position.y + 668)
+	_d_scrolls.size = Vector2(PAGE_L.size.x, 60)
+	root.add_child(_d_scrolls)
 	# Détail d'une voie survolée : recouvre la page de gauche.
 	_path_panel = Panel.new()
 	var psb := Palette.stylebox(Color("efe3c8"), Color("c6a66c"), 4, 3)
@@ -517,6 +523,7 @@ func _fill_detail() -> void:
 Les Esprits se trouvent dans les coffres de fin de niveau." % [
 			PlayerData.hero_level(id), "
 ".join(have)]
+	_fill_scrolls(id, owned)
 	var in_team := PlayerData.in_team(id)
 	var full := PlayerData.team().size() >= PlayerData.TEAM_SIZE
 	_d_team.text = "Dans l'équipe · retirer" if in_team else ("Équipe complète" if full else "Ajouter à l'équipe")
@@ -964,3 +971,34 @@ func _fiche(hero: Dictionary) -> Texture2D:
 func _attack_icon(a: Dictionary) -> Texture2D:
 	var path := ATTACK_ICON_DIR + String(a.get("id", "")) + ".png"
 	return load(path) if ResourceLoader.exists(path) else null
+
+
+## Les 4 parchemins d'expérience sous la fiche : quantité possédée, toucher = en lire un sur le héros.
+func _fill_scrolls(id: String, owned: bool) -> void:
+	for c in _d_scrolls.get_children():
+		c.queue_free()
+	var specs: Dictionary = GameData.progression.get("xp_scrolls", {})
+	var keys := specs.keys().filter(func(k: String) -> bool: return k.begins_with("parchemin_xp_"))
+	var w := _d_scrolls.size.x / maxf(1.0, keys.size())
+	for i in keys.size():
+		var key: String = keys[i]
+		var n := PlayerData.item_count(key)
+		var b := Button.new()
+		b.flat = true
+		b.focus_mode = Control.FOCUS_NONE
+		b.position = Vector2(i * w, 0)
+		b.size = Vector2(w - 6, 60)
+		b.disabled = not owned or n <= 0
+		b.tooltip_text = "%s · +%d XP
+%s" % [specs[key].name, int(specs[key].xp), "Toucher pour le lire sur ce héros." if n > 0 else "Dans les coffres de campagne."]
+		b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		_d_scrolls.add_child(b)
+		var ic := ScreenPack.image(b, ChestReveal.scroll_icon(key), Rect2(4, 4, 52, 52))
+		ic.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		ic.modulate = Color.WHITE if n > 0 else Color(0.5, 0.48, 0.45, 0.7)
+		ScreenPack.text(b, "×%d" % n, Rect2(54, 14, w - 60, 32), 20, UiKit.INK)
+		b.pressed.connect(func() -> void:
+			if PlayerData.use_xp_scroll(id, key):
+				ui_sound.emit("ui_ready")
+			else:
+				ui_sound.emit("ui_toggle"))

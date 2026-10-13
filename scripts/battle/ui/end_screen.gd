@@ -224,6 +224,8 @@ func _reward_name(key: String, amount := 1) -> String:
 		return REWARD_NAMES[key]
 	if key.begins_with("esprit_"):
 		return HeroesScreen.esprit_name(key, amount > 1)
+	if key.begins_with("parchemin_xp_"):
+		return String(GameData.progression.get("xp_scrolls", {}).get(key, {}).get("name", "Parchemin d'expérience"))
 	if key.begins_with("essence_"):
 		return "Essence " + ("d'" if key.ends_with("ombre") or key.ends_with("eau") else "de ") + key.trim_prefix("essence_")
 	if key.begins_with("relique_"):
@@ -343,7 +345,8 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 		var ir := FinPack.rect(icons[i])
 		ir.position.x += 40.0
 		var t: Texture2D = FinPack.tex(PACK_REWARD_ICONS[key]) if PACK_REWARD_ICONS.has(key) else (
-			ChestReveal.esprit_icon(key) if key.begins_with("esprit_") else ScreenPack.tex(P, _reward_icon(key)))
+			ChestReveal.esprit_icon(key) if key.begins_with("esprit_") else (ChestReveal.scroll_icon(key)
+			if key.begins_with("parchemin_xp_") else ScreenPack.tex(P, _reward_icon(key))))
 		var img := ScreenPack.image(_p_box, ScreenPack.trimmed(t), ir.grow(-6))
 		img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		img.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST

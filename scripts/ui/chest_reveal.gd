@@ -40,6 +40,13 @@ static func esprit_icon(item: String, size := 64) -> Texture2D:
 
 
 ## Cadre de rareté d'un Esprit (bois, fer, or, violet-or selon son stade).
+## Icône d'un parchemin d'expérience (parchemin_xp_<rang>), null sinon.
+static func scroll_icon(item: String) -> Texture2D:
+	if not item.begins_with("parchemin_xp_"):
+		return null
+	return FinPack.tex("hall_objets/objets/128/xp_%s.png" % item.trim_prefix("parchemin_xp_"))
+
+
 static func esprit_frame(item: String) -> Texture2D:
 	return tex("esprits/cadre_esprit_%s_64.png" % item.get_slice("_", 1))
 
@@ -108,6 +115,8 @@ func show_chest(chest: Dictionary, name_of: Callable) -> void:
 		if frame:
 			ScreenPack.image(_panel, frame, Rect2(r.position + Vector2(16, 10), Vector2(96, 96)))
 		var icon := esprit_icon(key, 128)
+		if icon == null:
+			icon = scroll_icon(key)
 		if icon == null:
 			icon = ScreenPack.tex("combat", {"gold": "reward_gold_64", "gems": "reward_gems_64",
 				"fragments_relique": "reward_relic_fragment_64"}.get(key, "reward_materials_64"))
