@@ -267,6 +267,7 @@ func _handle_events() -> void:
 	var hits_per_dst: Dictionary = {}
 	var last_time: Dictionary = {}
 	var max_time := 0.0
+	var chain_end := 0.0  # fin de la dernière attaque : les réactions jouent ensuite, l'une après l'autre
 	for ev in engine.drain_events():
 		_event_seq += 1
 		ev["seq"] = _event_seq
@@ -284,7 +285,19 @@ func _handle_events() -> void:
 			"attack", "quartet":
 				if ev.type == "attack" and ev.slot == BattleUnit.SLOT_ULTIMATE and engine.get_unit(ev.src).team == 0:
 					PlayerData.record_event("ultimate")  # prime du jour « Pleine puissance »
-				offset = _on_attack(ev) if ev.type == "attack" else _on_quartet(ev)
+				if ev.get("reaction", false):
+					# Réaction : après l'attaque qui l'a provoquée, avec un trait de lumière vers sa cible.
+					var rev: Dictionary = ev
+					var start := chain_end
+					_schedule(start, func() -> void:
+						_reaction_streak(rev)
+						_on_attack(rev))
+					offset = start
+				else:
+					offset = _on_attack(ev) if ev.type == "attack" else _on_quartet(ev)
+				var ht: Array = ev.get("hit_times", [0.4])
+				chain_end = offset + (float(ht[-1]) if not ht.is_empty() else 0.4) + 0.45
+				_hold = maxf(_hold, chain_end if ev.get("reaction", false) else 0.0)
 				times = ev.hit_times
 				if times.is_empty():
 					times = [0.4]
@@ -307,6 +320,10 @@ func _handle_events() -> void:
 					hits_per_dst[ev.dst] = k + 1
 					t = offset + float(times[mini(k, times.size() - 1)])
 					last_time[ev.dst] = maxf(last_time.get(ev.dst, 0.0), t)
+				elif ev.type == "status" and ev.get("status", "") == "reaction":
+					t = chain_end  # le nom de la réaction s'affiche quand le héros intervient
+				elif ev.type == "reaction":
+					t = chain_end
 				elif ev.has("dst"):
 					t = last_time.get(ev.dst, offset + float(times[0]))
 				else:
@@ -314,6 +331,19 @@ func _handle_events() -> void:
 				max_time = maxf(max_time, t)
 				var event: Dictionary = ev
 				_schedule(t, func() -> void: _on_impact(event))
+
+
+## Trait de lumière du héros qui réagit vers sa cible (lien visible entre les deux).
+func _reaction_streak(ev: Dictionary) -> void:
+	var v: UnitView = views.get(ev.src)
+	if v == null:
+		return
+	var color := Palette.element_color(v.unit.element).lightened(0.3)
+	fx.aura(v.position, color)
+	for uid: int in ev.get("targets", []).slice(0, 3):
+		var t: UnitView = views.get(uid)
+		if t and t != v:
+			fx.add_child(Projectile.new().setup(v.chest_position(), t.chest_position(), 0.18, color, true))
 
 
 ## Piège de Loge : son nom s'affiche et il éclate sur les combattants touchés.

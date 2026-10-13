@@ -25,6 +25,7 @@ func _initialize() -> void:
 	test_lodge()
 	test_formation_lines()
 	test_hero_progression()
+	test_reactions()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -645,3 +646,69 @@ func test_hero_progression() -> void:
 	check(float(oona60.get("heal", 0.0)) > 0.3, "Oona gagne des Soins en montant")
 	var o := BattleUnit.from_data(1, "oona", {"stats": oona60}, 0, 0)
 	check(o.stat("heal") > 0.3, "les Soins passent au combat")
+
+
+
+## Réactions aux événements (data/reactions.json) : ordre, chaînes sans boucle, seuils franchis.
+func _rx_hero(uid: int, slot: int, crit: float, reactions: Array, effects := [{"type": "damage", "power": 0.1}]) -> Dictionary:
+	return {"id": "h%d" % uid, "stats": {"hp": 1000, "atk": 50, "def": 10, "spd": 100, "crit": crit},
+		"attacks": [{"id": "a", "target": "single_enemy", "effects": effects}], "reactions": reactions}
+
+
+func test_reactions() -> void:
+	print("
+[Réactions]")
+	var gd := _data()
+	check(gd.hero("nyx").has("reactions"), "les réactions de reactions.json sont rangées avec les héros")
+	var foes := [[{"id": "m1", "stats": {"hp": 100000}}, {"id": "m2", "stats": {"hp": 100000}}]]
+	# Un allié critique : la réactrice frappe deux fois, avant la prochaine action normale.
+	var e := BattleEngine.new()
+	e.setup([_rx_hero(1, 0, 1.0, []), _rx_hero(2, 1, 0.0, [{"name": "Deux coups", "trigger": "ally_crit", "action": "basic",
+		"count": 2, "target": "random_enemy", "per_turn": 1}])], foes, 7)
+	e.drain_events()
+	e._ai_act(e.heroes[0])
+	var evs := e.drain_events()
+	var attacks := evs.filter(func(ev: Dictionary) -> bool: return ev.type == "attack")
+	check(attacks.size() == 3 and attacks[1].src == e.heroes[1].uid and attacks[1].get("reaction", false),
+		"un critique allié déclenche deux attaques de réaction juste après")
+	e._ai_act(e.heroes[0])
+	check(e.reaction_log.size() == 1, "limite « une fois par tour » respectée")
+	e._new_turn(e.heroes[1])
+	e._ai_act(e.heroes[0])
+	check(e.reaction_log.size() == 2, "la limite repart au tour suivant du héros")
+	# Deux héros qui réagissent aux critiques l'un de l'autre : pas de boucle.
+	var r := [{"name": "Écho", "trigger": "ally_crit", "action": "basic", "count": 1, "target": "random_enemy"}]
+	var e2 := BattleEngine.new()
+	e2.setup([_rx_hero(1, 0, 1.0, r), _rx_hero(2, 1, 1.0, r)], foes, 7)
+	e2._ai_act(e2.heroes[0])
+	check(e2.reaction_log.size() == 2 and e2.reaction_log[1].depth == 2, "deux héros qui se répondent : chacun une fois par chaîne, pas de boucle")
+	# Chaîne : critique -> attaque qui marque -> éclair sur la marque.
+	var e3 := BattleEngine.new()
+	e3.setup([_rx_hero(1, 0, 1.0, []),
+		_rx_hero(2, 1, 0.0, [{"name": "Marque", "trigger": "ally_crit", "action": "basic", "target": "random_enemy",
+			"extra_effects": [{"type": "status", "name": "marque", "duration": 5.0}]}]),
+		_rx_hero(3, 2, 0.0, [{"name": "Éclair", "trigger": "mark_applied", "action": "strike", "target": "event_target",
+			"effects": [{"type": "damage", "power": 0.5}]}])], foes, 7)
+	e3._ai_act(e3.heroes[0])
+	check(e3.reaction_log.size() == 2 and e3.reaction_log[1].name == "Éclair" and e3.reaction_log[1].depth == 2,
+		"les réactions s'enchaînent (critique, marque, éclair)")
+	# Seuil de PV : au franchissement seulement.
+	var e4 := BattleEngine.new()
+	e4.setup([_rx_hero(1, 0, 0.0, []), _rx_hero(2, 1, 0.0, [{"name": "Bouclier", "trigger": "ally_low_hp", "threshold": 0.3,
+		"action": "shield", "target": "event_ally", "power": 1.0, "stat": "def"}])], foes, 7)
+	var ally: BattleUnit = e4.heroes[0]
+	e4._apply_damage(e4.enemies[0], ally, 750.0, false, 1.0)
+	e4._resolve_reactions()
+	check(e4.reaction_log.size() == 1 and ally.shield > 0.0, "passer sous 30 % de PV déclenche la protection")
+	ally.shield = 0.0
+	e4._apply_damage(e4.enemies[0], ally, 50.0, false, 1.0)
+	e4._resolve_reactions()
+	check(e4.reaction_log.size() == 1, "rester sous le seuil ne redéclenche pas")
+	# Une cible morte entre-temps : la réaction choisit un autre ennemi.
+	var e5 := BattleEngine.new()
+	e5.setup([_rx_hero(1, 0, 0.0, [], [{"type": "damage", "power": 1000.0}]),
+		_rx_hero(2, 1, 0.0, [{"name": "Charognard", "trigger": "enemy_killed", "action": "basic", "target": "other_enemy"}])],
+		[[{"id": "m1", "stats": {"hp": 10}}, {"id": "m2", "stats": {"hp": 100000}}]], 7)
+	e5._ai_act(e5.heroes[0])
+	check(e5.reaction_log.size() == 1 and e5.enemies[1].hp < 100000, "un ennemi tué : la réaction frappe une autre cible vivante")
+	gd.free()

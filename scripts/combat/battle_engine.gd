@@ -152,7 +152,9 @@ func request_attack(uid: int, slot: int) -> bool:
 	if u == null or uid != awaiting_uid or not u.can_use(slot):
 		return false
 	awaiting_uid = -1
+	_new_turn(u)
 	_use_attack(u, slot)
+	_resolve_reactions()
 	_check_end()
 	return true
 
@@ -192,6 +194,7 @@ func request_combo(uid: int, id: String) -> bool:
 		return false
 	awaiting_uid = -1
 	_use_combo(get_unit(uid), _combo(id))
+	_resolve_reactions()
 	_check_end()
 	return true
 
@@ -242,6 +245,7 @@ func step(delta: float) -> void:
 		if u.is_alive():
 			u.tick_cooldowns(delta)
 			_tick_statuses(u, delta)
+	_resolve_reactions()  # une brûlure peut achever un ennemi ou faire passer un allié sous un seuil
 	if _check_end():
 		return
 
@@ -327,6 +331,8 @@ func _start_next_wave() -> void:
 		enemies.append(BattleUnit.from_data(_take_uid(), d.get("id", ""), d, 1, i))
 	for h in heroes:
 		h.gauge = 0.0
+		for i in h.reaction_uses:
+			h.reaction_uses[i]["wave"] = 0
 	focus_uid = -1
 	_emit({"type": "wave_start", "index": wave_index, "count": waves.size()})
 	if wave_index < wave_traps.size():
@@ -457,11 +463,13 @@ func _tick_statuses(u: BattleUnit, delta: float) -> void:
 func _ai_act(u: BattleUnit) -> void:
 	if u.attacks.is_empty():  # un mur ne fait rien
 		return
+	_new_turn(u)
 	var ready := ready_combos() if u.team == 0 else []
 	if not ready.is_empty():
 		_use_combo(u, _combo(ready[0]))
 	else:
 		_use_attack(u, _ai_choice(u))
+	_resolve_reactions()
 
 
 func _hero_by_id(id: String) -> BattleUnit:
@@ -624,6 +632,10 @@ func _use_attack(caster: BattleUnit, slot: int) -> void:
 			_heal(caster, caster, dealt * float(e.get("ratio", 0.2)))
 	if slot != BattleUnit.SLOT_ULTIMATE:
 		caster.add_energy(ENERGY_ON_ATTACK)
+	if not _bonus_attack:
+		_end_action_crit(caster, targets)
+		if slot == BattleUnit.SLOT_ULTIMATE:
+			_raise("ultimate_end", {"src": caster, "dst": targets[0] if not targets.is_empty() else null})
 	# Milieu : un lanceur de magie peut enchaîner une attaque de base gratuite.
 	if not _bonus_attack and caster.line() == 1 and caster.attack_kind == "magic" and caster.is_alive() \
 			and not _foes_of(caster).is_empty() and _rng.randf() < MIDDLE_MAGIC_EXTRA_CHANCE:
@@ -653,6 +665,8 @@ func _apply_effect(caster: BattleUnit, effect: Dictionary, targets: Array, singl
 					p *= 1.0 + float(effect.get("bonus", 0.0))
 					if effect.get("consume", false):
 						t.statuses.erase(bonus_on)
+						if bonus_on == "marque":
+							_raise("mark_consumed", {"src": caster, "dst": t})
 				dealt += _hit(caster, t, p, effect.get("kind", caster.attack_kind), stat_name, single)
 			"heal":
 				_heal(caster, t, caster.stat(stat_name) * power * _variance() * _support_mult(caster))
@@ -674,6 +688,7 @@ func _apply_effect(caster: BattleUnit, effect: Dictionary, targets: Array, singl
 					t.stun_time = maxf(t.stun_time, duration)
 					_emit({"type": "status", "dst": t.uid, "status": "stun", "duration": t.stun_time,
 						"label": effect.get("label", "")})
+					_raise("enemy_controlled", {"src": caster, "dst": t})
 			"dot":
 				var duration: float = effect.get("duration", 3.0)
 				var dot_name: String = effect.get("name", "dot")
@@ -689,6 +704,10 @@ func _apply_effect(caster: BattleUnit, effect: Dictionary, targets: Array, singl
 				var duration: float = effect.get("duration", 4.0)
 				t.statuses[effect.name] = maxf(t.statuses.get(effect.name, 0.0), duration)
 				_emit({"type": "status", "dst": t.uid, "status": effect.name, "duration": duration})
+				if effect.name == "marque":
+					_raise("mark_applied", {"src": caster, "dst": t})
+				elif effect.name == "enracine":
+					_raise("enemy_controlled", {"src": caster, "dst": t})
 			"buff":
 				var duration: float = effect.get("duration", 4.0)
 				t.mods.append({"stat": effect.stat, "amount": float(effect.amount), "time": duration})
@@ -709,6 +728,8 @@ func _apply_effect(caster: BattleUnit, effect: Dictionary, targets: Array, singl
 				t.mods = t.mods.filter(func(m: Dictionary) -> bool: return float(m.amount) > 0.0)
 		if cond != "" and effect.get("consume", false):
 			t.statuses.erase(cond)
+			if cond == "marque":
+				_raise("mark_consumed", {"src": caster, "dst": t})
 	return dealt
 
 
@@ -786,6 +807,8 @@ func _hit(src: BattleUnit, dst: BattleUnit, power: float, kind: String, stat_nam
 	var dmg := src.stat(stat_name) * power * (100.0 / (100.0 + mitigation)) * elem * _variance()
 	if is_crit:
 		dmg *= CRIT_MULT
+		if src.team == 0 or src.team == 1:
+			_action_crit = true
 	if dst.has_status("garde"):
 		dst.statuses.erase("garde")
 		dmg *= 0.6
@@ -800,11 +823,17 @@ func _hit(src: BattleUnit, dst: BattleUnit, power: float, kind: String, stat_nam
 func _apply_damage(src: BattleUnit, dst: BattleUnit, dmg: float, is_crit: bool, elem: float, is_dot := false) -> void:
 	if not dst.is_alive():
 		return
+	var had_shield := dst.shield > 0.0
+	var before := dst.hp / dst.max_hp
 	if dst.shield > 0.0:
 		var absorbed := minf(dst.shield, dmg)
 		dst.shield -= absorbed
 		dmg -= absorbed
 	dst.hp = maxf(0.0, dst.hp - dmg)
+	if had_shield and dst.shield <= 0.0:
+		_raise("shield_broken", {"src": src, "dst": dst})
+	if dst.hp > 0.0:
+		_raise("ally_low_hp", {"src": src, "dst": dst, "before": before, "after": dst.hp / dst.max_hp})
 	dst.add_energy(ENERGY_ON_HIT)
 	_emit({
 		"type": "damage", "src": src.uid if src else -1, "dst": dst.uid,
@@ -813,7 +842,242 @@ func _apply_damage(src: BattleUnit, dst: BattleUnit, dmg: float, is_crit: bool, 
 	if not dst.is_alive():
 		dst.dots.clear()
 		_emit({"type": "death", "dst": dst.uid})
+		_raise("enemy_killed", {"src": src, "dst": dst})
+		_raise("allies_dead", {"src": src, "dst": dst})
 
 
 func _variance() -> float:
 	return _rng.randf_range(1.0 - VARIANCE, 1.0 + VARIANCE)
+
+
+# --- Réactions aux événements du combat (data/reactions.json) ---------------------------------
+#
+# Un événement (critique, marque posée, ennemi tué, allié sous 30 % de PV…) est « levé » pendant une
+# action ; les héros dont une réaction écoute cet événement sont mis en file. Quand l'action se termine,
+# la file se résout dans l'ordre (formation de l'avant vers l'arrière), avant la prochaine action
+# normale, sans coûter de tour. Une réaction peut en lever d'autres : 4 maillons au plus, et un héros ne
+# réagit qu'une fois par chaîne (pas de boucle). La cible est revérifiée juste avant d'agir.
+
+const MAX_CHAIN := 4
+
+var _react_queue: Array = []  # [{unit, index, ctx, depth}]
+var _react_depth := 0  # profondeur de la réaction en cours (0 = action normale)
+var _react_used: Dictionary = {}  # uid -> true : a déjà réagi dans cette chaîne
+var _resolving := false
+var _action_crit := false  # un coup critique pendant l'action en cours
+var _action_src: BattleUnit = null
+var reaction_log: Array = []  # [{src, name, trigger, depth}] (tests et bilan)
+
+
+## Lève un événement : met en file les réactions qui l'écoutent.
+## ctx : {src, dst, ...} (unités BattleUnit, src = celui qui provoque l'événement).
+func _raise(trigger: String, ctx: Dictionary) -> void:
+	if _react_depth >= MAX_CHAIN:
+		return
+	var src: BattleUnit = ctx.get("src")
+	var dst: BattleUnit = ctx.get("dst")
+	var order: Array[BattleUnit] = heroes.duplicate()
+	order.append_array(enemies)
+	for u in order:
+		if u.reactions.is_empty() or not u.is_alive() or u.stun_time > 0.0 or _react_used.has(u.uid):
+			continue
+		for i in u.reactions.size():
+			var r: Dictionary = u.reactions[i]
+			if String(r.get("trigger", "")) != trigger or not _react_matches(u, i, r, trigger, src, dst, ctx):
+				continue
+			if not _react_allowed(u, i, r):
+				continue
+			if _react_queue.any(func(q: Dictionary) -> bool: return q.unit == u):
+				continue
+			_react_queue.append({"unit": u, "index": i, "ctx": ctx, "depth": _react_depth + 1})
+
+
+## La condition précise de la réaction (alliés, autre que soi, seuil franchi, compteur…).
+func _react_matches(u: BattleUnit, i: int, r: Dictionary, trigger: String, src: BattleUnit, dst: BattleUnit,
+		ctx: Dictionary) -> bool:
+	var ally_src := src != null and src.team == u.team
+	match trigger:
+		"ally_crit", "ultimate_end", "enemy_killed":
+			return ally_src and src != u
+		"ally_crit_count":
+			if not ally_src:
+				return false
+			var n := int(u.reaction_counts.get(i, 0)) + 1
+			if n < int(r.get("count", 3)):
+				u.reaction_counts[i] = n
+				return false
+			u.reaction_counts[i] = 0
+			return true
+		"mark_applied", "mark_consumed", "enemy_controlled":
+			return ally_src and dst != null and dst.team != u.team
+		"ally_low_hp":
+			var thr := float(r.get("threshold", 0.3))
+			return dst != null and dst.team == u.team and float(ctx.before) > thr and float(ctx.after) <= thr \
+				and dst.is_alive()
+		"shield_broken":
+			return dst != null and dst.team == u.team and src != null and src.team != u.team
+		"allies_dead":
+			var dead := 0
+			for a in (heroes if u.team == 0 else enemies):
+				if not a.is_alive():
+					dead += 1
+			return dst != null and dst.team == u.team and dead >= int(r.get("count", 3))
+	return false
+
+
+func _react_allowed(u: BattleUnit, i: int, r: Dictionary) -> bool:
+	var used: Dictionary = u.reaction_uses.get(i, {"turn": 0, "wave": 0, "combat": 0})
+	for k: String in ["turn", "wave", "combat"]:
+		if r.has("per_" + k) and int(used[k]) >= int(r["per_" + k]):
+			return false
+	return true
+
+
+func _react_count_use(u: BattleUnit, i: int) -> void:
+	var used: Dictionary = u.reaction_uses.get(i, {"turn": 0, "wave": 0, "combat": 0})
+	for k: String in ["turn", "wave", "combat"]:
+		used[k] = int(used[k]) + 1
+	u.reaction_uses[i] = used
+
+
+## Résout la file des réactions (à la fin de chaque action normale).
+func _resolve_reactions() -> void:
+	if _resolving:
+		return
+	_resolving = true
+	var guard := 0
+	while not _react_queue.is_empty() and guard < 32 and not finished:
+		guard += 1
+		var q: Dictionary = _react_queue.pop_front()
+		var u: BattleUnit = q.unit
+		if not u.is_alive() or u.stun_time > 0.0 or _react_used.has(u.uid) or _foes_of(u).is_empty():
+			continue
+		var r: Dictionary = u.reactions[q.index]
+		if not _react_allowed(u, q.index, r):
+			continue
+		_react_used[u.uid] = true
+		_react_depth = int(q.depth)
+		_react_count_use(u, q.index)
+		_do_reaction(u, r, q.ctx)
+		_react_depth = 0
+		if _check_end():
+			break
+	_react_queue.clear()
+	_react_used.clear()
+	_resolving = false
+
+
+## La cible d'une réaction, revérifiée (vivante) juste avant d'agir.
+func _react_targets(u: BattleUnit, r: Dictionary, ctx: Dictionary) -> Array[BattleUnit]:
+	var out: Array[BattleUnit] = []
+	var foes := _foes_of(u)
+	var src: BattleUnit = ctx.get("src")
+	var dst: BattleUnit = ctx.get("dst")
+	match String(r.get("target", "random_enemy")):
+		"event_target":
+			if dst != null and dst.is_alive() and dst.team != u.team:
+				out.append(dst)
+		"attacker":
+			if src != null and src.is_alive() and src.team != u.team:
+				out.append(src)
+		"other_enemy":
+			var others := foes.filter(func(f: BattleUnit) -> bool: return f != dst)
+			if not others.is_empty():
+				out.append(others[_rng.randi_range(0, others.size() - 1)])
+		"event_ally":
+			if dst != null and dst.is_alive() and dst.team == u.team:
+				out.append(dst)
+		"self":
+			out.append(u)
+		"all_allies":
+			return _allies_of(u)
+		"all_enemies":
+			return foes
+	if out.is_empty() and String(r.get("target", "")) in ["event_target", "attacker", "other_enemy", "random_enemy"] \
+			and not foes.is_empty():
+		out.append(foes[_rng.randi_range(0, foes.size() - 1)])  # cible disparue : un autre ennemi
+	return out
+
+
+func _do_reaction(u: BattleUnit, r: Dictionary, ctx: Dictionary) -> void:
+	var name := String(r.get("name", "Réaction"))
+	reaction_log.append({"src": u.def_id, "name": name, "trigger": r.get("trigger", ""), "depth": _react_depth})
+	_emit({"type": "reaction", "src": u.uid, "name": name, "trigger": r.get("trigger", ""), "depth": _react_depth})
+	_emit({"type": "status", "dst": u.uid, "status": "reaction", "duration": 0.0,
+		"label": name + (" ×%d" % _react_depth if _react_depth > 1 else "")})
+	var targets := _react_targets(u, r, ctx)
+	match String(r.get("action", "basic")):
+		"basic":
+			var effects: Array = u.attacks[0].get("effects", [{"type": "damage", "power": 1.0}]) if not u.attacks.is_empty() else []
+			effects = effects + r.get("extra_effects", [])
+			for k in int(r.get("count", 1)):
+				var tg := targets if k == 0 else _react_targets(u, r, ctx)
+				_react_attack(u, 0, effects, tg)
+		"skill":
+			var slot := 1 if u.attacks.size() > 1 else 0
+			var t2: Array[BattleUnit] = targets
+			var tt := String(u.attacks[slot].get("target", "single_enemy"))
+			if tt in ["all_enemies", "all_allies", "self", "lowest_hp_ally"]:
+				t2 = _attack_targets(u, tt)
+			_react_attack(u, slot, u.attacks[slot].get("effects", [{"type": "damage", "power": 1.0}]), t2)
+		"strike":
+			_react_attack(u, int(r.get("anim_slot", 0)), r.get("effects", [{"type": "damage", "power": 1.0}]), targets)
+		"shield":
+			for t in targets:
+				var amount := u.stat(String(r.get("stat", "def"))) * float(r.get("power", 1.0)) * _support_mult(u)
+				t.shield += amount
+				_emit({"type": "shield", "dst": t.uid, "amount": amount})
+		"transform":
+			var buffs: Dictionary = r.get("buffs", {})
+			for stat_name: String in buffs:
+				u.mods.append({"stat": stat_name, "amount": float(buffs[stat_name]), "time": INF})
+			if float(r.get("heal", 0.0)) > 0.0:
+				_heal(u, u, u.max_hp * float(r.heal))
+			u.statuses["dernier_debout"] = INF
+			_emit({"type": "status", "dst": u.uid, "status": "dernier_debout", "duration": 0.0})
+
+
+## Une attaque de réaction : animée comme une attaque (clip de `slot`), avec ses effets sur `targets`.
+## Ne donne pas d'énergie et n'ouvre pas l'enchaînement gratuit du milieu.
+func _react_attack(u: BattleUnit, slot: int, effects: Array, targets: Array[BattleUnit]) -> void:
+	targets = targets.filter(func(t: BattleUnit) -> bool: return t.is_alive())
+	if targets.is_empty():
+		return
+	var atk_data: Dictionary = u.attacks[clampi(slot, 0, u.attacks.size() - 1)] if not u.attacks.is_empty() else {}
+	var hit_time := float(atk_data.get("hit_time", DEFAULT_HIT_TIME))
+	_emit({
+		"type": "attack", "src": u.uid, "slot": slot, "attack_id": atk_data.get("id", ""), "reaction": true,
+		"name": atk_data.get("name", ""), "anim": atk_data.get("anim", ""), "clip": atk_data.get("clip", ""),
+		"hit_time": float(atk_data.get("hit_times", [hit_time])[0]), "hit_times": atk_data.get("hit_times", [hit_time]),
+		"targets": targets.map(func(t: BattleUnit) -> int: return t.uid),
+	})
+	var prev_crit := _action_crit
+	var prev_src := _action_src
+	_action_crit = false
+	_action_src = u
+	var single := targets.size() == 1
+	for e: Dictionary in effects:
+		var et: Array[BattleUnit] = targets
+		if e.get("self_only", false):
+			et = [u]
+		elif e.has("target") and String(e.target) in ["all_allies", "self", "lowest_hp_ally"]:
+			et = _attack_targets(u, String(e.target))
+		_apply_effect(u, e, et, single)
+	_end_action_crit(u, targets)
+	_action_crit = prev_crit
+	_action_src = prev_src
+
+
+## Fin d'une action : un critique pendant l'action lève « critique allié » (une fois par action).
+func _end_action_crit(u: BattleUnit, targets: Array) -> void:
+	if _action_crit and u != null:
+		var dst: BattleUnit = targets[0] if not targets.is_empty() else null
+		_raise("ally_crit", {"src": u, "dst": dst})
+		_raise("ally_crit_count", {"src": u, "dst": dst})
+	_action_crit = false
+
+
+## Un tour normal commence : les limites « par tour » de ses réactions repartent à zéro.
+func _new_turn(u: BattleUnit) -> void:
+	for i in u.reaction_uses:
+		u.reaction_uses[i]["turn"] = 0

@@ -1,0 +1,49 @@
+{
+  "_note": "Réactions des héros aux événements du combat (fusionnées dans heroes.json au chargement, voir GameData). trigger : ally_crit (un AUTRE allié fait un critique, une fois par action), ally_crit_count (n critiques alliés, compteur remis à zéro), ultimate_end (un autre allié termine son ultime), ally_low_hp (un allié passe sous `threshold` PV), allies_dead (`count` alliés morts), enemy_killed (un autre allié tue un ennemi), mark_applied (un allié pose une marque), mark_consumed (une marque est consommée), enemy_controlled (un ennemi est étourdi ou enraciné), shield_broken (le bouclier d'un allié se brise). action : basic (attaques de base, `count`), skill (sa technique à recharge, sans attendre), strike (effets propres `effects`, animation `anim_slot`), shield, transform. target : event_target, random_enemy, other_enemy, attacker, event_ally, self, all_allies, all_enemies. Limites : per_turn (remis à zéro à chaque tour normal du héros), per_wave, per_combat. Chaîne : 4 réactions au plus à la suite, un héros réagit une fois par chaîne.",
+  "nyx": [
+    {"name": "Danse du crépuscule", "trigger": "ally_crit", "action": "basic", "count": 2, "target": "random_enemy", "per_turn": 1, "per_wave": 3,
+     "description": "Quand un autre allié inflige un coup critique, Nyx frappe deux fois des ennemis au hasard."}
+  ],
+  "rivet": [
+    {"name": "Salve du contrebandier", "trigger": "ally_crit_count", "count": 3, "action": "strike", "target": "all_enemies", "anim_slot": 1,
+     "effects": [{"type": "damage", "power": 0.7, "stat": "atk"}], "per_wave": 2,
+     "description": "Tous les 3 coups critiques de l'équipe, Rivet arrose tous les ennemis."}
+  ],
+  "corbin": [
+    {"name": "Charognard", "trigger": "enemy_killed", "action": "basic", "count": 1, "target": "other_enemy", "per_wave": 2,
+     "description": "Quand un allié achève un ennemi, Corbin fond sur une autre cible et la marque.",
+     "extra_effects": [{"type": "status", "name": "marque", "duration": 6.0}]}
+  ],
+  "orage": [
+    {"name": "Éclair d'appel", "trigger": "mark_applied", "action": "strike", "target": "event_target", "anim_slot": 0,
+     "effects": [{"type": "damage", "power": 0.8, "stat": "atk", "kind": "magic"}], "per_wave": 3,
+     "description": "Quand un allié marque un ennemi, Orage le frappe d'un éclair."},
+    {"name": "Foudre sur l'entravé", "trigger": "enemy_controlled", "action": "strike", "target": "event_target", "anim_slot": 0,
+     "effects": [{"type": "damage", "power": 0.8, "stat": "atk", "kind": "magic"}], "per_wave": 2,
+     "description": "Quand un ennemi est étourdi ou enraciné, Orage le foudroie."}
+  ],
+  "braise": [
+    {"name": "Détonation", "trigger": "mark_consumed", "action": "strike", "target": "all_enemies", "anim_slot": 1,
+     "effects": [{"type": "damage", "power": 0.5, "stat": "mag"}, {"type": "dot", "name": "brulure", "power": 0.15, "duration": 4.0, "stat": "mag"}],
+     "per_wave": 2,
+     "description": "Quand une marque est consommée, Braise fait exploser le champ de bataille."}
+  ],
+  "kharok": [
+    {"name": "Carapace d'urgence", "trigger": "ally_low_hp", "threshold": 0.3, "action": "shield", "target": "event_ally", "power": 1.6, "stat": "def",
+     "per_combat": 3,
+     "description": "Quand un allié passe sous 30 % de PV, Kharok le couvre aussitôt d'un bouclier."}
+  ],
+  "bastion": [
+    {"name": "Riposte du rempart", "trigger": "shield_broken", "action": "basic", "count": 1, "target": "attacker", "per_wave": 3,
+     "description": "Quand le bouclier d'un allié se brise, Bastion contre-attaque l'agresseur."}
+  ],
+  "mei_lian": [
+    {"name": "Pétales en écho", "trigger": "ultimate_end", "action": "skill", "target": "event_target", "per_wave": 2,
+     "description": "Quand un allié termine son ultime, Mei Lian enchaîne sa technique sur la même cible."}
+  ],
+  "valen": [
+    {"name": "Dernier debout", "trigger": "allies_dead", "count": 3, "action": "transform", "per_combat": 1,
+     "buffs": {"atk": 0.8, "def": 0.5, "spd": 0.3}, "heal": 0.4,
+     "description": "Quand trois alliés sont tombés, Valen se relève : +80 % ATQ, +50 % DEF, +30 % VIT et 40 % de ses PV rendus."}
+  ]
+}

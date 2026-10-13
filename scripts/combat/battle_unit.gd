@@ -47,6 +47,11 @@ var dots: Array = []  # [{dps, time, src, acc, name}]
 var hots: Array = []  # régénérations [{hps, time, src, acc}]
 var statuses: Dictionary = {}  # état -> temps restant (marque, mouille, desequilibre, aveugle…)
 var mods: Array = []  # bonus/malus temporaires [{stat, amount, time}]
+## Réactions aux événements du combat (data/reactions.json) et leurs compteurs :
+## reaction_uses[i] = {turn, wave, combat}, reaction_counts[i] = compteur (ex. critiques alliés).
+var reactions: Array = []
+var reaction_uses: Dictionary = {}
+var reaction_counts: Dictionary = {}
 var used_ultimate := false  # a lancé son ultime au moins une fois (condition du quatuor)
 
 
@@ -72,6 +77,7 @@ static func from_data(p_uid: int, p_def_id: String, data: Dictionary, p_team: in
 	u.structure = String(data.get("structure", ""))
 	if data.get("wall", false):
 		u.taunt_time = INF  # le mur attire tous les coups ciblés tant qu'il tient
+	u.reactions = data.get("reactions", [])
 	for a: Dictionary in data.get("attacks", []):
 		u.attacks.append(a)
 		# Une attaque à recharge n'est pas disponible dès le début du combat.

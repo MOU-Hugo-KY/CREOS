@@ -21,6 +21,11 @@ func _ready() -> void:
 
 func reload() -> void:
 	heroes = load_json("res://data/heroes.json")
+	# Réactions aux événements du combat (data/reactions.json), rangées avec chaque héros.
+	var reactions := load_json("res://data/reactions.json")
+	for hid: String in reactions:
+		if heroes.has(hid) and reactions[hid] is Array:
+			heroes[hid]["reactions"] = reactions[hid]
 	monsters = load_json("res://data/monsters.json")
 	dungeons = load_json("res://data/dungeons.json")
 	regions = load_json("res://data/regions.json")
