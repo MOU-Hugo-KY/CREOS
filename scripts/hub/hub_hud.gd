@@ -158,7 +158,7 @@ func _refresh_avatar() -> void:
 			if c is RoundPortrait:
 				c.queue_free()
 		if _avatar_id != "":
-			var p := RoundPortrait.new().setup(GameData.hero(_avatar_id), _avatar_holder.size.x if _hud_frame else 84.0, 0.08)
+			var p := RoundPortrait.new().setup(GameData.hero(_avatar_id), _avatar_holder.size.x if _hud_frame else 84.0, 0.0 if _hud_frame else 0.08)
 			_avatar_holder.add_child(p)
 			_avatar_holder.move_child(p, 0)
 
@@ -341,8 +341,8 @@ func _build_pack_hud() -> void:
 	var off := -pr.position
 	var ar := FinPack.rect(P.avatar)
 	_avatar_holder = Control.new()
-	_avatar_holder.position = ar.position + off
-	_avatar_holder.size = ar.size
+	_avatar_holder.position = Vector2(96, 30)  # centre du rond du médaillon (138, 74), diamètre 86
+	_avatar_holder.size = Vector2(86, 86)
 	_avatar_holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	prof.add_child(_avatar_holder)
 	FinPack.image(prof, "port_franc/medaillon_profil.png", Rect2(Vector2.ZERO, pr.size))
