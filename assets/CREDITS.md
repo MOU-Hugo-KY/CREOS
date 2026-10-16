@@ -53,3 +53,6 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 - Table des Quatuors (assets/ui/echoppe/quatuors/) : pack ChatGPT « Table des Quatuors », créé pour CREOS (ImageGen).
 - Jardin des Esprits, Stèle des Fusions et animations d'invocation des 20 Esprits (assets/ui/invocateurs/jardin, stele, esprits) : packs ChatGPT créés pour CREOS (ImageGen).
 - Pack « Finitions » (assets/ui/finitions/) : interface du Port-Franc, Paramètres, Primes, Profil, Préparation de chasse, Ma Loge, Combat, Hall et objets — packs ChatGPT créés pour CREOS (ImageGen).
+
+## Agents IA (`.claude/agents/`)
+- 14 fiches tirées de [The Agency](https://github.com/msitarzewski/agency-agents) (licence MIT, © Mike Sitarzewski), adaptées avec un bloc de contexte CREOS.
