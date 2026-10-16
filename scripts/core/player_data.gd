@@ -116,7 +116,7 @@ func lodge_name() -> String:
 	return "Donjon de " + n.trim_prefix("Loge de ") if n.begins_with("Loge de ") else n
 
 
-## Renomme le joueur et sa loge (textes nettoyés, 3 à 16 caractères).
+## Renomme le joueur (3 à 16 caractères) et sa loge (3 à 24), textes nettoyés.
 func rename(new_name: String, new_lodge: String) -> bool:
 	var n := new_name.strip_edges()
 	var l := new_lodge.strip_edges()
@@ -1046,7 +1046,7 @@ func refund_draw(dungeon_id: String, lodge_battle: Dictionary) -> void:
 	if lodge_battle.is_empty():
 		state["energy"] = energy() + hunt_cost(dungeon_id)
 	else:
-		state.gold = gold() + int(current_lodge_battle.get("fee", 0))
+		state.gold = gold() + int(lodge_battle.get("fee", 0))
 	save_game()
 	changed.emit()
 

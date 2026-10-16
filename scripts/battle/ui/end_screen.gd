@@ -399,6 +399,8 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 			sound.emit("ui_ready"))
 	if not chest.is_empty():
 		get_tree().create_timer(0.9 + stars * 0.4).timeout.connect(func() -> void:
+			if not is_instance_valid(self) or not is_inside_tree() or not visible:
+				return
 			_chest_reveal.show_chest(chest, _reward_name)
 			sound.emit("ultimate_impact" if chest.kind in ["or", "serment"] else "ui_ready"))
 	if cl:

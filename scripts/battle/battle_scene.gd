@@ -168,6 +168,8 @@ func _process(delta: float) -> void:
 
 
 func _on_attack_requested(uid: int, slot: int) -> void:
+	if _hold > 0.0:
+		return  # une chaîne de réactions se joue encore : le tour suivant attend
 	if engine.request_attack(uid, slot):
 		audio.play("ui_click", -6.0, 0.0)
 		_end_turn(slot)
@@ -181,6 +183,8 @@ func _on_quartet_requested() -> void:
 
 
 func _on_combo_requested(combo_id: String) -> void:
+	if _hold > 0.0:
+		return
 	if engine.request_combo(engine.awaiting_uid, combo_id):
 		audio.play("ui_ready", -2.0, 0.0)
 		_end_turn()
@@ -324,6 +328,9 @@ func _handle_events() -> void:
 					t = chain_end  # le nom de la réaction s'affiche quand le héros intervient
 				elif ev.type == "reaction":
 					t = chain_end
+					if String(ev.get("action", "")) in ["shield", "transform"]:
+						chain_end += 0.6  # pas d'attaque : on laisse le temps de voir l'effet
+						_hold = maxf(_hold, chain_end)
 				elif ev.has("dst"):
 					t = last_time.get(ev.dst, offset + float(times[0]))
 				else:

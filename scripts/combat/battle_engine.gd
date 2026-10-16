@@ -193,6 +193,7 @@ func request_combo(uid: int, id: String) -> bool:
 	if uid != awaiting_uid or not combo_ready(id):
 		return false
 	awaiting_uid = -1
+	_new_turn(get_unit(uid))
 	_use_combo(get_unit(uid), _combo(id))
 	_resolve_reactions()
 	_check_end()
@@ -331,8 +332,9 @@ func _start_next_wave() -> void:
 		enemies.append(BattleUnit.from_data(_take_uid(), d.get("id", ""), d, 1, i))
 	for h in heroes:
 		h.gauge = 0.0
-		for i in h.reaction_uses:
-			h.reaction_uses[i]["wave"] = 0
+	for u in all_units():
+		for i in u.reaction_uses:
+			u.reaction_uses[i]["wave"] = 0
 	focus_uid = -1
 	_emit({"type": "wave_start", "index": wave_index, "count": waves.size()})
 	if wave_index < wave_traps.size():
@@ -590,6 +592,8 @@ func _lowest(units: Array[BattleUnit]) -> Array[BattleUnit]:
 func _use_attack(caster: BattleUnit, slot: int) -> void:
 	if not caster.has_attack(slot) or _foes_of(caster).is_empty():
 		return
+	if not _bonus_attack:
+		_action_crit = false  # un critique d'une action précédente ne déborde jamais sur celle-ci
 	var atk_data: Dictionary = caster.attacks[slot]
 	caster.energy -= caster.energy_cost(slot)
 	caster.cooldowns[slot] = float(atk_data.get("cooldown", 0.0))
@@ -643,6 +647,7 @@ func _use_attack(caster: BattleUnit, slot: int) -> void:
 		_emit({"type": "status", "dst": caster.uid, "status": "elan", "duration": 0.0, "label": "Élan !"})
 		_use_attack(caster, BattleUnit.SLOT_BASIC)
 		_bonus_attack = false
+		_end_action_crit(caster, targets)
 
 
 ## Applique un effet à ses cibles. Renvoie les dégâts infligés (pour le vol de vie).
@@ -748,6 +753,7 @@ func _heal(src: BattleUnit, t: BattleUnit, amount: float) -> void:
 ## Attaque combinée (quatuor, trio, duo) : chaque membre ajoute sa contribution (puissance × sa
 ## statistique) sur tous les ennemis, réduite par leur défense ; puis soins, boucliers et états.
 func _use_combo(caster: BattleUnit, combo: Dictionary) -> void:
+	_action_crit = false
 	combos_used[combo.id] = true
 	var foes := _foes_of(caster)
 	var members: Array[BattleUnit] = []
@@ -785,6 +791,7 @@ func _use_combo(caster: BattleUnit, combo: Dictionary) -> void:
 			if t.is_alive():
 				t.statuses[combo.status.name] = maxf(t.statuses.get(combo.status.name, 0.0), float(combo.status.time))
 				_emit({"type": "status", "dst": t.uid, "status": combo.status.name, "duration": float(combo.status.time)})
+	_end_action_crit(caster, foes)
 
 
 func _hit(src: BattleUnit, dst: BattleUnit, power: float, kind: String, stat_name := "", single := false,
@@ -865,7 +872,6 @@ var _react_depth := 0  # profondeur de la réaction en cours (0 = action normale
 var _react_used: Dictionary = {}  # uid -> true : a déjà réagi dans cette chaîne
 var _resolving := false
 var _action_crit := false  # un coup critique pendant l'action en cours
-var _action_src: BattleUnit = null
 var reaction_log: Array = []  # [{src, name, trigger, depth}] (tests et bilan)
 
 
@@ -900,8 +906,8 @@ func _react_matches(u: BattleUnit, i: int, r: Dictionary, trigger: String, src: 
 		"ally_crit", "ultimate_end", "enemy_killed":
 			return ally_src and src != u
 		"ally_crit_count":
-			if not ally_src:
-				return false
+			if not ally_src or not _react_allowed(u, i, r) or _react_queue.any(func(q: Dictionary) -> bool: return q.unit == u):
+				return false  # épuisée ou déjà en file : la charge n'est pas perdue
 			var n := int(u.reaction_counts.get(i, 0)) + 1
 			if n < int(r.get("count", 3)):
 				u.reaction_counts[i] = n
@@ -1002,7 +1008,8 @@ func _react_targets(u: BattleUnit, r: Dictionary, ctx: Dictionary) -> Array[Batt
 func _do_reaction(u: BattleUnit, r: Dictionary, ctx: Dictionary) -> void:
 	var name := String(r.get("name", "Réaction"))
 	reaction_log.append({"src": u.def_id, "name": name, "trigger": r.get("trigger", ""), "depth": _react_depth})
-	_emit({"type": "reaction", "src": u.uid, "name": name, "trigger": r.get("trigger", ""), "depth": _react_depth})
+	_emit({"type": "reaction", "src": u.uid, "name": name, "trigger": r.get("trigger", ""), "depth": _react_depth,
+		"action": r.get("action", "basic")})
 	_emit({"type": "status", "dst": u.uid, "status": "reaction", "duration": 0.0,
 		"label": name + (" ×%d" % _react_depth if _react_depth > 1 else "")})
 	var targets := _react_targets(u, r, ctx)
@@ -1052,9 +1059,7 @@ func _react_attack(u: BattleUnit, slot: int, effects: Array, targets: Array[Batt
 		"targets": targets.map(func(t: BattleUnit) -> int: return t.uid),
 	})
 	var prev_crit := _action_crit
-	var prev_src := _action_src
 	_action_crit = false
-	_action_src = u
 	var single := targets.size() == 1
 	for e: Dictionary in effects:
 		var et: Array[BattleUnit] = targets
@@ -1065,7 +1070,6 @@ func _react_attack(u: BattleUnit, slot: int, effects: Array, targets: Array[Batt
 		_apply_effect(u, e, et, single)
 	_end_action_crit(u, targets)
 	_action_crit = prev_crit
-	_action_src = prev_src
 
 
 ## Fin d'une action : un critique pendant l'action lève « critique allié » (une fois par action).
