@@ -77,9 +77,9 @@ func _ready() -> void:
 	_energy = ScreenPack.shadow(ScreenPack.text(_root, "", Rect2(mr.position + Vector2(66, 0), mr.size - Vector2(80, 0)), 28,
 		UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
 	# Le niveau : un parchemin à droite.
-	var ir := Rect2(1410, 500, 490, 230)
+	var ir := Rect2(1400, 440, 510, 300)
 	FinPack.nine(_root, "preparation_chasse/commun/parchemin.png", ir, [140, 24, 140, 24])
-	_info = ScreenPack.text(_root, "", Rect2(ir.position + Vector2(84, 40), ir.size - Vector2(168, 80)), 18, UiKit.INK,
+	_info = ScreenPack.text(_root, "", Rect2(ir.position + Vector2(100, 100), ir.size - Vector2(200, 160)), 17, UiKit.INK,
 		HORIZONTAL_ALIGNMENT_CENTER, true)
 	_board = Control.new()
 	_board.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -279,8 +279,10 @@ func _fill_drawer(team: Array) -> void:
 					_picked = -1
 					ui_sound.emit("ui_toggle"))
 	var tr := FinPack.rect(P.tiroir)
-	ScreenPack.shadow(ScreenPack.text(_drawer, "Choisis tes chasseurs · %d / 7  ·  touche deux héros de la formation pour les échanger" % team.size(),
-		Rect2(tr.position + Vector2(50, tr.size.y - 50), Vector2(1000, 30)), 19, Color("f3d9a0")), 2)
+	ScreenPack.shadow(ScreenPack.text(_drawer, "Choisis tes chasseurs · %d / 7" % team.size(),
+		Rect2(tr.position + Vector2(0, -40), Vector2(tr.size.x, 34)), 24, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 3)
+	ScreenPack.shadow(ScreenPack.text(_drawer, "Touche deux héros de la formation pour échanger leurs places",
+		Rect2(tr.position + Vector2(0, tr.size.y - 48), Vector2(tr.size.x, 28)), 18, Color("cbbfae"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	if pages > 1:
 		for dir: int in [-1, 1]:
 			var a := TextureButton.new()

@@ -314,5 +314,6 @@
         "piece_ressort": 1
       }
     }
-  }
+  },
+  "daily_win_cap": 2000
 }

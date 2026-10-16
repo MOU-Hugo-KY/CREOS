@@ -278,7 +278,7 @@ func _pack_banner(text: String, sub: String, duration: float) -> void:
 	var fs := Vector2(a.frame_size[0], a.frame_size[1])
 	box.size = fs
 	box.scale = Vector2.ONE * k
-	box.position = Vector2(vs.x / 2.0, vs.y * (440.0 if boss else 430.0) / 1080.0) - fs * k / 2.0
+	box.position = Vector2(vs.x / 2.0, vs.y * (330.0 if boss else 250.0) / 1080.0) - fs * k / 2.0
 	add_child(box)
 	_pack_banner_node = box
 	var s := FinPack.sheet(a)

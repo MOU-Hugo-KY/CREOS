@@ -348,7 +348,7 @@ func _build_reliquary() -> void:
 	root.add_child(np)
 	ScreenPack.shadow(ScreenPack.text(root, "LE RELIQUAIRE", _r(R.get("title_writing_rect", [745, 48, 430, 34])), 30,
 		Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
-	var q := ScreenPack.button(root, Q, "return", "Quatuors →", Rect2(1560, 30, 320, 76), 26)
+	var q := FinPack.button(root, "table_chasses/bouton_chasser", Rect2(1540, 30, 340, 80), "Quatuors", 26)
 	q.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		_tab = "Quatuors"
@@ -384,6 +384,9 @@ func _fill_reliquary() -> void:
 		var pr: Array = n.palier_rects
 		for k in pr.size():
 			ScreenPack.image(_niches, _rtex("reliquaire/palier_%d.png" % (5 if k < tier else 1)), _r(pr[k]))
+		var hero_name := String(GameData.hero(id).get("short", GameData.hero(id).get("name", id)))
+		ScreenPack.shadow(ScreenPack.text(_niches, hero_name, Rect2(rr.position.x - 10, rr.position.y - 26, rr.size.x + 20, 26), 17,
+			Color("f3d9a0") if tier > 0 else Color("b8ae9f"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 		var hover := ScreenPack.image(_niches, _rtex("reliquaire/niche_survol.png"), rr)
 		hover.visible = false
 		var hit := Control.new()

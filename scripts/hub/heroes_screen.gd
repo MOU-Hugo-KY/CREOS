@@ -27,7 +27,7 @@ var _tab := "Techniques"
 
 var _title: Label
 var _count: Label
-var _back: Button
+var _back: TextureButton
 var _collection: VBoxContainer
 var _filters: HBoxContainer
 var _grid: GridContainer
@@ -76,6 +76,16 @@ func _ready() -> void:
 	bg.color = Color("17141c")
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
+	# Décor : la salle du conseil, assombrie, derrière la collection.
+	var room := TextureRect.new()
+	room.texture = load("res://assets/ui/echoppe/quatuors/table_quatuors_fond.png") 		if ResourceLoader.exists("res://assets/ui/echoppe/quatuors/table_quatuors_fond.png") else null
+	room.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	room.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	room.modulate = Color(0.38, 0.36, 0.42)
+	room.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	room.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(room)
 	var margin := MarginContainer.new()
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for side in ["left", "right"]:
@@ -92,12 +102,25 @@ func _ready() -> void:
 	var head := HBoxContainer.new()
 	head.add_theme_constant_override("separation", 22)
 	page.add_child(head)
-	_back = UiKit.button("Retour au port", "wood", 22, Vector2(230, 58))
+	# Même flèche « Port » et même ruban de titre que les autres écrans.
+	var back_box := Control.new()
+	back_box.custom_minimum_size = Vector2(220, 80)
+	head.add_child(back_box)
+	_back = FinPack.button(back_box, "profil/commun/retour", Rect2(0, 0, 220, 80), "Port", 26)
+	_back.get_node("Label").position.x = 30
 	_back.pressed.connect(_on_back)
-	head.add_child(_back)
-	_title = UiKit.title("Loge des héros", 44, UiKit.PARCHMENT)
-	_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	head.add_child(_title)
+	var ribbon := Control.new()
+	ribbon.custom_minimum_size = Vector2(0, 90)
+	ribbon.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	head.add_child(ribbon)
+	var np := FinPack.nine(ribbon, "profil/commun/bandeau_titre.png", Rect2(0, 0, 700, 90), [130, 24, 130, 28])
+	np.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	np.position.x = -350
+	_title = UiKit.title("Loge des héros", 32, Color("f3d9a0"))
+	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_title.position = Vector2(0, 24)
+	_title.size = Vector2(700, 40)
+	np.add_child(_title)
 	_count = UiKit.label("", 24, UiKit.PARCHMENT_DARK)
 	head.add_child(_count)
 
@@ -135,9 +158,10 @@ func _build_collection(page: VBoxContainer) -> void:
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.get_v_scroll_bar().custom_minimum_size.x = 18  # assez large pour le doigt
 	_collection.add_child(scroll)
 	_grid = GridContainer.new()
-	_grid.columns = 7
+	_grid.columns = 8
 	_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_grid.add_theme_constant_override("h_separation", 20)
 	_grid.add_theme_constant_override("v_separation", 20)
@@ -156,8 +180,7 @@ func _show_collection() -> void:
 	_detail.visible = false
 	_page.visible = true
 	_collection.visible = true
-	_back.text = "Retour au port"
-	_title.text = "Loge des héros"
+	_title.text = "LOGE DES HÉROS"
 	refresh()
 
 
@@ -217,9 +240,14 @@ func _hero_card(hero: Dictionary) -> Control:
 	card.scale = Vector2.ONE * CARD_SCALE
 	card.pivot_offset = Vector2.ZERO
 	holder.add_child(card)
-	var sub := "À recruter à la Lanterne" if not owned else "Niv. %d · Force %d" % [PlayerData.hero_level(id), _power(id)]
+	# Héros à recruter : la carte reste face visible mais assombrie (on voit qui l'on cherche).
+	var rest := Color.WHITE if owned else Color(0.42, 0.4, 0.48)
+	if not owned:
+		card.set_face_up(true)
+		card.modulate = rest
+	var sub := "%s · à recruter" % String(hero.get("class", "")).capitalize() if not owned else "Niv. %d · Force %d" % [PlayerData.hero_level(id), _power(id)]
 	var rcol: Color = (Palette.RARITIES.get(int(hero.get("rarity", 2)), ["?", Color.WHITE])[1] as Color).lightened(0.3)
-	ScreenPack.shadow(ScreenPack.text(holder, String(TarotCard.arcane(id).title) if owned else "", Rect2(0, TarotCard.SIZE.y * CARD_SCALE + 4,
+	ScreenPack.shadow(ScreenPack.text(holder, String(TarotCard.arcane(id).title) if owned else String(hero.get("name", id)), Rect2(0, TarotCard.SIZE.y * CARD_SCALE + 4,
 		TarotCard.SIZE.x * CARD_SCALE, 28), 20, rcol, HORIZONTAL_ALIGNMENT_CENTER), 2)
 	var info := ScreenPack.shadow(ScreenPack.text(holder, sub, Rect2(0, TarotCard.SIZE.y * CARD_SCALE + 32,
 		TarotCard.SIZE.x * CARD_SCALE, 30), 19, UiKit.PARCHMENT_DARK if owned else Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
@@ -233,7 +261,7 @@ func _hero_card(hero: Dictionary) -> Control:
 		card.shine())
 	holder.mouse_exited.connect(func() -> void:
 		create_tween().tween_property(card, "position:y", 0.0, 0.12)
-		card.modulate = Color.WHITE)
+		card.modulate = rest)
 	holder.gui_input.connect(func(e: InputEvent) -> void:
 		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 			ui_sound.emit("ui_click")
@@ -244,7 +272,7 @@ func _hero_card(hero: Dictionary) -> Control:
 
 
 ## Taille des cartes de la collection.
-const CARD_SCALE := 0.62
+const CARD_SCALE := 0.55
 
 
 func _build_detail(_page: VBoxContainer) -> void:
@@ -265,7 +293,8 @@ func _build_detail(_page: VBoxContainer) -> void:
 	var shade := _DetailShade.new()
 	shade.size = Vector2(1920, 1080)
 	root.add_child(shade)
-	var back := ScreenPack.button(root, F, "collection", "← Collection", Rect2(24, 20, 260, 80), 28)
+	var back := FinPack.button(root, "profil/commun/retour", Rect2(24, 20, 240, 80), "Collection", 22)
+	back.get_node("Label").position.x = 34
 	back.pressed.connect(_on_back)
 	_d_count = ScreenPack.text(root, "", Rect2(300, 20, 360, 80), 22, Color(1, 1, 1, 0.6))
 	# La carte de tarot, en grand ; le héros animé vit dans sa fenêtre.

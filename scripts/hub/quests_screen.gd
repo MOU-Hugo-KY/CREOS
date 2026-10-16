@@ -338,8 +338,8 @@ func _fill_board() -> void:
 				_page += dir
 				_fill_board())
 			_board_box.add_child(a)
-		ScreenPack.shadow(ScreenPack.text(_board_box, "%d / %d" % [_page + 1, pages], Rect2(1480, 520, 120, 30), 20, Color("f3d9a0"),
-			HORIZONTAL_ALIGNMENT_CENTER), 2)
+		ScreenPack.shadow(ScreenPack.text(_board_box, "Page %d / %d" % [_page + 1, pages], Rect2(860, 214, 200, 32), 22, Color("f3d9a0"),
+			HORIZONTAL_ALIGNMENT_CENTER), 3)
 	# Points du jour et coffres posés à leur seuil.
 	var chests: Array = cfg.get("chests", [])
 	var max_points := _max_points()
@@ -360,7 +360,11 @@ func _fill_board() -> void:
 		var box := Control.new()
 		box.size = Vector2(120, 120)
 		box.position = Vector2(cx - 60, 900)
-		box.tooltip_text = _rewards_text(chests[i].get("rewards", {}))
+		box.tooltip_text = "%d points : %s%s" % [need, _rewards_text(chests[i].get("rewards", {})),
+			"
+(déjà ouvert)" if opened else ("
+Prêt : touche pour l'ouvrir" if ready else "
+Pas encore atteint")]
 		box.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		var index := i
 		box.gui_input.connect(func(e: InputEvent) -> void:
@@ -374,10 +378,42 @@ func _fill_board() -> void:
 			box.add_child(s)
 			s.play("a")
 		else:
-			FinPack.image(box, "primes/coffre_%s.png" % ("ouvert" if opened else "ferme"), Rect2(Vector2.ZERO, box.size))
+			var ci := FinPack.image(box, "primes/coffre_%s.png" % ("ouvert" if opened else "ferme"), Rect2(Vector2.ZERO, box.size))
+			if not opened:
+				ci.modulate = Color(0.55, 0.53, 0.58)  # pas encore atteint
 		ScreenPack.shadow(ScreenPack.text(_board_box, "✓" if opened else str(need), Rect2(cx - 40, 864, 80, 30), 22,
 			Color("ffd27a") if ready else UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	_fill_weekly()
 	_refresh_timer()
+
+
+## Prime de la semaine, à gauche de la barre des points : jours de venue et récompense.
+func _fill_weekly() -> void:
+	var W: Dictionary = GameData.quests.get("weekly", {})
+	if W.is_empty():
+		return
+	var w := PlayerData.weekly()
+	var r := Rect2(110, 300, 290, 430)
+	FinPack.nine(_board_box, "primes/affiche_%s.png" % ("reclamee" if w.claimed else ("terminee" if PlayerData.can_claim_weekly() else "en_cours")),
+		r, [44, 56, 62, 96])
+	var need := int(W.get("days", 5))
+	var days := mini((w.days as Array).size(), need)
+	ScreenPack.text(_board_box, String(W.get("name", "Prime de la semaine")), Rect2(r.position + Vector2(24, 52), Vector2(240, 50)), 21,
+		Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER, true)
+	ScreenPack.text(_board_box, "%s
+
+%d / %d jours
+
++%d gemmes" % [W.get("description", ""), days, need,
+		int(W.get("rewards", {}).get("gems", 0))], Rect2(r.position + Vector2(24, 112), Vector2(240, 200)), 18, UiKit.INK,
+		HORIZONTAL_ALIGNMENT_CENTER, true)
+	var b := FinPack.button(_board_box, "primes/bouton_reclamer", Rect2(r.position + Vector2(10, r.size.y + 6), Vector2(270, 64)),
+		"Fait" if w.claimed else "Réclamer", 20)
+	b.disabled = not PlayerData.can_claim_weekly()
+	b.pressed.connect(func() -> void:
+		if not PlayerData.claim_weekly().is_empty():
+			ui_sound.emit("ultimate_impact")
+			refresh())
 
 
 ## Une affiche : en cours, terminée (sceau, à réclamer) ou réclamée (pliée, grisée).

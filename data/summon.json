@@ -84,10 +84,11 @@
       "celeste": 0
     },
     "stages_after_campaign1": {
-      "oeuf": 6489,
+      "oeuf": 6390,
       "petit": 3500,
-      "grand": 10,
-      "celeste": 1
+      "grand": 100,
+      "celeste": 10
     }
-  }
+  },
+  "first_pity_every": 20
 }

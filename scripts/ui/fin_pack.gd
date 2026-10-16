@@ -42,6 +42,9 @@ static func image(parent: Node, path: String, r: Rect2) -> TextureRect:
 	t.size = r.size
 	t.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(t)
+	var c := ScreenPack.cover_behind(parent, t.texture, r)
+	if c:
+		t.set_meta("cover", c)
 	return t
 
 

@@ -512,7 +512,7 @@
   "energy_cost": 5
  },
  "monde03_1": {
-  "name": "Terriers de l'ile · 1",
+  "name": "Terriers de l'île · 1",
   "region": "monde03",
   "level": 1,
   "decor_scene": 1,
@@ -544,7 +544,7 @@
   "energy_cost": 5
  },
  "monde03_2": {
-  "name": "Terriers de l'ile · 2",
+  "name": "Terriers de l'île · 2",
   "region": "monde03",
   "level": 2,
   "decor_scene": 1,
@@ -576,7 +576,7 @@
   "energy_cost": 5
  },
  "monde03_3": {
-  "name": "Terriers de l'ile · 3",
+  "name": "Terriers de l'île · 3",
   "region": "monde03",
   "level": 3,
   "decor_scene": 1,
@@ -608,7 +608,7 @@
   "energy_cost": 5
  },
  "monde03_4": {
-  "name": "Terriers de l'ile · 4",
+  "name": "Terriers de l'île · 4",
   "region": "monde03",
   "level": 4,
   "decor_scene": 2,
@@ -640,7 +640,7 @@
   "energy_cost": 5
  },
  "monde03_5": {
-  "name": "Terriers de l'ile · 5",
+  "name": "Terriers de l'île · 5",
   "region": "monde03",
   "level": 5,
   "decor_scene": 2,
@@ -672,7 +672,7 @@
   "energy_cost": 5
  },
  "monde03_6": {
-  "name": "Terriers de l'ile · 6",
+  "name": "Terriers de l'île · 6",
   "region": "monde03",
   "level": 6,
   "decor_scene": 2,
@@ -704,7 +704,7 @@
   "energy_cost": 5
  },
  "monde03_7": {
-  "name": "Terriers de l'ile · 7",
+  "name": "Terriers de l'île · 7",
   "region": "monde03",
   "level": 7,
   "decor_scene": 2,
@@ -736,7 +736,7 @@
   "energy_cost": 5
  },
  "monde03_8": {
-  "name": "Terriers de l'ile · 8",
+  "name": "Terriers de l'île · 8",
   "region": "monde03",
   "level": 8,
   "decor_scene": 3,
@@ -1024,7 +1024,7 @@
   "energy_cost": 6
  },
  "monde05_1": {
-  "name": "Carrieres oubliees · 1",
+  "name": "Carrières oubliées · 1",
   "region": "monde05",
   "level": 1,
   "decor_scene": 1,
@@ -1056,7 +1056,7 @@
   "energy_cost": 6
  },
  "monde05_2": {
-  "name": "Carrieres oubliees · 2",
+  "name": "Carrières oubliées · 2",
   "region": "monde05",
   "level": 2,
   "decor_scene": 1,
@@ -1088,7 +1088,7 @@
   "energy_cost": 6
  },
  "monde05_3": {
-  "name": "Carrieres oubliees · 3",
+  "name": "Carrières oubliées · 3",
   "region": "monde05",
   "level": 3,
   "decor_scene": 1,
@@ -1120,7 +1120,7 @@
   "energy_cost": 6
  },
  "monde05_4": {
-  "name": "Carrieres oubliees · 4",
+  "name": "Carrières oubliées · 4",
   "region": "monde05",
   "level": 4,
   "decor_scene": 2,
@@ -1152,7 +1152,7 @@
   "energy_cost": 6
  },
  "monde05_5": {
-  "name": "Carrieres oubliees · 5",
+  "name": "Carrières oubliées · 5",
   "region": "monde05",
   "level": 5,
   "decor_scene": 2,
@@ -1184,7 +1184,7 @@
   "energy_cost": 6
  },
  "monde05_6": {
-  "name": "Carrieres oubliees · 6",
+  "name": "Carrières oubliées · 6",
   "region": "monde05",
   "level": 6,
   "decor_scene": 2,
@@ -1216,7 +1216,7 @@
   "energy_cost": 6
  },
  "monde05_7": {
-  "name": "Carrieres oubliees · 7",
+  "name": "Carrières oubliées · 7",
   "region": "monde05",
   "level": 7,
   "decor_scene": 2,
@@ -1248,7 +1248,7 @@
   "energy_cost": 6
  },
  "monde05_8": {
-  "name": "Carrieres oubliees · 8",
+  "name": "Carrières oubliées · 8",
   "region": "monde05",
   "level": 8,
   "decor_scene": 3,
@@ -1280,7 +1280,7 @@
   "energy_cost": 6
  },
  "monde06_1": {
-  "name": "Necropole engloutie · 1",
+  "name": "Nécropole engloutie · 1",
   "region": "monde06",
   "level": 1,
   "decor_scene": 1,
@@ -1312,7 +1312,7 @@
   "energy_cost": 7
  },
  "monde06_2": {
-  "name": "Necropole engloutie · 2",
+  "name": "Nécropole engloutie · 2",
   "region": "monde06",
   "level": 2,
   "decor_scene": 1,
@@ -1344,7 +1344,7 @@
   "energy_cost": 7
  },
  "monde06_3": {
-  "name": "Necropole engloutie · 3",
+  "name": "Nécropole engloutie · 3",
   "region": "monde06",
   "level": 3,
   "decor_scene": 1,
@@ -1376,7 +1376,7 @@
   "energy_cost": 7
  },
  "monde06_4": {
-  "name": "Necropole engloutie · 4",
+  "name": "Nécropole engloutie · 4",
   "region": "monde06",
   "level": 4,
   "decor_scene": 2,
@@ -1408,7 +1408,7 @@
   "energy_cost": 7
  },
  "monde06_5": {
-  "name": "Necropole engloutie · 5",
+  "name": "Nécropole engloutie · 5",
   "region": "monde06",
   "level": 5,
   "decor_scene": 2,
@@ -1440,7 +1440,7 @@
   "energy_cost": 7
  },
  "monde06_6": {
-  "name": "Necropole engloutie · 6",
+  "name": "Nécropole engloutie · 6",
   "region": "monde06",
   "level": 6,
   "decor_scene": 2,
@@ -1472,7 +1472,7 @@
   "energy_cost": 7
  },
  "monde06_7": {
-  "name": "Necropole engloutie · 7",
+  "name": "Nécropole engloutie · 7",
   "region": "monde06",
   "level": 7,
   "decor_scene": 2,
@@ -1504,7 +1504,7 @@
   "energy_cost": 7
  },
  "monde06_8": {
-  "name": "Necropole engloutie · 8",
+  "name": "Nécropole engloutie · 8",
   "region": "monde06",
   "level": 8,
   "decor_scene": 3,
@@ -1536,7 +1536,7 @@
   "energy_cost": 7
  },
  "monde07_1": {
-  "name": "Postes de chasse abandonnes · 1",
+  "name": "Postes de chasse abandonnés · 1",
   "region": "monde07",
   "level": 1,
   "decor_scene": 1,
@@ -1568,7 +1568,7 @@
   "energy_cost": 7
  },
  "monde07_2": {
-  "name": "Postes de chasse abandonnes · 2",
+  "name": "Postes de chasse abandonnés · 2",
   "region": "monde07",
   "level": 2,
   "decor_scene": 1,
@@ -1600,7 +1600,7 @@
   "energy_cost": 7
  },
  "monde07_3": {
-  "name": "Postes de chasse abandonnes · 3",
+  "name": "Postes de chasse abandonnés · 3",
   "region": "monde07",
   "level": 3,
   "decor_scene": 1,
@@ -1632,7 +1632,7 @@
   "energy_cost": 7
  },
  "monde07_4": {
-  "name": "Postes de chasse abandonnes · 4",
+  "name": "Postes de chasse abandonnés · 4",
   "region": "monde07",
   "level": 4,
   "decor_scene": 2,
@@ -1664,7 +1664,7 @@
   "energy_cost": 7
  },
  "monde07_5": {
-  "name": "Postes de chasse abandonnes · 5",
+  "name": "Postes de chasse abandonnés · 5",
   "region": "monde07",
   "level": 5,
   "decor_scene": 2,
@@ -1696,7 +1696,7 @@
   "energy_cost": 7
  },
  "monde07_6": {
-  "name": "Postes de chasse abandonnes · 6",
+  "name": "Postes de chasse abandonnés · 6",
   "region": "monde07",
   "level": 6,
   "decor_scene": 2,
@@ -1728,7 +1728,7 @@
   "energy_cost": 7
  },
  "monde07_7": {
-  "name": "Postes de chasse abandonnes · 7",
+  "name": "Postes de chasse abandonnés · 7",
   "region": "monde07",
   "level": 7,
   "decor_scene": 2,
@@ -1760,7 +1760,7 @@
   "energy_cost": 7
  },
  "monde07_8": {
-  "name": "Postes de chasse abandonnes · 8",
+  "name": "Postes de chasse abandonnés · 8",
   "region": "monde07",
   "level": 8,
   "decor_scene": 3,

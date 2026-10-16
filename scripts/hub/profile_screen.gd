@@ -482,6 +482,9 @@ func _fill_desk() -> void:
 		var ti := FinPack.image(_desk_box, String(t.states["debloque" if on else "verrouille"]), FinPack.rect(t.rect))
 		ti.mouse_filter = Control.MOUSE_FILTER_STOP
 		var info: Array = TROPHIES.get(id, [id, ""])
+		var tr2 := FinPack.rect(t.rect)
+		ScreenPack.shadow(ScreenPack.text(_desk_box, info[0], Rect2(tr2.position.x - 50, tr2.end.y + 2, tr2.size.x + 100, 24), 16,
+			Color("f3d9a0") if on else Color("a89d8e"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 		ti.tooltip_text = "%s\n%s%s" % [info[0], info[1], "" if on else "  (à faire)"]
 	ScreenPack.shadow(ScreenPack.text(_desk_box, "TROPHÉES · %d / %d" % [got, D.get("trophies", []).size()],
 		FinPack.rect(P.trophees_titre), 30, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)

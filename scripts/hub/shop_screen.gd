@@ -227,6 +227,9 @@ func _article(offer: Dictionary, slot: Dictionary) -> void:
 		ScreenPack.shadow(ScreenPack.text(_layer, "×%d" % int(gives[key]), Rect2(ar.end.x - 70, ar.end.y - 48, 80, 34), 24,
 			Color("ffd27a"), HORIZONTAL_ALIGNMENT_RIGHT), 2)
 	var pr := _rect(slot.prix_rect)
+	# Le nom, juste sous l'étiquette de prix de l'article.
+	ScreenPack.shadow(ScreenPack.text(_layer, String(offer.get("name", "")), Rect2(pr.position.x - 40, pr.end.y, pr.size.x + 80, 24),
+		16, Color("fff1cf"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	var tag := _nine(_layer, "echoppe/etiquette_prix_normal.png", pr)
 	var parts: Array = []
 	for k: String in cost:
@@ -449,6 +452,7 @@ func _img(parent: Control, t: Texture2D, r: Rect2) -> TextureRect:
 	tr.size = r.size
 	tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(tr)
+	ScreenPack.cover_behind(parent, t, r)
 	return tr
 
 

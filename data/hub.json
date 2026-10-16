@@ -105,7 +105,7 @@
       "name": "Éclats de serment",
       "description": "10 éclats violets : un appel au Sanctuaire du Druide (Esprits).",
       "cost": {
-        "gold": 2500
+        "gold": 1200
       },
       "gives": {
         "fragments_relique": 10

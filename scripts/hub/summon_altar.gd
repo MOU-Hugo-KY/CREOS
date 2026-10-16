@@ -80,6 +80,7 @@ var _druid_room: DruidRoom
 var _druid_ui: Array[Control] = []
 var _fusion_layer: Control
 var _stele_room: SteleRoom
+var _cover: TextureRect
 var _fusion_ui: Array[Control] = []
 var _fuse_pick := ""
 var _fusion_gold: Label
@@ -108,6 +109,16 @@ func _ready() -> void:
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 	var root := ScreenPack.frame(self)
+	# Décor de la salle en cours, étendu derrière tout l'écran (pas de bandes noires sur un écran large).
+	_cover = TextureRect.new()
+	_cover.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_cover.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_cover.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_cover.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_cover.modulate = Color(0.85, 0.85, 0.85)
+	_cover.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(_cover)
+	move_child(_cover, root.get_index())
 
 	# Salle du Mage runique (pack « Invocateurs ») si elle est là, sinon l'ancienne salle de la lanterne.
 	if MageRoom.available():
@@ -173,8 +184,8 @@ func _ready() -> void:
 	root.add_child(fade)
 
 	# Haut : retour discret, nom gravé, bourses.
-	var back := ScreenPack.button(root, S, "return", "← Hall" if FinPack.available(HALL) else "← Port",
-		Rect2(28, 24, 190, 72), 26)
+	var back := FinPack.button(root, "hall_objets/commun/retour", Rect2(28, 20, 220, 80), "Hall" if FinPack.available(HALL) else "Port", 26)
+	back.get_node("Label").position.x = 30
 	back.pressed.connect(func() -> void:
 		if busy:
 			return
@@ -183,8 +194,9 @@ func _ready() -> void:
 			_hall.visible = true  # retour au hall des invocateurs
 		else:
 			closed.emit())
+	FinPack.nine(root, "hall_objets/commun/bandeau_titre.png", Rect2(610, 0, 700, 80), [130, 24, 130, 28])
 	var title := ScreenPack.text(root, String(GameData.summon.get("name", "Lanterne des Serments")).to_upper(),
-		Rect2(560, 14, 800, 56), 38, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
+		Rect2(610, 18, 700, 44), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER)
 	_title = title
 	title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
 	title.add_theme_constant_override("shadow_offset_x", 3)
@@ -213,8 +225,8 @@ func _ready() -> void:
 	if _meca_room:
 		for i in 3:
 			var mode: String = ["heros", "esprits", "pieces"][i]
-			var tb := ScreenPack.button(root, S, "return", ["Mage · Héros", "Jardin · Esprits", "Mécanicien · Pièces"][i],
-				Rect2(470 + i * 330, 74, 310, 60), 22)
+			var tb := FinPack.button(root, "primes/bouton_reclamer", Rect2(470 + i * 330, 82, 310, 60),
+				["Mage · Héros", "Jardin · Esprits", "Mécanicien · Pièces"][i], 21)
 			tb.pressed.connect(func() -> void: _set_mode(mode))
 			_tabs[mode] = tb
 
@@ -272,6 +284,7 @@ func _ready() -> void:
 		var n: int = PACKS[i]
 		var b := ScreenPack.button(root, S, "invoke_gems" if n == 1 else "invoke_fragments", "",
 			Rect2(470 + i * 330, 968, 310, 88), 26, UiKit.WHITE if n == 1 else UiKit.INK)
+		b.add_theme_color_override("font_disabled_color", Color(0.86, 0.84, 0.8))  # lisible même désactivé
 		b.pressed.connect(func() -> void:
 			if _mode == "pieces":
 				_pull(n)
@@ -741,8 +754,8 @@ func _show_page() -> void:
 	var heroes: Array = GameData.heroes.keys().filter(func(id: String) -> bool:
 		return int(GameData.heroes[id].get("rarity", 2)) == _page)
 	var rate := float(Summon.odds(GameData.heroes, GameData.summon).get(_page, 0.0))
-	_odds.text = "Taux : %.0f %%
-Chaque héros : %.1f %%" % [rate, rate / maxf(1.0, heroes.size())]
+	_odds.text = ("Taux : %s %%
+Chaque héros : %s %%" % [String.num(rate, 1), String.num(rate / maxf(1.0, heroes.size()), 2)]).replace(".", ",")
 	for c in _pool_box.get_children():
 		c.queue_free()
 	for id: String in heroes:
@@ -782,7 +795,7 @@ func _hero_info(hero: Dictionary, owned: bool, rarity: int) -> Array:
 		info.append(["Niveau %d" % PlayerData.hero_level(hero.id), 20, UiKit.PARCHMENT_DARK])
 	else:
 		info.append(["Endormi : à réveiller ici", 20, Color("b0a8c0")])
-	info.append(["Chance : %.1f %%" % _hero_chance(hero), 20, Color("f3d9a0")])
+	info.append([("Chance : %s %%" % String.num(_hero_chance(hero), 2)).replace(".", ","), 20, Color("f3d9a0")])
 	return info
 
 
@@ -845,10 +858,13 @@ func _apply_mode() -> void:
 		c.visible = meca
 	for c in _druid_ui:
 		c.visible = druid
+	if _cover:
+		_cover.texture = {"heros": MageRoom.tex("mage/salle_mage.png"), "pieces": MageRoom.tex("mecanicien/salle_mecanicien.png"),
+			"esprits": MageRoom.tex("jardin/jardin_esprits.png"), "fusion": MageRoom.tex("stele/salle_stele.png")}.get(_mode)
 	_title.text = "ATELIER DU MÉCANICIEN" if meca else ("STÈLE DES FUSIONS" if _mode == "fusion" else "JARDIN DES ESPRITS" if druid
 		else String(GameData.summon.get("name", "Lanterne des Serments")).to_upper())
 	for m: String in _tabs:
-		(_tabs[m] as Button).modulate = Color.WHITE if m == _mode or (m == "esprits" and _mode == "fusion") else Color(0.6, 0.58, 0.64)
+		(_tabs[m] as Control).modulate = Color.WHITE if m == _mode or (m == "esprits" and _mode == "fusion") else Color(0.6, 0.58, 0.64)
 
 
 ## Bannière de l'atelier : les pièces possédées et ce que coûte chaque défense.

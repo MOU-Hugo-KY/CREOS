@@ -252,8 +252,14 @@ func _fill_map() -> void:
 		else:
 			FinPack.image(_map_box, String(reg.brouillard), rr)
 		var info: Dictionary = GameData.regions.get(rid, {})
-		ScreenPack.text(_map_box, "%d. %s" % [i + 1, info.get("name", reg.nom)], Rect2(rr.position.x - 10, rr.end.y - 6, rr.size.x + 20, 24),
-			16, Color("793b49") if sel else UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
+		# Nom du monde sur un petit cartouche, au-dessus des cartes de la ligne suivante.
+		var lbl := ScreenPack.text(_map_box, "%d. %s" % [i + 1, info.get("name", reg.nom)],
+			Rect2(rr.position.x - 14, rr.end.y - 26, rr.size.x + 28, 24), 15, Color("fff1cf") if sel else UiKit.WHITE,
+			HORIZONTAL_ALIGNMENT_CENTER)
+		ScreenPack.shadow(lbl, 2)
+		lbl.add_theme_constant_override("outline_size", 6)
+		lbl.add_theme_color_override("font_outline_color", Color("793b49") if sel else Color("29262e"))
+		lbl.z_index = 2
 		var hit := Control.new()
 		hit.position = rr.position
 		hit.size = rr.size
@@ -311,7 +317,7 @@ func _fill_panel() -> void:
 	var P: Dictionary = D.get("positions", {})
 	var pr := FinPack.rect(P.panneau_niveau)
 	FinPack.nine(_map_box, "table_chasses/commun/parchemin.png", pr, [140, 50, 140, 50])
-	var cr := FinPack.rect(P.contenu_panneau).grow_individual(10, 0, 10, 0)
+	var cr := FinPack.rect(P.contenu_panneau).grow_individual(-12, 0, -12, 0)  # marges dans le papier
 	var go := FinPack.button(_map_box, "table_chasses/bouton_chasser", FinPack.rect(P.bouton_chasser), "Chasser", 30)
 	if _pick == "":
 		go.disabled = true
@@ -352,6 +358,12 @@ func _fill_panel() -> void:
 			Rect2(cr.get_center().x - 78 + k * 52, at[0], 48, 48))
 	at[0] += 60
 	line.call("Énergie : %d" % PlayerData.hunt_cost(_pick), 20, UiKit.INK, 30)
+	at[0] += 14
+	line.call("Vagues : %d" % waves.size(), 18, UiKit.INK, 28)
+	line.call("Ta Force d'équipe : %d" % PlayerData.team_power(), 18, UiKit.INK, 28)
+	if int(d.get("level", 0)) == 8:
+		line.call("Boss : %s" % String(GameData.monsters.get(String(waves[-1][1]) if waves[-1].size() > 1 else "", {}).get("name", "?")),
+			18, Color("793b49"), 52)
 	var id := _pick
 	go.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")

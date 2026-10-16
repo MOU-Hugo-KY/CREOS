@@ -402,7 +402,7 @@ func _build_pack_hud() -> void:
 		var b := FinPack.button(root, "port_franc/boutons/" + id, r)
 		ScreenPack.shadow(ScreenPack.text(root, String({"heros": "Héros", "chasse": "Chasse", "lanterne": "Lanterne", "echoppe": "Échoppe",
 			"reliques": "Reliques", "primes": "Primes", "ma_loge": "Mon donjon", "parametres": "Paramètres", "jour_nuit": "Jour / nuit"}.get(id, name)), Rect2(r.position + Vector2(-40, r.size.y - 6),
-			Vector2(r.size.x + 80, 30)), 19, Color("fff1cf"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+			Vector2(r.size.x + 80, 30)), 20, Color("fff1cf"), HORIZONTAL_ALIGNMENT_CENTER), 2) 			.add_theme_constant_override("outline_size", 7)
 		b.mouse_entered.connect(func() -> void:
 			_tip_title.text = name
 			_tip_text.text = desc
@@ -467,6 +467,9 @@ func _refresh_pack_hud() -> void:
 	_name_label.text = PlayerData.player_name()
 	_lodge_label.text = PlayerData.lodge_name()
 	_xp_gauge.set_ratio(float(PlayerData.xp()) / maxf(1.0, PlayerData.xp_to_next()))
+	(_name_label.get_parent() as Control).tooltip_text = "Voir mon profil
+Niveau %d · %d / %d XP" % [PlayerData.level(),
+		PlayerData.xp(), PlayerData.xp_to_next()]
 	_values["or"].text = _fmt(PlayerData.gold())
 	_values["gemmes"].text = _fmt(PlayerData.gems())
 	_values["eclats"].text = _fmt(PlayerData.item_count("fragments_relique"))
@@ -628,7 +631,7 @@ func _build_side(key: String, left: bool) -> void:
 	col.add_theme_constant_override("separation", 6)
 	_root.add_child(col)
 	for item: Dictionary in GameData.hub.get(key, []):
-		var b := IconButton.new().setup(_icon(item.get("icon", "")), item.get("name", ""), 34.0)
+		var b := IconButton.new().setup(_icon(item.get("icon", "")), item.get("name", ""), 46.0)  # assez grand pour le doigt
 		var act: String = item.get("action", "")
 		var id: String = item.get("id", "")
 		_side_buttons[id] = b
@@ -666,6 +669,7 @@ func _build_title() -> void:
 	_root.add_child(_title)
 	var sub := _label(26)
 	sub.text = GameData.hub.get("subtitle", "")
+	sub.add_theme_constant_override("outline_size", 10)
 	sub.position = Vector2(0, 80)
 	sub.size = Vector2(1000, 30)
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

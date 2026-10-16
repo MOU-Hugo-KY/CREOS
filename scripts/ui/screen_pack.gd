@@ -57,6 +57,7 @@ static func frame(parent: Control) -> Control:
 	var root := Control.new()
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.size = Vector2(1920, 1080)
+	root.set_meta("pack_frame", true)
 	parent.add_child(root)
 	var center := func() -> void:
 		root.position = ((parent.size - root.size) / 2.0).round()
@@ -86,7 +87,31 @@ static func image(parent: Control, t: Texture2D, r: Rect2) -> TextureRect:
 	tr.size = r.size
 	tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(tr)
+	var c := cover_behind(parent, t, r)
+	if c:
+		tr.set_meta("cover", c)
 	return tr
+
+
+## Un décor plein écran (1920 × 1080) posé dans le repère du pack : on en met aussi une copie
+## « couvrante » derrière tout l'écran, pour qu'un écran plus large ou plus haut n'ait pas de bandes noires.
+static func cover_behind(parent: Node, t: Texture2D, r: Rect2) -> TextureRect:
+	if t == null or r != Rect2(0, 0, 1920, 1080) or not parent.has_meta("pack_frame"):
+		return null
+	var outer := parent.get_parent() as Control
+	if outer == null:
+		return null
+	var c := TextureRect.new()
+	c.texture = t
+	c.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	c.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	c.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	c.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	c.modulate = Color(0.85, 0.85, 0.85)  # un peu plus sombre : le cœur de l'écran reste net
+	outer.add_child(c)
+	outer.move_child(c, parent.get_index())
+	return c
 
 
 ## Bouton à trois états du pack (`<base>_normal/_hover/_pressed`, `_disabled` s'il existe).

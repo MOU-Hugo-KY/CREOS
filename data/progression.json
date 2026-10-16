@@ -2,7 +2,7 @@
   "max_level": 150,
   "hero_xp": {
     "base": 80,
-    "growth": 1.22
+    "growth": 1.08
   },
   "player_xp": {
     "base": 100,
@@ -17,7 +17,7 @@
     "spd": 0.0,
     "crit": 0.0
   },
-  "energy_regen_seconds": 300,
+  "energy_regen_seconds": 480,
   "player_xp_share": 0.5,
   "level_up_gold": {
     "base": 150,
@@ -434,5 +434,6 @@
       "name": "Parchemin d'expérience légendaire",
       "xp": 25000
     }
-  }
+  },
+  "energy_cost_mult": 1.5
 }

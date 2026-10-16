@@ -22,7 +22,7 @@
   ]
  },
  "monde03": {
-  "name": "Terriers de l'ile",
+  "name": "Terriers de l'île",
   "order": 3,
   "element": "nature",
   "decor": "res://assets/decors/monde03/",
@@ -44,7 +44,7 @@
   ]
  },
  "monde05": {
-  "name": "Carrieres oubliees",
+  "name": "Carrières oubliées",
   "order": 5,
   "element": null,
   "decor": "res://assets/decors/monde05/",
@@ -55,7 +55,7 @@
   ]
  },
  "monde06": {
-  "name": "Necropole engloutie",
+  "name": "Nécropole engloutie",
   "order": 6,
   "element": "ombre",
   "decor": "res://assets/decors/monde06/",
@@ -66,7 +66,7 @@
   ]
  },
  "monde07": {
-  "name": "Postes de chasse abandonnes",
+  "name": "Postes de chasse abandonnés",
   "order": 7,
   "element": "ombre",
   "decor": "res://assets/decors/monde07/",

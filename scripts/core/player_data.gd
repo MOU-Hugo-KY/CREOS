@@ -175,8 +175,45 @@ func daily() -> Dictionary:
 	if before != today():
 		Quests.record(state.daily, "login")
 		_add_stat("days_played")
+		_note_weekly_day()
 		save_game()
 	return state.daily
+
+
+## Prime de la semaine (quests.json "weekly") : venir au port `days` jours d'une même semaine.
+func weekly() -> Dictionary:
+	var week := _week_id()
+	var w: Dictionary = state.get("weekly", {})
+	if String(w.get("week", "")) != week:
+		w = {"week": week, "days": [], "claimed": false}
+		state["weekly"] = w
+	return w
+
+
+func _note_weekly_day() -> void:
+	var w := weekly()
+	if not (w.days as Array).has(today()):
+		(w.days as Array).append(today())
+
+
+func can_claim_weekly() -> bool:
+	var w := weekly()
+	return not w.claimed and (w.days as Array).size() >= int(quests_config.get("weekly", {}).get("days", 5))
+
+
+func claim_weekly() -> Dictionary:
+	if not can_claim_weekly():
+		return {}
+	weekly().claimed = true
+	return _grant(quests_config.get("weekly", {}).get("rewards", {}))
+
+
+## Semaine du lundi (année + numéro du lundi) : même valeur du lundi au dimanche.
+static func _week_id() -> String:
+	var unix := int(Time.get_unix_time_from_system())
+	var d := Time.get_datetime_dict_from_unix_time(unix)
+	var monday := unix - ((int(d.weekday) + 6) % 7) * 86400
+	return Time.get_date_string_from_unix_time(monday)
 
 
 ## Note un événement de jeu pour les primes (« hunt_win », « ultimate », « summon »…).
@@ -547,7 +584,7 @@ func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomN
 		return {}
 	var count := int(state.get("summon_count", 0))
 	var pity := int(state.get("summon_pity", 0))
-	var r := Summon.roll(pool, config, count, pity, rng)
+	var r := Summon.roll(pool, _pity_config(config), count, pity, rng)
 	if r.id == "":
 		return {}
 	var cost := summon_cost(currency, config)
@@ -558,6 +595,8 @@ func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomN
 	state.summon_count = count + 1
 	record_event("summon")
 	state.summon_pity = 0 if r.rarity >= int(config.get("pity_min_rarity", 4)) else pity + 1
+	if r.rarity >= int(config.get("pity_min_rarity", 4)):
+		state["got_legendary"] = true
 	var result := {"id": r.id, "rarity": r.rarity, "new": not state.heroes.has(r.id), "echoes": 0, "traps": []}
 	# Chaque invocation donne aussi des pièges pour Ma Loge (consommables).
 	var trap_ids: Array = _lodge_cfg().get("traps", {}).keys()
@@ -579,7 +618,16 @@ func summon(currency: String, config: Dictionary, pool: Dictionary, rng: RandomN
 
 ## Invocations restantes avant le Légendaire garanti.
 func summons_to_pity(config: Dictionary) -> int:
-	return int(config.get("pity_every", 10)) - int(state.get("summon_pity", 0))
+	return int(_pity_config(config).get("pity_every", 10)) - int(state.get("summon_pity", 0))
+
+
+## Le tout premier Légendaire est garanti plus tôt (`first_pity_every`), ensuite `pity_every`.
+func _pity_config(config: Dictionary) -> Dictionary:
+	if state.get("got_legendary", false) or not config.has("first_pity_every"):
+		return config
+	var c := config.duplicate()
+	c["pity_every"] = int(config.first_pity_every)
+	return c
 
 
 ## Niveaux de la campagne dans l'ordre (monde puis niveau).
@@ -659,7 +707,7 @@ func _spend(key: String, n: int) -> void:
 
 
 func hunt_cost(dungeon_id: String) -> int:
-	return int(_dungeons.get(dungeon_id, {}).get("energy_cost", 0))
+	return roundi(float(_dungeons.get(dungeon_id, {}).get("energy_cost", 0)) * float(_config.get("energy_cost_mult", 1.0)))
 
 
 # --- Équipe ------------------------------------------------------------------------
@@ -1055,7 +1103,16 @@ func finish_lodge_battle(won: bool) -> Dictionary:
 	var b := current_lodge_battle
 	var result := {"gold": 0}
 	if won and b.get("kind", "") == "rival":
-		result.gold = Lodge.win_reward(int(b.stake), _lodge_cfg()) + int(b.fee)
+		# Gains contre les rivaux hors ligne plafonnés par jour (`daily_win_cap`), la mise est toujours rendue.
+		var today := Time.get_date_string_from_system()
+		var g: Dictionary = state.get("lodge_gains", {})
+		if String(g.get("day", "")) != today:
+			g = {"day": today, "gold": 0}
+		var cap := int(_lodge_cfg().get("daily_win_cap", 1 << 30))
+		var win := mini(Lodge.win_reward(int(b.stake), _lodge_cfg()), maxi(0, cap - int(g.gold)))
+		g.gold = int(g.gold) + win
+		state["lodge_gains"] = g
+		result.gold = win + int(b.fee)
 		state.gold = gold() + result.gold
 		_add_stat("gold_earned", result.gold)
 	save_game()

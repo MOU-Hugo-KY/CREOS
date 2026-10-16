@@ -5,8 +5,8 @@ extends Control
 ## doré pour les héros et rouge pour les ennemis ; le premier (celui qui joue) est plus grand.
 
 const COUNT := 8
-const SIZE := 58.0
-const FIRST := 74.0
+const SIZE := 66.0
+const FIRST := 84.0
 const GAP := 8.0
 
 var _order: Array = []

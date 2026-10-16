@@ -40,9 +40,10 @@ func _ready() -> void:
 	var fb: Dictionary = D.get("buttons", {}).get("fermer", {})
 	var close := FinPack.button(root, "parametres/fermer", FinPack.rect(fb.get("rect", [1360, 200, 48, 48])))
 	close.pressed.connect(_close)
+	close.visible = false  # « Port » suffit : pas de deuxième façon de fermer
 	for s: Dictionary in D.get("sliders", []):
 		var id := String(s.id)
-		ScreenPack.shadow(ScreenPack.text(root, NAMES.get(id, id), FinPack.rect(s.label_rect), 26, Color("f3d9a0")), 2)
+		ScreenPack.shadow(ScreenPack.text(root, NAMES.get(id, id), Rect2(FinPack.rect(s.label_rect).position - Vector2(0, 14), FinPack.rect(s.label_rect).size), 24, Color("f3d9a0")), 2)
 		var g := FinPack.Gauge.new().setup("parametres/curseur_rail.png", FinPack.rect(s.rail_rect), [36, 14, 36, 14],
 			"parametres/curseur_remplissage.png", FinPack.rect(s.fill_rect).grow_individual(-10, -3, -6, -3))
 		root.add_child(g)
@@ -71,6 +72,8 @@ func _ready() -> void:
 		b.toggled.connect(_switch.bind(id))
 		root.add_child(b)
 		_switches[id] = b
+		var st := ScreenPack.shadow(ScreenPack.text(root, "", Rect2(r.end.x + 10, r.position.y, 110, r.size.y), 19, UiKit.WHITE), 2)
+		b.set_meta("state_label", st)
 
 
 func open() -> void:
@@ -94,6 +97,9 @@ func _refresh() -> void:
 	for id: String in _switches:
 		var on := not GameSettings.muted if id == "general" else GameSettings.get_volume(BUSES[id]) > 0.0
 		(_switches[id] as TextureButton).set_pressed_no_signal(on)
+		var st: Label = (_switches[id] as TextureButton).get_meta("state_label")
+		st.text = "Activé" if on else "Coupé"
+		st.add_theme_color_override("font_color", Color("63c8be") if on else Color("c9a0a0"))
 
 
 func _slider_input(e: InputEvent, id: String) -> void:

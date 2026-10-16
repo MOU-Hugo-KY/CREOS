@@ -516,7 +516,7 @@ func _fill_crypt() -> void:
 		var anchor := Vector2(room.construction_anchor[0], room.construction_anchor[1])
 		var nd := int(spec.get("defenses", 1))
 		for k in nd:
-			var at := anchor + Vector2((k - (nd - 1) / 2.0) * 150.0, -6)
+			var at := anchor + Vector2((k - (nd - 1) / 2.0) * 180.0, -6)
 			if k < built.size():
 				var did: String = built[k]
 				var art: Dictionary = anims.get(DEFENSE_ART.get(did, did) + "_repos", {})
@@ -540,8 +540,8 @@ func _fill_crypt() -> void:
 						ui_sound.emit("ui_click")
 						PlayerData.lodge_remove_defense(r, idx))
 			else:
-				var add := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(at - Vector2(70, 150), Vector2(140, 40)),
-					"+ Défense", 17)
+				var add := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(at - Vector2(80, 160), Vector2(160, 56)),
+					"+ Défense", 19)
 				add.modulate.a = 0.85
 				add.pressed.connect(func() -> void: _pick_defense(r))
 		# Pièges : une rangée de cases sous la salle (ce qui est posé, et où), pas sur le sol des héros.
@@ -553,7 +553,7 @@ func _fill_crypt() -> void:
 		for k in nt:
 			var cell := Rect2(cx - nt * 44.0 + k * 88.0, 646, 72, 72)
 			var on := k < traps.size()
-			var frame := FinPack.image(_crypt_box, "preparation_chasse/portrait_%s.png" % ("choisi" if on else "grise"), cell)
+			var frame := FinPack.image(_crypt_box, "preparation_chasse/portrait_%s.png" % ("choisi" if on else "normal"), cell)
 			frame.mouse_filter = Control.MOUSE_FILTER_STOP
 			frame.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 			if on:
@@ -624,8 +624,9 @@ func _fill_crypt() -> void:
 		int(round(float(cfg.get("win_share", 0.3)) * 100))]
 	# Blason et nom de la loge.
 	FinPack.image(_crypt_box, "ma_loge/blason.png", FinPack.rect(P.blason))
-	ScreenPack.text(_crypt_box, PlayerData.lodge_name(), FinPack.rect(P.nom_loge).grow_individual(10, 0, 10, 0), 17, UiKit.INK,
-		HORIZONTAL_ALIGNMENT_CENTER)
+	var ln := ScreenPack.text(_crypt_box, PlayerData.lodge_name(), FinPack.rect(P.nom_loge).grow_individual(-4, 0, -4, 0),
+		14 if PlayerData.lodge_name().length() > 14 else 16, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
+	ln.clip_text = true
 	# Mise, Force et essai, à droite.
 	var x0 := 1440.0
 	ScreenPack.shadow(ScreenPack.text(_crypt_box, "Mise du trésor : %s or" % HubHud._fmt(stake), Rect2(x0, 724, 440, 32), 22,
@@ -689,7 +690,7 @@ func _fill_rivals_board() -> void:
 			sel.size = pr.size + Vector2(24, 20)
 			sel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			card.add_child(sel)
-		ScreenPack.text(card, String(rv.name), Rect2(0, 0, pr.size.x, 52), 18, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER, true)
+		ScreenPack.text(card, String(rv.name), Rect2(14, 0, pr.size.x - 28, 52), 15, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER, true)
 		ScreenPack.text(card, "Force : %d" % int(rv.power), Rect2(0, 54, pr.size.x, 26), 18, Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER)
 		var state := "Déjà affronté" if done else ("Trop faible pour toi" if too_strong else "Trésor : %d or" % Lodge.win_reward(int(rv.stake), cfg))
 		ScreenPack.text(card, state, Rect2(0, 86, pr.size.x, 50), 16, UiKit.INK if not (done or too_strong) else Color("8c857c"),
@@ -707,7 +708,7 @@ func _fill_rivals_board() -> void:
 		return
 	var target: Dictionary = rivals[_rival_pick]
 	var fee := Lodge.entry_fee(int(target.stake), cfg)
-	(go.get_node("Label") as Label).text = "Attaquer · mise %d or" % fee
+	(go.get_node("Label") as Label).text = "Attaquer %s · %d or" % [String(target.name).get_slice(" ", 0), fee]
 	go.disabled = PlayerData.lodge_rival_done(target.id) or not Lodge.can_attack(team_power, int(target.power)) \
 		or PlayerData.gold() < fee
 	go.pressed.connect(func() -> void: _start(target))

@@ -294,6 +294,8 @@ func _ready_pack() -> void:
 func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, dungeon_name: String, replay: Dictionary) -> void:
 	var S: Dictionary = FinPack.data(FC).get("screens", {}).get("victoire" if won else "defaite", {})
 	_p_bg.texture = FinPack.tex(String(S.get("background", "combat/victoire_fond.png")))
+	if _p_bg.has_meta("cover"):
+		(_p_bg.get_meta("cover") as TextureRect).texture = _p_bg.texture
 	var draw: bool = replay.get("draw", false)
 	_p_title.text = "ÉGALITÉ" if draw else ("VICTOIRE" if won else "DÉFAITE")
 	for c in _p_box.get_children():
@@ -328,7 +330,7 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 			cell.add_child(p)
 		var up: bool = h.get("level_up", false)
 		ScreenPack.shadow(ScreenPack.text(cell, ("Niv. %d ▲" if up else "+%d XP") % (int(h.level) if up else int(h.xp)),
-			Rect2(-10, 70, 116, 24), 15, Color("63c8be") if up else UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+			Rect2(-14, 72, 124, 28), 20, Color("63c8be") if up else UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
 		if float(h.damage) > 0.0 and float(h.damage) == best:
 			FinPack.image(cell, "combat/etoile_pleine.png", Rect2(64, -6, 30, 30))
 	# Butin sur le parchemin.
