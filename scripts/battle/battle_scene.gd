@@ -52,6 +52,7 @@ var unit_data: Dictionary = {}  # uid -> Dictionary
 
 var hud: BattleHud
 var fx: BattleFx
+var fxlib: FxLibrary  # effets de lancer / d'impact pilotés par data/fx.json
 var audio: BattleAudio
 var camera: Camera2D
 var stage: BattleStage
@@ -65,6 +66,7 @@ var _last_sound: Dictionary = {}  # nom -> heure (évite 4 fois le même son au 
 var _ended := false
 var _event_seq := 0
 
+var _fx_ctx := {}  # uid -> contexte visuel de sa dernière attaque (FxLibrary.attack_context)
 var _last_slot := {}  # uid -> emplacement de sa dernière attaque (coups lourds)
 
 
@@ -403,6 +405,9 @@ func _on_attack(ev: Dictionary) -> float:
 		aim /= hits.size()
 	var delay := v.play_attack(clip, 0.0, aim)
 	_last_slot[int(ev.src)] = int(ev.slot)
+	var ctx := FxLibrary.attack_context(v.unit, _attack_data(int(ev.src), String(ev.get("attack_id", ""))), int(ev.slot))
+	_fx_ctx[int(ev.src)] = ctx
+	_fxl().cast(v.position + Vector2(0, -20), ctx)
 	_launch_projectiles(v, ev, delay)
 	fx.dust(v.position, 0.8)  # appui au sol au départ de l'attaque
 	var color := Palette.element_color(v.unit.element)
@@ -445,7 +450,9 @@ func _launch_projectiles(v: UnitView, ev: Dictionary, delay: float) -> void:
 			var travel := clampf(start.distance_to(target.chest_position()) / 1500.0, 0.12, 0.4)
 			_schedule(maxf(0.0, land - travel), func() -> void:
 				if is_instance_valid(target):
-					fx.add_child(Projectile.new().setup(start, target.chest_position(), travel, color, magic)))
+					var proj := Projectile.new().setup(start, target.chest_position(), travel, color, magic)
+					fx.add_child(proj)
+					_fxl().attach_trail(proj, v.unit.element))
 
 
 ## Duo ou trio : chaque membre lance son ultime à sa place, en même temps, vers les ennemis.
@@ -567,6 +574,23 @@ func _on_pixel_quartet(ev: Dictionary) -> float:
 	return 0.0
 
 
+## Bibliothèque d'effets (créée à la demande si un événement arrive avant le décor).
+func _fxl() -> FxLibrary:
+	if not is_instance_valid(fxlib):
+		fxlib = FxLibrary.new()
+		add_child(fxlib)
+		fxlib.setup(camera)
+	return fxlib
+
+
+## Données de l'attaque (héros ou monstre) pour choisir ses effets visuels.
+func _attack_data(uid: int, attack_id: String) -> Dictionary:
+	for a: Dictionary in unit_data.get(uid, {}).get("attacks", []):
+		if String(a.get("id", "")) == attack_id:
+			return a
+	return {}
+
+
 ## Héros et monstres en pixel art : leur effet d'impact (pack ChatGPT) éclate sur la cible touchée.
 func _signature_fx(src: UnitView, t: UnitView, slot: int) -> void:
 	var sheet := PixelSheet.for_actor(src.unit.def_id)
@@ -599,19 +623,32 @@ func _on_impact(ev: Dictionary) -> void:
 			if ev.get("dot", false):
 				t.popup(str(int(ev.amount)), Color(0.75, 0.55, 1.0), false, 0.8)
 				t.flash(Color(0.6, 0.3, 0.9), 0.35)
+				var tick := "brulure" if src and src.unit.element == "feu" else "poison"
+				_fxl().status(tick, t.head_position(), t.chest_position(), t.position, 0.0)
 			else:
 				t.play_hit(color)
 				var heavy: bool = ev.crit or int(_last_slot.get(int(ev.src), 0)) >= BattleUnit.SLOT_ULTIMATE
 				fx.burst(t.chest_position(), color, ev.crit)
 				fx.slash(t.chest_position(), color, heavy)
-				if src:
+				var ctx: Dictionary = _fx_ctx.get(int(ev.src), {})
+				var slot_fx: Dictionary = {}
+				if src and not ctx.is_empty():
+					_fxl().impact(t.chest_position(), ctx, ev.crit)
+					slot_fx = FxLibrary.data().get("slots", {}).get(ctx.slot, {})
+					if slot_fx.has("flash"):
+						_fxl().flash(Palette.element_color(src.unit.element).lightened(0.4), float(slot_fx.flash))
+						fx.kick(float(slot_fx.get("zoom", 0.04)))
+						fx.shake(float(slot_fx.get("shake", 0.4)))
+				elif src:
 					fx.element_hit(t.chest_position(), src.unit.element, heavy)
+				if src:
 					_signature_fx(src, t, int(_last_slot.get(int(ev.src), 0)))
 				if heavy:
 					fx.kick(0.05 if ev.crit else 0.035)
 				fx.dust(t.position, 0.6)
 				# Arrêt sur image : attaquant et cible se figent un instant.
-				var stop := 0.11 if heavy else 0.06
+				# (Ultime : arrêt un peu plus long = léger ralenti, réglé dans data/fx.json.)
+				var stop := float(slot_fx.get("freeze", 0.11 if heavy else 0.06))
 				t.freeze(stop)
 				if src:
 					src.freeze(stop)
@@ -645,6 +682,7 @@ func _on_impact(ev: Dictionary) -> void:
 			_set_shown_hp(t, ev)
 			t.popup("+" + str(int(ev.amount)), Palette.HEAL)
 			t.flash(Palette.HEAL, 0.5)
+			_fxl().heal(t.position, t.chest_position())
 			_sfx("heal", -6.0)
 			if _hero_stats.has(ev.src):
 				_hero_stats[ev.src].healing += ev.amount
@@ -653,6 +691,7 @@ func _on_impact(ev: Dictionary) -> void:
 			if t:
 				t.popup("Bouclier", Palette.SHIELD)
 				t.flash(Palette.SHIELD, 0.5)
+				_fxl().shield(t.chest_position(), t.height)
 				_sfx("shield", -6.0)
 		"status":
 			var t: UnitView = views.get(ev.dst)
@@ -662,6 +701,8 @@ func _on_impact(ev: Dictionary) -> void:
 					text = STATUS_LABELS.get(ev.status, "")
 				if text != "":
 					t.popup(text, Palette.GOLD, false, 1.4)
+				_fxl().status(String(ev.status), t.head_position(), t.chest_position(), t.position,
+					float(ev.get("duration", 0.0)))
 		"death":
 			var t: UnitView = views.get(ev.dst)
 			if t:
@@ -850,6 +891,9 @@ func _build_world() -> void:
 	fx = BattleFx.new()
 	add_child(fx)
 	fx.setup(camera)
+	fxlib = FxLibrary.new()
+	add_child(fxlib)
+	fxlib.setup(camera)
 
 
 ## Le cadre 1280 × 720 remplit la fenêtre (on coupe un peu les bords si le format diffère).

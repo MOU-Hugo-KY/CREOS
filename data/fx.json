@@ -1,0 +1,43 @@
+{
+  "_doc": "Effets visuels des attaques (affichage seulement). Impact = élément × type (base/technique/ultime) × nature (melee, ranged, magic, heal, shield, status). Une attaque peut avoir \"fx\": \"<clé de presets>\" qui prend le dessus. Formes : dot, ember, spark, leaf, drop, smoke, star, shard, ring.",
+  "elements": {
+    "feu":     {"shape": "ember", "colors": ["#fff3a0", "#ffb02e", "#e5452b", "#5a1a10"], "gravity": -260, "speed": [140, 360], "amount": 18, "life": 0.6, "size": 1.6, "additive": true,  "extra": {"shape": "smoke", "colors": ["#ff8a3c", "#3a2420"], "amount": 5, "gravity": -120, "speed": [30, 90], "life": 0.8, "size": 2.4}},
+    "eau":     {"shape": "drop",  "colors": ["#ffffff", "#9fe6ff", "#3a8fd8", "#1d4f8c"], "gravity": 900,  "speed": [220, 460], "amount": 18, "life": 0.6, "size": 1.4, "additive": false, "direction": [0, -1], "spread": 70, "extra": {"shape": "ring", "colors": ["#c8f2ff", "#3a8fd8"], "amount": 1, "gravity": 0, "speed": [0, 0], "life": 0.45, "size": 7.0}},
+    "nature":  {"shape": "leaf",  "colors": ["#e6ff9a", "#7fcf4a", "#3d8a32", "#24502a"], "gravity": 160,  "speed": [120, 300], "amount": 14, "life": 0.95, "size": 1.6, "additive": false, "spin": 400, "extra": {"shape": "dot", "colors": ["#f6ffd0", "#9be36a"], "amount": 8, "gravity": -60, "speed": [20, 80], "life": 0.9, "size": 0.8, "additive": true}},
+    "lumiere": {"shape": "spark", "colors": ["#ffffff", "#fff2a8", "#f2c14e", "#c6a66c"], "gravity": 0,    "speed": [260, 560], "amount": 16, "life": 0.4, "size": 1.6, "additive": true,  "align": true, "extra": {"shape": "star", "colors": ["#ffffff", "#ffd86b"], "amount": 6, "gravity": -40, "speed": [40, 140], "life": 0.7, "size": 1.3, "additive": true}},
+    "ombre":   {"shape": "smoke", "colors": ["#c79bff", "#7b3fb8", "#3b1a5c", "#120a1c"], "gravity": -70,  "speed": [50, 170],  "amount": 12, "life": 0.85, "size": 2.6, "additive": false, "extra": {"shape": "shard", "colors": ["#e8d4ff", "#8a4fd0"], "amount": 8, "gravity": 0, "speed": [160, 320], "life": 0.35, "size": 1.2, "additive": true, "align": true}},
+    "neutre":  {"shape": "spark", "colors": ["#ffffff", "#f3e3c0", "#c6a66c"], "gravity": 300, "speed": [200, 420], "amount": 12, "life": 0.35, "size": 1.3, "additive": true, "align": true}
+  },
+  "slots": {
+    "base":      {"scale": 1.0, "amount": 1.0},
+    "technique": {"scale": 1.3, "amount": 1.4},
+    "ultime":    {"scale": 1.8, "amount": 2.0, "flash": 0.35, "zoom": 0.06, "freeze": 0.2, "shake": 0.5, "ring": true},
+    "secret":    {"scale": 1.6, "amount": 1.8, "flash": 0.2,  "zoom": 0.04, "freeze": 0.14, "ring": true}
+  },
+  "natures": {
+    "melee":  {"impact": {"shape": "spark", "colors": ["#ffffff", "#ffe7a8", "#ffb347"], "gravity": 500, "speed": [260, 520], "amount": 10, "life": 0.28, "size": 1.2, "additive": true, "align": true}},
+    "ranged": {"impact": {"shape": "shard", "colors": ["#ffffff", "#e8e2d0", "#8a7a66"], "gravity": 600, "speed": [160, 360], "amount": 8, "life": 0.35, "size": 1.0, "align": true}},
+    "magic":  {"impact": {"shape": "ring", "colors": ["#ffffff", "@element"], "amount": 1, "gravity": 0, "speed": [0, 0], "life": 0.35, "size": 6.0, "additive": true}, "cast": true},
+    "heal":   {"cast": true},
+    "shield": {"cast": true},
+    "status": {"cast": true}
+  },
+  "cast": {"shape": "dot", "amount": 14, "gravity": -220, "speed": [20, 90], "life": 0.7, "size": 1.0, "additive": true, "radius": 40},
+  "crit": {"shape": "star", "colors": ["#ffffff", "#ffe066", "#ffb000"], "gravity": 200, "speed": [300, 620], "amount": 14, "life": 0.5, "size": 1.8, "additive": true, "flash": 0.12, "ring_color": "#ffe066"},
+  "heal":   {"shape": "dot", "colors": ["#ffffff", "#c8ffb0", "#5fd35f", "#2f8f4a"], "gravity": -260, "speed": [10, 60], "amount": 18, "life": 1.0, "size": 1.1, "additive": true, "radius": 46, "extra": {"shape": "star", "colors": ["#ffffff", "#9cff8a"], "amount": 5, "gravity": -180, "speed": [10, 40], "life": 1.0, "size": 1.0, "additive": true}},
+  "shield": {"color": "#7fd3ff", "life": 1.1, "radius": 70},
+  "statuses": {
+    "brulure":   {"shape": "ember", "colors": ["#fff3a0", "#ff8a2e", "#c8341e"], "gravity": -240, "speed": [20, 70], "amount": 10, "life": 0.8, "size": 1.3, "additive": true, "at": "chest", "radius": 26},
+    "poison":    {"shape": "dot",   "colors": ["#e3ff9a", "#8fd14f", "#4a7a2a"], "gravity": -120, "speed": [10, 40], "amount": 9, "life": 1.0, "size": 1.6, "at": "chest", "radius": 26},
+    "stun":      {"orbit": "star", "color": "#ffe066", "count": 3, "at": "head"},
+    "marque":    {"shape": "shard", "colors": ["#ffffff", "#ff5a6e", "#793b49"], "gravity": 0, "speed": [60, 140], "amount": 8, "life": 0.5, "size": 1.2, "additive": true, "at": "head", "align": true},
+    "mouille":   {"shape": "drop",  "colors": ["#ffffff", "#9fe6ff", "#3a8fd8"], "gravity": 700, "speed": [20, 80], "amount": 8, "life": 0.6, "size": 1.0, "at": "head", "radius": 20},
+    "aveugle":   {"shape": "smoke", "colors": ["#6a5a7a", "#2a2230"], "gravity": -40, "speed": [10, 40], "amount": 6, "life": 0.9, "size": 2.0, "at": "head"},
+    "enracine":  {"shape": "leaf",  "colors": ["#b6e36a", "#4f8a32"], "gravity": -80, "speed": [30, 90], "amount": 10, "life": 0.8, "size": 1.3, "at": "feet", "radius": 30, "spin": 300},
+    "taunt":     {"shape": "shard", "colors": ["#ffffff", "#ff6a3c"], "gravity": 0, "speed": [120, 220], "amount": 10, "life": 0.4, "size": 1.2, "additive": true, "at": "head", "align": true},
+    "regen":     {"shape": "dot",   "colors": ["#ffffff", "#9cff8a"], "gravity": -200, "speed": [10, 30], "amount": 8, "life": 0.8, "size": 0.9, "additive": true, "at": "chest", "radius": 30},
+    "_buff":     {"shape": "spark", "colors": ["#ffffff", "#ffd86b"], "gravity": -300, "speed": [40, 90], "amount": 8, "life": 0.6, "size": 1.0, "additive": true, "at": "feet", "radius": 30, "align": true},
+    "_debuff":   {"shape": "spark", "colors": ["#d8c8ff", "#6a4a9a"], "gravity": 300, "speed": [20, 60], "amount": 8, "life": 0.6, "size": 1.0, "at": "head", "radius": 24, "align": true}
+  },
+  "presets": {}
+}
