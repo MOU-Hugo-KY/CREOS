@@ -514,6 +514,8 @@ func _fill_crypt() -> void:
 		# Défenses (autour du point de construction).
 		var built: Array = l.defenses[r]
 		var anchor := Vector2(room.construction_anchor[0], room.construction_anchor[1])
+		if r == 2:
+			anchor.x -= 140  # salle du trésor : les défenses à gauche du coffre
 		var nd := int(spec.get("defenses", 1))
 		for k in nd:
 			var at := anchor + Vector2((k - (nd - 1) / 2.0) * 180.0, -6)
@@ -548,7 +550,7 @@ func _fill_crypt() -> void:
 		var traps: Array = l.traps[r]
 		var nt := int(spec.traps)
 		var cx := rr.get_center().x
-		ScreenPack.shadow(ScreenPack.text(_crypt_box, "Pièges", Rect2(cx - nt * 44.0 - 130, 662, 120, 30), 19, Color("cbbfae"),
+		ScreenPack.shadow(ScreenPack.text(_crypt_box, "Pièges", Rect2(cx - nt * 44.0 - 112, 668, 100, 30), 19, Color("cbbfae"),
 			HORIZONTAL_ALIGNMENT_RIGHT), 2)
 		for k in nt:
 			var cell := Rect2(cx - nt * 44.0 + k * 88.0, 646, 72, 72)
@@ -625,16 +627,16 @@ func _fill_crypt() -> void:
 	# Blason et nom de la loge.
 	FinPack.image(_crypt_box, "ma_loge/blason.png", FinPack.rect(P.blason))
 	var ln := ScreenPack.text(_crypt_box, PlayerData.lodge_name(), FinPack.rect(P.nom_loge).grow_individual(-4, 0, -4, 0),
-		14 if PlayerData.lodge_name().length() > 14 else 16, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
+		13 if PlayerData.lodge_name().length() > 14 else 15, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER)
 	ln.clip_text = true
 	# Mise, Force et essai, à droite.
 	var x0 := 1440.0
-	ScreenPack.shadow(ScreenPack.text(_crypt_box, "Mise du trésor : %s or" % HubHud._fmt(stake), Rect2(x0, 724, 440, 32), 22,
+	ScreenPack.shadow(ScreenPack.text(_crypt_box, "Mise du trésor : %s or" % HubHud._fmt(stake), Rect2(x0, 734, 440, 32), 22,
 		Color("ffd27a"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	var step := int(cfg.get("stake_step", 500))
 	for d in [-step, step]:
 		var b := FinPack.button(_crypt_box, "stele/bouton_%s" % ("moins" if d < 0 else "plus"),
-			Rect2(x0 + (110 if d < 0 else 234), 760, 96, 80))
+			Rect2(x0 + (110 if d < 0 else 234), 770, 96, 80))
 		b.texture_normal = MageRoom.tex("stele/bouton_%s_normal.png" % ("moins" if d < 0 else "plus"))
 		b.texture_hover = MageRoom.tex("stele/bouton_%s_survol.png" % ("moins" if d < 0 else "plus"))
 		b.texture_pressed = MageRoom.tex("stele/bouton_%s_appuye.png" % ("moins" if d < 0 else "plus"))
@@ -702,7 +704,7 @@ func _fill_rivals_board() -> void:
 				_rival_pick = idx
 				_fill_crypt())
 	var ab: Dictionary = D.get("buttons", {}).get("attaquer", {})
-	var go := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(720, 990, 380, 84), "Attaquer", 26)
+	var go := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(700, 970, 420, 88), "Attaquer", 24)
 	if rivals.is_empty():
 		go.disabled = true
 		return

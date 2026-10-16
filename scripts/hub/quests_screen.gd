@@ -356,7 +356,8 @@ func _fill_board() -> void:
 		var need := int(chests[i].points)
 		var opened: bool = daily.get("chests", []).has(i)
 		var ready := Quests.can_open_chest(daily, cfg, i)
-		var cx := fr.position.x + fr.size.x * (i + 0.5) / chests.size()
+		# Chaque coffre sous son seuil sur la barre (le dernier calé au bout).
+		var cx := clampf(fr.position.x + fr.size.x * float(need) / max_points, fr.position.x + 60, fr.end.x - 60)
 		var box := Control.new()
 		box.size = Vector2(120, 120)
 		box.position = Vector2(cx - 60, 900)
@@ -393,21 +394,21 @@ func _fill_weekly() -> void:
 	if W.is_empty():
 		return
 	var w := PlayerData.weekly()
-	var r := Rect2(110, 300, 290, 430)
+	var r := Rect2(110, 255, 290, 400)
 	FinPack.nine(_board_box, "primes/affiche_%s.png" % ("reclamee" if w.claimed else ("terminee" if PlayerData.can_claim_weekly() else "en_cours")),
 		r, [44, 56, 62, 96])
 	var need := int(W.get("days", 5))
 	var days := mini((w.days as Array).size(), need)
-	ScreenPack.text(_board_box, String(W.get("name", "Prime de la semaine")), Rect2(r.position + Vector2(24, 52), Vector2(240, 50)), 21,
+	ScreenPack.text(_board_box, String(W.get("name", "Prime de la semaine")), Rect2(r.position + Vector2(24, 66), Vector2(240, 50)), 20,
 		Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER, true)
 	ScreenPack.text(_board_box, "%s
 
 %d / %d jours
 
 +%d gemmes" % [W.get("description", ""), days, need,
-		int(W.get("rewards", {}).get("gems", 0))], Rect2(r.position + Vector2(24, 112), Vector2(240, 200)), 18, UiKit.INK,
+		int(W.get("rewards", {}).get("gems", 0))], Rect2(r.position + Vector2(24, 124), Vector2(240, 180)), 18, UiKit.INK,
 		HORIZONTAL_ALIGNMENT_CENTER, true)
-	var b := FinPack.button(_board_box, "primes/bouton_reclamer", Rect2(r.position + Vector2(10, r.size.y + 6), Vector2(270, 64)),
+	var b := FinPack.button(_board_box, "primes/bouton_reclamer", Rect2(r.position + Vector2(10, r.size.y + 2), Vector2(270, 64)),
 		"Fait" if w.claimed else "Réclamer", 20)
 	b.disabled = not PlayerData.can_claim_weekly()
 	b.pressed.connect(func() -> void:

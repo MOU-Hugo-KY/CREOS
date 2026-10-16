@@ -227,9 +227,12 @@ func _article(offer: Dictionary, slot: Dictionary) -> void:
 		ScreenPack.shadow(ScreenPack.text(_layer, "×%d" % int(gives[key]), Rect2(ar.end.x - 70, ar.end.y - 48, 80, 34), 24,
 			Color("ffd27a"), HORIZONTAL_ALIGNMENT_RIGHT), 2)
 	var pr := _rect(slot.prix_rect)
-	# Le nom, juste sous l'étiquette de prix de l'article.
-	ScreenPack.shadow(ScreenPack.text(_layer, String(offer.get("name", "")), Rect2(pr.position.x - 40, pr.end.y, pr.size.x + 80, 24),
-		16, Color("fff1cf"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Le nom, sur le coussin juste au-dessus de l'étiquette de prix (rien du rang du dessous ne le cache).
+	var nl := ScreenPack.shadow(ScreenPack.text(_layer, String(offer.get("name", "")), Rect2(pr.position.x - 60, pr.position.y - 24, pr.size.x + 120, 22),
+		15, Color("fff1cf"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+	nl.add_theme_constant_override("outline_size", 6)
+	nl.add_theme_color_override("font_outline_color", Color("29262e"))
+	nl.z_index = 1
 	var tag := _nine(_layer, "echoppe/etiquette_prix_normal.png", pr)
 	var parts: Array = []
 	for k: String in cost:

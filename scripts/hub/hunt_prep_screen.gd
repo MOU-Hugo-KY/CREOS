@@ -77,10 +77,11 @@ func _ready() -> void:
 	_energy = ScreenPack.shadow(ScreenPack.text(_root, "", Rect2(mr.position + Vector2(66, 0), mr.size - Vector2(80, 0)), 28,
 		UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
 	# Le niveau : un parchemin à droite.
-	var ir := Rect2(1400, 440, 510, 300)
+	var ir := Rect2(1440, 440, 470, 300)
 	FinPack.nine(_root, "preparation_chasse/commun/parchemin.png", ir, [140, 24, 140, 24])
-	_info = ScreenPack.text(_root, "", Rect2(ir.position + Vector2(100, 100), ir.size - Vector2(200, 160)), 17, UiKit.INK,
+	_info = ScreenPack.text(_root, "", Rect2(ir.position + Vector2(92, 70), ir.size - Vector2(184, 140)), 17, UiKit.INK,
 		HORIZONTAL_ALIGNMENT_CENTER, true)
+	_info.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_board = Control.new()
 	_board.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_board.size = Vector2(1920, 1080)
@@ -95,7 +96,8 @@ func _ready() -> void:
 		"preparation_chasse/jauge_force_remplissage.png", FinPack.rect(P.force_remplissage))
 	_root.add_child(_force)
 	for i in mini(PASTILLES.size(), P.synergies.size()):
-		var t := FinPack.image(_root, "", FinPack.rect(P.synergies[i]))
+		var t := FinPack.image(_root, "", FinPack.rect(P.synergies[i]).grow(-2).abs())
+		t.position.x -= 14  # la rangée reste sous la jauge de Force
 		t.mouse_filter = Control.MOUSE_FILTER_STOP
 		_pastilles.append(t)
 	var go: Dictionary = D.get("buttons", {}).get("partir", {})
@@ -126,7 +128,8 @@ func refresh() -> void:
 	_title.text = String(d.get("name", dungeon_id)).to_upper()
 	_energy.text = "%d / %d" % [PlayerData.energy(), PlayerData.energy_max()]
 	var team := PlayerData.team()
-	var lines: Array[String] = ["%d vagues · meilleur score : %s" % [d.get("waves", []).size(),
+	var lines: Array[String] = ["%d vagues
+Meilleur score : %s" % [d.get("waves", []).size(),
 		"★".repeat(PlayerData.best_stars(dungeon_id)) if PlayerData.best_stars(dungeon_id) > 0 else "aucun"]]
 	var formed: Array = []
 	for cid: String in GameData.team_combos():
@@ -282,7 +285,7 @@ func _fill_drawer(team: Array) -> void:
 	ScreenPack.shadow(ScreenPack.text(_drawer, "Choisis tes chasseurs · %d / 7" % team.size(),
 		Rect2(tr.position + Vector2(0, -40), Vector2(tr.size.x, 34)), 24, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 3)
 	ScreenPack.shadow(ScreenPack.text(_drawer, "Touche deux héros de la formation pour échanger leurs places",
-		Rect2(tr.position + Vector2(0, tr.size.y - 48), Vector2(tr.size.x, 28)), 18, Color("cbbfae"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+		Rect2(tr.position + Vector2(0, tr.size.y - 58), Vector2(tr.size.x, 28)), 18, Color("cbbfae"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	if pages > 1:
 		for dir: int in [-1, 1]:
 			var a := TextureButton.new()

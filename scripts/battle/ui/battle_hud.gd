@@ -350,7 +350,7 @@ func _build_header() -> void:
 	var right := HBoxContainer.new()
 	right.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	right.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-	right.offset_right = -40
+	right.offset_right = -30
 	right.offset_top = 28
 	right.add_theme_constant_override("separation", 8)
 	_root.add_child(right)

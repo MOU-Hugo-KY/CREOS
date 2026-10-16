@@ -626,7 +626,7 @@ func _build_side(key: String, left: bool) -> void:
 	if left:
 		col.offset_left = 18
 	else:
-		col.offset_right = -18
+		col.offset_right = -32
 	col.offset_top = -120
 	col.add_theme_constant_override("separation", 6)
 	_root.add_child(col)

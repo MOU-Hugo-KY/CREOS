@@ -81,5 +81,5 @@ func _draw() -> void:
 		draw_rect(r, edge, false, 3.0 if i == 0 else 2.0)
 		if i == 0:
 			draw_rect(Rect2(x + 6, FIRST + 4, s - 12, 20), Color(0.08, 0.07, 0.1, 0.85))
-			draw_string(UiKit.FONT, Vector2(x, FIRST + 19), "À lui", HORIZONTAL_ALIGNMENT_CENTER, s, 16, edge)
+			draw_string(UiKit.FONT, Vector2(x, FIRST + 21), "À lui", HORIZONTAL_ALIGNMENT_CENTER, s, 19, edge)
 		x += s + GAP
