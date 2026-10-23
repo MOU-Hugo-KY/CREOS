@@ -10,6 +10,7 @@ extends SceneTree
 ##   --scene=res://scenes/hub/hub.tscn   capture une autre scène (défaut : le combat)
 ##   --action=campaign   (hub) ouvre un écran avant la capture : campaign, heroes, altar, shop, relics…
 ##   --hour=23      (hub) heure du port (aube 7, jour 13, crépuscule 19.3, nuit 23)
+##   --demo              (défense) pose une base d'exemple
 ##   --hero=corbin       (hub, avec --action=heroes) ouvre la fiche de ce héros
 
 var shots: Array[int] = [200]
@@ -30,6 +31,7 @@ var combo := ""  # --combo=ombres : lance ce combo dès le premier tour (membres
 
 
 var team: Array = []
+var demo := false
 
 
 func _initialize() -> void:
@@ -62,6 +64,8 @@ func _initialize() -> void:
 			root.get_node("PlayerData").current_dungeon = arg.trim_prefix("--dungeon=")
 		elif arg.begins_with("--endwait="):
 			end_wait = int(arg.trim_prefix("--endwait="))
+		elif arg == "--demo":
+			demo = true
 		elif arg == "--draw":
 			force_draw = true
 		elif arg.begins_with("--combo="):
@@ -76,6 +80,8 @@ func _initialize() -> void:
 		pd.state.team = team
 	scene = load(scene_path).instantiate()
 	root.add_child(scene)
+	if demo and scene.has_method("demo_setup"):
+		scene.demo_setup()
 	if scene.has_method("set_auto"):
 		scene.set_auto(auto)
 	Engine.time_scale = speed

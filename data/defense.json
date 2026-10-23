@@ -1,0 +1,32 @@
+{
+	"grid": { "cols": 16, "rows": 9, "build_cols": 6 },
+	"castle": { "cell": [0, 4], "hp": 1000 },
+	"start_gold": 300,
+	"wave_gold": 60,
+	"first_wave_delay": 8.0,
+	"wave_interval": 22.0,
+	"placeables": {
+		"guerrier": { "name": "Guerrier", "type": "troop", "cost": 50, "hp": 220, "atk": 22, "range": 0.8, "speed": 1.6, "cooldown": 1.0, "aggro": 3.5 },
+		"archer": { "name": "Archer", "type": "troop", "cost": 60, "hp": 120, "atk": 16, "range": 3.5, "speed": 1.4, "cooldown": 1.2, "aggro": 4.5 },
+		"lancier": { "name": "Lancier", "type": "troop", "cost": 70, "hp": 300, "atk": 18, "range": 1.2, "speed": 1.2, "cooldown": 1.1, "aggro": 3.0 },
+		"tour": { "name": "Tour", "type": "defense", "cost": 120, "hp": 500, "atk": 20, "range": 4.5, "cooldown": 1.0 },
+		"barriere": { "name": "Barrière", "type": "defense", "cost": 40, "hp": 600, "atk": 0, "range": 0, "cooldown": 1.0, "blocks": true },
+		"catapulte": { "name": "Catapulte", "type": "defense", "cost": 160, "hp": 350, "atk": 45, "range": 7.0, "cooldown": 3.5, "splash": 1.2 }
+	},
+	"heroes": {
+		"chevalier": {
+			"name": "Chevalier", "hp": 900, "atk": 40, "range": 0.9, "speed": 1.8, "cooldown": 0.9, "aggro": 5.0,
+			"skill": { "name": "Cri de guerre", "cooldown": 18.0, "kind": "heal_allies", "amount": 0.35, "radius": 3.0 }
+		},
+		"archere": {
+			"name": "Archère", "hp": 500, "atk": 32, "range": 4.5, "speed": 1.6, "cooldown": 0.8, "aggro": 6.0,
+			"skill": { "name": "Pluie de flèches", "cooldown": 15.0, "kind": "damage_area", "amount": 120, "radius": 2.5 }
+		}
+	},
+	"enemies": {
+		"gobelin": { "name": "Gobelin", "hp": 90, "atk": 10, "range": 0.7, "speed": 1.1, "cooldown": 1.0, "gold": 8 },
+		"brute": { "name": "Brute", "hp": 320, "atk": 28, "range": 0.8, "speed": 0.7, "cooldown": 1.5, "gold": 20 },
+		"lanceur": { "name": "Lanceur de dynamite", "hp": 70, "atk": 18, "range": 3.0, "speed": 1.0, "cooldown": 2.0, "gold": 12 }
+	},
+	"waves": { "base_count": 4, "count_per_wave": 2, "hp_growth": 0.12, "spawn_gap": 1.2 }
+}

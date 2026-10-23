@@ -56,3 +56,10 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 
 ## Agents IA (`.claude/agents/`)
 - 14 fiches tirées de [The Agency](https://github.com/msitarzewski/agency-agents) (licence MIT, © Mike Sitarzewski), adaptées avec un bloc de contexte CREOS.
+
+## Tiny Swords (Free Pack) — Pixel Frog
+
+https://pixelfrog-assets.itch.io/tiny-swords — terrain, bâtiments, unités, effets et boutons de la
+défense de base. Utilisable dans un jeu (même commercial) mais **non redistribuable** : les images ne
+sont pas dans git (`assets/tiny/` est ignoré). Télécharger le pack dans `D:/dev/CREOS_sources/TinySwords`
+puis lancer `python tools/import_tiny_swords.py`.
