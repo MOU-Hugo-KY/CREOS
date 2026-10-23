@@ -4,7 +4,7 @@ extends RefCounted
 ## Le joueur pose troupes, défenses et héros sur les cases de sa zone ; tout bouge ensuite seul.
 ## Les héros ont une compétence que le joueur déclenche. Les vagues arrivent sans fin par la droite.
 ## Positions en cases (Vector2, le centre d'une case = col + 0,5).
-## Événements : placed, spawn, attack, damage, death, skill, wave_start, castle_hit, defeat.
+## Événements : placed, moved, spawn, attack, damage, death, skill, wave_start, castle_hit, defeat.
 
 var cfg: Dictionary = {}
 var units: Array = []  # dictionnaires, voir _make_unit()
@@ -46,8 +46,27 @@ func rows() -> int:
 	return int(cfg.grid.rows)
 
 
+## Rangées de la zone de construction (le plateau de la base ; la falaise est dessous).
+func build_rows() -> int:
+	return int(cfg.grid.get("build_rows", rows()))
+
+
+## Case en haut à gauche du château ; il occupe castle_size() cases.
 func castle_cell() -> Vector2i:
 	return Vector2i(int(cfg.castle.cell[0]), int(cfg.castle.cell[1]))
+
+
+func castle_size() -> Vector2i:
+	var sz: Array = cfg.castle.get("size", [1, 1])
+	return Vector2i(int(sz[0]), int(sz[1]))
+
+
+func castle_center() -> Vector2:
+	return Vector2(castle_cell()) + Vector2(castle_size()) / 2.0
+
+
+func in_castle(cell: Vector2i) -> bool:
+	return Rect2i(castle_cell(), castle_size()).has_point(cell)
 
 
 func time_to_next_wave() -> float:
@@ -71,19 +90,40 @@ func cost_of(kind: String) -> int:
 func can_place(kind: String, cell: Vector2i) -> bool:
 	if finished:
 		return false
-	if cell.x < 0 or cell.y < 0 or cell.x >= int(cfg.grid.build_cols) or cell.y >= rows():
-		return false
-	if cell == castle_cell():
+	if not _free_build_cell(cell, 0):
 		return false
 	if not cfg.placeables.has(kind) and not cfg.heroes.has(kind):
 		return false
 	if cfg.heroes.has(kind) and hero_uid(kind) != 0:
 		return false
-	if gold < cost_of(kind):
+	return gold >= cost_of(kind)
+
+
+## Case de la zone de construction, hors château, sans autre unité postée (sauf `ignore_uid`).
+func _free_build_cell(cell: Vector2i, ignore_uid: int) -> bool:
+	if cell.x < 0 or cell.y < 0 or cell.x >= int(cfg.grid.build_cols) or cell.y >= build_rows():
+		return false
+	if in_castle(cell):
 		return false
 	for u in units:
-		if u.alive and u.team == 0 and u.post == cell:
+		if u.alive and u.team == 0 and u.post == cell and u.uid != ignore_uid:
 			return false
+	return true
+
+
+## Les troupes et les héros peuvent changer de case ; ils y marchent tout seuls.
+func can_move(uid: int, cell: Vector2i) -> bool:
+	var u := unit(uid)
+	if finished or u.is_empty() or not u.alive or u.team != 0 or u.role == "defense":
+		return false
+	return _free_build_cell(cell, uid)
+
+
+func move_unit(uid: int, cell: Vector2i) -> bool:
+	if not can_move(uid, cell):
+		return false
+	unit(uid).post = cell
+	_events.append({"type": "moved", "uid": uid})
 	return true
 
 
@@ -248,8 +288,8 @@ func _ally_think(u: Dictionary, delta: float) -> void:
 # Ennemis : avancent vers le château ; attaquent ce qui est à portée en chemin.
 func _enemy_think(u: Dictionary, delta: float) -> void:
 	u.moving = false
-	var castle := Vector2(castle_cell()) + Vector2(0.5, 0.5)
-	if u.pos.distance_to(castle) <= u.range + 0.6:
+	var castle := castle_center()
+	if u.pos.distance_to(castle) <= u.range + 0.5 + castle_size().x / 2.0:
 		if u.atk_timer <= 0.0:
 			u.atk_timer = u.cooldown
 			castle_hp = max(0, castle_hp - u.atk)

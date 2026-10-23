@@ -28,7 +28,12 @@ func _initialize() -> void:
 	check(e.place("archer", e.castle_cell()) == 0, "pas sur le château")
 	var hero := e.place("archere", Vector2i(2, 2))
 	check(hero != 0 and e.place("archere", Vector2i(2, 3)) == 0, "un seul exemplaire de chaque héros")
-	e.place("tour", Vector2i(4, 5))
+	var tower := e.place("tour", Vector2i(4, 5))
+	var g := e.place("guerrier", Vector2i(1, 1))
+	check(e.move_unit(g, Vector2i(4, 1)) and e.unit(g).post == Vector2i(4, 1), "on déplace une troupe sur une case libre")
+	check(not e.move_unit(g, Vector2i(3, 4)), "pas sur une case occupée")
+	check(not e.move_unit(g, Vector2i(1, 4)), "pas dans le château (2×2 cases)")
+	check(not e.move_unit(tower, Vector2i(4, 6)), "une tour ne bouge pas")
 	check(e.use_skill(hero), "la compétence est prête au départ")
 	check(not e.use_skill(hero), "puis elle recharge")
 

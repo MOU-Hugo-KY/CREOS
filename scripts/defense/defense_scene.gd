@@ -5,8 +5,8 @@ extends Node2D
 
 const CELL := 96.0  # une tuile du pack (64 px) agrandie ×1,5
 const TILE := 64.0
-const BOARD_ORIGIN := Vector2(96, 72)
-const PANEL_X := 1660.0
+const BOARD_ORIGIN := Vector2(192, 64)
+const BAR_Y := 944.0  # barre des cartes en bas
 const FPS := 10.0
 const TINY := "res://assets/tiny/"
 
@@ -24,7 +24,9 @@ const LOOKS := {
 }
 
 var engine := DefenseEngine.new()
-var selected := "guerrier"
+var selected := ""  # ce qu'on va poser (vide = rien)
+var moving_uid := 0  # troupe ou héros choisi pour changer de case
+var _dragging := false
 var paused := false
 var hover_cell := Vector2i(-1, -1)
 var anim_time := 0.0
@@ -35,6 +37,7 @@ var _fx: Array = []  # flèches, explosions, poussières, cercles de compétence
 var _hud: Label
 var _pause_btn: Button
 var _skill_buttons := {}  # id du héros -> Button
+var _cards := {}  # id posable -> Button
 var _end_label: Label
 
 
@@ -64,9 +67,9 @@ func demo_setup() -> void:
 	if not is_node_ready():
 		await ready
 	engine.gold = 2000
-	for order in [["guerrier", 4, 3], ["guerrier", 4, 5], ["lancier", 5, 4], ["archer", 2, 2], ["archer", 2, 6],
-			["tour", 3, 1], ["tour", 3, 7], ["barriere", 5, 2], ["barriere", 5, 6], ["catapulte", 1, 2],
-			["chevalier", 3, 4], ["archere", 2, 4]]:
+	for order in [["guerrier", 4, 2], ["guerrier", 4, 4], ["lancier", 5, 3], ["archer", 2, 1], ["archer", 2, 5],
+			["tour", 3, 0], ["tour", 3, 6], ["barriere", 5, 1], ["barriere", 5, 5], ["catapulte", 1, 1],
+			["chevalier", 3, 3], ["archere", 2, 3]]:
 		engine.place(order[0], Vector2i(order[1], order[2]))
 
 
@@ -75,31 +78,62 @@ func demo_setup() -> void:
 func _build_ui() -> void:
 	var layer := CanvasLayer.new()
 	add_child(layer)
-	_hud = _label(layer, Vector2(BOARD_ORIGIN.x, 12), 34, Color.WHITE)
+	_hud = _label(layer, Vector2(BOARD_ORIGIN.x, 8), 34, Color.WHITE)
 
-	_pause_btn = _button(layer, "Pause", Vector2(PANEL_X, 12), Vector2(240, 72))
+	_pause_btn = _button(layer, "Pause", Vector2(1560, 4), Vector2(170, 56))
 	_pause_btn.pressed.connect(func() -> void: set_paused(not paused))
 
-	var y := 100.0
+	# cartes : une par troupe, défense ou héros, avec son image et son prix
+	var x := BOARD_ORIGIN.x
 	var kinds: Array = engine.cfg.placeables.keys() + engine.cfg.heroes.keys()
 	for kind in kinds:
-		var def: Dictionary = engine.cfg.placeables.get(kind, engine.cfg.heroes.get(kind, {}))
-		var text := "%s  %d or" % [def.name, engine.cost_of(kind)] if engine.cfg.placeables.has(kind) else "%s  (héros)" % def.name
-		var b := _button(layer, text, Vector2(PANEL_X, y), Vector2(240, 72))
-		b.pressed.connect(func() -> void: selected = kind)
-		y += 80.0
+		var price := "%d" % engine.cost_of(kind) if engine.cfg.placeables.has(kind) else "héros"
+		var b := _button(layer, price, Vector2(x, BAR_Y), Vector2(124, 124))
+		b.icon = _card_icon(kind)
+		b.expand_icon = true
+		b.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		b.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
+		b.tooltip_text = _name_of(kind)
+		b.pressed.connect(func() -> void: _select_card(kind))
+		_cards[kind] = b
+		x += 132.0
 
-	y += 20.0
+	x += 24.0
 	for hid in engine.cfg.heroes.keys():
-		var b := _button(layer, "", Vector2(PANEL_X, y), Vector2(240, 80), true)
+		var b := _button(layer, "", Vector2(x, BAR_Y + 22), Vector2(210, 80), true)
+		b.add_theme_font_size_override("font_size", 19)
 		b.pressed.connect(func() -> void: engine.use_skill(engine.hero_uid(hid)))
 		_skill_buttons[hid] = b
-		y += 88.0
+		x += 218.0
 
-	_end_label = _label(layer, Vector2(560, 440), 64, Color.WHITE)
+	_end_label = _label(layer, Vector2(560, 400), 64, Color.WHITE)
 	_end_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_end_label.size = Vector2(800, 200)
 	_end_label.visible = false
+
+
+## Première image de l'unité (ou le bâtiment) pour sa carte.
+func _card_icon(kind: String) -> Texture2D:
+	var t: Texture2D
+	var region := Rect2()
+	if LOOKS.has(kind):
+		t = tex("units/%s/%s_idle.png" % [LOOKS[kind][0], LOOKS[kind][1]])
+		if t:
+			var fh := float(t.get_height())
+			region = Rect2(fh * 0.25, fh * 0.2, fh * 0.5, fh * 0.5)  # le personnage, sans le vide autour
+	else:
+		t = tex({"tour": "buildings/tower.png", "catapulte": "buildings/archery.png", "barriere": "terrain/rock1.png"}.get(kind, ""))
+	if t == null or region == Rect2():
+		return t
+	var at := AtlasTexture.new()
+	at.atlas = t
+	at.region = region
+	return at
+
+
+func _select_card(kind: String) -> void:
+	selected = "" if selected == kind else kind
+	moving_uid = 0
 
 
 func _label(parent: Node, pos: Vector2, font_size: int, color: Color) -> Label:
@@ -164,8 +198,16 @@ func _process(delta: float) -> void:
 	_update_facing()
 
 	var next := "" if engine.finished else "  ·  prochaine dans %d s" % ceili(engine.time_to_next_wave())
-	_hud.text = "Or %d  ·  Château %d / %d  ·  Vague %d%s  ·  Pose : %s" % [
-		engine.gold, engine.castle_hp, engine.castle_max_hp, engine.wave, next, _name_of(selected)]
+	_hud.text = "Or %d  ·  Château %d / %d  ·  Vague %d%s" % [
+		engine.gold, engine.castle_hp, engine.castle_max_hp, engine.wave, next]
+	for kind in _cards:
+		var card: Button = _cards[kind]
+		card.disabled = (engine.cfg.placeables.has(kind) and engine.gold < engine.cost_of(kind)) \
+				or (engine.cfg.heroes.has(kind) and engine.hero_uid(kind) != 0)
+		card.modulate = Color(1.15, 1.15, 1.15) if kind == selected else Color.WHITE
+		card.position.y = BAR_Y - (12.0 if kind == selected else 0.0)
+	if moving_uid != 0 and engine.unit(moving_uid).is_empty():
+		moving_uid = 0
 	for hid in _skill_buttons:
 		var uid := engine.hero_uid(hid)
 		var b: Button = _skill_buttons[hid]
@@ -215,13 +257,47 @@ func _update_facing() -> void:
 		v.last_x = u.pos.x
 
 
+## Clic sur une de ses troupes (ou un héros) : on la choisit, puis on clique sa nouvelle case
+## (ou on la fait glisser). Sinon, un clic pose la carte choisie. Clic droit : annule.
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		hover_cell = _cell_at(event.position)
-	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		engine.place(selected, _cell_at(event.position))
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		var cell := _cell_at(event.position)
+		if event.pressed:
+			var uid := _unit_at(event.position)
+			if uid != 0:
+				moving_uid = uid
+				selected = ""
+				_dragging = true
+			elif moving_uid != 0:
+				engine.move_unit(moving_uid, cell)
+				moving_uid = 0
+			elif selected != "":
+				engine.place(selected, cell)
+		elif _dragging:
+			_dragging = false
+			var u := engine.unit(moving_uid)
+			if not u.is_empty() and cell != u.post and engine.move_unit(moving_uid, cell):
+				moving_uid = 0
+	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		moving_uid = 0
+		selected = ""
 	elif event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		set_paused(not paused)
+
+
+## Troupe ou héros du joueur sous le pointeur (0 si aucun).
+func _unit_at(screen: Vector2) -> int:
+	var best := 0
+	var best_d := 0.6
+	for u in engine.units:
+		if u.team == 0 and u.role != "defense":
+			var d: float = (_to_screen(u.pos) - Vector2(0, CELL * 0.3)).distance_to(screen) / CELL
+			if d < best_d:
+				best_d = d
+				best = u.uid
+	return best
 
 
 func _cell_at(screen: Vector2) -> Vector2i:
@@ -239,13 +315,17 @@ func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, Vector2(1920, 1080)), WATER)
 	_draw_island()
 	_draw_water_decor()
-	if hover_cell.x >= 0 and hover_cell.y >= 0 and hover_cell.x < engine.cols() and hover_cell.y < engine.rows():
-		var ok := engine.can_place(selected, hover_cell)
+	if moving_uid != 0:
+		var post: Vector2i = engine.unit(moving_uid).post
+		draw_rect(Rect2(_to_screen(Vector2(post)) + Vector2(4, 4), Vector2(CELL - 8, CELL - 8)), Color(1, 1, 1, 0.8), false, 3.0)
+	var showing := moving_uid != 0 or selected != ""
+	if showing and hover_cell.x >= 0 and hover_cell.y >= 0 and hover_cell.x < engine.cols() and hover_cell.y < engine.rows():
+		var ok := engine.can_move(moving_uid, hover_cell) if moving_uid != 0 else engine.can_place(selected, hover_cell)
 		draw_rect(Rect2(_to_screen(Vector2(hover_cell)), Vector2(CELL, CELL)), Color(1, 1, 1, 0.35) if ok else Color(1, 0.2, 0.2, 0.3))
 
 	# château et unités, triés par leur point au sol
 	var drawables: Array = engine.units.duplicate()
-	drawables.append({"castle": true, "pos": Vector2(engine.castle_cell()) + Vector2(0.5, 0.5)})
+	drawables.append({"castle": true, "pos": engine.castle_center()})
 	drawables.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.pos.y < b.pos.y)
 	for d in drawables:
 		if d.has("castle"):
@@ -274,20 +354,52 @@ func _draw_island() -> void:
 				if c == 0 or r == 0 or c == cols - 1 or r == rows:
 					var center := _to_screen(Vector2(c + 0.5, r + 0.5))
 					draw_texture_rect_region(foam, Rect2(center - Vector2(144, 144), Vector2(288, 288)), Rect2(fr * 192, 0, 192, 192))
+	# sol bas de l'île (tuiles plates, colonnes 0-2 du pack) et falaise avec écume dessous
 	for c in cols:
-		var tx := 0 if c == 0 else (2 if c == cols - 1 else 1)
 		for r in rows:
-			var ty := 0 if r == 0 else (2 if r == rows - 1 else 1)
-			draw_texture_rect_region(tm, Rect2(_to_screen(Vector2(c, r)), Vector2(CELL, CELL)), Rect2(tx * TILE, ty * TILE, TILE, TILE))
-		# falaise sous la dernière rangée
-		var cx := 6 if c == 0 else (8 if c == cols - 1 else 7)
-		draw_texture_rect_region(tm, Rect2(_to_screen(Vector2(c, rows)), Vector2(CELL, CELL)), Rect2(cx * TILE, 5 * TILE, TILE, TILE))
-	# zone de construction : cases légèrement éclairées
-	for c in int(engine.cfg.grid.build_cols):
-		for r in rows:
-			var rect := Rect2(_to_screen(Vector2(c, r)) + Vector2(3, 3), Vector2(CELL - 6, CELL - 6))
-			draw_rect(rect, Color(1, 1, 1, 0.07))
-			draw_rect(rect, Color(1, 1, 1, 0.18), false, 2.0)
+			_tile(tm, Vector2i(c, r), Vector2i(_edge(c, cols), _edge(r, rows)))
+		_tile(tm, Vector2i(c, rows), Vector2i(5 + _edge(c, cols), 5))
+	# plateau de la base : herbe surélevée (colonnes 5-7), ombre portée à droite, falaise dessous
+	var pw := int(engine.cfg.grid.build_cols)
+	var ph := engine.build_rows()
+	var shadow := tex("terrain/shadow.png")
+	if shadow:
+		draw_texture_rect(shadow, Rect2(_to_screen(Vector2(pw - 0.6, 0.2)), Vector2(CELL * 1.1, CELL * ph)), false, Color(1, 1, 1, 0.55))
+		draw_texture_rect(shadow, Rect2(_to_screen(Vector2(0, ph + 0.6)), Vector2(CELL * pw, CELL * 0.8)), false, Color(1, 1, 1, 0.55))
+	for c in pw:
+		for r in ph:
+			_tile(tm, Vector2i(c, r), Vector2i(5 + _edge(c, pw), _edge(r, ph)))
+		_tile(tm, Vector2i(c, ph), Vector2i(5 + _edge(c, pw), 4))
+	# zone de construction : cases légèrement marquées
+	for c in pw:
+		for r in ph:
+			var rect := Rect2(_to_screen(Vector2(c, r)) + Vector2(4, 4), Vector2(CELL - 8, CELL - 8))
+			draw_rect(rect, Color(1, 1, 1, 0.14), false, 2.0)
+	_draw_scenery()
+
+
+## Colonne (ou rangée) de tuile d'un bloc 3×3 : 0 = bord gauche, 1 = milieu, 2 = bord droit.
+func _edge(i: int, count: int) -> int:
+	return 0 if i == 0 else (2 if i == count - 1 else 1)
+
+
+func _tile(tm: Texture2D, cell: Vector2i, src: Vector2i) -> void:
+	draw_texture_rect_region(tm, Rect2(_to_screen(Vector2(cell)), Vector2(CELL, CELL)), Rect2(Vector2(src) * TILE, Vector2(TILE, TILE)))
+
+
+## Arbres et buissons sur les bords de l'île, là où personne ne passe.
+func _draw_scenery() -> void:
+	var tree := tex("terrain/tree.png")
+	var bush := tex("terrain/bush.png")
+	var rows := engine.rows()
+	if bush:
+		var fr := int(anim_time * 8.0) % 8
+		for p in [Vector2(7.2, 0.15), Vector2(10.6, 0.1), Vector2(13.8, rows - 0.2), Vector2(8.5, rows - 0.15)]:
+			draw_texture_rect_region(bush, Rect2(_to_screen(p) - Vector2(48, 72), Vector2(96, 96)), Rect2(fr * 128, 0, 128, 128))
+	if tree:
+		var fr := int(anim_time * 8.0) % 8
+		for p in [Vector2(9.6, 0.9), Vector2(14.4, 0.95), Vector2(11.2, rows + 0.05), Vector2(15.3, rows - 0.4)]:
+			draw_texture_rect_region(tree, Rect2(_to_screen(p) - Vector2(72, 180), Vector2(144, 192)), Rect2(fr * 192, 0, 192, 256))
 
 
 func _draw_water_decor() -> void:
@@ -312,14 +424,17 @@ func _draw_clouds() -> void:
 
 
 func _draw_castle() -> void:
-	var foot := _to_screen(Vector2(engine.castle_cell()) + Vector2(0.5, 1.0))
+	var foot := _to_screen(engine.castle_center() + Vector2(0, engine.castle_size().y / 2.0 - 0.1))
 	var t := tex("buildings/castle.png")
 	if t:
-		var size := Vector2(320, 256) * 0.7
+		var size := Vector2(320, 256) * 0.62
+		var sh := tex("terrain/shadow.png")
+		if sh:
+			draw_texture_rect(sh, Rect2(foot - Vector2(130, 40), Vector2(260, 80)), false, Color(1, 1, 1, 0.7))
 		draw_texture_rect(t, Rect2(foot - Vector2(size.x / 2, size.y - 10), size), false)
 	else:
 		draw_rect(Rect2(foot - Vector2(40, 110), Vector2(80, 110)), Color("#d9c7a3"))
-	_bar(foot + Vector2(-80, -200), 160, float(engine.castle_hp) / engine.castle_max_hp)
+	_bar(foot + Vector2(-70, -180), 140, float(engine.castle_hp) / engine.castle_max_hp)
 
 
 func _draw_unit(u: Dictionary) -> void:
@@ -334,8 +449,6 @@ func _draw_unit(u: Dictionary) -> void:
 		drawn = _draw_sprite_unit(u, p)
 	if not drawn:
 		draw_circle(p, 22, BLUE if u.team == 0 else RED)
-	if u.role == "hero":
-		draw_arc(p + Vector2(0, 8), 34, 0, TAU, 32, Color("#f2d24b"), 4.0)
 	if u.hp < u.max_hp:
 		_bar(p + Vector2(-30, -80), 60, float(u.hp) / u.max_hp)
 
@@ -360,7 +473,8 @@ func _draw_sprite_unit(u: Dictionary, p: Vector2) -> bool:
 	# le personnage est au centre de son image ; ses pieds sont un peu sous le centre
 	var center := p - Vector2(0, size * 0.18)
 	draw_set_transform(center, 0.0, Vector2(v.face, 1.0))
-	draw_texture_rect_region(t, Rect2(-size / 2, -size / 2, size, size), Rect2(fr * fh, 0, fh, fh))
+	var glow := Color(1.5, 1.5, 1.5) if u.uid == moving_uid and int(anim_time * 4.0) % 2 == 0 else Color.WHITE
+	draw_texture_rect_region(t, Rect2(-size / 2, -size / 2, size, size), Rect2(fr * fh, 0, fh, fh), glow)
 	draw_set_transform(Vector2.ZERO)
 	return true
 

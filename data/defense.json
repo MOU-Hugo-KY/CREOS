@@ -1,6 +1,6 @@
 {
-	"grid": { "cols": 16, "rows": 9, "build_cols": 6 },
-	"castle": { "cell": [0, 4], "hp": 1000 },
+	"grid": { "cols": 16, "rows": 8, "build_cols": 6, "build_rows": 7 },
+	"castle": { "cell": [0, 3], "size": [2, 2], "hp": 1000 },
 	"start_gold": 300,
 	"wave_gold": 60,
 	"first_wave_delay": 8.0,
