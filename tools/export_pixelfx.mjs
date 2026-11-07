@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Exporte les effets pixelfx choisis dans data/pixelfx.json en planches pour Godot (assets/pixelfx/).
 //
-//   node tools/export_pixelfx.mjs [chemin_de_pixelfx]      (défaut : D:/dev/creos-plateau/pixelfx)
+//   node tools/export_pixelfx.mjs [--data=data/pixelfx_xxx.json] [chemin_de_pixelfx]   (défaut : data/pixelfx.json,
+//   D:/dev/creos-plateau/pixelfx). Toute entrée qui a une clé "fx" (à n'importe quelle profondeur) est exportée.
 //
 // Une planche par couple (effet, palette) : <categorie>-<nom>[-<palette>].png (grille, 4096 px de large au plus,
 // recadrée sur ce qui est dessiné) + .json { frames, size, columns, fps, pivot, loop }. Le pivot est l'origine de
@@ -12,16 +13,28 @@ import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const PFX = process.argv[2] ?? "D:/dev/creos-plateau/pixelfx";
+const ARGS = process.argv.slice(2);
+const DATA = (ARGS.find((a) => a.startsWith("--data=")) ?? "--data=data/pixelfx.json").slice(7);
+const PFX = ARGS.find((a) => !a.startsWith("--")) ?? "D:/dev/creos-plateau/pixelfx";
 const lib = await import(pathToFileURL(join(PFX, "tools/lib/fxlib.mjs")).href);
 const { encodePNG } = await import(pathToFileURL(join(PFX, "tools/lib/png.mjs")).href);
-const cfg = JSON.parse(readFileSync(join(ROOT, "data/pixelfx.json"), "utf8"));
+const cfg = JSON.parse(readFileSync(join(ROOT, DATA), "utf8"));
+const base = JSON.parse(readFileSync(join(ROOT, "data/pixelfx.json"), "utf8"));
+cfg.palettes = { ...base.palettes, ...(cfg.palettes ?? {}) };
+// toutes les entrées { fx, ... } du fichier, où qu'elles soient
+const entries = [];
+(function walk(o, path) {
+  if (o && typeof o === "object") {
+    if (typeof o.fx === "string") entries.push([path, o]);
+    for (const [k, v] of Object.entries(o)) if (k !== "fx") walk(v, path ? path + "." + k : k);
+  }
+})(cfg, "");
 const OUT = join(ROOT, "assets/pixelfx");
 mkdirSync(OUT, { recursive: true });
 
 const FPS = 24;
 const done = new Set();
-for (const [attack, e] of Object.entries(cfg.attacks)) {
+for (const [attack, e] of entries) {
   const key = e.fx.replace("/", "-") + (e.pal ? "-" + e.pal : "");
   if (done.has(key)) continue;
   done.add(key);

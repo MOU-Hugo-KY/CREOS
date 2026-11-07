@@ -87,3 +87,35 @@ static func play(parent: Node, e: Dictionary, src_pos: Vector2, src_height: floa
 		tw.tween_property(spr, "modulate:a", 0.0, 0.25)
 		tw.tween_callback(spr.queue_free)
 	return true
+
+
+## Pose un effet pixelfx de décor (ou n'importe quel effet) : `e` = { fx, pal?, speed?, loop?, alpha?, flip? }.
+## `k` = échelle (entière de préférence, pour garder les pixels nets). Un effet en boucle reste jusqu'à ce que
+## son parent soit libéré ; sinon il se libère à la fin. Renvoie le sprite (ou null si la planche manque).
+static func spawn(parent: Node, e: Dictionary, pos: Vector2, k := 1.0, z := 0) -> AnimatedSprite2D:
+	var got := _load(_key(e))
+	if got.is_empty():
+		return null
+	var info: Dictionary = got[1]
+	var spr := AnimatedSprite2D.new()
+	spr.sprite_frames = got[0]
+	spr.centered = false
+	spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var flip := bool(e.get("flip", false))
+	spr.flip_h = flip
+	var px: float = info.pivot[0]
+	spr.offset = Vector2(-(float(info.size[0]) - px) if flip else -px, -float(info.pivot[1]))
+	spr.scale = Vector2(k, k)
+	spr.position = pos
+	spr.z_index = z
+	spr.speed_scale = float(e.get("speed", 1.0))
+	spr.modulate.a = float(e.get("alpha", 1.0))
+	parent.add_child(spr)
+	var loop := bool(e.get("loop", info.get("loop", false)))
+	if loop:
+		spr.animation_finished.connect(func() -> void: spr.play())
+		spr.frame = randi() % maxi(1, int(info.frames))  # décalage : deux torches ne battent pas ensemble
+	else:
+		spr.animation_finished.connect(spr.queue_free)
+	spr.play()
+	return spr
