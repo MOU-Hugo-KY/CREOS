@@ -68,6 +68,8 @@ var _event_seq := 0
 
 var _fx_ctx := {}  # uid -> contexte visuel de sa dernière attaque (FxLibrary.attack_context)
 var _last_slot := {}  # uid -> emplacement de sa dernière attaque (coups lourds)
+var _last_attack := {}  # uid -> id de sa dernière attaque (effets pixelfx, data/pixelfx.json)
+var _pfx_seen := {}  # anti-doublon des effets pixelfx : clé -> instant (ms)
 
 
 func _ready() -> void:
@@ -405,10 +407,19 @@ func _on_attack(ev: Dictionary) -> float:
 		aim /= hits.size()
 	var delay := v.play_attack(clip, 0.0, aim)
 	_last_slot[int(ev.src)] = int(ev.slot)
+	_last_attack[int(ev.src)] = String(ev.get("attack_id", ""))
 	var ctx := FxLibrary.attack_context(v.unit, _attack_data(int(ev.src), String(ev.get("attack_id", ""))), int(ev.slot))
 	_fx_ctx[int(ev.src)] = ctx
 	_fxl().cast(v.position + Vector2(0, -20), ctx)
 	_launch_projectiles(v, ev, delay)
+	# attaques sans dégâts ni soin (bouclier, renfort) : leur effet pixelfx éclate sur les cibles au moment du coup
+	var adata := _attack_data(int(ev.src), String(ev.get("attack_id", "")))
+	var kinds: Array = (adata.get("effects", []) as Array).map(func(x): return String(x.get("type", "")))
+	if not PixelFx.entry(String(ev.get("attack_id", ""))).is_empty() and not kinds.has("damage") and not kinds.has("heal"):
+		var src_uid := int(ev.src)
+		for uid: int in ev.get("targets", []):
+			var tu := uid
+			_schedule(delay, func() -> void: _pixel_hit(views.get(src_uid), views.get(tu)))
 	fx.dust(v.position, 0.8)  # appui au sol au départ de l'attaque
 	var color := Palette.element_color(v.unit.element)
 	if int(ev.slot) == BattleUnit.SLOT_COOLDOWN:
@@ -591,6 +602,24 @@ func _attack_data(uid: int, attack_id: String) -> Dictionary:
 	return {}
 
 
+## Effet pixelfx de la dernière attaque de `src` sur `t` (data/pixelfx.json). Un coup qui part de l'attaquant
+## (at = src) ne joue qu'une fois par attaque, même sur plusieurs cibles. Renvoie true si un effet a été joué.
+func _pixel_hit(src: UnitView, t: UnitView) -> bool:
+	if src == null or t == null:
+		return false
+	var e := PixelFx.entry(String(_last_attack.get(src.unit.uid, "")))
+	if e.is_empty():
+		return false
+	var now := Time.get_ticks_msec()
+	var key := "%d:%s" % [src.unit.uid, "src" if String(e.get("at", "")) == "src" else str(t.unit.uid)]
+	if now - int(_pfx_seen.get(key, -100000)) < 350:
+		return true  # déjà joué pour ce coup : on n'ajoute pas les éclats génériques non plus
+	_pfx_seen[key] = now
+	var face_left := t.position.x < src.position.x if t != src else src.unit.team == 1
+	return PixelFx.play(fx, e, src.position, src.height * src._size_scale(), t.position, t.chest_position(),
+		t.height * t._size_scale(), face_left)
+
+
 ## Héros et monstres en pixel art : leur effet d'impact (pack ChatGPT) éclate sur la cible touchée.
 func _signature_fx(src: UnitView, t: UnitView, slot: int) -> void:
 	var sheet := PixelSheet.for_actor(src.unit.def_id)
@@ -628,20 +657,23 @@ func _on_impact(ev: Dictionary) -> void:
 			else:
 				t.play_hit(color)
 				var heavy: bool = ev.crit or int(_last_slot.get(int(ev.src), 0)) >= BattleUnit.SLOT_ULTIMATE
-				fx.burst(t.chest_position(), color, ev.crit)
-				fx.slash(t.chest_position(), color, heavy)
+				var pixel := _pixel_hit(src, t)
+				if not pixel:
+					fx.burst(t.chest_position(), color, ev.crit)
+					fx.slash(t.chest_position(), color, heavy)
 				var ctx: Dictionary = _fx_ctx.get(int(ev.src), {})
 				var slot_fx: Dictionary = {}
 				if src and not ctx.is_empty():
-					_fxl().impact(t.chest_position(), ctx, ev.crit)
+					if not pixel:
+						_fxl().impact(t.chest_position(), ctx, ev.crit)
 					slot_fx = FxLibrary.data().get("slots", {}).get(ctx.slot, {})
 					if slot_fx.has("flash"):
 						_fxl().flash(Palette.element_color(src.unit.element).lightened(0.4), float(slot_fx.flash))
 						fx.kick(float(slot_fx.get("zoom", 0.04)))
 						fx.shake(float(slot_fx.get("shake", 0.4)))
-				elif src:
+				elif src and not pixel:
 					fx.element_hit(t.chest_position(), src.unit.element, heavy)
-				if src:
+				if src and not pixel:
 					_signature_fx(src, t, int(_last_slot.get(int(ev.src), 0)))
 				if heavy:
 					fx.kick(0.05 if ev.crit else 0.035)
@@ -682,7 +714,8 @@ func _on_impact(ev: Dictionary) -> void:
 			_set_shown_hp(t, ev)
 			t.popup("+" + str(int(ev.amount)), Palette.HEAL)
 			t.flash(Palette.HEAL, 0.5)
-			_fxl().heal(t.position, t.chest_position())
+			if not _pixel_hit(views.get(ev.src), t):
+				_fxl().heal(t.position, t.chest_position())
 			_sfx("heal", -6.0)
 			if _hero_stats.has(ev.src):
 				_hero_stats[ev.src].healing += ev.amount
@@ -691,7 +724,8 @@ func _on_impact(ev: Dictionary) -> void:
 			if t:
 				t.popup("Bouclier", Palette.SHIELD)
 				t.flash(Palette.SHIELD, 0.5)
-				_fxl().shield(t.chest_position(), t.height)
+				if not _pixel_hit(views.get(ev.get("src", -1)), t):
+					_fxl().shield(t.chest_position(), t.height)
 				_sfx("shield", -6.0)
 		"status":
 			var t: UnitView = views.get(ev.dst)

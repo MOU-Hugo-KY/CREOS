@@ -1,0 +1,91 @@
+{
+	"_doc": "Effets d'attaque en pixel art (pack pixelfx, MIT, patch-gg/pixelfx), exportés par `node tools/export_pixelfx.mjs` dans assets/pixelfx/. Par attaque : fx = effet pixelfx, pal = palette (clé de \"palettes\"), at = où il éclate (target : poitrine de la cible ; feet : pieds de la cible ; src : pieds de l'attaquant, pour les coups d'arme qui partent de lui), speed = vitesse de lecture, max = durée maximale (s), size = échelle en plus. Un effet remplace les éclats génériques de data/fx.json pour cette attaque.",
+	"palettes": {
+		"fire": ["#1f0b10", "#4a1118", "#8c1d1c", "#cc3a1a", "#f2701f", "#ffae35", "#ffe27a", "#fff8d6"],
+		"water": ["#081830", "#0e2e5a", "#14508c", "#1c76bc", "#36a2e0", "#78ccf4", "#c4ecff", "#ffffff"],
+		"ice": ["#0c1430", "#162c5c", "#1f4f94", "#2f7fcc", "#58b4ec", "#9bdcff", "#d8f4ff", "#ffffff"],
+		"leaf": ["#0c1a0e", "#163418", "#225224", "#357530", "#4f9a3a", "#7cc048", "#b4e070", "#e4ffb0"],
+		"holy": ["#2a1c08", "#5a3e10", "#9a6c18", "#d8a428", "#ffd84a", "#fff09a", "#fffbe6", "#ffffff"],
+		"shadow": ["#050308", "#0f0a18", "#1c1230", "#2c1a4a", "#432468", "#5e3290", "#8048b8", "#a970e0"],
+		"volt": ["#24160a", "#5e3a0c", "#a8680f", "#e8a218", "#ffd23c", "#fff08a", "#ffffff"],
+		"arcane": ["#140a26", "#2b1252", "#481c88", "#6b2cc0", "#9a48ec", "#c684ff", "#ecc8ff", "#ffffff"],
+		"metal": ["#0c0e14", "#1c2230", "#2e3648", "#4a5468", "#6e7a90", "#9aa6ba", "#d0d8e6", "#ffffff"]
+	},
+	"attacks": {
+		"corbin_0": {"fx": "melee/double-slash", "pal": "shadow", "at": "src"},
+		"corbin_1": {"fx": "melee/dagger-flurry", "pal": "shadow", "at": "src"},
+		"corbin_2": {"fx": "melee/scythe-reap", "at": "src", "speed": 1.3},
+
+		"aegis_0": {"fx": "impacts/blunt-hit", "pal": "holy"},
+		"aegis_1": {"fx": "melee/heavy-cleave", "pal": "holy", "at": "src", "speed": 1.4},
+		"aegis_2": {"fx": "holy/smite", "at": "feet", "speed": 1.6, "max": 1.6},
+
+		"brume_0": {"fx": "water/splash", "at": "feet", "speed": 1.4},
+		"brume_1": {"fx": "holy/heal", "pal": "water", "at": "feet"},
+		"brume_2": {"fx": "water/wave-crash", "at": "feet", "speed": 1.4},
+
+		"orage_0": {"fx": "melee/uppercut", "pal": "holy", "at": "src"},
+		"orage_1": {"fx": "holy/feather-burst", "at": "target", "speed": 1.6, "max": 1.6},
+		"orage_2": {"fx": "lightning/zap-hit", "pal": "volt"},
+
+		"kharok_0": {"fx": "melee/hammer-smash", "at": "src", "speed": 1.4},
+		"kharok_1": {"fx": "nature/healing-bloom", "at": "feet", "speed": 1.6},
+		"kharok_2": {"fx": "nature/earth-spike", "at": "feet", "speed": 1.6, "max": 1.8},
+
+		"braise_0": {"fx": "impacts/hit-spark", "pal": "fire", "size": 1.3},
+		"braise_1": {"fx": "explosions/plasma-explosion", "pal": "fire"},
+		"braise_2": {"fx": "fire/meteor", "at": "feet", "speed": 2.0, "max": 2.0},
+
+		"nacre_0": {"fx": "impacts/hit-spark", "pal": "holy", "size": 1.2},
+		"nacre_1": {"fx": "holy/heal", "at": "feet"},
+		"nacre_2": {"fx": "holy/holy-pillar", "at": "feet", "speed": 1.8, "max": 1.8},
+
+		"rivet_0": {"fx": "impacts/hit-spark", "pal": "shadow", "size": 1.2},
+		"rivet_1": {"fx": "melee/thrust", "pal": "shadow", "at": "src"},
+		"rivet_2": {"fx": "impacts/crit-hit", "pal": "shadow"},
+
+		"sylve_0": {"fx": "melee/claw-swipe", "pal": "leaf", "at": "src"},
+		"sylve_1": {"fx": "nature/healing-bloom", "at": "feet", "speed": 1.6},
+		"sylve_2": {"fx": "nature/thorns", "at": "feet", "speed": 1.6},
+
+		"valen_0": {"fx": "melee/thrust", "pal": "holy", "at": "src"},
+		"valen_1": {"fx": "melee/spear-sweep", "pal": "holy", "at": "src", "speed": 1.3},
+		"valen_2": {"fx": "holy/smite", "at": "feet", "speed": 1.6, "max": 1.6},
+
+		"bastion_0": {"fx": "impacts/blunt-hit", "pal": "holy"},
+		"bastion_1": {"fx": "holy/divine-shield", "at": "feet", "max": 1.4},
+		"bastion_2": {"fx": "holy/heal-aoe", "at": "feet", "speed": 1.6},
+
+		"saffran_0": {"fx": "explosions/implosion", "pal": "fire", "speed": 1.2},
+		"saffran_1": {"fx": "holy/heal", "pal": "fire", "at": "feet"},
+		"saffran_2": {"fx": "arcane/star-fall", "pal": "fire", "at": "feet", "speed": 1.6},
+
+		"oona_0": {"fx": "water/splash", "at": "feet", "speed": 1.4},
+		"oona_1": {"fx": "holy/heal", "pal": "water", "at": "feet"},
+		"oona_2": {"fx": "water/geyser", "at": "feet", "speed": 2.2, "max": 2.0},
+
+		"calx_0": {"fx": "impacts/bullet-impact", "pal": "fire", "speed": 1.4},
+		"calx_1": {"fx": "holy/heal", "pal": "metal", "at": "feet"},
+		"calx_2": {"fx": "explosions/small-explosion", "at": "feet", "speed": 2.4, "max": 2.0},
+
+		"nyx_0": {"fx": "melee/sword-slash", "pal": "shadow", "at": "src"},
+		"nyx_1": {"fx": "status/rage", "pal": "shadow", "at": "feet", "max": 1.2},
+		"nyx_2": {"fx": "melee/spin-slash", "pal": "shadow", "at": "src"},
+
+		"mei_lian_0": {"fx": "melee/double-slash", "pal": "leaf", "at": "src"},
+		"mei_lian_1": {"fx": "nature/leaf-storm", "at": "feet", "max": 1.2},
+		"mei_lian_2": {"fx": "nature/tornado", "at": "feet", "max": 1.4},
+
+		"jin_seok_0": {"fx": "melee/uppercut", "pal": "holy", "at": "src"},
+		"jin_seok_1": {"fx": "holy/heal", "at": "feet"},
+		"jin_seok_2": {"fx": "lightning/lightning-strike", "pal": "volt", "at": "feet", "speed": 1.8, "max": 1.7},
+
+		"yun_tao_0": {"fx": "impacts/blunt-hit", "pal": "water"},
+		"yun_tao_1": {"fx": "holy/heal", "pal": "water", "at": "feet"},
+		"yun_tao_2": {"fx": "ice/ice-spikes", "at": "feet", "speed": 1.5},
+
+		"tang_su_0": {"fx": "impacts/hit-spark", "pal": "shadow", "size": 1.2},
+		"tang_su_1": {"fx": "shadow/curse", "at": "feet", "speed": 1.6, "max": 1.8},
+		"tang_su_2": {"fx": "shadow/dark-explosion", "at": "feet", "speed": 2.0, "max": 1.8}
+	}
+}

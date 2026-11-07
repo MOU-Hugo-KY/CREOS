@@ -63,3 +63,6 @@ https://pixelfrog-assets.itch.io/tiny-swords — terrain, bâtiments, unités, e
 défense de base. Utilisable dans un jeu (même commercial) mais **non redistribuable** : les images ne
 sont pas dans git (`assets/tiny/` est ignoré). Télécharger le pack dans `D:/dev/CREOS_sources/TinySwords`
 puis lancer `python tools/import_tiny_swords.py`.
+
+## Effets d attaque pixel art
+- pixelfx, par Patch (patch.gg), licence MIT : https://github.com/patch-gg/pixelfx. Planches exportees par tools/export_pixelfx.mjs dans assets/pixelfx/.
