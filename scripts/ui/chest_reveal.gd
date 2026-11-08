@@ -123,9 +123,9 @@ func show_chest(chest: Dictionary, name_of: Callable) -> void:
 		ScreenPack.image(_panel, icon, Rect2(r.position + Vector2(16, 10), Vector2(96, 96)))
 		ScreenPack.text(_panel, "×%d" % int(chest.rewards[key]), Rect2(r.position.x, r.end.y - 34, r.size.x - 10, 30), 24,
 			UiKit.WHITE, HORIZONTAL_ALIGNMENT_RIGHT)
-		ScreenPack.text(_panel, String(name_of.call(key, int(chest.rewards[key]))), Rect2(r.position.x - 20, r.end.y + 6, r.size.x + 40, 30), 19,
-			UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-	ScreenPack.text(_panel, "Touche pour continuer", Rect2(560, 900, 800, 40), 22, Color(1, 1, 1, 0.7), HORIZONTAL_ALIGNMENT_CENTER)
+		ScreenPack.text(_panel, String(name_of.call(key, int(chest.rewards[key]))), Rect2(r.position.x - 8, r.end.y + 6, w - 6, 50), 18,
+			UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER, true)  # nom long sur 2 lignes, sans empiéter sur le voisin
+	ScreenPack.text(_panel, "Touche pour continuer", Rect2(560, 930, 800, 40), 22, Color(1, 1, 1, 0.7), HORIZONTAL_ALIGNMENT_CENTER)
 	_t = 0.0
 	_playing = true
 	visible = true

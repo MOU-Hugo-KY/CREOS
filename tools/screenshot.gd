@@ -10,6 +10,7 @@ extends SceneTree
 ##   --scene=res://scenes/hub/hub.tscn   capture une autre scène (défaut : le combat)
 ##   --action=campaign   (hub) ouvre un écran avant la capture : campaign, heroes, altar, shop, relics…
 ##   --hour=23      (hub) heure du port (aube 7, jour 13, crépuscule 19.3, nuit 23)
+##   --weather=rain (hub) force un effet plein écran de data/pixelfx_hub.json
 ##   --demo              (défense) pose une base d'exemple
 ##   --hero=corbin       (hub, avec --action=heroes) ouvre la fiche de ce héros
 
@@ -25,6 +26,7 @@ var action := ""
 var hero := ""
 var tab := ""
 var hour := -2.0
+var weather := ""
 var end_wait := 150  # --endwait=N : images après l'apparition de l'écran de fin
 var force_draw := false  # --draw : montre « Arrêter » puis déclare l'égalité
 var combo := ""  # --combo=ombres : lance ce combo dès le premier tour (membres dans --team)
@@ -56,6 +58,8 @@ func _initialize() -> void:
 			action = arg.trim_prefix("--action=")
 		elif arg.begins_with("--hero="):
 			hero = arg.trim_prefix("--hero=")
+		elif arg.begins_with("--weather="):
+			weather = arg.trim_prefix("--weather=")
 		elif arg.begins_with("--hour="):
 			hour = float(arg.trim_prefix("--hour="))
 		elif arg.begins_with("--tab="):
@@ -91,6 +95,8 @@ func _process(_delta: float) -> bool:
 	frames += 1
 	if frames == 2 and hour > -2.0 and "town" in scene:
 		scene.town.set_hour(hour)
+	if frames == 3 and weather != "" and "town" in scene:
+		scene.town.fx_layer.force_weather(weather)
 	if frames == 5 and action == "prep":  # préparation de chasse du premier niveau
 		scene.hud.open_hunt_prep("monde01_1")
 	elif frames == 5 and action.begins_with("shop_"):  # Marchand sur un onglet : shop_fusion, shop_rachat

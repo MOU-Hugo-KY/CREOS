@@ -1,0 +1,48 @@
+{
+	"_doc": "Effets pixelfx des monstres (data/monsters.json), choisis par règles (PixelFx.monster_entry). Ordre : 1) \"ids\" (exception par id d'attaque) ; 2) attaque *_skill d'un boss régional -> \"regional_skill\"[élément], d'un autre boss -> \"skill\"[élément] ; 3) attaque magique -> \"magic\"[élément] ; 4) attaque à distance physique -> \"ranged\" ; 5) corps à corps -> \"families\"[famille] (sinon \"_default\"). La palette vient de \"elements\"[élément].pal (sauf si l'entrée a déjà \"pal\" ; \"none\" = couleurs d'origine). Mêmes clés que data/pixelfx.json (at, speed, max, size). Planches : python tools/pixelfx_monsters_export.py (résout les règles puis appelle tools/export_pixelfx.mjs).",
+	"elements": {
+		"feu": {"pal": "fire"},
+		"eau": {"pal": "water"},
+		"nature": {"pal": "leaf"},
+		"ombre": {"pal": "shadow"},
+		"": {"pal": "none"}
+	},
+	"families": {
+		"_default": {"fx": "impacts/hit-spark"},
+		"humanoid": {"fx": "melee/sword-slash", "at": "src"},
+		"golem": {"fx": "impacts/blunt-hit"},
+		"slime": {"fx": "impacts/blunt-hit"},
+		"quadruped": {"fx": "melee/claw-swipe", "at": "src"},
+		"dragon": {"fx": "melee/claw-swipe", "at": "src"},
+		"arachnid": {"fx": "melee/claw-swipe", "at": "src"},
+		"insect": {"fx": "melee/dagger-flurry", "at": "src"},
+		"winged_insect": {"fx": "melee/dagger-flurry", "at": "src"},
+		"crab": {"fx": "melee/double-slash", "at": "src"},
+		"serpent": {"fx": "melee/thrust", "at": "src"},
+		"plant": {"fx": "nature/vine-whip", "at": "src", "speed": 1.3},
+		"fungus": {"fx": "nature/spore-burst", "speed": 1.6, "max": 1.0, "size": 0.5}
+	},
+	"ranged": {"fx": "impacts/hit-spark"},
+	"magic": {
+		"feu": {"fx": "explosions/implosion"},
+		"eau": {"fx": "water/splash", "speed": 1.4, "max": 1.2, "size": 0.75},
+		"nature": {"fx": "nature/acid-splash", "speed": 1.4, "max": 1.2, "size": 0.75},
+		"ombre": {"fx": "shadow/curse", "at": "feet", "speed": 1.5, "max": 1.4},
+		"": {"fx": "arcane/mana-burst", "pal": "arcane", "speed": 1.4, "max": 1.2, "size": 0.75}
+	},
+	"skill": {
+		"feu": {"fx": "fire/flame-pillar", "at": "feet", "speed": 1.6, "max": 1.6, "size": 0.5},
+		"eau": {"fx": "water/geyser", "at": "feet", "speed": 1.5, "max": 1.6, "size": 0.5},
+		"nature": {"fx": "nature/earth-spike", "at": "feet", "speed": 1.4, "max": 1.6, "size": 0.5},
+		"ombre": {"fx": "shadow/hex-sigil", "at": "feet", "speed": 1.6, "max": 1.6, "size": 0.5},
+		"": {"fx": "impacts/crit-hit", "size": 0.75}
+	},
+	"regional_skill": {
+		"feu": {"fx": "fire/meteor", "at": "feet", "speed": 1.6, "max": 2.2, "size": 0.5},
+		"eau": {"fx": "water/wave-crash", "at": "feet", "speed": 1.4, "max": 2.0, "size": 0.5},
+		"nature": {"fx": "nature/quake", "at": "feet", "speed": 1.4, "max": 2.0, "size": 0.5},
+		"ombre": {"fx": "shadow/dark-explosion", "at": "feet", "speed": 1.5, "max": 2.2, "size": 0.5},
+		"": {"fx": "impacts/ground-slam", "at": "feet", "speed": 1.5, "max": 2.0, "size": 0.5}
+	},
+	"ids": {}
+}

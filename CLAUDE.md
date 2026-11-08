@@ -47,16 +47,14 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   `heal`, `shield`, `status`, `death`, `wave_start`, `victory`, `defeat`).
   **Tour par tour** : quand la jauge d'un héros est pleine (hors Auto), le moteur se fige
   (`awaiting_uid`) jusqu'à `request_attack(uid, slot)`.
-- `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage), en 2D : `port_franc_2d.gd` monte la
-  scène 3840 × 1080 décrite par `assets/hub2d/port/Scene.json` (calques en parallaxe, bâtiments
-  cliquables avec image de survol et sans étiquette, animations en planches de sprites, mouettes,
-  marchand, héros qui se promènent avec leurs clips de marche). `port_ambience.gd` : cycle jour/nuit
-  (aube, jour, crépuscule, nuit, d'après l'heure réelle ou le bouton du hub) avec couleur du ciel,
-  teinte de la ville, halos des lanternes et fenêtres, étoiles, lune, brume, rayons, lucioles,
-  poussières et feuilles. Les planches qui « sautent » (bateau, feuillage) sont remplacées par une
-  image fixe qui se balance (`"sway"` dans Scene.json). `python tools/preview_port.py
-  sortie.png --grid` dessine la scène pour placer les éléments. Bâtiments et actions : `data/hub.json`
-  (l'Échoppe des masques est le Marchand). Profil de départ : `data/player_start.json`.
+- `scripts/hub/` = **Port-Franc**, le hub (scène de démarrage `scenes/hub/hub.tscn`, `hub_scene.gd`). La place est
+  en pixel art vue de dessus (`hub_pixel.gd`, `HubPixel`, carte 1280 × 720 décrite par `assets/hub_px/hub_layout.json`) :
+  sol, bâtiments et objets triés par leur pied, effets animés (cristal, flammes, bannières), lumières, cycle jour/nuit
+  (aube, jour, crépuscule, nuit, d'après l'heure réelle ou le bouton « Jour / nuit »), héros de l'équipe qui se
+  promènent ; toucher un bâtiment ouvre son service. `hub_fx.gd` (`HubFx`) ajoute les effets pixelfx de la place
+  (`data/pixelfx_hub.json` : papillons, oiseaux, feux follets, et effets plein écran lucioles / rayons / averse, dont
+  la bande de sol est coupée par `crop_bottom`). `hub_hud.gd` = l'interface (ruban du haut, boutons du bas, écrans).
+  Bâtiments et actions : `data/hub.json` (l'Échoppe des masques est le Marchand). Profil de départ : `data/player_start.json`.
 - **Interface** : `scripts/ui/ui_kit.gd` (`UiKit`) = le style commun, d'après la maquette
   `docs/maquette_interfaces/` (ivoire #eee4cd cerclé d'encre #29262e avec ombre dure, bordeaux
   #793b49, laiton #c6a66c, ardoise #505e75, turquoise #63c8be ; police Fredoka ; boutons en relief) ; `UiWindow` = fenêtre de jeu avec ruban
@@ -76,17 +74,15 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   ultime, un bouton par combo prêt (une fois par combat chacun). **Synergies** (`combos.json` "synergies") :
   bonus permanents selon le nombre de héros du même élément ou de la même classe. Au-delà de 4 héros,
   `GameData.dungeon_waves_for()` grossit les vagues (jusqu'à 8 ennemis, boss plus solide).
-- **Port-Franc en 2D** (`scripts/hub/port_franc_2d.gd`, images dans `assets/hub2d/port/`) : un
-  « théâtre » de calques posés à différentes distances de la caméra (parallaxe en glissant),
-  bâtiments cliquables avec leur image de survol, animations en planches de sprites
-  (`Nom_8f_10fps.png`), héros marionnettes qui se promènent. Ordre de dessin explicite
-  (`render_priority`) : fond < place < objets triés par leur point au sol < premier plan.
-  L'ancien port 3D (`port_franc.gd`) ne sert plus que si ces images sont absentes.
+- **Effets pixelfx du hub** : `data/pixelfx_hub.json` (papillons et oiseaux le jour, feux follets et chauve-souris la nuit, effets plein écran tirés au sort : lucioles la nuit, rayons à l'aube, averse rare), avec `when` (dawn/day/dusk/night), `drift`, `wander`, `glow` ; joués par `scripts/hub/hub_fx.gd` (`HubFx`, enfant de `HubPixel`, suit `set_hour`), planches exportées par `node tools/export_pixelfx.mjs --data=data/pixelfx_hub.json`. Capture : `--weather=rain`.
 - `scripts/battle/` = **affichage**, en 2D : lit les événements et anime. Ne met jamais de règle de
   jeu ici. `battle_scene.gd` (chef d'orchestre, formation en losange), `battle_stage.gd` (décor du
   monde), `unit_view.gd` (un personnage : ClipPlayer, ombre, cible, nombres), `battle_fx.gd`
   (secousses, éclats), `battle_audio.gd` (sons), `ui/` (interface, bouton du quatuor, écran de fin).
   Les instants d'impact (`hit_times`) viennent des repères des clips.
+  Décor vivant des arènes : `data/pixelfx_arenas.json` (par monde, effets pixelfx en boucle : météo, bestioles,
+  braseros ; `pos` dans le cadre 1280 × 720, `k` échelle entière, `z` -25 derrière les combattants, 16 pour la
+  météo légère), posés par `BattleStage._spawn_arena_fx()` ; exporter avec `node tools/export_pixelfx.mjs --data=data/pixelfx_arenas.json`.
 - **Ma Loge** (bâtiment « Loge privée » du hub, `PrivateLodgeScreen`) : le donjon du joueur. Trois salles
   (`data/lodge.json` : défenseurs et pièges par salle, mises), règles pures dans `scripts/core/lodge.gd`
   (`Lodge`), état dans la sauvegarde (`state.lodge_dungeon`, la clé `lodge` est le nom de la loge).
@@ -97,6 +93,7 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   (`BattleEngine.setup(..., traps)`, événement `trap`). Rivaux du jour générés en attendant le jeu en ligne.
 - **Les données vont dans `data/*.json`** (héros, monstres, donjons, régions), pas dans le code.
   Un nouveau héros = une entrée JSON (+ un modèle 3D), sans toucher au moteur si ses effets existent.
+- **Effets pixelfx** (`PixelFx`, `scripts/battle/pixel_fx.gd`) : héros dans `data/pixelfx.json` ("attacks", plus "statuses" = boucles d'état aux pieds et "deaths" = mort selon l'élément) ; monstres par règles dans `data/pixelfx_monsters.json` (famille / magie / distance / compétence de boss, palette selon l'élément, exceptions "ids" ; planches : `python tools/pixelfx_monsters_export.py`) ; interface (fin de combat, invocation, montée de niveau) dans `data/pixelfx_ui.json`, joué par `PixelFx.ui_play` (planches : `node tools/export_pixelfx.mjs --data=data/pixelfx_ui.json`).
 - Icônes d'attaque : `assets/ui/attacks/<id>.png`, tirées des clips par
   `python tools/make_attack_icons_from_clips.py`.
 - **3 attaques par héros** dans `"attacks"` : [0] base, [1] à recharge (`"cooldown"`),

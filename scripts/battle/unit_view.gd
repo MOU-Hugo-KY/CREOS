@@ -7,6 +7,7 @@ extends Node2D
 
 const HERO_SCALE := 0.5
 const ENEMY_SCALE := 0.8
+const POPUP_STACK_TIME := 0.5  # s : un même mot répété dans ce délai n'est montré qu'une fois
 
 var unit: BattleUnit
 var data: Dictionary
@@ -14,6 +15,8 @@ var home_position: Vector2
 var model_scale := 1.0
 var shown_hp := 0.0  # PV affichés (mis à jour à l'instant de l'impact, pas avant)
 var hp_seq := -1  # numéro du dernier événement qui a mis à jour shown_hp
+var _popups: Array = []  # textes montrés récemment : {t, text}
+static var _live_popups: Array = []  # textes flottants encore à l'écran (toutes unités)
 var height := 150.0  # hauteur du personnage au repos (px du cadre)
 
 var player: ClipPlayer
@@ -188,7 +191,18 @@ func flash(color: Color, strength := 0.8) -> void:
 
 
 ## Nombre ou mot qui monte au-dessus du personnage puis disparaît.
+## Les textes rapprochés s'empilent au lieu de se chevaucher ; un même mot répété aussitôt
+## (ex. « Mouillé » posé par deux coups) n'est montré qu'une fois.
 func popup(text: String, color: Color, big := false, rise := 1.0) -> void:
+	var recent: Array = []
+	for p: Dictionary in _popups:
+		if _time - float(p.t) < POPUP_STACK_TIME:
+			recent.append(p)
+	_popups = recent
+	for p: Dictionary in _popups:
+		if p.text == text and not text.is_valid_int() and _time - float(p.t) < POPUP_STACK_TIME:
+			return
+	_popups.append({"t": _time, "text": text})
 	var l := Label.new()
 	l.text = text
 	l.add_theme_font_size_override("font_size", 34 if big else 24)
@@ -197,9 +211,26 @@ func popup(text: String, color: Color, big := false, rise := 1.0) -> void:
 	l.add_theme_constant_override("outline_size", 8)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.size = Vector2(240, 40)
-	l.z_index = 40
+	l.z_index = 70  # au-dessus des effets pixelfx (60)
 	l.z_as_relative = false
-	l.position = head_position() + Vector2(-120 + randf_range(-14, 14), -10)
+	# Part au-dessus de la barre de vie (dessinée par l'interface, donc par-dessus le combat).
+	var at := head_position() + Vector2(-120 + randf_range(-14, 14), -46)
+	# Un texte encore visible au même endroit (de cette unité ou d'une voisine) : on se place au-dessus.
+	var live: Array = []
+	for o: Variant in _live_popups:
+		if is_instance_valid(o):
+			live.append(o)
+	_live_popups = live
+	for _i in 6:
+		var moved := false
+		for o: Label in _live_popups:
+			if o.get_parent() == get_parent() and absf(o.position.x - at.x) < 150.0 and absf(o.position.y - at.y) < 30.0:
+				at.y = o.position.y - 30.0
+				moved = true
+		if not moved:
+			break
+	l.position = at
+	_live_popups.append(l)
 	get_parent().add_child(l)
 	l.scale = Vector2.ONE * 0.6
 	l.pivot_offset = l.size / 2.0

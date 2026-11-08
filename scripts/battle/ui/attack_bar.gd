@@ -9,7 +9,7 @@ signal attack_chosen(slot: int)
 
 const TRAY := Vector2(1090, 164)
 const SKILL_X := [420.0, 566.0, 712.0]
-const SECRET_POS := Vector2(874, 44)
+const SECRET_POS := Vector2(874, 26)  # centrée sur les cases de compétence
 ## Icône d'élément du badge (pack partie 2, assets/ui/ecrans/fiche_heros/pieces/element_<nom>_64.png).
 const ELEMENT_ICONS := {"feu": "fire", "eau": "water", "nature": "nature", "lumiere": "light", "ombre": "shadow"}
 
@@ -66,7 +66,7 @@ func _ready() -> void:
 		var icon := AttackIcon.new()
 		var slot := i
 		icon.pressed.connect(func() -> void: attack_chosen.emit(slot))
-		icon.position = SECRET_POS if i == BattleUnit.SLOT_SECRET else Vector2(SKILL_X[i], 18)
+		icon.position = SECRET_POS if i == BattleUnit.SLOT_SECRET else Vector2(SKILL_X[i], 10)
 		add_child(icon)
 		_icons.append(icon)
 	# Case de la technique secrète encore verrouillée : cadre grisé + cadenas du kit.

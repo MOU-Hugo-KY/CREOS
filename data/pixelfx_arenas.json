@@ -1,0 +1,63 @@
+{
+  "_doc": "Effets pixelfx de décor des arènes de combat, par monde. pos = point dans le cadre 1280×720 (pivot de l'effet), k = échelle entière, z : -25 derrière les combattants (décor), 16 devant (météo légère seulement). Exporter : node tools/export_pixelfx.mjs --data=data/pixelfx_arenas.json",
+  "worlds": {
+    "monde01": [
+      {"fx": "weather/god-rays", "pos": [640, 680], "k": 4, "z": -25, "loop": true, "alpha": 0.12},
+      {"fx": "critters/bird", "pos": [190, 80], "k": 2, "z": -25, "loop": true},
+      {"fx": "critters/bird", "pos": [1080, 60], "k": 2, "z": -25, "loop": true, "flip": true, "speed": 0.85},
+      {"fx": "critters/butterfly", "pos": [60, 300], "k": 1, "z": -25, "loop": true}
+    ],
+    "monde02": [
+      {"fx": "weather/falling-leaves", "pos": [640, 680], "k": 2, "z": -25, "loop": true, "alpha": 0.5},
+      {"fx": "weather/falling-leaves", "pos": [640, 680], "k": 4, "z": 16, "loop": true, "alpha": 0.25},
+      {"fx": "critters/butterfly", "pos": [230, 220], "k": 2, "z": -25, "loop": true},
+      {"fx": "critters/butterfly", "pos": [1060, 200], "k": 2, "z": -25, "loop": true, "flip": true, "speed": 0.8},
+      {"fx": "critters/frog", "pos": [1210, 330], "k": 1, "z": -25, "loop": true, "flip": true}
+    ],
+    "monde03": [
+      {"fx": "critters/bat", "pos": [330, 120], "k": 2, "z": -25, "loop": true},
+      {"fx": "critters/bat", "pos": [960, 90], "k": 1, "z": -25, "loop": true, "flip": true, "speed": 1.2},
+      {"fx": "water/drip", "pos": [160, 250], "k": 2, "z": -25, "loop": true},
+      {"fx": "critters/slime", "pos": [1180, 300], "k": 1, "z": -25, "loop": true, "flip": true}
+    ],
+    "monde04": [
+      {"fx": "fire/brazier", "pos": [50, 330], "k": 1, "z": -25, "loop": true},
+      {"fx": "fire/brazier", "pos": [1230, 330], "k": 1, "z": -25, "loop": true, "flip": true},
+      {"fx": "critters/bird", "pos": [640, 40], "k": 1, "z": -25, "loop": true, "pal": "shadow"}
+    ],
+    "monde05": [
+      {"fx": "weather/god-rays", "pos": [640, 680], "k": 4, "z": -25, "loop": true, "alpha": 0.12},
+      {"fx": "critters/bird", "pos": [880, 70], "k": 2, "z": -25, "loop": true, "flip": true},
+      {"fx": "critters/snake", "pos": [80, 320], "k": 1, "z": -25, "loop": true}
+    ],
+    "monde06": [
+      {"fx": "weather/fog", "pos": [640, 680], "k": 4, "z": -25, "loop": true, "alpha": 0.4},
+      {"fx": "critters/wisp", "pos": [260, 150], "k": 2, "z": -25, "loop": true},
+      {"fx": "critters/wisp", "pos": [1030, 130], "k": 2, "z": -25, "loop": true, "flip": true, "speed": 0.8},
+      {"fx": "critters/jellyfish", "pos": [640, 90], "k": 1, "z": -25, "loop": true, "alpha": 0.8},
+      {"fx": "water/ripples", "pos": [430, 60], "k": 1, "z": -25, "loop": true, "alpha": 0.7}
+    ],
+    "monde07": [
+      {"fx": "weather/snow", "pos": [640, 780], "k": 4, "z": 16, "loop": true, "alpha": 0.8},
+      {"fx": "weather/fog", "pos": [640, 680], "k": 4, "z": -25, "loop": true, "alpha": 0.25}
+    ],
+    "monde08": [
+      {"fx": "weather/clouds", "pos": [640, 520], "k": 4, "z": -25, "loop": true, "alpha": 0.25},
+      {"fx": "critters/bird", "pos": [250, 70], "k": 2, "z": -25, "loop": true},
+      {"fx": "critters/bird", "pos": [1100, 110], "k": 1, "z": -25, "loop": true, "flip": true, "speed": 1.15}
+    ],
+    "monde09": [
+      {"fx": "fire/brazier", "pos": [50, 330], "k": 1, "z": -25, "loop": true},
+      {"fx": "fire/brazier", "pos": [1230, 330], "k": 1, "z": -25, "loop": true, "flip": true},
+      {"fx": "critters/flying-skull", "pos": [300, 160], "k": 1, "z": -25, "loop": true},
+      {"fx": "critters/flying-skull", "pos": [990, 150], "k": 1, "z": -25, "loop": true, "flip": true, "speed": 0.8}
+    ],
+    "monde10": [
+      {"fx": "weather/fog", "pos": [640, 680], "k": 4, "z": -25, "loop": true, "alpha": 0.3},
+      {"fx": "critters/bat", "pos": [250, 100], "k": 2, "z": -25, "loop": true},
+      {"fx": "critters/ghost", "pos": [1130, 260], "k": 1, "z": -25, "loop": true, "flip": true, "alpha": 0.8},
+      {"fx": "fire/spirit-flame", "pos": [60, 320], "k": 1, "z": -25, "loop": true, "pal": "arcane"},
+      {"fx": "fire/spirit-flame", "pos": [1220, 320], "k": 1, "z": -25, "loop": true, "pal": "arcane"}
+    ]
+  }
+}

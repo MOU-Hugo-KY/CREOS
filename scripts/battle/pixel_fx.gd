@@ -6,9 +6,15 @@ extends RefCounted
 
 const DATA_PATH := "res://data/pixelfx.json"
 const DIR := "res://assets/pixelfx/"
+const MAX_TARGET_SPAN := 4.5  # taille max d'un effet posé sur une cible, en hauteurs de cible
 const HERO_PIXELS := 40.0  # hauteur d'un personnage pixelfx : sert à mettre l'effet à l'échelle du héros
 
+const MONSTERS_PATH := "res://data/pixelfx_monsters.json"
+const UI_PATH := "res://data/pixelfx_ui.json"
+
 static var _data: Dictionary = {}
+static var _monsters: Dictionary = {}
+static var _ui: Dictionary = {}
 static var _frames: Dictionary = {}  # clé de planche -> [SpriteFrames, info]
 
 
@@ -21,6 +27,75 @@ static func data() -> Dictionary:
 ## L'entrée de data/pixelfx.json pour cette attaque, ou {} s'il n'y en a pas.
 static func entry(attack_id: String) -> Dictionary:
 	return data().get("attacks", {}).get(attack_id, {})
+
+
+static func _json(path: String) -> Dictionary:
+	var d = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+	return d if d is Dictionary else {}
+
+
+## Effet d'une attaque de monstre, choisi par les règles de data/pixelfx_monsters.json (voir son "_doc").
+## `def_id` : id du monstre dans data/monsters.json. Renvoie {} si ce n'est pas un monstre.
+static func monster_entry(def_id: String, attack_id: String) -> Dictionary:
+	if _monsters.is_empty():
+		_monsters = _json(MONSTERS_PATH)
+	var r := _monsters
+	if r.get("ids", {}).has(attack_id):
+		return r.ids[attack_id]
+	var m: Dictionary = GameData.monsters.get(def_id, {})
+	if m.is_empty():
+		return {}
+	var el := String(m.get("element", ""))
+	var e: Dictionary = {}
+	if attack_id.ends_with("_skill") and m.get("boss", false):
+		e = r.get("regional_skill" if m.get("regional_boss", false) else "skill", {}).get(el, {})
+	elif String(m.get("attack_kind", "")) == "magic":
+		e = r.get("magic", {}).get(el, {})
+	elif String(m.get("range", "")) == "ranged":
+		e = r.get("ranged", {})
+	else:
+		var fam: Dictionary = r.get("families", {})
+		e = fam.get(String(m.get("family", "")), fam.get("_default", {}))
+	if e.is_empty():
+		return {}
+	e = e.duplicate()
+	var pal := String(r.get("elements", {}).get(el, {}).get("pal", "none"))
+	if not e.has("pal") and pal != "none":
+		e.pal = pal
+	return e
+
+
+## Les choix d'effets d'interface (data/pixelfx_ui.json) : entrée (ou liste d'entrées) sous `key`.
+static func ui_entry(key: String) -> Variant:
+	if _ui.is_empty():
+		_ui = _json(UI_PATH)
+	return _ui.get(key, {})
+
+
+## Joue l'effet d'interface `key` (data/pixelfx_ui.json) au point `pos` de `parent` : chaque entrée
+## { fx, pal?, k (échelle entière), dx, dy, delay, speed, flip, alpha, max, z }. `kmul` multiplie k (entier) ;
+## `index` (>= 0) : place parmi les enfants de `parent` (pour passer derrière un personnage) ; `wait` : attente en plus (s).
+static func ui_play(parent: Node, key: String, pos: Vector2, kmul := 1, index := -1, wait := 0.0) -> void:
+	var v: Variant = ui_entry(key)
+	var list: Array = v if v is Array else ([v] if v is Dictionary and not (v as Dictionary).is_empty() else [])
+	for e: Dictionary in list:
+		var at := pos + Vector2(float(e.get("dx", 0)), float(e.get("dy", 0)))
+		var k := float(int(e.get("k", 1)) * kmul)
+		var go := func() -> void:
+			if is_instance_valid(parent):
+				var spr := spawn(parent, e, at, k, int(e.get("z", 5)))
+				if spr and index >= 0:
+					parent.move_child(spr, mini(index, parent.get_child_count() - 1))
+		var delay := float(e.get("delay", 0.0)) + wait
+		if delay > 0.0 and parent.is_inside_tree():
+			parent.get_tree().create_timer(delay).timeout.connect(go)
+		else:
+			go.call()
+
+
+## Échelle entière d'un effet de personnage pour une unité de `height` pixels.
+static func unit_scale(height: float, size := 1.0) -> float:
+	return maxf(1.0, roundf(clampf(height / HERO_PIXELS, 1.0, 4.0) * size))
 
 
 static func _key(e: Dictionary) -> String:
@@ -64,6 +139,11 @@ static func play(parent: Node, e: Dictionary, src_pos: Vector2, src_height: floa
 	var ref_h := src_height if at == "src" else height
 	# échelle entière (pixels nets), à la taille du héros
 	var k := maxf(1.0, roundf(clampf(ref_h / HERO_PIXELS, 1.0, 4.0) * float(e.get("size", 1.0))))
+	# Sur une cible, une grande planche (effet de zone joué sur chaque cible) ne dépasse pas
+	# MAX_TARGET_SPAN fois la taille de la cible : sinon les anneaux et explosions se recouvrent.
+	if at != "src":
+		var span := maxf(float(info.size[0]), float(info.size[1]))
+		k = minf(k, maxf(1.0, floorf(MAX_TARGET_SPAN * ref_h * float(e.get("size", 1.0)) / span)))
 	var spr := AnimatedSprite2D.new()
 	spr.sprite_frames = got[0]
 	spr.centered = false
@@ -111,7 +191,12 @@ static func spawn(parent: Node, e: Dictionary, pos: Vector2, k := 1.0, z := 0) -
 	spr.speed_scale = float(e.get("speed", 1.0))
 	spr.modulate.a = float(e.get("alpha", 1.0))
 	parent.add_child(spr)
-	var loop := bool(e.get("loop", info.get("loop", false)))
+	var loop: bool = bool(e.get("loop", info.get("loop", false))) and not bool(e.get("once", false))
+	if e.has("max") and not loop:
+		var tw := spr.create_tween()
+		tw.tween_interval(maxf(0.0, float(e.max) - 0.25))
+		tw.tween_property(spr, "modulate:a", 0.0, 0.25)
+		tw.tween_callback(spr.queue_free)
 	if loop:
 		spr.animation_finished.connect(func() -> void: spr.play())
 		spr.frame = randi() % maxi(1, int(info.frames))  # décalage : deux torches ne battent pas ensemble

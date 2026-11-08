@@ -683,6 +683,10 @@ func _show_result(hero: Dictionary, r: Dictionary) -> void:
 	_hero_player.position = HERO_FEET
 	_reveal.add_child(_hero_player)
 	_reveal.move_child(_hero_player, 1)
+	# Colonne de lumière selon la rareté, derrière le héros (data/pixelfx_ui.json "summon_<rareté>").
+	PixelFx.ui_play(_reveal, "summon_%d" % clampi(rarity, 2, 4), HERO_FEET, 1, 1)
+	if r.new:
+		PixelFx.ui_play(_reveal, "summon_new", HERO_FEET)
 	_hero_player.play(id + "_idle")
 	var h := maxf(1.0, _hero_player.actor_rect(id + "_idle").size.y)
 	var sc := _hero_height / h
@@ -1141,7 +1145,7 @@ func _stone_button(kind: String, r: Rect2) -> TextureButton:
 ## s'illuminent au survol ; en toucher une ouvre la salle. Le retour d'une salle ramène au hall.
 const HALL := "hall_objets"
 const HALL_MODES := {"mage": "heros", "mecanicien": "pieces", "jardin": "esprits"}
-const HALL_NAMES := {"mage": "Le Mage · Héros", "mecanicien": "Le Mécanicien · Pièces", "jardin": "Le Jardin des Esprits"}
+const HALL_NAMES := {"mage": "Le Mage · Héros", "mecanicien": "Le Mécanicien · Pièces", "jardin": "Le Jardin · Esprits"}
 
 var _hall: Control
 

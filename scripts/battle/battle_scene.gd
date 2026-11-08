@@ -70,6 +70,7 @@ var _fx_ctx := {}  # uid -> contexte visuel de sa dernière attaque (FxLibrary.a
 var _last_slot := {}  # uid -> emplacement de sa dernière attaque (coups lourds)
 var _last_attack := {}  # uid -> id de sa dernière attaque (effets pixelfx, data/pixelfx.json)
 var _pfx_seen := {}  # anti-doublon des effets pixelfx : clé -> instant (ms)
+var _status_fx := {}  # uid -> {état -> sprite pixelfx en boucle} (data/pixelfx.json "statuses")
 
 
 func _ready() -> void:
@@ -607,7 +608,10 @@ func _attack_data(uid: int, attack_id: String) -> Dictionary:
 func _pixel_hit(src: UnitView, t: UnitView) -> bool:
 	if src == null or t == null:
 		return false
-	var e := PixelFx.entry(String(_last_attack.get(src.unit.uid, "")))
+	var aid := String(_last_attack.get(src.unit.uid, ""))
+	var e := PixelFx.entry(aid)
+	if e.is_empty():
+		e = PixelFx.monster_entry(src.unit.def_id, aid)  # monstres : règles de data/pixelfx_monsters.json
 	if e.is_empty():
 		return false
 	var now := Time.get_ticks_msec()
@@ -618,6 +622,51 @@ func _pixel_hit(src: UnitView, t: UnitView) -> bool:
 	var face_left := t.position.x < src.position.x if t != src else src.unit.team == 1
 	return PixelFx.play(fx, e, src.position, src.height * src._size_scale(), t.position, t.chest_position(),
 		t.height * t._size_scale(), face_left)
+
+
+## État en pixel art (data/pixelfx.json "statuses") : aux pieds de l'unité, en boucle tant que l'état dure
+## (un nouvel envoi du même état remplace l'ancien). Renvoie false si l'état n'a pas d'effet pixelfx.
+func _pixel_status(t: UnitView, status: String, duration: float) -> bool:
+	var e: Dictionary = PixelFx.data().get("statuses", {}).get(status, {})
+	if e.is_empty() or t.is_dead():
+		return false
+	var mine: Dictionary = _status_fx.get(t.unit.uid, {})
+	_status_fx[t.unit.uid] = mine
+	if is_instance_valid(mine.get(status)):
+		mine[status].queue_free()
+	var spr := PixelFx.spawn(t, e, Vector2.ZERO, PixelFx.unit_scale(t.height * t._size_scale(), 0.9), 30)
+	if spr == null:
+		return false
+	spr.z_as_relative = false  # sous les chiffres (40), au-dessus des personnages
+	if e.get("once", false):
+		return true
+	mine[status] = spr
+	var tw := spr.create_tween()
+	tw.tween_interval(maxf(0.6, duration - 0.3))
+	tw.tween_property(spr, "modulate:a", 0.0, 0.3)
+	tw.tween_callback(spr.queue_free)
+	return true
+
+
+## Mort en pixel art (data/pixelfx.json "deaths") selon l'élément, plus une pluie d'or pour un boss.
+func _pixel_death(t: UnitView) -> void:
+	for spr in _status_fx.get(t.unit.uid, {}).values():
+		if is_instance_valid(spr):
+			spr.queue_free()
+	_status_fx.erase(t.unit.uid)
+	var deaths: Dictionary = PixelFx.data().get("deaths", {})
+	var k := PixelFx.unit_scale(t.height * t._size_scale(), 0.9)
+	var e: Dictionary = deaths.get(t.unit.element, deaths.get("", {}))
+	var spr := PixelFx.spawn(fx, e, t.position, k, 30) if not e.is_empty() else null
+	if spr:
+		spr.z_as_relative = false
+	var m: Dictionary = GameData.monsters.get(t.unit.def_id, {})
+	if m.get("boss", false):
+		var b: Dictionary = deaths.get("_regional" if m.get("regional_boss", false) else "_boss", {})
+		if not b.is_empty():
+			var bs := PixelFx.spawn(fx, b, t.position, maxf(1.0, roundf(k * float(b.get("size", 1.0)))), 30)
+			if bs:
+				bs.z_as_relative = false
 
 
 ## Héros et monstres en pixel art : leur effet d'impact (pack ChatGPT) éclate sur la cible touchée.
@@ -735,14 +784,16 @@ func _on_impact(ev: Dictionary) -> void:
 					text = STATUS_LABELS.get(ev.status, "")
 				if text != "":
 					t.popup(text, Palette.GOLD, false, 1.4)
-				_fxl().status(String(ev.status), t.head_position(), t.chest_position(), t.position,
-					float(ev.get("duration", 0.0)))
+				if not _pixel_status(t, String(ev.status), float(ev.get("duration", 0.0))):
+					_fxl().status(String(ev.status), t.head_position(), t.chest_position(), t.position,
+						float(ev.get("duration", 0.0)))
 		"death":
 			var t: UnitView = views.get(ev.dst)
 			if t:
 				t.shown_hp = 0.0
 				t.hp_seq = ev.seq
 				t.play_death()
+				_pixel_death(t)
 				_sfx("death", -2.0)
 				var fall_at := t.position
 				_schedule(1.3, func() -> void: fx.dust(fall_at, 1.3))
@@ -770,6 +821,7 @@ func _end_battle(won: bool, draw := false) -> void:
 			var v: UnitView = views[uid]
 			if v.unit.team == 0:
 				v.play_cheer()
+	hud.hide_turn_order()  # la bannière de fin prend sa place en haut
 	hud.banner("ÉGALITÉ" if draw else ("VICTOIRE !" if won else "DÉFAITE…"), "", 0.8)
 	audio.stop_music(0.4)
 	var stars := engine.stars()

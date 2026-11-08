@@ -111,7 +111,7 @@ func _draw() -> void:
 		if pv:
 			draw_texture_rect(pv, inner, false)
 	if slot == BattleUnit.SLOT_ULTIMATE:
-		var bar := Rect2(Vector2(0, size.y + 6), Vector2(size.x, 10))
+		var bar := Rect2(Vector2(4, size.y + 4), Vector2(size.x - 8, 8))  # reste dans le plateau
 		var ef := OverheadBar.tex("ultimate_energy_frame")
 		if ef:
 			draw_texture_rect(ef, bar, false)

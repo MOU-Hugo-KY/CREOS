@@ -94,7 +94,9 @@ static func image(parent: Control, t: Texture2D, r: Rect2) -> TextureRect:
 
 
 ## Un décor plein écran (1920 × 1080) posé dans le repère du pack : on en met aussi une copie
-## « couvrante » derrière tout l'écran, pour qu'un écran plus large ou plus haut n'ait pas de bandes noires.
+## derrière tout l'écran, pour qu'un écran plus large ou plus haut n'ait pas de bandes noires.
+## La copie est à la même échelle que le décor et reflétée en miroir au-delà de ses bords :
+## pas de raccord visible (une copie agrandie faisait une « couture » sur les côtés).
 static func cover_behind(parent: Node, t: Texture2D, r: Rect2) -> TextureRect:
 	if t == null or r != Rect2(0, 0, 1920, 1080) or not parent.has_meta("pack_frame"):
 		return null
@@ -104,14 +106,36 @@ static func cover_behind(parent: Node, t: Texture2D, r: Rect2) -> TextureRect:
 	var c := TextureRect.new()
 	c.texture = t
 	c.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	c.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	c.stretch_mode = TextureRect.STRETCH_SCALE
 	c.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	c.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	c.modulate = Color(0.85, 0.85, 0.85)  # un peu plus sombre : le cœur de l'écran reste net
+	var mat := ShaderMaterial.new()
+	mat.shader = _mirror_shader()
+	c.material = mat
 	outer.add_child(c)
 	outer.move_child(c, parent.get_index())
+	var sync := func() -> void:
+		mat.set_shader_parameter("area_size", outer.size)
+		mat.set_shader_parameter("frame_pos", (parent as Control).position)
+	outer.resized.connect(sync, CONNECT_DEFERRED)
+	(parent as Control).item_rect_changed.connect(sync)
+	sync.call()
 	return c
+
+
+static func _mirror_shader() -> Shader:
+	var sh := Shader.new()
+	sh.code = """shader_type canvas_item;
+uniform vec2 area_size = vec2(1920.0, 1080.0);
+uniform vec2 frame_pos = vec2(0.0);
+void fragment() {
+	vec2 f = (UV * area_size - frame_pos) / vec2(1920.0, 1080.0);
+	f = 1.0 - abs(1.0 - abs(f));  // miroir de part et d'autre du cadre
+	COLOR = texture(TEXTURE, clamp(f, vec2(0.0), vec2(1.0)));  // même teinte : pas de couture au bord
+}
+"""
+	return sh
 
 
 ## Bouton à trois états du pack (`<base>_normal/_hover/_pressed`, `_disabled` s'il existe).

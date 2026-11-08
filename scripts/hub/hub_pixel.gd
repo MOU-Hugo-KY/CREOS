@@ -25,6 +25,7 @@ var _nav := AStarGrid2D.new()
 var _clock := 0.0
 var _hour_override := -1.0
 var _hovered := ""
+var fx_layer: HubFx  # effets pixelfx (data/pixelfx_hub.json)
 
 
 func _ready() -> void:
@@ -50,6 +51,8 @@ func _ready() -> void:
 		_add_effect(item)
 	for item: Dictionary in layout.lights:
 		_add_light(item)
+	fx_layer = HubFx.new()
+	add_child(fx_layer)
 	_build_navigation()
 	_build_walkers()
 	set_hour(-1.0)
@@ -312,16 +315,22 @@ func set_hour(hour: float) -> void:
 		var t := Time.get_time_dict_from_system()
 		h = float(t.hour) + float(t.minute) / 60.0
 	var tint := Color.WHITE
+	var phase := "day"
 	_light_level = 0.0
 	if h < 5.5 or h >= 21.0:  # nuit
 		tint = Color(0.42, 0.45, 0.66)
 		_light_level = 1.2
+		phase = "night"
 	elif h < 8.0:  # aube
 		tint = Color(0.95, 0.82, 0.8)
 		_light_level = 0.5
+		phase = "dawn"
 	elif h >= 18.5:  # crépuscule
 		tint = Color(0.96, 0.74, 0.62)
 		_light_level = 0.8
+		phase = "dusk"
+	if fx_layer:
+		fx_layer.set_phase(phase, tint)
 	# Teinte du sol, des bâtiments et des objets (les effets lumineux et les lumières restent vifs).
 	for node: CanvasItem in [_ground, _world]:
 		create_tween().tween_property(node, "modulate", tint, 0.6)

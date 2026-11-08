@@ -515,10 +515,10 @@ func _fill_crypt() -> void:
 		var built: Array = l.defenses[r]
 		var anchor := Vector2(room.construction_anchor[0], room.construction_anchor[1])
 		if r == 2:
-			anchor.x -= 140  # salle du trésor : les défenses à gauche du coffre
+			anchor.x -= 120  # salle du trésor : les défenses à gauche du coffre
 		var nd := int(spec.get("defenses", 1))
 		for k in nd:
-			var at := anchor + Vector2((k - (nd - 1) / 2.0) * 180.0, -6)
+			var at := anchor + Vector2((k - (nd - 1) / 2.0) * 172.0, -6)
 			if k < built.size():
 				var did: String = built[k]
 				var art: Dictionary = anims.get(DEFENSE_ART.get(did, did) + "_repos", {})
@@ -542,7 +542,7 @@ func _fill_crypt() -> void:
 						ui_sound.emit("ui_click")
 						PlayerData.lodge_remove_defense(r, idx))
 			else:
-				var add := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(at - Vector2(80, 160), Vector2(160, 56)),
+				var add := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(at - Vector2(72, 160), Vector2(144, 56)),
 					"+ Défense", 19)
 				add.modulate.a = 0.85
 				add.pressed.connect(func() -> void: _pick_defense(r))
@@ -580,9 +580,10 @@ func _fill_crypt() -> void:
 		var nh := int(spec.defenders)
 		var first := FinPack.rect(dslots[0].rect)
 		var last := FinPack.rect(dslots[-1].rect)
-		if nh > dslots.size():  # place en plus : on resserre vers la gauche (le coffre est à droite)
-			first.position.x -= 50
-			last.position.x -= 70
+		if nh > dslots.size():  # place en plus : socles un peu plus petits, resserrés à gauche du coffre
+			var small := first.size * 0.84
+			first = Rect2(first.position + (first.size - small) * Vector2(0.5, 1.0) - Vector2(67, 0), small)
+			last = Rect2(Vector2(1686 - small.x, first.position.y), small)
 		for k in nh:
 			var t := 0.0 if nh <= 1 else float(k) / (nh - 1)
 			var dr := Rect2(first.position.lerp(last.position, t), first.size)
@@ -620,6 +621,7 @@ func _fill_crypt() -> void:
 	var smax := maxi(1, int(cfg.get("stake_max", 20000)))
 	var chest := "vide" if stake <= 0 else ("plein" if stake >= smax / 2 else "moitie")
 	var cr := FinPack.rect(P.coffre)
+	cr = Rect2(Vector2(1832 - 142, cr.end.y - 146), Vector2(142, 142))  # calé contre le pilier : les socles restent dégagés
 	var ch := FinPack.image(_crypt_box, "ma_loge/coffre_%s.png" % chest, cr)
 	ch.mouse_filter = Control.MOUSE_FILTER_STOP
 	ch.tooltip_text = "Récompense mise en jeu : %d or.\nUn chasseur qui te bat en emporte %d %%." % [stake,
@@ -710,7 +712,7 @@ func _fill_rivals_board() -> void:
 		return
 	var target: Dictionary = rivals[_rival_pick]
 	var fee := Lodge.entry_fee(int(target.stake), cfg)
-	(go.get_node("Label") as Label).text = "Attaquer %s · %d or" % [String(target.name).get_slice(" ", 0), fee]
+	(go.get_node("Label") as Label).text = "Attaquer · %d or" % fee  # le rival choisi est la carte cerclée ; son premier mot seul donnait « Attaquer Mère »
 	go.disabled = PlayerData.lodge_rival_done(target.id) or not Lodge.can_attack(team_power, int(target.power)) \
 		or PlayerData.gold() < fee
 	go.pressed.connect(func() -> void: _start(target))

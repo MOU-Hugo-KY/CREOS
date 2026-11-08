@@ -328,8 +328,10 @@ func _fill_board() -> void:
 			a.texture_hover = MageRoom.tex("jardin/fleche_salle_%s_survol.png" % side)
 			a.ignore_texture_size = true
 			a.stretch_mode = TextureButton.STRETCH_SCALE
-			a.size = Vector2(120, 90)
-			a.position = Vector2(320 if dir < 0 else 1480, 425)
+			# De part et d'autre de « Page x / y », au-dessus des affiches (sur les côtés, elles
+			# chevauchaient la prime de la semaine et la bannière de droite).
+			a.size = Vector2(72, 54)
+			a.position = Vector2(782 if dir < 0 else 1066, 203)
 			a.disabled = (_page == 0 and dir < 0) or (_page == pages - 1 and dir > 0)
 			a.modulate.a = 0.35 if a.disabled else 1.0
 			a.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -356,8 +358,8 @@ func _fill_board() -> void:
 		var need := int(chests[i].points)
 		var opened: bool = daily.get("chests", []).has(i)
 		var ready := Quests.can_open_chest(daily, cfg, i)
-		# Chaque coffre sous son seuil sur la barre (le dernier calé au bout).
-		var cx := clampf(fr.position.x + fr.size.x * float(need) / max_points, fr.position.x + 60, fr.end.x - 60)
+		# Chaque coffre sous son seuil sur la barre (le dernier au bout de la barre).
+		var cx := clampf(fr.position.x + fr.size.x * float(need) / max_points, fr.position.x + 60, fr.end.x)
 		var box := Control.new()
 		box.size = Vector2(120, 120)
 		box.position = Vector2(cx - 60, 900)
@@ -439,6 +441,9 @@ func _poster(p: Dictionary, daily: Dictionary, q: Dictionary) -> void:
 	var done := target if claimed else mini(Quests.progress(daily, q), target)
 	var pr: Rect2 = at.call(p.progress_rect)
 	var fr: Rect2 = at.call(p.progress_fill_rect)
+	if state == "terminee":  # le sceau de cire est dessiné en bas à droite de l'affiche : la barre s'arrête avant
+		pr.size.x -= 52
+		fr.size.x -= 52
 	var g := FinPack.Gauge.new().setup("primes/progression_fond.png", pr, [8, 8, 8, 8], "primes/progression_remplissage.png", fr)
 	g.set_ratio(float(done) / target)
 	card.add_child(g)

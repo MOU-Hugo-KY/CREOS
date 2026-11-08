@@ -1,0 +1,20 @@
+{
+	"_doc": "Effets pixelfx de l'interface, joués par PixelFx.ui_play(parent, clé, position). Une clé = une entrée ou une liste : fx, pal (clé de data/pixelfx.json \"palettes\"), k = échelle entière (pixels nets), dx/dy = décalage, delay (s), speed, flip, alpha, max (s), z. Planches : node tools/export_pixelfx.mjs --data=data/pixelfx_ui.json.",
+	"victory": [
+		{"fx": "ui/confetti", "k": 3, "dx": -560, "dy": 120, "speed": 1.2},
+		{"fx": "ui/confetti", "k": 3, "dx": 560, "dy": 120, "speed": 1.2, "flip": true, "delay": 0.35}
+	],
+	"reward": {"fx": "pickups/collect-burst", "pal": "holy", "k": 2, "speed": 1.2},
+	"reward_gold": {"fx": "pickups/collect-burst", "pal": "holy", "k": 3, "speed": 1.1},
+	"chest": {"fx": "pickups/chest-open", "k": 1, "dy": -6, "speed": 1.4, "max": 3.2},
+	"hero_level_up": {"fx": "ui/level-up", "k": 1, "speed": 1.2},
+	"player_level_up": {"fx": "ui/achievement", "k": 2, "speed": 1.1},
+	"summon_2": {"fx": "pickups/loot-beam", "pal": "water", "k": 4, "alpha": 0.85, "max": 3.0, "z": 0},
+	"summon_3": {"fx": "pickups/loot-beam", "pal": "arcane", "k": 4, "alpha": 0.9, "max": 3.0, "z": 0},
+	"summon_4": [
+		{"fx": "pickups/loot-beam", "pal": "holy", "k": 4, "max": 3.4, "z": 0},
+		{"fx": "ui/confetti", "k": 3, "dx": -420, "dy": -40, "delay": 0.3},
+		{"fx": "ui/confetti", "k": 3, "dx": 420, "dy": -40, "flip": true, "delay": 0.55}
+	],
+	"summon_new": {"fx": "pickups/collect-burst", "pal": "holy", "k": 3, "dy": -180, "delay": 0.3}
+}

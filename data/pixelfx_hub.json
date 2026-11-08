@@ -1,0 +1,18 @@
+{
+	"_doc": "Effets pixelfx de la place du hub (HubPixel, carte 1280 × 720), joués par scripts/hub/hub_fx.gd et exportés par `node tools/export_pixelfx.mjs --data=data/pixelfx_hub.json`. Par effet : fx (+ pal), pos = point d'ancrage sur la carte, k = échelle entière, when = moments où il est visible (dawn, day, dusk, night), alpha, speed, flip, drift = [vx, vy] px/s (l'effet traverse la carte et revient de l'autre côté), wander = rayon de promenade autour de pos, glow = reste vif la nuit (pas assombri), crop_bottom = lignes de sol coupées en bas de la planche (effets plein écran). weather = effets plein écran (320 × 180, ×4) tirés au sort : chance par tirage (toutes les `every` s), durée `duration` s.",
+	"effects": [
+		{"id": "butterfly_0", "fx": "critters/butterfly", "pos": [470, 296], "k": 1, "when": ["dawn", "day"], "wander": 30, "speed": 0.9},
+		{"id": "butterfly_1", "fx": "critters/butterfly", "pos": [812, 292], "k": 1, "when": ["day"], "wander": 34, "flip": true},
+		{"id": "butterfly_2", "fx": "critters/butterfly", "pos": [430, 525], "k": 1, "when": ["day", "dusk"], "wander": 26, "speed": 0.8},
+		{"id": "bird_0", "fx": "critters/bird", "pos": [200, 70], "k": 1, "when": ["dawn", "day"], "drift": [34, 3]},
+		{"id": "bird_1", "fx": "critters/bird", "pos": [900, 140], "k": 1, "when": ["day", "dusk"], "drift": [-26, -2], "flip": true, "speed": 1.15},
+		{"id": "wisp_0", "fx": "critters/wisp", "pos": [455, 530], "k": 1, "when": ["night"], "wander": 40, "glow": true, "alpha": 0.85},
+		{"id": "wisp_1", "fx": "critters/wisp", "pos": [930, 225], "k": 1, "when": ["dusk", "night"], "wander": 36, "glow": true, "alpha": 0.8, "flip": true, "speed": 0.8},
+		{"id": "bat_0", "fx": "critters/bat", "pos": [1100, 60], "k": 1, "when": ["night"], "drift": [-40, 6], "glow": false}
+	],
+	"weather": [
+		{"id": "fireflies", "fx": "weather/fireflies", "k": 4, "crop_bottom": 24, "when": ["night"], "chance": 1.0, "glow": true, "alpha": 0.9},
+		{"id": "god_rays", "fx": "weather/god-rays", "k": 4, "crop_bottom": 12, "when": ["dawn"], "chance": 1.0, "glow": true, "alpha": 0.55},
+		{"id": "rain", "fx": "weather/rain", "k": 4, "crop_bottom": 12, "when": ["day", "dusk"], "chance": 0.12, "every": 90, "duration": 45, "alpha": 0.6}
+	]
+}

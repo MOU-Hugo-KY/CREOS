@@ -69,10 +69,24 @@ func _setup_arena(dir: String, scene: int) -> void:
 	add_child(life)
 	life.setup(dir.trim_suffix("/").get_file(), _arena_json(path))
 	arena_life = life
+	_spawn_arena_fx(dir.trim_suffix("/").get_file())
 	ambience = Ambience.new()  # pas de particules de l'ancien décor ; sert à l'assombrissement des ultimes
 	ambience.z_index = -10
 	add_child(ambience)
 	ambience.arena_life = arena_life
+
+
+## Effets pixelfx vivants du monde (`data/pixelfx_arenas.json`) : torches, bestioles, météo. Affichage seul.
+func _spawn_arena_fx(world: String) -> void:
+	var path := "res://data/pixelfx_arenas.json"
+	if not FileAccess.file_exists(path):
+		return
+	var all: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not all is Dictionary:
+		return
+	for e: Dictionary in all.get("worlds", {}).get(world, []):
+		var p: Array = e.get("pos", [640, 360])
+		PixelFx.spawn(self, e, Vector2(p[0], p[1]), float(e.get("k", 1)), int(e.get("z", -25)))
 
 
 func _split_foreground(fg_path: String) -> void:

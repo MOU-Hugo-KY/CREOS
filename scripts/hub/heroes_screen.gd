@@ -286,9 +286,11 @@ func _build_detail(_page: VBoxContainer) -> void:
 	_detail.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_detail.visible = false
 	add_child(_detail)
-	var root := ScreenPack.frame(_detail)
-	_d_room = ScreenPack.image(root, null, Rect2(0, 0, 1920, 1080))
+	# La salle couvre tout l'écran (pas seulement le repère 1920 × 1080 : pas de bandes noires sur les côtés).
+	_d_room = ScreenPack.image(_detail, null, Rect2(0, 0, 1920, 1080))
+	_d_room.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_d_room.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	var root := ScreenPack.frame(_detail)
 	_d_room.modulate = Color(0.55, 0.52, 0.58)
 	var shade := _DetailShade.new()
 	shade.size = Vector2(1920, 1080)
@@ -346,7 +348,7 @@ func _build_detail(_page: VBoxContainer) -> void:
 		b.position = BOOK + Vector2(1052, 172 + i * 128)
 		b.size = Vector2(160, 64)
 		b.add_theme_font_override("font", UiKit.FONT)
-		b.add_theme_font_size_override("font_size", 18)
+		b.add_theme_font_size_override("font_size", 16)  # « Techniques » tient avant la queue du ruban
 		b.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		b.pressed.connect(func() -> void: _set_tab(t))
 		root.add_child(b)
@@ -429,8 +431,8 @@ func _bookmark_style(active: bool) -> StyleBoxTexture:
 	sb.texture = TarotCard.pack_tex("grimoire/marque_page_actif.png")  # même ruban, assombri s'il est inactif
 	if not active:
 		sb.modulate_color = Color(0.62, 0.56, 0.62)
-	sb.content_margin_left = 18
-	sb.content_margin_right = 26
+	sb.content_margin_left = 14
+	sb.content_margin_right = 26  # la queue d'aronde du ruban reste libre
 	return sb
 
 
@@ -440,7 +442,8 @@ class _DetailShade extends Control:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	func _draw() -> void:
-		draw_rect(Rect2(640, 0, 1280, 1080), Color(0.06, 0.05, 0.08, 0.55))
+		# Le voile déborde du repère à droite : l'écran peut être plus large que 1920 (salle étendue).
+		draw_rect(Rect2(640, -400, 1680, 1880), Color(0.06, 0.05, 0.08, 0.55))
 		for i in 16:
 			draw_rect(Rect2(0, 1080 - (i + 1) * 16, 640, 16), Color(0.06, 0.05, 0.08, 0.8 * (1.0 - i / 16.0)))
 			draw_rect(Rect2(0, i * 8, 640, 8), Color(0.06, 0.05, 0.08, 0.5 * (1.0 - i / 16.0)))
@@ -654,7 +657,7 @@ func _technique_row(y: float, icon: Texture2D, title: String, kind: String, desc
 			ScreenPack.image(holder, load("res://assets/ui/kit/lock.png"), Rect2(20, 20, 28, 28))
 	ScreenPack.text(_tab_box, title, Rect2(76, y, 308, 32), 22)
 	ScreenPack.text(_tab_box, kind, Rect2(76, y + 32, 308, 26), 17, Color("793b49"))
-	ScreenPack.text(_tab_box, desc, Rect2(0, y + 70, 384, 84), 16, UiKit.TEXT_SOFT, 0, true)
+	ScreenPack.text(_tab_box, _nbsp(desc), Rect2(0, y + 70, 384, 84), 16, UiKit.TEXT_SOFT, 0, true)
 
 
 ## Les trois voies d'Héritage : une seule active (changement gratuit hors combat), toutes
@@ -674,7 +677,7 @@ func _fill_paths(id: String, hero: Dictionary) -> void:
 		var lines: Array[String] = []
 		var stages: Dictionary = path.get("stages", {})
 		for k in thresholds.size():
-			lines.append("%s %d Échos · %s" % ["◆" if tier > k else "◇", int(thresholds[k]), stages.get(str(int(thresholds[k])), "")])
+			lines.append("%s %d %s · %s" % ["◆" if tier > k else "◇", int(thresholds[k]), _echo_word(int(thresholds[k])), stages.get(str(int(thresholds[k])), "")])
 		card.mouse_filter = Control.MOUSE_FILTER_PASS
 		var show := func() -> void:
 			_path_title.text = "%s · %s%s" % [path.get("name", ""), path.get("focus", ""), "  (active)" if i == active else ""]
@@ -747,13 +750,14 @@ func _fill_relic(id: String, hero: Dictionary) -> void:
 		var st := "relic_step_full" if i < tier else ("relic_step_active" if i == tier else "relic_step_empty")
 		ScreenPack.image(_tab_box, ScreenPack.tex(F, st), Rect2(0, y, 28, 28))
 		ScreenPack.text(_tab_box, str(i + 1), Rect2(0, y, 28, 28), 15, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER)
-		ScreenPack.text(_tab_box, relic_tier_text(hero, i), Rect2(38, y - 2, 346, 66), 16,
+		ScreenPack.text(_tab_box, _nbsp(relic_tier_text(hero, i)), Rect2(38, y - 2, 346, 66), 16,
 			UiKit.INK if i < tier else UiKit.TEXT_SOFT, 0, true)
 	if not cost.is_empty():
 		var label := "Retrouver" if tier == 0 else "Améliorer"
 		var b := ScreenPack.button(_tab_box, F, "upgrade", "%s · %d fragments%s" % [label, need,
 			"" if int(cost.materials) == 0 else " + %d mat." % int(cost.materials)], Rect2(0, 600, 384, 72), 20, UiKit.INK)
 		b.disabled = not PlayerData.can_upgrade_relic(id)
+		b.add_theme_color_override("font_disabled_color", Color(UiKit.PARCHMENT, 0.75))  # lisible sur le bouton éteint
 		b.pressed.connect(func() -> void:
 			if PlayerData.upgrade_relic(id):
 				ui_sound.emit("ultimate_impact")
@@ -773,7 +777,7 @@ func _fill_echoes(id: String, hero: Dictionary) -> void:
 		var reached := tier > k
 		var col := UiKit.INK if reached else UiKit.TEXT_SOFT
 		ScreenPack.image(_tab_box, ScreenPack.tex(F, "echo_full" if reached else "echo_empty"), Rect2(0, y, 32, 32))
-		ScreenPack.text(_tab_box, "%d Échos · %s" % [int(thresholds[k]), unlocks[k] if k < unlocks.size() else ""],
+		ScreenPack.text(_tab_box, "%d %s · %s" % [int(thresholds[k]), _echo_word(int(thresholds[k])), unlocks[k] if k < unlocks.size() else ""],
 			Rect2(40, y, 344, 30), 19, col)
 		ScreenPack.text(_tab_box, "+%d %% %s, +%d %% %s, +%d %% autres" % [int(float(e.primary[k]) * 100), hero.get("primary", ""),
 			int(float(e.secondary[k]) * 100), hero.get("secondary", ""), int(float(e.other[k]) * 100)],
@@ -781,7 +785,7 @@ func _fill_echoes(id: String, hero: Dictionary) -> void:
 		var bonus := ""
 		if k < mods.size():
 			bonus = " · ".join((mods[k] as Array).map(func(m: Dictionary) -> String: return String(m.get("text", ""))))
-		ScreenPack.text(_tab_box, bonus, Rect2(40, y + 56, 344, 56), 15, Color("793b49") if reached else UiKit.TEXT_SOFT, 0, true)
+		ScreenPack.text(_tab_box, _nbsp(bonus), Rect2(40, y + 56, 344, 56), 15, Color("793b49") if reached else UiKit.TEXT_SOFT, 0, true)
 	ScreenPack.text(_tab_box, "Un doublon donne un Écho. Aucune autre source.", Rect2(0, 680, 384, 30), 15, UiKit.TEXT_SOFT,
 		HORIZONTAL_ALIGNMENT_CENTER)
 
@@ -811,7 +815,9 @@ func _build_confirm() -> void:
 		_confirm.close_window()
 		if PlayerData.level_up_hero(selected):
 			ui_sound.emit("ui_ready")
-			_preview.play("cheer"))
+			_preview.play("cheer")
+			# Colonne « LEVEL UP » pixelfx sous le héros (data/pixelfx_ui.json "hero_level_up").
+			PixelFx.ui_play(_d_vpc.get_parent(), "hero_level_up", _d_vpc.position + Vector2(_d_vpc.size.x * 0.5, _d_vpc.size.y * 0.92), 2))
 	row.add_child(ok)
 	var cancel := UiKit.button("Annuler", "grey", 22, Vector2(180, 60))
 	cancel.pressed.connect(_confirm.close_window)
@@ -1031,3 +1037,14 @@ func _fill_scrolls(id: String, owned: bool) -> void:
 				ui_sound.emit("ui_ready")
 			else:
 				ui_sound.emit("ui_toggle"))
+
+
+## « Écho » au singulier pour 0 ou 1, « Échos » au-delà.
+static func _echo_word(n: int) -> String:
+	return "Écho" if n <= 1 else "Échos"
+
+
+## Espaces insécables avant « % » et « : » : pas de signe seul en début de ligne.
+static func _nbsp(t: String) -> String:
+	var nb := char(0xA0)
+	return t.replace(" %", nb + "%").replace(" :", nb + ":")

@@ -35,6 +35,7 @@ var _boss_view: UnitView
 var _banner: Label
 var _banner_sub: Label
 var _callout: Label
+const CALLOUT_TOP := 140.0  # sous la frise des tours et son « À lui »
 var _turn_uid := -1
 var _sound_button: Button
 var draw_button: Button
@@ -122,6 +123,7 @@ func add_overhead(view: UnitView) -> void:
 		_boss_box.visible = true
 		turn_order.offset_top = 156.0  # la frise des tours passe sous le cartouche du boss
 		turn_order.offset_bottom = 156.0 + 94.0
+		_place_callout(276.0)
 
 
 func remove_overhead(uid: int) -> void:
@@ -138,6 +140,24 @@ func clear_overheads() -> void:
 	if turn_order:
 		turn_order.offset_top = 24.0
 		turn_order.offset_bottom = 24.0 + 94.0
+		turn_order.visible = true
+		turn_order.modulate.a = 1.0
+	_place_callout(CALLOUT_TOP)
+
+
+## Le nom de l'ultime s'affiche sous la frise des tours (et sous le cartouche du boss s'il y en a un).
+func _place_callout(top: float) -> void:
+	if _callout:
+		_callout.offset_top = top
+		_callout.offset_bottom = top + 60.0
+
+
+## Fin du combat : la frise des tours s'efface (la bannière de victoire ou de défaite prend sa place).
+func hide_turn_order() -> void:
+	if turn_order and turn_order.visible:
+		var tw := create_tween()
+		tw.tween_property(turn_order, "modulate:a", 0.0, 0.2)
+		tw.tween_callback(func() -> void: turn_order.visible = false)
 
 
 func set_auto(on: bool) -> void:
@@ -278,7 +298,8 @@ func _pack_banner(text: String, sub: String, duration: float) -> void:
 	var fs := Vector2(a.frame_size[0], a.frame_size[1])
 	box.size = fs
 	box.scale = Vector2.ONE * k
-	box.position = Vector2(vs.x / 2.0, vs.y * (330.0 if boss else 250.0) / 1080.0) - fs * k / 2.0
+	# Boss : sous le cartouche du boss et la frise des tours, qui descend pour lui.
+	box.position = Vector2(vs.x / 2.0, vs.y * (470.0 if boss else 250.0) / 1080.0) - fs * k / 2.0
 	add_child(box)
 	_pack_banner_node = box
 	var s := FinPack.sheet(a)
@@ -506,8 +527,8 @@ func _build_banner() -> void:
 	_callout = _label(46, 12)
 	_callout.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	_callout.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_callout.offset_top = 96
-	_callout.offset_bottom = 156
+	_callout.offset_top = CALLOUT_TOP
+	_callout.offset_bottom = CALLOUT_TOP + 60.0
 	_callout.offset_left = -500
 	_callout.offset_right = 500
 	_callout.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

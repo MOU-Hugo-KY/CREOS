@@ -333,6 +333,8 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 			Rect2(-14, 72, 124, 28), 20, Color("63c8be") if up else UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
 		if float(h.damage) > 0.0 and float(h.damage) == best:
 			FinPack.image(cell, "combat/etoile_pleine.png", Rect2(64, -6, 30, 30))
+		if up:  # montée de niveau : colonne de lumière pixelfx (data/pixelfx_ui.json)
+			PixelFx.ui_play(cell, "hero_level_up", Vector2(48, 96), 1, -1, 0.8 + k * 0.15)
 	# Butin sur le parchemin.
 	var rr := FinPack.rect(S.get("rewards_rect", [550, 610, 820, 220]))
 	FinPack.nine(_p_box, "combat/commun/parchemin.png", rr, [140, 50, 140, 50])
@@ -356,6 +358,7 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 		img.tooltip_text = _reward_name(key, int(rewards[key]))
 		ScreenPack.text(_p_box, str(int(rewards[key])), FinPack.rect(values[i]).grow_individual(-20, 0, 60, 0), 24, UiKit.INK,
 			HORIZONTAL_ALIGNMENT_CENTER)
+		PixelFx.ui_play(_p_box, "reward_gold" if key == "gold" else "reward", ir.get_center(), 1, -1, 0.6 + i * 0.25)
 		i += 1
 	# Ligne du coffre, niveau de la loge, ou conseil.
 	var chest: Dictionary = replay.get("chest", {})
@@ -377,6 +380,12 @@ func _show_pack(won: bool, stars: int, rewards: Dictionary, hero_stats: Array, d
 	var cl: Label = null
 	if line != "":
 		cl = ScreenPack.shadow(ScreenPack.text(_p_box, line, Rect2(360, 842, 1200, 40), 24, color, HORIZONTAL_ALIGNMENT_CENTER), 2)
+		if not chest.is_empty():
+			PixelFx.ui_play(_p_box, "chest", Vector2(330, 884), 1, -1, 1.2)
+		elif replay.get("player_level_up", false):
+			PixelFx.ui_play(_p_box, "player_level_up", Vector2(960, 800), 1, -1, 1.2)
+	if won and not draw:
+		PixelFx.ui_play(_p_box, "victory", Vector2(960, 540), 1, -1, 0.3)
 	var cost: int = replay.get("cost", 0)
 	(_p_restart.get_node("Label") as Label).text = "Rejouer" if cost <= 0 else "Rejouer · %d énergie" % cost
 	_p_restart.disabled = not replay.get("possible", true)
