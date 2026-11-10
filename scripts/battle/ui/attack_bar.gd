@@ -7,9 +7,11 @@ extends Control
 
 signal attack_chosen(slot: int)
 
-const TRAY := Vector2(1090, 164)
-const SKILL_X := [420.0, 566.0, 712.0]
-const SECRET_POS := Vector2(874, 26)  # centrée sur les cases de compétence
+## Allégé : plus de plateau, de portrait ni de nom (l'anneau au sol montre déjà qui joue) ; seulement les
+## cases des attaques, en bas à droite, à portée du pouce.
+const TRAY := Vector2(540, 132)
+const SKILL_X := [0.0, 140.0, 280.0]
+const SECRET_POS := Vector2(426, 18)
 ## Icône d'élément du badge (pack partie 2, assets/ui/ecrans/fiche_heros/pieces/element_<nom>_64.png).
 const ELEMENT_ICONS := {"feu": "fire", "eau": "water", "nature": "nature", "lumiere": "light", "ombre": "shadow"}
 
@@ -25,13 +27,13 @@ var _tween: Tween
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
-	grow_horizontal = Control.GROW_DIRECTION_BOTH
+	set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	grow_vertical = Control.GROW_DIRECTION_BEGIN
-	offset_left = -TRAY.x / 2.0
-	offset_right = TRAY.x / 2.0
-	offset_top = -TRAY.y - 31.0
-	offset_bottom = -31.0
+	offset_left = -TRAY.x - 40.0
+	offset_right = -40.0
+	offset_top = -TRAY.y - 28.0
+	offset_bottom = -28.0
 	var tray := Panel.new()
 	tray.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	tray.mouse_filter = Control.MOUSE_FILTER_STOP  # le plateau ne laisse pas passer le toucher
@@ -39,6 +41,7 @@ func _ready() -> void:
 	tray_box.modulate_color = Color(0.62, 0.62, 0.68)  # plus sombre, comme la maquette
 	tray.add_theme_stylebox_override("panel", tray_box)
 	add_child(tray)
+	tray.visible = false
 	_portrait_holder = Control.new()
 	_portrait_holder.position = Vector2(24, 20)
 	_portrait_holder.size = Vector2(124, 124)
@@ -89,6 +92,8 @@ func _ready() -> void:
 	_lock.add_child(lock)
 	add_child(_lock)
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	for n: CanvasItem in [_portrait_holder, _name, _energy, _energy_fill]:
+		n.visible = false
 	visible = false
 
 
@@ -147,7 +152,7 @@ func show_for(p_unit: BattleUnit) -> void:
 		icon.visible = unit.has_attack(i)
 		if icon.visible:
 			icon.setup(i, unit.attacks[i], color)
-	_lock.visible = not unit.has_attack(BattleUnit.SLOT_SECRET)
+	_lock.visible = false  # la technique secrète verrouillée n'encombre plus la barre
 	refresh()
 	visible = true
 	modulate.a = 0.0

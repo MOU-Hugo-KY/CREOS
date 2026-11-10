@@ -340,8 +340,6 @@ func _fill_board() -> void:
 				_page += dir
 				_fill_board())
 			_board_box.add_child(a)
-		ScreenPack.shadow(ScreenPack.text(_board_box, "Page %d / %d" % [_page + 1, pages], Rect2(860, 214, 200, 32), 22, Color("f3d9a0"),
-			HORIZONTAL_ALIGNMENT_CENTER), 3)
 	# Points du jour et coffres posés à leur seuil.
 	var chests: Array = cfg.get("chests", [])
 	var max_points := _max_points()
@@ -403,13 +401,10 @@ func _fill_weekly() -> void:
 	var days := mini((w.days as Array).size(), need)
 	ScreenPack.text(_board_box, String(W.get("name", "Prime de la semaine")), Rect2(r.position + Vector2(24, 66), Vector2(240, 50)), 20,
 		Color("793b49"), HORIZONTAL_ALIGNMENT_CENTER, true)
-	ScreenPack.text(_board_box, "%s
-
-%d / %d jours
-
-+%d gemmes" % [W.get("description", ""), days, need,
-		int(W.get("rewards", {}).get("gems", 0))], Rect2(r.position + Vector2(24, 124), Vector2(240, 180)), 18, UiKit.INK,
-		HORIZONTAL_ALIGNMENT_CENTER, true)
+	# Court : où on en est et ce qu'on gagne ; la règle complète est dans l'info-bulle.
+	var wl := ScreenPack.text(_board_box, "%d / %d jours\n\n+%d gemmes" % [days, need, int(W.get("rewards", {}).get("gems", 0))],
+		Rect2(r.position + Vector2(24, 134), Vector2(240, 160)), 22, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER, true)
+	wl.tooltip_text = String(W.get("description", ""))
 	var b := FinPack.button(_board_box, "primes/bouton_reclamer", Rect2(r.position + Vector2(10, r.size.y + 2), Vector2(270, 64)),
 		"Fait" if w.claimed else "Réclamer", 20)
 	b.disabled = not PlayerData.can_claim_weekly()
@@ -435,8 +430,7 @@ func _poster(p: Dictionary, daily: Dictionary, q: Dictionary) -> void:
 	var desc := String(q.get("description", ""))
 	if not available:
 		desc += "\n(bientôt disponible)"
-	ScreenPack.text(card, desc + "\n\n+%d points" % int(q.get("points", 0)), at.call(p.body_rect), 18, UiKit.INK,
-		HORIZONTAL_ALIGNMENT_CENTER, true)
+	ScreenPack.text(card, desc, at.call(p.body_rect), 21, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER, true)
 	var target := int(q.get("target", 1))
 	var done := target if claimed else mini(Quests.progress(daily, q), target)
 	var pr: Rect2 = at.call(p.progress_rect)

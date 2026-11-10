@@ -542,9 +542,10 @@ func _fill_crypt() -> void:
 						ui_sound.emit("ui_click")
 						PlayerData.lodge_remove_defense(r, idx))
 			else:
-				var add := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(at - Vector2(72, 160), Vector2(144, 56)),
-					"+ Défense", 19)
-				add.modulate.a = 0.85
+				# Petit « + » discret à la place d'un bouton « + Défense » par emplacement (l'écran était chargé).
+				var add := FinPack.button(_crypt_box, "ma_loge/bouton_attaquer", Rect2(at - Vector2(32, 150), Vector2(64, 56)), "+", 30)
+				add.tooltip_text = "Construire une défense"
+				add.modulate.a = 0.7
 				add.pressed.connect(func() -> void: _pick_defense(r))
 		# Pièges : une rangée de cases sous la salle (ce qui est posé, et où), pas sur le sol des héros.
 		var traps: Array = l.traps[r]

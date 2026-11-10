@@ -7,6 +7,86 @@ const DIR := "res://assets/ui/finitions/"
 
 static var _json: Dictionary = {}
 static var _tex: Dictionary = {}
+static var _sober: Dictionary = {}
+
+## Charte « pixel art sobre » (docs/charte_pixel_sobre.md) : les pièces dorées des packs (rubans, parchemins,
+## cartouches, boutons) sont remplacées par des pièces dessinées ici, à gros pixels (P px), cadre fin, sans dorure.
+const SOBER := false  # à remettre à true quand les fonds sobres seront là
+const P := 4  # un pixel d'art = 4 px d'écran
+const INK := Color("1c1b24")
+const SOBER_KINDS := {  # couleur de fond, couleur du texte
+	"ribbon": [Color("9c3f4a"), Color("f4ece0")],
+	"paper": [Color("e9e0c9"), Color("1c1b24")],
+	"pill": [Color("2b2d3a"), Color("f4ece0")],
+	"teal": [Color("4fb3a5"), Color("ffffff")],
+	"slate": [Color("4a5468"), Color("f4ece0")],
+	"panel": [Color("2b2d3a"), Color("f4ece0")],
+}
+
+
+## Le genre sobre d'une pièce du pack (« » = on garde l'image d'origine).
+static func sober_kind(path: String) -> String:
+	if not SOBER:
+		return ""
+	var f := path.get_file().get_basename()
+	if f.begins_with("bandeau_titre"):
+		return "ribbon"
+	if f.begins_with("parchemin") or f.begins_with("infobulle") or f.begins_with("toast"):
+		return "paper"
+	if f.begins_with("cartouche_monnaie") or f.begins_with("cartouche_ressource"):
+		return "pill"
+	if f.begins_with("tiroir_heros") or f.begins_with("panneau_rivaux"):
+		return "panel"
+	return ""
+
+
+## Genre sobre d'un bouton du pack (`base` sans suffixe d'état).
+static func sober_button_kind(base: String) -> String:
+	if not SOBER:
+		return ""
+	var f := base.get_file()
+	if f == "retour" or f == "fermer":
+		return "slate"
+	if f.begins_with("bouton_"):
+		return "teal"
+	return ""
+
+
+## Texture d'une pièce sobre de `size` px. state : normal, hover, pressed, disabled.
+## Fond uni, cadre d'encre d'un pixel, liseré clair en haut, ombre dure en bas.
+static func sober_tex(kind: String, size: Vector2i, state := "normal") -> ImageTexture:
+	var key := "%s|%d|%d|%s" % [kind, size.x, size.y, state]
+	if _sober.has(key):
+		return _sober[key]
+	var w := maxi(size.x, 4 * P)
+	var h := maxi(size.y, 4 * P)
+	var img := Image.create(w, h, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0, 0, 0, 0))
+	var base: Color = SOBER_KINDS.get(kind, SOBER_KINDS.slate)[0]
+	if state == "hover":
+		base = base.lightened(0.12)
+	elif state == "pressed":
+		base = base.darkened(0.12)
+	elif state == "disabled":
+		base = Color(0.42, 0.43, 0.47)
+	var sh := 0 if state == "pressed" else P  # ombre dure sous la pièce
+	var top := P if state == "pressed" else 0  # appuyé : la pièce descend d'un pixel
+	var body := Rect2i(0, top, w, h - sh - top)
+	if sh > 0:
+		img.fill_rect(Rect2i(P, h - sh - P, w - P, sh + P), Color(INK, 0.5))
+	img.fill_rect(body, INK)
+	var inner := body.grow(-P)
+	img.fill_rect(inner, base)
+	if state != "pressed":
+		img.fill_rect(Rect2i(inner.position, Vector2i(inner.size.x, P)), base.lightened(0.22))
+	img.fill_rect(Rect2i(inner.position.x, inner.end.y - P, inner.size.x, P), base.darkened(0.18))
+	var t := ImageTexture.create_from_image(img)
+	_sober[key] = t
+	return t
+
+
+static func sober_text_color(kind: String) -> Color:
+	return SOBER_KINDS.get(kind, SOBER_KINDS.slate)[1]
 
 
 static func available(screen: String) -> bool:
@@ -35,9 +115,11 @@ static func rect(a: Array) -> Rect2:
 static func image(parent: Node, path: String, r: Rect2) -> TextureRect:
 	var t := TextureRect.new()
 	t.texture = tex(path)
+	if sober_kind(path) != "":
+		t.texture = sober_tex(sober_kind(path), Vector2i(r.size))
 	t.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	t.stretch_mode = TextureRect.STRETCH_SCALE
-	t.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	t.texture_filter = ScreenPack.filter_for(t.texture, r.size)
 	t.position = r.position
 	t.size = r.size
 	t.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -53,6 +135,10 @@ static func nine(parent: Node, path: String, r: Rect2, m: Array) -> NinePatchRec
 	var np := NinePatchRect.new()
 	np.texture = tex(path)
 	np.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var sk := sober_kind(path)
+	if sk != "":
+		np.texture = sober_tex(sk, Vector2i(12 * P, 12 * P))
+		m = [3 * P, 3 * P, 3 * P, 4 * P]
 	if m.size() >= 4:
 		np.patch_margin_left = int(m[0])
 		np.patch_margin_top = int(m[1])
@@ -90,9 +176,17 @@ static func button(parent: Node, base: String, r: Rect2, label := "", font := 26
 	b.texture_hover = tex(base + "_survol.png")
 	b.texture_pressed = tex(base + "_appuye.png")
 	b.texture_disabled = tex(base + "_desactive.png")
+	var sk := sober_button_kind(base)
+	if sk != "":
+		var sz := Vector2i(r.size)
+		b.texture_normal = sober_tex(sk, sz)
+		b.texture_hover = sober_tex(sk, sz, "hover")
+		b.texture_pressed = sober_tex(sk, sz, "pressed")
+		b.texture_disabled = sober_tex(sk, sz, "disabled")
+		color = sober_text_color(sk)
 	b.ignore_texture_size = true
 	b.stretch_mode = TextureButton.STRETCH_SCALE
-	b.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	b.texture_filter = ScreenPack.filter_for(b.texture_normal, r.size)
 	b.position = r.position
 	b.size = r.size
 	b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND

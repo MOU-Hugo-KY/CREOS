@@ -264,7 +264,7 @@ func refresh(delta: float) -> void:
 
 
 ## Grande annonce au centre (« Vague 2 / 3 », « Le boss arrive ! »…).
-func banner(text: String, sub := "", duration := 1.4) -> void:
+func banner(text: String, sub := "", duration := 0.8) -> void:  # court : l annonce ne cache pas le combat
 	if FinPack.available("combat"):
 		_pack_banner(text, sub, duration)
 		return
@@ -320,7 +320,7 @@ func _pack_banner(text: String, sub: String, duration: float) -> void:
 		p.modulate.a = 0.0
 		create_tween().tween_property(p, "modulate:a", 1.0, 0.25).set_delay(0.35)
 	var tw := create_tween()
-	tw.tween_interval(0.8 + duration)
+	tw.tween_interval(0.3 + duration)
 	tw.tween_property(box, "modulate:a", 0.0, 0.5)
 	tw.tween_callback(box.queue_free)
 
@@ -420,39 +420,39 @@ const GLYPHS := {"AUTO": "glyph_auto", "×2": "glyph_speed", "SON": "glyph_sound
 
 
 func _round_button(text: String) -> Button:
+	# Petit bouton rond, icône seule (le texte est dans l'info-bulle) : l'écran de combat reste dégagé.
 	var b := Button.new()
 	b.toggle_mode = true
 	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(170 if text == "AUTO" else 150, 64)
-	b.tooltip_text = text
+	var icon_only := GLYPHS.has(text)
+	b.custom_minimum_size = Vector2(72, 72) if icon_only else Vector2(150, 72)
+	b.tooltip_text = {"AUTO": "Combat automatique", "×2": "Vitesse ×2", "SON": "Son"}.get(text, text)
 	for st: String in ["normal", "hover", "pressed", "hover_pressed"]:
-		var sb: StyleBox = AttackBar._nine("wave_cartouche", 20)
-		if FinPack.available("port_franc"):  # cartouche laiton du Port-Franc, glyphe dans le médaillon
-			var t := StyleBoxTexture.new()
-			t.texture = FinPack.tex("port_franc/cartouche_ressource.png")
-			t.texture_margin_left = 74
-			t.texture_margin_top = 18
-			t.texture_margin_right = 22
-			t.texture_margin_bottom = 18
-			sb = t
-		(sb as StyleBoxTexture).modulate_color = Color(1.25, 1.1, 0.7) if st.contains("pressed") else (Color(1.1, 1.1, 1.1) if st == "hover" else Color.WHITE)
+		var sb := StyleBoxFlat.new()
+		sb.set_corner_radius_all(36)
+		sb.bg_color = Color(0.09, 0.08, 0.12, 0.62)
+		sb.set_border_width_all(3)
+		sb.border_color = Color("e8c66a") if st.contains("pressed") else Color(1, 1, 1, 0.22 if st == "normal" else 0.45)
+		if st.contains("pressed"):
+			sb.bg_color = Color(0.32, 0.25, 0.1, 0.8)
 		b.add_theme_stylebox_override(st, sb)
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-	var glyph := TextureRect.new()
-	glyph.texture = OverheadBar.tex(GLYPHS.get(text, "glyph_pause"))
-	glyph.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	glyph.position = Vector2(20, 17)
-	glyph.size = Vector2(30, 30)
-	glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	b.add_child(glyph)
-	var cap := _label(22, 5)
-	cap.text = text
-	cap.position = Vector2(66, 0)
-	cap.size = Vector2(b.custom_minimum_size.x - 80, 64)
-	cap.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	cap.add_theme_color_override("font_color", Color("f6efdf"))
-	b.add_child(cap)
+	if icon_only:
+		var glyph := TextureRect.new()
+		glyph.texture = OverheadBar.tex(GLYPHS[text])
+		glyph.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		glyph.position = Vector2(18, 18)
+		glyph.size = Vector2(36, 36)
+		glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(glyph)
+	else:
+		var cap := _label(22, 5)
+		cap.text = text
+		cap.size = b.custom_minimum_size
+		cap.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		cap.add_theme_color_override("font_color", Color("f6efdf"))
+		b.add_child(cap)
 	b.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	return b
 

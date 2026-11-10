@@ -77,7 +77,16 @@ static func panel(parent: Control, screen: String, name: String, r: Rect2) -> Pa
 	return p
 
 
-## Image simple posée à `r` (étirée, filtrage net).
+## Filtrage d'une image montrée à `shown` px : net (pixels francs) si elle est à sa taille ou agrandie ;
+## lissé avec mipmaps si elle est réduite (sinon les détails des illustrations crénellent et scintillent).
+static func filter_for(t: Texture2D, shown: Vector2) -> CanvasItem.TextureFilter:
+	if t == null or shown.x <= 0.0:
+		return CanvasItem.TEXTURE_FILTER_NEAREST
+	var k := minf(shown.x / float(t.get_width()), shown.y / float(t.get_height()))
+	return CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS if k < 0.9 else CanvasItem.TEXTURE_FILTER_NEAREST
+
+
+## Image simple posée à `r` (étirée ; nette, ou lissée si elle est réduite).
 static func image(parent: Control, t: Texture2D, r: Rect2) -> TextureRect:
 	var tr := TextureRect.new()
 	tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE  # avant la taille, sinon l'image impose la sienne
@@ -86,6 +95,7 @@ static func image(parent: Control, t: Texture2D, r: Rect2) -> TextureRect:
 	tr.position = r.position
 	tr.size = r.size
 	tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	tr.texture_filter = filter_for(t, r.size)
 	parent.add_child(tr)
 	var c := cover_behind(parent, t, r)
 	if c:

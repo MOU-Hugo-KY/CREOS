@@ -5,8 +5,8 @@ extends Control
 ## et sous les pieds la jauge jaune d'énergie avec l'icône de son état principal à gauche.
 
 const DIR := "res://assets/ui/combat/"
-const BAR := Vector2(110, 18)
-const INSET := 4.0
+const BAR := Vector2(84, 12)  # une seule barre fine au-dessus de la tête
+const INSET := 2.0
 const FOOT := Vector2(96, 10)  # jauge d'énergie sous les pieds
 ## État du moteur -> icône du pack (status_<nom>_24.png).
 const STATUS_ICONS := {"brulure": "burn", "poison": "poison", "mouille": "wet", "marque": "mark",
@@ -108,14 +108,14 @@ func _draw() -> void:
 	_fill(tex("hp_hero_fill" if hero else "hp_enemy_fill"), inner, _hp_ratio)
 	if _shield_ratio > 0.0:
 		_fill(tex("shield_fill"), inner, _shield_ratio, Color(1, 1, 1, 0.8))
-	# Énergie (jaune), sous les pieds, avec l'icône d'état à gauche.
-	var er := Rect2(_feet + Vector2(-FOOT.x / 2.0 + 12, 8), FOOT)
-	var ef := tex("energy_frame")
-	if ef:
-		draw_texture_rect(ef, er, false)
-	_fill(tex("hero_energy_fill"), er.grow(-2.0), _energy_ratio)
+	# Énergie des héros : un mince filet jaune collé sous la vie (plus de jauge sous les pieds).
+	if hero:
+		var er := Rect2(Vector2(INSET, BAR.y - 1.0), Vector2(BAR.x - INSET * 2.0, 3.0))
+		draw_rect(er.grow(1.0), Color(0.07, 0.06, 0.1, 0.85))
+		draw_rect(Rect2(er.position, Vector2(er.size.x * _energy_ratio, er.size.y)), Color("ffd23c"))
+	# Icône d'état, petite, à gauche de la barre.
 	if _icon:
-		draw_texture_rect(_icon, Rect2(er.position + Vector2(-26, -7), Vector2(24, 24)), false)
+		draw_texture_rect(_icon, Rect2(Vector2(-22, -4), Vector2(20, 20)), false)
 
 
 ## Remplissage recadré à `ratio` (la texture est pleine, on n'en montre que la part utile).

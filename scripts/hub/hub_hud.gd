@@ -392,6 +392,8 @@ func _build_pack_hud() -> void:
 	var buildings: Dictionary = GameData.hub.get("buildings", {})
 	var anim: Dictionary = D.get("animations", {}).get("notification", {})
 	for id: String in D.get("buttons", {}):
+		if id == "jour_nuit":
+			continue  # outil d'essai : le port suit l'heure réelle, le bouton encombrait la barre
 		var info: Dictionary = D.buttons[id]
 		var map: Array = PF_BUTTONS.get(id, ["", ""])
 		var bld: Dictionary = buildings.get(map[1], {})
@@ -399,6 +401,8 @@ func _build_pack_hud() -> void:
 		var desc := String(bld.get("description", {"primes": "Les chasses du jour et leurs coffres.",
 			"parametres": "Le volume de la musique et des effets.", "jour_nuit": "Change le moment de la journée sur le port."}.get(id, "")))
 		var r := FinPack.rect(info.rect)
+		if D.buttons.has("jour_nuit"):  # sans le bouton jour / nuit, la rangée est recentrée
+			r.position.x += (FinPack.rect(D.buttons.jour_nuit.rect).position.x - FinPack.rect(D.buttons.parametres.rect).position.x) / 2.0
 		var b := FinPack.button(root, "port_franc/boutons/" + id, r)
 		ScreenPack.shadow(ScreenPack.text(root, String({"heros": "Héros", "chasse": "Chasse", "lanterne": "Lanterne", "echoppe": "Échoppe",
 			"reliques": "Reliques", "primes": "Primes", "ma_loge": "Mon donjon", "parametres": "Paramètres", "jour_nuit": "Jour / nuit"}.get(id, name)), Rect2(r.position + Vector2(-40, r.size.y - 6),

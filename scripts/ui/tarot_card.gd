@@ -46,7 +46,7 @@ func setup(h: Dictionary, is_owned: bool, still := true) -> TarotCard:
 	owned = is_owned
 	size = SIZE
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS  # la carte est souvent montrée réduite : lissée
 	for c in get_children():
 		remove_child(c)
 		c.queue_free()
@@ -126,6 +126,7 @@ func _add_still_hero() -> void:
 	var k := clampf(roundf(780.0 / maxf(1.0, body.size.y) * 2.0) / 2.0, 2.0, 3.5)
 	var art := _image(content, tex, Rect2(FEET - sheet.anchor * k, tex.get_size() * k))
 	art.stretch_mode = TextureRect.STRETCH_SCALE
+	art.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # le héros est en vrai pixel art : il reste net
 
 
 func _emblem(name: String, center: Vector2) -> void:

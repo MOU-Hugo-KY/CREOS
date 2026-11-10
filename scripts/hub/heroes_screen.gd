@@ -245,15 +245,11 @@ func _hero_card(hero: Dictionary) -> Control:
 	if not owned:
 		card.set_face_up(true)
 		card.modulate = rest
-	var sub := "%s · à recruter" % String(hero.get("class", "")).capitalize() if not owned else "Niv. %d · Force %d" % [PlayerData.hero_level(id), _power(id)]
-	var rcol: Color = (Palette.RARITIES.get(int(hero.get("rarity", 2)), ["?", Color.WHITE])[1] as Color).lightened(0.3)
-	ScreenPack.shadow(ScreenPack.text(holder, String(TarotCard.arcane(id).title) if owned else String(hero.get("name", id)), Rect2(0, TarotCard.SIZE.y * CARD_SCALE + 4,
-		TarotCard.SIZE.x * CARD_SCALE, 28), 20, rcol, HORIZONTAL_ALIGNMENT_CENTER), 2)
-	var info := ScreenPack.shadow(ScreenPack.text(holder, sub, Rect2(0, TarotCard.SIZE.y * CARD_SCALE + 32,
-		TarotCard.SIZE.x * CARD_SCALE, 30), 19, UiKit.PARCHMENT_DARK if owned else Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 2)
-	if PlayerData.in_team(id):
-		info.text = "◆ Équipe · " + sub
-		info.add_theme_color_override("font_color", Color("63c8be"))
+	# Une seule ligne courte sous la carte (le nom est déjà sur la carte ; la Force est dans la fiche).
+	var in_team := PlayerData.in_team(id)
+	var sub := "à recruter" if not owned else ("◆ Niv. %d" if in_team else "Niv. %d") % PlayerData.hero_level(id)
+	ScreenPack.shadow(ScreenPack.text(holder, sub, Rect2(0, TarotCard.SIZE.y * CARD_SCALE + 6, TarotCard.SIZE.x * CARD_SCALE, 30), 21,
+		Color("63c8be") if in_team else (UiKit.PARCHMENT_DARK if owned else Color(0.7, 0.68, 0.74)), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	# Survol : la carte se soulève ; clic : elle se retourne et ouvre la fiche.
 	holder.mouse_entered.connect(func() -> void:
 		create_tween().tween_property(card, "position:y", -14.0, 0.12)

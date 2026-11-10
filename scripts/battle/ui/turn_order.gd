@@ -4,9 +4,9 @@ extends Control
 ## en haut au centre, des vignettes carrées (tête du personnage tirée de son dessin de combat), cadre
 ## doré pour les héros et rouge pour les ennemis ; le premier (celui qui joue) est plus grand.
 
-const COUNT := 8
-const SIZE := 66.0
-const FIRST := 84.0
+const COUNT := 3  # seulement les 3 prochains : moins chargé
+const SIZE := 52.0
+const FIRST := 64.0
 const GAP := 8.0
 
 var _order: Array = []

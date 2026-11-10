@@ -53,40 +53,8 @@
     "echoppe_masques",
     "ma_loge"
   ],
-  "side_left": [
-    {
-      "id": "recompenses",
-      "name": "Récompenses",
-      "icon": "recompenses",
-      "action": "rewards"
-    },
-    {
-      "id": "evenements",
-      "name": "Corruption",
-      "icon": "evenements",
-      "action": "events"
-    }
-  ],
-  "side_right": [
-    {
-      "id": "classement",
-      "name": "Classement",
-      "icon": "classement",
-      "action": "leaderboard"
-    },
-    {
-      "id": "guilde",
-      "name": "Guilde",
-      "icon": "guilde",
-      "action": "guild"
-    },
-    {
-      "id": "tour",
-      "name": "Tour",
-      "icon": "tour",
-      "action": "tower"
-    }
-  ],
+  "side_left": [],
+  "side_right": [],
   "first_hunt": "monde01_1",
   "shop": [
     {
@@ -189,5 +157,42 @@
       }
     }
   ],
-  "sell_price": 25
+  "sell_price": 25,
+  "_side_hidden": {
+    "side_left": [
+      {
+        "id": "recompenses",
+        "name": "Récompenses",
+        "icon": "recompenses",
+        "action": "rewards"
+      },
+      {
+        "id": "evenements",
+        "name": "Corruption",
+        "icon": "evenements",
+        "action": "events"
+      }
+    ],
+    "side_right": [
+      {
+        "id": "classement",
+        "name": "Classement",
+        "icon": "classement",
+        "action": "leaderboard"
+      },
+      {
+        "id": "guilde",
+        "name": "Guilde",
+        "icon": "guilde",
+        "action": "guild"
+      },
+      {
+        "id": "tour",
+        "name": "Tour",
+        "icon": "tour",
+        "action": "tower"
+      }
+    ],
+    "_doc": "Boutons de côté « bientôt » cachés (écran trop chargé) : les remettre dans side_left / side_right quand leurs écrans existeront."
+  }
 }
