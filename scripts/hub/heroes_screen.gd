@@ -485,6 +485,7 @@ func show_hero(id: String, tab := "Techniques") -> void:
 	_detail.visible = true
 	refresh()  # pose d'abord la carte (et le héros animé dans sa fenêtre)
 	_preview.show_hero(GameData.hero(id))
+	_d_card.pivot_offset = TarotCard.SIZE / 2.0  # s'ouvre depuis son centre, pas son bord gauche
 	_d_card.scale = Vector2(0.0, 1.0)
 	create_tween().tween_property(_d_card, "scale:x", 1.0, 0.22).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 

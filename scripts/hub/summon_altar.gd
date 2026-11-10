@@ -1166,27 +1166,37 @@ func _build_hall() -> void:
 	FinPack.image(root, String(D.get("background", "hall_objets/hall_invocateurs.png")), Rect2(0, 0, 1920, 1080))
 	for p: Dictionary in D.get("portals", []):
 		var id := String(p.id)
+		# L'arche respire doucement (sur téléphone il n'y a pas de survol : on montre qu'elle se touche).
 		var glow := FinPack.image(root, String(p.hover_file), FinPack.rect(p.rect))
-		glow.visible = false
+		glow.modulate.a = 0.0
+		var pulse := glow.create_tween().set_loops()
+		pulse.tween_property(glow, "modulate:a", 0.55, 1.4).set_trans(Tween.TRANS_SINE).set_delay(0.4 * HALL_MODES.keys().find(id))
+		pulse.tween_property(glow, "modulate:a", 0.0, 1.4).set_trans(Tween.TRANS_SINE)
+		var enter := func() -> void:
+			ui_sound.emit("ui_click")
+			_hall.visible = false
+			var mode: String = HALL_MODES.get(id, "heros")
+			if mode != _mode:
+				_set_mode(mode)
 		var hit := Control.new()
 		var hr := FinPack.rect(p.hit_rect)
 		hit.position = hr.position
 		hit.size = hr.size
 		hit.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		root.add_child(hit)
-		hit.mouse_entered.connect(func() -> void: glow.visible = true)
-		hit.mouse_exited.connect(func() -> void: glow.visible = false)
+		hit.mouse_entered.connect(func() -> void: glow.modulate.a = 1.0)
 		hit.gui_input.connect(func(e: InputEvent) -> void:
 			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
-				glow.visible = false
-				_hall.visible = false
-				var mode: String = HALL_MODES.get(id, "heros")
-				if mode == _mode:
-					ui_sound.emit("ui_click")
-				else:
-					_set_mode(mode))
-		ScreenPack.shadow(ScreenPack.text(root, HALL_NAMES.get(id, id), FinPack.rect(p.label_rect), 26, Color("f3d9a0"),
-			HORIZONTAL_ALIGNMENT_CENTER), 3)
+				enter.call())
+		# Une vraie plaque sous chaque arche : nom de l'invocateur et ce qu'il donne, assez grande pour le doigt.
+		var lr := FinPack.rect(p.label_rect)
+		var parts := String(HALL_NAMES.get(id, id)).split(" · ")
+		var pr := Rect2(lr.get_center().x - 210.0, lr.position.y - 34, 420, 96)
+		var plate := FinPack.button(root, "table_chasses/bouton_chasser", pr, parts[0], 30)
+		plate.pressed.connect(enter)
+		if parts.size() > 1:
+			ScreenPack.shadow(ScreenPack.text(root, parts[1], Rect2(plate.position.x, plate.position.y + 100, plate.size.x, 34), 24,
+				Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 3)
 	var tr := FinPack.rect(P.titre)
 	FinPack.nine(root, "hall_objets/commun/bandeau_titre.png", tr, [130, 24, 130, 28])
 	ScreenPack.shadow(ScreenPack.text(root, String(GameData.summon.get("name", "Lanterne des Serments")).to_upper(),
@@ -1196,5 +1206,5 @@ func _build_hall() -> void:
 	back.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		closed.emit())
-	ScreenPack.shadow(ScreenPack.text(root, "Choisis un invocateur", Rect2(560, 990, 800, 40), 24, UiKit.WHITE,
-		HORIZONTAL_ALIGNMENT_CENTER), 2)
+	ScreenPack.shadow(ScreenPack.text(root, "Choisis un invocateur", Rect2(560, 1000, 800, 44), 30, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER), 3)

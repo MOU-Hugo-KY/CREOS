@@ -39,7 +39,7 @@ for (const [attack, e] of entries) {
   if (done.has(key)) continue;
   done.add(key);
   const fx = await lib.loadEffect(e.fx, join(PFX, "src/fx"));
-  const options = e.pal ? { palette: cfg.palettes[e.pal] } : {};
+  const options = { ...(e.pal ? { palette: cfg.palettes[e.pal] } : {}), ...(e.opts ?? {}) };  // opts : options de l'effet pixelfx
   const r = lib.renderFrames(fx, { fps: FPS, bg: "none", actor: false, seed: 7, options });
   // recadrage sur la zone dessinée de toutes les images
   let x0 = r.w, y0 = r.h, x1 = -1, y1 = -1;

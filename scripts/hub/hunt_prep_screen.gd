@@ -79,7 +79,7 @@ func _ready() -> void:
 	# Le niveau : un parchemin à droite.
 	var ir := Rect2(1440, 440, 470, 300)
 	FinPack.nine(_root, "preparation_chasse/commun/parchemin.png", ir, [140, 24, 140, 24])
-	_info = ScreenPack.text(_root, "", Rect2(ir.position + Vector2(92, 70), ir.size - Vector2(184, 140)), 17, UiKit.INK,
+	_info = ScreenPack.text(_root, "", Rect2(ir.position + Vector2(92, 70), ir.size - Vector2(184, 140)), 21, UiKit.INK,
 		HORIZONTAL_ALIGNMENT_CENTER, true)
 	_info.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_board = Control.new()
@@ -255,7 +255,23 @@ func _fill_drawer(team: Array) -> void:
 	for k in rects.size():
 		var idx := _page * rects.size() + k
 		if idx >= owned.size():
-			break
+			# Places libres : les héros pas encore recrutés, grisés (le banc n'est jamais vide, et on voit qui reste à trouver).
+			var others: Array = GameData.heroes.keys().filter(func(h: String) -> bool: return not h in owned)
+			var j := idx - owned.size()
+			if j < others.size():
+				var lr := FinPack.rect(rects[k])
+				var lb := Control.new()
+				lb.position = lr.position
+				lb.size = lr.size
+				lb.tooltip_text = "%s · à recruter à la Lanterne" % GameData.hero(others[j]).name
+				_drawer.add_child(lb)
+				var lp := RoundPortrait.new().setup(GameData.hero(others[j]), lr.size.x - 20, 0.0)
+				lp.position = Vector2(10, 10)
+				lp.set_grey(true)
+				lp.modulate.a = 0.55
+				lb.add_child(lp)
+				FinPack.image(lb, "preparation_chasse/portrait_grise.png", Rect2(Vector2.ZERO, lr.size))
+			continue
 		var id: String = owned[idx]
 		var r := FinPack.rect(rects[k])
 		var in_team := id in team
@@ -273,7 +289,7 @@ func _fill_drawer(team: Array) -> void:
 			port.set_grey(true)
 		FinPack.image(b, "preparation_chasse/portrait_%s.png" % ("choisi" if in_team else ("grise" if full else "normal")),
 			Rect2(Vector2.ZERO, r.size))
-		ScreenPack.shadow(ScreenPack.text(b, str(PlayerData.hero_level(id)), Rect2(r.size.x - 34, r.size.y - 28, 30, 24), 16,
+		ScreenPack.shadow(ScreenPack.text(b, str(PlayerData.hero_level(id)), Rect2(r.size.x - 40, r.size.y - 32, 36, 28), 21,
 			UiKit.WHITE, HORIZONTAL_ALIGNMENT_RIGHT), 2)
 		var hid := id
 		b.gui_input.connect(func(e: InputEvent) -> void:
@@ -283,9 +299,9 @@ func _fill_drawer(team: Array) -> void:
 					ui_sound.emit("ui_toggle"))
 	var tr := FinPack.rect(P.tiroir)
 	ScreenPack.shadow(ScreenPack.text(_drawer, "Choisis tes chasseurs · %d / 7" % team.size(),
-		Rect2(tr.position + Vector2(0, -40), Vector2(tr.size.x, 34)), 24, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 3)
+		Rect2(tr.position + Vector2(0, -44), Vector2(tr.size.x, 38)), 28, Color("f3d9a0"), HORIZONTAL_ALIGNMENT_CENTER), 3)
 	ScreenPack.shadow(ScreenPack.text(_drawer, "Touche deux héros de la formation pour échanger leurs places",
-		Rect2(tr.position + Vector2(0, tr.size.y - 58), Vector2(tr.size.x, 28)), 18, Color("cbbfae"), HORIZONTAL_ALIGNMENT_CENTER), 2)
+		Rect2(tr.position + Vector2(0, tr.size.y - 62), Vector2(tr.size.x, 32)), 22, Color("cbbfae"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 	if pages > 1:
 		for dir: int in [-1, 1]:
 			var a := TextureButton.new()

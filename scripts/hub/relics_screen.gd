@@ -318,8 +318,8 @@ func _build_reliquary() -> void:
 	root.add_child(_niches)
 	ScreenPack.image(root, _rtex("reliquaire/lutrin_relique.png"), _r(R.get("lutrin_rect", [1330, 260, 560, 760])))
 	var wr := _r(R.get("lutrin_writing_rect", [1440, 335, 340, 225]))
-	_lectern = ScreenPack.text(root, "", Rect2(wr.position, Vector2(wr.size.x, 64)), 22, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER, true)
-	_lectern_sub = ScreenPack.text(root, "", Rect2(wr.position + Vector2(0, 66), wr.size - Vector2(0, 66)), 17, UiKit.TEXT_SOFT,
+	_lectern = ScreenPack.text(root, "", Rect2(wr.position, Vector2(wr.size.x, 72)), 28, UiKit.INK, HORIZONTAL_ALIGNMENT_CENTER, true)
+	_lectern_sub = ScreenPack.text(root, "", Rect2(wr.position + Vector2(0, 76), wr.size - Vector2(0, 76)), 22, UiKit.TEXT_SOFT,
 		HORIZONTAL_ALIGNMENT_CENTER, true)
 	# Haut : retour (ferme l'écran), titre, accès aux quatuors.
 	var back := TextureButton.new()
@@ -355,7 +355,11 @@ func _build_reliquary() -> void:
 		refresh())
 
 
+var _picked := ""  # niche touchée une fois (le second toucher l'ouvre)
+
+
 func _fill_reliquary() -> void:
+	_picked = ""
 	for c in _niches.get_children():
 		_niches.remove_child(c)
 		c.queue_free()
@@ -364,7 +368,7 @@ func _fill_reliquary() -> void:
 	var ids: Array = GameData.heroes.keys()
 	var unlocked := PlayerData.relics_unlocked()
 	_lectern.text = "Les reliques" if unlocked else "Reliques scellées"
-	_lectern_sub.text = ("Survole une niche pour lire sa relique ; touche-la pour l'améliorer." if unlocked else
+	_lectern_sub.text = ("Touche une niche pour lire sa relique ; touche-la encore pour l'améliorer." if unlocked else
 		"Elles s'éveillent après la Campagne 1 : bats Morvath au dernier niveau du monde 10.")
 	for i in mini(ids.size(), niches.size()):
 		var id: String = ids[i]
@@ -385,7 +389,7 @@ func _fill_reliquary() -> void:
 		for k in pr.size():
 			ScreenPack.image(_niches, _rtex("reliquaire/palier_%d.png" % (5 if k < tier else 1)), _r(pr[k]))
 		var hero_name := String(GameData.hero(id).get("short", GameData.hero(id).get("name", id)))
-		ScreenPack.shadow(ScreenPack.text(_niches, hero_name, Rect2(rr.position.x - 10, rr.position.y - 26, rr.size.x + 20, 26), 17,
+		ScreenPack.shadow(ScreenPack.text(_niches, hero_name, Rect2(rr.position.x - 16, rr.position.y - 30, rr.size.x + 32, 30), 21,
 			Color("f3d9a0") if tier > 0 else Color("b8ae9f"), HORIZONTAL_ALIGNMENT_CENTER), 2)
 		var hover := ScreenPack.image(_niches, _rtex("reliquaire/niche_survol.png"), rr)
 		hover.visible = false
@@ -396,7 +400,10 @@ func _fill_reliquary() -> void:
 		hit.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		_niches.add_child(hit)
 		var hero := GameData.hero(id)
-		hit.mouse_entered.connect(func() -> void:
+		var show_info := func() -> void:
+			for h in _niches.get_children():
+				if h.has_meta("hover"):
+					h.visible = false
 			hover.visible = true
 			_lectern.text = String(relic.get("name", id))
 			var state := "Scellée" if not unlocked else ("Pas encore retrouvée · %d fragments" % PlayerData.relic_fragments(id)
@@ -404,9 +411,15 @@ func _fill_reliquary() -> void:
 			_lectern_sub.text = "%s
 %s
 
-%s" % [hero.get("name", id), state, relic.get("dungeon", "")])
-		hit.mouse_exited.connect(func() -> void: hover.visible = false)
+%s" % [hero.get("name", id), state, relic.get("dungeon", "")]
+		hover.set_meta("hover", true)
+		hit.mouse_entered.connect(show_info)
+		# Sur téléphone il n'y a pas de survol : le premier toucher montre la relique sur le lutrin, le second l'ouvre.
 		hit.gui_input.connect(func(e: InputEvent) -> void:
 			if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 				ui_sound.emit("ui_click")
-				hero_relic_requested.emit(id))
+				if _picked == id:
+					hero_relic_requested.emit(id)
+				else:
+					_picked = id
+					show_info.call())

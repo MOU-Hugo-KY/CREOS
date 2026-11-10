@@ -12,3 +12,4 @@ docs/pour_chatgpt/*.zip
 
 # Pack Tiny Swords (Pixel Frog) : non redistribuable, copié par tools/import_tiny_swords.py
 assets/tiny/
+/build/

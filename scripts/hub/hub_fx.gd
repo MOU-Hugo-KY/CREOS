@@ -165,9 +165,20 @@ func _process(delta: float) -> void:
 			elif spr.position.x < -80.0:
 				spr.position = Vector2(MAP.x + 80.0, it.home.y)
 		elif e.has("wander"):
-			# petite promenade autour de son point (courbe de Lissajous lente)
+			# promenade : vole doucement vers un point au hasard autour de son ancrage, puis en choisit un autre
 			var r := float(e.wander)
-			spr.position = it.home + Vector2(sin(it.t * 0.31) * r, sin(it.t * 0.47 + 1.3) * r * 0.5)
+			var p: Vector2 = it.get("p", it.home)
+			var v: Vector2 = it.get("v", Vector2.ZERO)
+			var goal: Vector2 = it.get("goal", it.home)
+			if p.distance_to(goal) < 6.0:
+				goal = it.home + Vector2(randf_range(-r, r), randf_range(-r, r) * 0.6)
+			var speed := float(e.get("fly", 16.0))
+			v = v.lerp((goal - p).normalized() * speed, minf(1.0, delta * 1.2))  # virages souples
+			p += v * delta
+			it.p = p
+			it.v = v
+			it.goal = goal
+			spr.position = p
 		spr.position = spr.position.round()  # pixels nets
 	if not _weather.is_empty() and float(_weather.left) > 0.0:
 		_weather.left -= delta

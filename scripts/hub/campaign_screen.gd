@@ -184,7 +184,15 @@ const TC := "table_chasses"
 const TC_REWARD_ICONS := {"gold": "or", "gems": "gemme", "fragments_relique": "eclat", "materiaux_relique": "fragment_relique"}
 
 var _map: Control
-var _map_box: Control
+var _map_box: Control  # interface fixe de la carte (énergie, parchemin)
+var _world: Control  # la carte elle-même (fond, mondes, niveaux) : zoomée sur le monde choisi
+var _world_box: Control
+var _zoomed := true  # vrai : la carte est grossie sur le monde choisi (lisible sur téléphone)
+var _zoom_btn: Button
+var _zoom_tw: Tween
+const ZOOM_MAX := 2.6
+const ZOOM_AREA := Rect2(30, 130, 1380, 930)  # zone de l'écran où tient le monde grossi (à gauche du parchemin)
+const LEVEL_HIT := 44.0  # zone à toucher autour d'un niveau (pixels de carte, ×2,6 une fois grossie), plus large que son dessin
 var _pick := ""  # niveau choisi
 
 
@@ -201,7 +209,15 @@ func _build_map() -> void:
 	var root := ScreenPack.frame(_map)
 	var D := FinPack.data(TC)
 	var P: Dictionary = D.get("positions", {})
-	FinPack.image(root, String(D.get("background", "table_chasses/carte_monde.png")), Rect2(0, 0, 1920, 1080))
+	_world = Control.new()
+	_world.size = Vector2(1920, 1080)
+	_world.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_world)
+	FinPack.image(_world, String(D.get("background", "table_chasses/carte_monde.png")), Rect2(0, 0, 1920, 1080))
+	_world_box = Control.new()
+	_world_box.size = Vector2(1920, 1080)
+	_world_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_world.add_child(_world_box)
 	_map_box = Control.new()
 	_map_box.size = Vector2(1920, 1080)
 	_map_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -216,12 +232,56 @@ func _build_map() -> void:
 		ui_sound.emit("ui_click")
 		region = ""
 		close_window())
+	# Bouton qui grossit la carte sur le monde choisi ou montre les 10 mondes.
+	_zoom_btn = UiKit.button("Tous les mondes", "blue", 24)
+	_zoom_btn.position = Vector2(40, 950)
+	_zoom_btn.custom_minimum_size = Vector2(300, 84)
+	_zoom_btn.size = Vector2(300, 84)
+	_zoom_btn.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		_zoomed = not _zoomed
+		_apply_zoom(true))
+	root.add_child(_zoom_btn)
+
+
+## Grossit la carte sur le monde choisi (ou la montre en entier). Les niveaux deviennent assez grands pour le doigt.
+func _apply_zoom(animate: bool) -> void:
+	if not _world:
+		return
+	var k := 1.0
+	var at := Vector2.ZERO
+	var D := FinPack.data(TC)
+	var rr := Rect2()
+	var rids := GameData.region_ids()
+	for reg: Dictionary in D.get("regions", []):
+		var i := int(reg.monde) - 1
+		if i >= 0 and i < rids.size() and rids[i] == region:
+			rr = FinPack.rect(reg.rect)
+	if _zoomed and rr.size != Vector2.ZERO:
+		rr = rr.grow(40)
+		k = minf(ZOOM_MAX, minf(ZOOM_AREA.size.x / rr.size.x, ZOOM_AREA.size.y / rr.size.y))
+		at = ZOOM_AREA.get_center() - rr.get_center() * k
+		# la carte ne laisse jamais voir de vide sur les bords
+		at.x = clampf(at.x, 1920.0 - 1920.0 * k, 0.0)
+		at.y = clampf(at.y, 1080.0 - 1080.0 * k, 0.0)
+	if _zoom_btn:
+		_zoom_btn.text = "Tous les mondes" if _zoomed else "Grossir le monde"
+	if _zoom_tw:
+		_zoom_tw.kill()
+	if animate:
+		_zoom_tw = create_tween().set_parallel().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		_zoom_tw.tween_property(_world, "scale", Vector2(k, k), 0.35)
+		_zoom_tw.tween_property(_world, "position", at, 0.35)
+	else:
+		_world.scale = Vector2(k, k)
+		_world.position = at
 
 
 func _fill_map() -> void:
-	for c in _map_box.get_children():
-		_map_box.remove_child(c)
-		c.queue_free()
+	for box: Control in [_map_box, _world_box]:
+		for c in box.get_children():
+			box.remove_child(c)
+			c.queue_free()
 	var D := FinPack.data(TC)
 	var P: Dictionary = D.get("positions", {})
 	var M: Dictionary = D.get("marqueurs", {})
@@ -246,14 +306,14 @@ func _fill_map() -> void:
 		var rr := FinPack.rect(reg.rect)
 		var sel := rid == region
 		if sel:
-			FinPack.image(_map_box, String(reg.eclaire), rr)
+			FinPack.image(_world_box, String(reg.eclaire), rr)
 		if open:
-			FinPack.image(_map_box, String(reg.chemin), rr)
+			FinPack.image(_world_box, String(reg.chemin), rr)
 		else:
-			FinPack.image(_map_box, String(reg.brouillard), rr)
+			FinPack.image(_world_box, String(reg.brouillard), rr)
 		var info: Dictionary = GameData.regions.get(rid, {})
 		# Nom du monde sur un petit cartouche, au-dessus des cartes de la ligne suivante.
-		var lbl := ScreenPack.text(_map_box, "%d. %s" % [i + 1, info.get("name", reg.nom)],
+		var lbl := ScreenPack.text(_world_box, "%d. %s" % [i + 1, info.get("name", reg.nom)],
 			Rect2(rr.position.x - 14, rr.end.y - 26, rr.size.x + 28, 24), 15, Color("fff1cf") if sel else UiKit.WHITE,
 			HORIZONTAL_ALIGNMENT_CENTER)
 		ScreenPack.shadow(lbl, 2)
@@ -271,7 +331,7 @@ func _fill_map() -> void:
 				region = rid
 				_pick = ""
 				_fill_map())
-		_map_box.add_child(hit)
+		_world_box.add_child(hit)
 		# Les 8 niveaux.
 		var pts: Array = reg.get("chemin_points", [])
 		for k in mini(pts.size(), ids.size()):
@@ -288,14 +348,19 @@ func _fill_map() -> void:
 			var r := FinPack.rect(pt.rect)
 			if key == "verrouille" and bool(pt.boss):
 				r = r.grow(-8)
-			var m := FinPack.image(_map_box, String(mk.get("file", "")), r)
+			var m := FinPack.image(_world_box, String(mk.get("file", "")), r)
 			if id == _pick:
 				m.modulate = Color(1.4, 1.3, 0.9)
 			if lvl_open:
-				m.mouse_filter = Control.MOUSE_FILTER_STOP
-				m.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				m.tooltip_text = String(GameData.dungeon(id).get("name", id))
-				m.gui_input.connect(func(e: InputEvent) -> void:
+				var lh := Control.new()  # zone à toucher plus grande que le dessin du niveau
+				lh.size = Vector2(LEVEL_HIT, LEVEL_HIT)
+				lh.position = r.get_center() - lh.size / 2.0
+				lh.z_index = 3
+				lh.mouse_filter = Control.MOUSE_FILTER_STOP
+				lh.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				lh.tooltip_text = String(GameData.dungeon(id).get("name", id))
+				_world_box.add_child(lh)
+				lh.gui_input.connect(func(e: InputEvent) -> void:
 					if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 						ui_sound.emit("ui_click")
 						region = rid
@@ -306,9 +371,10 @@ func _fill_map() -> void:
 				var s := FinPack.sheet(a)
 				s.scale = Vector2(0.5, 0.5)
 				s.position = Vector2(pt.center[0], pt.center[1]) - Vector2(0, 10)
-				_map_box.add_child(s)
+				_world_box.add_child(s)
 				s.play("a")
 	_fill_panel()
+	_apply_zoom(_world.scale == Vector2.ONE and _zoomed)
 
 
 ## Parchemin de droite : le niveau choisi.
