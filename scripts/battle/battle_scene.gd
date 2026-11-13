@@ -19,12 +19,19 @@ var engine := BattleEngine.new()
 var views: Dictionary = {}  # uid -> UnitView
 var unit_data: Dictionary = {}  # uid -> Dictionary
 
+var _visual_events: Array[Dictionary] = []
+var _visual_sequence := 0
+var _visual_time := 0.0
+var _effects_until := 0.0
+var _actions_until := 0.0
+
 var _units_root: Node3D
 var _hud: CanvasLayer
 var _hero_buttons: Dictionary = {}  # uid -> Button
 var _banner: Label
 var _auto_button: CheckButton
 var _restart_button: Button
+var _banner_tween: Tween
 
 
 func _ready() -> void:
@@ -34,7 +41,13 @@ func _ready() -> void:
 
 
 func start_battle(rng_seed: int) -> void:
+	_visual_events.clear()
+	_visual_sequence = 0
+	_visual_time = 0.0
+	_effects_until = 0.0
+	_actions_until = 0.0
 	for c in _units_root.get_children():
+		_units_root.remove_child(c)
 		c.queue_free()
 	views.clear()
 	unit_data.clear()
@@ -50,6 +63,7 @@ func start_battle(rng_seed: int) -> void:
 
 
 func _process(delta: float) -> void:
+	_visual_time += delta
 	engine.step(delta)
 	_handle_events()
 	for uid in views:
@@ -60,38 +74,72 @@ func _process(delta: float) -> void:
 # --- Événements du moteur -> affichage ----------------------------------------
 
 func _handle_events() -> void:
+	var impact_time := _visual_time
 	for ev in engine.drain_events():
-		match ev.type:
-			"wave_start":
-				_spawn_wave()
-				_show_banner("Vague %d / %d" % [ev.index + 1, ev.count])
-			"attack":
-				_view(ev.src, func(v: UnitView) -> void: v.play_attack())
-			"skill":
-				_view(ev.src, func(v: UnitView) -> void:
-					v.play_skill()
-					v.popup(ev.name, Color.GOLD, true))
-			"damage":
-				_view(ev.dst, func(v: UnitView) -> void:
-					v.play_hit()
-					var color := Color.ORANGE if ev.crit else Color.WHITE
-					if ev.elem_mult > 1.0:
-						color = Color(1, 0.3, 0.2)
-					elif ev.elem_mult < 1.0:
-						color = Color(0.6, 0.6, 0.7)
-					v.popup(str(int(ev.amount)) + ("!" if ev.crit else ""), color, ev.crit))
-			"heal":
-				_view(ev.dst, func(v: UnitView) -> void: v.popup("+" + str(int(ev.amount)), Color.LIME_GREEN))
-			"shield":
-				_view(ev.dst, func(v: UnitView) -> void: v.popup("Bouclier", Color.SKY_BLUE))
-			"death":
-				_view(ev.dst, func(v: UnitView) -> void: v.play_death())
-			"victory":
-				_show_banner("VICTOIRE ! Brumenoire recule…", 0.0)
-				_restart_button.visible = true
-			"defeat":
-				_show_banner("Défaite… Morvath gagne du terrain.", 0.0)
-				_restart_button.visible = true
+		if ev.type in ["attack", "skill"]:
+			var actor: UnitView = views.get(ev.src)
+			var target: UnitView = views.get(ev.targets[0]) if not ev.targets.is_empty() else null
+			if is_instance_valid(actor):
+				var timing := actor.play_action(target, ev.type == "skill")
+				impact_time = _visual_time + float(timing.impact)
+				_actions_until = maxf(_actions_until, _visual_time + float(timing.duration))
+				if ev.type == "skill":
+					actor.popup(ev.name, Color.GOLD, true)
+			continue
+		var due := _visual_time
+		if ev.type in ["damage", "heal", "shield", "status", "death"]:
+			# Conserver l'ordre des PV et des morts, même si deux gestes se croisent.
+			due = maxf(impact_time, _effects_until)
+			_effects_until = due
+		elif ev.type in ["wave_start", "victory", "defeat"]:
+			due = maxf(_visual_time, maxf(_effects_until, _actions_until))
+		_visual_sequence += 1
+		_visual_events.append({"due": due, "order": _visual_sequence, "event": ev})
+	_flush_visual_events()
+
+
+func _flush_visual_events() -> void:
+	# Tri stable : dégâts puis mort, et dernière mort puis victoire.
+	_visual_events.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		return a.order < b.order if a.due == b.due else a.due < b.due)
+	while not _visual_events.is_empty() and float(_visual_events[0].due) <= _visual_time:
+		_present_event(_visual_events.pop_front().event)
+
+
+func _present_event(ev: Dictionary) -> void:
+	match ev.type:
+		"wave_start":
+			_spawn_wave()
+			_show_banner("Vague %d / %d" % [ev.index + 1, ev.count])
+		"damage":
+			_view(ev.dst, func(v: UnitView) -> void:
+				v.displayed_hp = ev.hp
+				v.play_hit()
+				var color := Color.ORANGE if ev.crit else Color.WHITE
+				if ev.elem_mult > 1.0:
+					color = Color(1, 0.3, 0.2)
+				elif ev.elem_mult < 1.0:
+					color = Color(0.6, 0.6, 0.7)
+				v.popup(str(int(ev.amount)) + ("!" if ev.crit else ""), color, ev.crit))
+		"heal":
+			_view(ev.dst, func(v: UnitView) -> void:
+				v.displayed_hp = ev.hp
+				v.popup("+" + str(int(ev.amount)), Color.LIME_GREEN))
+		"shield":
+			_view(ev.dst, func(v: UnitView) -> void:
+				v.show_shield()
+				v.popup("Bouclier", Color.SKY_BLUE))
+		"death":
+			_view(ev.dst, func(v: UnitView) -> void: v.play_death())
+		"victory":
+			for v: UnitView in views.values():
+				if v.unit.team == 0:
+					v.play_victory()
+			_show_banner("VICTOIRE ! Brumenoire recule…", 0.0)
+			_restart_button.visible = true
+		"defeat":
+			_show_banner("Défaite… Morvath gagne du terrain.", 0.0)
+			_restart_button.visible = true
 
 
 func _view(uid: int, fn: Callable) -> void:
@@ -229,7 +277,7 @@ func _refresh_hero_buttons() -> void:
 	for uid in _hero_buttons:
 		var u := engine.get_unit(uid)
 		var b: Button = _hero_buttons[uid]
-		var hp_pct := int(100.0 * u.hp / u.max_hp)
+		var hp_pct := int(100.0 * (views[uid] as UnitView).displayed_hp / u.max_hp)
 		var en_pct := int(u.energy)
 		b.text = "%s\nPV %d%%   Énergie %d%%\n%s" % [
 			u.display_name, hp_pct, en_pct,
@@ -240,9 +288,11 @@ func _refresh_hero_buttons() -> void:
 
 
 func _show_banner(text: String, duration := 2.0) -> void:
+	if _banner_tween:
+		_banner_tween.kill()
 	_banner.text = text
 	_banner.modulate.a = 1.0
 	if duration > 0.0:
-		var tw := create_tween()
-		tw.tween_interval(duration)
-		tw.tween_property(_banner, "modulate:a", 0.0, 0.5)
+		_banner_tween = create_tween()
+		_banner_tween.tween_interval(duration)
+		_banner_tween.tween_property(_banner, "modulate:a", 0.0, 0.5)

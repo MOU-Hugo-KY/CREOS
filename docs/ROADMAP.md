@@ -11,7 +11,11 @@
 
 ![Prototype](capture-prototype.png)
 
-## 🎯 Étape 1 — Combat qui « claque » (prochaine session)
+## 🎯 Étape 1 — Combat qui « claque » (en cours)
+
+- [x] Pilote Brannoc : équipement filtré, trois attaques, approche et retour, impacts synchronisés,
+      protection contre les interruptions et démonstration ([guide](ANIMATIONS.md))
+- [ ] Étendre et régler ce profil pour les quatre autres héros et les monstres
 - [ ] Choisir l'équipement visible de chaque héros : les modèles KayKit contiennent déjà toutes
       leurs variantes d'armes et de boucliers (`1H_Sword`, `2H_Sword`, `Round_Shield`…). Ajouter
       `"show": [...]` dans le JSON et masquer le reste. Les armes en plus se mettent sur les os

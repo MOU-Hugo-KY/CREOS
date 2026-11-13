@@ -8,7 +8,10 @@
     "range": "melee",
     "attack_kind": "physical",
     "model": "res://assets/kaykit/adventurers/Characters/Knight.glb",
-    "anim": { "attack": "1H_Melee_Attack_Chop", "skill": "Block_Attack" },
+    "show": ["1H_Sword", "Round_Shield"],
+    "equipment_nodes": ["1H_Sword", "1H_Sword_Offhand", "2H_Sword", "Badge_Shield", "Rectangle_Shield", "Round_Shield", "Spike_Shield"],
+    "anim": {"attack": "1H_Melee_Attack_Chop", "skill": "Block_Attack", "attacks": ["1H_Melee_Attack_Chop", "1H_Melee_Attack_Slice_Diagonal", "1H_Melee_Attack_Stab"], "run": "Running_A", "return": "Walking_Backwards", "hit": "Block_Hit", "victory": "Cheer"},
+    "presentation": {"advance": true, "approach_duration": 0.2, "return_duration": 0.24, "reach": 1.5, "action_duration": 0.68, "impact_ratio": 0.48, "skill_impact_ratio": 0.45, "blend": 0.12, "shield_color": "67d9bd"},
     "stats": { "hp": 1400, "atk": 70, "def": 90, "res": 50, "spd": 85, "crit": 0.05 },
     "skill": {
       "id": "rempart",

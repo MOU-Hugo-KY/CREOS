@@ -10,6 +10,7 @@ original.
 ![Prototype](docs/capture-prototype.png)
 
 - 📖 Univers et règles : [`docs/GDD.md`](docs/GDD.md)
+- 🎬 Animations de Brannoc : [`docs/ANIMATIONS.md`](docs/ANIMATIONS.md)
 - 🗺️ Feuille de route : [`docs/ROADMAP.md`](docs/ROADMAP.md)
 - 🚀 Installer et lancer : [`docs/DEMARRAGE.md`](docs/DEMARRAGE.md)
 - 🤖 Instructions pour Claude Code : [`CLAUDE.md`](CLAUDE.md)
