@@ -12,6 +12,9 @@
 ![Prototype](capture-prototype.png)
 
 ## 🎯 Étape 1 — Combat qui « claque » (en cours)
+- [x] Pilote pixel Corbin : attaque de base enrichie de 8 à 16 poses, atlas avec pieds recalés,
+      comparatif animé et import réutilisable ([guide](animations/CORBIN_16_POSES.md))
+- [ ] Vérifier ce pilote artistiquement puis étendre les poses aux autres mouvements et héros
 - [x] **3 attaques par héros** (`"attacks"` dans le JSON) : ① attaque de base automatique
       (jauge de vitesse), ② attaque à recharge (`"cooldown"` en secondes), ③ ultime (`"energy"`).
       Chaque attaque a son animation (`"anim"`) et son instant d'impact (`"hit_time"`).

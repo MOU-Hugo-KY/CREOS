@@ -54,7 +54,20 @@ func _build(data: Dictionary, dir: String) -> void:
 		for f: Array in a.frames:
 			if a.get("hit_frame") != null and i == int(a.hit_frame):
 				hit_time = total
-			frames.append([ClipPlayer.texture(dir + String(f[0])), float(f[1])])
+			var texture: Texture2D = ClipPlayer.texture(dir + String(f[0]))
+			if f.size() > 2 and f[2] is Dictionary:
+				# Une planche conserve ses pixels natifs ; seules ses régions sont découpées.
+				var layout: Dictionary = f[2]
+				var region: Array = layout.region
+				var atlas := AtlasTexture.new()
+				atlas.atlas = texture
+				atlas.region = Rect2(region[0], region[1], region[2], region[3])
+				atlas.filter_clip = true
+				var origin: Array = layout.get("anchor", [anchor.x, anchor.y])
+				atlas.set_meta("pixel_anchor", Vector2(origin[0], origin[1]))
+				atlas.set_meta("pixel_scale", float(layout.get("scale", scale)))
+				texture = atlas
+			frames.append([texture, float(f[1])])
 			total += float(f[1])
 			i += 1
 		anims[name] = {"loop": bool(a.loop), "frames": frames, "total": total, "hit_time": hit_time}
@@ -131,6 +144,16 @@ func _frame_in(a: Dictionary, p: float) -> Texture2D:
 		if p < acc:
 			return f[0]
 	return a.frames[-1][0]
+
+
+## Calage de la pose choisie : les nouvelles planches peuvent avoir une autre résolution.
+## Le repos renvoyé avant/après une attaque garde automatiquement son propre calage.
+func frame_anchor(texture: Texture2D) -> Vector2:
+	return texture.get_meta("pixel_anchor", anchor)
+
+
+func frame_scale(texture: Texture2D) -> float:
+	return float(texture.get_meta("pixel_scale", scale))
 
 
 ## Rectangle du corps (repère local de l'acteur, pieds en 0) d'après la première image de repos.

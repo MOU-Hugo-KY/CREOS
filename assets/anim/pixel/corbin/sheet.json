@@ -99,41 +99,281 @@
   },
   "attack_1": {
    "loop": false,
+   "hit_frame": 8,
    "frames": [
     [
-     "corbin_attack_1_000.png",
-     0.1
+     "corbin_attack_1_16f.png",
+     0.055,
+     {
+      "region": [
+       0,
+       0,
+       314,
+       314
+      ],
+      "anchor": [
+       174.27,
+       269
+      ],
+      "scale": 1.375203
+     }
     ],
     [
-     "corbin_attack_1_001.png",
-     0.1
+     "corbin_attack_1_16f.png",
+     0.055,
+     {
+      "region": [
+       314,
+       0,
+       313,
+       314
+      ],
+      "anchor": [
+       172.2,
+       269
+      ],
+      "scale": 1.375203
+     }
     ],
     [
-     "corbin_attack_1_002.png",
-     0.08
+     "corbin_attack_1_16f.png",
+     0.05,
+     {
+      "region": [
+       627,
+       0,
+       313,
+       314
+      ],
+      "anchor": [
+       158.91,
+       271
+      ],
+      "scale": 1.375203
+     }
     ],
     [
-     "corbin_attack_1_003.png",
-     0.05
+     "corbin_attack_1_16f.png",
+     0.045,
+     {
+      "region": [
+       940,
+       0,
+       314,
+       314
+      ],
+      "anchor": [
+       161.41,
+       269
+      ],
+      "scale": 1.375203
+     }
     ],
     [
-     "corbin_attack_1_004.png",
-     0.065
+     "corbin_attack_1_16f.png",
+     0.045,
+     {
+      "region": [
+       0,
+       314,
+       314,
+       313
+      ],
+      "anchor": [
+       162.56,
+       267
+      ],
+      "scale": 1.375203
+     }
     ],
     [
-     "corbin_attack_1_005.png",
-     0.07
+     "corbin_attack_1_16f.png",
+     0.04,
+     {
+      "region": [
+       314,
+       314,
+       313,
+       313
+      ],
+      "anchor": [
+       155.31,
+       267
+      ],
+      "scale": 1.375203
+     }
     ],
     [
-     "corbin_attack_1_006.png",
-     0.1
+     "corbin_attack_1_16f.png",
+     0.03,
+     {
+      "region": [
+       627,
+       314,
+       313,
+       313
+      ],
+      "anchor": [
+       151.14,
+       267
+      ],
+      "scale": 1.375203
+     }
     ],
     [
-     "corbin_attack_1_007.png",
-     0.12
+     "corbin_attack_1_16f.png",
+     0.03,
+     {
+      "region": [
+       940,
+       314,
+       314,
+       313
+      ],
+      "anchor": [
+       146.54,
+       266
+      ],
+      "scale": 1.375203
+     }
+    ],
+    [
+     "corbin_attack_1_16f.png",
+     0.04,
+     {
+      "region": [
+       0,
+       627,
+       314,
+       313
+      ],
+      "anchor": [
+       146.32,
+       268
+      ],
+      "scale": 1.375203
+     }
+    ],
+    [
+     "corbin_attack_1_16f.png",
+     0.04,
+     {
+      "region": [
+       314,
+       627,
+       313,
+       313
+      ],
+      "anchor": [
+       149.6,
+       268
+      ],
+      "scale": 1.375203
+     }
+    ],
+    [
+     "corbin_attack_1_16f.png",
+     0.04,
+     {
+      "region": [
+       627,
+       627,
+       313,
+       313
+      ],
+      "anchor": [
+       152.9,
+       268
+      ],
+      "scale": 1.375203
+     }
+    ],
+    [
+     "corbin_attack_1_16f.png",
+     0.045,
+     {
+      "region": [
+       940,
+       627,
+       314,
+       313
+      ],
+      "anchor": [
+       159.27,
+       268
+      ],
+      "scale": 1.375203
+     }
+    ],
+    [
+     "corbin_attack_1_16f.png",
+     0.05,
+     {
+      "region": [
+       0,
+       940,
+       314,
+       314
+      ],
+      "anchor": [
+       174.87,
+       269
+      ],
+      "scale": 1.375203
+     }
+    ],
+    [
+     "corbin_attack_1_16f.png",
+     0.055,
+     {
+      "region": [
+       314,
+       940,
+       313,
+       314
+      ],
+      "anchor": [
+       169.88,
+       268
+      ],
+      "scale": 1.375203
+     }
+    ],
+    [
+     "corbin_attack_1_16f.png",
+     0.06,
+     {
+      "region": [
+       627,
+       940,
+       313,
+       314
+      ],
+      "anchor": [
+       175.12,
+       269
+      ],
+      "scale": 1.375203
+     }
+    ],
+    [
+     "corbin_attack_1_16f.png",
+     0.065,
+     {
+      "region": [
+       940,
+       940,
+       314,
+       314
+      ],
+      "anchor": [
+       174.91,
+       268
+      ],
+      "scale": 1.375203
+     }
     ]
-   ],
-   "hit_frame": 3
+   ]
   },
   "attack_2": {
    "loop": false,
@@ -397,6 +637,44 @@
     [
      "corbin_fx_007.png",
      0.07
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "corbin_attack_1_000.png",
+     0.1
+    ],
+    [
+     "corbin_attack_1_001.png",
+     0.1
+    ],
+    [
+     "corbin_attack_1_002.png",
+     0.08
+    ],
+    [
+     "corbin_attack_1_003.png",
+     0.05
+    ],
+    [
+     "corbin_attack_1_004.png",
+     0.065
+    ],
+    [
+     "corbin_attack_1_005.png",
+     0.07
+    ],
+    [
+     "corbin_attack_1_006.png",
+     0.1
+    ],
+    [
+     "corbin_attack_1_007.png",
+     0.12
     ]
    ],
    "hit_frame": 3

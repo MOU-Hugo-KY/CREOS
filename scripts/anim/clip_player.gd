@@ -215,11 +215,11 @@ func _draw() -> void:
 	var f := clampi(_frame, 0, frames.size() - 1)
 	if _pixel_anim != "":
 		if show_actor:
-			var s := _pixel.scale
 			var pt := _t + (_phase if _pixel_anim == "idle" else 0.0)  # respirations décalées entre héros
 			var tex := _pixel.frame_at(_pixel_anim, pt, float(_clip.dur), _clip_hit)
+			var s := _pixel.frame_scale(tex)
 			var dx := _pixel.lunge(_t, float(_clip.dur), _clip_hit) if _pixel_anim.begins_with("attack") or _pixel_anim == "skill" and _pixel.facing < 0.0 else 0.0
-			draw_set_transform(Vector2(dx, 0) - _pixel.anchor * s, 0.0, Vector2(s, s))
+			draw_set_transform(Vector2(dx, 0) - _pixel.frame_anchor(tex) * s, 0.0, Vector2(s, s))
 			draw_texture(tex, Vector2.ZERO)
 			draw_set_transform(Vector2.ZERO)
 		return  # les effets sont dessinés dans les images pixel

@@ -64,3 +64,10 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 - Salles du port (fonds de `assets/ui/echoppe`, `assets/ui/finitions`, `assets/ui/invocateurs`), leurs personnages (mage, mécanicien, gardienne, marchande), le nid, la stèle, l'étal, le lutrin et les 20 Esprits : peints pour CREOS (ChatGPT, d'après `docs/pour_chatgpt/salles/`), animés par `tools/bake_salles_peintes.py`.
 
 - Agents `godot-specialist` et `godot-gdscript-specialist` (`.claude/agents/`) et notes Godot 4.7 (`docs/engine-reference/godot/`) : Claude Code Game Studios, Donchitos, licence MIT — https://github.com/Donchitos/Claude-Code-Game-Studios
+
+## Corbin — planche enrichie (16 poses)
+
+`assets/anim/pixel/corbin/corbin_attack_1_16f.png` : créée pour CREOS avec le générateur
+d'images de ChatGPT, à partir des sprites de Corbin déjà présents dans le dépôt, le 13 novembre
+2026. Les sprites d'origine sont conservés. Calage et intégration par
+`tools/import_pixel_atlas.py` ; voir `docs/animations/CORBIN_16_POSES.md`.
