@@ -13,8 +13,6 @@ Importées et allégées par `tools/import_creos_packs.py` (sources dans `D:/dev
 | `anim/enemies/rNN/` | 152 ennemis des 10 mondes de l'acte I (repos, marche, attaque, touché, mort, compétence des boss), sons | CREOS_Ennemis_Region1_Animes, CREOS_MondeNN_Partie1/2 |
 | `decors/mondeNN/` | 30 décors de combat (fond, sol, premier plan) + ambiances animées | CREOS_Decors_MondeNN, CREOS_Ambiances_Animees |
 | `relics/` | 19 reliques (sprites et icônes) | CREOS_Pack_Animations_Reliques_V2 |
-| `hub2d/port/` | Port-Franc en 2D : calques, bâtiments, survols, animations | Port_Franc_Full_2D_Lot1 |
-| `npcs2d/marchand_masques/` | le marchand de masques en pièces | Brumenoire_Et_Marchand_2D |
 
 Les sons des packs sont des bruitages synthétisés originaux (convertis en OGG). `scripts/battle/ambience.gd`
 et `ambience.gdshader` viennent du pack « Ambiances animées » (créé pour CREOS).
@@ -56,13 +54,6 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 
 ## Agents IA (`.claude/agents/`)
 - 14 fiches tirées de [The Agency](https://github.com/msitarzewski/agency-agents) (licence MIT, © Mike Sitarzewski), adaptées avec un bloc de contexte CREOS.
-
-## Tiny Swords (Free Pack) — Pixel Frog
-
-https://pixelfrog-assets.itch.io/tiny-swords — terrain, bâtiments, unités, effets et boutons de la
-défense de base. Utilisable dans un jeu (même commercial) mais **non redistribuable** : les images ne
-sont pas dans git (`assets/tiny/` est ignoré). Télécharger le pack dans `D:/dev/CREOS_sources/TinySwords`
-puis lancer `python tools/import_tiny_swords.py`.
 
 ## Effets d attaque pixel art
 - pixelfx, par Patch (patch.gg), licence MIT : https://github.com/patch-gg/pixelfx. Planches exportees par tools/export_pixelfx.mjs dans assets/pixelfx/.

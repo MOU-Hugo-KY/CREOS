@@ -31,18 +31,13 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
     par `scripts/battle/ambience.gd`). Cadre 1280 × 720, pieds vers y = 590.
     Les 30 arènes jouées sont peintes (ChatGPT) : `areneN.png` en 1920 × 1080 (N = 1 entrée, 2 profondeur,
     3 boss) + `areneN.json` ; prompts et images de référence dans `docs/pour_chatgpt/decors/`.
-  - Reliques : `assets/relics/`. Marchand de masques : `assets/npcs2d/` (`PaperDoll`, pièces + puppet.json).
+  - Reliques : `assets/relics/`.
   - `python tools/render_clip.py` dessine un clip en image (vérifier sans Godot) ;
     `python tools/make_attack_icons_from_clips.py` refait les icônes d'attaque ;
     `python tools/build_game_data.py` régénère heroes/monsters/dungeons/regions/relics.json depuis la
     fiche de combat (`CREOS_Donnees_Combat.json`) et la table des effets en tête du script.
 
 ## Architecture (à respecter)
-- **Nouvelle direction (prototype)** : défense de base à vagues continues, style Tiny Swords. Règles pures
-  dans `scripts/defense/defense_engine.gd` (`DefenseEngine` : troupes, défenses et héros posés sur les cases
-  de la zone, déplacement automatique, compétences des héros déclenchées par le joueur), chiffres dans
-  `data/defense.json`, scène `scenes/defense/defense.tscn` (dessin provisoire, bouton Pause / Espace).
-  L'ancien jeu ci-dessous est gardé.
 - `scripts/combat/` = **logique pure** (RefCounted, aucun nœud, aucun affichage), **déterministe**
   avec une graine aléatoire. `BattleEngine.step(delta)` fait avancer le combat ;
   `drain_events()` renvoie les événements (`turn`, `attack` avec son `slot` 0/1/2, `damage`,
@@ -139,7 +134,6 @@ godot --headless --path . --import                              # (ré)importer 
 godot --headless --path . --script res://tests/run_tests.gd     # tests du moteur de combat
 godot --headless --path . --script res://tests/smoke_battle.gd  # la scène de combat va jusqu'au bout
 godot --headless --path . --script res://tests/smoke_hub.gd     # le hub se charge et mène au combat
-godot --headless --path . --script res://tests/smoke_defense.gd # règles et scène de la défense de base
 godot --path .                                                  # lancer le jeu
 godot --path . --resolution 1280x720 --script res://tools/screenshot.gd  # capture -> docs/
 #   options après `--` : --scene=res://scenes/hub/hub.tscn --shots=200,600 --auto --end --out=…
