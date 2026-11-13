@@ -124,6 +124,27 @@ func play_attack(clip: String, _hit_time := 0.0, target := Vector2.INF) -> float
 	return 0.0
 
 
+## Entrée en scène : arrive en courant depuis `offset` (hors de l'écran) jusqu'à sa place.
+func enter(offset: Vector2, delay: float, on_arrive := Callable()) -> void:
+	position = home_position + offset
+	modulate.a = 0.0
+	var walk := _id + "_walk"
+	var tw := create_tween()
+	tw.tween_interval(delay)
+	tw.tween_callback(func() -> void:
+		if not _dead and not data.has("structure") and player.has_clip(walk):
+			player.play(walk)
+			player.idle_clip = walk)
+	tw.tween_property(self, "modulate:a", 1.0, 0.12)
+	tw.parallel().tween_property(self, "position", home_position, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_callback(func() -> void:
+		player.idle_clip = _id + "_idle"
+		if not _dead and not _attacking:
+			player.play(_id + "_idle")
+		if on_arrive.is_valid():
+			on_arrive.call())
+
+
 func clip_duration(clip: String) -> float:
 	return player.duration(clip)
 
@@ -251,7 +272,11 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	# Ombre au sol.
 	var w := clampf(height * 0.42, 34.0, 120.0)
-	_ellipse(Vector2.ZERO, Vector2(w, w * 0.22), Color(0, 0, 0, 0.28 if not _dead else 0.12))
+	# Ombre douce : une large tache floue et un cœur plus sombre sous les pieds.
+	var k := 0.4 if _dead else 1.0
+	var disc := StageGrade.disc()
+	draw_texture_rect(disc, Rect2(Vector2(-w * 1.5, -w * 0.36), Vector2(w * 3.0, w * 0.72)), false, Color(0.05, 0.02, 0.1, 0.42 * k))
+	draw_texture_rect(disc, Rect2(Vector2(-w * 0.95, -w * 0.2), Vector2(w * 1.9, w * 0.4)), false, Color(0.05, 0.02, 0.1, 0.5 * k))
 	# Anneaux pixel du pack d'interface de combat (assets/ui/combat/anim) : doré sous le héros dont
 	# c'est le tour, rouge sous l'ennemi ciblé, avec un chevron au-dessus de sa tête.
 	if _highlight:

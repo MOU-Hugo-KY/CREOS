@@ -64,9 +64,14 @@ func _ready() -> void:
 	_root.add_child(masks)
 	masks.visible = false  # les masques animés juraient avec le décor (déjà plein de masques)
 	# La marchande, derrière le comptoir.
-	var fiche := "res://assets/npcs2d/marchand_masques/fiche.png"
+	var fiche := DIR + "echoppe/marchande_repos.png"
 	var m := _img(_root, load(fiche) if ResourceLoader.exists(fiche) else null, _rect(E.get("merchant_rect", [120, 400, 440, 480])))
 	m.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	m.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	m.pivot_offset = Vector2(m.size.x / 2.0, m.size.y)
+	var breath := m.create_tween().set_loops()
+	breath.tween_property(m, "scale", Vector2(0.994, 1.012), 1.4).set_trans(Tween.TRANS_SINE)
+	breath.tween_property(m, "scale", Vector2.ONE, 1.4).set_trans(Tween.TRANS_SINE)
 	var fc: Dictionary = E.get("foreground_counter", {})
 	_img(_root, tex(String(fc.get("file", "echoppe/comptoir_avant.png"))), _rect(fc.get("rect", [0, 632, 856, 245])))
 	# Bulle de dialogue.

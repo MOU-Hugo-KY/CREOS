@@ -9,7 +9,8 @@ extends Control
 signal previous_room
 
 var _P: Dictionary
-var _runes: MageRoom.Sheet
+var _glow: TextureRect  # la stèle gravures allumées, par-dessus celle du fond
+var _glow_tween: Tween
 var _fx: MageRoom.Sheet
 var _add: CanvasItemMaterial
 var _offer: Array[Control] = []
@@ -33,9 +34,18 @@ func _ready() -> void:
 	bg.size = size
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bg)
-	_runes = _sheet("stele_repos")
-	_runes.material = _add
-	_runes.play("stele_repos")
+	var er: Array = _P.get("eveil_rect", [])
+	if er.size() == 4:
+		_glow = TextureRect.new()
+		_glow.texture = MageRoom.tex("stele/stele_eveil.png")
+		_glow.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		_glow.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		_glow.position = Vector2(er[0], er[1])
+		_glow.size = Vector2(er[2], er[3])
+		_glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_glow.modulate.a = 0.0
+		add_child(_glow)
+		_breathe()
 	_fx = _sheet("stele_fusion")
 	_fx.material = _add
 	_fx.visible = false
@@ -51,6 +61,21 @@ func _ready() -> void:
 	arrow.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	arrow.pressed.connect(func() -> void: previous_room.emit())
 	add_child(arrow)
+
+
+## Les gravures respirent au repos ; `strong` : elles s'allument en plein pour la fusion.
+func _breathe(strong := false) -> void:
+	if _glow == null:
+		return
+	if _glow_tween:
+		_glow_tween.kill()
+	_glow_tween = create_tween()
+	if strong:
+		_glow_tween.tween_property(_glow, "modulate:a", 1.0, 0.5)
+		return
+	_glow_tween.set_loops()
+	_glow_tween.tween_property(_glow, "modulate:a", 0.45, 1.6).set_trans(Tween.TRANS_SINE)
+	_glow_tween.tween_property(_glow, "modulate:a", 0.08, 1.6).set_trans(Tween.TRANS_SINE)
 
 
 ## Pose l'Esprit `item` sur les 5 coupelles (grisées au-delà de `have`) et `up` au sommet.
@@ -78,6 +103,7 @@ func ceremony(stage: String) -> void:
 		if is_instance_valid(s):
 			s.queue_free()
 	_shown.clear()
+	_breathe(true)
 	_fx.visible = true
 	_fx.play("stele_charge")
 	await get_tree().create_timer(0.9).timeout
@@ -103,7 +129,7 @@ func show_result(up: String, count: int) -> void:
 	var s := DruidRoom.spirit_sheet(up)
 	if s:
 		s.position = MageRoom._vec(top.get("pieds_esprit", [960, 410]))
-		s.scale = Vector2.ONE * 0.75 * float(s.get_meta("scale")) / 2.3
+		s.scale = Vector2.ONE * 0.42 * float(s.get_meta("scale"))
 		add_child(s)
 		_shown.append(s)
 		s.play("invocation")
@@ -119,6 +145,7 @@ func reset() -> void:
 			s.queue_free()
 	_shown.clear()
 	_fx.visible = false
+	_breathe()
 
 
 func _clear() -> void:

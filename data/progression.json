@@ -1,8 +1,9 @@
 {
-  "max_level": 150,
+  "max_level": 60,
+  "energy_max": 100,
   "hero_xp": {
     "base": 80,
-    "growth": 1.08
+    "growth": 1.06
   },
   "player_xp": {
     "base": 100,

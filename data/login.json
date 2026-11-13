@@ -1,0 +1,12 @@
+{
+  "_note": "Coffre de connexion : un cadeau par jour, sur un cycle de 7 jours (on avance d'une case par jour où l'on se connecte, sans remise à zéro si on rate un jour).",
+  "days": [
+    {"gold": 1000},
+    {"gems": 30},
+    {"energy": 30},
+    {"materiaux_relique": 20},
+    {"gold": 3000},
+    {"gems": 50},
+    {"gems": 100, "gold": 2000}
+  ]
+}

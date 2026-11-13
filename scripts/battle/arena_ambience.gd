@@ -26,6 +26,7 @@ var _color := Color.WHITE
 var _clock := 0.0
 var _dim := 1.0
 var _rng := RandomNumberGenerator.new()
+var soft := false  # arène peinte : poussières rondes et lumineuses au lieu de carrés de pixel art
 
 
 func setup(world: String, arena: Dictionary) -> void:
@@ -81,9 +82,17 @@ func _draw() -> void:
 		var r: float = l[1] * 1.6
 		for k in 4:  # halo en couches, du plus large au plus serré
 			var f := 1.0 - k / 4.0
-			draw_circle(l[0], r * f * flick, Color(c, 0.12 * _dim))
+			if soft:
+				var rr := r * f * flick * 1.5
+				draw_texture_rect(StageGrade.disc(), Rect2(l[0] - Vector2(rr, rr), Vector2(rr, rr) * 2.0), false, Color(c, 0.16 * _dim))
+			else:
+				draw_circle(l[0], r * f * flick, Color(c, 0.12 * _dim))
 	for q: Dictionary in _parts:
 		var a := _color.a * _dim * (0.7 + 0.3 * sin(_clock * 2.0 + q.phase))
+		if soft:
+			var s: float = q.size * 3.2
+			draw_texture_rect(StageGrade.disc(), Rect2(q.p - Vector2(s, s), Vector2(s, s) * 2.0), false, Color(_color, a * 0.8))
+			continue
 		var r := Rect2(q.p.round(), Vector2(q.size, q.size).round())
 		draw_rect(r.grow(1.0), Color(_color.darkened(0.6), a * 0.5))  # liseré sombre : lisible sur un sol clair
 		draw_rect(r, Color(_color, a))

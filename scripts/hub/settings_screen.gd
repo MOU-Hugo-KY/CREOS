@@ -9,6 +9,11 @@ signal ui_sound(sfx_name: String)
 
 const SCREEN := "parametres"
 const BUSES := {"general": "Master", "musique": GameSettings.BUS_MUSIC, "effets": GameSettings.BUS_SFX}
+const ROW_TOP := 588.0  # centre de la première rangée (velours de la boîte)
+const ROW_GAP := 74.0
+const RAIL_X := 760.0
+const RAIL_W := 470.0
+var _row_dy: Dictionary = {}  # id -> décalage vertical de la rangée
 const NAMES := {"general": "Général", "musique": "Musique", "effets": "Effets"}
 
 var _sliders: Dictionary = {}  # id -> [Gauge, knob TextureRect, x0, x1, y]
@@ -41,11 +46,23 @@ func _ready() -> void:
 	var close := FinPack.button(root, "parametres/fermer", FinPack.rect(fb.get("rect", [1360, 200, 48, 48])))
 	close.pressed.connect(_close)
 	close.visible = false  # « Port » suffit : pas de deuxième façon de fermer
-	for s: Dictionary in D.get("sliders", []):
+	# Les rangées du pack étaient trop serrées (le nom touchait le rail du dessus) : on les écarte de ROW_GAP,
+	# autour de celle du milieu, et chaque nom est posé juste au-dessus de son rail.
+	var sliders: Array = D.get("sliders", [])
+	for i in sliders.size():
+		var s: Dictionary = sliders[i]
 		var id := String(s.id)
-		ScreenPack.shadow(ScreenPack.text(root, NAMES.get(id, id), Rect2(FinPack.rect(s.label_rect).position - Vector2(0, 14), FinPack.rect(s.label_rect).size), 24, Color("f3d9a0")), 2)
-		var g := FinPack.Gauge.new().setup("parametres/curseur_rail.png", FinPack.rect(s.rail_rect), [36, 14, 36, 14],
-			"parametres/curseur_remplissage.png", FinPack.rect(s.fill_rect).grow_individual(-10, -3, -6, -3))
+		# Rangée i centrée dans le velours de la boîte ; le nom à gauche du rail, sur la même ligne.
+		var cy := ROW_TOP + i * ROW_GAP
+		var rail := Rect2(RAIL_X, cy - 22, RAIL_W, 44)
+		_row_dy[id] = Vector2(0, cy - FinPack.rect(s.rail_rect).get_center().y)
+		var dy: Vector2 = _row_dy[id]
+		var nl := ScreenPack.shadow(ScreenPack.text(root, NAMES.get(id, id), Rect2(RAIL_X - 150, cy - 17, 140, 34), 23,
+			Color("f3d9a0"), HORIZONTAL_ALIGNMENT_RIGHT), 2)
+		nl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		var fill := Rect2(rail.position.x + 26, cy - 7, rail.size.x - 52, 14)
+		var g := FinPack.Gauge.new().setup("parametres/curseur_rail.png", rail, [36, 14, 36, 14],
+			"parametres/curseur_remplissage.png", fill.grow_individual(-10, -3, -6, -3))
 		root.add_child(g)
 		var hit := Control.new()  # zone de saisie : toute la largeur du rail
 		hit.position = g.position + Vector2(0, -10)
@@ -56,7 +73,7 @@ func _ready() -> void:
 		var ks: Array = s.get("knob_size", [60, 60])
 		var knob := FinPack.image(root, "parametres/curseur_bouton.png", Rect2(Vector2.ZERO, Vector2(ks[0], ks[1])))
 		var rng: Array = s.knob_center_range
-		_sliders[id] = [g, knob, float(rng[0][0]), float(rng[1][0]), float(rng[0][1])]
+		_sliders[id] = [g, knob, fill.position.x, fill.end.x, cy]
 	for w: Dictionary in D.get("switches", []):
 		var id := String(w.id).trim_suffix("_active")
 		var b := TextureButton.new()
@@ -66,6 +83,7 @@ func _ready() -> void:
 		b.ignore_texture_size = true
 		b.stretch_mode = TextureButton.STRETCH_SCALE
 		var r := FinPack.rect(w.rect)
+		r.position += _row_dy.get(id, Vector2.ZERO)
 		b.position = r.position
 		b.size = r.size
 		b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND

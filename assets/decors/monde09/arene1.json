@@ -10,21 +10,7 @@
     1120,
     380
   ],
-  "lumieres": [
-    [
-      330,
-      35,
-      100,
-      "#FFAC4D"
-    ],
-    [
-      950,
-      35,
-      100,
-      "#FFAC4D"
-    ]
-  ],
+  "lumieres": [],
   "animations": [],
-  "premier_plan_vide": true,
-  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par2"
+  "premier_plan_vide": true
 }

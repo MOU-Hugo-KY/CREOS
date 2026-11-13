@@ -97,7 +97,7 @@ func start_hunt(hunt: String) -> void:
 
 func go_to_battle() -> void:
 	audio.stop_music(0.3)
-	get_tree().change_scene_to_file(BATTLE_SCENE)
+	Transition.go(BATTLE_SCENE)
 
 
 func _name_of(id: String) -> String:

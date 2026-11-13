@@ -35,6 +35,9 @@ func _init() -> void:
 	setup("Profil du chasseur", Vector2(1260, 800), Color("505e75"))
 
 
+var _album: AlbumScreen
+
+
 func _ready() -> void:
 	super._ready()
 	var body := HBoxContainer.new()
@@ -139,6 +142,9 @@ func _ready() -> void:
 			refresh())
 	if FinPack.available(PF_DIR):
 		_build_desk()
+	_album = AlbumScreen.new()
+	_album.ui_sound.connect(func(n: String) -> void: ui_sound.emit(n))
+	add_child(_album)
 
 
 func open() -> void:
@@ -367,6 +373,12 @@ func _build_desk() -> void:
 	back.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
 		close_window())
+	# Album des monstres : même bouton, en miroir à droite.
+	var rr := FinPack.rect(P.retour)
+	var album_btn := FinPack.button(root, "profil/commun/retour", Rect2(1920 - rr.end.x, rr.position.y, rr.size.x, rr.size.y), "Album", 26)
+	album_btn.pressed.connect(func() -> void:
+		ui_sound.emit("ui_click")
+		_album.open())
 	# Nom et loge : cartouches où l'on écrit directement (Entrée ou clic ailleurs pour garder).
 	for k: String in ["nom", "loge"]:
 		FinPack.nine(root, "profil/cartouches/%s.png" % k, FinPack.rect(P[k]), [62, 26, 62, 26])

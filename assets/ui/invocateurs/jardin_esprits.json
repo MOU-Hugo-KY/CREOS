@@ -158,7 +158,13 @@
           160,
           120
         ]
-      }
+      },
+      "eveil_rect": [
+        773,
+        175,
+        373,
+        640
+      ]
     },
     "jardin": {
       "gardien": {
@@ -362,42 +368,48 @@
     "gardien_repos": {
       "fichier": "jardin/gardien_repos.png",
       "taille_image": [
-        256,
-        256
+        380,
+        528
       ],
       "nombre": 8,
       "duree_ms": 140,
       "pivot": [
-        110,
-        240
+        190,
+        504
       ],
       "position": [
         460,
         890
       ],
       "boucle": true,
-      "ordre": "horizontal",
-      "mode": "personnage"
+      "ordre": "grille",
+      "mode": "personnage",
+      "colonnes": 4,
+      "lisse": true,
+      "echelle": 0.6667
     },
     "gardien_appel": {
       "fichier": "jardin/gardien_appel.png",
       "taille_image": [
-        256,
-        256
+        380,
+        528
       ],
       "nombre": 12,
       "duree_ms": 110,
       "pivot": [
-        110,
-        240
+        190,
+        504
       ],
       "position": [
         460,
         890
       ],
       "boucle": false,
-      "ordre": "horizontal",
-      "mode": "personnage"
+      "ordre": "grille",
+      "mode": "personnage",
+      "colonnes": 4,
+      "lisse": true,
+      "echelle": 0.6667
     },
     "eveil_feu": {
       "fichier": "jardin/eveil_feu.png",
@@ -502,22 +514,25 @@
     "nid_ouverture": {
       "fichier": "jardin/nid_ouverture.png",
       "taille_image": [
-        512,
-        512
+        812,
+        664
       ],
       "nombre": 12,
       "duree_ms": 100,
       "pivot": [
-        256,
-        512
+        406,
+        640
       ],
       "position": [
         960,
         860
       ],
       "boucle": false,
-      "ordre": "horizontal",
-      "mode": "remplace_nid"
+      "ordre": "grille",
+      "mode": "remplace_nid",
+      "colonnes": 4,
+      "lisse": true,
+      "echelle": 0.6667
     },
     "lueurs_montantes": {
       "fichier": "jardin/lueurs_montantes.png",

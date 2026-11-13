@@ -32,7 +32,7 @@
   },
   "synergies": {
     "element": {
-      "feu": {"name": "Ardeur", "levels": [[2, {"atk": 0.1, "mag": 0.1}], [3, {"atk": 0.2, "mag": 0.2}]]},
+      "feu": {"name": "Ardeur", "levels": [[2, {"atk": 0.1, "mag": 0.1}], [3, {"atk": 0.15, "mag": 0.15}]]},
       "eau": {"name": "Courant", "levels": [[2, {"res": 0.15}], [3, {"res": 0.3, "mag": 0.1}]]},
       "nature": {"name": "Sève", "levels": [[2, {"def": 0.12}], [3, {"def": 0.25, "atk": 0.1}]]},
       "lumiere": {"name": "Aurore", "levels": [[2, {"def": 0.08, "res": 0.08}], [4, {"def": 0.16, "res": 0.16}], [6, {"def": 0.25, "res": 0.25, "atk": 0.1}]]},
@@ -40,10 +40,10 @@
     },
     "class": {
       "gardien": {"name": "Rempart", "levels": [[2, {"def": 0.15}], [4, {"def": 0.3, "res": 0.15}]]},
-      "lame": {"name": "Fil de la lame", "levels": [[2, {"atk": 0.12}], [3, {"atk": 0.22, "crit": 0.05}]]},
+      "lame": {"name": "Fil de la lame", "levels": [[2, {"atk": 0.15}], [3, {"atk": 0.22, "crit": 0.05}]]},
       "moine": {"name": "Discipline", "levels": [[2, {"spd": 0.1}], [3, {"spd": 0.2, "atk": 0.1}]]},
-      "traqueur": {"name": "Traque", "levels": [[2, {"crit": 0.1}]]},
-      "arcaniste": {"name": "Arcanes", "levels": [[2, {"mag": 0.18}]]},
+      "traqueur": {"name": "Traque", "levels": [[2, {"crit": 0.1}], [3, {"crit": 0.15}]]},
+      "arcaniste": {"name": "Arcanes", "levels": [[2, {"mag": 0.15}], [3, {"mag": 0.28}]]},
       "soutien": {"name": "Soutien", "levels": [[2, {"res": 0.15, "def": 0.1}]]}
     }
   }

@@ -78,6 +78,9 @@ func _ready() -> void:
 
 func open() -> void:
 	visible = true
+	var dim := get_child(0) as CanvasItem  # le fond s'assombrit en douceur
+	dim.modulate.a = 0.0
+	create_tween().tween_property(dim, "modulate:a", 1.0, 0.18)
 	UiKit.pop_in(_frame.get_parent() as Control)
 
 

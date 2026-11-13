@@ -95,6 +95,8 @@ func play(id: String, then_idle := true) -> bool:
 		_rig_anim = ""
 		texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		_clip_hit = float(clip.cue[0][0]) if not clip.cue.is_empty() else -1.0
+	else:
+		texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR  # pièces illustrées : lissées
 	_charge_until = 0.0
 	if _rig_anim in ["2", "3", "4", "5"] and not clip.cue.is_empty():
 		_charge_until = float(clip.cue[0][0])

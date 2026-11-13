@@ -5,6 +5,7 @@ extends Node
 
 signal changed
 
+const BACKUP_PATH := "user://save.bak.json"
 const SAVE_PATH := "user://save.json"
 const SAVE_VERSION := 1
 const TEAM_SIZE := 7  # formation : 2 devant, 3 au milieu, 2 à l'arrière
@@ -67,16 +68,21 @@ func reset() -> void:
 
 
 func load_game() -> void:
-	if not persist or not FileAccess.file_exists(SAVE_PATH):
+	# Pas de sauvegarde mais une copie : jeu coupé entre les deux renommages de save_game().
+	if not persist or not (FileAccess.file_exists(SAVE_PATH) or FileAccess.file_exists(BACKUP_PATH)):
 		reset()
 		return
-	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
-	if typeof(parsed) != TYPE_DICTIONARY:
-		push_warning("Sauvegarde illisible : nouvelle partie.")
-		reset()
-		return
+	var parsed: Variant = _read_save(SAVE_PATH)
+	if parsed == null:
+		# Sauvegarde abîmée (jeu coupé pendant l'écriture) : on reprend la copie de secours.
+		parsed = _read_save(BACKUP_PATH)
+		if parsed == null:
+			push_warning("Sauvegarde illisible et pas de copie : nouvelle partie.")
+			reset()
+			return
+		push_warning("Sauvegarde abîmée : copie de secours rechargée.")
 	state = _start.duplicate(true)
-	state.merge(parsed, true)
+	_deep_merge(state, parsed)
 	# Héros retirés du jeu (changement de direction artistique) : on les enlève de la sauvegarde.
 	if not known_heroes.is_empty():
 		for id: String in state.heroes.keys():
@@ -100,9 +106,39 @@ func load_game() -> void:
 func save_game() -> void:
 	if not persist:
 		return
-	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	if f:
-		f.store_string(JSON.stringify(state, "  "))
+	# Écriture sûre : fichier temporaire, puis on garde l'ancienne sauvegarde en copie et on renomme.
+	# Si le jeu est coupé au milieu, la vraie sauvegarde (ou sa copie) reste entière.
+	var tmp := SAVE_PATH + ".tmp"
+	var f := FileAccess.open(tmp, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify(state, "  "))
+	f.close()
+	if _read_save(tmp) == null:
+		return  # écriture ratée (disque plein…) : on ne touche pas à la bonne sauvegarde
+	if FileAccess.file_exists(SAVE_PATH):
+		DirAccess.remove_absolute(BACKUP_PATH)
+		DirAccess.rename_absolute(SAVE_PATH, BACKUP_PATH)
+	DirAccess.rename_absolute(tmp, SAVE_PATH)
+
+
+func _read_save(path: String) -> Variant:
+	if not FileAccess.file_exists(path):
+		return null
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	return parsed if typeof(parsed) == TYPE_DICTIONARY else null
+
+
+## Fusion : pour les sous-parties « réglages » (DEEP_KEYS), les nouvelles clés du profil de départ restent
+## présentes ; les collections (héros, objets…) viennent telles quelles de la sauvegarde.
+const DEEP_KEYS := ["lodge_dungeon"]
+
+static func _deep_merge(into: Dictionary, from: Dictionary, deep := false) -> void:
+	for k: Variant in from:
+		if (deep or k in DEEP_KEYS) and into.has(k) and typeof(into[k]) == TYPE_DICTIONARY and typeof(from[k]) == TYPE_DICTIONARY:
+			_deep_merge(into[k], from[k], true)
+		else:
+			into[k] = from[k]
 
 
 # --- Profil et statistiques ------------------------------------------------------
@@ -248,6 +284,62 @@ func open_chest(index: int) -> Dictionary:
 	return _grant(quests_config.chests[index].get("rewards", {}))
 
 
+## --- Album des monstres --------------------------------------------------------------
+const ALBUM_STEP := 10  # tous les 10 monstres découverts…
+const ALBUM_GEMS := 50  # …des gemmes
+
+func album() -> Dictionary:
+	return state.get("album", {})
+
+
+## Note les monstres d'un donjon gagné ; un palier de découverte donne des gemmes. Renvoie les nouveaux.
+func _record_album(dungeon_id: String) -> Array:
+	var seen: Dictionary = state.get("album", {})
+	var before := seen.size()
+	var fresh: Array = []
+	for wave: Array in _dungeons.get(dungeon_id, {}).get("waves", []):
+		for mid: String in wave:
+			if not seen.has(mid):
+				fresh.append(mid)
+			seen[mid] = int(seen.get(mid, 0)) + 1
+	state.album = seen
+	var steps := seen.size() / ALBUM_STEP - before / ALBUM_STEP
+	if steps > 0:
+		state.gems = gems() + steps * ALBUM_GEMS
+	return fresh
+
+
+## --- Coffre de connexion (data/login.json) ---------------------------------------
+## Case du jour (0..6) et si elle peut être prise aujourd'hui.
+func login_day() -> int:
+	var l: Dictionary = state.get("login", {})
+	var n := int(l.get("count", 0))
+	if String(l.get("last", "")) == today():
+		n -= 1  # déjà pris : on montre la case du jour comme prise
+	return posmod(n, 7)
+
+
+static func login_days() -> Array:
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/login.json"))
+	return parsed.get("days", []) if parsed is Dictionary else []
+
+
+func can_claim_login() -> bool:
+	return String(state.get("login", {}).get("last", "")) != today()
+
+
+func claim_login() -> Dictionary:
+	if not can_claim_login():
+		return {}
+	var days: Array = login_days()
+	if days.is_empty():
+		return {}
+	var l: Dictionary = state.get("login", {})
+	var rewards: Dictionary = days[posmod(int(l.get("count", 0)), days.size())]
+	state.login = {"count": int(l.get("count", 0)) + 1, "last": today()}
+	return _grant(rewards)
+
+
 ## Donne des récompenses : or, gemmes, énergie (peut dépasser le maximum), objets.
 func _grant(rewards: Dictionary) -> Dictionary:
 	for key: String in rewards:
@@ -285,7 +377,8 @@ func energy() -> int:
 
 
 func energy_max() -> int:
-	return int(state.get("energy_max", 60))
+	# plafond 100 (progression.json) : on ne perd plus d'énergie pendant la nuit
+	return maxi(int(state.get("energy_max", 60)), int(_config.get("energy_max", 60)))
 
 
 func level() -> int:
@@ -417,7 +510,7 @@ func hero_level_cap(id: String) -> int:
 ## Le héros attend un éveil : il est au palier (10, 20…) et n'a pas encore nourri ses Esprits.
 func hero_needs_awakening(id: String) -> bool:
 	var lv := hero_level(id)
-	return state.heroes.has(id) and lv == hero_level_cap(id) and lv < int(_config.get("max_level", 150))
+	return state.heroes.has(id) and lv == hero_level_cap(id) and lv < int(_config.get("max_level", 60))
 
 
 ## Esprits demandés par le prochain éveil du héros : {objet: nombre}.
@@ -561,19 +654,20 @@ func summon_pack(currency: String, config: Dictionary, pool: Dictionary, rng: Ra
 		count: int) -> Array:
 	if not can_summon_pack(currency, config, count):
 		return []
+	# Rabais rendu avant les tirages : sinon, avec juste le prix du paquet, le dernier tirage manque.
 	var refund := summon_cost(currency, config) * count - summon_pack_cost(currency, config, count)
+	if refund > 0:
+		if currency == "gems":
+			state.gems = gems() + refund
+		else:
+			state.items[currency] = item_count(currency) + refund
 	var out: Array = []
 	for i in count:
 		var r := summon(currency, config, pool, rng)
 		if r.is_empty():
 			break
 		out.append(r)
-	if refund > 0:
-		if currency == "gems":
-			state.gems = gems() + refund
-		else:
-			state.items[currency] = item_count(currency) + refund
-		save_game()
+	save_game()
 	return out
 
 
@@ -774,6 +868,7 @@ func finish_hunt(dungeon_id: String, won: bool, stars: int, rewards: Dictionary,
 	if not won:
 		save_game()
 		return result
+	result["album_new"] = _record_album(dungeon_id)
 	var split := Progression.split_rewards(filter_locked_loot(rewards, dungeon_id), _config)
 	var max_level: int = _config.get("player_max_level", 60)
 	for id: String in team_ids:

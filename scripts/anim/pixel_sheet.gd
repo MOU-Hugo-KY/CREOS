@@ -19,7 +19,14 @@ var effect_pivot := Vector2(64, 64)
 var effect_scale: Dictionary = {}  # animation d'attaque -> taille conseillée
 
 
+## Interrupteur de la couche pixel art. À `false`, héros et monstres sont dessinés avec leurs pièces
+## illustrées (squelette des héros, clips des monstres) et l'interface prend portraits et fiches dessinés.
+static var enabled := true
+
+
 static func for_actor(id: String) -> PixelSheet:
+	if not enabled:
+		return null
 	if _cache.has(id):
 		return _cache[id]
 	var sheet: PixelSheet = null

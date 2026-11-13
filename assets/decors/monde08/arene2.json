@@ -12,6 +12,5 @@
   ],
   "lumieres": [],
   "animations": [],
-  "premier_plan_vide": true,
-  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par2"
+  "premier_plan_vide": true
 }

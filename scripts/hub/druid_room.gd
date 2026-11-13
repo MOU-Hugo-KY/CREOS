@@ -42,7 +42,8 @@ static func sheets() -> Dictionary:
 	for k: String in P:
 		var p: Dictionary = P[k]
 		out[k] = {"file": p.fichier, "frame_size": p.taille_image, "frame_count": int(p.nombre),
-			"duration_ms": int(p.duree_ms), "loop": bool(p.boucle), "pivot": p.pivot, "position": p.position}
+			"duration_ms": int(p.duree_ms), "loop": bool(p.boucle), "pivot": p.pivot, "position": p.position,
+			"columns": int(p.get("colonnes", 0)), "smooth": bool(p.get("lisse", false)), "scale": float(p.get("echelle", 1.0))}
 	return out
 
 
@@ -59,7 +60,8 @@ static func spirit_sheet(item: String) -> MageRoom.Sheet:
 	var s := MageRoom.Sheet.new()
 	s.base_dir = ESPRITS_DIR
 	s.anims = {"invocation": {"file": key + ".png", "frame_size": a.taille_image, "frame_count": int(a.images),
-		"frame_durations_ms": a.durees_ms, "loop": false, "pivot": a.pivot}}
+		"frame_durations_ms": a.durees_ms, "loop": false, "pivot": a.pivot,
+		"columns": int(a.get("colonnes", 0)), "smooth": bool(a.get("lisse", false))}}
 	s.set_meta("scale", float(a.get("echelle_jardin", 3.0)))
 	return s
 

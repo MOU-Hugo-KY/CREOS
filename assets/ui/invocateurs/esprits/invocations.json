@@ -19,12 +19,12 @@
       "fichier": "animations/oeuf_feu/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -48,21 +48,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.5,
+      "echelle_jardin": 0.5,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "oeuf_eau": {
       "fichier": "animations/oeuf_eau/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -86,21 +88,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.5,
+      "echelle_jardin": 0.5,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "oeuf_nature": {
       "fichier": "animations/oeuf_nature/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -124,21 +128,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.5,
+      "echelle_jardin": 0.5,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "oeuf_lumiere": {
       "fichier": "animations/oeuf_lumiere/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -162,21 +168,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.5,
+      "echelle_jardin": 0.5,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "oeuf_ombre": {
       "fichier": "animations/oeuf_ombre/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -200,21 +208,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.5,
+      "echelle_jardin": 0.5,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "petit_feu": {
       "fichier": "animations/petit_feu/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -238,21 +248,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.0,
+      "echelle_jardin": 0.62,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "sprite_original_et_braises"
+      "mode_mouvement": "sprite_original_et_braises",
+      "colonnes": 4,
+      "lisse": true
     },
     "petit_eau": {
       "fichier": "animations/petit_eau/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -276,21 +288,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.0,
+      "echelle_jardin": 0.62,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "petit_nature": {
       "fichier": "animations/petit_nature/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -314,21 +328,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.0,
+      "echelle_jardin": 0.62,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "petit_lumiere": {
       "fichier": "animations/petit_lumiere/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -352,21 +368,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.0,
+      "echelle_jardin": 0.62,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "petit_ombre": {
       "fichier": "animations/petit_ombre/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -390,21 +408,23 @@
         960,
         740
       ],
-      "echelle_jardin": 3.0,
+      "echelle_jardin": 0.62,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "grand_feu": {
       "fichier": "animations/grand_feu/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -428,21 +448,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.5,
+      "echelle_jardin": 0.74,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "grand_eau": {
       "fichier": "animations/grand_eau/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -466,21 +488,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.5,
+      "echelle_jardin": 0.74,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "grand_nature": {
       "fichier": "animations/grand_nature/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -504,21 +528,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.5,
+      "echelle_jardin": 0.74,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "grand_lumiere": {
       "fichier": "animations/grand_lumiere/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -542,21 +568,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.5,
+      "echelle_jardin": 0.74,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "grand_ombre": {
       "fichier": "animations/grand_ombre/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -580,21 +608,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.5,
+      "echelle_jardin": 0.74,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "celeste_feu": {
       "fichier": "animations/celeste_feu/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -618,21 +648,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.3,
+      "echelle_jardin": 0.86,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "celeste_eau": {
       "fichier": "animations/celeste_eau/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -656,21 +688,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.3,
+      "echelle_jardin": 0.86,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "celeste_nature": {
       "fichier": "animations/celeste_nature/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -694,21 +728,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.3,
+      "echelle_jardin": 0.86,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "celeste_lumiere": {
       "fichier": "animations/celeste_lumiere/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -732,21 +768,23 @@
         960,
         740
       ],
-      "echelle_jardin": 2.3,
+      "echelle_jardin": 0.86,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     },
     "celeste_ombre": {
       "fichier": "animations/celeste_ombre/invocation.png",
       "images": 12,
       "taille_image": [
-        256,
-        256
+        512,
+        512
       ],
       "pivot": [
-        128,
-        200
+        256,
+        416
       ],
       "durees_ms": [
         100,
@@ -770,10 +808,12 @@
         960,
         740
       ],
-      "echelle_jardin": 2.3,
+      "echelle_jardin": 0.86,
       "apparition_ms": 0,
       "pose_originale_ms": 1000,
-      "mode_mouvement": "poses_animees"
+      "mode_mouvement": "poses_animees",
+      "colonnes": 4,
+      "lisse": true
     }
   },
   "integration": {

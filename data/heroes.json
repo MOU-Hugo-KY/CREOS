@@ -1816,11 +1816,16 @@
    {
     "id": "sylve_2",
     "name": "La forêt se souvient",
-    "description": "Tente Enraciné 1 action sur tous ; Écorce ancienne : +20 % DEF et +15 points résistance au contrôle à tous les alliés 2 tours. AUCUN soin.",
+    "description": "Tente Enraciné 1 action sur tous ; Écorce ancienne : +20 % DEF et +15 points résistance au contrôle à tous les alliés 2 tours. Frappe tous les ennemis (120 % ATQ).",
     "visual": "Forêt et écorces protectrices.",
     "clip": "sylve_2",
     "target": "all_enemies",
     "effects": [
+     {
+      "type": "damage",
+      "power": 1.2,
+      "stat": "atk"
+     },
      {
       "type": "status",
       "name": "enracine",
@@ -2197,7 +2202,7 @@
    {
     "id": "bastion_2",
     "name": "Dernier rempart",
-    "description": "Bouclier collectif 160 % DEF, 2 tours ; prochaine attaque de zone reçue prépare une riposte 100 % DEF sur son auteur.",
+    "description": "Bouclier collectif 160 % DEF, 2 tours ; prochaine attaque de zone reçue prépare une riposte 100 % DEF sur son auteur. Soigne aussi tous les alliés (80 % DEF).",
     "visual": "Forteresse de boucliers.",
     "clip": "bastion_2",
     "target": "all_allies",
@@ -2205,6 +2210,11 @@
      {
       "type": "shield",
       "power": 1.6,
+      "stat": "def"
+     },
+     {
+      "type": "heal",
+      "power": 0.8,
       "stat": "def"
      }
     ],

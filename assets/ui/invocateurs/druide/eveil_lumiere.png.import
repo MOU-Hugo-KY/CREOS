@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/eveil_lumiere.png-be2c5b953f67b1c6e87a69adee9
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

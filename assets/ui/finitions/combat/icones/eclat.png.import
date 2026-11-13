@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/eclat.png-2b6b2a4c9d82b05b04ce46b40bd296b4.ct
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

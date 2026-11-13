@@ -26,6 +26,7 @@ func _initialize() -> void:
 	test_formation_lines()
 	test_hero_progression()
 	test_reactions()
+	test_login_album()
 	print("\n%d vérifications, %d échec(s)" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -319,24 +320,29 @@ func test_summon() -> void:
 	pd.use_memory_only()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 11
-	var frag0: int = pd.item_count("fragments_relique")
+	pd.state.gems = 1000
+	var gems0: int = pd.gems()
 	# Un héros pas encore possédé, ajouté pour le test (le jeu n'en a pas d'autre pour l'instant).
 	var test_pool: Dictionary = gd.heroes.duplicate(true)
 	test_pool["recrue"] = {"name": "Recrue", "rarity": 4}
 	cfg = cfg.duplicate(true)
 	cfg.first_summon = "recrue"
-	var first: Dictionary = pd.summon("fragments_relique", cfg, test_pool, rng)
+	check(pd.summon_cost("fragments_relique", cfg) == 0, "la Lanterne ne prend pas les fragments de relique")
+	var first: Dictionary = pd.summon("gems", cfg, test_pool, rng)
 	check(first.get("id") == "recrue" and first.new and pd.owned_heroes().has("recrue"),
 		"la première invocation réveille un nouveau héros")
-	check(pd.item_count("fragments_relique") == frag0 - pd.summon_cost("fragments_relique", cfg), "les fragments sont dépensés")
+	check(pd.gems() == gems0 - pd.summon_cost("gems", cfg), "les gemmes sont dépensées")
 	var owned_pool: Dictionary = {}
 	for id: String in pd.owned_heroes():
 		owned_pool[id] = test_pool[id]
-	var again: Dictionary = pd.summon("fragments_relique", cfg, owned_pool, rng)
+	var again: Dictionary = pd.summon("gems", cfg, owned_pool, rng)
 	check(not again.new and again.echoes == 1 and pd.hero_echoes(again.id) == 1,
 		"un héros déjà possédé revient en Écho")
-	pd.state.items["fragments_relique"] = 0
-	check(pd.summon("fragments_relique", cfg, gd.heroes, rng).is_empty(), "pas d'invocation sans fragments")
+	pd.state.gems = 0
+	check(pd.summon("gems", cfg, gd.heroes, rng).is_empty(), "pas d'invocation sans gemmes")
+	pd.state.gems = pd.summon_pack_cost("gems", cfg, 10)  # juste le prix du paquet ×10
+	check(pd.summon_pack("gems", cfg, gd.heroes, rng, 10).size() == 10 and pd.gems() == 0,
+		"le ×10 payé au prix juste donne bien 10 héros")
 	# Garantie : au moins un héros Légendaire (rareté 4+) sur `pity_every` invocations.
 	var pool: Dictionary = test_pool
 	var every := int(cfg.pity_every)
@@ -712,3 +718,32 @@ func test_reactions() -> void:
 	e5._ai_act(e5.heroes[0])
 	check(e5.reaction_log.size() == 1 and e5.enemies[1].hp < 100000, "un ennemi tué : la réaction frappe une autre cible vivante")
 	gd.free()
+
+
+func test_login_album() -> void:
+	print("Cadeau du jour, album, fusion de sauvegarde")
+	var gd := _data()
+	var pd: Node = PlayerDataScript.new()
+	pd.configure(gd.player_start, gd.progression, gd.dungeons)
+	pd.use_memory_only()
+	var g0: int = pd.gold()
+	check(pd.can_claim_login() and pd.login_day() == 0, "le premier cadeau est prêt")
+	pd.claim_login()
+	check(pd.gold() > g0 and not pd.can_claim_login(), "un seul cadeau par jour")
+	check(pd.claim_login().is_empty(), "pas de deuxième cadeau le même jour")
+	pd.state.login.last = "2000-01-01"
+	check(pd.can_claim_login() and pd.login_day() == 1, "le lendemain, case suivante")
+	var gems0: int = pd.gems()
+	var fresh: Array = pd._record_album("monde01_1")
+	check(fresh.size() > 0 and pd.album().has(fresh[0]), "les monstres vaincus entrent dans l'album")
+	check(pd._record_album("monde01_1").is_empty(), "un monstre déjà vu n'est pas compté deux fois")
+	pd.state.album = {}
+	for i in 9:
+		pd.state.album["m%d" % i] = 1
+	pd._record_album("monde01_1")
+	check(pd.gems() == gems0 + pd.ALBUM_GEMS, "10 monstres découverts : des gemmes")
+	var into := {"lodge_dungeon": {"a": 1, "nouveau": 2}, "items": {"x": 5}}
+	pd._deep_merge(into, {"lodge_dungeon": {"a": 9}, "items": {"y": 1}})
+	check(into.lodge_dungeon.a == 9 and into.lodge_dungeon.nouveau == 2 and not into.items.has("x"),
+		"fusion : nouvelles clés gardées dans les sous-parties, collections de la sauvegarde")
+	pd.free()

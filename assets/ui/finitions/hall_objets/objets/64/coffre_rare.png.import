@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/coffre_rare.png-2e68f2b17ef2f5618b9e4564c3ba2
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

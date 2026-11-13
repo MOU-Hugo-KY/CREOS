@@ -10,27 +10,7 @@
     1120,
     380
   ],
-  "lumieres": [
-    [
-      182,
-      110,
-      90,
-      "#B17BFF"
-    ],
-    [
-      640,
-      105,
-      90,
-      "#B17BFF"
-    ],
-    [
-      1098,
-      110,
-      90,
-      "#B17BFF"
-    ]
-  ],
+  "lumieres": [],
   "animations": [],
-  "premier_plan_vide": true,
-  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par2"
+  "premier_plan_vide": true
 }

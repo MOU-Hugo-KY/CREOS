@@ -14,6 +14,7 @@ var info: Dictionary = {}
 var topdown := false
 var combat_rect := Rect2(80, 300, 1120, 380)
 var arena_life: ArenaAmbience  # halos et particules de l'arène
+var painted := false  # arène peinte en 1920 × 1080 (pas de pixel art par-dessus)
 
 
 static func _arena_json(path: String) -> Dictionary:
@@ -62,14 +63,21 @@ func _setup_arena(dir: String, scene: int) -> void:
 		if a is Dictionary and a.has("combat_rect"):
 			var r: Array = a.combat_rect
 			combat_rect = Rect2(r[0], r[1], r[2], r[3])
+	var arena_tex: Texture2D = load(dir + "arene%d.png" % scene)
+	painted = arena_tex != null and arena_tex.get_width() > int(SIZE.x)
 	_layer(dir + "arene%d.png" % scene, -30, true)
 	_layer(dir + "arene%d_avant.png" % scene, 20, true)
 	var life := ArenaAmbience.new()
 	life.z_index = 15  # par-dessus les combattants : halos et particules flottent devant
 	add_child(life)
+	life.soft = painted
 	life.setup(dir.trim_suffix("/").get_file(), _arena_json(path))
 	arena_life = life
-	_spawn_arena_fx(dir.trim_suffix("/").get_file())
+	if not painted:  # les oiseaux et la météo en pixel art jurent avec un décor peint
+		_spawn_arena_fx(dir.trim_suffix("/").get_file())
+	var grade := StageGrade.new()
+	add_child(grade)
+	grade.setup(dir.trim_suffix("/").get_file(), painted)
 	ambience = Ambience.new()  # pas de particules de l'ancien décor ; sert à l'assombrissement des ultimes
 	ambience.z_index = -10
 	add_child(ambience)
@@ -117,9 +125,12 @@ func _layer(path: String, z: int, pixel := false) -> void:
 	if not ResourceLoader.exists(path):
 		return
 	var s := Sprite2D.new()
-	if pixel:
-		s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	s.texture = load(path)
+	# Ancien décor en pixel art (1280 × 720) : pixels nets ; nouvelle arène peinte (1920 × 1080) : lissée.
+	if pixel and s.texture.get_width() <= int(SIZE.x):
+		s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	else:
+		s.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	s.centered = false
 	s.scale = SIZE / Vector2(s.texture.get_size())
 	s.z_index = z

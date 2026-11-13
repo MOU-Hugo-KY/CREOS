@@ -8,7 +8,7 @@ extends Control
 
 const DIR := "res://assets/ui/invocateurs/"
 const COLORS := {2: "bleu", 3: "violet", 4: "or"}
-const MAGE_SCALE := 1.6  # le mage du pack (~200 px) agrandi pour la salle
+const MAGE_SCALE := 1.0  # le mage peint est déjà à sa taille (échelle dans invocateurs.json)
 const COLUMNS := {2: "colonne_rune_rare", 3: "colonne_rune_epique", 4: "colonne_rune_legendaire"}
 
 static var _data: Dictionary = {}
@@ -224,7 +224,8 @@ class Sheet extends Node2D:
 		_a = anims.get(name, {})
 		var path := base_dir + String(_a.get("file", ""))
 		_tex = load(path) if ResourceLoader.exists(path) else null
-		texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		# Planches peintes (« smooth ») : lissées ; planches en pixel art : pixels nets.
+		texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR if bool(_a.get("smooth", false)) else CanvasItem.TEXTURE_FILTER_NEAREST
 
 	func play(name: String, then := "") -> void:
 		load_anim(name)
@@ -262,4 +263,8 @@ class Sheet extends Node2D:
 			return
 		var fs := Vector2(_a.frame_size[0], _a.frame_size[1])
 		var pivot := Vector2(_a.pivot[0], _a.pivot[1])
-		draw_texture_rect_region(_tex, Rect2(-pivot, fs), Rect2(Vector2(_frame * fs.x, 0), fs))
+		# « columns » : planche en grille (les grandes planches peintes) ; « scale » : taille à l'écran.
+		var cols := int(_a.get("columns", 0))
+		var k := float(_a.get("scale", 1.0))
+		var src := Vector2(_frame * fs.x, 0) if cols <= 0 else Vector2((_frame % cols) * fs.x, (_frame / cols) * fs.y)
+		draw_texture_rect_region(_tex, Rect2(-pivot * k, fs * k), Rect2(src, fs))

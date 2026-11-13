@@ -72,6 +72,7 @@ func _ready() -> void:
 func open_current() -> void:
 	var current := PlayerData.current_campaign_level()
 	region = String(GameData.dungeon(current).get("region", GameData.region_ids()[0]))
+	_zoomed = false  # on arrive toujours sur la vue d'ensemble
 	open()
 	refresh()
 
@@ -187,7 +188,7 @@ var _map: Control
 var _map_box: Control  # interface fixe de la carte (énergie, parchemin)
 var _world: Control  # la carte elle-même (fond, mondes, niveaux) : zoomée sur le monde choisi
 var _world_box: Control
-var _zoomed := true  # vrai : la carte est grossie sur le monde choisi (lisible sur téléphone)
+var _zoomed := false  # vrai : la carte est grossie sur le monde choisi (lisible sur téléphone)
 var _zoom_btn: Button
 var _zoom_tw: Tween
 const ZOOM_MAX := 2.6
@@ -239,8 +240,8 @@ func _build_map() -> void:
 	_zoom_btn.size = Vector2(300, 84)
 	_zoom_btn.pressed.connect(func() -> void:
 		ui_sound.emit("ui_click")
-		_zoomed = not _zoomed
-		_apply_zoom(true))
+		_zoomed = false
+		_fill_map())
 	root.add_child(_zoom_btn)
 
 
@@ -265,7 +266,8 @@ func _apply_zoom(animate: bool) -> void:
 		at.x = clampf(at.x, 1920.0 - 1920.0 * k, 0.0)
 		at.y = clampf(at.y, 1080.0 - 1080.0 * k, 0.0)
 	if _zoom_btn:
-		_zoom_btn.text = "Tous les mondes" if _zoomed else "Grossir le monde"
+		_zoom_btn.text = "Tous les mondes"
+		_zoom_btn.visible = _zoomed  # en vue d'ensemble, on touche un monde pour le grossir
 	if _zoom_tw:
 		_zoom_tw.kill()
 	if animate:
@@ -330,6 +332,7 @@ func _fill_map() -> void:
 				ui_sound.emit("ui_click")
 				region = rid
 				_pick = ""
+				_zoomed = true  # toucher un monde de la vue d'ensemble le grossit
 				_fill_map())
 		_world_box.add_child(hit)
 		# Les 8 niveaux.
@@ -370,11 +373,13 @@ func _fill_map() -> void:
 				var a: Dictionary = D.get("animations", {}).get("pion_courant", {})
 				var s := FinPack.sheet(a)
 				s.scale = Vector2(0.5, 0.5)
-				s.position = Vector2(pt.center[0], pt.center[1]) - Vector2(0, 10)
+				# Le pion se tient au-dessus du rond du niveau (pas planté au milieu de son dessin).
+				s.position = Vector2(pt.center[0], r.position.y + 6.0)
+				s.z_index = 4
 				_world_box.add_child(s)
 				s.play("a")
 	_fill_panel()
-	_apply_zoom(_world.scale == Vector2.ONE and _zoomed)
+	_apply_zoom(true)
 
 
 ## Parchemin de droite : le niveau choisi.

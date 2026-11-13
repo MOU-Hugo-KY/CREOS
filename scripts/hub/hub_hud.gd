@@ -32,6 +32,7 @@ var _values: Dictionary = {}  # "or" / "gemmes" / "energie" -> Label
 var lodge: HeroesScreen
 var altar: SummonAltar
 var profile: ProfileScreen
+var login: LoginScreen
 var quests: QuestsScreen
 var hunt_prep: HuntPrepScreen
 var campaign: CampaignScreen
@@ -66,6 +67,14 @@ func _ready() -> void:
 	altar.closed.connect(close_altar)
 	altar.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
 	_root.add_child(altar)
+	login = LoginScreen.new()
+	login.closed.connect(func() -> void: _set_menus_visible(true))
+	login.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
+	_root.add_child(login)
+	if PlayerData.persist and PlayerData.can_claim_login():
+		(func() -> void:
+			_set_menus_visible(false)
+			login.open()).call_deferred()
 	profile = ProfileScreen.new()
 	profile.closed.connect(func() -> void: _set_menus_visible(true))
 	profile.ui_sound.connect(func(s: String) -> void: ui_sound.emit(s))
@@ -173,6 +182,11 @@ func close_lodge() -> void:
 	_set_menus_visible(true)
 
 
+func open_login() -> void:
+	_set_menus_visible(false)
+	login.open()
+
+
 func open_profile() -> void:
 	_set_menus_visible(false)
 	profile.open()
@@ -221,7 +235,7 @@ func close_altar() -> void:
 
 ## Vrai si un écran plein (Loge, Lanterne, Échoppe…) est ouvert par-dessus le port.
 func any_screen_open() -> bool:
-	for c in [lodge, altar, profile, quests, hunt_prep, campaign, shop, relics, private_lodge, settings]:
+	for c in [lodge, altar, login, profile, quests, hunt_prep, campaign, shop, relics, private_lodge, settings]:
 		if c and (c as Control).visible:
 			return true
 	return false
@@ -231,7 +245,7 @@ func any_screen_open() -> bool:
 func _set_menus_visible(on: bool) -> void:
 	screen_opened.emit(not on)
 	for c in _root.get_children():
-		if c not in [lodge, altar, profile, quests, hunt_prep, campaign, shop, relics, private_lodge, settings, _toast]:
+		if c not in [lodge, altar, login, profile, quests, hunt_prep, campaign, shop, relics, private_lodge, settings, _toast]:
 			c.visible = on
 	if on and _sound_panel and _sound_button:
 		_sound_panel.visible = _sound_button.button_pressed
@@ -360,8 +374,22 @@ func _build_pack_hud() -> void:
 	_lodge_label = ScreenPack.text(prof, "", Rect2(FinPack.rect(P.loge).position + off + Vector2(4, -10), FinPack.rect(P.loge).size - Vector2(14, 0)),
 		13, Color("f3d9a0"))
 	_lodge_label.clip_text = true
-	_level_label = ScreenPack.shadow(ScreenPack.text(prof, "", Rect2(FinPack.rect(P.niveau).position + off - Vector2(6, 2),
-		FinPack.rect(P.niveau).size + Vector2(12, 4)), 18, UiKit.WHITE, HORIZONTAL_ALIGNMENT_CENTER), 2)
+	# Niveau : centré dans le petit anneau du médaillon (centre mesuré sur l'image : 94, 120 ; trou de 26 px),
+	# sur un disque sombre, en petit pour que « 60 » y tienne.
+	var hole := Vector2(94, 120)
+	var disc := Panel.new()
+	var dsb := StyleBoxFlat.new()
+	dsb.bg_color = Color("1f1a26")
+	dsb.set_corner_radius_all(13)
+	disc.add_theme_stylebox_override("panel", dsb)
+	disc.position = hole - Vector2(13, 13)
+	disc.size = Vector2(26, 26)
+	disc.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	prof.add_child(disc)
+	prof.move_child(disc, 0)  # sous le médaillon : seul le trou le laisse voir
+	_level_label = ScreenPack.shadow(ScreenPack.text(prof, "", Rect2(hole - Vector2(16, 12), Vector2(32, 24)), 15, UiKit.WHITE,
+		HORIZONTAL_ALIGNMENT_CENTER), 2)
+	_level_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_xp_gauge = FinPack.Gauge.new().setup("port_franc/jauge_xp_fond.png", FinPack.rect(P.xp_fond), [4, 4, 4, 4],
 		"port_franc/jauge_xp_remplissage.png", FinPack.rect(P.xp_remplissage))
 	_xp_gauge.position += off
@@ -481,6 +509,19 @@ Niveau %d · %d / %d XP" % [PlayerData.level(),
 	var next := PlayerData.seconds_to_next_energy()
 	_recharge.text = "" if next <= 0 else "Recharge : %d:%02d" % [next / 60, next % 60]
 	_set_badge("primes", PlayerData.claimable_quests())
+	# Pastilles « à faire » : héros de l'équipe à monter, reliques à améliorer, invocation possible.
+	var up := 0
+	for id: String in PlayerData.team():
+		if PlayerData.hero_level(id) < PlayerData.hero_level_cap(id) and PlayerData.gold() >= PlayerData.hero_level_up_cost(id):
+			up += 1
+	_set_badge("heros", up)
+	var rel := 0
+	for id: String in PlayerData.state.get("heroes", {}):
+		if PlayerData.can_upgrade_relic(id):
+			rel += 1
+	_set_badge("reliques", rel)
+	_set_badge("lanterne", 1 if PlayerData.can_summon("gems", GameData.summon) else 0)
+	_set_badge("chasse", 1 if PlayerData.energy() >= PlayerData.energy_max() else 0)
 
 
 func _build_profile() -> void:

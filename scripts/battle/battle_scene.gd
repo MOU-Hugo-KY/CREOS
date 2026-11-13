@@ -23,13 +23,13 @@ const ENEMY_SPOTS := [Vector2(705, 554), Vector2(760, 668), Vector2(830, 552), V
 const CROWD_SCALE := 0.78  # combattants un peu plus petits quand il y a plus de 4 héros
 # Formation en colonnes, comme les règles du moteur (BattleUnit.line()) : places 0-1 devant (près
 # de l'adversaire), 2-4 au milieu, 5-6 à l'arrière. Les ennemis en miroir.
-const TOP_HEROES := [Vector2(520, 400), Vector2(520, 540), Vector2(355, 335), Vector2(355, 465),
-	Vector2(355, 595), Vector2(190, 400), Vector2(190, 540)]
-const TOP_ENEMIES := [Vector2(760, 400), Vector2(760, 540), Vector2(925, 335), Vector2(925, 465),
-	Vector2(925, 595), Vector2(1090, 400), Vector2(1090, 540)]
+const TOP_HEROES := [Vector2(505, 425), Vector2(505, 570), Vector2(335, 350), Vector2(335, 480),
+	Vector2(335, 610), Vector2(165, 425), Vector2(165, 570)]
+const TOP_ENEMIES := [Vector2(775, 425), Vector2(775, 570), Vector2(945, 350), Vector2(945, 480),
+	Vector2(945, 610), Vector2(1115, 425), Vector2(1115, 570)]
 # Personnages tous à la même taille. Héros : pixel source × 4,8 × 0,5 × TOP_SCALE × 1,5 (cadre 1280 → écran
-# 1920) = exactement 2 pixels d'écran par pixel de dessin, pour un pixel art net.
-const TOP_SCALE := 2.0 / (4.8 * 0.5 * 1.5)
+# 1920) = exactement 3 pixels d'écran par pixel de dessin, pour un pixel art net.
+const TOP_SCALE := 3.0 / (4.8 * 0.5 * 1.5)
 const BOSS_SPOT := Vector2(1040, 604)
 const INTRO_HOLD := 1.4  # pause d'affichage au début de chaque vague
 const END_DELAY := 1.4
@@ -100,7 +100,7 @@ func _ready() -> void:
 	hud.hub_requested.connect(func() -> void:
 		Engine.time_scale = 1.0
 		PlayerData.current_lodge_battle = {}
-		get_tree().change_scene_to_file(HUB_SCENE))
+		Transition.go(HUB_SCENE))
 	hud.ui_sound.connect(func(s: String) -> void: audio.play(s, -4.0, 0.0))
 	get_viewport().size_changed.connect(_fit_camera)
 	_fit_camera()
@@ -795,9 +795,15 @@ func _on_impact(ev: Dictionary) -> void:
 				t.play_death()
 				_pixel_death(t)
 				_sfx("death", -2.0)
+				if t.unit and t.unit.is_boss:
+					Input.vibrate_handheld(220)  # le boss tombe : le téléphone tremble
+					var speed := Engine.time_scale
+					Engine.time_scale = speed * 0.35  # court ralenti sur le coup fatal
+					get_tree().create_timer(0.25, true, false, true).timeout.connect(Callable(Engine, "set").bind("time_scale", speed))
 				var fall_at := t.position
 				_schedule(1.3, func() -> void: fx.dust(fall_at, 1.3))
 		"victory":
+			Input.vibrate_handheld(80)
 			_end_battle(true)
 		"defeat":
 			_end_battle(false)
@@ -949,6 +955,15 @@ func _spawn(u: BattleUnit, data: Dictionary, pos: Vector2) -> void:
 	views[u.uid] = v
 	unit_data[u.uid] = data
 	hud.add_overhead(v)
+	# Entrée en scène : les héros arrivent de la gauche, les monstres de la droite, l'un après l'autre.
+	var side := -1.0 if u.team == 0 else 1.0
+	var order := _units_root.get_child_count() % 8
+	if u.is_boss:
+		v.enter(Vector2(side * 520.0, 0), 0.45, func() -> void:
+			fx.shake(0.7)
+			fx.dust(v.position, 2.0))
+	else:
+		v.enter(Vector2(side * 460.0, 0), 0.06 * order, func() -> void: fx.dust(v.position, 0.8))
 
 
 # --- Monde 2D ----------------------------------------------------------------

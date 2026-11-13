@@ -37,12 +37,19 @@ func set_phase(phase: String, tint: Color) -> void:
 	var changed := phase != _phase
 	_phase = phase
 	_tint = tint
-	for it: Dictionary in _items:
-		_show(it.spr, it.e, phase in it.e.get("when", []))
+	_refresh_items()
 	if changed:
 		_end_weather()
 		_roll = 0.0
 		_pick_weather(true)
+
+
+## Bêtes visibles selon le moment de la journée ; aucune sous la pluie (elles s'abritent).
+func _refresh_items() -> void:
+	var raining := not _weather.is_empty() and String(_weather.e.get("id", "")) == "rain"
+	for it: Dictionary in _items:
+		var critter := String(it.e.fx).begins_with("critters/")
+		_show(it.spr, it.e, _phase in it.e.get("when", []) and not (raining and critter))
 
 
 func _color(e: Dictionary, on: bool) -> Color:
@@ -114,6 +121,7 @@ func _pick_weather(_first: bool) -> void:
 		spr.modulate.a = 0.0
 		_show(spr, w, true)
 		_weather = {"e": w, "spr": spr, "left": float(w.get("duration", -1.0))}
+		_refresh_items()
 		return
 
 
@@ -137,6 +145,7 @@ func _end_weather() -> void:
 	tw.tween_property(spr, "modulate:a", 0.0, FADE)
 	tw.tween_callback(spr.queue_free)  # la planche n'est plus gardée en mémoire
 	_weather = {}
+	_refresh_items()
 
 
 ## Force un effet plein écran (outil de capture) : `id` de data/pixelfx_hub.json "weather".
@@ -148,6 +157,7 @@ func force_weather(id: String) -> void:
 			if spr:
 				spr.modulate = _color(w, true)
 				_weather = {"e": w, "spr": spr, "left": float(w.get("duration", -1.0))}
+				_refresh_items()
 
 
 func _process(delta: float) -> void:

@@ -8,7 +8,7 @@ extends Control
 ## qui est sorti.
 
 const DIR := "res://assets/ui/invocateurs/"
-const WORKER_SCALE := 1.6
+const WORKER_SCALE := 1.0  # mécanicien peint : échelle dans invocateurs.json
 
 var appear := Vector2(985, 555)
 var _worker: MageRoom.Sheet

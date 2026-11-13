@@ -103,7 +103,7 @@ HEROES = {
     "sylve": ("nature", "melee", "physical", 3, "gardien", 0.05, [
         ("single_enemy", [dmg(0.9), st("enracine", A)]),
         ("all_allies", [dict(type="regen", power=0.04, stat="hp", duration=T), buff("res", 0.1)]),
-        ("all_enemies", [st("enracine", A), buff("def", 0.2, target="all_allies")]),
+        ("all_enemies", [dmg(1.2), st("enracine", A), buff("def", 0.2, target="all_allies")]),
     ]),
     "valen": ("lumiere", "melee", "physical", 4, "lancier", 0.08, [
         ("single_enemy", [dmg(1.05)]),
@@ -113,7 +113,7 @@ HEROES = {
     "bastion": ("lumiere", "melee", "physical", 3, "gardien", 0.05, [
         ("single_enemy", [dmg(1.0)]),
         ("self", [dict(type="taunt", duration=3.0), buff("def", 0.25)]),
-        ("all_allies", [shield(1.6)]),
+        ("all_allies", [shield(1.6), dict(type="heal", power=0.8, stat="def")]),
     ]),
     "saffran": ("feu", "ranged", "magic", 3, "illusionniste", 0.08, [
         ("single_enemy", [dmg(0.95, "mag"), st("scelle")]),

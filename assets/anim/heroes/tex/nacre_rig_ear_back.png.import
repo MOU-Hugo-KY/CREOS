@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/nacre_rig_ear_back.png-a2fd2ccfe99e7c4d3d4aba
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

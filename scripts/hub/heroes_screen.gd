@@ -620,7 +620,8 @@ func _fill_skills(hero: Dictionary) -> void:
 func _skill_icon(id: String) -> Texture2D:
 	var ps := PixelSheet.for_actor(id)
 	if ps == null or not ps.anims.has("skill"):
-		return load("res://assets/ui/kit/lock.png")
+		var direct := String(GameData.heroes.get(id, {}).get("portrait", ""))
+		return load(direct) if direct != "" and ResourceLoader.exists(direct) else load("res://assets/ui/kit/lock.png")
 	var frames: Array = ps.anims.skill.frames
 	var tex: Texture2D = frames[mini(4, frames.size() - 1)][0]
 	var img: Image = tex.get_image()

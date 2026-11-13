@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/etourdi.png-45a02eb87e8c7d54a50f66b944d6fffc.
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

@@ -139,7 +139,18 @@ static func button(text: String, kind := "green", font_size := 26, min_size := V
 	b.focus_mode = Control.FOCUS_NONE
 	b.custom_minimum_size = min_size
 	style_button(b, kind, font_size)
+	juice(b)
 	return b
+
+
+## Le bouton s'écrase un peu sous le doigt puis rebondit.
+static func juice(b: BaseButton) -> void:
+	b.button_down.connect(func() -> void:
+		b.pivot_offset = b.size / 2.0
+		b.create_tween().tween_property(b, "scale", Vector2(0.94, 0.94), 0.06))
+	b.button_up.connect(func() -> void:
+		b.pivot_offset = b.size / 2.0
+		b.create_tween().tween_property(b, "scale", Vector2.ONE, 0.22).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT))
 
 
 static func style_button(b: Button, kind := "green", font_size := 26) -> void:

@@ -10,33 +10,7 @@
     1120,
     380
   ],
-  "lumieres": [
-    [
-      498,
-      173,
-      95,
-      "#FF993D"
-    ],
-    [
-      784,
-      179,
-      95,
-      "#FF993D"
-    ],
-    [
-      173,
-      45,
-      60,
-      "#FFB15A"
-    ],
-    [
-      1107,
-      45,
-      60,
-      "#FFB15A"
-    ]
-  ],
+  "lumieres": [],
   "animations": [],
-  "premier_plan_vide": true,
-  "coordonnees": "pixels dans arene.png; version 2x: multiplier positions et rayons par 2"
+  "premier_plan_vide": true
 }

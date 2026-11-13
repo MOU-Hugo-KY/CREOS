@@ -1,0 +1,16 @@
+{
+  "nom": "monde09_2",
+  "taille": [
+    1280,
+    720
+  ],
+  "combat_rect": [
+    80,
+    300,
+    1120,
+    380
+  ],
+  "lumieres": [],
+  "animations": [],
+  "premier_plan_vide": true
+}

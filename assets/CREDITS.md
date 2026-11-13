@@ -66,3 +66,10 @@ puis lancer `python tools/import_tiny_swords.py`.
 
 ## Effets d attaque pixel art
 - pixelfx, par Patch (patch.gg), licence MIT : https://github.com/patch-gg/pixelfx. Planches exportees par tools/export_pixelfx.mjs dans assets/pixelfx/.
+
+- `assets/ui/loading/chargement_*.png` et `logo_creos.png` : illustrations et logo de l'écran de chargement, créées pour CREOS (ChatGPT, d'après nos fiches de héros).
+- `icon.png`, `icon_android.png` : icône du jeu, créée pour CREOS (ChatGPT, d'après Corbin).
+- `assets/decors/monde*/arene*.png` : les 30 arènes peintes, créées pour CREOS (ChatGPT, d'après nos prompts `docs/pour_chatgpt/decors/`).
+- Salles du port (fonds de `assets/ui/echoppe`, `assets/ui/finitions`, `assets/ui/invocateurs`), leurs personnages (mage, mécanicien, gardienne, marchande), le nid, la stèle, l'étal, le lutrin et les 20 Esprits : peints pour CREOS (ChatGPT, d'après `docs/pour_chatgpt/salles/`), animés par `tools/bake_salles_peintes.py`.
+
+- Agents `godot-specialist` et `godot-gdscript-specialist` (`.claude/agents/`) et notes Godot 4.7 (`docs/engine-reference/godot/`) : Claude Code Game Studios, Donchitos, licence MIT — https://github.com/Donchitos/Claude-Code-Game-Studios

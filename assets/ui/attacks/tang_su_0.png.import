@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/tang_su_0.png-0622b8c17800333e6fc9a550e70fe65
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

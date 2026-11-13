@@ -29,6 +29,8 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
     `_skill` pour les boss. Ils regardent à gauche.
   - Décors de combat : `assets/decors/mondeNN/` (fond1-3, sol, premier plan, ambiance1-3.json lue
     par `scripts/battle/ambience.gd`). Cadre 1280 × 720, pieds vers y = 590.
+    Les 30 arènes jouées sont peintes (ChatGPT) : `areneN.png` en 1920 × 1080 (N = 1 entrée, 2 profondeur,
+    3 boss) + `areneN.json` ; prompts et images de référence dans `docs/pour_chatgpt/decors/`.
   - Reliques : `assets/relics/`. Marchand de masques : `assets/npcs2d/` (`PaperDoll`, pièces + puppet.json).
   - `python tools/render_clip.py` dessine un clip en image (vérifier sans Godot) ;
     `python tools/make_attack_icons_from_clips.py` refait les icônes d'attaque ;
@@ -65,7 +67,17 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   `HuntPrepScreen`), Marchand (`ShopScreen`, offres dans `hub.json`), Reliques et quatuors
   (`RelicsScreen`), Profil (clic sur le profil en haut à gauche), Primes du jour (`QuestsScreen`, règles pures dans `scripts/core/quests.gd`,
   données dans `data/quests.json`, événements notés par `PlayerData.record_event()`), Loge,
-  Lanterne des Serments (invocations, `data/summon.json`).
+  Lanterne des Serments (invocations en gemmes seulement, `data/summon.json` ; les fragments de relique ne servent
+  qu'aux reliques), Cadeau du jour (`LoginScreen`, 7 cases, `data/login.json`, s'ouvre seul au port), Album des
+  monstres (`AlbumScreen`, depuis le Profil ; `state.album`, 50 gemmes tous les 10 monstres). Pastilles rouges sur
+  les boutons du port (`hub_hud.gd`, `_refresh_pack_hud`).
+- **Sauvegarde** : écriture sûre (fichier `.tmp` puis renommage, copie `user://save.bak.json` rechargée si la
+  sauvegarde est abîmée) ; `_deep_merge` garde les nouvelles clés des sous-parties de `DEEP_KEYS`.
+- **Difficulté de la campagne** : `data/difficulty.json` (multiplicateur par niveau) écrit par
+  `godot --headless --path . --script res://tools/calibrate_difficulty.gd` (courbe continue : niveau de héros visé
+  1 au début → 58 au boss final, ~6/10 victoires). À relancer après un changement d'équilibrage.
+- **Images** : illustrations (ui, décors, héros et ennemis en pièces) importées en WebP avec perte (qualité 0.85),
+  pixel art (hub_px, anim/pixel, pixelfx) sans perte.
 - **Progression (fiche de combat)** : niveaux 1-60 ; **Échos** = doublons du même héros (seuils
   1/3/6/9/12, bonus surtout sur la statistique principale, `progression.json` "echoes") ;
   **reliques** à 5 paliers (fragments `relique_<héros>` gagnés en campagne + `materiaux_relique`) ;
@@ -83,6 +95,18 @@ L'utilisateur (Hugo) parle français : **réponds en français**, simplement, sa
   Décor vivant des arènes : `data/pixelfx_arenas.json` (par monde, effets pixelfx en boucle : météo, bestioles,
   braseros ; `pos` dans le cadre 1280 × 720, `k` échelle entière, `z` -25 derrière les combattants, 16 pour la
   météo légère), posés par `BattleStage._spawn_arena_fx()` ; exporter avec `node tools/export_pixelfx.mjs --data=data/pixelfx_arenas.json`.
+- **Mise en beauté du combat** : `scripts/battle/stage_grade.gd` (`StageGrade` : vignette, bas d'écran assombri, lueur du
+  monde, rayons de lumière sur les arènes peintes ; `StageGrade.disc()` = disque flou partagé pour les ombres et poussières).
+  Arène peinte (image plus large que 1280) : `BattleStage.painted`, pas d'effets pixelfx par-dessus, poussières douces.
+  Combattants à 3 pixels d'écran par pixel de dessin (`TOP_SCALE`), entrée en scène en courant (`UnitView.enter`).
+  Changement de scène : autoload `Transition` (`scripts/core/transition.gd`, iris d'encre cerclé de laiton), `Transition.go(chemin)`.
+  Boutons `UiKit.button` : écrasement sous le doigt (`UiKit.juice`).
+- **Salles peintes** (échoppe, reliquaire, Lanterne, profil, primes…) : fonds 1920 × 1080 peints par ChatGPT, posés à la
+  place des anciens. Personnages des salles, nid et Esprits : livrés en poses fixes puis transformés en planches animées
+  par `python tools/bake_salles_peintes.py <dossier recu> . <anciennes pièces>` (respiration, pose d'action, apparition),
+  jouées par `MageRoom.Sheet` (clés `columns` = grille, `smooth` = lissé, `scale` ; en français `colonnes`, `lisse`,
+  `echelle` dans `jardin_esprits.json`). Le même script pose la stèle dans sa salle (`stele_eveil.png` s'allume par-dessus),
+  redécoupe le comptoir de l'échoppe et recale les niches du reliquaire (`ecrans.json`, 3 rangées de 7).
 - **Ma Loge** (bâtiment « Loge privée » du hub, `PrivateLodgeScreen`) : le donjon du joueur. Trois salles
   (`data/lodge.json` : défenseurs et pièges par salle, mises), règles pures dans `scripts/core/lodge.gd`
   (`Lodge`), état dans la sauvegarde (`state.lodge_dungeon`, la clé `lodge` est le nom de la loge).

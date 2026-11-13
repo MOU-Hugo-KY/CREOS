@@ -119,6 +119,13 @@ func flip(on_middle: Callable = Callable(), duration := 0.32) -> void:
 func _add_still_hero() -> void:
 	var sheet := PixelSheet.for_actor(String(hero.get("id", "")))
 	if sheet == null or not sheet.anims.has("idle"):
+		# Sans couche pixel : la fiche dessinée du héros, debout dans la fenêtre.
+		var fiche := "res://assets/anim/heroes/fiches/%s.png" % String(hero.get("id", ""))
+		if ResourceLoader.exists(fiche):
+			var h := WINDOW.size.y * 0.86
+			var f := _image(content, load(fiche), Rect2((WINDOW.size.x - h) / 2.0, FEET.y - h * 0.93, h, h))
+			f.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			f.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		return
 	var tex: Texture2D = sheet.anims.idle.frames[0][0]
 	var body := sheet.body_rect()

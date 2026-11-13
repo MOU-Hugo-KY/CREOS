@@ -54,6 +54,21 @@ static func head(def_id: String) -> AtlasTexture:
 		at = AtlasTexture.new()
 		at.atlas = tex
 		at.region = Rect2(used.position.x + (used.size.x - side) / 2, used.position.y, side, side)
+	if at == null:  # sans couche pixel : le portrait dessiné du héros, ou la première pièce du monstre
+		var tex: Texture2D = null
+		var hero: Dictionary = GameData.heroes.get(def_id, {})
+		var direct := String(hero.get("portrait", ""))
+		if direct != "" and ResourceLoader.exists(direct):
+			tex = load(direct)
+		elif GameData.monsters.has(def_id):
+			var dir := String(GameData.monsters[def_id].get("anim", ""))
+			var clip := ClipPlayer.load_clip(dir, def_id + "_idle")
+			if not clip.is_empty() and not clip.tex.is_empty():
+				tex = ClipPlayer.texture(dir + "tex/" + String(clip.tex[0]))
+		if tex:
+			at = AtlasTexture.new()
+			at.atlas = tex
+			at.region = Rect2(Vector2.ZERO, tex.get_size())
 	_heads[def_id] = at
 	return at
 

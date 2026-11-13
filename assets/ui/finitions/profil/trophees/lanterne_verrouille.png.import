@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/lanterne_verrouille.png-b0f7fd0f9641bb3f61c7a
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

@@ -10,8 +10,8 @@
     "mage_repos": {
       "file": "mage/mage_repos.png",
       "frame_size": [
-        384,
-        384
+        656,
+        628
       ],
       "frame_count": 8,
       "duration_ms": 140,
@@ -27,16 +27,19 @@
       ],
       "loop": true,
       "pivot": [
-        192,
-        360
+        328,
+        604
       ],
-      "layout": "horizontal"
+      "layout": "grid",
+      "columns": 4,
+      "smooth": true,
+      "scale": 0.6667
     },
     "mage_incantation": {
       "file": "mage/mage_incantation.png",
       "frame_size": [
-        384,
-        384
+        656,
+        628
       ],
       "frame_count": 12,
       "duration_ms": 100,
@@ -56,10 +59,13 @@
       ],
       "loop": false,
       "pivot": [
-        192,
-        360
+        328,
+        604
       ],
-      "layout": "horizontal"
+      "layout": "grid",
+      "columns": 4,
+      "smooth": true,
+      "scale": 0.6667
     },
     "eclats_runiques": {
       "file": "mage/eclats_runiques.png",
@@ -205,8 +211,8 @@
     "mecanicien_repos": {
       "file": "mecanicien/mecanicien_repos.png",
       "frame_size": [
-        384,
-        384
+        444,
+        604
       ],
       "frame_count": 8,
       "duration_ms": 140,
@@ -222,16 +228,19 @@
       ],
       "loop": true,
       "pivot": [
-        192,
-        360
+        222,
+        580
       ],
-      "layout": "horizontal"
+      "layout": "grid",
+      "columns": 4,
+      "smooth": true,
+      "scale": 0.6667
     },
     "mecanicien_travail": {
       "file": "mecanicien/mecanicien_travail.png",
       "frame_size": [
-        384,
-        384
+        444,
+        604
       ],
       "frame_count": 12,
       "duration_ms": 100,
@@ -251,10 +260,13 @@
       ],
       "loop": false,
       "pivot": [
-        192,
-        360
+        222,
+        580
       ],
-      "layout": "horizontal"
+      "layout": "grid",
+      "columns": 4,
+      "smooth": true,
+      "scale": 0.6667
     },
     "particules_magie_ancienne": {
       "file": "mecanicien/particules_magie_ancienne.png",

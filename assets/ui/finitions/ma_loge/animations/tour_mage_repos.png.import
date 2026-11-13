@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/tour_mage_repos.png-c6f456fb7a550d1b56add7ee1
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

@@ -19,6 +19,9 @@ func _ready() -> void:
 	reload()
 
 
+var difficulty: Dictionary = {}
+
+
 func reload() -> void:
 	heroes = load_json("res://data/heroes.json")
 	# Réactions aux événements du combat (data/reactions.json), rangées avec chaque héros.
@@ -38,6 +41,8 @@ func reload() -> void:
 	relics = load_json("res://data/relics.json")
 	combos_data = load_json("res://data/combos.json")
 	lodge = load_json("res://data/lodge.json")
+	# Réglage fin de chaque niveau (tools/calibrate_difficulty.gd) : courbe de difficulté continue.
+	difficulty = load_json("res://data/difficulty.json") if FileAccess.file_exists("res://data/difficulty.json") else {}
 
 
 static func load_json(path: String) -> Dictionary:
@@ -79,6 +84,7 @@ func _toughen(m: Dictionary, dungeon_id: String) -> Dictionary:
 	var out := m.duplicate(true)
 	var world := int(String(dungeons.get(dungeon_id, {}).get("region", "monde01")).trim_prefix("monde"))
 	var k := 1.0 + float(cfg.get("per_world", 0.0)) * maxi(0, world - 1)
+	k *= float(difficulty.get("dungeons", {}).get(dungeon_id, 1.0))
 	var hp := k
 	var power := k
 	if out.get("boss", false):
