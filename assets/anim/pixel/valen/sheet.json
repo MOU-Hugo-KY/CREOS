@@ -25,36 +25,165 @@
    "loop": true,
    "frames": [
     [
-     "valen_idle_000.png",
-     0.3
+     "valen_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       0,
+       0,
+       170,
+       151
+      ],
+      "anchor": [
+       82.12,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       22,
+       15,
+       132,
+       124
+      ]
+     }
     ],
     [
-     "valen_idle_001.png",
-     0.3
+     "valen_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       170,
+       0,
+       166,
+       151
+      ],
+      "anchor": [
+       78.15,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       16,
+       12,
+       134,
+       127
+      ]
+     }
     ],
     [
-     "valen_idle_002.png",
-     0.3
+     "valen_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       336,
+       0,
+       165,
+       151
+      ],
+      "anchor": [
+       76.77,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       15,
+       10,
+       134,
+       129
+      ]
+     }
     ],
     [
-     "valen_idle_003.png",
-     0.3
+     "valen_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       501,
+       0,
+       164,
+       151
+      ],
+      "anchor": [
+       74.61,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       17,
+       9,
+       131,
+       130
+      ]
+     }
     ],
     [
-     "valen_idle_004.png",
-     0.3
+     "valen_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       665,
+       0,
+       165,
+       151
+      ],
+      "anchor": [
+       77.43,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       15,
+       14,
+       134,
+       125
+      ]
+     }
     ],
     [
-     "valen_idle_005.png",
-     0.3
+     "valen_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       830,
+       0,
+       166,
+       151
+      ],
+      "anchor": [
+       78.07,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       17,
+       16,
+       133,
+       123
+      ]
+     }
     ],
     [
-     "valen_idle_006.png",
-     0.3
-    ],
-    [
-     "valen_idle_007.png",
-     0.3
+     "valen_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       996,
+       0,
+       186,
+       151
+      ],
+      "anchor": [
+       74.29,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       17,
+       18,
+       131,
+       121
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +192,165 @@
    "loop": true,
    "frames": [
     [
-     "valen_walk_000.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       0,
+       151,
+       170,
+       146
+      ],
+      "anchor": [
+       80.22,
+       132
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       18,
+       13,
+       138,
+       119
+      ]
+     }
     ],
     [
-     "valen_walk_001.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       170,
+       151,
+       166,
+       146
+      ],
+      "anchor": [
+       64.6,
+       132
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       15,
+       12,
+       134,
+       120
+      ]
+     }
     ],
     [
-     "valen_walk_002.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       336,
+       151,
+       165,
+       146
+      ],
+      "anchor": [
+       66.78,
+       132
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       11,
+       8,
+       139,
+       124
+      ]
+     }
     ],
     [
-     "valen_walk_003.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       501,
+       151,
+       164,
+       146
+      ],
+      "anchor": [
+       65.49,
+       131
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       13,
+       7,
+       133,
+       124
+      ]
+     }
     ],
     [
-     "valen_walk_004.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       665,
+       151,
+       165,
+       146
+      ],
+      "anchor": [
+       73.05,
+       131
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       15,
+       13,
+       133,
+       118
+      ]
+     }
     ],
     [
-     "valen_walk_005.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       830,
+       151,
+       166,
+       146
+      ],
+      "anchor": [
+       73.05,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       18,
+       13,
+       133,
+       116
+      ]
+     }
     ],
     [
-     "valen_walk_006.png",
-     0.1
-    ],
-    [
-     "valen_walk_007.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       996,
+       151,
+       186,
+       146
+      ],
+      "anchor": [
+       77.2,
+       131
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       17,
+       14,
+       131,
+       117
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,188 +359,1040 @@
    "loop": false,
    "frames": [
     [
-     "valen_attack_1_000.png",
-     0.1
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       381,
+       296
+      ],
+      "anchor": [
+       187.79,
+       253
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       93,
+       64,
+       216,
+       189
+      ]
+     }
     ],
     [
-     "valen_attack_1_001.png",
-     0.1
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       381,
+       0,
+       361,
+       296
+      ],
+      "anchor": [
+       168.88,
+       254
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       73,
+       65,
+       215,
+       189
+      ]
+     }
     ],
     [
-     "valen_attack_1_002.png",
-     0.08
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       742,
+       0,
+       362,
+       296
+      ],
+      "anchor": [
+       169.78,
+       253
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       71,
+       64,
+       219,
+       189
+      ]
+     }
     ],
     [
-     "valen_attack_1_003.png",
-     0.05
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1104,
+       0,
+       344,
+       296
+      ],
+      "anchor": [
+       147.84,
+       253
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       58,
+       66,
+       245,
+       187
+      ]
+     }
     ],
     [
-     "valen_attack_1_004.png",
-     0.065
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       296,
+       381,
+       276
+      ],
+      "anchor": [
+       156.59,
+       229
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       68,
+       43,
+       236,
+       186
+      ]
+     }
     ],
     [
-     "valen_attack_1_005.png",
-     0.07
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       381,
+       296,
+       361,
+       276
+      ],
+      "anchor": [
+       129.04,
+       229
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       46,
+       44,
+       220,
+       185
+      ]
+     }
     ],
     [
-     "valen_attack_1_006.png",
-     0.1
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       742,
+       296,
+       362,
+       276
+      ],
+      "anchor": [
+       128.68,
+       229
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       43,
+       52,
+       199,
+       177
+      ]
+     }
     ],
     [
-     "valen_attack_1_007.png",
-     0.12
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1104,
+       296,
+       344,
+       276
+      ],
+      "anchor": [
+       96.58,
+       229
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       56,
+       56,
+       258,
+       173
+      ]
+     }
+    ],
+    [
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       572,
+       381,
+       272
+      ],
+      "anchor": [
+       113.05,
+       224
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       72,
+       51,
+       283,
+       173
+      ]
+     }
+    ],
+    [
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       381,
+       572,
+       361,
+       272
+      ],
+      "anchor": [
+       140.23,
+       224
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       51,
+       51,
+       252,
+       173
+      ]
+     }
+    ],
+    [
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       742,
+       572,
+       362,
+       272
+      ],
+      "anchor": [
+       119.38,
+       224
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       52,
+       47,
+       236,
+       177
+      ]
+     }
+    ],
+    [
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1104,
+       572,
+       344,
+       272
+      ],
+      "anchor": [
+       131.74,
+       224
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       48,
+       38,
+       247,
+       186
+      ]
+     }
+    ],
+    [
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       844,
+       381,
+       242
+      ],
+      "anchor": [
+       169.61,
+       225
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       74,
+       37,
+       234,
+       188
+      ]
+     }
+    ],
+    [
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       381,
+       844,
+       361,
+       242
+      ],
+      "anchor": [
+       162.6,
+       225
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       65,
+       37,
+       222,
+       188
+      ]
+     }
+    ],
+    [
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       742,
+       844,
+       362,
+       242
+      ],
+      "anchor": [
+       167.74,
+       225
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       72,
+       36,
+       217,
+       189
+      ]
+     }
+    ],
+    [
+     "valen_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1104,
+       844,
+       344,
+       242
+      ],
+      "anchor": [
+       170.67,
+       225
+      ],
+      "scale": 1.563571,
+      "bounds": [
+       75,
+       36,
+       215,
+       189
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "valen_attack_2_000.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       0,
+       443,
+       170,
+       147
+      ],
+      "anchor": [
+       70.57,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       17,
+       16,
+       137,
+       113
+      ]
+     }
     ],
     [
-     "valen_attack_2_001.png",
-     0.085
+     "valen_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       170,
+       443,
+       166,
+       147
+      ],
+      "anchor": [
+       55.37,
+       131
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       7,
+       0,
+       159,
+       131
+      ]
+     }
     ],
     [
-     "valen_attack_2_002.png",
-     0.06
+     "valen_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       336,
+       443,
+       165,
+       147
+      ],
+      "anchor": [
+       50.5,
+       147
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       0,
+       165,
+       147
+      ]
+     }
     ],
     [
-     "valen_attack_2_003.png",
-     0.06
+     "valen_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       501,
+       443,
+       164,
+       147
+      ],
+      "anchor": [
+       49.3,
+       147
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       4,
+       146,
+       143
+      ]
+     }
     ],
     [
-     "valen_attack_2_004.png",
-     0.065
+     "valen_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       665,
+       443,
+       165,
+       147
+      ],
+      "anchor": [
+       97.17,
+       132
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       6,
+       32,
+       154,
+       100
+      ]
+     }
     ],
     [
-     "valen_attack_2_005.png",
-     0.075
+     "valen_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       830,
+       443,
+       166,
+       147
+      ],
+      "anchor": [
+       62.14,
+       131
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       12,
+       14,
+       130,
+       117
+      ]
+     }
     ],
     [
-     "valen_attack_2_006.png",
-     0.11
-    ],
-    [
-     "valen_attack_2_007.png",
-     0.12
+     "valen_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       996,
+       443,
+       186,
+       147
+      ],
+      "anchor": [
+       70.84,
+       130
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       14,
+       15,
+       140,
+       115
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 3
   },
   "ultimate": {
    "loop": false,
    "frames": [
     [
-     "valen_ultimate_000.png",
-     0.11
+     "valen_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       0,
+       590,
+       170,
+       145
+      ],
+      "anchor": [
+       80.22,
+       128
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       22,
+       14,
+       130,
+       114
+      ]
+     }
     ],
     [
-     "valen_ultimate_001.png",
-     0.11
+     "valen_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       170,
+       590,
+       166,
+       145
+      ],
+      "anchor": [
+       66.29,
+       126
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       6,
+       17,
+       160,
+       109
+      ]
+     }
     ],
     [
-     "valen_ultimate_002.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       336,
+       590,
+       165,
+       145
+      ],
+      "anchor": [
+       87.84,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       0,
+       165,
+       129
+      ]
+     }
     ],
     [
-     "valen_ultimate_003.png",
-     0.075
+     "valen_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       501,
+       590,
+       164,
+       145
+      ],
+      "anchor": [
+       37.95,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       0,
+       158,
+       129
+      ]
+     }
     ],
     [
-     "valen_ultimate_004.png",
-     0.085
+     "valen_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       665,
+       590,
+       165,
+       145
+      ],
+      "anchor": [
+       53.49,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       3,
+       25,
+       162,
+       104
+      ]
+     }
     ],
     [
-     "valen_ultimate_005.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       830,
+       590,
+       166,
+       145
+      ],
+      "anchor": [
+       63.62,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       20,
+       155,
+       109
+      ]
+     }
     ],
     [
-     "valen_ultimate_006.png",
-     0.11
-    ],
-    [
-     "valen_ultimate_007.png",
-     0.13
+     "valen_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       996,
+       590,
+       186,
+       145
+      ],
+      "anchor": [
+       73.54,
+       128
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       21,
+       20,
+       134,
+       108
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 3
   },
   "skill": {
    "loop": false,
    "frames": [
     [
-     "valen_skill_000.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       0,
+       735,
+       170,
+       143
+      ],
+      "anchor": [
+       73.81,
+       128
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       22,
+       15,
+       134,
+       113
+      ]
+     }
     ],
     [
-     "valen_skill_001.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       170,
+       735,
+       166,
+       143
+      ],
+      "anchor": [
+       61.74,
+       127
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       7,
+       11,
+       159,
+       116
+      ]
+     }
     ],
     [
-     "valen_skill_002.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       336,
+       735,
+       165,
+       143
+      ],
+      "anchor": [
+       64.87,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       4,
+       165,
+       125
+      ]
+     }
     ],
     [
-     "valen_skill_003.png",
-     0.07
+     "valen_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       501,
+       735,
+       164,
+       143
+      ],
+      "anchor": [
+       24.07,
+       128
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       5,
+       153,
+       123
+      ]
+     }
     ],
     [
-     "valen_skill_004.png",
-     0.08
+     "valen_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       665,
+       735,
+       165,
+       143
+      ],
+      "anchor": [
+       46.51,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       3,
+       18,
+       159,
+       111
+      ]
+     }
     ],
     [
-     "valen_skill_005.png",
-     0.085
+     "valen_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       830,
+       735,
+       166,
+       143
+      ],
+      "anchor": [
+       67.16,
+       130
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       3,
+       19,
+       148,
+       111
+      ]
+     }
     ],
     [
-     "valen_skill_006.png",
-     0.1
-    ],
-    [
-     "valen_skill_007.png",
-     0.12
+     "valen_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       996,
+       735,
+       186,
+       143
+      ],
+      "anchor": [
+       74.71,
+       131
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       21,
+       19,
+       131,
+       112
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 3
   },
   "hurt": {
    "loop": false,
    "frames": [
     [
-     "valen_hurt_000.png",
-     0.085
+     "valen_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       1020,
+       170,
+       150
+      ],
+      "anchor": [
+       78.2,
+       131
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       21,
+       14,
+       130,
+       117
+      ]
+     }
     ],
     [
-     "valen_hurt_001.png",
-     0.065
+     "valen_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       170,
+       1020,
+       166,
+       150
+      ],
+      "anchor": [
+       75.79,
+       133
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       14,
+       14,
+       129,
+       119
+      ]
+     }
     ],
     [
-     "valen_hurt_002.png",
-     0.075
+     "valen_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       336,
+       1020,
+       165,
+       150
+      ],
+      "anchor": [
+       71.93,
+       133
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       9,
+       9,
+       131,
+       124
+      ]
+     }
     ],
     [
-     "valen_hurt_003.png",
-     0.08
+     "valen_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       501,
+       1020,
+       164,
+       150
+      ],
+      "anchor": [
+       73.84,
+       134
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       3,
+       14,
+       133,
+       120
+      ]
+     }
     ],
     [
-     "valen_hurt_004.png",
-     0.085
+     "valen_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       665,
+       1020,
+       165,
+       150
+      ],
+      "anchor": [
+       71.97,
+       133
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       15,
+       18,
+       133,
+       115
+      ]
+     }
     ],
     [
-     "valen_hurt_005.png",
-     0.09
+     "valen_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       830,
+       1020,
+       166,
+       150
+      ],
+      "anchor": [
+       75.36,
+       133
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       16,
+       18,
+       134,
+       115
+      ]
+     }
     ],
     [
-     "valen_hurt_006.png",
-     0.1
-    ],
-    [
-     "valen_hurt_007.png",
-     0.12
+     "valen_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       996,
+       1020,
+       186,
+       150
+      ],
+      "anchor": [
+       75.89,
+       133
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       17,
+       17,
+       136,
+       116
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1401,165 @@
    "loop": false,
    "frames": [
     [
-     "valen_dodge_000.png",
-     0.09
+     "valen_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       0,
+       878,
+       170,
+       142
+      ],
+      "anchor": [
+       73.67,
+       125
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       26,
+       11,
+       120,
+       114
+      ]
+     }
     ],
     [
-     "valen_dodge_001.png",
-     0.065
+     "valen_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       170,
+       878,
+       166,
+       142
+      ],
+      "anchor": [
+       53.95,
+       125
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       14,
+       28,
+       152,
+       97
+      ]
+     }
     ],
     [
-     "valen_dodge_002.png",
-     0.055
+     "valen_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       336,
+       878,
+       165,
+       142
+      ],
+      "anchor": [
+       50.57,
+       127
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       33,
+       165,
+       94
+      ]
+     }
     ],
     [
-     "valen_dodge_003.png",
-     0.055
+     "valen_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       501,
+       878,
+       164,
+       142
+      ],
+      "anchor": [
+       41.64,
+       130
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       43,
+       148,
+       87
+      ]
+     }
     ],
     [
-     "valen_dodge_004.png",
-     0.065
+     "valen_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       665,
+       878,
+       165,
+       142
+      ],
+      "anchor": [
+       55.09,
+       129
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       2,
+       28,
+       145,
+       101
+      ]
+     }
     ],
     [
-     "valen_dodge_005.png",
-     0.075
+     "valen_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       830,
+       878,
+       166,
+       142
+      ],
+      "anchor": [
+       70.43,
+       127
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       20,
+       17,
+       130,
+       110
+      ]
+     }
     ],
     [
-     "valen_dodge_006.png",
-     0.09
-    ],
-    [
-     "valen_dodge_007.png",
-     0.12
+     "valen_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       996,
+       878,
+       186,
+       142
+      ],
+      "anchor": [
+       76.48,
+       130
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       21,
+       15,
+       128,
+       115
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1568,165 @@
    "loop": false,
    "frames": [
     [
-     "valen_death_000.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       0,
+       1170,
+       170,
+       160
+      ],
+      "anchor": [
+       77.09,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       27,
+       15,
+       128,
+       124
+      ]
+     }
     ],
     [
-     "valen_death_001.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       170,
+       1170,
+       166,
+       160
+      ],
+      "anchor": [
+       56.67,
+       140
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       12,
+       26,
+       154,
+       114
+      ]
+     }
     ],
     [
-     "valen_death_002.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       336,
+       1170,
+       165,
+       160
+      ],
+      "anchor": [
+       59.81,
+       140
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       40,
+       165,
+       100
+      ]
+     }
     ],
     [
-     "valen_death_003.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       501,
+       1170,
+       164,
+       160
+      ],
+      "anchor": [
+       64.26,
+       140
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       49,
+       164,
+       91
+      ]
+     }
     ],
     [
-     "valen_death_004.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       665,
+       1170,
+       165,
+       160
+      ],
+      "anchor": [
+       57.21,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       66,
+       165,
+       73
+      ]
+     }
     ],
     [
-     "valen_death_005.png",
-     0.1
+     "valen_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       830,
+       1170,
+       166,
+       160
+      ],
+      "anchor": [
+       59.03,
+       140
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       84,
+       166,
+       56
+      ]
+     }
     ],
     [
-     "valen_death_006.png",
-     0.1
-    ],
-    [
-     "valen_death_007.png",
-     0.45
+     "valen_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       996,
+       1170,
+       186,
+       160
+      ],
+      "anchor": [
+       70.24,
+       139
+      ],
+      "scale": 2.383185,
+      "bounds": [
+       0,
+       96,
+       176,
+       43
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1768,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "valen_idle_000.png",
+     0.3
+    ],
+    [
+     "valen_idle_001.png",
+     0.3
+    ],
+    [
+     "valen_idle_002.png",
+     0.3
+    ],
+    [
+     "valen_idle_003.png",
+     0.3
+    ],
+    [
+     "valen_idle_004.png",
+     0.3
+    ],
+    [
+     "valen_idle_005.png",
+     0.3
+    ],
+    [
+     "valen_idle_006.png",
+     0.3
+    ],
+    [
+     "valen_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "valen_walk_000.png",
+     0.1
+    ],
+    [
+     "valen_walk_001.png",
+     0.1
+    ],
+    [
+     "valen_walk_002.png",
+     0.1
+    ],
+    [
+     "valen_walk_003.png",
+     0.1
+    ],
+    [
+     "valen_walk_004.png",
+     0.1
+    ],
+    [
+     "valen_walk_005.png",
+     0.1
+    ],
+    [
+     "valen_walk_006.png",
+     0.1
+    ],
+    [
+     "valen_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "valen_attack_1_000.png",
+     0.1
+    ],
+    [
+     "valen_attack_1_001.png",
+     0.1
+    ],
+    [
+     "valen_attack_1_002.png",
+     0.08
+    ],
+    [
+     "valen_attack_1_003.png",
+     0.05
+    ],
+    [
+     "valen_attack_1_004.png",
+     0.065
+    ],
+    [
+     "valen_attack_1_005.png",
+     0.07
+    ],
+    [
+     "valen_attack_1_006.png",
+     0.1
+    ],
+    [
+     "valen_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "valen_attack_2_000.png",
+     0.1
+    ],
+    [
+     "valen_attack_2_001.png",
+     0.085
+    ],
+    [
+     "valen_attack_2_002.png",
+     0.06
+    ],
+    [
+     "valen_attack_2_003.png",
+     0.06
+    ],
+    [
+     "valen_attack_2_004.png",
+     0.065
+    ],
+    [
+     "valen_attack_2_005.png",
+     0.075
+    ],
+    [
+     "valen_attack_2_006.png",
+     0.11
+    ],
+    [
+     "valen_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "valen_ultimate_000.png",
+     0.11
+    ],
+    [
+     "valen_ultimate_001.png",
+     0.11
+    ],
+    [
+     "valen_ultimate_002.png",
+     0.1
+    ],
+    [
+     "valen_ultimate_003.png",
+     0.075
+    ],
+    [
+     "valen_ultimate_004.png",
+     0.085
+    ],
+    [
+     "valen_ultimate_005.png",
+     0.1
+    ],
+    [
+     "valen_ultimate_006.png",
+     0.11
+    ],
+    [
+     "valen_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "valen_skill_000.png",
+     0.1
+    ],
+    [
+     "valen_skill_001.png",
+     0.1
+    ],
+    [
+     "valen_skill_002.png",
+     0.1
+    ],
+    [
+     "valen_skill_003.png",
+     0.07
+    ],
+    [
+     "valen_skill_004.png",
+     0.08
+    ],
+    [
+     "valen_skill_005.png",
+     0.085
+    ],
+    [
+     "valen_skill_006.png",
+     0.1
+    ],
+    [
+     "valen_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "valen_dodge_000.png",
+     0.09
+    ],
+    [
+     "valen_dodge_001.png",
+     0.065
+    ],
+    [
+     "valen_dodge_002.png",
+     0.055
+    ],
+    [
+     "valen_dodge_003.png",
+     0.055
+    ],
+    [
+     "valen_dodge_004.png",
+     0.065
+    ],
+    [
+     "valen_dodge_005.png",
+     0.075
+    ],
+    [
+     "valen_dodge_006.png",
+     0.09
+    ],
+    [
+     "valen_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "valen_hurt_000.png",
+     0.085
+    ],
+    [
+     "valen_hurt_001.png",
+     0.065
+    ],
+    [
+     "valen_hurt_002.png",
+     0.075
+    ],
+    [
+     "valen_hurt_003.png",
+     0.08
+    ],
+    [
+     "valen_hurt_004.png",
+     0.085
+    ],
+    [
+     "valen_hurt_005.png",
+     0.09
+    ],
+    [
+     "valen_hurt_006.png",
+     0.1
+    ],
+    [
+     "valen_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "valen_death_000.png",
+     0.1
+    ],
+    [
+     "valen_death_001.png",
+     0.1
+    ],
+    [
+     "valen_death_002.png",
+     0.1
+    ],
+    [
+     "valen_death_003.png",
+     0.1
+    ],
+    [
+     "valen_death_004.png",
+     0.1
+    ],
+    [
+     "valen_death_005.png",
+     0.1
+    ],
+    [
+     "valen_death_006.png",
+     0.1
+    ],
+    [
+     "valen_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

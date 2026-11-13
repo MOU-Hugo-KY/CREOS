@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "orage_idle_000.png",
-     0.3
+     "orage_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       149,
+       149
+      ],
+      "anchor": [
+       84.82,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       26,
+       16,
+       99,
+       118
+      ]
+     }
     ],
     [
-     "orage_idle_001.png",
-     0.3
+     "orage_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       149,
+       0,
+       149,
+       149
+      ],
+      "anchor": [
+       83.38,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       24,
+       16,
+       100,
+       117
+      ]
+     }
     ],
     [
-     "orage_idle_002.png",
-     0.3
+     "orage_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       298,
+       0,
+       148,
+       149
+      ],
+      "anchor": [
+       79.7,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       24,
+       14,
+       100,
+       120
+      ]
+     }
     ],
     [
-     "orage_idle_003.png",
-     0.3
+     "orage_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       446,
+       0,
+       148,
+       149
+      ],
+      "anchor": [
+       80.17,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       24,
+       12,
+       99,
+       122
+      ]
+     }
     ],
     [
-     "orage_idle_004.png",
-     0.3
+     "orage_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       594,
+       0,
+       147,
+       149
+      ],
+      "anchor": [
+       77.6,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       24,
+       12,
+       101,
+       122
+      ]
+     }
     ],
     [
-     "orage_idle_005.png",
-     0.3
+     "orage_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       741,
+       0,
+       146,
+       149
+      ],
+      "anchor": [
+       79.37,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       23,
+       16,
+       98,
+       118
+      ]
+     }
     ],
     [
-     "orage_idle_006.png",
-     0.3
+     "orage_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       887,
+       0,
+       147,
+       149
+      ],
+      "anchor": [
+       81.66,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       25,
+       16,
+       98,
+       118
+      ]
+     }
     ],
     [
-     "orage_idle_007.png",
-     0.3
+     "orage_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1034,
+       0,
+       148,
+       149
+      ],
+      "anchor": [
+       82.13,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       25,
+       17,
+       98,
+       117
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "orage_walk_000.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       149,
+       149,
+       146
+      ],
+      "anchor": [
+       82.84,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       25,
+       13,
+       99,
+       118
+      ]
+     }
     ],
     [
-     "orage_walk_001.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       149,
+       149,
+       149,
+       146
+      ],
+      "anchor": [
+       78.37,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       27,
+       12,
+       95,
+       119
+      ]
+     }
     ],
     [
-     "orage_walk_002.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       298,
+       149,
+       148,
+       146
+      ],
+      "anchor": [
+       76.51,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       27,
+       11,
+       93,
+       121
+      ]
+     }
     ],
     [
-     "orage_walk_003.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       446,
+       149,
+       148,
+       146
+      ],
+      "anchor": [
+       65.91,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       28,
+       12,
+       89,
+       120
+      ]
+     }
     ],
     [
-     "orage_walk_004.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       594,
+       149,
+       147,
+       146
+      ],
+      "anchor": [
+       71.39,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       25,
+       14,
+       91,
+       117
+      ]
+     }
     ],
     [
-     "orage_walk_005.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       741,
+       149,
+       146,
+       146
+      ],
+      "anchor": [
+       84.42,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       25,
+       14,
+       95,
+       118
+      ]
+     }
     ],
     [
-     "orage_walk_006.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       887,
+       149,
+       147,
+       146
+      ],
+      "anchor": [
+       79.57,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       28,
+       13,
+       92,
+       118
+      ]
+     }
     ],
     [
-     "orage_walk_007.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1034,
+       149,
+       148,
+       146
+      ],
+      "anchor": [
+       83.25,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       28,
+       13,
+       96,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,112 +405,752 @@
    "loop": false,
    "frames": [
     [
-     "orage_attack_1_000.png",
-     0.1
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       314,
+       332
+      ],
+      "anchor": [
+       164.02,
+       261
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       82,
+       89,
+       147,
+       172
+      ]
+     }
     ],
     [
-     "orage_attack_1_001.png",
-     0.1
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       314,
+       0,
+       316,
+       332
+      ],
+      "anchor": [
+       166.0,
+       261
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       85,
+       89,
+       146,
+       172
+      ]
+     }
     ],
     [
-     "orage_attack_1_002.png",
-     0.08
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       630,
+       0,
+       316,
+       332
+      ],
+      "anchor": [
+       167.14,
+       260
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       85,
+       89,
+       145,
+       171
+      ]
+     }
     ],
     [
-     "orage_attack_1_003.png",
-     0.05
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       0,
+       317,
+       332
+      ],
+      "anchor": [
+       195.5,
+       260
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       87,
+       89,
+       142,
+       171
+      ]
+     }
     ],
     [
-     "orage_attack_1_004.png",
-     0.065
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       332,
+       314,
+       307
+      ],
+      "anchor": [
+       182.84,
+       240
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       85,
+       74,
+       145,
+       166
+      ]
+     }
     ],
     [
-     "orage_attack_1_005.png",
-     0.07
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       314,
+       332,
+       316,
+       307
+      ],
+      "anchor": [
+       182.9,
+       240
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       87,
+       72,
+       146,
+       168
+      ]
+     }
     ],
     [
-     "orage_attack_1_006.png",
-     0.1
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       630,
+       332,
+       316,
+       307
+      ],
+      "anchor": [
+       173.23,
+       238
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       80,
+       74,
+       160,
+       164
+      ]
+     }
     ],
     [
-     "orage_attack_1_007.png",
-     0.12
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       332,
+       317,
+       307
+      ],
+      "anchor": [
+       163.21,
+       239
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       89,
+       74,
+       165,
+       165
+      ]
+     }
+    ],
+    [
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       639,
+       314,
+       305
+      ],
+      "anchor": [
+       140.35,
+       233
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       92,
+       71,
+       176,
+       162
+      ]
+     }
+    ],
+    [
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       314,
+       639,
+       316,
+       305
+      ],
+      "anchor": [
+       159.84,
+       234
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       95,
+       72,
+       166,
+       162
+      ]
+     }
+    ],
+    [
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       630,
+       639,
+       316,
+       305
+      ],
+      "anchor": [
+       159.68,
+       234
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       88,
+       72,
+       149,
+       162
+      ]
+     }
+    ],
+    [
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       639,
+       317,
+       305
+      ],
+      "anchor": [
+       165.1,
+       234
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       91,
+       71,
+       144,
+       163
+      ]
+     }
+    ],
+    [
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       944,
+       314,
+       302
+      ],
+      "anchor": [
+       163.81,
+       239
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       91,
+       70,
+       135,
+       169
+      ]
+     }
+    ],
+    [
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       314,
+       944,
+       316,
+       302
+      ],
+      "anchor": [
+       163.45,
+       239
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       92,
+       70,
+       138,
+       169
+      ]
+     }
+    ],
+    [
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       630,
+       944,
+       316,
+       302
+      ],
+      "anchor": [
+       165.32,
+       239
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       88,
+       71,
+       142,
+       168
+      ]
+     }
+    ],
+    [
+     "orage_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       944,
+       317,
+       302
+      ],
+      "anchor": [
+       163.24,
+       239
+      ],
+      "scale": 1.788593,
+      "bounds": [
+       86,
+       71,
+       144,
+       168
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "orage_attack_2_000.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       443,
+       149,
+       149
+      ],
+      "anchor": [
+       83.31,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       26,
+       16,
+       99,
+       117
+      ]
+     }
     ],
     [
-     "orage_attack_2_001.png",
-     0.085
+     "orage_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       149,
+       443,
+       149,
+       149
+      ],
+      "anchor": [
+       80.3,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       22,
+       18,
+       103,
+       115
+      ]
+     }
     ],
     [
-     "orage_attack_2_002.png",
-     0.06
+     "orage_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       298,
+       443,
+       148,
+       149
+      ],
+      "anchor": [
+       67.54,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       24,
+       19,
+       109,
+       113
+      ]
+     }
     ],
     [
-     "orage_attack_2_003.png",
-     0.06
+     "orage_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       446,
+       443,
+       148,
+       149
+      ],
+      "anchor": [
+       66.3,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       18,
+       17,
+       130,
+       116
+      ]
+     }
     ],
     [
-     "orage_attack_2_004.png",
-     0.065
+     "orage_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       594,
+       443,
+       147,
+       149
+      ],
+      "anchor": [
+       73.62,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       0,
+       18,
+       147,
+       114
+      ]
+     }
     ],
     [
-     "orage_attack_2_005.png",
-     0.075
+     "orage_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       741,
+       443,
+       146,
+       149
+      ],
+      "anchor": [
+       90.33,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       0,
+       20,
+       133,
+       113
+      ]
+     }
     ],
     [
-     "orage_attack_2_006.png",
-     0.11
+     "orage_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       887,
+       443,
+       147,
+       149
+      ],
+      "anchor": [
+       79.63,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       20,
+       17,
+       105,
+       117
+      ]
+     }
     ],
     [
-     "orage_attack_2_007.png",
-     0.12
+     "orage_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1034,
+       443,
+       148,
+       149
+      ],
+      "anchor": [
+       80.78,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       25,
+       18,
+       99,
+       116
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 4
   },
   "ultimate": {
    "loop": false,
    "frames": [
     [
-     "orage_ultimate_000.png",
-     0.11
+     "orage_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       592,
+       149,
+       147
+      ],
+      "anchor": [
+       81.5,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       25,
+       15,
+       100,
+       116
+      ]
+     }
     ],
     [
-     "orage_ultimate_001.png",
-     0.11
+     "orage_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       149,
+       592,
+       149,
+       147
+      ],
+      "anchor": [
+       83.22,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       21,
+       19,
+       111,
+       112
+      ]
+     }
     ],
     [
-     "orage_ultimate_002.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       298,
+       592,
+       148,
+       147
+      ],
+      "anchor": [
+       72.78,
+       128
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       10,
+       12,
+       138,
+       116
+      ]
+     }
     ],
     [
-     "orage_ultimate_003.png",
-     0.075
+     "orage_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       446,
+       592,
+       148,
+       147
+      ],
+      "anchor": [
+       68.39,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       0,
+       6,
+       135,
+       125
+      ]
+     }
     ],
     [
-     "orage_ultimate_004.png",
-     0.085
+     "orage_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       594,
+       592,
+       147,
+       147
+      ],
+      "anchor": [
+       74.28,
+       139
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       0,
+       2,
+       139,
+       137
+      ]
+     }
     ],
     [
-     "orage_ultimate_005.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       741,
+       592,
+       146,
+       147
+      ],
+      "anchor": [
+       78.34,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       8,
+       19,
+       138,
+       112
+      ]
+     }
     ],
     [
-     "orage_ultimate_006.png",
-     0.11
+     "orage_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       887,
+       592,
+       147,
+       147
+      ],
+      "anchor": [
+       81.26,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       17,
+       15,
+       107,
+       116
+      ]
+     }
     ],
     [
-     "orage_ultimate_007.png",
-     0.13
+     "orage_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1034,
+       592,
+       148,
+       147
+      ],
+      "anchor": [
+       82.45,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       27,
+       16,
+       98,
+       116
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "orage_skill_000.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       739,
+       149,
+       148
+      ],
+      "anchor": [
+       83.91,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       26,
+       15,
+       100,
+       116
+      ]
+     }
     ],
     [
-     "orage_skill_001.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       149,
+       739,
+       149,
+       148
+      ],
+      "anchor": [
+       71.72,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       32,
+       16,
+       92,
+       117
+      ]
+     }
     ],
     [
-     "orage_skill_002.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       298,
+       739,
+       148,
+       148
+      ],
+      "anchor": [
+       59.18,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       20,
+       17,
+       106,
+       115
+      ]
+     }
     ],
     [
-     "orage_skill_003.png",
-     0.07
+     "orage_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       446,
+       739,
+       148,
+       148
+      ],
+      "anchor": [
+       64.03,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       5,
+       16,
+       132,
+       117
+      ]
+     }
     ],
     [
-     "orage_skill_004.png",
-     0.08
+     "orage_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       594,
+       739,
+       147,
+       148
+      ],
+      "anchor": [
+       81.33,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       4,
+       4,
+       142,
+       128
+      ]
+     }
     ],
     [
-     "orage_skill_005.png",
-     0.085
+     "orage_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       741,
+       739,
+       146,
+       148
+      ],
+      "anchor": [
+       79.76,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       17,
+       17,
+       117,
+       115
+      ]
+     }
     ],
     [
-     "orage_skill_006.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       887,
+       739,
+       147,
+       148
+      ],
+      "anchor": [
+       82.63,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       32,
+       17,
+       94,
+       115
+      ]
+     }
     ],
     [
-     "orage_skill_007.png",
-     0.12
+     "orage_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1034,
+       739,
+       148,
+       148
+      ],
+      "anchor": [
+       82.55,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       29,
+       17,
+       96,
+       115
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "orage_hurt_000.png",
-     0.085
+     "orage_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       1035,
+       149,
+       148
+      ],
+      "anchor": [
+       83.32,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       26,
+       16,
+       100,
+       115
+      ]
+     }
     ],
     [
-     "orage_hurt_001.png",
-     0.065
+     "orage_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       149,
+       1035,
+       149,
+       148
+      ],
+      "anchor": [
+       90.89,
+       135
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       24,
+       14,
+       102,
+       121
+      ]
+     }
     ],
     [
-     "orage_hurt_002.png",
-     0.075
+     "orage_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       298,
+       1035,
+       148,
+       148
+      ],
+      "anchor": [
+       77.04,
+       135
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       12,
+       8,
+       112,
+       127
+      ]
+     }
     ],
     [
-     "orage_hurt_003.png",
-     0.08
+     "orage_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       446,
+       1035,
+       148,
+       148
+      ],
+      "anchor": [
+       66.88,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       11,
+       10,
+       114,
+       124
+      ]
+     }
     ],
     [
-     "orage_hurt_004.png",
-     0.085
+     "orage_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       594,
+       1035,
+       147,
+       148
+      ],
+      "anchor": [
+       78.09,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       17,
+       27,
+       100,
+       107
+      ]
+     }
     ],
     [
-     "orage_hurt_005.png",
-     0.09
+     "orage_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       741,
+       1035,
+       146,
+       148
+      ],
+      "anchor": [
+       77.3,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       18,
+       25,
+       100,
+       109
+      ]
+     }
     ],
     [
-     "orage_hurt_006.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       887,
+       1035,
+       147,
+       148
+      ],
+      "anchor": [
+       79.48,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       23,
+       23,
+       98,
+       111
+      ]
+     }
     ],
     [
-     "orage_hurt_007.png",
-     0.12
+     "orage_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1034,
+       1035,
+       148,
+       148
+      ],
+      "anchor": [
+       81.59,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       26,
+       19,
+       98,
+       115
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "orage_dodge_000.png",
-     0.09
+     "orage_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       887,
+       149,
+       148
+      ],
+      "anchor": [
+       81.82,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       26,
+       16,
+       100,
+       117
+      ]
+     }
     ],
     [
-     "orage_dodge_001.png",
-     0.065
+     "orage_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       149,
+       887,
+       149,
+       148
+      ],
+      "anchor": [
+       83.85,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       19,
+       20,
+       103,
+       113
+      ]
+     }
     ],
     [
-     "orage_dodge_002.png",
-     0.055
+     "orage_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       298,
+       887,
+       148,
+       148
+      ],
+      "anchor": [
+       75.54,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       8,
+       27,
+       140,
+       105
+      ]
+     }
     ],
     [
-     "orage_dodge_003.png",
-     0.055
+     "orage_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       446,
+       887,
+       148,
+       148
+      ],
+      "anchor": [
+       67.69,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       0,
+       39,
+       120,
+       94
+      ]
+     }
     ],
     [
-     "orage_dodge_004.png",
-     0.065
+     "orage_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       594,
+       887,
+       147,
+       148
+      ],
+      "anchor": [
+       71.48,
+       133
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       11,
+       27,
+       106,
+       106
+      ]
+     }
     ],
     [
-     "orage_dodge_005.png",
-     0.075
+     "orage_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       741,
+       887,
+       146,
+       148
+      ],
+      "anchor": [
+       73.92,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       17,
+       22,
+       103,
+       110
+      ]
+     }
     ],
     [
-     "orage_dodge_006.png",
-     0.09
+     "orage_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       887,
+       887,
+       147,
+       148
+      ],
+      "anchor": [
+       79.97,
+       132
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       21,
+       21,
+       105,
+       111
+      ]
+     }
     ],
     [
-     "orage_dodge_007.png",
-     0.12
+     "orage_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1034,
+       887,
+       148,
+       148
+      ],
+      "anchor": [
+       81.13,
+       134
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       26,
+       18,
+       100,
+       116
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "orage_death_000.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1183,
+       149,
+       147
+      ],
+      "anchor": [
+       83.04,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       26,
+       15,
+       99,
+       116
+      ]
+     }
     ],
     [
-     "orage_death_001.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       149,
+       1183,
+       149,
+       147
+      ],
+      "anchor": [
+       76.13,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       25,
+       19,
+       96,
+       112
+      ]
+     }
     ],
     [
-     "orage_death_002.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       298,
+       1183,
+       148,
+       147
+      ],
+      "anchor": [
+       70.12,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       16,
+       31,
+       101,
+       100
+      ]
+     }
     ],
     [
-     "orage_death_003.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       446,
+       1183,
+       148,
+       147
+      ],
+      "anchor": [
+       61.89,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       12,
+       49,
+       108,
+       82
+      ]
+     }
     ],
     [
-     "orage_death_004.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       594,
+       1183,
+       147,
+       147
+      ],
+      "anchor": [
+       72.31,
+       131
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       2,
+       69,
+       130,
+       62
+      ]
+     }
     ],
     [
-     "orage_death_005.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       741,
+       1183,
+       146,
+       147
+      ],
+      "anchor": [
+       70.95,
+       128
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       11,
+       78,
+       123,
+       50
+      ]
+     }
     ],
     [
-     "orage_death_006.png",
-     0.1
+     "orage_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       887,
+       1183,
+       147,
+       147
+      ],
+      "anchor": [
+       72.42,
+       128
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       14,
+       80,
+       122,
+       48
+      ]
+     }
     ],
     [
-     "orage_death_007.png",
-     0.45
+     "orage_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1034,
+       1183,
+       148,
+       147
+      ],
+      "anchor": [
+       69.83,
+       129
+      ],
+      "scale": 2.607102,
+      "bounds": [
+       15,
+       82,
+       118,
+       47
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "orage_idle_000.png",
+     0.3
+    ],
+    [
+     "orage_idle_001.png",
+     0.3
+    ],
+    [
+     "orage_idle_002.png",
+     0.3
+    ],
+    [
+     "orage_idle_003.png",
+     0.3
+    ],
+    [
+     "orage_idle_004.png",
+     0.3
+    ],
+    [
+     "orage_idle_005.png",
+     0.3
+    ],
+    [
+     "orage_idle_006.png",
+     0.3
+    ],
+    [
+     "orage_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "orage_walk_000.png",
+     0.1
+    ],
+    [
+     "orage_walk_001.png",
+     0.1
+    ],
+    [
+     "orage_walk_002.png",
+     0.1
+    ],
+    [
+     "orage_walk_003.png",
+     0.1
+    ],
+    [
+     "orage_walk_004.png",
+     0.1
+    ],
+    [
+     "orage_walk_005.png",
+     0.1
+    ],
+    [
+     "orage_walk_006.png",
+     0.1
+    ],
+    [
+     "orage_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_attack_1_000.png",
+     0.1
+    ],
+    [
+     "orage_attack_1_001.png",
+     0.1
+    ],
+    [
+     "orage_attack_1_002.png",
+     0.08
+    ],
+    [
+     "orage_attack_1_003.png",
+     0.05
+    ],
+    [
+     "orage_attack_1_004.png",
+     0.065
+    ],
+    [
+     "orage_attack_1_005.png",
+     0.07
+    ],
+    [
+     "orage_attack_1_006.png",
+     0.1
+    ],
+    [
+     "orage_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_attack_2_000.png",
+     0.1
+    ],
+    [
+     "orage_attack_2_001.png",
+     0.085
+    ],
+    [
+     "orage_attack_2_002.png",
+     0.06
+    ],
+    [
+     "orage_attack_2_003.png",
+     0.06
+    ],
+    [
+     "orage_attack_2_004.png",
+     0.065
+    ],
+    [
+     "orage_attack_2_005.png",
+     0.075
+    ],
+    [
+     "orage_attack_2_006.png",
+     0.11
+    ],
+    [
+     "orage_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_ultimate_000.png",
+     0.11
+    ],
+    [
+     "orage_ultimate_001.png",
+     0.11
+    ],
+    [
+     "orage_ultimate_002.png",
+     0.1
+    ],
+    [
+     "orage_ultimate_003.png",
+     0.075
+    ],
+    [
+     "orage_ultimate_004.png",
+     0.085
+    ],
+    [
+     "orage_ultimate_005.png",
+     0.1
+    ],
+    [
+     "orage_ultimate_006.png",
+     0.11
+    ],
+    [
+     "orage_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_skill_000.png",
+     0.1
+    ],
+    [
+     "orage_skill_001.png",
+     0.1
+    ],
+    [
+     "orage_skill_002.png",
+     0.1
+    ],
+    [
+     "orage_skill_003.png",
+     0.07
+    ],
+    [
+     "orage_skill_004.png",
+     0.08
+    ],
+    [
+     "orage_skill_005.png",
+     0.085
+    ],
+    [
+     "orage_skill_006.png",
+     0.1
+    ],
+    [
+     "orage_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_dodge_000.png",
+     0.09
+    ],
+    [
+     "orage_dodge_001.png",
+     0.065
+    ],
+    [
+     "orage_dodge_002.png",
+     0.055
+    ],
+    [
+     "orage_dodge_003.png",
+     0.055
+    ],
+    [
+     "orage_dodge_004.png",
+     0.065
+    ],
+    [
+     "orage_dodge_005.png",
+     0.075
+    ],
+    [
+     "orage_dodge_006.png",
+     0.09
+    ],
+    [
+     "orage_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_hurt_000.png",
+     0.085
+    ],
+    [
+     "orage_hurt_001.png",
+     0.065
+    ],
+    [
+     "orage_hurt_002.png",
+     0.075
+    ],
+    [
+     "orage_hurt_003.png",
+     0.08
+    ],
+    [
+     "orage_hurt_004.png",
+     0.085
+    ],
+    [
+     "orage_hurt_005.png",
+     0.09
+    ],
+    [
+     "orage_hurt_006.png",
+     0.1
+    ],
+    [
+     "orage_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "orage_death_000.png",
+     0.1
+    ],
+    [
+     "orage_death_001.png",
+     0.1
+    ],
+    [
+     "orage_death_002.png",
+     0.1
+    ],
+    [
+     "orage_death_003.png",
+     0.1
+    ],
+    [
+     "orage_death_004.png",
+     0.1
+    ],
+    [
+     "orage_death_005.png",
+     0.1
+    ],
+    [
+     "orage_death_006.png",
+     0.1
+    ],
+    [
+     "orage_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

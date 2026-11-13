@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "tang_su_idle_000.png",
-     0.3
+     "tang_su_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       161,
+       154
+      ],
+      "anchor": [
+       79.42,
+       141
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       32,
+       14,
+       108,
+       127
+      ]
+     }
     ],
     [
-     "tang_su_idle_001.png",
-     0.3
+     "tang_su_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       161,
+       0,
+       149,
+       154
+      ],
+      "anchor": [
+       67.2,
+       141
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       22,
+       15,
+       106,
+       126
+      ]
+     }
     ],
     [
-     "tang_su_idle_002.png",
-     0.3
+     "tang_su_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       310,
+       0,
+       148,
+       154
+      ],
+      "anchor": [
+       70.8,
+       141
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       20,
+       16,
+       109,
+       125
+      ]
+     }
     ],
     [
-     "tang_su_idle_003.png",
-     0.3
+     "tang_su_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       458,
+       0,
+       148,
+       154
+      ],
+      "anchor": [
+       73.33,
+       140
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       21,
+       16,
+       107,
+       124
+      ]
+     }
     ],
     [
-     "tang_su_idle_004.png",
-     0.3
+     "tang_su_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       606,
+       0,
+       149,
+       154
+      ],
+      "anchor": [
+       73.29,
+       141
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       21,
+       16,
+       107,
+       125
+      ]
+     }
     ],
     [
-     "tang_su_idle_005.png",
-     0.3
+     "tang_su_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       755,
+       0,
+       150,
+       154
+      ],
+      "anchor": [
+       73.43,
+       141
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       20,
+       17,
+       109,
+       124
+      ]
+     }
     ],
     [
-     "tang_su_idle_006.png",
-     0.3
+     "tang_su_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       905,
+       0,
+       150,
+       154
+      ],
+      "anchor": [
+       71.56,
+       141
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       21,
+       18,
+       108,
+       123
+      ]
+     }
     ],
     [
-     "tang_su_idle_007.png",
-     0.3
+     "tang_su_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1055,
+       0,
+       127,
+       154
+      ],
+      "anchor": [
+       69.25,
+       141
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       24,
+       18,
+       103,
+       123
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "tang_su_walk_000.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       154,
+       161,
+       150
+      ],
+      "anchor": [
+       78.38,
+       137
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       29,
+       14,
+       108,
+       123
+      ]
+     }
     ],
     [
-     "tang_su_walk_001.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       161,
+       154,
+       149,
+       150
+      ],
+      "anchor": [
+       74.67,
+       139
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       19,
+       14,
+       108,
+       125
+      ]
+     }
     ],
     [
-     "tang_su_walk_002.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       310,
+       154,
+       148,
+       150
+      ],
+      "anchor": [
+       79.68,
+       138
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       16,
+       14,
+       111,
+       124
+      ]
+     }
     ],
     [
-     "tang_su_walk_003.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       458,
+       154,
+       148,
+       150
+      ],
+      "anchor": [
+       69.64,
+       137
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       17,
+       14,
+       109,
+       123
+      ]
+     }
     ],
     [
-     "tang_su_walk_004.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       606,
+       154,
+       149,
+       150
+      ],
+      "anchor": [
+       66.3,
+       136
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       11,
+       14,
+       116,
+       122
+      ]
+     }
     ],
     [
-     "tang_su_walk_005.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       755,
+       154,
+       150,
+       150
+      ],
+      "anchor": [
+       64.1,
+       136
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       13,
+       14,
+       109,
+       122
+      ]
+     }
     ],
     [
-     "tang_su_walk_006.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       905,
+       154,
+       150,
+       150
+      ],
+      "anchor": [
+       61.42,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       11,
+       15,
+       108,
+       120
+      ]
+     }
     ],
     [
-     "tang_su_walk_007.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1055,
+       154,
+       127,
+       150
+      ],
+      "anchor": [
+       64.32,
+       136
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       14,
+       15,
+       107,
+       121
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,112 +405,752 @@
    "loop": false,
    "frames": [
     [
-     "tang_su_attack_1_000.png",
-     0.1
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       318,
+       347
+      ],
+      "anchor": [
+       156.62,
+       281
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       78,
+       99,
+       168,
+       182
+      ]
+     }
     ],
     [
-     "tang_su_attack_1_001.png",
-     0.1
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       318,
+       0,
+       311,
+       347
+      ],
+      "anchor": [
+       153.92,
+       281
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       77,
+       99,
+       159,
+       182
+      ]
+     }
     ],
     [
-     "tang_su_attack_1_002.png",
-     0.08
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       629,
+       0,
+       307,
+       347
+      ],
+      "anchor": [
+       160.0,
+       281
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       77,
+       99,
+       154,
+       182
+      ]
+     }
     ],
     [
-     "tang_su_attack_1_003.png",
-     0.05
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       936,
+       0,
+       325,
+       347
+      ],
+      "anchor": [
+       168.77,
+       281
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       77,
+       100,
+       154,
+       181
+      ]
+     }
     ],
     [
-     "tang_su_attack_1_004.png",
-     0.065
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       347,
+       318,
+       314
+      ],
+      "anchor": [
+       159.81,
+       247
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       63,
+       66,
+       152,
+       181
+      ]
+     }
     ],
     [
-     "tang_su_attack_1_005.png",
-     0.07
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       318,
+       347,
+       311,
+       314
+      ],
+      "anchor": [
+       158.46,
+       247
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       63,
+       67,
+       151,
+       180
+      ]
+     }
     ],
     [
-     "tang_su_attack_1_006.png",
-     0.1
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       629,
+       347,
+       307,
+       314
+      ],
+      "anchor": [
+       161.7,
+       247
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       63,
+       64,
+       167,
+       183
+      ]
+     }
     ],
     [
-     "tang_su_attack_1_007.png",
-     0.12
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       936,
+       347,
+       325,
+       314
+      ],
+      "anchor": [
+       163.89,
+       247
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       62,
+       66,
+       219,
+       181
+      ]
+     }
+    ],
+    [
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       661,
+       318,
+       315
+      ],
+      "anchor": [
+       152.83,
+       246
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       47,
+       68,
+       224,
+       178
+      ]
+     }
+    ],
+    [
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       318,
+       661,
+       311,
+       315
+      ],
+      "anchor": [
+       153.78,
+       246
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       50,
+       67,
+       217,
+       179
+      ]
+     }
+    ],
+    [
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       629,
+       661,
+       307,
+       315
+      ],
+      "anchor": [
+       157.97,
+       246
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       59,
+       67,
+       185,
+       179
+      ]
+     }
+    ],
+    [
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       936,
+       661,
+       325,
+       315
+      ],
+      "anchor": [
+       166.95,
+       246
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       87,
+       67,
+       157,
+       179
+      ]
+     }
+    ],
+    [
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       976,
+       318,
+       271
+      ],
+      "anchor": [
+       158.23,
+       248
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       80,
+       67,
+       157,
+       181
+      ]
+     }
+    ],
+    [
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       318,
+       976,
+       311,
+       271
+      ],
+      "anchor": [
+       154.0,
+       248
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       77,
+       67,
+       161,
+       181
+      ]
+     }
+    ],
+    [
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       629,
+       976,
+       307,
+       271
+      ],
+      "anchor": [
+       159.03,
+       248
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       83,
+       67,
+       161,
+       181
+      ]
+     }
+    ],
+    [
+     "tang_su_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       936,
+       976,
+       325,
+       271
+      ],
+      "anchor": [
+       167.01,
+       248
+      ],
+      "scale": 1.632412,
+      "bounds": [
+       91,
+       68,
+       164,
+       180
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "tang_su_attack_2_000.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       454,
+       161,
+       148
+      ],
+      "anchor": [
+       76.86,
+       134
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       24,
+       15,
+       110,
+       119
+      ]
+     }
     ],
     [
-     "tang_su_attack_2_001.png",
-     0.085
+     "tang_su_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       161,
+       454,
+       149,
+       148
+      ],
+      "anchor": [
+       62.42,
+       134
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       8,
+       17,
+       141,
+       117
+      ]
+     }
     ],
     [
-     "tang_su_attack_2_002.png",
-     0.06
+     "tang_su_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       310,
+       454,
+       148,
+       148
+      ],
+      "anchor": [
+       34.5,
+       132
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       13,
+       148,
+       119
+      ]
+     }
     ],
     [
-     "tang_su_attack_2_003.png",
-     0.06
+     "tang_su_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       458,
+       454,
+       148,
+       148
+      ],
+      "anchor": [
+       76.74,
+       148
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       14,
+       142,
+       134
+      ]
+     }
     ],
     [
-     "tang_su_attack_2_004.png",
-     0.065
+     "tang_su_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       606,
+       454,
+       149,
+       148
+      ],
+      "anchor": [
+       52.09,
+       132
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       3,
+       18,
+       146,
+       114
+      ]
+     }
     ],
     [
-     "tang_su_attack_2_005.png",
-     0.075
+     "tang_su_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       755,
+       454,
+       150,
+       148
+      ],
+      "anchor": [
+       59.3,
+       132
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       21,
+       146,
+       111
+      ]
+     }
     ],
     [
-     "tang_su_attack_2_006.png",
-     0.11
+     "tang_su_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       905,
+       454,
+       150,
+       148
+      ],
+      "anchor": [
+       62.22,
+       134
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       11,
+       17,
+       112,
+       117
+      ]
+     }
     ],
     [
-     "tang_su_attack_2_007.png",
-     0.12
+     "tang_su_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1055,
+       454,
+       127,
+       148
+      ],
+      "anchor": [
+       66.52,
+       134
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       13,
+       17,
+       111,
+       117
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 4
   },
   "ultimate": {
    "loop": false,
    "frames": [
     [
-     "tang_su_ultimate_000.png",
-     0.11
+     "tang_su_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       602,
+       161,
+       145
+      ],
+      "anchor": [
+       74.69,
+       132
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       22,
+       16,
+       110,
+       116
+      ]
+     }
     ],
     [
-     "tang_su_ultimate_001.png",
-     0.11
+     "tang_su_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       161,
+       602,
+       149,
+       145
+      ],
+      "anchor": [
+       64.52,
+       132
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       8,
+       19,
+       141,
+       113
+      ]
+     }
     ],
     [
-     "tang_su_ultimate_002.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       310,
+       602,
+       148,
+       145
+      ],
+      "anchor": [
+       62.69,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       18,
+       148,
+       113
+      ]
+     }
     ],
     [
-     "tang_su_ultimate_003.png",
-     0.075
+     "tang_su_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       458,
+       602,
+       148,
+       145
+      ],
+      "anchor": [
+       48.21,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       0,
+       148,
+       131
+      ]
+     }
     ],
     [
-     "tang_su_ultimate_004.png",
-     0.085
+     "tang_su_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       606,
+       602,
+       149,
+       145
+      ],
+      "anchor": [
+       48.75,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       4,
+       149,
+       127
+      ]
+     }
     ],
     [
-     "tang_su_ultimate_005.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       755,
+       602,
+       150,
+       145
+      ],
+      "anchor": [
+       53.05,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       19,
+       133,
+       112
+      ]
+     }
     ],
     [
-     "tang_su_ultimate_006.png",
-     0.11
+     "tang_su_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       905,
+       602,
+       150,
+       145
+      ],
+      "anchor": [
+       54.5,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       4,
+       19,
+       119,
+       112
+      ]
+     }
     ],
     [
-     "tang_su_ultimate_007.png",
-     0.13
+     "tang_su_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1055,
+       602,
+       127,
+       145
+      ],
+      "anchor": [
+       62.77,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       10,
+       19,
+       110,
+       112
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "tang_su_skill_000.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       747,
+       161,
+       142
+      ],
+      "anchor": [
+       72.14,
+       129
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       24,
+       13,
+       107,
+       116
+      ]
+     }
     ],
     [
-     "tang_su_skill_001.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       161,
+       747,
+       149,
+       142
+      ],
+      "anchor": [
+       58.15,
+       129
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       9,
+       14,
+       107,
+       115
+      ]
+     }
     ],
     [
-     "tang_su_skill_002.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       310,
+       747,
+       148,
+       142
+      ],
+      "anchor": [
+       60.11,
+       129
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       4,
+       13,
+       144,
+       116
+      ]
+     }
     ],
     [
-     "tang_su_skill_003.png",
-     0.07
+     "tang_su_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       458,
+       747,
+       148,
+       142
+      ],
+      "anchor": [
+       49.33,
+       129
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       15,
+       144,
+       114
+      ]
+     }
     ],
     [
-     "tang_su_skill_004.png",
-     0.08
+     "tang_su_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       606,
+       747,
+       149,
+       142
+      ],
+      "anchor": [
+       51.5,
+       129
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       8,
+       17,
+       138,
+       112
+      ]
+     }
     ],
     [
-     "tang_su_skill_005.png",
-     0.085
+     "tang_su_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       755,
+       747,
+       150,
+       142
+      ],
+      "anchor": [
+       56.82,
+       128
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       8,
+       19,
+       122,
+       109
+      ]
+     }
     ],
     [
-     "tang_su_skill_006.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       905,
+       747,
+       150,
+       142
+      ],
+      "anchor": [
+       53.68,
+       129
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       9,
+       18,
+       111,
+       111
+      ]
+     }
     ],
     [
-     "tang_su_skill_007.png",
-     0.12
+     "tang_su_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1055,
+       747,
+       127,
+       142
+      ],
+      "anchor": [
+       62.53,
+       129
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       13,
+       17,
+       106,
+       112
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "tang_su_hurt_000.png",
-     0.085
+     "tang_su_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       1035,
+       161,
+       150
+      ],
+      "anchor": [
+       78.54,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       28,
+       14,
+       108,
+       121
+      ]
+     }
     ],
     [
-     "tang_su_hurt_001.png",
-     0.065
+     "tang_su_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       161,
+       1035,
+       149,
+       150
+      ],
+      "anchor": [
+       63.72,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       9,
+       17,
+       117,
+       118
+      ]
+     }
     ],
     [
-     "tang_su_hurt_002.png",
-     0.075
+     "tang_su_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       310,
+       1035,
+       148,
+       150
+      ],
+      "anchor": [
+       67.85,
+       137
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       5,
+       18,
+       121,
+       119
+      ]
+     }
     ],
     [
-     "tang_su_hurt_003.png",
-     0.08
+     "tang_su_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       458,
+       1035,
+       148,
+       150
+      ],
+      "anchor": [
+       72.29,
+       137
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       5,
+       24,
+       119,
+       113
+      ]
+     }
     ],
     [
-     "tang_su_hurt_004.png",
-     0.085
+     "tang_su_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       606,
+       1035,
+       149,
+       150
+      ],
+      "anchor": [
+       68.61,
+       137
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       13,
+       20,
+       109,
+       117
+      ]
+     }
     ],
     [
-     "tang_su_hurt_005.png",
-     0.09
+     "tang_su_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       755,
+       1035,
+       150,
+       150
+      ],
+      "anchor": [
+       66.62,
+       136
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       15,
+       18,
+       109,
+       118
+      ]
+     }
     ],
     [
-     "tang_su_hurt_006.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       905,
+       1035,
+       150,
+       150
+      ],
+      "anchor": [
+       68.58,
+       136
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       17,
+       16,
+       107,
+       120
+      ]
+     }
     ],
     [
-     "tang_su_hurt_007.png",
-     0.12
+     "tang_su_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1055,
+       1035,
+       127,
+       150
+      ],
+      "anchor": [
+       67.18,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       15,
+       16,
+       110,
+       119
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "tang_su_dodge_000.png",
-     0.09
+     "tang_su_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       889,
+       161,
+       146
+      ],
+      "anchor": [
+       76.06,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       28,
+       12,
+       104,
+       119
+      ]
+     }
     ],
     [
-     "tang_su_dodge_001.png",
-     0.065
+     "tang_su_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       161,
+       889,
+       149,
+       146
+      ],
+      "anchor": [
+       48.76,
+       130
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       14,
+       25,
+       106,
+       105
+      ]
+     }
     ],
     [
-     "tang_su_dodge_002.png",
-     0.055
+     "tang_su_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       310,
+       889,
+       148,
+       146
+      ],
+      "anchor": [
+       41.0,
+       129
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       7,
+       35,
+       133,
+       94
+      ]
+     }
     ],
     [
-     "tang_su_dodge_003.png",
-     0.055
+     "tang_su_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       458,
+       889,
+       148,
+       146
+      ],
+      "anchor": [
+       25.72,
+       128
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       39,
+       129,
+       89
+      ]
+     }
     ],
     [
-     "tang_su_dodge_004.png",
-     0.065
+     "tang_su_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       606,
+       889,
+       149,
+       146
+      ],
+      "anchor": [
+       57.67,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       14,
+       22,
+       109,
+       109
+      ]
+     }
     ],
     [
-     "tang_su_dodge_005.png",
-     0.075
+     "tang_su_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       755,
+       889,
+       150,
+       146
+      ],
+      "anchor": [
+       64.15,
+       130
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       13,
+       13,
+       108,
+       117
+      ]
+     }
     ],
     [
-     "tang_su_dodge_006.png",
-     0.09
+     "tang_su_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       905,
+       889,
+       150,
+       146
+      ],
+      "anchor": [
+       64.93,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       17,
+       14,
+       105,
+       117
+      ]
+     }
     ],
     [
-     "tang_su_dodge_007.png",
-     0.12
+     "tang_su_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1055,
+       889,
+       127,
+       146
+      ],
+      "anchor": [
+       62.8,
+       131
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       14,
+       14,
+       106,
+       117
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "tang_su_death_000.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1185,
+       161,
+       145
+      ],
+      "anchor": [
+       75.92,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       29,
+       18,
+       106,
+       117
+      ]
+     }
     ],
     [
-     "tang_su_death_001.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       161,
+       1185,
+       149,
+       145
+      ],
+      "anchor": [
+       58.31,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       12,
+       22,
+       102,
+       113
+      ]
+     }
     ],
     [
-     "tang_su_death_002.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       310,
+       1185,
+       148,
+       145
+      ],
+      "anchor": [
+       60.15,
+       134
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       1,
+       36,
+       147,
+       98
+      ]
+     }
     ],
     [
-     "tang_su_death_003.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       458,
+       1185,
+       148,
+       145
+      ],
+      "anchor": [
+       70.81,
+       136
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       53,
+       125,
+       83
+      ]
+     }
     ],
     [
-     "tang_su_death_004.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       606,
+       1185,
+       149,
+       145
+      ],
+      "anchor": [
+       70.75,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       2,
+       65,
+       147,
+       70
+      ]
+     }
     ],
     [
-     "tang_su_death_005.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       755,
+       1185,
+       150,
+       145
+      ],
+      "anchor": [
+       78.44,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       73,
+       150,
+       62
+      ]
+     }
     ],
     [
-     "tang_su_death_006.png",
-     0.1
+     "tang_su_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       905,
+       1185,
+       150,
+       145
+      ],
+      "anchor": [
+       74.42,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       81,
+       150,
+       54
+      ]
+     }
     ],
     [
-     "tang_su_death_007.png",
-     0.45
+     "tang_su_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1055,
+       1185,
+       127,
+       145
+      ],
+      "anchor": [
+       67.23,
+       135
+      ],
+      "scale": 2.339362,
+      "bounds": [
+       0,
+       87,
+       121,
+       48
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "tang_su_idle_000.png",
+     0.3
+    ],
+    [
+     "tang_su_idle_001.png",
+     0.3
+    ],
+    [
+     "tang_su_idle_002.png",
+     0.3
+    ],
+    [
+     "tang_su_idle_003.png",
+     0.3
+    ],
+    [
+     "tang_su_idle_004.png",
+     0.3
+    ],
+    [
+     "tang_su_idle_005.png",
+     0.3
+    ],
+    [
+     "tang_su_idle_006.png",
+     0.3
+    ],
+    [
+     "tang_su_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "tang_su_walk_000.png",
+     0.1
+    ],
+    [
+     "tang_su_walk_001.png",
+     0.1
+    ],
+    [
+     "tang_su_walk_002.png",
+     0.1
+    ],
+    [
+     "tang_su_walk_003.png",
+     0.1
+    ],
+    [
+     "tang_su_walk_004.png",
+     0.1
+    ],
+    [
+     "tang_su_walk_005.png",
+     0.1
+    ],
+    [
+     "tang_su_walk_006.png",
+     0.1
+    ],
+    [
+     "tang_su_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "tang_su_attack_1_000.png",
+     0.1
+    ],
+    [
+     "tang_su_attack_1_001.png",
+     0.1
+    ],
+    [
+     "tang_su_attack_1_002.png",
+     0.08
+    ],
+    [
+     "tang_su_attack_1_003.png",
+     0.05
+    ],
+    [
+     "tang_su_attack_1_004.png",
+     0.065
+    ],
+    [
+     "tang_su_attack_1_005.png",
+     0.07
+    ],
+    [
+     "tang_su_attack_1_006.png",
+     0.1
+    ],
+    [
+     "tang_su_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "tang_su_attack_2_000.png",
+     0.1
+    ],
+    [
+     "tang_su_attack_2_001.png",
+     0.085
+    ],
+    [
+     "tang_su_attack_2_002.png",
+     0.06
+    ],
+    [
+     "tang_su_attack_2_003.png",
+     0.06
+    ],
+    [
+     "tang_su_attack_2_004.png",
+     0.065
+    ],
+    [
+     "tang_su_attack_2_005.png",
+     0.075
+    ],
+    [
+     "tang_su_attack_2_006.png",
+     0.11
+    ],
+    [
+     "tang_su_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "tang_su_ultimate_000.png",
+     0.11
+    ],
+    [
+     "tang_su_ultimate_001.png",
+     0.11
+    ],
+    [
+     "tang_su_ultimate_002.png",
+     0.1
+    ],
+    [
+     "tang_su_ultimate_003.png",
+     0.075
+    ],
+    [
+     "tang_su_ultimate_004.png",
+     0.085
+    ],
+    [
+     "tang_su_ultimate_005.png",
+     0.1
+    ],
+    [
+     "tang_su_ultimate_006.png",
+     0.11
+    ],
+    [
+     "tang_su_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "tang_su_skill_000.png",
+     0.1
+    ],
+    [
+     "tang_su_skill_001.png",
+     0.1
+    ],
+    [
+     "tang_su_skill_002.png",
+     0.1
+    ],
+    [
+     "tang_su_skill_003.png",
+     0.07
+    ],
+    [
+     "tang_su_skill_004.png",
+     0.08
+    ],
+    [
+     "tang_su_skill_005.png",
+     0.085
+    ],
+    [
+     "tang_su_skill_006.png",
+     0.1
+    ],
+    [
+     "tang_su_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "tang_su_dodge_000.png",
+     0.09
+    ],
+    [
+     "tang_su_dodge_001.png",
+     0.065
+    ],
+    [
+     "tang_su_dodge_002.png",
+     0.055
+    ],
+    [
+     "tang_su_dodge_003.png",
+     0.055
+    ],
+    [
+     "tang_su_dodge_004.png",
+     0.065
+    ],
+    [
+     "tang_su_dodge_005.png",
+     0.075
+    ],
+    [
+     "tang_su_dodge_006.png",
+     0.09
+    ],
+    [
+     "tang_su_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "tang_su_hurt_000.png",
+     0.085
+    ],
+    [
+     "tang_su_hurt_001.png",
+     0.065
+    ],
+    [
+     "tang_su_hurt_002.png",
+     0.075
+    ],
+    [
+     "tang_su_hurt_003.png",
+     0.08
+    ],
+    [
+     "tang_su_hurt_004.png",
+     0.085
+    ],
+    [
+     "tang_su_hurt_005.png",
+     0.09
+    ],
+    [
+     "tang_su_hurt_006.png",
+     0.1
+    ],
+    [
+     "tang_su_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "tang_su_death_000.png",
+     0.1
+    ],
+    [
+     "tang_su_death_001.png",
+     0.1
+    ],
+    [
+     "tang_su_death_002.png",
+     0.1
+    ],
+    [
+     "tang_su_death_003.png",
+     0.1
+    ],
+    [
+     "tang_su_death_004.png",
+     0.1
+    ],
+    [
+     "tang_su_death_005.png",
+     0.1
+    ],
+    [
+     "tang_su_death_006.png",
+     0.1
+    ],
+    [
+     "tang_su_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

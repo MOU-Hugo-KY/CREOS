@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "aegis_idle_000.png",
-     0.3
+     "aegis_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       150,
+       153
+      ],
+      "anchor": [
+       75.42,
+       134
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       17,
+       24,
+       115,
+       110
+      ]
+     }
     ],
     [
-     "aegis_idle_001.png",
-     0.3
+     "aegis_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       150,
+       0,
+       150,
+       153
+      ],
+      "anchor": [
+       77.19,
+       134
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       16,
+       23,
+       118,
+       111
+      ]
+     }
     ],
     [
-     "aegis_idle_002.png",
-     0.3
+     "aegis_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       300,
+       0,
+       149,
+       153
+      ],
+      "anchor": [
+       75.08,
+       134
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       15,
+       21,
+       118,
+       113
+      ]
+     }
     ],
     [
-     "aegis_idle_003.png",
-     0.3
+     "aegis_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       449,
+       0,
+       150,
+       153
+      ],
+      "anchor": [
+       75.11,
+       134
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       16,
+       21,
+       118,
+       113
+      ]
+     }
     ],
     [
-     "aegis_idle_004.png",
-     0.3
+     "aegis_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       599,
+       0,
+       149,
+       153
+      ],
+      "anchor": [
+       74.63,
+       134
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       17,
+       23,
+       116,
+       111
+      ]
+     }
     ],
     [
-     "aegis_idle_005.png",
-     0.3
+     "aegis_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       748,
+       0,
+       148,
+       153
+      ],
+      "anchor": [
+       74.95,
+       134
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       15,
+       24,
+       117,
+       110
+      ]
+     }
     ],
     [
-     "aegis_idle_006.png",
-     0.3
+     "aegis_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       896,
+       0,
+       148,
+       153
+      ],
+      "anchor": [
+       77.03,
+       134
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       16,
+       25,
+       116,
+       109
+      ]
+     }
     ],
     [
-     "aegis_idle_007.png",
-     0.3
+     "aegis_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1044,
+       0,
+       138,
+       153
+      ],
+      "anchor": [
+       77.26,
+       134
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       16,
+       26,
+       116,
+       108
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "aegis_walk_000.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       153,
+       150,
+       144
+      ],
+      "anchor": [
+       76.63,
+       124
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       15,
+       14,
+       116,
+       110
+      ]
+     }
     ],
     [
-     "aegis_walk_001.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       150,
+       153,
+       150,
+       144
+      ],
+      "anchor": [
+       73.65,
+       124
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       16,
+       15,
+       111,
+       109
+      ]
+     }
     ],
     [
-     "aegis_walk_002.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       300,
+       153,
+       149,
+       144
+      ],
+      "anchor": [
+       69.42,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       15,
+       14,
+       110,
+       111
+      ]
+     }
     ],
     [
-     "aegis_walk_003.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       449,
+       153,
+       150,
+       144
+      ],
+      "anchor": [
+       71.72,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       18,
+       14,
+       112,
+       111
+      ]
+     }
     ],
     [
-     "aegis_walk_004.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       599,
+       153,
+       149,
+       144
+      ],
+      "anchor": [
+       74.14,
+       124
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       17,
+       16,
+       111,
+       108
+      ]
+     }
     ],
     [
-     "aegis_walk_005.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       748,
+       153,
+       148,
+       144
+      ],
+      "anchor": [
+       70.7,
+       124
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       18,
+       15,
+       107,
+       109
+      ]
+     }
     ],
     [
-     "aegis_walk_006.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       896,
+       153,
+       148,
+       144
+      ],
+      "anchor": [
+       77.23,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       18,
+       16,
+       114,
+       109
+      ]
+     }
     ],
     [
-     "aegis_walk_007.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1044,
+       153,
+       138,
+       144
+      ],
+      "anchor": [
+       77.24,
+       124
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       22,
+       17,
+       106,
+       107
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +405,562 @@
    "loop": false,
    "frames": [
     [
-     "aegis_attack_1_000.png",
-     0.1
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       320,
+       334
+      ],
+      "anchor": [
+       149.56,
+       265
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       73,
+       89,
+       179,
+       176
+      ]
+     }
     ],
     [
-     "aegis_attack_1_001.png",
-     0.1
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       320,
+       0,
+       313,
+       334
+      ],
+      "anchor": [
+       141.57,
+       265
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       67,
+       89,
+       179,
+       176
+      ]
+     }
     ],
     [
-     "aegis_attack_1_002.png",
-     0.08
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       633,
+       0,
+       313,
+       334
+      ],
+      "anchor": [
+       142.17,
+       265
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       67,
+       89,
+       180,
+       176
+      ]
+     }
     ],
     [
-     "aegis_attack_1_003.png",
-     0.05
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       0,
+       308,
+       334
+      ],
+      "anchor": [
+       138.17,
+       265
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       64,
+       89,
+       184,
+       176
+      ]
+     }
     ],
     [
-     "aegis_attack_1_004.png",
-     0.065
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       334,
+       320,
+       318
+      ],
+      "anchor": [
+       149.78,
+       245
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       68,
+       70,
+       189,
+       175
+      ]
+     }
     ],
     [
-     "aegis_attack_1_005.png",
-     0.07
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       320,
+       334,
+       313,
+       318
+      ],
+      "anchor": [
+       137.67,
+       245
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       67,
+       67,
+       179,
+       178
+      ]
+     }
     ],
     [
-     "aegis_attack_1_006.png",
-     0.1
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       633,
+       334,
+       313,
+       318
+      ],
+      "anchor": [
+       133.69,
+       245
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       71,
+       70,
+       160,
+       175
+      ]
+     }
     ],
     [
-     "aegis_attack_1_007.png",
-     0.12
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       334,
+       308,
+       318
+      ],
+      "anchor": [
+       119.52,
+       245
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       64,
+       74,
+       195,
+       171
+      ]
+     }
+    ],
+    [
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       652,
+       320,
+       313
+      ],
+      "anchor": [
+       115.98,
+       239
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       73,
+       79,
+       229,
+       160
+      ]
+     }
+    ],
+    [
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       320,
+       652,
+       313,
+       313
+      ],
+      "anchor": [
+       117.6,
+       239
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       62,
+       73,
+       202,
+       166
+      ]
+     }
+    ],
+    [
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       633,
+       652,
+       313,
+       313
+      ],
+      "anchor": [
+       130.01,
+       239
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       60,
+       67,
+       185,
+       172
+      ]
+     }
+    ],
+    [
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       652,
+       308,
+       313
+      ],
+      "anchor": [
+       124.79,
+       240
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       60,
+       64,
+       178,
+       176
+      ]
+     }
+    ],
+    [
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       965,
+       320,
+       289
+      ],
+      "anchor": [
+       149.95,
+       240
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       65,
+       65,
+       182,
+       175
+      ]
+     }
+    ],
+    [
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       320,
+       965,
+       313,
+       289
+      ],
+      "anchor": [
+       146.26,
+       241
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       67,
+       64,
+       179,
+       177
+      ]
+     }
+    ],
+    [
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       633,
+       965,
+       313,
+       289
+      ],
+      "anchor": [
+       152.94,
+       240
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       68,
+       65,
+       179,
+       175
+      ]
+     }
+    ],
+    [
+     "aegis_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       965,
+       308,
+       289
+      ],
+      "anchor": [
+       153.43,
+       240
+      ],
+      "scale": 1.600108,
+      "bounds": [
+       68,
+       65,
+       180,
+       175
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "aegis_attack_2_000.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       445,
+       150,
+       149
+      ],
+      "anchor": [
+       76.37,
+       127
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       18,
+       15,
+       114,
+       112
+      ]
+     }
     ],
     [
-     "aegis_attack_2_001.png",
-     0.085
+     "aegis_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       150,
+       445,
+       150,
+       149
+      ],
+      "anchor": [
+       120.87,
+       137
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       13,
+       30,
+       127,
+       107
+      ]
+     }
     ],
     [
-     "aegis_attack_2_002.png",
-     0.06
+     "aegis_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       300,
+       445,
+       149,
+       149
+      ],
+      "anchor": [
+       92.57,
+       149
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       12,
+       0,
+       113,
+       149
+      ]
+     }
     ],
     [
-     "aegis_attack_2_003.png",
-     0.06
+     "aegis_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       449,
+       445,
+       150,
+       149
+      ],
+      "anchor": [
+       72.64,
+       149
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       3,
+       31,
+       136,
+       118
+      ]
+     }
     ],
     [
-     "aegis_attack_2_004.png",
-     0.065
+     "aegis_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       599,
+       445,
+       149,
+       149
+      ],
+      "anchor": [
+       117.67,
+       137
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       14,
+       19,
+       135,
+       118
+      ]
+     }
     ],
     [
-     "aegis_attack_2_005.png",
-     0.075
+     "aegis_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       748,
+       445,
+       148,
+       149
+      ],
+      "anchor": [
+       122.09,
+       137
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       0,
+       33,
+       141,
+       104
+      ]
+     }
     ],
     [
-     "aegis_attack_2_006.png",
-     0.11
+     "aegis_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       896,
+       445,
+       148,
+       149
+      ],
+      "anchor": [
+       76.29,
+       128
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       16,
+       17,
+       119,
+       111
+      ]
+     }
     ],
     [
-     "aegis_attack_2_007.png",
-     0.12
+     "aegis_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1044,
+       445,
+       138,
+       149
+      ],
+      "anchor": [
+       76.29,
+       128
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       19,
+       19,
+       113,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -177,36 +969,188 @@
    "loop": false,
    "frames": [
     [
-     "aegis_ultimate_000.png",
-     0.11
+     "aegis_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       594,
+       150,
+       147
+      ],
+      "anchor": [
+       76.75,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       19,
+       14,
+       113,
+       111
+      ]
+     }
     ],
     [
-     "aegis_ultimate_001.png",
-     0.11
+     "aegis_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       150,
+       594,
+       150,
+       147
+      ],
+      "anchor": [
+       84.17,
+       129
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       15,
+       26,
+       120,
+       103
+      ]
+     }
     ],
     [
-     "aegis_ultimate_002.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       300,
+       594,
+       149,
+       147
+      ],
+      "anchor": [
+       69.73,
+       127
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       7,
+       0,
+       126,
+       127
+      ]
+     }
     ],
     [
-     "aegis_ultimate_003.png",
-     0.075
+     "aegis_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       449,
+       594,
+       150,
+       147
+      ],
+      "anchor": [
+       89.81,
+       131
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       0,
+       0,
+       143,
+       131
+      ]
+     }
     ],
     [
-     "aegis_ultimate_004.png",
-     0.085
+     "aegis_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       599,
+       594,
+       149,
+       147
+      ],
+      "anchor": [
+       106.82,
+       133
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       12,
+       2,
+       133,
+       131
+      ]
+     }
     ],
     [
-     "aegis_ultimate_005.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       748,
+       594,
+       148,
+       147
+      ],
+      "anchor": [
+       88.19,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       21,
+       24,
+       119,
+       101
+      ]
+     }
     ],
     [
-     "aegis_ultimate_006.png",
-     0.11
+     "aegis_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       896,
+       594,
+       148,
+       147
+      ],
+      "anchor": [
+       78.67,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       19,
+       19,
+       118,
+       106
+      ]
+     }
     ],
     [
-     "aegis_ultimate_007.png",
-     0.13
+     "aegis_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1044,
+       594,
+       138,
+       147
+      ],
+      "anchor": [
+       78.02,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       20,
+       17,
+       112,
+       108
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "aegis_skill_000.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       741,
+       150,
+       147
+      ],
+      "anchor": [
+       76.6,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       18,
+       14,
+       113,
+       111
+      ]
+     }
     ],
     [
-     "aegis_skill_001.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       150,
+       741,
+       150,
+       147
+      ],
+      "anchor": [
+       71.81,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       13,
+       18,
+       111,
+       107
+      ]
+     }
     ],
     [
-     "aegis_skill_002.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       300,
+       741,
+       149,
+       147
+      ],
+      "anchor": [
+       66.27,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       10,
+       15,
+       109,
+       110
+      ]
+     }
     ],
     [
-     "aegis_skill_003.png",
-     0.07
+     "aegis_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       449,
+       741,
+       150,
+       147
+      ],
+      "anchor": [
+       62.19,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       6,
+       18,
+       124,
+       107
+      ]
+     }
     ],
     [
-     "aegis_skill_004.png",
-     0.08
+     "aegis_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       599,
+       741,
+       149,
+       147
+      ],
+      "anchor": [
+       68.73,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       13,
+       17,
+       124,
+       108
+      ]
+     }
     ],
     [
-     "aegis_skill_005.png",
-     0.085
+     "aegis_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       748,
+       741,
+       148,
+       147
+      ],
+      "anchor": [
+       73.36,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       17,
+       17,
+       112,
+       108
+      ]
+     }
     ],
     [
-     "aegis_skill_006.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       896,
+       741,
+       148,
+       147
+      ],
+      "anchor": [
+       70.88,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       16,
+       17,
+       115,
+       108
+      ]
+     }
     ],
     [
-     "aegis_skill_007.png",
-     0.12
+     "aegis_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1044,
+       741,
+       138,
+       147
+      ],
+      "anchor": [
+       77.08,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       19,
+       17,
+       112,
+       108
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "aegis_hurt_000.png",
-     0.085
+     "aegis_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       1034,
+       150,
+       148
+      ],
+      "anchor": [
+       76.9,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       19,
+       15,
+       113,
+       110
+      ]
+     }
     ],
     [
-     "aegis_hurt_001.png",
-     0.065
+     "aegis_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       150,
+       1034,
+       150,
+       148
+      ],
+      "anchor": [
+       77.86,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       17,
+       19,
+       115,
+       107
+      ]
+     }
     ],
     [
-     "aegis_hurt_002.png",
-     0.075
+     "aegis_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       300,
+       1034,
+       149,
+       148
+      ],
+      "anchor": [
+       70.36,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       12,
+       11,
+       115,
+       115
+      ]
+     }
     ],
     [
-     "aegis_hurt_003.png",
-     0.08
+     "aegis_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       449,
+       1034,
+       150,
+       148
+      ],
+      "anchor": [
+       75.32,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       11,
+       19,
+       114,
+       107
+      ]
+     }
     ],
     [
-     "aegis_hurt_004.png",
-     0.085
+     "aegis_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       599,
+       1034,
+       149,
+       148
+      ],
+      "anchor": [
+       74.43,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       14,
+       22,
+       105,
+       104
+      ]
+     }
     ],
     [
-     "aegis_hurt_005.png",
-     0.09
+     "aegis_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       748,
+       1034,
+       148,
+       148
+      ],
+      "anchor": [
+       68.98,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       15,
+       20,
+       107,
+       106
+      ]
+     }
     ],
     [
-     "aegis_hurt_006.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       896,
+       1034,
+       148,
+       148
+      ],
+      "anchor": [
+       73.09,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       17,
+       19,
+       116,
+       107
+      ]
+     }
     ],
     [
-     "aegis_hurt_007.png",
-     0.12
+     "aegis_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1044,
+       1034,
+       138,
+       148
+      ],
+      "anchor": [
+       77.88,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       19,
+       17,
+       113,
+       108
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "aegis_dodge_000.png",
-     0.09
+     "aegis_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       888,
+       150,
+       146
+      ],
+      "anchor": [
+       76.55,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       19,
+       16,
+       113,
+       109
+      ]
+     }
     ],
     [
-     "aegis_dodge_001.png",
-     0.065
+     "aegis_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       150,
+       888,
+       150,
+       146
+      ],
+      "anchor": [
+       78.38,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       12,
+       23,
+       112,
+       102
+      ]
+     }
     ],
     [
-     "aegis_dodge_002.png",
-     0.055
+     "aegis_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       300,
+       888,
+       149,
+       146
+      ],
+      "anchor": [
+       99.77,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       4,
+       19,
+       124,
+       106
+      ]
+     }
     ],
     [
-     "aegis_dodge_003.png",
-     0.055
+     "aegis_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       449,
+       888,
+       150,
+       146
+      ],
+      "anchor": [
+       70.95,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       2,
+       30,
+       123,
+       95
+      ]
+     }
     ],
     [
-     "aegis_dodge_004.png",
-     0.065
+     "aegis_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       599,
+       888,
+       149,
+       146
+      ],
+      "anchor": [
+       65.57,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       16,
+       32,
+       113,
+       93
+      ]
+     }
     ],
     [
-     "aegis_dodge_005.png",
-     0.075
+     "aegis_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       748,
+       888,
+       148,
+       146
+      ],
+      "anchor": [
+       65.09,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       11,
+       23,
+       106,
+       102
+      ]
+     }
     ],
     [
-     "aegis_dodge_006.png",
-     0.09
+     "aegis_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       896,
+       888,
+       148,
+       146
+      ],
+      "anchor": [
+       72.28,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       15,
+       20,
+       113,
+       105
+      ]
+     }
     ],
     [
-     "aegis_dodge_007.png",
-     0.12
+     "aegis_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1044,
+       888,
+       138,
+       146
+      ],
+      "anchor": [
+       77.35,
+       125
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       18,
+       19,
+       113,
+       106
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "aegis_death_000.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1182,
+       150,
+       148
+      ],
+      "anchor": [
+       76.74,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       19,
+       15,
+       113,
+       111
+      ]
+     }
     ],
     [
-     "aegis_death_001.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       150,
+       1182,
+       150,
+       148
+      ],
+      "anchor": [
+       63.78,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       17,
+       22,
+       109,
+       104
+      ]
+     }
     ],
     [
-     "aegis_death_002.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       300,
+       1182,
+       149,
+       148
+      ],
+      "anchor": [
+       66.21,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       10,
+       29,
+       106,
+       97
+      ]
+     }
     ],
     [
-     "aegis_death_003.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       449,
+       1182,
+       150,
+       148
+      ],
+      "anchor": [
+       65.55,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       3,
+       47,
+       147,
+       79
+      ]
+     }
     ],
     [
-     "aegis_death_004.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       599,
+       1182,
+       149,
+       148
+      ],
+      "anchor": [
+       77.49,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       0,
+       58,
+       129,
+       68
+      ]
+     }
     ],
     [
-     "aegis_death_005.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       748,
+       1182,
+       148,
+       148
+      ],
+      "anchor": [
+       71.0,
+       126
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       3,
+       65,
+       145,
+       61
+      ]
+     }
     ],
     [
-     "aegis_death_006.png",
-     0.1
+     "aegis_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       896,
+       1182,
+       148,
+       148
+      ],
+      "anchor": [
+       77.55,
+       121
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       0,
+       74,
+       136,
+       47
+      ]
+     }
     ],
     [
-     "aegis_death_007.png",
-     0.45
+     "aegis_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1044,
+       1182,
+       138,
+       148
+      ],
+      "anchor": [
+       67.04,
+       121
+      ],
+      "scale": 2.560173,
+      "bounds": [
+       4,
+       83,
+       128,
+       38
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "aegis_idle_000.png",
+     0.3
+    ],
+    [
+     "aegis_idle_001.png",
+     0.3
+    ],
+    [
+     "aegis_idle_002.png",
+     0.3
+    ],
+    [
+     "aegis_idle_003.png",
+     0.3
+    ],
+    [
+     "aegis_idle_004.png",
+     0.3
+    ],
+    [
+     "aegis_idle_005.png",
+     0.3
+    ],
+    [
+     "aegis_idle_006.png",
+     0.3
+    ],
+    [
+     "aegis_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "aegis_walk_000.png",
+     0.1
+    ],
+    [
+     "aegis_walk_001.png",
+     0.1
+    ],
+    [
+     "aegis_walk_002.png",
+     0.1
+    ],
+    [
+     "aegis_walk_003.png",
+     0.1
+    ],
+    [
+     "aegis_walk_004.png",
+     0.1
+    ],
+    [
+     "aegis_walk_005.png",
+     0.1
+    ],
+    [
+     "aegis_walk_006.png",
+     0.1
+    ],
+    [
+     "aegis_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "aegis_attack_1_000.png",
+     0.1
+    ],
+    [
+     "aegis_attack_1_001.png",
+     0.1
+    ],
+    [
+     "aegis_attack_1_002.png",
+     0.08
+    ],
+    [
+     "aegis_attack_1_003.png",
+     0.05
+    ],
+    [
+     "aegis_attack_1_004.png",
+     0.065
+    ],
+    [
+     "aegis_attack_1_005.png",
+     0.07
+    ],
+    [
+     "aegis_attack_1_006.png",
+     0.1
+    ],
+    [
+     "aegis_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "aegis_attack_2_000.png",
+     0.1
+    ],
+    [
+     "aegis_attack_2_001.png",
+     0.085
+    ],
+    [
+     "aegis_attack_2_002.png",
+     0.06
+    ],
+    [
+     "aegis_attack_2_003.png",
+     0.06
+    ],
+    [
+     "aegis_attack_2_004.png",
+     0.065
+    ],
+    [
+     "aegis_attack_2_005.png",
+     0.075
+    ],
+    [
+     "aegis_attack_2_006.png",
+     0.11
+    ],
+    [
+     "aegis_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "aegis_ultimate_000.png",
+     0.11
+    ],
+    [
+     "aegis_ultimate_001.png",
+     0.11
+    ],
+    [
+     "aegis_ultimate_002.png",
+     0.1
+    ],
+    [
+     "aegis_ultimate_003.png",
+     0.075
+    ],
+    [
+     "aegis_ultimate_004.png",
+     0.085
+    ],
+    [
+     "aegis_ultimate_005.png",
+     0.1
+    ],
+    [
+     "aegis_ultimate_006.png",
+     0.11
+    ],
+    [
+     "aegis_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "aegis_skill_000.png",
+     0.1
+    ],
+    [
+     "aegis_skill_001.png",
+     0.1
+    ],
+    [
+     "aegis_skill_002.png",
+     0.1
+    ],
+    [
+     "aegis_skill_003.png",
+     0.07
+    ],
+    [
+     "aegis_skill_004.png",
+     0.08
+    ],
+    [
+     "aegis_skill_005.png",
+     0.085
+    ],
+    [
+     "aegis_skill_006.png",
+     0.1
+    ],
+    [
+     "aegis_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "aegis_dodge_000.png",
+     0.09
+    ],
+    [
+     "aegis_dodge_001.png",
+     0.065
+    ],
+    [
+     "aegis_dodge_002.png",
+     0.055
+    ],
+    [
+     "aegis_dodge_003.png",
+     0.055
+    ],
+    [
+     "aegis_dodge_004.png",
+     0.065
+    ],
+    [
+     "aegis_dodge_005.png",
+     0.075
+    ],
+    [
+     "aegis_dodge_006.png",
+     0.09
+    ],
+    [
+     "aegis_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "aegis_hurt_000.png",
+     0.085
+    ],
+    [
+     "aegis_hurt_001.png",
+     0.065
+    ],
+    [
+     "aegis_hurt_002.png",
+     0.075
+    ],
+    [
+     "aegis_hurt_003.png",
+     0.08
+    ],
+    [
+     "aegis_hurt_004.png",
+     0.085
+    ],
+    [
+     "aegis_hurt_005.png",
+     0.09
+    ],
+    [
+     "aegis_hurt_006.png",
+     0.1
+    ],
+    [
+     "aegis_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "aegis_death_000.png",
+     0.1
+    ],
+    [
+     "aegis_death_001.png",
+     0.1
+    ],
+    [
+     "aegis_death_002.png",
+     0.1
+    ],
+    [
+     "aegis_death_003.png",
+     0.1
+    ],
+    [
+     "aegis_death_004.png",
+     0.1
+    ],
+    [
+     "aegis_death_005.png",
+     0.1
+    ],
+    [
+     "aegis_death_006.png",
+     0.1
+    ],
+    [
+     "aegis_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

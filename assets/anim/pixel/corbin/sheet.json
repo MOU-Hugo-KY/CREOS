@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "corbin_idle_000.png",
-     0.3
+     "corbin_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       166,
+       132
+      ],
+      "anchor": [
+       94.59,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       9,
+       118,
+       112
+      ]
+     }
     ],
     [
-     "corbin_idle_001.png",
-     0.3
+     "corbin_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       166,
+       0,
+       166,
+       132
+      ],
+      "anchor": [
+       92.9,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       9,
+       116,
+       112
+      ]
+     }
     ],
     [
-     "corbin_idle_002.png",
-     0.3
+     "corbin_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       332,
+       0,
+       165,
+       132
+      ],
+      "anchor": [
+       93.28,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       24,
+       9,
+       116,
+       111
+      ]
+     }
     ],
     [
-     "corbin_idle_003.png",
-     0.3
+     "corbin_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       497,
+       0,
+       165,
+       132
+      ],
+      "anchor": [
+       92.89,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       24,
+       8,
+       117,
+       113
+      ]
+     }
     ],
     [
-     "corbin_idle_004.png",
-     0.3
+     "corbin_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       662,
+       0,
+       165,
+       132
+      ],
+      "anchor": [
+       90.47,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       26,
+       9,
+       114,
+       112
+      ]
+     }
     ],
     [
-     "corbin_idle_005.png",
-     0.3
+     "corbin_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       827,
+       0,
+       165,
+       132
+      ],
+      "anchor": [
+       91.37,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       26,
+       10,
+       113,
+       111
+      ]
+     }
     ],
     [
-     "corbin_idle_006.png",
-     0.3
+     "corbin_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       992,
+       0,
+       166,
+       132
+      ],
+      "anchor": [
+       93.08,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       26,
+       10,
+       113,
+       111
+      ]
+     }
     ],
     [
-     "corbin_idle_007.png",
-     0.3
+     "corbin_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1158,
+       0,
+       164,
+       132
+      ],
+      "anchor": [
+       93.89,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       10,
+       115,
+       111
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,352 +215,752 @@
    "loop": true,
    "frames": [
     [
-     "corbin_walk_000.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       132,
+       166,
+       132
+      ],
+      "anchor": [
+       92.26,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       24,
+       9,
+       111,
+       112
+      ]
+     }
     ],
     [
-     "corbin_walk_001.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       166,
+       132,
+       166,
+       132
+      ],
+      "anchor": [
+       97.72,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       9,
+       110,
+       111
+      ]
+     }
     ],
     [
-     "corbin_walk_002.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       332,
+       132,
+       165,
+       132
+      ],
+      "anchor": [
+       103.69,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       23,
+       11,
+       114,
+       109
+      ]
+     }
     ],
     [
-     "corbin_walk_003.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       497,
+       132,
+       165,
+       132
+      ],
+      "anchor": [
+       91.76,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       22,
+       12,
+       116,
+       108
+      ]
+     }
     ],
     [
-     "corbin_walk_004.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       662,
+       132,
+       165,
+       132
+      ],
+      "anchor": [
+       99.04,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       23,
+       12,
+       115,
+       108
+      ]
+     }
     ],
     [
-     "corbin_walk_005.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       827,
+       132,
+       165,
+       132
+      ],
+      "anchor": [
+       104.89,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       23,
+       12,
+       116,
+       109
+      ]
+     }
     ],
     [
-     "corbin_walk_006.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       992,
+       132,
+       166,
+       132
+      ],
+      "anchor": [
+       99.12,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       26,
+       12,
+       114,
+       108
+      ]
+     }
     ],
     [
-     "corbin_walk_007.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1158,
+       132,
+       164,
+       132
+      ],
+      "anchor": [
+       86.87,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       23,
+       12,
+       116,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": null
   },
   "attack_1": {
    "loop": false,
-   "hit_frame": 8,
    "frames": [
     [
-     "corbin_attack_1_16f.png",
-     0.055,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
        0,
        0,
-       314,
-       314
+       316,
+       324
       ],
       "anchor": [
-       174.27,
-       269
+       160.6,
+       257
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       73,
+       94,
+       172,
+       163
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.055,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       314,
+       316,
        0,
-       313,
-       314
+       312,
+       324
       ],
       "anchor": [
-       172.2,
-       269
+       157.33,
+       257
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       72,
+       93,
+       168,
+       164
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.05,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       627,
+       628,
        0,
-       313,
-       314
+       309,
+       324
       ],
       "anchor": [
-       158.91,
-       271
+       157.65,
+       257
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       71,
+       94,
+       169,
+       163
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.045,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       940,
+       937,
        0,
-       314,
-       314
+       324,
+       324
       ],
       "anchor": [
-       161.41,
-       269
+       162.91,
+       257
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       71,
+       93,
+       165,
+       164
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.045,
-     {
-      "region": [
-       0,
-       314,
-       314,
-       313
-      ],
-      "anchor": [
-       162.56,
-       267
-      ],
-      "scale": 1.375203
-     }
-    ],
-    [
-     "corbin_attack_1_16f.png",
-     0.04,
-     {
-      "region": [
-       314,
-       314,
-       313,
-       313
-      ],
-      "anchor": [
-       155.31,
-       267
-      ],
-      "scale": 1.375203
-     }
-    ],
-    [
-     "corbin_attack_1_16f.png",
-     0.03,
-     {
-      "region": [
-       627,
-       314,
-       313,
-       313
-      ],
-      "anchor": [
-       151.14,
-       267
-      ],
-      "scale": 1.375203
-     }
-    ],
-    [
-     "corbin_attack_1_16f.png",
-     0.03,
-     {
-      "region": [
-       940,
-       314,
-       314,
-       313
-      ],
-      "anchor": [
-       146.54,
-       266
-      ],
-      "scale": 1.375203
-     }
-    ],
-    [
-     "corbin_attack_1_16f.png",
-     0.04,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
        0,
-       627,
-       314,
-       313
+       324,
+       316,
+       301
       ],
       "anchor": [
-       146.32,
-       268
+       158.49,
+       233
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       68,
+       70,
+       174,
+       163
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.04,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       314,
-       627,
-       313,
-       313
+       316,
+       324,
+       312,
+       301
       ],
       "anchor": [
-       149.6,
-       268
+       163.94,
+       232
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       62,
+       69,
+       184,
+       163
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.04,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       627,
-       627,
-       313,
-       313
+       628,
+       324,
+       309,
+       301
       ],
       "anchor": [
-       152.9,
-       268
+       175.61,
+       229
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       63,
+       68,
+       198,
+       161
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.045,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       940,
-       627,
-       314,
-       313
+       937,
+       324,
+       324,
+       301
       ],
       "anchor": [
-       159.27,
-       268
+       144.49,
+       230
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       70,
+       70,
+       211,
+       160
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.05,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
        0,
-       940,
-       314,
-       314
+       625,
+       316,
+       301
       ],
       "anchor": [
-       174.87,
-       269
+       134.55,
+       230
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       71,
+       72,
+       220,
+       158
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.055,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       314,
-       940,
-       313,
-       314
+       316,
+       625,
+       312,
+       301
       ],
       "anchor": [
-       169.88,
-       268
+       132.08,
+       230
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       67,
+       73,
+       211,
+       157
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.06,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       627,
-       940,
-       313,
-       314
+       628,
+       625,
+       309,
+       301
       ],
       "anchor": [
-       175.12,
-       269
+       138.88,
+       230
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       67,
+       73,
+       183,
+       157
+      ]
      }
     ],
     [
-     "corbin_attack_1_16f.png",
-     0.065,
+     "corbin_redesign_attack.png",
+     0.042813,
      {
       "region": [
-       940,
-       940,
-       314,
-       314
+       937,
+       625,
+       324,
+       301
       ],
       "anchor": [
-       174.91,
-       268
+       140.1,
+       230
       ],
-      "scale": 1.375203
+      "scale": 1.654601,
+      "bounds": [
+       71,
+       73,
+       172,
+       157
+      ]
+     }
+    ],
+    [
+     "corbin_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       926,
+       316,
+       321
+      ],
+      "anchor": [
+       152.65,
+       232
+      ],
+      "scale": 1.654601,
+      "bounds": [
+       69,
+       70,
+       178,
+       162
+      ]
+     }
+    ],
+    [
+     "corbin_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       316,
+       926,
+       312,
+       321
+      ],
+      "anchor": [
+       150.46,
+       232
+      ],
+      "scale": 1.654601,
+      "bounds": [
+       71,
+       70,
+       173,
+       162
+      ]
+     }
+    ],
+    [
+     "corbin_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       628,
+       926,
+       309,
+       321
+      ],
+      "anchor": [
+       159.13,
+       232
+      ],
+      "scale": 1.654601,
+      "bounds": [
+       71,
+       70,
+       174,
+       162
+      ]
+     }
+    ],
+    [
+     "corbin_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       937,
+       926,
+       324,
+       321
+      ],
+      "anchor": [
+       171.21,
+       231
+      ],
+      "scale": 1.654601,
+      "bounds": [
+       78,
+       71,
+       172,
+       160
+      ]
      }
     ]
-   ]
+   ],
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "corbin_attack_2_000.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       397,
+       166,
+       132
+      ],
+      "anchor": [
+       95.75,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       26,
+       11,
+       117,
+       109
+      ]
+     }
     ],
     [
-     "corbin_attack_2_001.png",
-     0.085
+     "corbin_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       166,
+       397,
+       166,
+       132
+      ],
+      "anchor": [
+       71.79,
+       123
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       19,
+       19,
+       121,
+       104
+      ]
+     }
     ],
     [
-     "corbin_attack_2_002.png",
-     0.06
+     "corbin_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       332,
+       397,
+       165,
+       132
+      ],
+      "anchor": [
+       56.75,
+       122
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       7,
+       12,
+       150,
+       110
+      ]
+     }
     ],
     [
-     "corbin_attack_2_003.png",
-     0.06
+     "corbin_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       497,
+       397,
+       165,
+       132
+      ],
+      "anchor": [
+       66.37,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       3,
+       6,
+       160,
+       114
+      ]
+     }
     ],
     [
-     "corbin_attack_2_004.png",
-     0.065
+     "corbin_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       662,
+       397,
+       165,
+       132
+      ],
+      "anchor": [
+       80.34,
+       123
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       11,
+       6,
+       152,
+       117
+      ]
+     }
     ],
     [
-     "corbin_attack_2_005.png",
-     0.075
+     "corbin_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       827,
+       397,
+       165,
+       132
+      ],
+      "anchor": [
+       72.94,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       17,
+       13,
+       136,
+       107
+      ]
+     }
     ],
     [
-     "corbin_attack_2_006.png",
-     0.11
+     "corbin_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       992,
+       397,
+       166,
+       132
+      ],
+      "anchor": [
+       95.41,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       18,
+       15,
+       125,
+       105
+      ]
+     }
     ],
     [
-     "corbin_attack_2_007.png",
-     0.12
+     "corbin_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1158,
+       397,
+       164,
+       132
+      ],
+      "anchor": [
+       94.57,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       24,
+       12,
+       118,
+       108
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -417,36 +969,188 @@
    "loop": false,
    "frames": [
     [
-     "corbin_ultimate_000.png",
-     0.11
+     "corbin_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       529,
+       166,
+       132
+      ],
+      "anchor": [
+       95.3,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       11,
+       118,
+       109
+      ]
+     }
     ],
     [
-     "corbin_ultimate_001.png",
-     0.11
+     "corbin_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       166,
+       529,
+       166,
+       132
+      ],
+      "anchor": [
+       81.45,
+       119
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       11,
+       17,
+       125,
+       102
+      ]
+     }
     ],
     [
-     "corbin_ultimate_002.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       332,
+       529,
+       165,
+       132
+      ],
+      "anchor": [
+       60.49,
+       117
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       5,
+       18,
+       142,
+       99
+      ]
+     }
     ],
     [
-     "corbin_ultimate_003.png",
-     0.075
+     "corbin_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       497,
+       529,
+       165,
+       132
+      ],
+      "anchor": [
+       48.1,
+       115
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       4,
+       8,
+       161,
+       107
+      ]
+     }
     ],
     [
-     "corbin_ultimate_004.png",
-     0.085
+     "corbin_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       662,
+       529,
+       165,
+       132
+      ],
+      "anchor": [
+       85.5,
+       132
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       0,
+       12,
+       165,
+       120
+      ]
+     }
     ],
     [
-     "corbin_ultimate_005.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       827,
+       529,
+       165,
+       132
+      ],
+      "anchor": [
+       49.43,
+       119
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       0,
+       28,
+       155,
+       91
+      ]
+     }
     ],
     [
-     "corbin_ultimate_006.png",
-     0.11
+     "corbin_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       992,
+       529,
+       166,
+       132
+      ],
+      "anchor": [
+       93.68,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       18,
+       17,
+       122,
+       104
+      ]
+     }
     ],
     [
-     "corbin_ultimate_007.png",
-     0.13
+     "corbin_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1158,
+       529,
+       164,
+       132
+      ],
+      "anchor": [
+       94.05,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       11,
+       116,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -455,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "corbin_skill_000.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       661,
+       166,
+       132
+      ],
+      "anchor": [
+       95.76,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       11,
+       118,
+       110
+      ]
+     }
     ],
     [
-     "corbin_skill_001.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       166,
+       661,
+       166,
+       132
+      ],
+      "anchor": [
+       94.77,
+       122
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       19,
+       13,
+       127,
+       109
+      ]
+     }
     ],
     [
-     "corbin_skill_002.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       332,
+       661,
+       165,
+       132
+      ],
+      "anchor": [
+       92.31,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       20,
+       9,
+       129,
+       112
+      ]
+     }
     ],
     [
-     "corbin_skill_003.png",
-     0.07
+     "corbin_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       497,
+       661,
+       165,
+       132
+      ],
+      "anchor": [
+       90.71,
+       124
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       18,
+       0,
+       129,
+       124
+      ]
+     }
     ],
     [
-     "corbin_skill_004.png",
-     0.08
+     "corbin_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       662,
+       661,
+       165,
+       132
+      ],
+      "anchor": [
+       90.79,
+       124
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       3,
+       0,
+       159,
+       124
+      ]
+     }
     ],
     [
-     "corbin_skill_005.png",
-     0.085
+     "corbin_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       827,
+       661,
+       165,
+       132
+      ],
+      "anchor": [
+       90.52,
+       123
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       19,
+       5,
+       131,
+       118
+      ]
+     }
     ],
     [
-     "corbin_skill_006.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       992,
+       661,
+       166,
+       132
+      ],
+      "anchor": [
+       94.73,
+       122
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       24,
+       15,
+       121,
+       107
+      ]
+     }
     ],
     [
-     "corbin_skill_007.png",
-     0.12
+     "corbin_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1158,
+       661,
+       164,
+       132
+      ],
+      "anchor": [
+       95.2,
+       122
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       26,
+       13,
+       115,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -493,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "corbin_dodge_000.png",
-     0.09
+     "corbin_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       793,
+       166,
+       130
+      ],
+      "anchor": [
+       95.71,
+       119
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       26,
+       12,
+       117,
+       107
+      ]
+     }
     ],
     [
-     "corbin_dodge_001.png",
-     0.065
+     "corbin_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       166,
+       793,
+       166,
+       130
+      ],
+      "anchor": [
+       89.32,
+       118
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       22,
+       23,
+       108,
+       95
+      ]
+     }
     ],
     [
-     "corbin_dodge_002.png",
-     0.055
+     "corbin_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       332,
+       793,
+       165,
+       130
+      ],
+      "anchor": [
+       53.08,
+       116
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       14,
+       14,
+       122,
+       102
+      ]
+     }
     ],
     [
-     "corbin_dodge_003.png",
-     0.055
+     "corbin_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       497,
+       793,
+       165,
+       130
+      ],
+      "anchor": [
+       31.8,
+       114
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       12,
+       4,
+       128,
+       110
+      ]
+     }
     ],
     [
-     "corbin_dodge_004.png",
-     0.065
+     "corbin_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       662,
+       793,
+       165,
+       130
+      ],
+      "anchor": [
+       83.46,
+       116
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       14,
+       21,
+       129,
+       95
+      ]
+     }
     ],
     [
-     "corbin_dodge_005.png",
-     0.075
+     "corbin_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       827,
+       793,
+       165,
+       130
+      ],
+      "anchor": [
+       70.83,
+       117
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       17,
+       30,
+       121,
+       87
+      ]
+     }
     ],
     [
-     "corbin_dodge_006.png",
-     0.09
+     "corbin_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       992,
+       793,
+       166,
+       130
+      ],
+      "anchor": [
+       92.54,
+       119
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       23,
+       20,
+       114,
+       99
+      ]
+     }
     ],
     [
-     "corbin_dodge_007.png",
-     0.12
+     "corbin_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1158,
+       793,
+       164,
+       130
+      ],
+      "anchor": [
+       94.32,
+       119
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       24,
+       12,
+       117,
+       107
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -531,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "corbin_hurt_000.png",
-     0.085
+     "corbin_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       923,
+       166,
+       128
+      ],
+      "anchor": [
+       95.66,
+       119
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       10,
+       118,
+       109
+      ]
+     }
     ],
     [
-     "corbin_hurt_001.png",
-     0.065
+     "corbin_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       166,
+       923,
+       166,
+       128
+      ],
+      "anchor": [
+       85.25,
+       119
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       23,
+       15,
+       110,
+       104
+      ]
+     }
     ],
     [
-     "corbin_hurt_002.png",
-     0.075
+     "corbin_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       332,
+       923,
+       165,
+       128
+      ],
+      "anchor": [
+       75.3,
+       117
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       17,
+       10,
+       129,
+       107
+      ]
+     }
     ],
     [
-     "corbin_hurt_003.png",
-     0.08
+     "corbin_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       497,
+       923,
+       165,
+       128
+      ],
+      "anchor": [
+       83.87,
+       108
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       17,
+       8,
+       127,
+       100
+      ]
+     }
     ],
     [
-     "corbin_hurt_004.png",
-     0.085
+     "corbin_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       662,
+       923,
+       165,
+       128
+      ],
+      "anchor": [
+       84.85,
+       115
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       17,
+       17,
+       116,
+       98
+      ]
+     }
     ],
     [
-     "corbin_hurt_005.png",
-     0.09
+     "corbin_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       827,
+       923,
+       165,
+       128
+      ],
+      "anchor": [
+       88.56,
+       118
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       20,
+       29,
+       118,
+       89
+      ]
+     }
     ],
     [
-     "corbin_hurt_006.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       992,
+       923,
+       166,
+       128
+      ],
+      "anchor": [
+       95.25,
+       119
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       18,
+       117,
+       101
+      ]
+     }
     ],
     [
-     "corbin_hurt_007.png",
-     0.12
+     "corbin_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1158,
+       923,
+       164,
+       128
+      ],
+      "anchor": [
+       95.65,
+       118
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       11,
+       116,
+       107
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -569,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "corbin_death_000.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1051,
+       166,
+       139
+      ],
+      "anchor": [
+       95.75,
+       118
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       25,
+       8,
+       118,
+       110
+      ]
+     }
     ],
     [
-     "corbin_death_001.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       166,
+       1051,
+       166,
+       139
+      ],
+      "anchor": [
+       91.51,
+       118
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       22,
+       14,
+       114,
+       104
+      ]
+     }
     ],
     [
-     "corbin_death_002.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       332,
+       1051,
+       165,
+       139
+      ],
+      "anchor": [
+       83.33,
+       120
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       17,
+       17,
+       123,
+       103
+      ]
+     }
     ],
     [
-     "corbin_death_003.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       497,
+       1051,
+       165,
+       139
+      ],
+      "anchor": [
+       80.5,
+       121
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       16,
+       30,
+       127,
+       91
+      ]
+     }
     ],
     [
-     "corbin_death_004.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       662,
+       1051,
+       165,
+       139
+      ],
+      "anchor": [
+       64.02,
+       123
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       11,
+       46,
+       134,
+       77
+      ]
+     }
     ],
     [
-     "corbin_death_005.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       827,
+       1051,
+       165,
+       139
+      ],
+      "anchor": [
+       81.4,
+       123
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       11,
+       54,
+       137,
+       69
+      ]
+     }
     ],
     [
-     "corbin_death_006.png",
-     0.1
+     "corbin_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       992,
+       1051,
+       166,
+       139
+      ],
+      "anchor": [
+       82.62,
+       124
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       10,
+       61,
+       138,
+       63
+      ]
+     }
     ],
     [
-     "corbin_death_007.png",
-     0.45
+     "corbin_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1158,
+       1051,
+       164,
+       139
+      ],
+      "anchor": [
+       86.74,
+       123
+      ],
+      "scale": 2.408036,
+      "bounds": [
+       10,
+       68,
+       143,
+       55
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -678,6 +1990,311 @@
     ]
    ],
    "hit_frame": 3
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "corbin_idle_000.png",
+     0.3
+    ],
+    [
+     "corbin_idle_001.png",
+     0.3
+    ],
+    [
+     "corbin_idle_002.png",
+     0.3
+    ],
+    [
+     "corbin_idle_003.png",
+     0.3
+    ],
+    [
+     "corbin_idle_004.png",
+     0.3
+    ],
+    [
+     "corbin_idle_005.png",
+     0.3
+    ],
+    [
+     "corbin_idle_006.png",
+     0.3
+    ],
+    [
+     "corbin_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "corbin_walk_000.png",
+     0.1
+    ],
+    [
+     "corbin_walk_001.png",
+     0.1
+    ],
+    [
+     "corbin_walk_002.png",
+     0.1
+    ],
+    [
+     "corbin_walk_003.png",
+     0.1
+    ],
+    [
+     "corbin_walk_004.png",
+     0.1
+    ],
+    [
+     "corbin_walk_005.png",
+     0.1
+    ],
+    [
+     "corbin_walk_006.png",
+     0.1
+    ],
+    [
+     "corbin_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "corbin_attack_2_000.png",
+     0.1
+    ],
+    [
+     "corbin_attack_2_001.png",
+     0.085
+    ],
+    [
+     "corbin_attack_2_002.png",
+     0.06
+    ],
+    [
+     "corbin_attack_2_003.png",
+     0.06
+    ],
+    [
+     "corbin_attack_2_004.png",
+     0.065
+    ],
+    [
+     "corbin_attack_2_005.png",
+     0.075
+    ],
+    [
+     "corbin_attack_2_006.png",
+     0.11
+    ],
+    [
+     "corbin_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "corbin_ultimate_000.png",
+     0.11
+    ],
+    [
+     "corbin_ultimate_001.png",
+     0.11
+    ],
+    [
+     "corbin_ultimate_002.png",
+     0.1
+    ],
+    [
+     "corbin_ultimate_003.png",
+     0.075
+    ],
+    [
+     "corbin_ultimate_004.png",
+     0.085
+    ],
+    [
+     "corbin_ultimate_005.png",
+     0.1
+    ],
+    [
+     "corbin_ultimate_006.png",
+     0.11
+    ],
+    [
+     "corbin_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "corbin_skill_000.png",
+     0.1
+    ],
+    [
+     "corbin_skill_001.png",
+     0.1
+    ],
+    [
+     "corbin_skill_002.png",
+     0.1
+    ],
+    [
+     "corbin_skill_003.png",
+     0.07
+    ],
+    [
+     "corbin_skill_004.png",
+     0.08
+    ],
+    [
+     "corbin_skill_005.png",
+     0.085
+    ],
+    [
+     "corbin_skill_006.png",
+     0.1
+    ],
+    [
+     "corbin_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "corbin_dodge_000.png",
+     0.09
+    ],
+    [
+     "corbin_dodge_001.png",
+     0.065
+    ],
+    [
+     "corbin_dodge_002.png",
+     0.055
+    ],
+    [
+     "corbin_dodge_003.png",
+     0.055
+    ],
+    [
+     "corbin_dodge_004.png",
+     0.065
+    ],
+    [
+     "corbin_dodge_005.png",
+     0.075
+    ],
+    [
+     "corbin_dodge_006.png",
+     0.09
+    ],
+    [
+     "corbin_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "corbin_hurt_000.png",
+     0.085
+    ],
+    [
+     "corbin_hurt_001.png",
+     0.065
+    ],
+    [
+     "corbin_hurt_002.png",
+     0.075
+    ],
+    [
+     "corbin_hurt_003.png",
+     0.08
+    ],
+    [
+     "corbin_hurt_004.png",
+     0.085
+    ],
+    [
+     "corbin_hurt_005.png",
+     0.09
+    ],
+    [
+     "corbin_hurt_006.png",
+     0.1
+    ],
+    [
+     "corbin_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "corbin_death_000.png",
+     0.1
+    ],
+    [
+     "corbin_death_001.png",
+     0.1
+    ],
+    [
+     "corbin_death_002.png",
+     0.1
+    ],
+    [
+     "corbin_death_003.png",
+     0.1
+    ],
+    [
+     "corbin_death_004.png",
+     0.1
+    ],
+    [
+     "corbin_death_005.png",
+     0.1
+    ],
+    [
+     "corbin_death_006.png",
+     0.1
+    ],
+    [
+     "corbin_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

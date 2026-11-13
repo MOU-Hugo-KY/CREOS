@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "braise_idle_000.png",
-     0.3
+     "braise_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       155,
+       153
+      ],
+      "anchor": [
+       84.66,
+       137
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       20,
+       15,
+       123,
+       122
+      ]
+     }
     ],
     [
-     "braise_idle_001.png",
-     0.3
+     "braise_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       155,
+       0,
+       147,
+       153
+      ],
+      "anchor": [
+       76.83,
+       137
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       12,
+       14,
+       123,
+       123
+      ]
+     }
     ],
     [
-     "braise_idle_002.png",
-     0.3
+     "braise_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       302,
+       0,
+       146,
+       153
+      ],
+      "anchor": [
+       78.18,
+       137
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       12,
+       12,
+       122,
+       125
+      ]
+     }
     ],
     [
-     "braise_idle_003.png",
-     0.3
+     "braise_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       448,
+       0,
+       147,
+       153
+      ],
+      "anchor": [
+       76.73,
+       137
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       13,
+       12,
+       122,
+       125
+      ]
+     }
     ],
     [
-     "braise_idle_004.png",
-     0.3
+     "braise_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       595,
+       0,
+       147,
+       153
+      ],
+      "anchor": [
+       76.18,
+       137
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       13,
+       16,
+       121,
+       121
+      ]
+     }
     ],
     [
-     "braise_idle_005.png",
-     0.3
+     "braise_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       742,
+       0,
+       148,
+       153
+      ],
+      "anchor": [
+       77.08,
+       137
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       14,
+       17,
+       120,
+       120
+      ]
+     }
     ],
     [
-     "braise_idle_006.png",
-     0.3
+     "braise_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       890,
+       0,
+       146,
+       153
+      ],
+      "anchor": [
+       78.14,
+       137
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       12,
+       17,
+       122,
+       120
+      ]
+     }
     ],
     [
-     "braise_idle_007.png",
-     0.3
+     "braise_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1036,
+       0,
+       146,
+       153
+      ],
+      "anchor": [
+       77.79,
+       137
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       13,
+       19,
+       122,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "braise_walk_000.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       153,
+       155,
+       146
+      ],
+      "anchor": [
+       74.39,
+       131
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       17,
+       9,
+       120,
+       122
+      ]
+     }
     ],
     [
-     "braise_walk_001.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       155,
+       153,
+       147,
+       146
+      ],
+      "anchor": [
+       67.6,
+       130
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       12,
+       8,
+       117,
+       122
+      ]
+     }
     ],
     [
-     "braise_walk_002.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       302,
+       153,
+       146,
+       146
+      ],
+      "anchor": [
+       70.83,
+       131
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       13,
+       7,
+       118,
+       124
+      ]
+     }
     ],
     [
-     "braise_walk_003.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       448,
+       153,
+       147,
+       146
+      ],
+      "anchor": [
+       74.9,
+       130
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       14,
+       6,
+       116,
+       124
+      ]
+     }
     ],
     [
-     "braise_walk_004.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       595,
+       153,
+       147,
+       146
+      ],
+      "anchor": [
+       74.99,
+       130
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       13,
+       9,
+       117,
+       121
+      ]
+     }
     ],
     [
-     "braise_walk_005.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       742,
+       153,
+       148,
+       146
+      ],
+      "anchor": [
+       72.62,
+       131
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       14,
+       10,
+       117,
+       121
+      ]
+     }
     ],
     [
-     "braise_walk_006.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       890,
+       153,
+       146,
+       146
+      ],
+      "anchor": [
+       63.5,
+       130
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       13,
+       9,
+       118,
+       121
+      ]
+     }
     ],
     [
-     "braise_walk_007.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1036,
+       153,
+       146,
+       146
+      ],
+      "anchor": [
+       71.85,
+       130
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       13,
+       10,
+       119,
+       120
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,112 +405,752 @@
    "loop": false,
    "frames": [
     [
-     "braise_attack_1_000.png",
-     0.1
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       318,
+       338
+      ],
+      "anchor": [
+       148.67,
+       274
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       73,
+       90,
+       173,
+       184
+      ]
+     }
     ],
     [
-     "braise_attack_1_001.png",
-     0.1
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       318,
+       0,
+       314,
+       338
+      ],
+      "anchor": [
+       146.29,
+       274
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       70,
+       89,
+       175,
+       185
+      ]
+     }
     ],
     [
-     "braise_attack_1_002.png",
-     0.08
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       632,
+       0,
+       312,
+       338
+      ],
+      "anchor": [
+       146.57,
+       274
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       71,
+       90,
+       173,
+       184
+      ]
+     }
     ],
     [
-     "braise_attack_1_003.png",
-     0.05
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       944,
+       0,
+       317,
+       338
+      ],
+      "anchor": [
+       150.07,
+       274
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       74,
+       87,
+       161,
+       187
+      ]
+     }
     ],
     [
-     "braise_attack_1_004.png",
-     0.065
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       338,
+       318,
+       310
+      ],
+      "anchor": [
+       157.86,
+       245
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       72,
+       60,
+       167,
+       185
+      ]
+     }
     ],
     [
-     "braise_attack_1_005.png",
-     0.07
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       318,
+       338,
+       314,
+       310
+      ],
+      "anchor": [
+       155.15,
+       245
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       62,
+       60,
+       174,
+       185
+      ]
+     }
     ],
     [
-     "braise_attack_1_006.png",
-     0.1
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       632,
+       338,
+       312,
+       310
+      ],
+      "anchor": [
+       157.24,
+       245
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       64,
+       62,
+       167,
+       183
+      ]
+     }
     ],
     [
-     "braise_attack_1_007.png",
-     0.12
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       944,
+       338,
+       317,
+       310
+      ],
+      "anchor": [
+       139.86,
+       245
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       61,
+       64,
+       202,
+       181
+      ]
+     }
+    ],
+    [
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       648,
+       318,
+       312
+      ],
+      "anchor": [
+       128.07,
+       244
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       47,
+       68,
+       240,
+       176
+      ]
+     }
+    ],
+    [
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       318,
+       648,
+       314,
+       312
+      ],
+      "anchor": [
+       131.23,
+       244
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       51,
+       66,
+       200,
+       178
+      ]
+     }
+    ],
+    [
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       632,
+       648,
+       312,
+       312
+      ],
+      "anchor": [
+       141.03,
+       244
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       55,
+       65,
+       193,
+       179
+      ]
+     }
+    ],
+    [
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       944,
+       648,
+       317,
+       312
+      ],
+      "anchor": [
+       156.42,
+       244
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       59,
+       65,
+       186,
+       179
+      ]
+     }
+    ],
+    [
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       960,
+       318,
+       287
+      ],
+      "anchor": [
+       143.37,
+       244
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       63,
+       63,
+       180,
+       181
+      ]
+     }
+    ],
+    [
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       318,
+       960,
+       314,
+       287
+      ],
+      "anchor": [
+       142.07,
+       244
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       62,
+       63,
+       178,
+       181
+      ]
+     }
+    ],
+    [
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       632,
+       960,
+       312,
+       287
+      ],
+      "anchor": [
+       145.57,
+       244
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       65,
+       64,
+       178,
+       180
+      ]
+     }
+    ],
+    [
+     "braise_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       944,
+       960,
+       317,
+       287
+      ],
+      "anchor": [
+       149.24,
+       244
+      ],
+      "scale": 1.493092,
+      "bounds": [
+       70,
+       64,
+       178,
+       180
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "braise_attack_2_000.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       450,
+       155,
+       151
+      ],
+      "anchor": [
+       81.68,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       12,
+       16,
+       130,
+       113
+      ]
+     }
     ],
     [
-     "braise_attack_2_001.png",
-     0.085
+     "braise_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       155,
+       450,
+       147,
+       151
+      ],
+      "anchor": [
+       74.34,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       9,
+       21,
+       124,
+       108
+      ]
+     }
     ],
     [
-     "braise_attack_2_002.png",
-     0.06
+     "braise_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       302,
+       450,
+       146,
+       151
+      ],
+      "anchor": [
+       68.32,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       10,
+       11,
+       119,
+       118
+      ]
+     }
     ],
     [
-     "braise_attack_2_003.png",
-     0.06
+     "braise_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       448,
+       450,
+       147,
+       151
+      ],
+      "anchor": [
+       59.24,
+       128
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       5,
+       2,
+       142,
+       126
+      ]
+     }
     ],
     [
-     "braise_attack_2_004.png",
-     0.065
+     "braise_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       595,
+       450,
+       147,
+       151
+      ],
+      "anchor": [
+       58.35,
+       128
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       0,
+       2,
+       147,
+       126
+      ]
+     }
     ],
     [
-     "braise_attack_2_005.png",
-     0.075
+     "braise_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       742,
+       450,
+       148,
+       151
+      ],
+      "anchor": [
+       71.57,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       0,
+       5,
+       137,
+       124
+      ]
+     }
     ],
     [
-     "braise_attack_2_006.png",
-     0.11
+     "braise_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       890,
+       450,
+       146,
+       151
+      ],
+      "anchor": [
+       76.09,
+       128
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       8,
+       10,
+       121,
+       118
+      ]
+     }
     ],
     [
-     "braise_attack_2_007.png",
-     0.12
+     "braise_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1036,
+       450,
+       146,
+       151
+      ],
+      "anchor": [
+       69.42,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       10,
+       13,
+       121,
+       116
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 4
   },
   "ultimate": {
    "loop": false,
    "frames": [
     [
-     "braise_ultimate_000.png",
-     0.11
+     "braise_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       601,
+       155,
+       145
+      ],
+      "anchor": [
+       80.61,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       13,
+       16,
+       126,
+       110
+      ]
+     }
     ],
     [
-     "braise_ultimate_001.png",
-     0.11
+     "braise_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       155,
+       601,
+       147,
+       145
+      ],
+      "anchor": [
+       71.02,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       3,
+       12,
+       131,
+       114
+      ]
+     }
     ],
     [
-     "braise_ultimate_002.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       302,
+       601,
+       146,
+       145
+      ],
+      "anchor": [
+       60.29,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       2,
+       5,
+       132,
+       121
+      ]
+     }
     ],
     [
-     "braise_ultimate_003.png",
-     0.075
+     "braise_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       448,
+       601,
+       147,
+       145
+      ],
+      "anchor": [
+       56.78,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       0,
+       1,
+       140,
+       125
+      ]
+     }
     ],
     [
-     "braise_ultimate_004.png",
-     0.085
+     "braise_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       595,
+       601,
+       147,
+       145
+      ],
+      "anchor": [
+       62.78,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       3,
+       5,
+       143,
+       121
+      ]
+     }
     ],
     [
-     "braise_ultimate_005.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       742,
+       601,
+       148,
+       145
+      ],
+      "anchor": [
+       66.22,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       6,
+       14,
+       117,
+       112
+      ]
+     }
     ],
     [
-     "braise_ultimate_006.png",
-     0.11
+     "braise_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       890,
+       601,
+       146,
+       145
+      ],
+      "anchor": [
+       70.37,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       4,
+       11,
+       127,
+       115
+      ]
+     }
     ],
     [
-     "braise_ultimate_007.png",
-     0.13
+     "braise_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1036,
+       601,
+       146,
+       145
+      ],
+      "anchor": [
+       73.16,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       8,
+       16,
+       124,
+       110
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "braise_skill_000.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       746,
+       155,
+       142
+      ],
+      "anchor": [
+       79.23,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       16,
+       8,
+       117,
+       117
+      ]
+     }
     ],
     [
-     "braise_skill_001.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       155,
+       746,
+       147,
+       142
+      ],
+      "anchor": [
+       73.51,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       9,
+       8,
+       120,
+       117
+      ]
+     }
     ],
     [
-     "braise_skill_002.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       302,
+       746,
+       146,
+       142
+      ],
+      "anchor": [
+       67.8,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       6,
+       8,
+       122,
+       117
+      ]
+     }
     ],
     [
-     "braise_skill_003.png",
-     0.07
+     "braise_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       448,
+       746,
+       147,
+       142
+      ],
+      "anchor": [
+       65.96,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       1,
+       6,
+       131,
+       119
+      ]
+     }
     ],
     [
-     "braise_skill_004.png",
-     0.08
+     "braise_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       595,
+       746,
+       147,
+       142
+      ],
+      "anchor": [
+       68.52,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       4,
+       10,
+       132,
+       115
+      ]
+     }
     ],
     [
-     "braise_skill_005.png",
-     0.085
+     "braise_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       742,
+       746,
+       148,
+       142
+      ],
+      "anchor": [
+       71.48,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       4,
+       10,
+       123,
+       115
+      ]
+     }
     ],
     [
-     "braise_skill_006.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       890,
+       746,
+       146,
+       142
+      ],
+      "anchor": [
+       74.06,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       6,
+       10,
+       120,
+       115
+      ]
+     }
     ],
     [
-     "braise_skill_007.png",
-     0.12
+     "braise_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1036,
+       746,
+       146,
+       142
+      ],
+      "anchor": [
+       74.82,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       8,
+       12,
+       118,
+       113
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "braise_hurt_000.png",
-     0.085
+     "braise_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       1035,
+       155,
+       149
+      ],
+      "anchor": [
+       82.29,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       17,
+       14,
+       121,
+       115
+      ]
+     }
     ],
     [
-     "braise_hurt_001.png",
-     0.065
+     "braise_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       155,
+       1035,
+       147,
+       149
+      ],
+      "anchor": [
+       77.54,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       9,
+       9,
+       124,
+       120
+      ]
+     }
     ],
     [
-     "braise_hurt_002.png",
-     0.075
+     "braise_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       302,
+       1035,
+       146,
+       149
+      ],
+      "anchor": [
+       71.78,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       1,
+       7,
+       125,
+       122
+      ]
+     }
     ],
     [
-     "braise_hurt_003.png",
-     0.08
+     "braise_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       448,
+       1035,
+       147,
+       149
+      ],
+      "anchor": [
+       69.7,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       2,
+       7,
+       121,
+       122
+      ]
+     }
     ],
     [
-     "braise_hurt_004.png",
-     0.085
+     "braise_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       595,
+       1035,
+       147,
+       149
+      ],
+      "anchor": [
+       71.25,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       0,
+       9,
+       120,
+       120
+      ]
+     }
     ],
     [
-     "braise_hurt_005.png",
-     0.09
+     "braise_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       742,
+       1035,
+       148,
+       149
+      ],
+      "anchor": [
+       69.25,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       5,
+       15,
+       119,
+       114
+      ]
+     }
     ],
     [
-     "braise_hurt_006.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       890,
+       1035,
+       146,
+       149
+      ],
+      "anchor": [
+       77.19,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       8,
+       15,
+       122,
+       114
+      ]
+     }
     ],
     [
-     "braise_hurt_007.png",
-     0.12
+     "braise_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1036,
+       1035,
+       146,
+       149
+      ],
+      "anchor": [
+       77.47,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       9,
+       14,
+       124,
+       115
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "braise_dodge_000.png",
-     0.09
+     "braise_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       888,
+       155,
+       147
+      ],
+      "anchor": [
+       77.36,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       10,
+       11,
+       145,
+       115
+      ]
+     }
     ],
     [
-     "braise_dodge_001.png",
-     0.065
+     "braise_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       155,
+       888,
+       147,
+       147
+      ],
+      "anchor": [
+       63.0,
+       125
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       0,
+       11,
+       147,
+       114
+      ]
+     }
     ],
     [
-     "braise_dodge_002.png",
-     0.055
+     "braise_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       302,
+       888,
+       146,
+       147
+      ],
+      "anchor": [
+       77.53,
+       124
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       0,
+       21,
+       146,
+       103
+      ]
+     }
     ],
     [
-     "braise_dodge_003.png",
-     0.055
+     "braise_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       448,
+       888,
+       147,
+       147
+      ],
+      "anchor": [
+       63.97,
+       124
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       0,
+       29,
+       147,
+       95
+      ]
+     }
     ],
     [
-     "braise_dodge_004.png",
-     0.065
+     "braise_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       595,
+       888,
+       147,
+       147
+      ],
+      "anchor": [
+       72.07,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       0,
+       17,
+       124,
+       109
+      ]
+     }
     ],
     [
-     "braise_dodge_005.png",
-     0.075
+     "braise_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       742,
+       888,
+       148,
+       147
+      ],
+      "anchor": [
+       73.71,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       3,
+       14,
+       123,
+       112
+      ]
+     }
     ],
     [
-     "braise_dodge_006.png",
-     0.09
+     "braise_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       890,
+       888,
+       146,
+       147
+      ],
+      "anchor": [
+       75.47,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       5,
+       18,
+       124,
+       108
+      ]
+     }
     ],
     [
-     "braise_dodge_007.png",
-     0.12
+     "braise_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1036,
+       888,
+       146,
+       147
+      ],
+      "anchor": [
+       77.75,
+       126
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       10,
+       17,
+       123,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "braise_death_000.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1184,
+       155,
+       146
+      ],
+      "anchor": [
+       79.29,
+       128
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       17,
+       11,
+       122,
+       117
+      ]
+     }
     ],
     [
-     "braise_death_001.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       155,
+       1184,
+       147,
+       146
+      ],
+      "anchor": [
+       73.77,
+       128
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       5,
+       16,
+       118,
+       112
+      ]
+     }
     ],
     [
-     "braise_death_002.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       302,
+       1184,
+       146,
+       146
+      ],
+      "anchor": [
+       62.61,
+       128
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       7,
+       27,
+       111,
+       101
+      ]
+     }
     ],
     [
-     "braise_death_003.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       448,
+       1184,
+       147,
+       146
+      ],
+      "anchor": [
+       66.67,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       7,
+       42,
+       119,
+       87
+      ]
+     }
     ],
     [
-     "braise_death_004.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       595,
+       1184,
+       147,
+       146
+      ],
+      "anchor": [
+       65.46,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       1,
+       57,
+       129,
+       72
+      ]
+     }
     ],
     [
-     "braise_death_005.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       742,
+       1184,
+       148,
+       146
+      ],
+      "anchor": [
+       72.57,
+       129
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       3,
+       65,
+       129,
+       64
+      ]
+     }
     ],
     [
-     "braise_death_006.png",
-     0.1
+     "braise_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       890,
+       1184,
+       146,
+       146
+      ],
+      "anchor": [
+       71.05,
+       128
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       2,
+       65,
+       131,
+       63
+      ]
+     }
     ],
     [
-     "braise_death_007.png",
-     0.45
+     "braise_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1036,
+       1184,
+       146,
+       146
+      ],
+      "anchor": [
+       73.74,
+       128
+      ],
+      "scale": 2.251877,
+      "bounds": [
+       6,
+       65,
+       130,
+       63
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "braise_idle_000.png",
+     0.3
+    ],
+    [
+     "braise_idle_001.png",
+     0.3
+    ],
+    [
+     "braise_idle_002.png",
+     0.3
+    ],
+    [
+     "braise_idle_003.png",
+     0.3
+    ],
+    [
+     "braise_idle_004.png",
+     0.3
+    ],
+    [
+     "braise_idle_005.png",
+     0.3
+    ],
+    [
+     "braise_idle_006.png",
+     0.3
+    ],
+    [
+     "braise_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "braise_walk_000.png",
+     0.1
+    ],
+    [
+     "braise_walk_001.png",
+     0.1
+    ],
+    [
+     "braise_walk_002.png",
+     0.1
+    ],
+    [
+     "braise_walk_003.png",
+     0.1
+    ],
+    [
+     "braise_walk_004.png",
+     0.1
+    ],
+    [
+     "braise_walk_005.png",
+     0.1
+    ],
+    [
+     "braise_walk_006.png",
+     0.1
+    ],
+    [
+     "braise_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "braise_attack_1_000.png",
+     0.1
+    ],
+    [
+     "braise_attack_1_001.png",
+     0.1
+    ],
+    [
+     "braise_attack_1_002.png",
+     0.08
+    ],
+    [
+     "braise_attack_1_003.png",
+     0.05
+    ],
+    [
+     "braise_attack_1_004.png",
+     0.065
+    ],
+    [
+     "braise_attack_1_005.png",
+     0.07
+    ],
+    [
+     "braise_attack_1_006.png",
+     0.1
+    ],
+    [
+     "braise_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "braise_attack_2_000.png",
+     0.1
+    ],
+    [
+     "braise_attack_2_001.png",
+     0.085
+    ],
+    [
+     "braise_attack_2_002.png",
+     0.06
+    ],
+    [
+     "braise_attack_2_003.png",
+     0.06
+    ],
+    [
+     "braise_attack_2_004.png",
+     0.065
+    ],
+    [
+     "braise_attack_2_005.png",
+     0.075
+    ],
+    [
+     "braise_attack_2_006.png",
+     0.11
+    ],
+    [
+     "braise_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "braise_ultimate_000.png",
+     0.11
+    ],
+    [
+     "braise_ultimate_001.png",
+     0.11
+    ],
+    [
+     "braise_ultimate_002.png",
+     0.1
+    ],
+    [
+     "braise_ultimate_003.png",
+     0.075
+    ],
+    [
+     "braise_ultimate_004.png",
+     0.085
+    ],
+    [
+     "braise_ultimate_005.png",
+     0.1
+    ],
+    [
+     "braise_ultimate_006.png",
+     0.11
+    ],
+    [
+     "braise_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "braise_skill_000.png",
+     0.1
+    ],
+    [
+     "braise_skill_001.png",
+     0.1
+    ],
+    [
+     "braise_skill_002.png",
+     0.1
+    ],
+    [
+     "braise_skill_003.png",
+     0.07
+    ],
+    [
+     "braise_skill_004.png",
+     0.08
+    ],
+    [
+     "braise_skill_005.png",
+     0.085
+    ],
+    [
+     "braise_skill_006.png",
+     0.1
+    ],
+    [
+     "braise_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "braise_dodge_000.png",
+     0.09
+    ],
+    [
+     "braise_dodge_001.png",
+     0.065
+    ],
+    [
+     "braise_dodge_002.png",
+     0.055
+    ],
+    [
+     "braise_dodge_003.png",
+     0.055
+    ],
+    [
+     "braise_dodge_004.png",
+     0.065
+    ],
+    [
+     "braise_dodge_005.png",
+     0.075
+    ],
+    [
+     "braise_dodge_006.png",
+     0.09
+    ],
+    [
+     "braise_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "braise_hurt_000.png",
+     0.085
+    ],
+    [
+     "braise_hurt_001.png",
+     0.065
+    ],
+    [
+     "braise_hurt_002.png",
+     0.075
+    ],
+    [
+     "braise_hurt_003.png",
+     0.08
+    ],
+    [
+     "braise_hurt_004.png",
+     0.085
+    ],
+    [
+     "braise_hurt_005.png",
+     0.09
+    ],
+    [
+     "braise_hurt_006.png",
+     0.1
+    ],
+    [
+     "braise_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "braise_death_000.png",
+     0.1
+    ],
+    [
+     "braise_death_001.png",
+     0.1
+    ],
+    [
+     "braise_death_002.png",
+     0.1
+    ],
+    [
+     "braise_death_003.png",
+     0.1
+    ],
+    [
+     "braise_death_004.png",
+     0.1
+    ],
+    [
+     "braise_death_005.png",
+     0.1
+    ],
+    [
+     "braise_death_006.png",
+     0.1
+    ],
+    [
+     "braise_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

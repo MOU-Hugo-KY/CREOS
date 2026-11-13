@@ -100,7 +100,7 @@ static func pixel_head(id: String) -> Texture2D:
 		_cache[key] = null
 		return null
 	var img: Image = (sheet.anims.idle.frames[0][0] as Texture2D).get_image()
-	var used := img.get_used_rect()
+	var used := sheet.frame_rect(sheet.anims.idle.frames[0][0])
 	var h := used.size.y
 	# Axe du corps : le milieu des pieds ; la tête : le haut de la silhouette, près de cet axe.
 	var feet := 0.0

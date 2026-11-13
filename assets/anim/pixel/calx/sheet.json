@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "calx_idle_000.png",
-     0.3
+     "calx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       183,
+       139
+      ],
+      "anchor": [
+       94.25,
+       125
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       43,
+       18,
+       112,
+       107
+      ]
+     }
     ],
     [
-     "calx_idle_001.png",
-     0.3
+     "calx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       183,
+       0,
+       169,
+       139
+      ],
+      "anchor": [
+       79.38,
+       125
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       28,
+       17,
+       113,
+       108
+      ]
+     }
     ],
     [
-     "calx_idle_002.png",
-     0.3
+     "calx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       352,
+       0,
+       167,
+       139
+      ],
+      "anchor": [
+       86.7,
+       124
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       27,
+       14,
+       114,
+       110
+      ]
+     }
     ],
     [
-     "calx_idle_003.png",
-     0.3
+     "calx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       519,
+       0,
+       166,
+       139
+      ],
+      "anchor": [
+       81.1,
+       123
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       26,
+       15,
+       115,
+       108
+      ]
+     }
     ],
     [
-     "calx_idle_004.png",
-     0.3
+     "calx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       685,
+       0,
+       165,
+       139
+      ],
+      "anchor": [
+       79.23,
+       124
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       26,
+       17,
+       112,
+       107
+      ]
+     }
     ],
     [
-     "calx_idle_005.png",
-     0.3
+     "calx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       850,
+       0,
+       165,
+       139
+      ],
+      "anchor": [
+       78.61,
+       125
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       27,
+       18,
+       110,
+       107
+      ]
+     }
     ],
     [
-     "calx_idle_006.png",
-     0.3
+     "calx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1015,
+       0,
+       166,
+       139
+      ],
+      "anchor": [
+       79.7,
+       125
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       28,
+       20,
+       111,
+       105
+      ]
+     }
     ],
     [
-     "calx_idle_007.png",
-     0.3
+     "calx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1181,
+       0,
+       149,
+       139
+      ],
+      "anchor": [
+       78.3,
+       124
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       27,
+       20,
+       110,
+       104
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "calx_walk_000.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       139,
+       183,
+       129
+      ],
+      "anchor": [
+       94.43,
+       114
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       42,
+       5,
+       112,
+       109
+      ]
+     }
     ],
     [
-     "calx_walk_001.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       183,
+       139,
+       169,
+       129
+      ],
+      "anchor": [
+       72.48,
+       114
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       29,
+       5,
+       107,
+       109
+      ]
+     }
     ],
     [
-     "calx_walk_002.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       352,
+       139,
+       167,
+       129
+      ],
+      "anchor": [
+       90.2,
+       113
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       28,
+       5,
+       100,
+       108
+      ]
+     }
     ],
     [
-     "calx_walk_003.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       519,
+       139,
+       166,
+       129
+      ],
+      "anchor": [
+       70.94,
+       113
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       24,
+       9,
+       97,
+       104
+      ]
+     }
     ],
     [
-     "calx_walk_004.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       685,
+       139,
+       165,
+       129
+      ],
+      "anchor": [
+       72.52,
+       114
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       23,
+       9,
+       99,
+       105
+      ]
+     }
     ],
     [
-     "calx_walk_005.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       850,
+       139,
+       165,
+       129
+      ],
+      "anchor": [
+       77.14,
+       114
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       31,
+       9,
+       94,
+       105
+      ]
+     }
     ],
     [
-     "calx_walk_006.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1015,
+       139,
+       166,
+       129
+      ],
+      "anchor": [
+       73.22,
+       114
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       33,
+       9,
+       95,
+       105
+      ]
+     }
     ],
     [
-     "calx_walk_007.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1181,
+       139,
+       149,
+       129
+      ],
+      "anchor": [
+       73.49,
+       114
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       32,
+       8,
+       98,
+       106
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +405,562 @@
    "loop": false,
    "frames": [
     [
-     "calx_attack_1_000.png",
-     0.1
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       373,
+       322
+      ],
+      "anchor": [
+       182.31,
+       276
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       102,
+       109,
+       182,
+       167
+      ]
+     }
     ],
     [
-     "calx_attack_1_001.png",
-     0.1
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       373,
+       0,
+       360,
+       322
+      ],
+      "anchor": [
+       169.78,
+       276
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       88,
+       109,
+       183,
+       167
+      ]
+     }
     ],
     [
-     "calx_attack_1_002.png",
-     0.08
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       733,
+       0,
+       361,
+       322
+      ],
+      "anchor": [
+       170.44,
+       276
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       88,
+       109,
+       184,
+       167
+      ]
+     }
     ],
     [
-     "calx_attack_1_003.png",
-     0.05
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1094,
+       0,
+       354,
+       322
+      ],
+      "anchor": [
+       169.38,
+       276
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       81,
+       111,
+       202,
+       165
+      ]
+     }
     ],
     [
-     "calx_attack_1_004.png",
-     0.065
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       322,
+       373,
+       250
+      ],
+      "anchor": [
+       178.58,
+       202
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       93,
+       50,
+       194,
+       152
+      ]
+     }
     ],
     [
-     "calx_attack_1_005.png",
-     0.07
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       373,
+       322,
+       360,
+       250
+      ],
+      "anchor": [
+       166.68,
+       202
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       77,
+       46,
+       181,
+       156
+      ]
+     }
     ],
     [
-     "calx_attack_1_006.png",
-     0.1
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       733,
+       322,
+       361,
+       250
+      ],
+      "anchor": [
+       169.68,
+       202
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       81,
+       46,
+       189,
+       156
+      ]
+     }
     ],
     [
-     "calx_attack_1_007.png",
-     0.12
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1094,
+       322,
+       354,
+       250
+      ],
+      "anchor": [
+       162.57,
+       202
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       84,
+       47,
+       231,
+       155
+      ]
+     }
+    ],
+    [
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       572,
+       373,
+       249
+      ],
+      "anchor": [
+       180.31,
+       201
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       104,
+       45,
+       253,
+       156
+      ]
+     }
+    ],
+    [
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       373,
+       572,
+       360,
+       249
+      ],
+      "anchor": [
+       167.32,
+       201
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       93,
+       45,
+       212,
+       156
+      ]
+     }
+    ],
+    [
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       733,
+       572,
+       361,
+       249
+      ],
+      "anchor": [
+       170.63,
+       201
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       95,
+       42,
+       189,
+       159
+      ]
+     }
+    ],
+    [
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1094,
+       572,
+       354,
+       249
+      ],
+      "anchor": [
+       171.01,
+       201
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       94,
+       42,
+       173,
+       159
+      ]
+     }
+    ],
+    [
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       821,
+       373,
+       265
+      ],
+      "anchor": [
+       183.81,
+       206
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       102,
+       43,
+       175,
+       163
+      ]
+     }
+    ],
+    [
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       373,
+       821,
+       360,
+       265
+      ],
+      "anchor": [
+       172.12,
+       207
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       92,
+       43,
+       171,
+       164
+      ]
+     }
+    ],
+    [
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       733,
+       821,
+       361,
+       265
+      ],
+      "anchor": [
+       175.68,
+       207
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       94,
+       43,
+       176,
+       164
+      ]
+     }
+    ],
+    [
+     "calx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1094,
+       821,
+       354,
+       265
+      ],
+      "anchor": [
+       176.33,
+       207
+      ],
+      "scale": 1.660623,
+      "bounds": [
+       94,
+       43,
+       178,
+       164
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "calx_attack_2_000.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       400,
+       183,
+       130
+      ],
+      "anchor": [
+       85.02,
+       110
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       36,
+       9,
+       113,
+       101
+      ]
+     }
     ],
     [
-     "calx_attack_2_001.png",
-     0.085
+     "calx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       183,
+       400,
+       169,
+       130
+      ],
+      "anchor": [
+       76.2,
+       109
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       19,
+       4,
+       114,
+       105
+      ]
+     }
     ],
     [
-     "calx_attack_2_002.png",
-     0.06
+     "calx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       352,
+       400,
+       167,
+       130
+      ],
+      "anchor": [
+       64.0,
+       130
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       6,
+       0,
+       161,
+       130
+      ]
+     }
     ],
     [
-     "calx_attack_2_003.png",
-     0.06
+     "calx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       519,
+       400,
+       166,
+       130
+      ],
+      "anchor": [
+       70.58,
+       130
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       3,
+       4,
+       152,
+       126
+      ]
+     }
     ],
     [
-     "calx_attack_2_004.png",
-     0.065
+     "calx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       685,
+       400,
+       165,
+       130
+      ],
+      "anchor": [
+       60.79,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       11,
+       9,
+       146,
+       102
+      ]
+     }
     ],
     [
-     "calx_attack_2_005.png",
-     0.075
+     "calx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       850,
+       400,
+       165,
+       130
+      ],
+      "anchor": [
+       64.45,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       14,
+       10,
+       126,
+       98
+      ]
+     }
     ],
     [
-     "calx_attack_2_006.png",
-     0.11
+     "calx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1015,
+       400,
+       166,
+       130
+      ],
+      "anchor": [
+       66.21,
+       109
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       17,
+       10,
+       115,
+       99
+      ]
+     }
     ],
     [
-     "calx_attack_2_007.png",
-     0.12
+     "calx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1181,
+       400,
+       149,
+       130
+      ],
+      "anchor": [
+       65.28,
+       110
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       18,
+       10,
+       109,
+       100
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -177,36 +969,188 @@
    "loop": false,
    "frames": [
     [
-     "calx_ultimate_000.png",
-     0.11
+     "calx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       530,
+       183,
+       126
+      ],
+      "anchor": [
+       90.05,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       36,
+       6,
+       116,
+       105
+      ]
+     }
     ],
     [
-     "calx_ultimate_001.png",
-     0.11
+     "calx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       183,
+       530,
+       169,
+       126
+      ],
+      "anchor": [
+       72.36,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       18,
+       6,
+       123,
+       105
+      ]
+     }
     ],
     [
-     "calx_ultimate_002.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       352,
+       530,
+       167,
+       126
+      ],
+      "anchor": [
+       60.11,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       0,
+       0,
+       167,
+       111
+      ]
+     }
     ],
     [
-     "calx_ultimate_003.png",
-     0.075
+     "calx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       519,
+       530,
+       166,
+       126
+      ],
+      "anchor": [
+       63.85,
+       115
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       0,
+       0,
+       154,
+       115
+      ]
+     }
     ],
     [
-     "calx_ultimate_004.png",
-     0.085
+     "calx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       685,
+       530,
+       165,
+       126
+      ],
+      "anchor": [
+       68.7,
+       110
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       1,
+       6,
+       162,
+       104
+      ]
+     }
     ],
     [
-     "calx_ultimate_005.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       850,
+       530,
+       165,
+       126
+      ],
+      "anchor": [
+       74.4,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       21,
+       10,
+       131,
+       101
+      ]
+     }
     ],
     [
-     "calx_ultimate_006.png",
-     0.11
+     "calx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1015,
+       530,
+       166,
+       126
+      ],
+      "anchor": [
+       70.06,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       22,
+       9,
+       112,
+       102
+      ]
+     }
     ],
     [
-     "calx_ultimate_007.png",
-     0.13
+     "calx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1181,
+       530,
+       149,
+       126
+      ],
+      "anchor": [
+       72.03,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       22,
+       11,
+       108,
+       100
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "calx_skill_000.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       656,
+       183,
+       124
+      ],
+      "anchor": [
+       90.75,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       40,
+       7,
+       109,
+       101
+      ]
+     }
     ],
     [
-     "calx_skill_001.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       183,
+       656,
+       169,
+       124
+      ],
+      "anchor": [
+       72.11,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       24,
+       5,
+       115,
+       103
+      ]
+     }
     ],
     [
-     "calx_skill_002.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       352,
+       656,
+       167,
+       124
+      ],
+      "anchor": [
+       66.08,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       16,
+       7,
+       134,
+       101
+      ]
+     }
     ],
     [
-     "calx_skill_003.png",
-     0.07
+     "calx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       519,
+       656,
+       166,
+       124
+      ],
+      "anchor": [
+       58.07,
+       107
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       10,
+       6,
+       153,
+       101
+      ]
+     }
     ],
     [
-     "calx_skill_004.png",
-     0.08
+     "calx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       685,
+       656,
+       165,
+       124
+      ],
+      "anchor": [
+       63.53,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       15,
+       6,
+       146,
+       102
+      ]
+     }
     ],
     [
-     "calx_skill_005.png",
-     0.085
+     "calx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       850,
+       656,
+       165,
+       124
+      ],
+      "anchor": [
+       68.0,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       18,
+       9,
+       105,
+       99
+      ]
+     }
     ],
     [
-     "calx_skill_006.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1015,
+       656,
+       166,
+       124
+      ],
+      "anchor": [
+       73.64,
+       109
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       21,
+       9,
+       109,
+       100
+      ]
+     }
     ],
     [
-     "calx_skill_007.png",
-     0.12
+     "calx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1181,
+       656,
+       149,
+       124
+      ],
+      "anchor": [
+       74.08,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       22,
+       8,
+       110,
+       100
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "calx_hurt_000.png",
-     0.085
+     "calx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       906,
+       183,
+       128
+      ],
+      "anchor": [
+       92.38,
+       112
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       40,
+       8,
+       112,
+       104
+      ]
+     }
     ],
     [
-     "calx_hurt_001.png",
-     0.065
+     "calx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       183,
+       906,
+       169,
+       128
+      ],
+      "anchor": [
+       78.23,
+       112
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       23,
+       8,
+       122,
+       104
+      ]
+     }
     ],
     [
-     "calx_hurt_002.png",
-     0.075
+     "calx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       352,
+       906,
+       167,
+       128
+      ],
+      "anchor": [
+       75.96,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       11,
+       7,
+       156,
+       104
+      ]
+     }
     ],
     [
-     "calx_hurt_003.png",
-     0.08
+     "calx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       519,
+       906,
+       166,
+       128
+      ],
+      "anchor": [
+       66.32,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       0,
+       15,
+       137,
+       96
+      ]
+     }
     ],
     [
-     "calx_hurt_004.png",
-     0.085
+     "calx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       685,
+       906,
+       165,
+       128
+      ],
+      "anchor": [
+       74.59,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       17,
+       13,
+       117,
+       98
+      ]
+     }
     ],
     [
-     "calx_hurt_005.png",
-     0.09
+     "calx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       850,
+       906,
+       165,
+       128
+      ],
+      "anchor": [
+       70.45,
+       112
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       19,
+       13,
+       111,
+       99
+      ]
+     }
     ],
     [
-     "calx_hurt_006.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1015,
+       906,
+       166,
+       128
+      ],
+      "anchor": [
+       72.86,
+       112
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       25,
+       13,
+       109,
+       99
+      ]
+     }
     ],
     [
-     "calx_hurt_007.png",
-     0.12
+     "calx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1181,
+       906,
+       149,
+       128
+      ],
+      "anchor": [
+       71.72,
+       113
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       25,
+       12,
+       108,
+       101
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "calx_dodge_000.png",
-     0.09
+     "calx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       780,
+       183,
+       126
+      ],
+      "anchor": [
+       88.34,
+       109
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       39,
+       8,
+       109,
+       101
+      ]
+     }
     ],
     [
-     "calx_dodge_001.png",
-     0.065
+     "calx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       183,
+       780,
+       169,
+       126
+      ],
+      "anchor": [
+       68.09,
+       109
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       11,
+       22,
+       158,
+       87
+      ]
+     }
     ],
     [
-     "calx_dodge_002.png",
-     0.055
+     "calx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       352,
+       780,
+       167,
+       126
+      ],
+      "anchor": [
+       58.02,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       0,
+       23,
+       167,
+       85
+      ]
+     }
     ],
     [
-     "calx_dodge_003.png",
-     0.055
+     "calx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       519,
+       780,
+       166,
+       126
+      ],
+      "anchor": [
+       62.28,
+       108
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       0,
+       31,
+       139,
+       77
+      ]
+     }
     ],
     [
-     "calx_dodge_004.png",
-     0.065
+     "calx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       685,
+       780,
+       165,
+       126
+      ],
+      "anchor": [
+       73.53,
+       109
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       17,
+       20,
+       102,
+       89
+      ]
+     }
     ],
     [
-     "calx_dodge_005.png",
-     0.075
+     "calx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       850,
+       780,
+       165,
+       126
+      ],
+      "anchor": [
+       74.36,
+       109
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       18,
+       17,
+       109,
+       92
+      ]
+     }
     ],
     [
-     "calx_dodge_006.png",
-     0.09
+     "calx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1015,
+       780,
+       166,
+       126
+      ],
+      "anchor": [
+       69.76,
+       110
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       22,
+       8,
+       109,
+       102
+      ]
+     }
     ],
     [
-     "calx_dodge_007.png",
-     0.12
+     "calx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1181,
+       780,
+       149,
+       126
+      ],
+      "anchor": [
+       74.14,
+       110
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       23,
+       8,
+       113,
+       102
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "calx_death_000.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1034,
+       183,
+       149
+      ],
+      "anchor": [
+       90.05,
+       112
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       40,
+       9,
+       109,
+       103
+      ]
+     }
     ],
     [
-     "calx_death_001.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       183,
+       1034,
+       169,
+       149
+      ],
+      "anchor": [
+       73.51,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       16,
+       4,
+       119,
+       107
+      ]
+     }
     ],
     [
-     "calx_death_002.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       352,
+       1034,
+       167,
+       149
+      ],
+      "anchor": [
+       76.23,
+       110
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       7,
+       10,
+       116,
+       100
+      ]
+     }
     ],
     [
-     "calx_death_003.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       519,
+       1034,
+       166,
+       149
+      ],
+      "anchor": [
+       75.57,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       3,
+       30,
+       119,
+       81
+      ]
+     }
     ],
     [
-     "calx_death_004.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       685,
+       1034,
+       165,
+       149
+      ],
+      "anchor": [
+       84.81,
+       112
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       7,
+       35,
+       124,
+       77
+      ]
+     }
     ],
     [
-     "calx_death_005.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       850,
+       1034,
+       165,
+       149
+      ],
+      "anchor": [
+       83.3,
+       112
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       7,
+       43,
+       122,
+       69
+      ]
+     }
     ],
     [
-     "calx_death_006.png",
-     0.1
+     "calx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1015,
+       1034,
+       166,
+       149
+      ],
+      "anchor": [
+       76.47,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       5,
+       56,
+       138,
+       55
+      ]
+     }
     ],
     [
-     "calx_death_007.png",
-     0.45
+     "calx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1181,
+       1034,
+       149,
+       149
+      ],
+      "anchor": [
+       73.14,
+       111
+      ],
+      "scale": 2.591813,
+      "bounds": [
+       4,
+       62,
+       131,
+       49
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "calx_idle_000.png",
+     0.3
+    ],
+    [
+     "calx_idle_001.png",
+     0.3
+    ],
+    [
+     "calx_idle_002.png",
+     0.3
+    ],
+    [
+     "calx_idle_003.png",
+     0.3
+    ],
+    [
+     "calx_idle_004.png",
+     0.3
+    ],
+    [
+     "calx_idle_005.png",
+     0.3
+    ],
+    [
+     "calx_idle_006.png",
+     0.3
+    ],
+    [
+     "calx_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "calx_walk_000.png",
+     0.1
+    ],
+    [
+     "calx_walk_001.png",
+     0.1
+    ],
+    [
+     "calx_walk_002.png",
+     0.1
+    ],
+    [
+     "calx_walk_003.png",
+     0.1
+    ],
+    [
+     "calx_walk_004.png",
+     0.1
+    ],
+    [
+     "calx_walk_005.png",
+     0.1
+    ],
+    [
+     "calx_walk_006.png",
+     0.1
+    ],
+    [
+     "calx_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_attack_1_000.png",
+     0.1
+    ],
+    [
+     "calx_attack_1_001.png",
+     0.1
+    ],
+    [
+     "calx_attack_1_002.png",
+     0.08
+    ],
+    [
+     "calx_attack_1_003.png",
+     0.05
+    ],
+    [
+     "calx_attack_1_004.png",
+     0.065
+    ],
+    [
+     "calx_attack_1_005.png",
+     0.07
+    ],
+    [
+     "calx_attack_1_006.png",
+     0.1
+    ],
+    [
+     "calx_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_attack_2_000.png",
+     0.1
+    ],
+    [
+     "calx_attack_2_001.png",
+     0.085
+    ],
+    [
+     "calx_attack_2_002.png",
+     0.06
+    ],
+    [
+     "calx_attack_2_003.png",
+     0.06
+    ],
+    [
+     "calx_attack_2_004.png",
+     0.065
+    ],
+    [
+     "calx_attack_2_005.png",
+     0.075
+    ],
+    [
+     "calx_attack_2_006.png",
+     0.11
+    ],
+    [
+     "calx_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_ultimate_000.png",
+     0.11
+    ],
+    [
+     "calx_ultimate_001.png",
+     0.11
+    ],
+    [
+     "calx_ultimate_002.png",
+     0.1
+    ],
+    [
+     "calx_ultimate_003.png",
+     0.075
+    ],
+    [
+     "calx_ultimate_004.png",
+     0.085
+    ],
+    [
+     "calx_ultimate_005.png",
+     0.1
+    ],
+    [
+     "calx_ultimate_006.png",
+     0.11
+    ],
+    [
+     "calx_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_skill_000.png",
+     0.1
+    ],
+    [
+     "calx_skill_001.png",
+     0.1
+    ],
+    [
+     "calx_skill_002.png",
+     0.1
+    ],
+    [
+     "calx_skill_003.png",
+     0.07
+    ],
+    [
+     "calx_skill_004.png",
+     0.08
+    ],
+    [
+     "calx_skill_005.png",
+     0.085
+    ],
+    [
+     "calx_skill_006.png",
+     0.1
+    ],
+    [
+     "calx_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_dodge_000.png",
+     0.09
+    ],
+    [
+     "calx_dodge_001.png",
+     0.065
+    ],
+    [
+     "calx_dodge_002.png",
+     0.055
+    ],
+    [
+     "calx_dodge_003.png",
+     0.055
+    ],
+    [
+     "calx_dodge_004.png",
+     0.065
+    ],
+    [
+     "calx_dodge_005.png",
+     0.075
+    ],
+    [
+     "calx_dodge_006.png",
+     0.09
+    ],
+    [
+     "calx_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_hurt_000.png",
+     0.085
+    ],
+    [
+     "calx_hurt_001.png",
+     0.065
+    ],
+    [
+     "calx_hurt_002.png",
+     0.075
+    ],
+    [
+     "calx_hurt_003.png",
+     0.08
+    ],
+    [
+     "calx_hurt_004.png",
+     0.085
+    ],
+    [
+     "calx_hurt_005.png",
+     0.09
+    ],
+    [
+     "calx_hurt_006.png",
+     0.1
+    ],
+    [
+     "calx_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "calx_death_000.png",
+     0.1
+    ],
+    [
+     "calx_death_001.png",
+     0.1
+    ],
+    [
+     "calx_death_002.png",
+     0.1
+    ],
+    [
+     "calx_death_003.png",
+     0.1
+    ],
+    [
+     "calx_death_004.png",
+     0.1
+    ],
+    [
+     "calx_death_005.png",
+     0.1
+    ],
+    [
+     "calx_death_006.png",
+     0.1
+    ],
+    [
+     "calx_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

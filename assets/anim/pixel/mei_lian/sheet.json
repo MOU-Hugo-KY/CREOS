@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "mei_lian_idle_000.png",
-     0.3
+     "mei_lian_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       172,
+       136
+      ],
+      "anchor": [
+       94.07,
+       128
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       32,
+       10,
+       113,
+       118
+      ]
+     }
     ],
     [
-     "mei_lian_idle_001.png",
-     0.3
+     "mei_lian_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       172,
+       0,
+       167,
+       136
+      ],
+      "anchor": [
+       87.78,
+       128
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       28,
+       11,
+       111,
+       117
+      ]
+     }
     ],
     [
-     "mei_lian_idle_002.png",
-     0.3
+     "mei_lian_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       339,
+       0,
+       167,
+       136
+      ],
+      "anchor": [
+       87.56,
+       128
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       28,
+       9,
+       111,
+       119
+      ]
+     }
     ],
     [
-     "mei_lian_idle_003.png",
-     0.3
+     "mei_lian_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       506,
+       0,
+       166,
+       136
+      ],
+      "anchor": [
+       87.53,
+       128
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       26,
+       9,
+       113,
+       119
+      ]
+     }
     ],
     [
-     "mei_lian_idle_004.png",
-     0.3
+     "mei_lian_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       672,
+       0,
+       166,
+       136
+      ],
+      "anchor": [
+       89.7,
+       128
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       25,
+       11,
+       115,
+       117
+      ]
+     }
     ],
     [
-     "mei_lian_idle_005.png",
-     0.3
+     "mei_lian_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       838,
+       0,
+       166,
+       136
+      ],
+      "anchor": [
+       89.65,
+       127
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       28,
+       14,
+       110,
+       113
+      ]
+     }
     ],
     [
-     "mei_lian_idle_006.png",
-     0.3
+     "mei_lian_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1004,
+       0,
+       166,
+       136
+      ],
+      "anchor": [
+       88.69,
+       128
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       27,
+       13,
+       112,
+       115
+      ]
+     }
     ],
     [
-     "mei_lian_idle_007.png",
-     0.3
+     "mei_lian_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1170,
+       0,
+       158,
+       136
+      ],
+      "anchor": [
+       87.89,
+       128
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       26,
+       13,
+       112,
+       115
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "mei_lian_walk_000.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       136,
+       172,
+       132
+      ],
+      "anchor": [
+       88.39,
+       124
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       31,
+       8,
+       116,
+       116
+      ]
+     }
     ],
     [
-     "mei_lian_walk_001.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       172,
+       136,
+       167,
+       132
+      ],
+      "anchor": [
+       83.04,
+       125
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       27,
+       8,
+       115,
+       117
+      ]
+     }
     ],
     [
-     "mei_lian_walk_002.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       339,
+       136,
+       167,
+       132
+      ],
+      "anchor": [
+       87.25,
+       125
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       26,
+       11,
+       115,
+       114
+      ]
+     }
     ],
     [
-     "mei_lian_walk_003.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       506,
+       136,
+       166,
+       132
+      ],
+      "anchor": [
+       91.41,
+       123
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       24,
+       10,
+       117,
+       113
+      ]
+     }
     ],
     [
-     "mei_lian_walk_004.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       672,
+       136,
+       166,
+       132
+      ],
+      "anchor": [
+       79.78,
+       125
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       26,
+       8,
+       115,
+       117
+      ]
+     }
     ],
     [
-     "mei_lian_walk_005.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       838,
+       136,
+       166,
+       132
+      ],
+      "anchor": [
+       82.38,
+       120
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       24,
+       9,
+       117,
+       111
+      ]
+     }
     ],
     [
-     "mei_lian_walk_006.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1004,
+       136,
+       166,
+       132
+      ],
+      "anchor": [
+       92.27,
+       123
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       25,
+       10,
+       118,
+       113
+      ]
+     }
     ],
     [
-     "mei_lian_walk_007.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1170,
+       136,
+       158,
+       132
+      ],
+      "anchor": [
+       81.11,
+       124
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       27,
+       8,
+       112,
+       116
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +405,562 @@
    "loop": false,
    "frames": [
     [
-     "mei_lian_attack_1_000.png",
-     0.1
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       343,
+       328
+      ],
+      "anchor": [
+       182.66,
+       279
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       84,
+       86,
+       189,
+       193
+      ]
+     }
     ],
     [
-     "mei_lian_attack_1_001.png",
-     0.1
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       343,
+       0,
+       331,
+       328
+      ],
+      "anchor": [
+       169.43,
+       279
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       70,
+       89,
+       190,
+       190
+      ]
+     }
     ],
     [
-     "mei_lian_attack_1_002.png",
-     0.08
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       674,
+       0,
+       327,
+       328
+      ],
+      "anchor": [
+       169.85,
+       279
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       71,
+       90,
+       189,
+       189
+      ]
+     }
     ],
     [
-     "mei_lian_attack_1_003.png",
-     0.05
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1001,
+       0,
+       327,
+       328
+      ],
+      "anchor": [
+       175.19,
+       279
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       77,
+       90,
+       170,
+       189
+      ]
+     }
     ],
     [
-     "mei_lian_attack_1_004.png",
-     0.065
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       328,
+       343,
+       286
+      ],
+      "anchor": [
+       182.64,
+       238
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       75,
+       49,
+       174,
+       189
+      ]
+     }
     ],
     [
-     "mei_lian_attack_1_005.png",
-     0.07
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       343,
+       328,
+       331,
+       286
+      ],
+      "anchor": [
+       177.14,
+       237
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       64,
+       48,
+       182,
+       189
+      ]
+     }
     ],
     [
-     "mei_lian_attack_1_006.png",
-     0.1
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       674,
+       328,
+       327,
+       286
+      ],
+      "anchor": [
+       171.69,
+       237
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       65,
+       48,
+       205,
+       189
+      ]
+     }
     ],
     [
-     "mei_lian_attack_1_007.png",
-     0.12
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1001,
+       328,
+       327,
+       286
+      ],
+      "anchor": [
+       171.11,
+       237
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       64,
+       48,
+       236,
+       189
+      ]
+     }
+    ],
+    [
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       614,
+       343,
+       287
+      ],
+      "anchor": [
+       178.47,
+       235
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       78,
+       48,
+       234,
+       187
+      ]
+     }
+    ],
+    [
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       343,
+       614,
+       331,
+       287
+      ],
+      "anchor": [
+       167.53,
+       235
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       69,
+       47,
+       229,
+       188
+      ]
+     }
+    ],
+    [
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       674,
+       614,
+       327,
+       287
+      ],
+      "anchor": [
+       168.41,
+       235
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       70,
+       45,
+       199,
+       190
+      ]
+     }
+    ],
+    [
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1001,
+       614,
+       327,
+       287
+      ],
+      "anchor": [
+       177.19,
+       236
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       72,
+       41,
+       186,
+       195
+      ]
+     }
+    ],
+    [
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       901,
+       343,
+       283
+      ],
+      "anchor": [
+       175.81,
+       244
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       75,
+       46,
+       190,
+       198
+      ]
+     }
+    ],
+    [
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       343,
+       901,
+       331,
+       283
+      ],
+      "anchor": [
+       165.47,
+       244
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       66,
+       47,
+       193,
+       197
+      ]
+     }
+    ],
+    [
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       674,
+       901,
+       327,
+       283
+      ],
+      "anchor": [
+       170.46,
+       245
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       68,
+       49,
+       193,
+       196
+      ]
+     }
+    ],
+    [
+     "mei_lian_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1001,
+       901,
+       327,
+       283
+      ],
+      "anchor": [
+       177.42,
+       244
+      ],
+      "scale": 1.591694,
+      "bounds": [
+       74,
+       49,
+       191,
+       195
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "mei_lian_attack_2_000.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       400,
+       172,
+       132
+      ],
+      "anchor": [
+       95.93,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       32,
+       8,
+       109,
+       113
+      ]
+     }
     ],
     [
-     "mei_lian_attack_2_001.png",
-     0.085
+     "mei_lian_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       172,
+       400,
+       167,
+       132
+      ],
+      "anchor": [
+       88.26,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       29,
+       11,
+       109,
+       110
+      ]
+     }
     ],
     [
-     "mei_lian_attack_2_002.png",
-     0.06
+     "mei_lian_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       339,
+       400,
+       167,
+       132
+      ],
+      "anchor": [
+       88.65,
+       120
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       24,
+       1,
+       117,
+       119
+      ]
+     }
     ],
     [
-     "mei_lian_attack_2_003.png",
-     0.06
+     "mei_lian_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       506,
+       400,
+       166,
+       132
+      ],
+      "anchor": [
+       88.33,
+       132
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       0,
+       12,
+       160,
+       120
+      ]
+     }
     ],
     [
-     "mei_lian_attack_2_004.png",
-     0.065
+     "mei_lian_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       672,
+       400,
+       166,
+       132
+      ],
+      "anchor": [
+       54.26,
+       117
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       7,
+       14,
+       146,
+       103
+      ]
+     }
     ],
     [
-     "mei_lian_attack_2_005.png",
-     0.075
+     "mei_lian_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       838,
+       400,
+       166,
+       132
+      ],
+      "anchor": [
+       84.57,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       15,
+       9,
+       129,
+       112
+      ]
+     }
     ],
     [
-     "mei_lian_attack_2_006.png",
-     0.11
+     "mei_lian_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1004,
+       400,
+       166,
+       132
+      ],
+      "anchor": [
+       91.17,
+       119
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       24,
+       13,
+       119,
+       106
+      ]
+     }
     ],
     [
-     "mei_lian_attack_2_007.png",
-     0.12
+     "mei_lian_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1170,
+       400,
+       158,
+       132
+      ],
+      "anchor": [
+       86.66,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       28,
+       12,
+       110,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -177,36 +969,188 @@
    "loop": false,
    "frames": [
     [
-     "mei_lian_ultimate_000.png",
-     0.11
+     "mei_lian_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       532,
+       172,
+       131
+      ],
+      "anchor": [
+       94.99,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       36,
+       10,
+       109,
+       111
+      ]
+     }
     ],
     [
-     "mei_lian_ultimate_001.png",
-     0.11
+     "mei_lian_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       172,
+       532,
+       167,
+       131
+      ],
+      "anchor": [
+       88.78,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       30,
+       10,
+       110,
+       111
+      ]
+     }
     ],
     [
-     "mei_lian_ultimate_002.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       339,
+       532,
+       167,
+       131
+      ],
+      "anchor": [
+       79.95,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       11,
+       7,
+       156,
+       114
+      ]
+     }
     ],
     [
-     "mei_lian_ultimate_003.png",
-     0.075
+     "mei_lian_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       506,
+       532,
+       166,
+       131
+      ],
+      "anchor": [
+       67.86,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       0,
+       0,
+       162,
+       121
+      ]
+     }
     ],
     [
-     "mei_lian_ultimate_004.png",
-     0.085
+     "mei_lian_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       672,
+       532,
+       166,
+       131
+      ],
+      "anchor": [
+       93.19,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       9,
+       6,
+       143,
+       112
+      ]
+     }
     ],
     [
-     "mei_lian_ultimate_005.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       838,
+       532,
+       166,
+       131
+      ],
+      "anchor": [
+       85.68,
+       119
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       23,
+       12,
+       117,
+       107
+      ]
+     }
     ],
     [
-     "mei_lian_ultimate_006.png",
-     0.11
+     "mei_lian_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1004,
+       532,
+       166,
+       131
+      ],
+      "anchor": [
+       88.54,
+       120
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       25,
+       14,
+       120,
+       106
+      ]
+     }
     ],
     [
-     "mei_lian_ultimate_007.png",
-     0.13
+     "mei_lian_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1170,
+       532,
+       158,
+       131
+      ],
+      "anchor": [
+       88.07,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       28,
+       11,
+       110,
+       110
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "mei_lian_skill_000.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       663,
+       172,
+       128
+      ],
+      "anchor": [
+       95.53,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       33,
+       9,
+       111,
+       109
+      ]
+     }
     ],
     [
-     "mei_lian_skill_001.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       172,
+       663,
+       167,
+       128
+      ],
+      "anchor": [
+       90.74,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       26,
+       9,
+       109,
+       109
+      ]
+     }
     ],
     [
-     "mei_lian_skill_002.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       339,
+       663,
+       167,
+       128
+      ],
+      "anchor": [
+       86.66,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       16,
+       9,
+       151,
+       109
+      ]
+     }
     ],
     [
-     "mei_lian_skill_003.png",
-     0.07
+     "mei_lian_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       506,
+       663,
+       166,
+       128
+      ],
+      "anchor": [
+       66.25,
+       117
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       0,
+       11,
+       160,
+       106
+      ]
+     }
     ],
     [
-     "mei_lian_skill_004.png",
-     0.08
+     "mei_lian_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       672,
+       663,
+       166,
+       128
+      ],
+      "anchor": [
+       72.09,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       15,
+       9,
+       140,
+       109
+      ]
+     }
     ],
     [
-     "mei_lian_skill_005.png",
-     0.085
+     "mei_lian_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       838,
+       663,
+       166,
+       128
+      ],
+      "anchor": [
+       90.5,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       24,
+       9,
+       119,
+       109
+      ]
+     }
     ],
     [
-     "mei_lian_skill_006.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1004,
+       663,
+       166,
+       128
+      ],
+      "anchor": [
+       93.27,
+       117
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       24,
+       9,
+       117,
+       108
+      ]
+     }
     ],
     [
-     "mei_lian_skill_007.png",
-     0.12
+     "mei_lian_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1170,
+       663,
+       158,
+       128
+      ],
+      "anchor": [
+       87.46,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       26,
+       9,
+       112,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "mei_lian_hurt_000.png",
-     0.085
+     "mei_lian_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       921,
+       172,
+       129
+      ],
+      "anchor": [
+       94.93,
+       119
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       32,
+       10,
+       113,
+       109
+      ]
+     }
     ],
     [
-     "mei_lian_hurt_001.png",
-     0.065
+     "mei_lian_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       172,
+       921,
+       167,
+       129
+      ],
+      "anchor": [
+       87.62,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       19,
+       8,
+       121,
+       110
+      ]
+     }
     ],
     [
-     "mei_lian_hurt_002.png",
-     0.075
+     "mei_lian_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       339,
+       921,
+       167,
+       129
+      ],
+      "anchor": [
+       95.05,
+       117
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       7,
+       14,
+       129,
+       103
+      ]
+     }
     ],
     [
-     "mei_lian_hurt_003.png",
-     0.08
+     "mei_lian_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       506,
+       921,
+       166,
+       129
+      ],
+      "anchor": [
+       84.77,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       7,
+       17,
+       124,
+       101
+      ]
+     }
     ],
     [
-     "mei_lian_hurt_004.png",
-     0.085
+     "mei_lian_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       672,
+       921,
+       166,
+       129
+      ],
+      "anchor": [
+       88.8,
+       119
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       21,
+       13,
+       120,
+       106
+      ]
+     }
     ],
     [
-     "mei_lian_hurt_005.png",
-     0.09
+     "mei_lian_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       838,
+       921,
+       166,
+       129
+      ],
+      "anchor": [
+       84.13,
+       119
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       22,
+       12,
+       117,
+       107
+      ]
+     }
     ],
     [
-     "mei_lian_hurt_006.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1004,
+       921,
+       166,
+       129
+      ],
+      "anchor": [
+       87.33,
+       119
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       25,
+       13,
+       117,
+       106
+      ]
+     }
     ],
     [
-     "mei_lian_hurt_007.png",
-     0.12
+     "mei_lian_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1170,
+       921,
+       158,
+       129
+      ],
+      "anchor": [
+       87.91,
+       119
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       27,
+       10,
+       111,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "mei_lian_dodge_000.png",
-     0.09
+     "mei_lian_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       791,
+       172,
+       130
+      ],
+      "anchor": [
+       96.1,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       32,
+       9,
+       113,
+       109
+      ]
+     }
     ],
     [
-     "mei_lian_dodge_001.png",
-     0.065
+     "mei_lian_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       172,
+       791,
+       167,
+       130
+      ],
+      "anchor": [
+       77.66,
+       117
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       32,
+       22,
+       108,
+       95
+      ]
+     }
     ],
     [
-     "mei_lian_dodge_002.png",
-     0.055
+     "mei_lian_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       339,
+       791,
+       167,
+       130
+      ],
+      "anchor": [
+       66.37,
+       117
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       8,
+       24,
+       134,
+       93
+      ]
+     }
     ],
     [
-     "mei_lian_dodge_003.png",
-     0.055
+     "mei_lian_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       506,
+       791,
+       166,
+       130
+      ],
+      "anchor": [
+       63.8,
+       117
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       5,
+       23,
+       136,
+       94
+      ]
+     }
     ],
     [
-     "mei_lian_dodge_004.png",
-     0.065
+     "mei_lian_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       672,
+       791,
+       166,
+       130
+      ],
+      "anchor": [
+       81.32,
+       117
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       12,
+       9,
+       127,
+       108
+      ]
+     }
     ],
     [
-     "mei_lian_dodge_005.png",
-     0.075
+     "mei_lian_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       838,
+       791,
+       166,
+       130
+      ],
+      "anchor": [
+       87.67,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       25,
+       10,
+       111,
+       108
+      ]
+     }
     ],
     [
-     "mei_lian_dodge_006.png",
-     0.09
+     "mei_lian_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1004,
+       791,
+       166,
+       130
+      ],
+      "anchor": [
+       86.78,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       27,
+       9,
+       111,
+       109
+      ]
+     }
     ],
     [
-     "mei_lian_dodge_007.png",
-     0.12
+     "mei_lian_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1170,
+       791,
+       158,
+       130
+      ],
+      "anchor": [
+       88.21,
+       118
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       30,
+       10,
+       108,
+       108
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "mei_lian_death_000.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1050,
+       172,
+       134
+      ],
+      "anchor": [
+       97.2,
+       119
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       32,
+       5,
+       112,
+       114
+      ]
+     }
     ],
     [
-     "mei_lian_death_001.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       172,
+       1050,
+       167,
+       134
+      ],
+      "anchor": [
+       82.82,
+       120
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       26,
+       10,
+       114,
+       110
+      ]
+     }
     ],
     [
-     "mei_lian_death_002.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       339,
+       1050,
+       167,
+       134
+      ],
+      "anchor": [
+       79.83,
+       120
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       22,
+       13,
+       116,
+       107
+      ]
+     }
     ],
     [
-     "mei_lian_death_003.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       506,
+       1050,
+       166,
+       134
+      ],
+      "anchor": [
+       89.49,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       14,
+       27,
+       120,
+       94
+      ]
+     }
     ],
     [
-     "mei_lian_death_004.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       672,
+       1050,
+       166,
+       134
+      ],
+      "anchor": [
+       84.75,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       10,
+       40,
+       127,
+       81
+      ]
+     }
     ],
     [
-     "mei_lian_death_005.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       838,
+       1050,
+       166,
+       134
+      ],
+      "anchor": [
+       82.74,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       8,
+       50,
+       131,
+       71
+      ]
+     }
     ],
     [
-     "mei_lian_death_006.png",
-     0.1
+     "mei_lian_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1004,
+       1050,
+       166,
+       134
+      ],
+      "anchor": [
+       87.03,
+       121
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       9,
+       59,
+       136,
+       62
+      ]
+     }
     ],
     [
-     "mei_lian_death_007.png",
-     0.45
+     "mei_lian_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1170,
+       1050,
+       158,
+       134
+      ],
+      "anchor": [
+       86.0,
+       120
+      ],
+      "scale": 2.603364,
+      "bounds": [
+       9,
+       67,
+       139,
+       53
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "mei_lian_idle_000.png",
+     0.3
+    ],
+    [
+     "mei_lian_idle_001.png",
+     0.3
+    ],
+    [
+     "mei_lian_idle_002.png",
+     0.3
+    ],
+    [
+     "mei_lian_idle_003.png",
+     0.3
+    ],
+    [
+     "mei_lian_idle_004.png",
+     0.3
+    ],
+    [
+     "mei_lian_idle_005.png",
+     0.3
+    ],
+    [
+     "mei_lian_idle_006.png",
+     0.3
+    ],
+    [
+     "mei_lian_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "mei_lian_walk_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_walk_001.png",
+     0.1
+    ],
+    [
+     "mei_lian_walk_002.png",
+     0.1
+    ],
+    [
+     "mei_lian_walk_003.png",
+     0.1
+    ],
+    [
+     "mei_lian_walk_004.png",
+     0.1
+    ],
+    [
+     "mei_lian_walk_005.png",
+     0.1
+    ],
+    [
+     "mei_lian_walk_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_attack_1_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_attack_1_001.png",
+     0.1
+    ],
+    [
+     "mei_lian_attack_1_002.png",
+     0.08
+    ],
+    [
+     "mei_lian_attack_1_003.png",
+     0.05
+    ],
+    [
+     "mei_lian_attack_1_004.png",
+     0.065
+    ],
+    [
+     "mei_lian_attack_1_005.png",
+     0.07
+    ],
+    [
+     "mei_lian_attack_1_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_attack_2_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_attack_2_001.png",
+     0.085
+    ],
+    [
+     "mei_lian_attack_2_002.png",
+     0.06
+    ],
+    [
+     "mei_lian_attack_2_003.png",
+     0.06
+    ],
+    [
+     "mei_lian_attack_2_004.png",
+     0.065
+    ],
+    [
+     "mei_lian_attack_2_005.png",
+     0.075
+    ],
+    [
+     "mei_lian_attack_2_006.png",
+     0.11
+    ],
+    [
+     "mei_lian_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_ultimate_000.png",
+     0.11
+    ],
+    [
+     "mei_lian_ultimate_001.png",
+     0.11
+    ],
+    [
+     "mei_lian_ultimate_002.png",
+     0.1
+    ],
+    [
+     "mei_lian_ultimate_003.png",
+     0.075
+    ],
+    [
+     "mei_lian_ultimate_004.png",
+     0.085
+    ],
+    [
+     "mei_lian_ultimate_005.png",
+     0.1
+    ],
+    [
+     "mei_lian_ultimate_006.png",
+     0.11
+    ],
+    [
+     "mei_lian_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_skill_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_skill_001.png",
+     0.1
+    ],
+    [
+     "mei_lian_skill_002.png",
+     0.1
+    ],
+    [
+     "mei_lian_skill_003.png",
+     0.07
+    ],
+    [
+     "mei_lian_skill_004.png",
+     0.08
+    ],
+    [
+     "mei_lian_skill_005.png",
+     0.085
+    ],
+    [
+     "mei_lian_skill_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_dodge_000.png",
+     0.09
+    ],
+    [
+     "mei_lian_dodge_001.png",
+     0.065
+    ],
+    [
+     "mei_lian_dodge_002.png",
+     0.055
+    ],
+    [
+     "mei_lian_dodge_003.png",
+     0.055
+    ],
+    [
+     "mei_lian_dodge_004.png",
+     0.065
+    ],
+    [
+     "mei_lian_dodge_005.png",
+     0.075
+    ],
+    [
+     "mei_lian_dodge_006.png",
+     0.09
+    ],
+    [
+     "mei_lian_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_hurt_000.png",
+     0.085
+    ],
+    [
+     "mei_lian_hurt_001.png",
+     0.065
+    ],
+    [
+     "mei_lian_hurt_002.png",
+     0.075
+    ],
+    [
+     "mei_lian_hurt_003.png",
+     0.08
+    ],
+    [
+     "mei_lian_hurt_004.png",
+     0.085
+    ],
+    [
+     "mei_lian_hurt_005.png",
+     0.09
+    ],
+    [
+     "mei_lian_hurt_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "mei_lian_death_000.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_001.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_002.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_003.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_004.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_005.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_006.png",
+     0.1
+    ],
+    [
+     "mei_lian_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

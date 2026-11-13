@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "rivet_idle_000.png",
-     0.3
+     "rivet_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       164,
+       138
+      ],
+      "anchor": [
+       89.38,
+       129
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       24,
+       13,
+       117,
+       116
+      ]
+     }
     ],
     [
-     "rivet_idle_001.png",
-     0.3
+     "rivet_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       164,
+       0,
+       163,
+       138
+      ],
+      "anchor": [
+       76.92,
+       129
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       23,
+       11,
+       118,
+       118
+      ]
+     }
     ],
     [
-     "rivet_idle_002.png",
-     0.3
+     "rivet_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       327,
+       0,
+       162,
+       138
+      ],
+      "anchor": [
+       76.1,
+       129
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       22,
+       9,
+       118,
+       120
+      ]
+     }
     ],
     [
-     "rivet_idle_003.png",
-     0.3
+     "rivet_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       489,
+       0,
+       162,
+       138
+      ],
+      "anchor": [
+       74.48,
+       128
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       23,
+       9,
+       117,
+       119
+      ]
+     }
     ],
     [
-     "rivet_idle_004.png",
-     0.3
+     "rivet_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       651,
+       0,
+       161,
+       138
+      ],
+      "anchor": [
+       82.53,
+       129
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       21,
+       14,
+       118,
+       115
+      ]
+     }
     ],
     [
-     "rivet_idle_005.png",
-     0.3
+     "rivet_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       812,
+       0,
+       163,
+       138
+      ],
+      "anchor": [
+       88.9,
+       128
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       23,
+       15,
+       117,
+       113
+      ]
+     }
     ],
     [
-     "rivet_idle_006.png",
-     0.3
+     "rivet_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       975,
+       0,
+       161,
+       138
+      ],
+      "anchor": [
+       85.98,
+       128
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       24,
+       16,
+       114,
+       112
+      ]
+     }
     ],
     [
-     "rivet_idle_007.png",
-     0.3
+     "rivet_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1136,
+       0,
+       159,
+       138
+      ],
+      "anchor": [
+       88.01,
+       128
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       23,
+       16,
+       115,
+       112
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "rivet_walk_000.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       138,
+       164,
+       134
+      ],
+      "anchor": [
+       88.22,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       22,
+       11,
+       120,
+       111
+      ]
+     }
     ],
     [
-     "rivet_walk_001.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       164,
+       138,
+       163,
+       134
+      ],
+      "anchor": [
+       86.3,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       21,
+       10,
+       119,
+       112
+      ]
+     }
     ],
     [
-     "rivet_walk_002.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       327,
+       138,
+       162,
+       134
+      ],
+      "anchor": [
+       84.0,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       23,
+       8,
+       118,
+       114
+      ]
+     }
     ],
     [
-     "rivet_walk_003.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       489,
+       138,
+       162,
+       134
+      ],
+      "anchor": [
+       84.14,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       26,
+       8,
+       114,
+       114
+      ]
+     }
     ],
     [
-     "rivet_walk_004.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       651,
+       138,
+       161,
+       134
+      ],
+      "anchor": [
+       77.34,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       23,
+       10,
+       116,
+       112
+      ]
+     }
     ],
     [
-     "rivet_walk_005.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       812,
+       138,
+       163,
+       134
+      ],
+      "anchor": [
+       99.0,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       26,
+       10,
+       114,
+       111
+      ]
+     }
     ],
     [
-     "rivet_walk_006.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       975,
+       138,
+       161,
+       134
+      ],
+      "anchor": [
+       93.05,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       26,
+       12,
+       113,
+       110
+      ]
+     }
     ],
     [
-     "rivet_walk_007.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1136,
+       138,
+       159,
+       134
+      ],
+      "anchor": [
+       81.39,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       22,
+       13,
+       118,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,112 +405,752 @@
    "loop": false,
    "frames": [
     [
-     "rivet_attack_1_000.png",
-     0.1
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       320,
+       332
+      ],
+      "anchor": [
+       169.33,
+       273
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       67,
+       93,
+       182,
+       180
+      ]
+     }
     ],
     [
-     "rivet_attack_1_001.png",
-     0.1
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       320,
+       0,
+       324,
+       332
+      ],
+      "anchor": [
+       174.56,
+       273
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       69,
+       93,
+       186,
+       180
+      ]
+     }
     ],
     [
-     "rivet_attack_1_002.png",
-     0.08
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       644,
+       0,
+       322,
+       332
+      ],
+      "anchor": [
+       174.07,
+       273
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       68,
+       93,
+       186,
+       180
+      ]
+     }
     ],
     [
-     "rivet_attack_1_003.png",
-     0.05
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       966,
+       0,
+       329,
+       332
+      ],
+      "anchor": [
+       175.2,
+       273
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       68,
+       91,
+       185,
+       182
+      ]
+     }
     ],
     [
-     "rivet_attack_1_004.png",
-     0.065
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       332,
+       320,
+       297
+      ],
+      "anchor": [
+       170.66,
+       237
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       64,
+       56,
+       180,
+       181
+      ]
+     }
     ],
     [
-     "rivet_attack_1_005.png",
-     0.07
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       320,
+       332,
+       324,
+       297
+      ],
+      "anchor": [
+       172.28,
+       237
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       69,
+       57,
+       177,
+       180
+      ]
+     }
     ],
     [
-     "rivet_attack_1_006.png",
-     0.1
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       644,
+       332,
+       322,
+       297
+      ],
+      "anchor": [
+       173.27,
+       237
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       68,
+       56,
+       195,
+       181
+      ]
+     }
     ],
     [
-     "rivet_attack_1_007.png",
-     0.12
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       966,
+       332,
+       329,
+       297
+      ],
+      "anchor": [
+       173.96,
+       237
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       67,
+       57,
+       220,
+       180
+      ]
+     }
+    ],
+    [
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       629,
+       320,
+       299
+      ],
+      "anchor": [
+       167.31,
+       239
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       57,
+       58,
+       254,
+       181
+      ]
+     }
+    ],
+    [
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       320,
+       629,
+       324,
+       299
+      ],
+      "anchor": [
+       174.42,
+       239
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       62,
+       60,
+       242,
+       179
+      ]
+     }
+    ],
+    [
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       644,
+       629,
+       322,
+       299
+      ],
+      "anchor": [
+       174.22,
+       239
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       67,
+       59,
+       212,
+       180
+      ]
+     }
+    ],
+    [
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       966,
+       629,
+       329,
+       299
+      ],
+      "anchor": [
+       168.62,
+       240
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       68,
+       62,
+       185,
+       178
+      ]
+     }
+    ],
+    [
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       928,
+       320,
+       287
+      ],
+      "anchor": [
+       163.63,
+       238
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       63,
+       61,
+       183,
+       177
+      ]
+     }
+    ],
+    [
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       320,
+       928,
+       324,
+       287
+      ],
+      "anchor": [
+       171.32,
+       237
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       69,
+       62,
+       186,
+       175
+      ]
+     }
+    ],
+    [
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       644,
+       928,
+       322,
+       287
+      ],
+      "anchor": [
+       172.51,
+       237
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       68,
+       62,
+       186,
+       175
+      ]
+     }
+    ],
+    [
+     "rivet_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       966,
+       928,
+       329,
+       287
+      ],
+      "anchor": [
+       174.94,
+       237
+      ],
+      "scale": 1.548311,
+      "bounds": [
+       70,
+       62,
+       187,
+       175
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "rivet_attack_2_000.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       407,
+       164,
+       136
+      ],
+      "anchor": [
+       90.74,
+       123
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       24,
+       11,
+       117,
+       112
+      ]
+     }
     ],
     [
-     "rivet_attack_2_001.png",
-     0.085
+     "rivet_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       164,
+       407,
+       163,
+       136
+      ],
+      "anchor": [
+       88.29,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       19,
+       13,
+       125,
+       109
+      ]
+     }
     ],
     [
-     "rivet_attack_2_002.png",
-     0.06
+     "rivet_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       327,
+       407,
+       162,
+       136
+      ],
+      "anchor": [
+       88.99,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       18,
+       11,
+       123,
+       110
+      ]
+     }
     ],
     [
-     "rivet_attack_2_003.png",
-     0.06
+     "rivet_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       489,
+       407,
+       162,
+       136
+      ],
+      "anchor": [
+       76.96,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       8,
+       12,
+       154,
+       109
+      ]
+     }
     ],
     [
-     "rivet_attack_2_004.png",
-     0.065
+     "rivet_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       651,
+       407,
+       161,
+       136
+      ],
+      "anchor": [
+       86.21,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       0,
+       13,
+       152,
+       108
+      ]
+     }
     ],
     [
-     "rivet_attack_2_005.png",
-     0.075
+     "rivet_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       812,
+       407,
+       163,
+       136
+      ],
+      "anchor": [
+       85.11,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       20,
+       15,
+       121,
+       107
+      ]
+     }
     ],
     [
-     "rivet_attack_2_006.png",
-     0.11
+     "rivet_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       975,
+       407,
+       161,
+       136
+      ],
+      "anchor": [
+       86.22,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       19,
+       14,
+       115,
+       108
+      ]
+     }
     ],
     [
-     "rivet_attack_2_007.png",
-     0.12
+     "rivet_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1136,
+       407,
+       159,
+       136
+      ],
+      "anchor": [
+       87.7,
+       123
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       25,
+       15,
+       114,
+       108
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 4
   },
   "ultimate": {
    "loop": false,
    "frames": [
     [
-     "rivet_ultimate_000.png",
-     0.11
+     "rivet_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       543,
+       164,
+       135
+      ],
+      "anchor": [
+       90.76,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       23,
+       13,
+       118,
+       109
+      ]
+     }
     ],
     [
-     "rivet_ultimate_001.png",
-     0.11
+     "rivet_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       164,
+       543,
+       163,
+       135
+      ],
+      "anchor": [
+       69.76,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       10,
+       16,
+       132,
+       106
+      ]
+     }
     ],
     [
-     "rivet_ultimate_002.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       327,
+       543,
+       162,
+       135
+      ],
+      "anchor": [
+       62.75,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       3,
+       6,
+       159,
+       116
+      ]
+     }
     ],
     [
-     "rivet_ultimate_003.png",
-     0.075
+     "rivet_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       489,
+       543,
+       162,
+       135
+      ],
+      "anchor": [
+       62.02,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       0,
+       4,
+       162,
+       118
+      ]
+     }
     ],
     [
-     "rivet_ultimate_004.png",
-     0.085
+     "rivet_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       651,
+       543,
+       161,
+       135
+      ],
+      "anchor": [
+       83.35,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       0,
+       5,
+       161,
+       116
+      ]
+     }
     ],
     [
-     "rivet_ultimate_005.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       812,
+       543,
+       163,
+       135
+      ],
+      "anchor": [
+       83.18,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       0,
+       16,
+       150,
+       105
+      ]
+     }
     ],
     [
-     "rivet_ultimate_006.png",
-     0.11
+     "rivet_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       975,
+       543,
+       161,
+       135
+      ],
+      "anchor": [
+       82.38,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       21,
+       15,
+       126,
+       107
+      ]
+     }
     ],
     [
-     "rivet_ultimate_007.png",
-     0.13
+     "rivet_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1136,
+       543,
+       159,
+       135
+      ],
+      "anchor": [
+       87.42,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       21,
+       14,
+       116,
+       108
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "rivet_skill_000.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       678,
+       164,
+       135
+      ],
+      "anchor": [
+       90.47,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       23,
+       12,
+       118,
+       110
+      ]
+     }
     ],
     [
-     "rivet_skill_001.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       164,
+       678,
+       163,
+       135
+      ],
+      "anchor": [
+       79.72,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       14,
+       17,
+       132,
+       105
+      ]
+     }
     ],
     [
-     "rivet_skill_002.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       327,
+       678,
+       162,
+       135
+      ],
+      "anchor": [
+       70.0,
+       120
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       7,
+       13,
+       138,
+       107
+      ]
+     }
     ],
     [
-     "rivet_skill_003.png",
-     0.07
+     "rivet_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       489,
+       678,
+       162,
+       135
+      ],
+      "anchor": [
+       63.3,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       4,
+       12,
+       158,
+       109
+      ]
+     }
     ],
     [
-     "rivet_skill_004.png",
-     0.08
+     "rivet_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       651,
+       678,
+       161,
+       135
+      ],
+      "anchor": [
+       76.04,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       12,
+       13,
+       145,
+       109
+      ]
+     }
     ],
     [
-     "rivet_skill_005.png",
-     0.085
+     "rivet_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       812,
+       678,
+       163,
+       135
+      ],
+      "anchor": [
+       81.48,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       18,
+       16,
+       134,
+       106
+      ]
+     }
     ],
     [
-     "rivet_skill_006.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       975,
+       678,
+       161,
+       135
+      ],
+      "anchor": [
+       81.67,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       15,
+       17,
+       120,
+       105
+      ]
+     }
     ],
     [
-     "rivet_skill_007.png",
-     0.12
+     "rivet_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1136,
+       678,
+       159,
+       135
+      ],
+      "anchor": [
+       87.7,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       24,
+       14,
+       111,
+       108
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "rivet_hurt_000.png",
-     0.085
+     "rivet_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       947,
+       164,
+       129
+      ],
+      "anchor": [
+       91.05,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       24,
+       11,
+       117,
+       111
+      ]
+     }
     ],
     [
-     "rivet_hurt_001.png",
-     0.065
+     "rivet_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       164,
+       947,
+       163,
+       129
+      ],
+      "anchor": [
+       84.15,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       22,
+       14,
+       107,
+       108
+      ]
+     }
     ],
     [
-     "rivet_hurt_002.png",
-     0.075
+     "rivet_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       327,
+       947,
+       162,
+       129
+      ],
+      "anchor": [
+       82.2,
+       115
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       12,
+       12,
+       120,
+       103
+      ]
+     }
     ],
     [
-     "rivet_hurt_003.png",
-     0.08
+     "rivet_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       489,
+       947,
+       162,
+       129
+      ],
+      "anchor": [
+       91.75,
+       112
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       9,
+       7,
+       117,
+       105
+      ]
+     }
     ],
     [
-     "rivet_hurt_004.png",
-     0.085
+     "rivet_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       651,
+       947,
+       161,
+       129
+      ],
+      "anchor": [
+       75.65,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       14,
+       19,
+       116,
+       102
+      ]
+     }
     ],
     [
-     "rivet_hurt_005.png",
-     0.09
+     "rivet_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       812,
+       947,
+       163,
+       129
+      ],
+      "anchor": [
+       84.67,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       15,
+       16,
+       116,
+       105
+      ]
+     }
     ],
     [
-     "rivet_hurt_006.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       975,
+       947,
+       161,
+       129
+      ],
+      "anchor": [
+       85.82,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       17,
+       17,
+       118,
+       105
+      ]
+     }
     ],
     [
-     "rivet_hurt_007.png",
-     0.12
+     "rivet_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1136,
+       947,
+       159,
+       129
+      ],
+      "anchor": [
+       88.19,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       20,
+       13,
+       119,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "rivet_dodge_000.png",
-     0.09
+     "rivet_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       813,
+       164,
+       134
+      ],
+      "anchor": [
+       90.9,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       24,
+       10,
+       117,
+       112
+      ]
+     }
     ],
     [
-     "rivet_dodge_001.png",
-     0.065
+     "rivet_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       164,
+       813,
+       163,
+       134
+      ],
+      "anchor": [
+       73.55,
+       120
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       18,
+       25,
+       118,
+       95
+      ]
+     }
     ],
     [
-     "rivet_dodge_002.png",
-     0.055
+     "rivet_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       327,
+       813,
+       162,
+       134
+      ],
+      "anchor": [
+       86.61,
+       120
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       4,
+       20,
+       141,
+       100
+      ]
+     }
     ],
     [
-     "rivet_dodge_003.png",
-     0.055
+     "rivet_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       489,
+       813,
+       162,
+       134
+      ],
+      "anchor": [
+       84.85,
+       120
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       3,
+       28,
+       143,
+       92
+      ]
+     }
     ],
     [
-     "rivet_dodge_004.png",
-     0.065
+     "rivet_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       651,
+       813,
+       161,
+       134
+      ],
+      "anchor": [
+       77.87,
+       120
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       13,
+       29,
+       121,
+       91
+      ]
+     }
     ],
     [
-     "rivet_dodge_005.png",
-     0.075
+     "rivet_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       812,
+       813,
+       163,
+       134
+      ],
+      "anchor": [
+       82.84,
+       121
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       16,
+       21,
+       117,
+       100
+      ]
+     }
     ],
     [
-     "rivet_dodge_006.png",
-     0.09
+     "rivet_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       975,
+       813,
+       161,
+       134
+      ],
+      "anchor": [
+       82.78,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       19,
+       16,
+       115,
+       106
+      ]
+     }
     ],
     [
-     "rivet_dodge_007.png",
-     0.12
+     "rivet_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1136,
+       813,
+       159,
+       134
+      ],
+      "anchor": [
+       88.49,
+       122
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       21,
+       12,
+       117,
+       110
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "rivet_death_000.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1076,
+       164,
+       138
+      ],
+      "anchor": [
+       87.84,
+       114
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       24,
+       6,
+       115,
+       108
+      ]
+     }
     ],
     [
-     "rivet_death_001.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       164,
+       1076,
+       163,
+       138
+      ],
+      "anchor": [
+       83.04,
+       113
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       22,
+       7,
+       109,
+       106
+      ]
+     }
     ],
     [
-     "rivet_death_002.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       327,
+       1076,
+       162,
+       138
+      ],
+      "anchor": [
+       75.73,
+       112
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       20,
+       17,
+       110,
+       95
+      ]
+     }
     ],
     [
-     "rivet_death_003.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       489,
+       1076,
+       162,
+       138
+      ],
+      "anchor": [
+       85.86,
+       113
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       19,
+       24,
+       119,
+       89
+      ]
+     }
     ],
     [
-     "rivet_death_004.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       651,
+       1076,
+       161,
+       138
+      ],
+      "anchor": [
+       81.48,
+       113
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       13,
+       36,
+       130,
+       77
+      ]
+     }
     ],
     [
-     "rivet_death_005.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       812,
+       1076,
+       163,
+       138
+      ],
+      "anchor": [
+       84.84,
+       111
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       9,
+       44,
+       136,
+       67
+      ]
+     }
     ],
     [
-     "rivet_death_006.png",
-     0.1
+     "rivet_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       975,
+       1076,
+       161,
+       138
+      ],
+      "anchor": [
+       88.84,
+       112
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       6,
+       52,
+       143,
+       60
+      ]
+     }
     ],
     [
-     "rivet_death_007.png",
-     0.45
+     "rivet_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1136,
+       1076,
+       159,
+       138
+      ],
+      "anchor": [
+       83.71,
+       110
+      ],
+      "scale": 2.402552,
+      "bounds": [
+       9,
+       60,
+       141,
+       50
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "rivet_idle_000.png",
+     0.3
+    ],
+    [
+     "rivet_idle_001.png",
+     0.3
+    ],
+    [
+     "rivet_idle_002.png",
+     0.3
+    ],
+    [
+     "rivet_idle_003.png",
+     0.3
+    ],
+    [
+     "rivet_idle_004.png",
+     0.3
+    ],
+    [
+     "rivet_idle_005.png",
+     0.3
+    ],
+    [
+     "rivet_idle_006.png",
+     0.3
+    ],
+    [
+     "rivet_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "rivet_walk_000.png",
+     0.1
+    ],
+    [
+     "rivet_walk_001.png",
+     0.1
+    ],
+    [
+     "rivet_walk_002.png",
+     0.1
+    ],
+    [
+     "rivet_walk_003.png",
+     0.1
+    ],
+    [
+     "rivet_walk_004.png",
+     0.1
+    ],
+    [
+     "rivet_walk_005.png",
+     0.1
+    ],
+    [
+     "rivet_walk_006.png",
+     0.1
+    ],
+    [
+     "rivet_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "rivet_attack_1_000.png",
+     0.1
+    ],
+    [
+     "rivet_attack_1_001.png",
+     0.1
+    ],
+    [
+     "rivet_attack_1_002.png",
+     0.08
+    ],
+    [
+     "rivet_attack_1_003.png",
+     0.05
+    ],
+    [
+     "rivet_attack_1_004.png",
+     0.065
+    ],
+    [
+     "rivet_attack_1_005.png",
+     0.07
+    ],
+    [
+     "rivet_attack_1_006.png",
+     0.1
+    ],
+    [
+     "rivet_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "rivet_attack_2_000.png",
+     0.1
+    ],
+    [
+     "rivet_attack_2_001.png",
+     0.085
+    ],
+    [
+     "rivet_attack_2_002.png",
+     0.06
+    ],
+    [
+     "rivet_attack_2_003.png",
+     0.06
+    ],
+    [
+     "rivet_attack_2_004.png",
+     0.065
+    ],
+    [
+     "rivet_attack_2_005.png",
+     0.075
+    ],
+    [
+     "rivet_attack_2_006.png",
+     0.11
+    ],
+    [
+     "rivet_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "rivet_ultimate_000.png",
+     0.11
+    ],
+    [
+     "rivet_ultimate_001.png",
+     0.11
+    ],
+    [
+     "rivet_ultimate_002.png",
+     0.1
+    ],
+    [
+     "rivet_ultimate_003.png",
+     0.075
+    ],
+    [
+     "rivet_ultimate_004.png",
+     0.085
+    ],
+    [
+     "rivet_ultimate_005.png",
+     0.1
+    ],
+    [
+     "rivet_ultimate_006.png",
+     0.11
+    ],
+    [
+     "rivet_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "rivet_skill_000.png",
+     0.1
+    ],
+    [
+     "rivet_skill_001.png",
+     0.1
+    ],
+    [
+     "rivet_skill_002.png",
+     0.1
+    ],
+    [
+     "rivet_skill_003.png",
+     0.07
+    ],
+    [
+     "rivet_skill_004.png",
+     0.08
+    ],
+    [
+     "rivet_skill_005.png",
+     0.085
+    ],
+    [
+     "rivet_skill_006.png",
+     0.1
+    ],
+    [
+     "rivet_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "rivet_dodge_000.png",
+     0.09
+    ],
+    [
+     "rivet_dodge_001.png",
+     0.065
+    ],
+    [
+     "rivet_dodge_002.png",
+     0.055
+    ],
+    [
+     "rivet_dodge_003.png",
+     0.055
+    ],
+    [
+     "rivet_dodge_004.png",
+     0.065
+    ],
+    [
+     "rivet_dodge_005.png",
+     0.075
+    ],
+    [
+     "rivet_dodge_006.png",
+     0.09
+    ],
+    [
+     "rivet_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "rivet_hurt_000.png",
+     0.085
+    ],
+    [
+     "rivet_hurt_001.png",
+     0.065
+    ],
+    [
+     "rivet_hurt_002.png",
+     0.075
+    ],
+    [
+     "rivet_hurt_003.png",
+     0.08
+    ],
+    [
+     "rivet_hurt_004.png",
+     0.085
+    ],
+    [
+     "rivet_hurt_005.png",
+     0.09
+    ],
+    [
+     "rivet_hurt_006.png",
+     0.1
+    ],
+    [
+     "rivet_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "rivet_death_000.png",
+     0.1
+    ],
+    [
+     "rivet_death_001.png",
+     0.1
+    ],
+    [
+     "rivet_death_002.png",
+     0.1
+    ],
+    [
+     "rivet_death_003.png",
+     0.1
+    ],
+    [
+     "rivet_death_004.png",
+     0.1
+    ],
+    [
+     "rivet_death_005.png",
+     0.1
+    ],
+    [
+     "rivet_death_006.png",
+     0.1
+    ],
+    [
+     "rivet_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

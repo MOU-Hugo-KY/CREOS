@@ -54,6 +54,7 @@ func _build() -> void:
 	_label(canvas, "CREOS / CORBIN", Vector2(64, 42), 36, Color("eee4cd"))
 	_label(canvas, "Entaille du corbeau · comparaison des poses", Vector2(64, 92), 23, Color("a8b6be"))
 	var sheet := PixelSheet.for_actor("corbin")
+	sheet.anims["attack_1_original"] = sheet.original_animation("attack_1")
 	var clip := ClipPlayer.load_clip("res://assets/anim/heroes/", "corbin_0")
 	for i in 2:
 		var pose := Pose.new()

@@ -131,7 +131,8 @@ func _add_still_hero() -> void:
 	var body := sheet.body_rect()
 	# Même règle que le combat (tailles égalisées) : ~2,8 pour un héros moyen, arrondi au demi.
 	var k := clampf(roundf(780.0 / maxf(1.0, body.size.y) * 2.0) / 2.0, 2.0, 3.5)
-	var art := _image(content, tex, Rect2(FEET - sheet.anchor * k, tex.get_size() * k))
+	k *= sheet.frame_scale(tex) / sheet.scale
+	var art := _image(content, tex, Rect2(FEET - sheet.frame_anchor(tex) * k, tex.get_size() * k))
 	art.stretch_mode = TextureRect.STRETCH_SCALE
 	art.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # le héros est en vrai pixel art : il reste net
 

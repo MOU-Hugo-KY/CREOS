@@ -25,36 +25,165 @@
    "loop": true,
    "frames": [
     [
-     "oona_idle_000.png",
-     0.3
+     "oona_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       0,
+       0,
+       175,
+       151
+      ],
+      "anchor": [
+       84.95,
+       139
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       25,
+       16,
+       132,
+       123
+      ]
+     }
     ],
     [
-     "oona_idle_001.png",
-     0.3
+     "oona_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       175,
+       0,
+       168,
+       151
+      ],
+      "anchor": [
+       77.27,
+       139
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       19,
+       14,
+       130,
+       125
+      ]
+     }
     ],
     [
-     "oona_idle_002.png",
-     0.3
+     "oona_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       343,
+       0,
+       167,
+       151
+      ],
+      "anchor": [
+       77.86,
+       138
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       20,
+       13,
+       127,
+       125
+      ]
+     }
     ],
     [
-     "oona_idle_003.png",
-     0.3
+     "oona_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       510,
+       0,
+       167,
+       151
+      ],
+      "anchor": [
+       77.48,
+       139
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       19,
+       12,
+       128,
+       127
+      ]
+     }
     ],
     [
-     "oona_idle_004.png",
-     0.3
+     "oona_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       677,
+       0,
+       168,
+       151
+      ],
+      "anchor": [
+       79.44,
+       139
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       20,
+       19,
+       127,
+       120
+      ]
+     }
     ],
     [
-     "oona_idle_005.png",
-     0.3
+     "oona_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       845,
+       0,
+       169,
+       151
+      ],
+      "anchor": [
+       78.66,
+       139
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       21,
+       21,
+       126,
+       118
+      ]
+     }
     ],
     [
-     "oona_idle_006.png",
-     0.3
-    ],
-    [
-     "oona_idle_007.png",
-     0.3
+     "oona_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       1014,
+       0,
+       168,
+       151
+      ],
+      "anchor": [
+       77.01,
+       139
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       21,
+       21,
+       126,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +192,165 @@
    "loop": true,
    "frames": [
     [
-     "oona_walk_000.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       0,
+       151,
+       175,
+       145
+      ],
+      "anchor": [
+       85.38,
+       129
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       27,
+       11,
+       127,
+       118
+      ]
+     }
     ],
     [
-     "oona_walk_001.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       175,
+       151,
+       168,
+       145
+      ],
+      "anchor": [
+       71.55,
+       131
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       24,
+       9,
+       122,
+       122
+      ]
+     }
     ],
     [
-     "oona_walk_002.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       343,
+       151,
+       167,
+       145
+      ],
+      "anchor": [
+       66.92,
+       131
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       22,
+       8,
+       126,
+       123
+      ]
+     }
     ],
     [
-     "oona_walk_003.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       510,
+       151,
+       167,
+       145
+      ],
+      "anchor": [
+       58.59,
+       132
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       19,
+       7,
+       131,
+       125
+      ]
+     }
     ],
     [
-     "oona_walk_004.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       677,
+       151,
+       168,
+       145
+      ],
+      "anchor": [
+       75.94,
+       132
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       23,
+       11,
+       128,
+       121
+      ]
+     }
     ],
     [
-     "oona_walk_005.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       845,
+       151,
+       169,
+       145
+      ],
+      "anchor": [
+       80.77,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       27,
+       12,
+       125,
+       118
+      ]
+     }
     ],
     [
-     "oona_walk_006.png",
-     0.1
-    ],
-    [
-     "oona_walk_007.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       1014,
+       151,
+       168,
+       145
+      ],
+      "anchor": [
+       76.93,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       24,
+       12,
+       127,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +359,539 @@
    "loop": false,
    "frames": [
     [
-     "oona_attack_1_000.png",
-     0.1
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       376,
+       292
+      ],
+      "anchor": [
+       189.01,
+       242
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       112,
+       81,
+       174,
+       161
+      ]
+     }
     ],
     [
-     "oona_attack_1_001.png",
-     0.1
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       376,
+       0,
+       354,
+       292
+      ],
+      "anchor": [
+       172.01,
+       241
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       89,
+       79,
+       175,
+       162
+      ]
+     }
     ],
     [
-     "oona_attack_1_002.png",
-     0.08
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       730,
+       0,
+       352,
+       292
+      ],
+      "anchor": [
+       168.51,
+       240
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       90,
+       78,
+       174,
+       162
+      ]
+     }
     ],
     [
-     "oona_attack_1_003.png",
-     0.05
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1082,
+       0,
+       366,
+       292
+      ],
+      "anchor": [
+       179.96,
+       241
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       89,
+       73,
+       171,
+       168
+      ]
+     }
     ],
     [
-     "oona_attack_1_004.png",
-     0.065
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       292,
+       376,
+       264
+      ],
+      "anchor": [
+       196.59,
+       213
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       113,
+       47,
+       165,
+       166
+      ]
+     }
     ],
     [
-     "oona_attack_1_005.png",
-     0.07
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       376,
+       292,
+       354,
+       264
+      ],
+      "anchor": [
+       167.15,
+       213
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       88,
+       45,
+       166,
+       168
+      ]
+     }
     ],
     [
-     "oona_attack_1_006.png",
-     0.1
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       730,
+       292,
+       352,
+       264
+      ],
+      "anchor": [
+       160.53,
+       212
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       90,
+       55,
+       176,
+       157
+      ]
+     }
     ],
     [
-     "oona_attack_1_007.png",
-     0.12
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1082,
+       292,
+       366,
+       264
+      ],
+      "anchor": [
+       150.04,
+       216
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       84,
+       61,
+       218,
+       155
+      ]
+     }
+    ],
+    [
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       556,
+       376,
+       266
+      ],
+      "anchor": [
+       172.41,
+       211
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       103,
+       58,
+       248,
+       153
+      ]
+     }
+    ],
+    [
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       376,
+       556,
+       354,
+       266
+      ],
+      "anchor": [
+       156.96,
+       210
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       82,
+       53,
+       207,
+       157
+      ]
+     }
+    ],
+    [
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       730,
+       556,
+       352,
+       266
+      ],
+      "anchor": [
+       155.52,
+       211
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       83,
+       49,
+       191,
+       162
+      ]
+     }
+    ],
+    [
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1082,
+       556,
+       366,
+       266
+      ],
+      "anchor": [
+       158.04,
+       211
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       86,
+       46,
+       178,
+       165
+      ]
+     }
+    ],
+    [
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       822,
+       376,
+       264
+      ],
+      "anchor": [
+       180.33,
+       214
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       111,
+       49,
+       174,
+       165
+      ]
+     }
+    ],
+    [
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       376,
+       822,
+       354,
+       264
+      ],
+      "anchor": [
+       164.78,
+       214
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       90,
+       49,
+       173,
+       165
+      ]
+     }
+    ],
+    [
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       730,
+       822,
+       352,
+       264
+      ],
+      "anchor": [
+       164.9,
+       214
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       86,
+       51,
+       178,
+       163
+      ]
+     }
+    ],
+    [
+     "oona_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1082,
+       822,
+       366,
+       264
+      ],
+      "anchor": [
+       170.38,
+       214
+      ],
+      "scale": 1.732391,
+      "bounds": [
+       91,
+       51,
+       178,
+       163
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "oona_attack_2_000.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       0,
+       446,
+       175,
+       150
+      ],
+      "anchor": [
+       78.19,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       20,
+       16,
+       124,
+       117
+      ]
+     }
     ],
     [
-     "oona_attack_2_001.png",
-     0.085
+     "oona_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       175,
+       446,
+       168,
+       150
+      ],
+      "anchor": [
+       67.4,
+       135
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       13,
+       17,
+       125,
+       118
+      ]
+     }
     ],
     [
-     "oona_attack_2_002.png",
-     0.06
+     "oona_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       343,
+       446,
+       167,
+       150
+      ],
+      "anchor": [
+       56.74,
+       135
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       4,
+       9,
+       163,
+       126
+      ]
+     }
     ],
     [
-     "oona_attack_2_003.png",
-     0.06
+     "oona_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       510,
+       446,
+       167,
+       150
+      ],
+      "anchor": [
+       72.78,
+       150
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       0,
+       8,
+       161,
+       142
+      ]
+     }
     ],
     [
-     "oona_attack_2_004.png",
-     0.065
+     "oona_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       677,
+       446,
+       168,
+       150
+      ],
+      "anchor": [
+       67.17,
+       135
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       10,
+       16,
+       152,
+       119
+      ]
+     }
     ],
     [
-     "oona_attack_2_005.png",
-     0.075
+     "oona_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       845,
+       446,
+       169,
+       150
+      ],
+      "anchor": [
+       72.02,
+       134
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       18,
+       20,
+       126,
+       114
+      ]
+     }
     ],
     [
-     "oona_attack_2_006.png",
-     0.11
-    ],
-    [
-     "oona_attack_2_007.png",
-     0.12
+     "oona_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       1014,
+       446,
+       168,
+       150
+      ],
+      "anchor": [
+       79.67,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       21,
+       19,
+       126,
+       114
+      ]
+     }
     ]
    ],
    "hit_frame": 3
@@ -177,112 +900,499 @@
    "loop": false,
    "frames": [
     [
-     "oona_ultimate_000.png",
-     0.11
+     "oona_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       0,
+       596,
+       175,
+       149
+      ],
+      "anchor": [
+       82.83,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       28,
+       16,
+       126,
+       114
+      ]
+     }
     ],
     [
-     "oona_ultimate_001.png",
-     0.11
+     "oona_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       175,
+       596,
+       168,
+       149
+      ],
+      "anchor": [
+       75.22,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       18,
+       12,
+       127,
+       118
+      ]
+     }
     ],
     [
-     "oona_ultimate_002.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       343,
+       596,
+       167,
+       149
+      ],
+      "anchor": [
+       61.59,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       0,
+       8,
+       167,
+       122
+      ]
+     }
     ],
     [
-     "oona_ultimate_003.png",
-     0.075
+     "oona_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       510,
+       596,
+       167,
+       149
+      ],
+      "anchor": [
+       61.61,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       0,
+       0,
+       158,
+       133
+      ]
+     }
     ],
     [
-     "oona_ultimate_004.png",
-     0.085
+     "oona_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       677,
+       596,
+       168,
+       149
+      ],
+      "anchor": [
+       74.29,
+       131
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       3,
+       4,
+       159,
+       127
+      ]
+     }
     ],
     [
-     "oona_ultimate_005.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       845,
+       596,
+       169,
+       149
+      ],
+      "anchor": [
+       79.8,
+       129
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       17,
+       15,
+       140,
+       114
+      ]
+     }
     ],
     [
-     "oona_ultimate_006.png",
-     0.11
-    ],
-    [
-     "oona_ultimate_007.png",
-     0.13
+     "oona_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       1014,
+       596,
+       168,
+       149
+      ],
+      "anchor": [
+       81.6,
+       128
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       23,
+       19,
+       127,
+       109
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 3
   },
   "skill": {
    "loop": false,
    "frames": [
     [
-     "oona_skill_000.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       0,
+       745,
+       175,
+       146
+      ],
+      "anchor": [
+       85.98,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       28,
+       18,
+       125,
+       112
+      ]
+     }
     ],
     [
-     "oona_skill_001.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       175,
+       745,
+       168,
+       146
+      ],
+      "anchor": [
+       76.25,
+       129
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       19,
+       17,
+       128,
+       112
+      ]
+     }
     ],
     [
-     "oona_skill_002.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       343,
+       745,
+       167,
+       146
+      ],
+      "anchor": [
+       67.53,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       2,
+       10,
+       140,
+       120
+      ]
+     }
     ],
     [
-     "oona_skill_003.png",
-     0.07
+     "oona_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       510,
+       745,
+       167,
+       146
+      ],
+      "anchor": [
+       60.49,
+       132
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       4,
+       11,
+       150,
+       121
+      ]
+     }
     ],
     [
-     "oona_skill_004.png",
-     0.08
+     "oona_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       677,
+       745,
+       168,
+       146
+      ],
+      "anchor": [
+       62.68,
+       126
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       11,
+       15,
+       149,
+       111
+      ]
+     }
     ],
     [
-     "oona_skill_005.png",
-     0.085
+     "oona_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       845,
+       745,
+       169,
+       146
+      ],
+      "anchor": [
+       74.2,
+       131
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       17,
+       21,
+       127,
+       110
+      ]
+     }
     ],
     [
-     "oona_skill_006.png",
-     0.1
-    ],
-    [
-     "oona_skill_007.png",
-     0.12
+     "oona_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       1014,
+       745,
+       168,
+       146
+      ],
+      "anchor": [
+       79.74,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       24,
+       18,
+       124,
+       112
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 3
   },
   "hurt": {
    "loop": false,
    "frames": [
     [
-     "oona_hurt_000.png",
-     0.085
+     "oona_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       1034,
+       175,
+       144
+      ],
+      "anchor": [
+       83.71,
+       128
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       27,
+       15,
+       126,
+       113
+      ]
+     }
     ],
     [
-     "oona_hurt_001.png",
-     0.065
+     "oona_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       175,
+       1034,
+       168,
+       144
+      ],
+      "anchor": [
+       63.98,
+       129
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       10,
+       13,
+       130,
+       116
+      ]
+     }
     ],
     [
-     "oona_hurt_002.png",
-     0.075
+     "oona_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       343,
+       1034,
+       167,
+       144
+      ],
+      "anchor": [
+       56.13,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       3,
+       10,
+       164,
+       120
+      ]
+     }
     ],
     [
-     "oona_hurt_003.png",
-     0.08
+     "oona_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       510,
+       1034,
+       167,
+       144
+      ],
+      "anchor": [
+       57.56,
+       129
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       0,
+       6,
+       122,
+       123
+      ]
+     }
     ],
     [
-     "oona_hurt_004.png",
-     0.085
+     "oona_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       677,
+       1034,
+       168,
+       144
+      ],
+      "anchor": [
+       74.87,
+       129
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       8,
+       14,
+       128,
+       115
+      ]
+     }
     ],
     [
-     "oona_hurt_005.png",
-     0.09
+     "oona_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       845,
+       1034,
+       169,
+       144
+      ],
+      "anchor": [
+       76.68,
+       131
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       19,
+       21,
+       128,
+       110
+      ]
+     }
     ],
     [
-     "oona_hurt_006.png",
-     0.1
-    ],
-    [
-     "oona_hurt_007.png",
-     0.12
+     "oona_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1014,
+       1034,
+       168,
+       144
+      ],
+      "anchor": [
+       79.55,
+       131
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       22,
+       20,
+       129,
+       111
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1401,165 @@
    "loop": false,
    "frames": [
     [
-     "oona_dodge_000.png",
-     0.09
+     "oona_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       0,
+       891,
+       175,
+       143
+      ],
+      "anchor": [
+       83.25,
+       126
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       27,
+       13,
+       126,
+       113
+      ]
+     }
     ],
     [
-     "oona_dodge_001.png",
-     0.065
+     "oona_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       175,
+       891,
+       168,
+       143
+      ],
+      "anchor": [
+       55.32,
+       127
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       10,
+       16,
+       132,
+       111
+      ]
+     }
     ],
     [
-     "oona_dodge_002.png",
-     0.055
+     "oona_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       343,
+       891,
+       167,
+       143
+      ],
+      "anchor": [
+       65.3,
+       127
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       2,
+       32,
+       148,
+       95
+      ]
+     }
     ],
     [
-     "oona_dodge_003.png",
-     0.055
+     "oona_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       510,
+       891,
+       167,
+       143
+      ],
+      "anchor": [
+       86.85,
+       127
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       3,
+       38,
+       157,
+       89
+      ]
+     }
     ],
     [
-     "oona_dodge_004.png",
-     0.065
+     "oona_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       677,
+       891,
+       168,
+       143
+      ],
+      "anchor": [
+       85.34,
+       127
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       8,
+       21,
+       147,
+       106
+      ]
+     }
     ],
     [
-     "oona_dodge_005.png",
-     0.075
+     "oona_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       845,
+       891,
+       169,
+       143
+      ],
+      "anchor": [
+       77.79,
+       126
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       21,
+       15,
+       125,
+       111
+      ]
+     }
     ],
     [
-     "oona_dodge_006.png",
-     0.09
-    ],
-    [
-     "oona_dodge_007.png",
-     0.12
+     "oona_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       1014,
+       891,
+       168,
+       143
+      ],
+      "anchor": [
+       80.02,
+       126
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       21,
+       15,
+       127,
+       111
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1568,165 @@
    "loop": false,
    "frames": [
     [
-     "oona_death_000.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       0,
+       1178,
+       175,
+       152
+      ],
+      "anchor": [
+       80.24,
+       130
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       23,
+       9,
+       125,
+       121
+      ]
+     }
     ],
     [
-     "oona_death_001.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       175,
+       1178,
+       168,
+       152
+      ],
+      "anchor": [
+       63.57,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       12,
+       25,
+       132,
+       108
+      ]
+     }
     ],
     [
-     "oona_death_002.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       343,
+       1178,
+       167,
+       152
+      ],
+      "anchor": [
+       63.05,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       5,
+       42,
+       162,
+       91
+      ]
+     }
     ],
     [
-     "oona_death_003.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       510,
+       1178,
+       167,
+       152
+      ],
+      "anchor": [
+       68.4,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       0,
+       56,
+       167,
+       77
+      ]
+     }
     ],
     [
-     "oona_death_004.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       677,
+       1178,
+       168,
+       152
+      ],
+      "anchor": [
+       71.55,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       0,
+       67,
+       148,
+       66
+      ]
+     }
     ],
     [
-     "oona_death_005.png",
-     0.1
+     "oona_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       845,
+       1178,
+       169,
+       152
+      ],
+      "anchor": [
+       72.8,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       2,
+       71,
+       146,
+       62
+      ]
+     }
     ],
     [
-     "oona_death_006.png",
-     0.1
-    ],
-    [
-     "oona_death_007.png",
-     0.45
+     "oona_redesign_atlas.png",
+     0.164286,
+     {
+      "region": [
+       1014,
+       1178,
+       168,
+       152
+      ],
+      "anchor": [
+       76.63,
+       133
+      ],
+      "scale": 2.267602,
+      "bounds": [
+       5,
+       78,
+       145,
+       55
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1768,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "oona_idle_000.png",
+     0.3
+    ],
+    [
+     "oona_idle_001.png",
+     0.3
+    ],
+    [
+     "oona_idle_002.png",
+     0.3
+    ],
+    [
+     "oona_idle_003.png",
+     0.3
+    ],
+    [
+     "oona_idle_004.png",
+     0.3
+    ],
+    [
+     "oona_idle_005.png",
+     0.3
+    ],
+    [
+     "oona_idle_006.png",
+     0.3
+    ],
+    [
+     "oona_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "oona_walk_000.png",
+     0.1
+    ],
+    [
+     "oona_walk_001.png",
+     0.1
+    ],
+    [
+     "oona_walk_002.png",
+     0.1
+    ],
+    [
+     "oona_walk_003.png",
+     0.1
+    ],
+    [
+     "oona_walk_004.png",
+     0.1
+    ],
+    [
+     "oona_walk_005.png",
+     0.1
+    ],
+    [
+     "oona_walk_006.png",
+     0.1
+    ],
+    [
+     "oona_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "oona_attack_1_000.png",
+     0.1
+    ],
+    [
+     "oona_attack_1_001.png",
+     0.1
+    ],
+    [
+     "oona_attack_1_002.png",
+     0.08
+    ],
+    [
+     "oona_attack_1_003.png",
+     0.05
+    ],
+    [
+     "oona_attack_1_004.png",
+     0.065
+    ],
+    [
+     "oona_attack_1_005.png",
+     0.07
+    ],
+    [
+     "oona_attack_1_006.png",
+     0.1
+    ],
+    [
+     "oona_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "oona_attack_2_000.png",
+     0.1
+    ],
+    [
+     "oona_attack_2_001.png",
+     0.085
+    ],
+    [
+     "oona_attack_2_002.png",
+     0.06
+    ],
+    [
+     "oona_attack_2_003.png",
+     0.06
+    ],
+    [
+     "oona_attack_2_004.png",
+     0.065
+    ],
+    [
+     "oona_attack_2_005.png",
+     0.075
+    ],
+    [
+     "oona_attack_2_006.png",
+     0.11
+    ],
+    [
+     "oona_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "oona_ultimate_000.png",
+     0.11
+    ],
+    [
+     "oona_ultimate_001.png",
+     0.11
+    ],
+    [
+     "oona_ultimate_002.png",
+     0.1
+    ],
+    [
+     "oona_ultimate_003.png",
+     0.075
+    ],
+    [
+     "oona_ultimate_004.png",
+     0.085
+    ],
+    [
+     "oona_ultimate_005.png",
+     0.1
+    ],
+    [
+     "oona_ultimate_006.png",
+     0.11
+    ],
+    [
+     "oona_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "oona_skill_000.png",
+     0.1
+    ],
+    [
+     "oona_skill_001.png",
+     0.1
+    ],
+    [
+     "oona_skill_002.png",
+     0.1
+    ],
+    [
+     "oona_skill_003.png",
+     0.07
+    ],
+    [
+     "oona_skill_004.png",
+     0.08
+    ],
+    [
+     "oona_skill_005.png",
+     0.085
+    ],
+    [
+     "oona_skill_006.png",
+     0.1
+    ],
+    [
+     "oona_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "oona_dodge_000.png",
+     0.09
+    ],
+    [
+     "oona_dodge_001.png",
+     0.065
+    ],
+    [
+     "oona_dodge_002.png",
+     0.055
+    ],
+    [
+     "oona_dodge_003.png",
+     0.055
+    ],
+    [
+     "oona_dodge_004.png",
+     0.065
+    ],
+    [
+     "oona_dodge_005.png",
+     0.075
+    ],
+    [
+     "oona_dodge_006.png",
+     0.09
+    ],
+    [
+     "oona_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "oona_hurt_000.png",
+     0.085
+    ],
+    [
+     "oona_hurt_001.png",
+     0.065
+    ],
+    [
+     "oona_hurt_002.png",
+     0.075
+    ],
+    [
+     "oona_hurt_003.png",
+     0.08
+    ],
+    [
+     "oona_hurt_004.png",
+     0.085
+    ],
+    [
+     "oona_hurt_005.png",
+     0.09
+    ],
+    [
+     "oona_hurt_006.png",
+     0.1
+    ],
+    [
+     "oona_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "oona_death_000.png",
+     0.1
+    ],
+    [
+     "oona_death_001.png",
+     0.1
+    ],
+    [
+     "oona_death_002.png",
+     0.1
+    ],
+    [
+     "oona_death_003.png",
+     0.1
+    ],
+    [
+     "oona_death_004.png",
+     0.1
+    ],
+    [
+     "oona_death_005.png",
+     0.1
+    ],
+    [
+     "oona_death_006.png",
+     0.1
+    ],
+    [
+     "oona_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

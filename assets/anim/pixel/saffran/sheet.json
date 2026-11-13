@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "saffran_idle_000.png",
-     0.3
+     "saffran_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       160,
+       138
+      ],
+      "anchor": [
+       98.51,
+       128
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       8,
+       127,
+       120
+      ]
+     }
     ],
     [
-     "saffran_idle_001.png",
-     0.3
+     "saffran_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       160,
+       0,
+       157,
+       138
+      ],
+      "anchor": [
+       94.71,
+       129
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       7,
+       125,
+       122
+      ]
+     }
     ],
     [
-     "saffran_idle_002.png",
-     0.3
+     "saffran_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       317,
+       0,
+       157,
+       138
+      ],
+      "anchor": [
+       94.58,
+       129
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       15,
+       6,
+       127,
+       123
+      ]
+     }
     ],
     [
-     "saffran_idle_003.png",
-     0.3
+     "saffran_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       474,
+       0,
+       158,
+       138
+      ],
+      "anchor": [
+       97.35,
+       128
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       6,
+       127,
+       122
+      ]
+     }
     ],
     [
-     "saffran_idle_004.png",
-     0.3
+     "saffran_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       632,
+       0,
+       158,
+       138
+      ],
+      "anchor": [
+       95.52,
+       128
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       5,
+       127,
+       123
+      ]
+     }
     ],
     [
-     "saffran_idle_005.png",
-     0.3
+     "saffran_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       790,
+       0,
+       158,
+       138
+      ],
+      "anchor": [
+       103.61,
+       127
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       5,
+       127,
+       122
+      ]
+     }
     ],
     [
-     "saffran_idle_006.png",
-     0.3
+     "saffran_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       948,
+       0,
+       158,
+       138
+      ],
+      "anchor": [
+       101.43,
+       127
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       4,
+       125,
+       123
+      ]
+     }
     ],
     [
-     "saffran_idle_007.png",
-     0.3
+     "saffran_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1106,
+       0,
+       155,
+       138
+      ],
+      "anchor": [
+       94.92,
+       129
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       10,
+       125,
+       119
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "saffran_walk_000.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       138,
+       160,
+       134
+      ],
+      "anchor": [
+       88.18,
+       125
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       8,
+       127,
+       117
+      ]
+     }
     ],
     [
-     "saffran_walk_001.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       160,
+       138,
+       157,
+       134
+      ],
+      "anchor": [
+       97.99,
+       122
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       12,
+       9,
+       130,
+       113
+      ]
+     }
     ],
     [
-     "saffran_walk_002.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       317,
+       138,
+       157,
+       134
+      ],
+      "anchor": [
+       104.61,
+       125
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       14,
+       7,
+       129,
+       118
+      ]
+     }
     ],
     [
-     "saffran_walk_003.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       474,
+       138,
+       158,
+       134
+      ],
+      "anchor": [
+       92.87,
+       122
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       15,
+       6,
+       130,
+       116
+      ]
+     }
     ],
     [
-     "saffran_walk_004.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       632,
+       138,
+       158,
+       134
+      ],
+      "anchor": [
+       96.38,
+       122
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       9,
+       129,
+       113
+      ]
+     }
     ],
     [
-     "saffran_walk_005.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       790,
+       138,
+       158,
+       134
+      ],
+      "anchor": [
+       94.99,
+       122
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       11,
+       127,
+       111
+      ]
+     }
     ],
     [
-     "saffran_walk_006.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       948,
+       138,
+       158,
+       134
+      ],
+      "anchor": [
+       94.86,
+       124
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       12,
+       126,
+       112
+      ]
+     }
     ],
     [
-     "saffran_walk_007.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1106,
+       138,
+       155,
+       134
+      ],
+      "anchor": [
+       95.26,
+       123
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       15,
+       10,
+       127,
+       113
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +405,562 @@
    "loop": false,
    "frames": [
     [
-     "saffran_attack_1_000.png",
-     0.1
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       324,
+       337
+      ],
+      "anchor": [
+       194.65,
+       265
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       79,
+       99,
+       181,
+       166
+      ]
+     }
     ],
     [
-     "saffran_attack_1_001.png",
-     0.1
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       324,
+       0,
+       311,
+       337
+      ],
+      "anchor": [
+       181.74,
+       265
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       64,
+       97,
+       183,
+       168
+      ]
+     }
     ],
     [
-     "saffran_attack_1_002.png",
-     0.08
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       635,
+       0,
+       311,
+       337
+      ],
+      "anchor": [
+       181.13,
+       265
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       65,
+       103,
+       180,
+       162
+      ]
+     }
     ],
     [
-     "saffran_attack_1_003.png",
-     0.05
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       0,
+       315,
+       337
+      ],
+      "anchor": [
+       177.48,
+       265
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       65,
+       101,
+       181,
+       164
+      ]
+     }
     ],
     [
-     "saffran_attack_1_004.png",
-     0.065
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       337,
+       324,
+       309
+      ],
+      "anchor": [
+       187.7,
+       235
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       75,
+       69,
+       187,
+       166
+      ]
+     }
     ],
     [
-     "saffran_attack_1_005.png",
-     0.07
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       324,
+       337,
+       311,
+       309
+      ],
+      "anchor": [
+       173.48,
+       235
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       54,
+       68,
+       197,
+       167
+      ]
+     }
     ],
     [
-     "saffran_attack_1_006.png",
-     0.1
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       635,
+       337,
+       311,
+       309
+      ],
+      "anchor": [
+       169.86,
+       235
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       54,
+       70,
+       208,
+       165
+      ]
+     }
     ],
     [
-     "saffran_attack_1_007.png",
-     0.12
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       337,
+       315,
+       309
+      ],
+      "anchor": [
+       163.66,
+       235
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       54,
+       71,
+       218,
+       164
+      ]
+     }
+    ],
+    [
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       646,
+       324,
+       309
+      ],
+      "anchor": [
+       167.88,
+       233
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       70,
+       75,
+       218,
+       158
+      ]
+     }
+    ],
+    [
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       324,
+       646,
+       311,
+       309
+      ],
+      "anchor": [
+       154.36,
+       233
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       61,
+       76,
+       196,
+       157
+      ]
+     }
+    ],
+    [
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       635,
+       646,
+       311,
+       309
+      ],
+      "anchor": [
+       157.3,
+       233
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       59,
+       73,
+       191,
+       160
+      ]
+     }
+    ],
+    [
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       646,
+       315,
+       309
+      ],
+      "anchor": [
+       159.02,
+       233
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       57,
+       71,
+       186,
+       162
+      ]
+     }
+    ],
+    [
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       955,
+       324,
+       292
+      ],
+      "anchor": [
+       176.66,
+       235
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       75,
+       71,
+       183,
+       164
+      ]
+     }
+    ],
+    [
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       324,
+       955,
+       311,
+       292
+      ],
+      "anchor": [
+       170.08,
+       235
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       67,
+       70,
+       178,
+       165
+      ]
+     }
+    ],
+    [
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       635,
+       955,
+       311,
+       292
+      ],
+      "anchor": [
+       173.96,
+       235
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       63,
+       70,
+       182,
+       165
+      ]
+     }
+    ],
+    [
+     "saffran_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       946,
+       955,
+       315,
+       292
+      ],
+      "anchor": [
+       175.99,
+       235
+      ],
+      "scale": 1.771265,
+      "bounds": [
+       67,
+       70,
+       183,
+       165
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "saffran_attack_2_000.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       406,
+       160,
+       134
+      ],
+      "anchor": [
+       97.07,
+       121
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       8,
+       127,
+       113
+      ]
+     }
     ],
     [
-     "saffran_attack_2_001.png",
-     0.085
+     "saffran_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       160,
+       406,
+       157,
+       134
+      ],
+      "anchor": [
+       83.47,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       12,
+       28,
+       136,
+       92
+      ]
+     }
     ],
     [
-     "saffran_attack_2_002.png",
-     0.06
+     "saffran_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       317,
+       406,
+       157,
+       134
+      ],
+      "anchor": [
+       67.77,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       13,
+       132,
+       106
+      ]
+     }
     ],
     [
-     "saffran_attack_2_003.png",
-     0.06
+     "saffran_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       474,
+       406,
+       158,
+       134
+      ],
+      "anchor": [
+       95.85,
+       134
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       4,
+       0,
+       154,
+       134
+      ]
+     }
     ],
     [
-     "saffran_attack_2_004.png",
-     0.065
+     "saffran_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       632,
+       406,
+       158,
+       134
+      ],
+      "anchor": [
+       82.13,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       0,
+       8,
+       158,
+       112
+      ]
+     }
     ],
     [
-     "saffran_attack_2_005.png",
-     0.075
+     "saffran_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       790,
+       406,
+       158,
+       134
+      ],
+      "anchor": [
+       86.95,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       0,
+       20,
+       149,
+       99
+      ]
+     }
     ],
     [
-     "saffran_attack_2_006.png",
-     0.11
+     "saffran_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       948,
+       406,
+       158,
+       134
+      ],
+      "anchor": [
+       87.79,
+       117
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       19,
+       12,
+       127,
+       105
+      ]
+     }
     ],
     [
-     "saffran_attack_2_007.png",
-     0.12
+     "saffran_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1106,
+       406,
+       155,
+       134
+      ],
+      "anchor": [
+       96.27,
+       121
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       9,
+       125,
+       112
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -177,36 +969,188 @@
    "loop": false,
    "frames": [
     [
-     "saffran_ultimate_000.png",
-     0.11
+     "saffran_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       540,
+       160,
+       134
+      ],
+      "anchor": [
+       96.97,
+       121
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       10,
+       126,
+       111
+      ]
+     }
     ],
     [
-     "saffran_ultimate_001.png",
-     0.11
+     "saffran_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       160,
+       540,
+       157,
+       134
+      ],
+      "anchor": [
+       62.9,
+       126
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       24,
+       131,
+       102
+      ]
+     }
     ],
     [
-     "saffran_ultimate_002.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       317,
+       540,
+       157,
+       134
+      ],
+      "anchor": [
+       36.26,
+       126
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       13,
+       5,
+       138,
+       121
+      ]
+     }
     ],
     [
-     "saffran_ultimate_003.png",
-     0.075
+     "saffran_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       474,
+       540,
+       158,
+       134
+      ],
+      "anchor": [
+       36.76,
+       127
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       5,
+       0,
+       151,
+       127
+      ]
+     }
     ],
     [
-     "saffran_ultimate_004.png",
-     0.085
+     "saffran_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       632,
+       540,
+       158,
+       134
+      ],
+      "anchor": [
+       70.66,
+       118
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       13,
+       8,
+       145,
+       110
+      ]
+     }
     ],
     [
-     "saffran_ultimate_005.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       790,
+       540,
+       158,
+       134
+      ],
+      "anchor": [
+       80.7,
+       122
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       0,
+       21,
+       158,
+       101
+      ]
+     }
     ],
     [
-     "saffran_ultimate_006.png",
-     0.11
+     "saffran_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       948,
+       540,
+       158,
+       134
+      ],
+      "anchor": [
+       83.27,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       18,
+       20,
+       126,
+       100
+      ]
+     }
     ],
     [
-     "saffran_ultimate_007.png",
-     0.13
+     "saffran_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1106,
+       540,
+       155,
+       134
+      ],
+      "anchor": [
+       94.56,
+       121
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       11,
+       125,
+       110
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "saffran_skill_000.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       674,
+       160,
+       134
+      ],
+      "anchor": [
+       98.34,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       8,
+       126,
+       112
+      ]
+     }
     ],
     [
-     "saffran_skill_001.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       160,
+       674,
+       157,
+       134
+      ],
+      "anchor": [
+       82.12,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       15,
+       19,
+       127,
+       101
+      ]
+     }
     ],
     [
-     "saffran_skill_002.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       317,
+       674,
+       157,
+       134
+      ],
+      "anchor": [
+       72.55,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       7,
+       8,
+       137,
+       112
+      ]
+     }
     ],
     [
-     "saffran_skill_003.png",
-     0.07
+     "saffran_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       474,
+       674,
+       158,
+       134
+      ],
+      "anchor": [
+       79.22,
+       121
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       2,
+       8,
+       153,
+       113
+      ]
+     }
     ],
     [
-     "saffran_skill_004.png",
-     0.08
+     "saffran_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       632,
+       674,
+       158,
+       134
+      ],
+      "anchor": [
+       73.43,
+       117
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       15,
+       12,
+       137,
+       105
+      ]
+     }
     ],
     [
-     "saffran_skill_005.png",
-     0.085
+     "saffran_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       790,
+       674,
+       158,
+       134
+      ],
+      "anchor": [
+       78.44,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       21,
+       25,
+       124,
+       94
+      ]
+     }
     ],
     [
-     "saffran_skill_006.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       948,
+       674,
+       158,
+       134
+      ],
+      "anchor": [
+       80.05,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       24,
+       128,
+       95
+      ]
+     }
     ],
     [
-     "saffran_skill_007.png",
-     0.12
+     "saffran_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1106,
+       674,
+       155,
+       134
+      ],
+      "anchor": [
+       95.07,
+       121
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       12,
+       126,
+       109
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "saffran_hurt_000.png",
-     0.085
+     "saffran_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       941,
+       160,
+       133
+      ],
+      "anchor": [
+       97.15,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       8,
+       126,
+       112
+      ]
+     }
     ],
     [
-     "saffran_hurt_001.png",
-     0.065
+     "saffran_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       160,
+       941,
+       157,
+       133
+      ],
+      "anchor": [
+       91.03,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       15,
+       21,
+       127,
+       99
+      ]
+     }
     ],
     [
-     "saffran_hurt_002.png",
-     0.075
+     "saffran_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       317,
+       941,
+       157,
+       133
+      ],
+      "anchor": [
+       77.44,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       12,
+       8,
+       127,
+       111
+      ]
+     }
     ],
     [
-     "saffran_hurt_003.png",
-     0.08
+     "saffran_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       474,
+       941,
+       158,
+       133
+      ],
+      "anchor": [
+       71.75,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       7,
+       13,
+       117,
+       107
+      ]
+     }
     ],
     [
-     "saffran_hurt_004.png",
-     0.085
+     "saffran_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       632,
+       941,
+       158,
+       133
+      ],
+      "anchor": [
+       84.64,
+       118
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       13,
+       15,
+       125,
+       103
+      ]
+     }
     ],
     [
-     "saffran_hurt_005.png",
-     0.09
+     "saffran_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       790,
+       941,
+       158,
+       133
+      ],
+      "anchor": [
+       83.7,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       25,
+       125,
+       94
+      ]
+     }
     ],
     [
-     "saffran_hurt_006.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       948,
+       941,
+       158,
+       133
+      ],
+      "anchor": [
+       89.06,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       18,
+       126,
+       101
+      ]
+     }
     ],
     [
-     "saffran_hurt_007.png",
-     0.12
+     "saffran_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1106,
+       941,
+       155,
+       133
+      ],
+      "anchor": [
+       96.12,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       10,
+       125,
+       110
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "saffran_dodge_000.png",
-     0.09
+     "saffran_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       808,
+       160,
+       133
+      ],
+      "anchor": [
+       97.48,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       8,
+       127,
+       112
+      ]
+     }
     ],
     [
-     "saffran_dodge_001.png",
-     0.065
+     "saffran_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       160,
+       808,
+       157,
+       133
+      ],
+      "anchor": [
+       82.2,
+       122
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       13,
+       29,
+       128,
+       93
+      ]
+     }
     ],
     [
-     "saffran_dodge_002.png",
-     0.055
+     "saffran_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       317,
+       808,
+       157,
+       133
+      ],
+      "anchor": [
+       58.36,
+       113
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       11,
+       25,
+       127,
+       88
+      ]
+     }
     ],
     [
-     "saffran_dodge_003.png",
-     0.055
+     "saffran_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       474,
+       808,
+       158,
+       133
+      ],
+      "anchor": [
+       80.35,
+       116
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       0,
+       31,
+       144,
+       85
+      ]
+     }
     ],
     [
-     "saffran_dodge_004.png",
-     0.065
+     "saffran_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       632,
+       808,
+       158,
+       133
+      ],
+      "anchor": [
+       90.45,
+       123
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       19,
+       29,
+       131,
+       94
+      ]
+     }
     ],
     [
-     "saffran_dodge_005.png",
-     0.075
+     "saffran_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       790,
+       808,
+       158,
+       133
+      ],
+      "anchor": [
+       86.21,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       21,
+       19,
+       125,
+       100
+      ]
+     }
     ],
     [
-     "saffran_dodge_006.png",
-     0.09
+     "saffran_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       948,
+       808,
+       158,
+       133
+      ],
+      "anchor": [
+       97.08,
+       119
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       18,
+       15,
+       126,
+       104
+      ]
+     }
     ],
     [
-     "saffran_dodge_007.png",
-     0.12
+     "saffran_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1106,
+       808,
+       155,
+       133
+      ],
+      "anchor": [
+       94.76,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       8,
+       125,
+       112
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "saffran_death_000.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1074,
+       160,
+       173
+      ],
+      "anchor": [
+       97.32,
+       120
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       17,
+       9,
+       126,
+       111
+      ]
+     }
     ],
     [
-     "saffran_death_001.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       160,
+       1074,
+       157,
+       173
+      ],
+      "anchor": [
+       95.17,
+       126
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       15,
+       25,
+       118,
+       101
+      ]
+     }
     ],
     [
-     "saffran_death_002.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       317,
+       1074,
+       157,
+       173
+      ],
+      "anchor": [
+       93.26,
+       126
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       16,
+       33,
+       122,
+       93
+      ]
+     }
     ],
     [
-     "saffran_death_003.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       474,
+       1074,
+       158,
+       173
+      ],
+      "anchor": [
+       103.53,
+       130
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       13,
+       44,
+       128,
+       86
+      ]
+     }
     ],
     [
-     "saffran_death_004.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       632,
+       1074,
+       158,
+       173
+      ],
+      "anchor": [
+       108.93,
+       134
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       10,
+       64,
+       131,
+       70
+      ]
+     }
     ],
     [
-     "saffran_death_005.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       790,
+       1074,
+       158,
+       173
+      ],
+      "anchor": [
+       115.07,
+       141
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       5,
+       69,
+       133,
+       72
+      ]
+     }
     ],
     [
-     "saffran_death_006.png",
-     0.1
+     "saffran_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       948,
+       1074,
+       158,
+       173
+      ],
+      "anchor": [
+       115.81,
+       135
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       3,
+       71,
+       147,
+       64
+      ]
+     }
     ],
     [
-     "saffran_death_007.png",
-     0.45
+     "saffran_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1106,
+       1074,
+       155,
+       173
+      ],
+      "anchor": [
+       122.03,
+       135
+      ],
+      "scale": 2.45025,
+      "bounds": [
+       5,
+       80,
+       141,
+       55
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "saffran_idle_000.png",
+     0.3
+    ],
+    [
+     "saffran_idle_001.png",
+     0.3
+    ],
+    [
+     "saffran_idle_002.png",
+     0.3
+    ],
+    [
+     "saffran_idle_003.png",
+     0.3
+    ],
+    [
+     "saffran_idle_004.png",
+     0.3
+    ],
+    [
+     "saffran_idle_005.png",
+     0.3
+    ],
+    [
+     "saffran_idle_006.png",
+     0.3
+    ],
+    [
+     "saffran_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "saffran_walk_000.png",
+     0.1
+    ],
+    [
+     "saffran_walk_001.png",
+     0.1
+    ],
+    [
+     "saffran_walk_002.png",
+     0.1
+    ],
+    [
+     "saffran_walk_003.png",
+     0.1
+    ],
+    [
+     "saffran_walk_004.png",
+     0.1
+    ],
+    [
+     "saffran_walk_005.png",
+     0.1
+    ],
+    [
+     "saffran_walk_006.png",
+     0.1
+    ],
+    [
+     "saffran_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "saffran_attack_1_000.png",
+     0.1
+    ],
+    [
+     "saffran_attack_1_001.png",
+     0.1
+    ],
+    [
+     "saffran_attack_1_002.png",
+     0.08
+    ],
+    [
+     "saffran_attack_1_003.png",
+     0.05
+    ],
+    [
+     "saffran_attack_1_004.png",
+     0.065
+    ],
+    [
+     "saffran_attack_1_005.png",
+     0.07
+    ],
+    [
+     "saffran_attack_1_006.png",
+     0.1
+    ],
+    [
+     "saffran_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "saffran_attack_2_000.png",
+     0.1
+    ],
+    [
+     "saffran_attack_2_001.png",
+     0.085
+    ],
+    [
+     "saffran_attack_2_002.png",
+     0.06
+    ],
+    [
+     "saffran_attack_2_003.png",
+     0.06
+    ],
+    [
+     "saffran_attack_2_004.png",
+     0.065
+    ],
+    [
+     "saffran_attack_2_005.png",
+     0.075
+    ],
+    [
+     "saffran_attack_2_006.png",
+     0.11
+    ],
+    [
+     "saffran_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "saffran_ultimate_000.png",
+     0.11
+    ],
+    [
+     "saffran_ultimate_001.png",
+     0.11
+    ],
+    [
+     "saffran_ultimate_002.png",
+     0.1
+    ],
+    [
+     "saffran_ultimate_003.png",
+     0.075
+    ],
+    [
+     "saffran_ultimate_004.png",
+     0.085
+    ],
+    [
+     "saffran_ultimate_005.png",
+     0.1
+    ],
+    [
+     "saffran_ultimate_006.png",
+     0.11
+    ],
+    [
+     "saffran_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "saffran_skill_000.png",
+     0.1
+    ],
+    [
+     "saffran_skill_001.png",
+     0.1
+    ],
+    [
+     "saffran_skill_002.png",
+     0.1
+    ],
+    [
+     "saffran_skill_003.png",
+     0.07
+    ],
+    [
+     "saffran_skill_004.png",
+     0.08
+    ],
+    [
+     "saffran_skill_005.png",
+     0.085
+    ],
+    [
+     "saffran_skill_006.png",
+     0.1
+    ],
+    [
+     "saffran_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "saffran_dodge_000.png",
+     0.09
+    ],
+    [
+     "saffran_dodge_001.png",
+     0.065
+    ],
+    [
+     "saffran_dodge_002.png",
+     0.055
+    ],
+    [
+     "saffran_dodge_003.png",
+     0.055
+    ],
+    [
+     "saffran_dodge_004.png",
+     0.065
+    ],
+    [
+     "saffran_dodge_005.png",
+     0.075
+    ],
+    [
+     "saffran_dodge_006.png",
+     0.09
+    ],
+    [
+     "saffran_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "saffran_hurt_000.png",
+     0.085
+    ],
+    [
+     "saffran_hurt_001.png",
+     0.065
+    ],
+    [
+     "saffran_hurt_002.png",
+     0.075
+    ],
+    [
+     "saffran_hurt_003.png",
+     0.08
+    ],
+    [
+     "saffran_hurt_004.png",
+     0.085
+    ],
+    [
+     "saffran_hurt_005.png",
+     0.09
+    ],
+    [
+     "saffran_hurt_006.png",
+     0.1
+    ],
+    [
+     "saffran_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "saffran_death_000.png",
+     0.1
+    ],
+    [
+     "saffran_death_001.png",
+     0.1
+    ],
+    [
+     "saffran_death_002.png",
+     0.1
+    ],
+    [
+     "saffran_death_003.png",
+     0.1
+    ],
+    [
+     "saffran_death_004.png",
+     0.1
+    ],
+    [
+     "saffran_death_005.png",
+     0.1
+    ],
+    [
+     "saffran_death_006.png",
+     0.1
+    ],
+    [
+     "saffran_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

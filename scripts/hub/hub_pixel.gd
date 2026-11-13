@@ -179,6 +179,11 @@ func _build_walkers() -> void:
 		node.add_child(sprite)
 		sprite.play("idle_down")
 		sprite.frame = randi() % frames.get_frame_count("idle_down")
+		var sheet := PixelSheet.for_actor(id)
+		if sheet and sheet.anims.idle.frames[0][0].has_meta("pixel_anchor"):
+			sprite.frame_changed.connect(_calibrate_walker.bind(sprite, sheet))
+			sprite.animation_changed.connect(_calibrate_walker.bind(sprite, sheet))
+			_calibrate_walker(sprite, sheet)
 		_walkers.append({"id": id, "node": node, "sprite": sprite, "path": PackedVector2Array(),
 			"rest": randf_range(0.5, 3.0), "facing": "down"})
 	if not _walkers.is_empty():
@@ -187,6 +192,19 @@ func _build_walkers() -> void:
 
 ## Planches 4 directions d'un héros (`heroes/<id>/<id>_hub.json`), ou null s'il n'en a pas.
 func _hero_frames(id: String) -> SpriteFrames:
+	var sheet := PixelSheet.for_actor(id)
+	if sheet and sheet.anims.idle.frames[0][0].has_meta("pixel_anchor"):
+		var updated := SpriteFrames.new()
+		updated.remove_animation("default")
+		for direction: String in ["left", "right", "up", "down"]:
+			for state: String in ["idle", "walk"]:
+				var anim := state + "_" + direction
+				updated.add_animation(anim)
+				updated.set_animation_speed(anim, 1.0)
+				updated.set_animation_loop(anim, true)
+				for f: Array in sheet.anims[state].frames:
+					updated.add_frame(anim, f[0], float(f[1]))
+		return updated
 	var path := DIR + "heroes/%s/%s_hub.json" % [id, id]
 	if not FileAccess.file_exists(path):
 		return null
@@ -334,3 +352,14 @@ func set_hour(hour: float) -> void:
 	# Teinte du sol, des bâtiments et des objets (les effets lumineux et les lumières restent vifs).
 	for node: CanvasItem in [_ground, _world]:
 		create_tween().tween_property(node, "modulate", tint, 0.6)
+
+
+## Reprendre les mêmes dessins au port ; les nouvelles vues restent de trois quarts.
+func _calibrate_walker(sprite: AnimatedSprite2D, sheet: PixelSheet) -> void:
+	var texture := sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
+	var origin := sheet.frame_anchor(texture)
+	sprite.flip_h = String(sprite.animation).ends_with("left")
+	if sprite.flip_h:
+		origin.x = texture.get_width() - origin.x
+	sprite.offset = -origin
+	sprite.scale = Vector2.ONE * 0.7 * sheet.frame_scale(texture) / sheet.scale

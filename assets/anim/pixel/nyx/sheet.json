@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "nyx_idle_000.png",
-     0.3
+     "nyx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       169,
+       135
+      ],
+      "anchor": [
+       93.46,
+       126
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       28,
+       8,
+       117,
+       118
+      ]
+     }
     ],
     [
-     "nyx_idle_001.png",
-     0.3
+     "nyx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       169,
+       0,
+       165,
+       135
+      ],
+      "anchor": [
+       92.77,
+       126
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       25,
+       7,
+       116,
+       119
+      ]
+     }
     ],
     [
-     "nyx_idle_002.png",
-     0.3
+     "nyx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       334,
+       0,
+       164,
+       135
+      ],
+      "anchor": [
+       92.99,
+       126
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       23,
+       7,
+       118,
+       119
+      ]
+     }
     ],
     [
-     "nyx_idle_003.png",
-     0.3
+     "nyx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       498,
+       0,
+       165,
+       135
+      ],
+      "anchor": [
+       97.51,
+       125
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       21,
+       8,
+       121,
+       117
+      ]
+     }
     ],
     [
-     "nyx_idle_004.png",
-     0.3
+     "nyx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       663,
+       0,
+       165,
+       135
+      ],
+      "anchor": [
+       88.19,
+       126
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       24,
+       7,
+       118,
+       119
+      ]
+     }
     ],
     [
-     "nyx_idle_005.png",
-     0.3
+     "nyx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       828,
+       0,
+       166,
+       135
+      ],
+      "anchor": [
+       88.67,
+       126
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       24,
+       7,
+       117,
+       119
+      ]
+     }
     ],
     [
-     "nyx_idle_006.png",
-     0.3
+     "nyx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       994,
+       0,
+       165,
+       135
+      ],
+      "anchor": [
+       89.19,
+       126
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       24,
+       8,
+       117,
+       118
+      ]
+     }
     ],
     [
-     "nyx_idle_007.png",
-     0.3
+     "nyx_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1159,
+       0,
+       159,
+       135
+      ],
+      "anchor": [
+       89.24,
+       126
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       24,
+       8,
+       116,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "nyx_walk_000.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       135,
+       169,
+       134
+      ],
+      "anchor": [
+       92.65,
+       124
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       19,
+       6,
+       125,
+       118
+      ]
+     }
     ],
     [
-     "nyx_walk_001.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       169,
+       135,
+       165,
+       134
+      ],
+      "anchor": [
+       89.75,
+       125
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       18,
+       5,
+       120,
+       120
+      ]
+     }
     ],
     [
-     "nyx_walk_002.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       334,
+       135,
+       164,
+       134
+      ],
+      "anchor": [
+       79.01,
+       124
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       18,
+       4,
+       122,
+       120
+      ]
+     }
     ],
     [
-     "nyx_walk_003.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       498,
+       135,
+       165,
+       134
+      ],
+      "anchor": [
+       93.59,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       20,
+       4,
+       120,
+       115
+      ]
+     }
     ],
     [
-     "nyx_walk_004.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       663,
+       135,
+       165,
+       134
+      ],
+      "anchor": [
+       94.98,
+       123
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       16,
+       5,
+       123,
+       118
+      ]
+     }
     ],
     [
-     "nyx_walk_005.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       828,
+       135,
+       166,
+       134
+      ],
+      "anchor": [
+       83.4,
+       125
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       19,
+       5,
+       118,
+       120
+      ]
+     }
     ],
     [
-     "nyx_walk_006.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       994,
+       135,
+       165,
+       134
+      ],
+      "anchor": [
+       78.35,
+       124
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       17,
+       7,
+       120,
+       117
+      ]
+     }
     ],
     [
-     "nyx_walk_007.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1159,
+       135,
+       159,
+       134
+      ],
+      "anchor": [
+       74.09,
+       124
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       17,
+       6,
+       123,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +405,562 @@
    "loop": false,
    "frames": [
     [
-     "nyx_attack_1_000.png",
-     0.1
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       328,
+       336
+      ],
+      "anchor": [
+       169.95,
+       270
+      ],
+      "scale": 1.684,
+      "bounds": [
+       80,
+       98,
+       165,
+       172
+      ]
+     }
     ],
     [
-     "nyx_attack_1_001.png",
-     0.1
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       328,
+       0,
+       328,
+       336
+      ],
+      "anchor": [
+       172.13,
+       270
+      ],
+      "scale": 1.684,
+      "bounds": [
+       83,
+       98,
+       164,
+       172
+      ]
+     }
     ],
     [
-     "nyx_attack_1_002.png",
-     0.08
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       656,
+       0,
+       324,
+       336
+      ],
+      "anchor": [
+       174.28,
+       270
+      ],
+      "scale": 1.684,
+      "bounds": [
+       78,
+       98,
+       169,
+       172
+      ]
+     }
     ],
     [
-     "nyx_attack_1_003.png",
-     0.05
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       980,
+       0,
+       338,
+       336
+      ],
+      "anchor": [
+       177.96,
+       270
+      ],
+      "scale": 1.684,
+      "bounds": [
+       73,
+       99,
+       178,
+       171
+      ]
+     }
     ],
     [
-     "nyx_attack_1_004.png",
-     0.065
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       336,
+       328,
+       301
+      ],
+      "anchor": [
+       167.13,
+       233
+      ],
+      "scale": 1.684,
+      "bounds": [
+       63,
+       62,
+       180,
+       171
+      ]
+     }
     ],
     [
-     "nyx_attack_1_005.png",
-     0.07
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       328,
+       336,
+       328,
+       301
+      ],
+      "anchor": [
+       170.45,
+       233
+      ],
+      "scale": 1.684,
+      "bounds": [
+       64,
+       62,
+       180,
+       171
+      ]
+     }
     ],
     [
-     "nyx_attack_1_006.png",
-     0.1
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       656,
+       336,
+       324,
+       301
+      ],
+      "anchor": [
+       170.87,
+       233
+      ],
+      "scale": 1.684,
+      "bounds": [
+       62,
+       64,
+       199,
+       169
+      ]
+     }
     ],
     [
-     "nyx_attack_1_007.png",
-     0.12
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       980,
+       336,
+       338,
+       301
+      ],
+      "anchor": [
+       178.98,
+       233
+      ],
+      "scale": 1.684,
+      "bounds": [
+       72,
+       73,
+       213,
+       160
+      ]
+     }
+    ],
+    [
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       637,
+       328,
+       300
+      ],
+      "anchor": [
+       175.29,
+       231
+      ],
+      "scale": 1.684,
+      "bounds": [
+       62,
+       71,
+       229,
+       160
+      ]
+     }
+    ],
+    [
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       328,
+       637,
+       328,
+       300
+      ],
+      "anchor": [
+       175.12,
+       232
+      ],
+      "scale": 1.684,
+      "bounds": [
+       60,
+       69,
+       214,
+       163
+      ]
+     }
+    ],
+    [
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       656,
+       637,
+       324,
+       300
+      ],
+      "anchor": [
+       173.48,
+       232
+      ],
+      "scale": 1.684,
+      "bounds": [
+       51,
+       66,
+       201,
+       166
+      ]
+     }
+    ],
+    [
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       980,
+       637,
+       338,
+       300
+      ],
+      "anchor": [
+       180.47,
+       232
+      ],
+      "scale": 1.684,
+      "bounds": [
+       68,
+       62,
+       188,
+       170
+      ]
+     }
+    ],
+    [
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       937,
+       328,
+       256
+      ],
+      "anchor": [
+       172.69,
+       232
+      ],
+      "scale": 1.684,
+      "bounds": [
+       61,
+       59,
+       187,
+       173
+      ]
+     }
+    ],
+    [
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       328,
+       937,
+       328,
+       256
+      ],
+      "anchor": [
+       172.66,
+       232
+      ],
+      "scale": 1.684,
+      "bounds": [
+       66,
+       60,
+       182,
+       172
+      ]
+     }
+    ],
+    [
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       656,
+       937,
+       324,
+       256
+      ],
+      "anchor": [
+       174.63,
+       232
+      ],
+      "scale": 1.684,
+      "bounds": [
+       76,
+       61,
+       172,
+       171
+      ]
+     }
+    ],
+    [
+     "nyx_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       980,
+       937,
+       338,
+       256
+      ],
+      "anchor": [
+       180.02,
+       232
+      ],
+      "scale": 1.684,
+      "bounds": [
+       85,
+       61,
+       170,
+       171
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "nyx_attack_2_000.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       403,
+       169,
+       135
+      ],
+      "anchor": [
+       87.7,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       25,
+       9,
+       113,
+       112
+      ]
+     }
     ],
     [
-     "nyx_attack_2_001.png",
-     0.085
+     "nyx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       169,
+       403,
+       165,
+       135
+      ],
+      "anchor": [
+       81.87,
+       120
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       19,
+       14,
+       125,
+       106
+      ]
+     }
     ],
     [
-     "nyx_attack_2_002.png",
-     0.06
+     "nyx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       334,
+       403,
+       164,
+       135
+      ],
+      "anchor": [
+       85.91,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       18,
+       9,
+       134,
+       110
+      ]
+     }
     ],
     [
-     "nyx_attack_2_003.png",
-     0.06
+     "nyx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       498,
+       403,
+       165,
+       135
+      ],
+      "anchor": [
+       93.89,
+       135
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       5,
+       0,
+       160,
+       135
+      ]
+     }
     ],
     [
-     "nyx_attack_2_004.png",
-     0.065
+     "nyx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       663,
+       403,
+       165,
+       135
+      ],
+      "anchor": [
+       91.22,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       0,
+       13,
+       156,
+       108
+      ]
+     }
     ],
     [
-     "nyx_attack_2_005.png",
-     0.075
+     "nyx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       828,
+       403,
+       166,
+       135
+      ],
+      "anchor": [
+       87.24,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       6,
+       19,
+       160,
+       102
+      ]
+     }
     ],
     [
-     "nyx_attack_2_006.png",
-     0.11
+     "nyx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       994,
+       403,
+       165,
+       135
+      ],
+      "anchor": [
+       91.01,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       0,
+       16,
+       144,
+       105
+      ]
+     }
     ],
     [
-     "nyx_attack_2_007.png",
-     0.12
+     "nyx_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1159,
+       403,
+       159,
+       135
+      ],
+      "anchor": [
+       89.88,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       31,
+       14,
+       109,
+       107
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -177,36 +969,188 @@
    "loop": false,
    "frames": [
     [
-     "nyx_ultimate_000.png",
-     0.11
+     "nyx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       538,
+       169,
+       133
+      ],
+      "anchor": [
+       92.0,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       31,
+       10,
+       109,
+       108
+      ]
+     }
     ],
     [
-     "nyx_ultimate_001.png",
-     0.11
+     "nyx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       169,
+       538,
+       165,
+       133
+      ],
+      "anchor": [
+       89.67,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       25,
+       15,
+       112,
+       103
+      ]
+     }
     ],
     [
-     "nyx_ultimate_002.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       334,
+       538,
+       164,
+       133
+      ],
+      "anchor": [
+       88.82,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       19,
+       12,
+       145,
+       106
+      ]
+     }
     ],
     [
-     "nyx_ultimate_003.png",
-     0.075
+     "nyx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       498,
+       538,
+       165,
+       133
+      ],
+      "anchor": [
+       76.34,
+       120
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       0,
+       0,
+       165,
+       120
+      ]
+     }
     ],
     [
-     "nyx_ultimate_004.png",
-     0.085
+     "nyx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       663,
+       538,
+       165,
+       133
+      ],
+      "anchor": [
+       88.49,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       0,
+       0,
+       156,
+       118
+      ]
+     }
     ],
     [
-     "nyx_ultimate_005.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       828,
+       538,
+       166,
+       133
+      ],
+      "anchor": [
+       90.25,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       22,
+       14,
+       131,
+       104
+      ]
+     }
     ],
     [
-     "nyx_ultimate_006.png",
-     0.11
+     "nyx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       994,
+       538,
+       165,
+       133
+      ],
+      "anchor": [
+       90.77,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       30,
+       14,
+       111,
+       104
+      ]
+     }
     ],
     [
-     "nyx_ultimate_007.png",
-     0.13
+     "nyx_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1159,
+       538,
+       159,
+       133
+      ],
+      "anchor": [
+       91.02,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       28,
+       13,
+       111,
+       105
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "nyx_skill_000.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       671,
+       169,
+       131
+      ],
+      "anchor": [
+       91.86,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       30,
+       10,
+       113,
+       109
+      ]
+     }
     ],
     [
-     "nyx_skill_001.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       169,
+       671,
+       165,
+       131
+      ],
+      "anchor": [
+       96.16,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       26,
+       11,
+       118,
+       108
+      ]
+     }
     ],
     [
-     "nyx_skill_002.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       334,
+       671,
+       164,
+       131
+      ],
+      "anchor": [
+       96.08,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       17,
+       9,
+       144,
+       109
+      ]
+     }
     ],
     [
-     "nyx_skill_003.png",
-     0.07
+     "nyx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       498,
+       671,
+       165,
+       131
+      ],
+      "anchor": [
+       92.91,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       7,
+       5,
+       158,
+       114
+      ]
+     }
     ],
     [
-     "nyx_skill_004.png",
-     0.08
+     "nyx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       663,
+       671,
+       165,
+       131
+      ],
+      "anchor": [
+       87.33,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       0,
+       13,
+       153,
+       105
+      ]
+     }
     ],
     [
-     "nyx_skill_005.png",
-     0.085
+     "nyx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       828,
+       671,
+       166,
+       131
+      ],
+      "anchor": [
+       91.64,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       20,
+       13,
+       128,
+       106
+      ]
+     }
     ],
     [
-     "nyx_skill_006.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       994,
+       671,
+       165,
+       131
+      ],
+      "anchor": [
+       91.44,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       26,
+       12,
+       113,
+       106
+      ]
+     }
     ],
     [
-     "nyx_skill_007.png",
-     0.12
+     "nyx_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1159,
+       671,
+       159,
+       131
+      ],
+      "anchor": [
+       92.24,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       27,
+       12,
+       112,
+       106
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "nyx_hurt_000.png",
-     0.085
+     "nyx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       932,
+       169,
+       131
+      ],
+      "anchor": [
+       90.23,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       21,
+       11,
+       121,
+       108
+      ]
+     }
     ],
     [
-     "nyx_hurt_001.png",
-     0.065
+     "nyx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       169,
+       932,
+       165,
+       131
+      ],
+      "anchor": [
+       96.47,
+       114
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       22,
+       11,
+       116,
+       103
+      ]
+     }
     ],
     [
-     "nyx_hurt_002.png",
-     0.075
+     "nyx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       334,
+       932,
+       164,
+       131
+      ],
+      "anchor": [
+       87.71,
+       108
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       17,
+       4,
+       123,
+       104
+      ]
+     }
     ],
     [
-     "nyx_hurt_003.png",
-     0.08
+     "nyx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       498,
+       932,
+       165,
+       131
+      ],
+      "anchor": [
+       89.42,
+       112
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       10,
+       4,
+       133,
+       108
+      ]
+     }
     ],
     [
-     "nyx_hurt_004.png",
-     0.085
+     "nyx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       663,
+       932,
+       165,
+       131
+      ],
+      "anchor": [
+       84.99,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       19,
+       14,
+       117,
+       104
+      ]
+     }
     ],
     [
-     "nyx_hurt_005.png",
-     0.09
+     "nyx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       828,
+       932,
+       166,
+       131
+      ],
+      "anchor": [
+       84.87,
+       118
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       21,
+       15,
+       112,
+       103
+      ]
+     }
     ],
     [
-     "nyx_hurt_006.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       994,
+       932,
+       165,
+       131
+      ],
+      "anchor": [
+       88.8,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       26,
+       17,
+       111,
+       102
+      ]
+     }
     ],
     [
-     "nyx_hurt_007.png",
-     0.12
+     "nyx_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1159,
+       932,
+       159,
+       131
+      ],
+      "anchor": [
+       88.9,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       24,
+       17,
+       113,
+       102
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "nyx_dodge_000.png",
-     0.09
+     "nyx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       802,
+       169,
+       130
+      ],
+      "anchor": [
+       93.23,
+       117
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       30,
+       9,
+       107,
+       108
+      ]
+     }
     ],
     [
-     "nyx_dodge_001.png",
-     0.065
+     "nyx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       169,
+       802,
+       165,
+       130
+      ],
+      "anchor": [
+       92.45,
+       117
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       21,
+       21,
+       114,
+       96
+      ]
+     }
     ],
     [
-     "nyx_dodge_002.png",
-     0.055
+     "nyx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       334,
+       802,
+       164,
+       130
+      ],
+      "anchor": [
+       96.82,
+       110
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       13,
+       10,
+       137,
+       100
+      ]
+     }
     ],
     [
-     "nyx_dodge_003.png",
-     0.055
+     "nyx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       498,
+       802,
+       165,
+       130
+      ],
+      "anchor": [
+       74.45,
+       114
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       4,
+       14,
+       151,
+       100
+      ]
+     }
     ],
     [
-     "nyx_dodge_004.png",
-     0.065
+     "nyx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       663,
+       802,
+       165,
+       130
+      ],
+      "anchor": [
+       90.75,
+       117
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       35,
+       15,
+       108,
+       102
+      ]
+     }
     ],
     [
-     "nyx_dodge_005.png",
-     0.075
+     "nyx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       828,
+       802,
+       166,
+       130
+      ],
+      "anchor": [
+       94.99,
+       117
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       26,
+       17,
+       115,
+       100
+      ]
+     }
     ],
     [
-     "nyx_dodge_006.png",
-     0.09
+     "nyx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       994,
+       802,
+       165,
+       130
+      ],
+      "anchor": [
+       90.94,
+       117
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       27,
+       10,
+       114,
+       107
+      ]
+     }
     ],
     [
-     "nyx_dodge_007.png",
-     0.12
+     "nyx_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1159,
+       802,
+       159,
+       130
+      ],
+      "anchor": [
+       88.57,
+       117
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       28,
+       10,
+       111,
+       107
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "nyx_death_000.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1063,
+       169,
+       130
+      ],
+      "anchor": [
+       90.9,
+       120
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       30,
+       7,
+       111,
+       113
+      ]
+     }
     ],
     [
-     "nyx_death_001.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       169,
+       1063,
+       165,
+       130
+      ],
+      "anchor": [
+       85.35,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       25,
+       13,
+       113,
+       106
+      ]
+     }
     ],
     [
-     "nyx_death_002.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       334,
+       1063,
+       164,
+       130
+      ],
+      "anchor": [
+       82.36,
+       119
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       22,
+       23,
+       117,
+       96
+      ]
+     }
     ],
     [
-     "nyx_death_003.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       498,
+       1063,
+       165,
+       130
+      ],
+      "anchor": [
+       94.63,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       19,
+       33,
+       117,
+       88
+      ]
+     }
     ],
     [
-     "nyx_death_004.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       663,
+       1063,
+       165,
+       130
+      ],
+      "anchor": [
+       94.0,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       12,
+       43,
+       128,
+       78
+      ]
+     }
     ],
     [
-     "nyx_death_005.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       828,
+       1063,
+       166,
+       130
+      ],
+      "anchor": [
+       92.2,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       8,
+       57,
+       138,
+       64
+      ]
+     }
     ],
     [
-     "nyx_death_006.png",
-     0.1
+     "nyx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       994,
+       1063,
+       165,
+       130
+      ],
+      "anchor": [
+       92.46,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       4,
+       67,
+       143,
+       54
+      ]
+     }
     ],
     [
-     "nyx_death_007.png",
-     0.45
+     "nyx_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1159,
+       1063,
+       159,
+       130
+      ],
+      "anchor": [
+       90.46,
+       121
+      ],
+      "scale": 2.454644,
+      "bounds": [
+       2,
+       81,
+       147,
+       40
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "nyx_idle_000.png",
+     0.3
+    ],
+    [
+     "nyx_idle_001.png",
+     0.3
+    ],
+    [
+     "nyx_idle_002.png",
+     0.3
+    ],
+    [
+     "nyx_idle_003.png",
+     0.3
+    ],
+    [
+     "nyx_idle_004.png",
+     0.3
+    ],
+    [
+     "nyx_idle_005.png",
+     0.3
+    ],
+    [
+     "nyx_idle_006.png",
+     0.3
+    ],
+    [
+     "nyx_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "nyx_walk_000.png",
+     0.1
+    ],
+    [
+     "nyx_walk_001.png",
+     0.1
+    ],
+    [
+     "nyx_walk_002.png",
+     0.1
+    ],
+    [
+     "nyx_walk_003.png",
+     0.1
+    ],
+    [
+     "nyx_walk_004.png",
+     0.1
+    ],
+    [
+     "nyx_walk_005.png",
+     0.1
+    ],
+    [
+     "nyx_walk_006.png",
+     0.1
+    ],
+    [
+     "nyx_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "nyx_attack_1_000.png",
+     0.1
+    ],
+    [
+     "nyx_attack_1_001.png",
+     0.1
+    ],
+    [
+     "nyx_attack_1_002.png",
+     0.08
+    ],
+    [
+     "nyx_attack_1_003.png",
+     0.05
+    ],
+    [
+     "nyx_attack_1_004.png",
+     0.065
+    ],
+    [
+     "nyx_attack_1_005.png",
+     0.07
+    ],
+    [
+     "nyx_attack_1_006.png",
+     0.1
+    ],
+    [
+     "nyx_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "nyx_attack_2_000.png",
+     0.1
+    ],
+    [
+     "nyx_attack_2_001.png",
+     0.085
+    ],
+    [
+     "nyx_attack_2_002.png",
+     0.06
+    ],
+    [
+     "nyx_attack_2_003.png",
+     0.06
+    ],
+    [
+     "nyx_attack_2_004.png",
+     0.065
+    ],
+    [
+     "nyx_attack_2_005.png",
+     0.075
+    ],
+    [
+     "nyx_attack_2_006.png",
+     0.11
+    ],
+    [
+     "nyx_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "nyx_ultimate_000.png",
+     0.11
+    ],
+    [
+     "nyx_ultimate_001.png",
+     0.11
+    ],
+    [
+     "nyx_ultimate_002.png",
+     0.1
+    ],
+    [
+     "nyx_ultimate_003.png",
+     0.075
+    ],
+    [
+     "nyx_ultimate_004.png",
+     0.085
+    ],
+    [
+     "nyx_ultimate_005.png",
+     0.1
+    ],
+    [
+     "nyx_ultimate_006.png",
+     0.11
+    ],
+    [
+     "nyx_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "nyx_skill_000.png",
+     0.1
+    ],
+    [
+     "nyx_skill_001.png",
+     0.1
+    ],
+    [
+     "nyx_skill_002.png",
+     0.1
+    ],
+    [
+     "nyx_skill_003.png",
+     0.07
+    ],
+    [
+     "nyx_skill_004.png",
+     0.08
+    ],
+    [
+     "nyx_skill_005.png",
+     0.085
+    ],
+    [
+     "nyx_skill_006.png",
+     0.1
+    ],
+    [
+     "nyx_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "nyx_dodge_000.png",
+     0.09
+    ],
+    [
+     "nyx_dodge_001.png",
+     0.065
+    ],
+    [
+     "nyx_dodge_002.png",
+     0.055
+    ],
+    [
+     "nyx_dodge_003.png",
+     0.055
+    ],
+    [
+     "nyx_dodge_004.png",
+     0.065
+    ],
+    [
+     "nyx_dodge_005.png",
+     0.075
+    ],
+    [
+     "nyx_dodge_006.png",
+     0.09
+    ],
+    [
+     "nyx_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "nyx_hurt_000.png",
+     0.085
+    ],
+    [
+     "nyx_hurt_001.png",
+     0.065
+    ],
+    [
+     "nyx_hurt_002.png",
+     0.075
+    ],
+    [
+     "nyx_hurt_003.png",
+     0.08
+    ],
+    [
+     "nyx_hurt_004.png",
+     0.085
+    ],
+    [
+     "nyx_hurt_005.png",
+     0.09
+    ],
+    [
+     "nyx_hurt_006.png",
+     0.1
+    ],
+    [
+     "nyx_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "nyx_death_000.png",
+     0.1
+    ],
+    [
+     "nyx_death_001.png",
+     0.1
+    ],
+    [
+     "nyx_death_002.png",
+     0.1
+    ],
+    [
+     "nyx_death_003.png",
+     0.1
+    ],
+    [
+     "nyx_death_004.png",
+     0.1
+    ],
+    [
+     "nyx_death_005.png",
+     0.1
+    ],
+    [
+     "nyx_death_006.png",
+     0.1
+    ],
+    [
+     "nyx_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

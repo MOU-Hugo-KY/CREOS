@@ -49,7 +49,7 @@ static func head(def_id: String) -> AtlasTexture:
 		at.region = Rect2(Vector2.ZERO, px.get_size())
 	elif sheet and sheet.anims.has("idle"):
 		var tex: Texture2D = sheet.anims.idle.frames[0][0]
-		var used := tex.get_image().get_used_rect()
+		var used := sheet.frame_rect(tex)
 		var side := mini(used.size.x, maxi(28, int(used.size.y * 0.6)))
 		at = AtlasTexture.new()
 		at.atlas = tex

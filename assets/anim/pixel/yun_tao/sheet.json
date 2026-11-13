@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "yun_tao_idle_000.png",
-     0.3
+     "yun_tao_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       168,
+       145
+      ],
+      "anchor": [
+       91.02,
+       138
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       28,
+       12,
+       118,
+       126
+      ]
+     }
     ],
     [
-     "yun_tao_idle_001.png",
-     0.3
+     "yun_tao_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       168,
+       0,
+       162,
+       145
+      ],
+      "anchor": [
+       84.94,
+       138
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       22,
+       12,
+       118,
+       126
+      ]
+     }
     ],
     [
-     "yun_tao_idle_002.png",
-     0.3
+     "yun_tao_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       330,
+       0,
+       161,
+       145
+      ],
+      "anchor": [
+       84.83,
+       138
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       21,
+       11,
+       119,
+       127
+      ]
+     }
     ],
     [
-     "yun_tao_idle_003.png",
-     0.3
+     "yun_tao_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       491,
+       0,
+       161,
+       145
+      ],
+      "anchor": [
+       84.91,
+       138
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       20,
+       11,
+       121,
+       127
+      ]
+     }
     ],
     [
-     "yun_tao_idle_004.png",
-     0.3
+     "yun_tao_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       652,
+       0,
+       163,
+       145
+      ],
+      "anchor": [
+       85.03,
+       138
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       23,
+       11,
+       117,
+       127
+      ]
+     }
     ],
     [
-     "yun_tao_idle_005.png",
-     0.3
+     "yun_tao_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       815,
+       0,
+       162,
+       145
+      ],
+      "anchor": [
+       85.03,
+       138
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       23,
+       13,
+       116,
+       125
+      ]
+     }
     ],
     [
-     "yun_tao_idle_006.png",
-     0.3
+     "yun_tao_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       977,
+       0,
+       161,
+       145
+      ],
+      "anchor": [
+       84.36,
+       138
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       23,
+       13,
+       115,
+       125
+      ]
+     }
     ],
     [
-     "yun_tao_idle_007.png",
-     0.3
+     "yun_tao_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1138,
+       0,
+       155,
+       145
+      ],
+      "anchor": [
+       85.45,
+       138
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       24,
+       12,
+       111,
+       126
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "yun_tao_walk_000.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       145,
+       168,
+       136
+      ],
+      "anchor": [
+       87.25,
+       128
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       27,
+       4,
+       118,
+       124
+      ]
+     }
     ],
     [
-     "yun_tao_walk_001.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       168,
+       145,
+       162,
+       136
+      ],
+      "anchor": [
+       82.02,
+       128
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       21,
+       4,
+       121,
+       124
+      ]
+     }
     ],
     [
-     "yun_tao_walk_002.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       330,
+       145,
+       161,
+       136
+      ],
+      "anchor": [
+       87.75,
+       128
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       21,
+       4,
+       121,
+       124
+      ]
+     }
     ],
     [
-     "yun_tao_walk_003.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       491,
+       145,
+       161,
+       136
+      ],
+      "anchor": [
+       70.75,
+       128
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       22,
+       4,
+       121,
+       124
+      ]
+     }
     ],
     [
-     "yun_tao_walk_004.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       652,
+       145,
+       163,
+       136
+      ],
+      "anchor": [
+       82.32,
+       128
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       22,
+       7,
+       122,
+       121
+      ]
+     }
     ],
     [
-     "yun_tao_walk_005.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       815,
+       145,
+       162,
+       136
+      ],
+      "anchor": [
+       81.83,
+       128
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       25,
+       9,
+       116,
+       119
+      ]
+     }
     ],
     [
-     "yun_tao_walk_006.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       977,
+       145,
+       161,
+       136
+      ],
+      "anchor": [
+       78.14,
+       128
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       26,
+       9,
+       110,
+       119
+      ]
+     }
     ],
     [
-     "yun_tao_walk_007.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1138,
+       145,
+       155,
+       136
+      ],
+      "anchor": [
+       87.77,
+       128
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       27,
+       7,
+       110,
+       121
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +405,562 @@
    "loop": false,
    "frames": [
     [
-     "yun_tao_attack_1_000.png",
-     0.1
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       378,
+       301
+      ],
+      "anchor": [
+       207.67,
+       258
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       113,
+       70,
+       172,
+       188
+      ]
+     }
     ],
     [
-     "yun_tao_attack_1_001.png",
-     0.1
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       378,
+       0,
+       360,
+       301
+      ],
+      "anchor": [
+       190.13,
+       258
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       92,
+       69,
+       174,
+       189
+      ]
+     }
     ],
     [
-     "yun_tao_attack_1_002.png",
-     0.08
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       738,
+       0,
+       359,
+       301
+      ],
+      "anchor": [
+       192.52,
+       258
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       95,
+       70,
+       173,
+       188
+      ]
+     }
     ],
     [
-     "yun_tao_attack_1_003.png",
-     0.05
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1097,
+       0,
+       351,
+       301
+      ],
+      "anchor": [
+       194.46,
+       258
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       94,
+       70,
+       168,
+       188
+      ]
+     }
     ],
     [
-     "yun_tao_attack_1_004.png",
-     0.065
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       301,
+       378,
+       271
+      ],
+      "anchor": [
+       204.04,
+       229
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       103,
+       40,
+       173,
+       189
+      ]
+     }
     ],
     [
-     "yun_tao_attack_1_005.png",
-     0.07
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       378,
+       301,
+       360,
+       271
+      ],
+      "anchor": [
+       185.96,
+       229
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       80,
+       42,
+       182,
+       187
+      ]
+     }
     ],
     [
-     "yun_tao_attack_1_006.png",
-     0.1
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       738,
+       301,
+       359,
+       271
+      ],
+      "anchor": [
+       217.9,
+       229
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       74,
+       43,
+       194,
+       186
+      ]
+     }
     ],
     [
-     "yun_tao_attack_1_007.png",
-     0.12
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1097,
+       301,
+       351,
+       271
+      ],
+      "anchor": [
+       222.57,
+       229
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       57,
+       41,
+       217,
+       188
+      ]
+     }
+    ],
+    [
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       572,
+       378,
+       271
+      ],
+      "anchor": [
+       199.21,
+       228
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       87,
+       43,
+       261,
+       185
+      ]
+     }
+    ],
+    [
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       378,
+       572,
+       360,
+       271
+      ],
+      "anchor": [
+       199.76,
+       228
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       78,
+       42,
+       250,
+       186
+      ]
+     }
+    ],
+    [
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       738,
+       572,
+       359,
+       271
+      ],
+      "anchor": [
+       193.38,
+       228
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       86,
+       39,
+       205,
+       189
+      ]
+     }
+    ],
+    [
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1097,
+       572,
+       351,
+       271
+      ],
+      "anchor": [
+       179.99,
+       228
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       100,
+       39,
+       167,
+       189
+      ]
+     }
+    ],
+    [
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       843,
+       378,
+       243
+      ],
+      "anchor": [
+       191.39,
+       231
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       112,
+       40,
+       168,
+       191
+      ]
+     }
+    ],
+    [
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       378,
+       843,
+       360,
+       243
+      ],
+      "anchor": [
+       188.62,
+       231
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       96,
+       40,
+       168,
+       191
+      ]
+     }
+    ],
+    [
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       738,
+       843,
+       359,
+       243
+      ],
+      "anchor": [
+       192.21,
+       231
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       100,
+       40,
+       167,
+       191
+      ]
+     }
+    ],
+    [
+     "yun_tao_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       1097,
+       843,
+       351,
+       243
+      ],
+      "anchor": [
+       196.42,
+       231
+      ],
+      "scale": 1.642553,
+      "bounds": [
+       103,
+       40,
+       168,
+       191
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "yun_tao_attack_2_000.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       417,
+       168,
+       136
+      ],
+      "anchor": [
+       86.36,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       25,
+       8,
+       117,
+       117
+      ]
+     }
     ],
     [
-     "yun_tao_attack_2_001.png",
-     0.085
+     "yun_tao_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       168,
+       417,
+       162,
+       136
+      ],
+      "anchor": [
+       74.49,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       12,
+       7,
+       123,
+       118
+      ]
+     }
     ],
     [
-     "yun_tao_attack_2_002.png",
-     0.06
+     "yun_tao_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       330,
+       417,
+       161,
+       136
+      ],
+      "anchor": [
+       75.63,
+       123
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       3,
+       6,
+       134,
+       117
+      ]
+     }
     ],
     [
-     "yun_tao_attack_2_003.png",
-     0.06
+     "yun_tao_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       491,
+       417,
+       161,
+       136
+      ],
+      "anchor": [
+       70.5,
+       136
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       1,
+       2,
+       158,
+       134
+      ]
+     }
     ],
     [
-     "yun_tao_attack_2_004.png",
-     0.065
+     "yun_tao_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       652,
+       417,
+       163,
+       136
+      ],
+      "anchor": [
+       73.79,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       15,
+       9,
+       148,
+       115
+      ]
+     }
     ],
     [
-     "yun_tao_attack_2_005.png",
-     0.075
+     "yun_tao_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       815,
+       417,
+       162,
+       136
+      ],
+      "anchor": [
+       76.72,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       21,
+       8,
+       134,
+       117
+      ]
+     }
     ],
     [
-     "yun_tao_attack_2_006.png",
-     0.11
+     "yun_tao_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       977,
+       417,
+       161,
+       136
+      ],
+      "anchor": [
+       81.35,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       26,
+       7,
+       112,
+       118
+      ]
+     }
     ],
     [
-     "yun_tao_attack_2_007.png",
-     0.12
+     "yun_tao_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1138,
+       417,
+       155,
+       136
+      ],
+      "anchor": [
+       84.38,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       26,
+       7,
+       111,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -177,74 +969,378 @@
    "loop": false,
    "frames": [
     [
-     "yun_tao_ultimate_000.png",
-     0.11
+     "yun_tao_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       553,
+       168,
+       135
+      ],
+      "anchor": [
+       90.91,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       21,
+       7,
+       117,
+       117
+      ]
+     }
     ],
     [
-     "yun_tao_ultimate_001.png",
-     0.11
+     "yun_tao_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       168,
+       553,
+       162,
+       135
+      ],
+      "anchor": [
+       85.59,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       12,
+       8,
+       126,
+       116
+      ]
+     }
     ],
     [
-     "yun_tao_ultimate_002.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       330,
+       553,
+       161,
+       135
+      ],
+      "anchor": [
+       84.19,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       1,
+       8,
+       160,
+       116
+      ]
+     }
     ],
     [
-     "yun_tao_ultimate_003.png",
-     0.075
+     "yun_tao_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       491,
+       553,
+       161,
+       135
+      ],
+      "anchor": [
+       62.95,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       0,
+       0,
+       157,
+       125
+      ]
+     }
     ],
     [
-     "yun_tao_ultimate_004.png",
-     0.085
+     "yun_tao_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       652,
+       553,
+       163,
+       135
+      ],
+      "anchor": [
+       84.63,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       12,
+       6,
+       147,
+       119
+      ]
+     }
     ],
     [
-     "yun_tao_ultimate_005.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       815,
+       553,
+       162,
+       135
+      ],
+      "anchor": [
+       77.39,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       0,
+       9,
+       162,
+       116
+      ]
+     }
     ],
     [
-     "yun_tao_ultimate_006.png",
-     0.11
+     "yun_tao_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       977,
+       553,
+       161,
+       135
+      ],
+      "anchor": [
+       85.88,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       0,
+       7,
+       143,
+       118
+      ]
+     }
     ],
     [
-     "yun_tao_ultimate_007.png",
-     0.13
+     "yun_tao_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1138,
+       553,
+       155,
+       135
+      ],
+      "anchor": [
+       85.21,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       28,
+       8,
+       108,
+       117
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 4
   },
   "skill": {
    "loop": false,
    "frames": [
     [
-     "yun_tao_skill_000.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       688,
+       168,
+       135
+      ],
+      "anchor": [
+       90.51,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       21,
+       7,
+       119,
+       118
+      ]
+     }
     ],
     [
-     "yun_tao_skill_001.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       168,
+       688,
+       162,
+       135
+      ],
+      "anchor": [
+       82.37,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       16,
+       8,
+       124,
+       117
+      ]
+     }
     ],
     [
-     "yun_tao_skill_002.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       330,
+       688,
+       161,
+       135
+      ],
+      "anchor": [
+       82.83,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       8,
+       8,
+       133,
+       117
+      ]
+     }
     ],
     [
-     "yun_tao_skill_003.png",
-     0.07
+     "yun_tao_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       491,
+       688,
+       161,
+       135
+      ],
+      "anchor": [
+       82.9,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       0,
+       8,
+       152,
+       117
+      ]
+     }
     ],
     [
-     "yun_tao_skill_004.png",
-     0.08
+     "yun_tao_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       652,
+       688,
+       163,
+       135
+      ],
+      "anchor": [
+       77.44,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       16,
+       9,
+       147,
+       116
+      ]
+     }
     ],
     [
-     "yun_tao_skill_005.png",
-     0.085
+     "yun_tao_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       815,
+       688,
+       162,
+       135
+      ],
+      "anchor": [
+       78.56,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       15,
+       10,
+       147,
+       115
+      ]
+     }
     ],
     [
-     "yun_tao_skill_006.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       977,
+       688,
+       161,
+       135
+      ],
+      "anchor": [
+       84.69,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       0,
+       9,
+       136,
+       116
+      ]
+     }
     ],
     [
-     "yun_tao_skill_007.png",
-     0.12
+     "yun_tao_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1138,
+       688,
+       155,
+       135
+      ],
+      "anchor": [
+       84.66,
+       125
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       26,
+       8,
+       110,
+       117
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "yun_tao_hurt_000.png",
-     0.085
+     "yun_tao_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       958,
+       168,
+       132
+      ],
+      "anchor": [
+       90.21,
+       123
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       31,
+       7,
+       111,
+       116
+      ]
+     }
     ],
     [
-     "yun_tao_hurt_001.png",
-     0.065
+     "yun_tao_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       168,
+       958,
+       162,
+       132
+      ],
+      "anchor": [
+       82.16,
+       122
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       16,
+       11,
+       111,
+       111
+      ]
+     }
     ],
     [
-     "yun_tao_hurt_002.png",
-     0.075
+     "yun_tao_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       330,
+       958,
+       161,
+       132
+      ],
+      "anchor": [
+       72.26,
+       122
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       7,
+       16,
+       129,
+       106
+      ]
+     }
     ],
     [
-     "yun_tao_hurt_003.png",
-     0.08
+     "yun_tao_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       491,
+       958,
+       161,
+       132
+      ],
+      "anchor": [
+       83.59,
+       121
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       9,
+       15,
+       131,
+       106
+      ]
+     }
     ],
     [
-     "yun_tao_hurt_004.png",
-     0.085
+     "yun_tao_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       652,
+       958,
+       163,
+       132
+      ],
+      "anchor": [
+       76.64,
+       123
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       20,
+       17,
+       113,
+       106
+      ]
+     }
     ],
     [
-     "yun_tao_hurt_005.png",
-     0.09
+     "yun_tao_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       815,
+       958,
+       162,
+       132
+      ],
+      "anchor": [
+       75.56,
+       123
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       23,
+       14,
+       112,
+       109
+      ]
+     }
     ],
     [
-     "yun_tao_hurt_006.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       977,
+       958,
+       161,
+       132
+      ],
+      "anchor": [
+       80.84,
+       123
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       25,
+       9,
+       107,
+       114
+      ]
+     }
     ],
     [
-     "yun_tao_hurt_007.png",
-     0.12
+     "yun_tao_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1138,
+       958,
+       155,
+       132
+      ],
+      "anchor": [
+       83.59,
+       123
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       26,
+       8,
+       111,
+       115
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "yun_tao_dodge_000.png",
-     0.09
+     "yun_tao_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       823,
+       168,
+       135
+      ],
+      "anchor": [
+       89.87,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       31,
+       7,
+       109,
+       117
+      ]
+     }
     ],
     [
-     "yun_tao_dodge_001.png",
-     0.065
+     "yun_tao_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       168,
+       823,
+       162,
+       135
+      ],
+      "anchor": [
+       74.82,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       14,
+       18,
+       121,
+       106
+      ]
+     }
     ],
     [
-     "yun_tao_dodge_002.png",
-     0.055
+     "yun_tao_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       330,
+       823,
+       161,
+       135
+      ],
+      "anchor": [
+       68.03,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       3,
+       17,
+       139,
+       107
+      ]
+     }
     ],
     [
-     "yun_tao_dodge_003.png",
-     0.055
+     "yun_tao_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       491,
+       823,
+       161,
+       135
+      ],
+      "anchor": [
+       93.26,
+       123
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       10,
+       27,
+       132,
+       96
+      ]
+     }
     ],
     [
-     "yun_tao_dodge_004.png",
-     0.065
+     "yun_tao_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       652,
+       823,
+       163,
+       135
+      ],
+      "anchor": [
+       79.08,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       17,
+       24,
+       117,
+       100
+      ]
+     }
     ],
     [
-     "yun_tao_dodge_005.png",
-     0.075
+     "yun_tao_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       815,
+       823,
+       162,
+       135
+      ],
+      "anchor": [
+       77.33,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       24,
+       14,
+       107,
+       110
+      ]
+     }
     ],
     [
-     "yun_tao_dodge_006.png",
-     0.09
+     "yun_tao_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       977,
+       823,
+       161,
+       135
+      ],
+      "anchor": [
+       82.46,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       26,
+       11,
+       103,
+       113
+      ]
+     }
     ],
     [
-     "yun_tao_dodge_007.png",
-     0.12
+     "yun_tao_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1138,
+       823,
+       155,
+       135
+      ],
+      "anchor": [
+       85.28,
+       124
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       26,
+       7,
+       109,
+       117
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "yun_tao_death_000.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1090,
+       168,
+       127
+      ],
+      "anchor": [
+       90.3,
+       120
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       32,
+       6,
+       109,
+       114
+      ]
+     }
     ],
     [
-     "yun_tao_death_001.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       168,
+       1090,
+       162,
+       127
+      ],
+      "anchor": [
+       83.29,
+       120
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       19,
+       9,
+       106,
+       111
+      ]
+     }
     ],
     [
-     "yun_tao_death_002.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       330,
+       1090,
+       161,
+       127
+      ],
+      "anchor": [
+       90.8,
+       119
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       16,
+       16,
+       122,
+       103
+      ]
+     }
     ],
     [
-     "yun_tao_death_003.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       491,
+       1090,
+       161,
+       127
+      ],
+      "anchor": [
+       95.04,
+       118
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       15,
+       26,
+       126,
+       92
+      ]
+     }
     ],
     [
-     "yun_tao_death_004.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       652,
+       1090,
+       163,
+       127
+      ],
+      "anchor": [
+       92.61,
+       117
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       16,
+       36,
+       129,
+       81
+      ]
+     }
     ],
     [
-     "yun_tao_death_005.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       815,
+       1090,
+       162,
+       127
+      ],
+      "anchor": [
+       94.86,
+       116
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       15,
+       46,
+       130,
+       70
+      ]
+     }
     ],
     [
-     "yun_tao_death_006.png",
-     0.1
+     "yun_tao_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       977,
+       1090,
+       161,
+       127
+      ],
+      "anchor": [
+       88.74,
+       117
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       10,
+       59,
+       135,
+       58
+      ]
+     }
     ],
     [
-     "yun_tao_death_007.png",
-     0.45
+     "yun_tao_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1138,
+       1090,
+       155,
+       127
+      ],
+      "anchor": [
+       98.45,
+       117
+      ],
+      "scale": 2.450794,
+      "bounds": [
+       11,
+       68,
+       134,
+       49
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "yun_tao_idle_000.png",
+     0.3
+    ],
+    [
+     "yun_tao_idle_001.png",
+     0.3
+    ],
+    [
+     "yun_tao_idle_002.png",
+     0.3
+    ],
+    [
+     "yun_tao_idle_003.png",
+     0.3
+    ],
+    [
+     "yun_tao_idle_004.png",
+     0.3
+    ],
+    [
+     "yun_tao_idle_005.png",
+     0.3
+    ],
+    [
+     "yun_tao_idle_006.png",
+     0.3
+    ],
+    [
+     "yun_tao_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "yun_tao_walk_000.png",
+     0.1
+    ],
+    [
+     "yun_tao_walk_001.png",
+     0.1
+    ],
+    [
+     "yun_tao_walk_002.png",
+     0.1
+    ],
+    [
+     "yun_tao_walk_003.png",
+     0.1
+    ],
+    [
+     "yun_tao_walk_004.png",
+     0.1
+    ],
+    [
+     "yun_tao_walk_005.png",
+     0.1
+    ],
+    [
+     "yun_tao_walk_006.png",
+     0.1
+    ],
+    [
+     "yun_tao_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "yun_tao_attack_1_000.png",
+     0.1
+    ],
+    [
+     "yun_tao_attack_1_001.png",
+     0.1
+    ],
+    [
+     "yun_tao_attack_1_002.png",
+     0.08
+    ],
+    [
+     "yun_tao_attack_1_003.png",
+     0.05
+    ],
+    [
+     "yun_tao_attack_1_004.png",
+     0.065
+    ],
+    [
+     "yun_tao_attack_1_005.png",
+     0.07
+    ],
+    [
+     "yun_tao_attack_1_006.png",
+     0.1
+    ],
+    [
+     "yun_tao_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "yun_tao_attack_2_000.png",
+     0.1
+    ],
+    [
+     "yun_tao_attack_2_001.png",
+     0.085
+    ],
+    [
+     "yun_tao_attack_2_002.png",
+     0.06
+    ],
+    [
+     "yun_tao_attack_2_003.png",
+     0.06
+    ],
+    [
+     "yun_tao_attack_2_004.png",
+     0.065
+    ],
+    [
+     "yun_tao_attack_2_005.png",
+     0.075
+    ],
+    [
+     "yun_tao_attack_2_006.png",
+     0.11
+    ],
+    [
+     "yun_tao_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "yun_tao_ultimate_000.png",
+     0.11
+    ],
+    [
+     "yun_tao_ultimate_001.png",
+     0.11
+    ],
+    [
+     "yun_tao_ultimate_002.png",
+     0.1
+    ],
+    [
+     "yun_tao_ultimate_003.png",
+     0.075
+    ],
+    [
+     "yun_tao_ultimate_004.png",
+     0.085
+    ],
+    [
+     "yun_tao_ultimate_005.png",
+     0.1
+    ],
+    [
+     "yun_tao_ultimate_006.png",
+     0.11
+    ],
+    [
+     "yun_tao_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "yun_tao_skill_000.png",
+     0.1
+    ],
+    [
+     "yun_tao_skill_001.png",
+     0.1
+    ],
+    [
+     "yun_tao_skill_002.png",
+     0.1
+    ],
+    [
+     "yun_tao_skill_003.png",
+     0.07
+    ],
+    [
+     "yun_tao_skill_004.png",
+     0.08
+    ],
+    [
+     "yun_tao_skill_005.png",
+     0.085
+    ],
+    [
+     "yun_tao_skill_006.png",
+     0.1
+    ],
+    [
+     "yun_tao_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "yun_tao_dodge_000.png",
+     0.09
+    ],
+    [
+     "yun_tao_dodge_001.png",
+     0.065
+    ],
+    [
+     "yun_tao_dodge_002.png",
+     0.055
+    ],
+    [
+     "yun_tao_dodge_003.png",
+     0.055
+    ],
+    [
+     "yun_tao_dodge_004.png",
+     0.065
+    ],
+    [
+     "yun_tao_dodge_005.png",
+     0.075
+    ],
+    [
+     "yun_tao_dodge_006.png",
+     0.09
+    ],
+    [
+     "yun_tao_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "yun_tao_hurt_000.png",
+     0.085
+    ],
+    [
+     "yun_tao_hurt_001.png",
+     0.065
+    ],
+    [
+     "yun_tao_hurt_002.png",
+     0.075
+    ],
+    [
+     "yun_tao_hurt_003.png",
+     0.08
+    ],
+    [
+     "yun_tao_hurt_004.png",
+     0.085
+    ],
+    [
+     "yun_tao_hurt_005.png",
+     0.09
+    ],
+    [
+     "yun_tao_hurt_006.png",
+     0.1
+    ],
+    [
+     "yun_tao_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "yun_tao_death_000.png",
+     0.1
+    ],
+    [
+     "yun_tao_death_001.png",
+     0.1
+    ],
+    [
+     "yun_tao_death_002.png",
+     0.1
+    ],
+    [
+     "yun_tao_death_003.png",
+     0.1
+    ],
+    [
+     "yun_tao_death_004.png",
+     0.1
+    ],
+    [
+     "yun_tao_death_005.png",
+     0.1
+    ],
+    [
+     "yun_tao_death_006.png",
+     0.1
+    ],
+    [
+     "yun_tao_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

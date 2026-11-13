@@ -14,6 +14,9 @@ var _body := Rect2()
 var anchor := Vector2(96, 146)
 var map: Dictionary = {}  # clip du jeu ("0", "idle"…) -> animation du pack
 var anims: Dictionary = {}  # nom -> {loop, frames: [[Texture2D, durée]], hit_frame, total, hit_time}
+var _originals: Dictionary = {}
+var _original_cache: Dictionary = {}
+var _source_dir := ""
 var effect: SpriteFrames  # effet « signature » joué sur la cible à l'impact (null si aucun)
 var effect_pivot := Vector2(64, 64)
 var effect_scale: Dictionary = {}  # animation d'attaque -> taille conseillée
@@ -41,36 +44,17 @@ static func for_actor(id: String) -> PixelSheet:
 
 
 func _build(data: Dictionary, dir: String) -> void:
+	_source_dir = dir
 	scale = float(data.get("scale", 4.8))
 	facing = float(data.get("facing", 1))
 	anchor = Vector2(data.anchor[0], data.anchor[1])
 	map = data.get("map", {})
 	for name: String in data.anims:
 		var a: Dictionary = data.anims[name]
-		var frames: Array = []
-		var total := 0.0
-		var hit_time := -1.0
-		var i := 0
-		for f: Array in a.frames:
-			if a.get("hit_frame") != null and i == int(a.hit_frame):
-				hit_time = total
-			var texture: Texture2D = ClipPlayer.texture(dir + String(f[0]))
-			if f.size() > 2 and f[2] is Dictionary:
-				# Une planche conserve ses pixels natifs ; seules ses régions sont découpées.
-				var layout: Dictionary = f[2]
-				var region: Array = layout.region
-				var atlas := AtlasTexture.new()
-				atlas.atlas = texture
-				atlas.region = Rect2(region[0], region[1], region[2], region[3])
-				atlas.filter_clip = true
-				var origin: Array = layout.get("anchor", [anchor.x, anchor.y])
-				atlas.set_meta("pixel_anchor", Vector2(origin[0], origin[1]))
-				atlas.set_meta("pixel_scale", float(layout.get("scale", scale)))
-				texture = atlas
-			frames.append([texture, float(f[1])])
-			total += float(f[1])
-			i += 1
-		anims[name] = {"loop": bool(a.loop), "frames": frames, "total": total, "hit_time": hit_time}
+		if data.get("redesign", false) and name.ends_with("_original"):
+			_originals[name] = a
+			continue
+		anims[name] = _load_animation(a, dir)
 	_center_on_feet()
 	var fx: Variant = data.get("effect")
 	if fx is Dictionary:
@@ -88,7 +72,10 @@ func _build(data: Dictionary, dir: String) -> void:
 func _center_on_feet() -> void:
 	if not anims.has("idle"):
 		return
-	var img: Image = (anims.idle.frames[0][0] as Texture2D).get_image()
+	var first: Texture2D = anims.idle.frames[0][0]
+	if first.has_meta("pixel_anchor"):
+		return
+	var img: Image = first.get_image()
 	var used := img.get_used_rect()
 	if used.size == Vector2i.ZERO:
 		return
@@ -160,8 +147,8 @@ func frame_scale(texture: Texture2D) -> float:
 func body_rect() -> Rect2:
 	if _body.size == Vector2.ZERO and anims.has("idle"):
 		var tex: Texture2D = anims.idle.frames[0][0]
-		var used := tex.get_image().get_used_rect()
-		_body = Rect2((Vector2(used.position) - anchor) * scale, Vector2(used.size) * scale)
+		var used := frame_rect(tex)
+		_body = Rect2((Vector2(used.position) - frame_anchor(tex)) * frame_scale(tex), Vector2(used.size) * frame_scale(tex))
 	return _body
 
 
@@ -175,3 +162,52 @@ func lunge(t: float, clip_dur: float, clip_hit: float) -> float:
 	if t < clip_hit:
 		return smoothstep(clip_hit * 0.6, clip_hit, t) * 70.0 * facing
 	return (1.0 - smoothstep(clip_hit, out, t)) * 70.0 * facing
+
+
+## Limites opaques fournies à l'import : exclure les pixels presque transparents du cadrage.
+func frame_rect(texture: Texture2D) -> Rect2i:
+	return texture.get_meta("pixel_bounds", texture.get_image().get_used_rect())
+
+
+## Charger les anciens dessins seulement pour un diagnostic, pas pour chaque héros affiché.
+func original_animation(state: String) -> Dictionary:
+	var key := state + "_original"
+	if anims.has(key):
+		return anims[key]
+	if not _original_cache.has(key) and _originals.has(key):
+		_original_cache[key] = _load_animation(_originals[key], _source_dir)
+	return _original_cache.get(key, {})
+
+
+func has_original(state: String) -> bool:
+	return _originals.has(state + "_original") or anims.has(state + "_original")
+
+
+func _load_animation(a: Dictionary, dir: String) -> Dictionary:
+	var frames: Array = []
+	var total := 0.0
+	var hit_time := -1.0
+	var i := 0
+	for f: Array in a.frames:
+		if a.get("hit_frame") != null and i == int(a.hit_frame):
+			hit_time = total
+		var texture: Texture2D = ClipPlayer.texture(dir + String(f[0]))
+		if f.size() > 2 and f[2] is Dictionary:
+			# Une planche conserve ses pixels natifs ; seules ses régions sont découpées.
+			var layout: Dictionary = f[2]
+			var region: Array = layout.region
+			var atlas := AtlasTexture.new()
+			atlas.atlas = texture
+			atlas.region = Rect2(region[0], region[1], region[2], region[3])
+			atlas.filter_clip = true
+			var origin: Array = layout.get("anchor", [anchor.x, anchor.y])
+			atlas.set_meta("pixel_anchor", Vector2(origin[0], origin[1]))
+			atlas.set_meta("pixel_scale", float(layout.get("scale", scale)))
+			if layout.has("bounds"):
+				var b: Array = layout.bounds
+				atlas.set_meta("pixel_bounds", Rect2i(b[0], b[1], b[2], b[3]))
+			texture = atlas
+		frames.append([texture, float(f[1])])
+		total += float(f[1])
+		i += 1
+	return {"loop": bool(a.loop), "frames": frames, "total": total, "hit_time": hit_time}

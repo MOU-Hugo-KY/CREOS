@@ -71,3 +71,11 @@ converti de WAV en OGG (ffmpeg, qualité 4).
 d'images de ChatGPT, à partir des sprites de Corbin déjà présents dans le dépôt, le 13 novembre
 2026. Les sprites d'origine sont conservés. Calage et intégration par
 `tools/import_pixel_atlas.py` ; voir `docs/animations/CORBIN_16_POSES.md`.
+
+## Refonte des 19 héros — novembre 2026
+
+`assets/anim/pixel/<id>/<id>_redesign_*.png` : 39 planches originales créées pour CREOS avec
+le générateur d'images de ChatGPT à partir des références du projet : un atlas des mouvements
+et une attaque en 16 poses par héros, plus une nouvelle chute pour Jin Seok. Les anciens
+sprites restent conservés. Découpes et directions : `data/hero_redesigns.json` ; intégration :
+`tools/import_hero_redesigns.py`. Voir `docs/animations/REFONTE_19_HEROS.md`.

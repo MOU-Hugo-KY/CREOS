@@ -1,0 +1,809 @@
+{
+ "corbin": {
+  "atlas": "assets/anim/pixel/corbin/corbin_redesign_atlas.png",
+  "attack": "assets/anim/pixel/corbin/corbin_redesign_attack.png",
+  "x_edges": [
+   0,
+   166,
+   332,
+   497,
+   662,
+   827,
+   992,
+   1158,
+   1322
+  ],
+  "y_edges": [
+   0,
+   132,
+   264,
+   397,
+   529,
+   661,
+   793,
+   923,
+   1051,
+   1190
+  ],
+  "attack_x_edges": [
+   0,
+   316,
+   628,
+   937,
+   1261
+  ],
+  "attack_y_edges": [
+   0,
+   324,
+   625,
+   926,
+   1247
+  ],
+  "art_direction": "ivory raven mask with engraved obsidian teardrop; silver feather clasp; asymmetric raven-feather mantle; burgundy layered hood; twin crescent sickles with violet inlaid runes"
+ },
+ "aegis": {
+  "atlas": "assets/anim/pixel/aegis/aegis_redesign_atlas.png",
+  "attack": "assets/anim/pixel/aegis/aegis_redesign_attack.png",
+  "x_edges": [
+   0,
+   150,
+   300,
+   449,
+   599,
+   748,
+   896,
+   1044,
+   1182
+  ],
+  "y_edges": [
+   0,
+   153,
+   297,
+   445,
+   594,
+   741,
+   888,
+   1034,
+   1182,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   320,
+   633,
+   946,
+   1254
+  ],
+  "attack_y_edges": [
+   0,
+   334,
+   652,
+   965,
+   1254
+  ],
+  "art_direction": "solar eclipse executioner knight; dark split greathelm, porcelain-gold sun visor; white tabard with scarlet lining; enormous articulated sun hammer and octagonal solar shield"
+ },
+ "brume": {
+  "atlas": "assets/anim/pixel/brume/brume_redesign_atlas.png",
+  "attack": "assets/anim/pixel/brume/brume_redesign_attack.png",
+  "x_edges": [
+   0,
+   166,
+   326,
+   486,
+   646,
+   806,
+   966,
+   1182
+  ],
+  "y_edges": [
+   0,
+   142,
+   283,
+   429,
+   575,
+   720,
+   862,
+   1005,
+   1157,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   326,
+   635,
+   943,
+   1261
+  ],
+  "attack_y_edges": [
+   0,
+   321,
+   625,
+   930,
+   1247
+  ],
+  "art_direction": "abyssal tide witch; translucent sea-glass charms, slate scalloped hood, glowing turquoise eyes; twisted coral crescent staff with suspended luminous water orb, kelp ribbons"
+ },
+ "orage": {
+  "atlas": "assets/anim/pixel/orage/orage_redesign_atlas.png",
+  "attack": "assets/anim/pixel/orage/orage_redesign_attack.png",
+  "x_edges": [
+   0,
+   149,
+   298,
+   446,
+   594,
+   741,
+   887,
+   1034,
+   1182
+  ],
+  "y_edges": [
+   0,
+   149,
+   295,
+   443,
+   592,
+   739,
+   887,
+   1035,
+   1183,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   314,
+   630,
+   946,
+   1263
+  ],
+  "attack_y_edges": [
+   0,
+   332,
+   639,
+   944,
+   1246
+  ],
+  "art_direction": "storm pilgrim monk; ivory hood with golden lightning seams; turquoise prayer beads orbiting wrists; asymmetrical copper prayer gauntlets and burgundy sash"
+ },
+ "kharok": {
+  "atlas": "assets/anim/pixel/kharok/kharok_redesign_atlas.png",
+  "attack": "assets/anim/pixel/kharok/kharok_redesign_attack.png",
+  "x_edges": [
+   0,
+   156,
+   305,
+   453,
+   600,
+   748,
+   895,
+   1043,
+   1182
+  ],
+  "y_edges": [
+   0,
+   153,
+   297,
+   445,
+   594,
+   741,
+   886,
+   1033,
+   1181,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   322,
+   636,
+   950,
+   1261
+  ],
+  "attack_y_edges": [
+   0,
+   326,
+   633,
+   936,
+   1247
+  ],
+  "art_direction": "emerald scarab guardian; majestic forked rhinoceros horn, bronze articulated carapace, amber resin shield and crystalline amber spear; green moss cords"
+ },
+ "braise": {
+  "atlas": "assets/anim/pixel/braise/braise_redesign_atlas.png",
+  "attack": "assets/anim/pixel/braise/braise_redesign_attack.png",
+  "x_edges": [
+   0,
+   155,
+   302,
+   448,
+   595,
+   742,
+   890,
+   1036,
+   1182
+  ],
+  "y_edges": [
+   0,
+   153,
+   299,
+   450,
+   601,
+   746,
+   888,
+   1035,
+   1184,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   318,
+   632,
+   944,
+   1261
+  ],
+  "attack_y_edges": [
+   0,
+   338,
+   648,
+   960,
+   1247
+  ],
+  "art_direction": "charcoal-black salamander pyrotechnician with vermilion crest and ember freckles; brass furnace gauntlets, segmented glowing tail, soot apron and flame-pipe cannon"
+ },
+ "nacre": {
+  "atlas": "assets/anim/pixel/nacre/nacre_redesign_atlas.png",
+  "attack": "assets/anim/pixel/nacre/nacre_redesign_attack.png",
+  "x_edges": [
+   0,
+   153,
+   301,
+   451,
+   600,
+   749,
+   898,
+   1046,
+   1182
+  ],
+  "y_edges": [
+   0,
+   148,
+   292,
+   443,
+   593,
+   740,
+   884,
+   1030,
+   1177,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   318,
+   636,
+   952,
+   1266
+  ],
+  "attack_y_edges": [
+   0,
+   322,
+   624,
+   927,
+   1243
+  ],
+  "art_direction": "lunar silk moth oracle; pearlescent moon-eye wing patterns, ivory fur collar, rose-brown ceremonial robe, tiny golden dream bell and luminous silk threads"
+ },
+ "rivet": {
+  "atlas": "assets/anim/pixel/rivet/rivet_redesign_atlas.png",
+  "attack": "assets/anim/pixel/rivet/rivet_redesign_attack.png",
+  "x_edges": [
+   0,
+   164,
+   327,
+   489,
+   651,
+   812,
+   975,
+   1136,
+   1295
+  ],
+  "y_edges": [
+   0,
+   138,
+   272,
+   407,
+   543,
+   678,
+   813,
+   947,
+   1076,
+   1214
+  ],
+  "attack_x_edges": [
+   0,
+   320,
+   644,
+   966,
+   1295
+  ],
+  "attack_y_edges": [
+   0,
+   332,
+   629,
+   928,
+   1215
+  ],
+  "art_direction": "scrappy grey rat sharpshooter; enormous expressive ears, burgundy tricorn with goggles, brass clockwork crossbow, leather ammunition bandolier and mechanical tail ring"
+ },
+ "sylve": {
+  "atlas": "assets/anim/pixel/sylve/sylve_redesign_atlas.png",
+  "attack": "assets/anim/pixel/sylve/sylve_redesign_attack.png",
+  "x_edges": [
+   0,
+   197,
+   356,
+   514,
+   673,
+   833,
+   992,
+   1246
+  ],
+  "y_edges": [
+   0,
+   140,
+   276,
+   414,
+   553,
+   691,
+   826,
+   962,
+   1105,
+   1262
+  ],
+  "attack_x_edges": [
+   0,
+   375,
+   725,
+   1075,
+   1448
+  ],
+  "attack_y_edges": [
+   0,
+   273,
+   535,
+   801,
+   1086
+  ],
+  "art_direction": "ancient living bonsai oak; hollow glowing green face, asymmetrical branch antlers, tiny ivory shelf mushrooms, braided root beard, moss mantle and seed lantern"
+ },
+ "valen": {
+  "atlas": "assets/anim/pixel/valen/valen_redesign_atlas.png",
+  "attack": "assets/anim/pixel/valen/valen_redesign_attack.png",
+  "x_edges": [
+   0,
+   170,
+   336,
+   501,
+   665,
+   830,
+   996,
+   1182
+  ],
+  "y_edges": [
+   0,
+   151,
+   297,
+   443,
+   590,
+   735,
+   878,
+   1020,
+   1170,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   381,
+   742,
+   1104,
+   1448
+  ],
+  "attack_y_edges": [
+   0,
+   296,
+   572,
+   844,
+   1086
+  ],
+  "art_direction": "noble spear duelist; swept black hair with silver streak, burgundy officer coat and ivory scarf, long ornate silver partisan spear, gold vambrace and sun pennant"
+ },
+ "bastion": {
+  "atlas": "assets/anim/pixel/bastion/bastion_redesign_atlas.png",
+  "attack": "assets/anim/pixel/bastion/bastion_redesign_attack.png",
+  "x_edges": [
+   0,
+   166,
+   332,
+   497,
+   662,
+   827,
+   992,
+   1182
+  ],
+  "y_edges": [
+   0,
+   147,
+   289,
+   441,
+   596,
+   742,
+   886,
+   1030,
+   1176,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   318,
+   631,
+   943,
+   1261
+  ],
+  "attack_y_edges": [
+   0,
+   339,
+   647,
+   954,
+   1247
+  ],
+  "art_direction": "fortress sentinel human; massive asymmetric slate segmented armor, small exposed determined face, crenellated tower shield with gold lion seal, brutal rectangular mace"
+ },
+ "saffran": {
+  "atlas": "assets/anim/pixel/saffran/saffran_redesign_atlas.png",
+  "attack": "assets/anim/pixel/saffran/saffran_redesign_attack.png",
+  "x_edges": [
+   0,
+   160,
+   317,
+   474,
+   632,
+   790,
+   948,
+   1106,
+   1261
+  ],
+  "y_edges": [
+   0,
+   138,
+   272,
+   406,
+   540,
+   674,
+   808,
+   941,
+   1074,
+   1247
+  ],
+  "attack_x_edges": [
+   0,
+   324,
+   635,
+   946,
+   1261
+  ],
+  "attack_y_edges": [
+   0,
+   337,
+   646,
+   955,
+   1247
+  ],
+  "art_direction": "bright red fox talisman trickster; twin flowing cream tails with cinnabar seals, black lacquer shoulder armor, red-and-gold paper talismans, calligraphy brush dagger"
+ },
+ "oona": {
+  "atlas": "assets/anim/pixel/oona/oona_redesign_atlas.png",
+  "attack": "assets/anim/pixel/oona/oona_redesign_attack.png",
+  "x_edges": [
+   0,
+   175,
+   343,
+   510,
+   677,
+   845,
+   1014,
+   1182
+  ],
+  "y_edges": [
+   0,
+   151,
+   296,
+   446,
+   596,
+   745,
+   891,
+   1034,
+   1178,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   376,
+   730,
+   1082,
+   1448
+  ],
+  "attack_y_edges": [
+   0,
+   292,
+   556,
+   822,
+   1086
+  ],
+  "art_direction": "magenta terrestrial octopus healer; navigator bicorne with pearl compass badge, teal maritime jacket, eight articulated curling tentacles with ivory suction cups, luminous shell lantern"
+ },
+ "calx": {
+  "atlas": "assets/anim/pixel/calx/calx_redesign_atlas.png",
+  "attack": "assets/anim/pixel/calx/calx_redesign_attack.png",
+  "x_edges": [
+   0,
+   183,
+   352,
+   519,
+   685,
+   850,
+   1015,
+   1181,
+   1330
+  ],
+  "y_edges": [
+   0,
+   139,
+   268,
+   400,
+   530,
+   656,
+   780,
+   906,
+   1034,
+   1183
+  ],
+  "attack_x_edges": [
+   0,
+   373,
+   733,
+   1094,
+   1448
+  ],
+  "attack_y_edges": [
+   0,
+   322,
+   572,
+   821,
+   1086
+  ],
+  "art_direction": "ancient stone-and-brass resonator automaton; suspended glowing amber core, cracked slate ceramic armor, nested bronze bell helmet, tuning-fork arms and exposed clockwork gears"
+ },
+ "nyx": {
+  "atlas": "assets/anim/pixel/nyx/nyx_redesign_atlas.png",
+  "attack": "assets/anim/pixel/nyx/nyx_redesign_attack.png",
+  "x_edges": [
+   0,
+   169,
+   334,
+   498,
+   663,
+   828,
+   994,
+   1159,
+   1318
+  ],
+  "y_edges": [
+   0,
+   135,
+   269,
+   403,
+   538,
+   671,
+   802,
+   932,
+   1063,
+   1193
+  ],
+  "attack_x_edges": [
+   0,
+   328,
+   656,
+   980,
+   1318
+  ],
+  "attack_y_edges": [
+   0,
+   336,
+   637,
+   937,
+   1193
+  ],
+  "art_direction": "violet bat vampire rogue; huge elegant bat ears, one gold fang and amber eyes, torn crimson flight cape, silver hooked daggers, crescent bloodstone brooch"
+ },
+ "mei_lian": {
+  "atlas": "assets/anim/pixel/mei_lian/mei_lian_redesign_atlas.png",
+  "attack": "assets/anim/pixel/mei_lian/mei_lian_redesign_attack.png",
+  "x_edges": [
+   0,
+   172,
+   339,
+   506,
+   672,
+   838,
+   1004,
+   1170,
+   1328
+  ],
+  "y_edges": [
+   0,
+   136,
+   268,
+   400,
+   532,
+   663,
+   791,
+   921,
+   1050,
+   1184
+  ],
+  "attack_x_edges": [
+   0,
+   343,
+   674,
+   1001,
+   1328
+  ],
+  "attack_y_edges": [
+   0,
+   328,
+   614,
+   901,
+   1184
+  ],
+  "art_direction": "Hua mountain swordswoman; black flowing ponytail with ivory plum blossom comb, cream-and-crimson silk battle robes, jade sword guard, slender silver sword trailing pink petals"
+ },
+ "jin_seok": {
+  "atlas": "assets/anim/pixel/jin_seok/jin_seok_redesign_atlas.png",
+  "attack": "assets/anim/pixel/jin_seok/jin_seok_redesign_attack.png",
+  "x_edges": [
+   0,
+   165,
+   319,
+   473,
+   628,
+   783,
+   938,
+   1182
+  ],
+  "y_edges": [
+   0,
+   159,
+   306,
+   455,
+   609,
+   762,
+   909,
+   1051,
+   1194,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   316,
+   627,
+   935,
+   1261
+  ],
+  "attack_y_edges": [
+   0,
+   337,
+   649,
+   957,
+   1247
+  ],
+  "death": "assets/anim/pixel/jin_seok/jin_seok_redesign_death.png",
+  "death_x_edges": [
+   0,
+   309,
+   618,
+   923,
+   1261
+  ],
+  "death_y_edges": [
+   0,
+   324,
+   634,
+   951,
+   1247
+  ],
+  "art_direction": "Shaolin temple protector; shaved head with small sacred gold forehead mark, saffron wraps over charcoal robes, enormous carved wooden prayer beads, bronze bracers and weighted staff"
+ },
+ "yun_tao": {
+  "atlas": "assets/anim/pixel/yun_tao/yun_tao_redesign_atlas.png",
+  "attack": "assets/anim/pixel/yun_tao/yun_tao_redesign_attack.png",
+  "x_edges": [
+   0,
+   168,
+   330,
+   491,
+   652,
+   815,
+   977,
+   1138,
+   1293
+  ],
+  "y_edges": [
+   0,
+   145,
+   281,
+   417,
+   553,
+   688,
+   823,
+   958,
+   1090,
+   1217
+  ],
+  "attack_x_edges": [
+   0,
+   378,
+   738,
+   1097,
+   1448
+  ],
+  "attack_y_edges": [
+   0,
+   301,
+   572,
+   843,
+   1086
+  ],
+  "art_direction": "silver-haired Wudang water swordsman; pale blue layered coat, dark indigo flowing sash, jade yin-yang clasp, straight silver jian and orbiting water ribbon"
+ },
+ "tang_su": {
+  "atlas": "assets/anim/pixel/tang_su/tang_su_redesign_atlas.png",
+  "attack": "assets/anim/pixel/tang_su/tang_su_redesign_attack.png",
+  "x_edges": [
+   0,
+   161,
+   310,
+   458,
+   606,
+   755,
+   905,
+   1055,
+   1182
+  ],
+  "y_edges": [
+   0,
+   154,
+   304,
+   454,
+   602,
+   747,
+   889,
+   1035,
+   1185,
+   1330
+  ],
+  "attack_x_edges": [
+   0,
+   318,
+   629,
+   936,
+   1261
+  ],
+  "attack_y_edges": [
+   0,
+   347,
+   661,
+   976,
+   1247
+  ],
+  "art_direction": "Tang clan poison huntress; sharp black asymmetrical bob with emerald jade pins, charcoal-and-burgundy cloak, gold hidden crossbow gauntlet, green venom vials and spiderweb lace"
+ }
+}

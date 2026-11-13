@@ -25,36 +25,165 @@
    "loop": true,
    "frames": [
     [
-     "jin_seok_idle_000.png",
-     0.3
+     "jin_seok_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       0,
+       0,
+       165,
+       159
+      ],
+      "anchor": [
+       88.33,
+       146
+      ],
+      "scale": 2.456,
+      "bounds": [
+       32,
+       21,
+       113,
+       125
+      ]
+     }
     ],
     [
-     "jin_seok_idle_001.png",
-     0.3
+     "jin_seok_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       165,
+       0,
+       154,
+       159
+      ],
+      "anchor": [
+       77.72,
+       146
+      ],
+      "scale": 2.456,
+      "bounds": [
+       21,
+       20,
+       112,
+       126
+      ]
+     }
     ],
     [
-     "jin_seok_idle_002.png",
-     0.3
+     "jin_seok_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       319,
+       0,
+       154,
+       159
+      ],
+      "anchor": [
+       77.8,
+       146
+      ],
+      "scale": 2.456,
+      "bounds": [
+       20,
+       17,
+       114,
+       129
+      ]
+     }
     ],
     [
-     "jin_seok_idle_003.png",
-     0.3
+     "jin_seok_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       473,
+       0,
+       155,
+       159
+      ],
+      "anchor": [
+       79.21,
+       145
+      ],
+      "scale": 2.456,
+      "bounds": [
+       21,
+       17,
+       113,
+       128
+      ]
+     }
     ],
     [
-     "jin_seok_idle_004.png",
-     0.3
+     "jin_seok_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       628,
+       0,
+       155,
+       159
+      ],
+      "anchor": [
+       78.03,
+       145
+      ],
+      "scale": 2.456,
+      "bounds": [
+       20,
+       19,
+       114,
+       126
+      ]
+     }
     ],
     [
-     "jin_seok_idle_005.png",
-     0.3
+     "jin_seok_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       783,
+       0,
+       155,
+       159
+      ],
+      "anchor": [
+       77.68,
+       145
+      ],
+      "scale": 2.456,
+      "bounds": [
+       21,
+       20,
+       114,
+       125
+      ]
+     }
     ],
     [
-     "jin_seok_idle_006.png",
-     0.3
-    ],
-    [
-     "jin_seok_idle_007.png",
-     0.3
+     "jin_seok_redesign_atlas.png",
+     0.342857,
+     {
+      "region": [
+       938,
+       0,
+       244,
+       159
+      ],
+      "anchor": [
+       77.97,
+       145
+      ],
+      "scale": 2.456,
+      "bounds": [
+       22,
+       21,
+       110,
+       124
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +192,165 @@
    "loop": true,
    "frames": [
     [
-     "jin_seok_walk_000.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       0,
+       159,
+       165,
+       147
+      ],
+      "anchor": [
+       88.58,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       28,
+       14,
+       123,
+       119
+      ]
+     }
     ],
     [
-     "jin_seok_walk_001.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       165,
+       159,
+       154,
+       147
+      ],
+      "anchor": [
+       68.49,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       25,
+       10,
+       119,
+       126
+      ]
+     }
     ],
     [
-     "jin_seok_walk_002.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       319,
+       159,
+       154,
+       147
+      ],
+      "anchor": [
+       72.8,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       30,
+       5,
+       108,
+       131
+      ]
+     }
     ],
     [
-     "jin_seok_walk_003.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       473,
+       159,
+       155,
+       147
+      ],
+      "anchor": [
+       80.9,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       27,
+       5,
+       115,
+       131
+      ]
+     }
     ],
     [
-     "jin_seok_walk_004.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       628,
+       159,
+       155,
+       147
+      ],
+      "anchor": [
+       80.55,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       25,
+       8,
+       119,
+       128
+      ]
+     }
     ],
     [
-     "jin_seok_walk_005.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       783,
+       159,
+       155,
+       147
+      ],
+      "anchor": [
+       77.22,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       32,
+       10,
+       113,
+       126
+      ]
+     }
     ],
     [
-     "jin_seok_walk_006.png",
-     0.1
-    ],
-    [
-     "jin_seok_walk_007.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.114286,
+     {
+      "region": [
+       938,
+       159,
+       244,
+       147
+      ],
+      "anchor": [
+       87.26,
+       134
+      ],
+      "scale": 2.456,
+      "bounds": [
+       30,
+       12,
+       115,
+       122
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +359,539 @@
    "loop": false,
    "frames": [
     [
-     "jin_seok_attack_1_000.png",
-     0.1
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       316,
+       337
+      ],
+      "anchor": [
+       160.34,
+       281
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       67,
+       78,
+       187,
+       203
+      ]
+     }
     ],
     [
-     "jin_seok_attack_1_001.png",
-     0.1
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       316,
+       0,
+       311,
+       337
+      ],
+      "anchor": [
+       161.61,
+       280
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       65,
+       79,
+       183,
+       201
+      ]
+     }
     ],
     [
-     "jin_seok_attack_1_002.png",
-     0.08
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       627,
+       0,
+       308,
+       337
+      ],
+      "anchor": [
+       167.37,
+       281
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       68,
+       80,
+       173,
+       201
+      ]
+     }
     ],
     [
-     "jin_seok_attack_1_003.png",
-     0.05
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       935,
+       0,
+       326,
+       337
+      ],
+      "anchor": [
+       167.36,
+       281
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       68,
+       81,
+       171,
+       200
+      ]
+     }
     ],
     [
-     "jin_seok_attack_1_004.png",
-     0.065
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       337,
+       316,
+       312
+      ],
+      "anchor": [
+       154.21,
+       253
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       56,
+       58,
+       178,
+       195
+      ]
+     }
     ],
     [
-     "jin_seok_attack_1_005.png",
-     0.07
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       316,
+       337,
+       311,
+       312
+      ],
+      "anchor": [
+       159.1,
+       253
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       52,
+       62,
+       184,
+       191
+      ]
+     }
     ],
     [
-     "jin_seok_attack_1_006.png",
-     0.1
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       627,
+       337,
+       308,
+       312
+      ],
+      "anchor": [
+       163.9,
+       253
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       47,
+       63,
+       189,
+       190
+      ]
+     }
     ],
     [
-     "jin_seok_attack_1_007.png",
-     0.12
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       935,
+       337,
+       326,
+       312
+      ],
+      "anchor": [
+       173.07,
+       253
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       60,
+       63,
+       216,
+       190
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       649,
+       316,
+       308
+      ],
+      "anchor": [
+       161.56,
+       249
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       50,
+       61,
+       236,
+       188
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       316,
+       649,
+       311,
+       308
+      ],
+      "anchor": [
+       159.92,
+       249
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       49,
+       61,
+       230,
+       188
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       627,
+       649,
+       308,
+       308
+      ],
+      "anchor": [
+       165.57,
+       249
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       56,
+       58,
+       213,
+       191
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       935,
+       649,
+       326,
+       308
+      ],
+      "anchor": [
+       171.53,
+       249
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       68,
+       55,
+       190,
+       194
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       957,
+       316,
+       290
+      ],
+      "anchor": [
+       164.96,
+       250
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       64,
+       54,
+       184,
+       196
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       316,
+       957,
+       311,
+       290
+      ],
+      "anchor": [
+       161.99,
+       250
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       65,
+       54,
+       182,
+       196
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       627,
+       957,
+       308,
+       290
+      ],
+      "anchor": [
+       165.45,
+       251
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       70,
+       54,
+       183,
+       197
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       935,
+       957,
+       326,
+       290
+      ],
+      "anchor": [
+       174.72,
+       250
+      ],
+      "scale": 1.512315,
+      "bounds": [
+       78,
+       54,
+       184,
+       196
+      ]
+     }
     ]
    ],
-   "hit_frame": 3
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "jin_seok_attack_2_000.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       0,
+       455,
+       165,
+       154
+      ],
+      "anchor": [
+       77.78,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       17,
+       18,
+       124,
+       115
+      ]
+     }
     ],
     [
-     "jin_seok_attack_2_001.png",
-     0.085
+     "jin_seok_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       165,
+       455,
+       154,
+       154
+      ],
+      "anchor": [
+       65.9,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       14,
+       0,
+       111,
+       133
+      ]
+     }
     ],
     [
-     "jin_seok_attack_2_002.png",
-     0.06
+     "jin_seok_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       319,
+       455,
+       154,
+       154
+      ],
+      "anchor": [
+       78.48,
+       154
+      ],
+      "scale": 2.456,
+      "bounds": [
+       6,
+       0,
+       148,
+       154
+      ]
+     }
     ],
     [
-     "jin_seok_attack_2_003.png",
-     0.06
+     "jin_seok_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       473,
+       455,
+       155,
+       154
+      ],
+      "anchor": [
+       90.9,
+       154
+      ],
+      "scale": 2.456,
+      "bounds": [
+       0,
+       21,
+       154,
+       133
+      ]
+     }
     ],
     [
-     "jin_seok_attack_2_004.png",
-     0.065
+     "jin_seok_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       628,
+       455,
+       155,
+       154
+      ],
+      "anchor": [
+       73.55,
+       131
+      ],
+      "scale": 2.456,
+      "bounds": [
+       11,
+       27,
+       137,
+       104
+      ]
+     }
     ],
     [
-     "jin_seok_attack_2_005.png",
-     0.075
+     "jin_seok_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       783,
+       455,
+       155,
+       154
+      ],
+      "anchor": [
+       75.18,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       11,
+       27,
+       137,
+       103
+      ]
+     }
     ],
     [
-     "jin_seok_attack_2_006.png",
-     0.11
-    ],
-    [
-     "jin_seok_attack_2_007.png",
-     0.12
+     "jin_seok_redesign_atlas.png",
+     0.096429,
+     {
+      "region": [
+       938,
+       455,
+       244,
+       154
+      ],
+      "anchor": [
+       78.96,
+       132
+      ],
+      "scale": 2.456,
+      "bounds": [
+       20,
+       14,
+       120,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": 3
@@ -177,36 +900,165 @@
    "loop": false,
    "frames": [
     [
-     "jin_seok_ultimate_000.png",
-     0.11
+     "jin_seok_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       0,
+       609,
+       165,
+       153
+      ],
+      "anchor": [
+       88.47,
+       137
+      ],
+      "scale": 2.456,
+      "bounds": [
+       32,
+       18,
+       110,
+       119
+      ]
+     }
     ],
     [
-     "jin_seok_ultimate_001.png",
-     0.11
+     "jin_seok_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       165,
+       609,
+       154,
+       153
+      ],
+      "anchor": [
+       74.99,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       12,
+       12,
+       123,
+       124
+      ]
+     }
     ],
     [
-     "jin_seok_ultimate_002.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       319,
+       609,
+       154,
+       153
+      ],
+      "anchor": [
+       78.92,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       10,
+       0,
+       132,
+       136
+      ]
+     }
     ],
     [
-     "jin_seok_ultimate_003.png",
-     0.075
+     "jin_seok_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       473,
+       609,
+       155,
+       153
+      ],
+      "anchor": [
+       89.26,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       2,
+       0,
+       153,
+       136
+      ]
+     }
     ],
     [
-     "jin_seok_ultimate_004.png",
-     0.085
+     "jin_seok_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       628,
+       609,
+       155,
+       153
+      ],
+      "anchor": [
+       84.59,
+       136
+      ],
+      "scale": 2.456,
+      "bounds": [
+       0,
+       12,
+       155,
+       124
+      ]
+     }
     ],
     [
-     "jin_seok_ultimate_005.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       783,
+       609,
+       155,
+       153
+      ],
+      "anchor": [
+       90.58,
+       137
+      ],
+      "scale": 2.456,
+      "bounds": [
+       0,
+       20,
+       150,
+       117
+      ]
+     }
     ],
     [
-     "jin_seok_ultimate_006.png",
-     0.11
-    ],
-    [
-     "jin_seok_ultimate_007.png",
-     0.13
+     "jin_seok_redesign_atlas.png",
+     0.117143,
+     {
+      "region": [
+       938,
+       609,
+       244,
+       153
+      ],
+      "anchor": [
+       94.78,
+       137
+      ],
+      "scale": 2.456,
+      "bounds": [
+       37,
+       16,
+       117,
+       121
+      ]
+     }
     ]
    ],
    "hit_frame": 3
@@ -215,74 +1067,332 @@
    "loop": false,
    "frames": [
     [
-     "jin_seok_skill_000.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       0,
+       762,
+       165,
+       147
+      ],
+      "anchor": [
+       84.13,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       31,
+       16,
+       112,
+       117
+      ]
+     }
     ],
     [
-     "jin_seok_skill_001.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       165,
+       762,
+       154,
+       147
+      ],
+      "anchor": [
+       78.13,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       22,
+       6,
+       114,
+       127
+      ]
+     }
     ],
     [
-     "jin_seok_skill_002.png",
-     0.1
+     "jin_seok_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       319,
+       762,
+       154,
+       147
+      ],
+      "anchor": [
+       79.07,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       18,
+       0,
+       123,
+       133
+      ]
+     }
     ],
     [
-     "jin_seok_skill_003.png",
-     0.07
+     "jin_seok_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       473,
+       762,
+       155,
+       147
+      ],
+      "anchor": [
+       80.43,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       12,
+       4,
+       143,
+       129
+      ]
+     }
     ],
     [
-     "jin_seok_skill_004.png",
-     0.08
+     "jin_seok_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       628,
+       762,
+       155,
+       147
+      ],
+      "anchor": [
+       88.23,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       0,
+       14,
+       155,
+       119
+      ]
+     }
     ],
     [
-     "jin_seok_skill_005.png",
-     0.085
+     "jin_seok_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       783,
+       762,
+       155,
+       147
+      ],
+      "anchor": [
+       91.37,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       0,
+       15,
+       153,
+       118
+      ]
+     }
     ],
     [
-     "jin_seok_skill_006.png",
-     0.1
-    ],
-    [
-     "jin_seok_skill_007.png",
-     0.12
+     "jin_seok_redesign_atlas.png",
+     0.107857,
+     {
+      "region": [
+       938,
+       762,
+       244,
+       147
+      ],
+      "anchor": [
+       92.93,
+       133
+      ],
+      "scale": 2.456,
+      "bounds": [
+       39,
+       14,
+       117,
+       119
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 3
   },
   "hurt": {
    "loop": false,
    "frames": [
     [
-     "jin_seok_hurt_000.png",
-     0.085
+     "jin_seok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       1051,
+       165,
+       143
+      ],
+      "anchor": [
+       86.54,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       28,
+       11,
+       115,
+       119
+      ]
+     }
     ],
     [
-     "jin_seok_hurt_001.png",
-     0.065
+     "jin_seok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       165,
+       1051,
+       154,
+       143
+      ],
+      "anchor": [
+       74.99,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       22,
+       14,
+       109,
+       116
+      ]
+     }
     ],
     [
-     "jin_seok_hurt_002.png",
-     0.075
+     "jin_seok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       319,
+       1051,
+       154,
+       143
+      ],
+      "anchor": [
+       76.48,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       15,
+       9,
+       117,
+       121
+      ]
+     }
     ],
     [
-     "jin_seok_hurt_003.png",
-     0.08
+     "jin_seok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       473,
+       1051,
+       155,
+       143
+      ],
+      "anchor": [
+       76.74,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       22,
+       9,
+       104,
+       121
+      ]
+     }
     ],
     [
-     "jin_seok_hurt_004.png",
-     0.085
+     "jin_seok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       628,
+       1051,
+       155,
+       143
+      ],
+      "anchor": [
+       68.16,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       19,
+       17,
+       107,
+       113
+      ]
+     }
     ],
     [
-     "jin_seok_hurt_005.png",
-     0.09
+     "jin_seok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       783,
+       1051,
+       155,
+       143
+      ],
+      "anchor": [
+       72.53,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       13,
+       12,
+       122,
+       118
+      ]
+     }
     ],
     [
-     "jin_seok_hurt_006.png",
-     0.1
-    ],
-    [
-     "jin_seok_hurt_007.png",
-     0.12
+     "jin_seok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       938,
+       1051,
+       244,
+       143
+      ],
+      "anchor": [
+       81.27,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       22,
+       14,
+       120,
+       116
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1401,165 @@
    "loop": false,
    "frames": [
     [
-     "jin_seok_dodge_000.png",
-     0.09
+     "jin_seok_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       0,
+       909,
+       165,
+       142
+      ],
+      "anchor": [
+       83.03,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       26,
+       11,
+       117,
+       119
+      ]
+     }
     ],
     [
-     "jin_seok_dodge_001.png",
-     0.065
+     "jin_seok_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       165,
+       909,
+       154,
+       142
+      ],
+      "anchor": [
+       71.08,
+       129
+      ],
+      "scale": 2.456,
+      "bounds": [
+       12,
+       26,
+       121,
+       103
+      ]
+     }
     ],
     [
-     "jin_seok_dodge_002.png",
-     0.055
+     "jin_seok_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       319,
+       909,
+       154,
+       142
+      ],
+      "anchor": [
+       71.17,
+       129
+      ],
+      "scale": 2.456,
+      "bounds": [
+       6,
+       38,
+       126,
+       91
+      ]
+     }
     ],
     [
-     "jin_seok_dodge_003.png",
-     0.055
+     "jin_seok_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       473,
+       909,
+       155,
+       142
+      ],
+      "anchor": [
+       66.58,
+       129
+      ],
+      "scale": 2.456,
+      "bounds": [
+       7,
+       52,
+       125,
+       77
+      ]
+     }
     ],
     [
-     "jin_seok_dodge_004.png",
-     0.065
+     "jin_seok_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       628,
+       909,
+       155,
+       142
+      ],
+      "anchor": [
+       66.6,
+       129
+      ],
+      "scale": 2.456,
+      "bounds": [
+       7,
+       23,
+       123,
+       106
+      ]
+     }
     ],
     [
-     "jin_seok_dodge_005.png",
-     0.075
+     "jin_seok_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       783,
+       909,
+       155,
+       142
+      ],
+      "anchor": [
+       71.66,
+       129
+      ],
+      "scale": 2.456,
+      "bounds": [
+       14,
+       16,
+       120,
+       113
+      ]
+     }
     ],
     [
-     "jin_seok_dodge_006.png",
-     0.09
-    ],
-    [
-     "jin_seok_dodge_007.png",
-     0.12
+     "jin_seok_redesign_atlas.png",
+     0.087857,
+     {
+      "region": [
+       938,
+       909,
+       244,
+       142
+      ],
+      "anchor": [
+       82.28,
+       130
+      ],
+      "scale": 2.456,
+      "bounds": [
+       25,
+       11,
+       116,
+       119
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1568,372 @@
    "loop": false,
    "frames": [
     [
-     "jin_seok_death_000.png",
-     0.1
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       0,
+       0,
+       309,
+       324
+      ],
+      "anchor": [
+       148.92,
+       255
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       80,
+       90,
+       146,
+       165
+      ]
+     }
     ],
     [
-     "jin_seok_death_001.png",
-     0.1
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       309,
+       0,
+       309,
+       324
+      ],
+      "anchor": [
+       151.52,
+       256
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       86,
+       93,
+       139,
+       163
+      ]
+     }
     ],
     [
-     "jin_seok_death_002.png",
-     0.1
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       618,
+       0,
+       305,
+       324
+      ],
+      "anchor": [
+       159.17,
+       256
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       91,
+       96,
+       126,
+       160
+      ]
+     }
     ],
     [
-     "jin_seok_death_003.png",
-     0.1
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       923,
+       0,
+       338,
+       324
+      ],
+      "anchor": [
+       163.17,
+       257
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       85,
+       99,
+       133,
+       158
+      ]
+     }
     ],
     [
-     "jin_seok_death_004.png",
-     0.1
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       0,
+       324,
+       309,
+       310
+      ],
+      "anchor": [
+       161.01,
+       232
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       88,
+       74,
+       135,
+       158
+      ]
+     }
     ],
     [
-     "jin_seok_death_005.png",
-     0.1
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       309,
+       324,
+       309,
+       310
+      ],
+      "anchor": [
+       145.54,
+       233
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       87,
+       80,
+       130,
+       153
+      ]
+     }
     ],
     [
-     "jin_seok_death_006.png",
-     0.1
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       618,
+       324,
+       305,
+       310
+      ],
+      "anchor": [
+       159.47,
+       234
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       84,
+       92,
+       137,
+       142
+      ]
+     }
     ],
     [
-     "jin_seok_death_007.png",
-     0.45
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       923,
+       324,
+       338,
+       310
+      ],
+      "anchor": [
+       145.67,
+       236
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       79,
+       109,
+       147,
+       127
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       0,
+       634,
+       309,
+       317
+      ],
+      "anchor": [
+       144.26,
+       217
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       71,
+       97,
+       155,
+       120
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       309,
+       634,
+       309,
+       317
+      ],
+      "anchor": [
+       118.04,
+       216
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       60,
+       107,
+       163,
+       109
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       618,
+       634,
+       305,
+       317
+      ],
+      "anchor": [
+       134.23,
+       214
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       45,
+       123,
+       172,
+       91
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       923,
+       634,
+       338,
+       317
+      ],
+      "anchor": [
+       164.13,
+       216
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       43,
+       133,
+       184,
+       83
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       0,
+       951,
+       309,
+       296
+      ],
+      "anchor": [
+       155.6,
+       200
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       51,
+       119,
+       182,
+       81
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       309,
+       951,
+       309,
+       296
+      ],
+      "anchor": [
+       153.15,
+       200
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       47,
+       119,
+       182,
+       81
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       618,
+       951,
+       305,
+       296
+      ],
+      "anchor": [
+       148.96,
+       200
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       44,
+       119,
+       183,
+       81
+      ]
+     }
+    ],
+    [
+     "jin_seok_redesign_death.png",
+     0.071875,
+     {
+      "region": [
+       923,
+       951,
+       338,
+       296
+      ],
+      "anchor": [
+       153.56,
+       200
+      ],
+      "scale": 1.860606,
+      "bounds": [
+       46,
+       119,
+       185,
+       81
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1975,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "jin_seok_idle_000.png",
+     0.3
+    ],
+    [
+     "jin_seok_idle_001.png",
+     0.3
+    ],
+    [
+     "jin_seok_idle_002.png",
+     0.3
+    ],
+    [
+     "jin_seok_idle_003.png",
+     0.3
+    ],
+    [
+     "jin_seok_idle_004.png",
+     0.3
+    ],
+    [
+     "jin_seok_idle_005.png",
+     0.3
+    ],
+    [
+     "jin_seok_idle_006.png",
+     0.3
+    ],
+    [
+     "jin_seok_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "jin_seok_walk_000.png",
+     0.1
+    ],
+    [
+     "jin_seok_walk_001.png",
+     0.1
+    ],
+    [
+     "jin_seok_walk_002.png",
+     0.1
+    ],
+    [
+     "jin_seok_walk_003.png",
+     0.1
+    ],
+    [
+     "jin_seok_walk_004.png",
+     0.1
+    ],
+    [
+     "jin_seok_walk_005.png",
+     0.1
+    ],
+    [
+     "jin_seok_walk_006.png",
+     0.1
+    ],
+    [
+     "jin_seok_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "jin_seok_attack_1_000.png",
+     0.1
+    ],
+    [
+     "jin_seok_attack_1_001.png",
+     0.1
+    ],
+    [
+     "jin_seok_attack_1_002.png",
+     0.08
+    ],
+    [
+     "jin_seok_attack_1_003.png",
+     0.05
+    ],
+    [
+     "jin_seok_attack_1_004.png",
+     0.065
+    ],
+    [
+     "jin_seok_attack_1_005.png",
+     0.07
+    ],
+    [
+     "jin_seok_attack_1_006.png",
+     0.1
+    ],
+    [
+     "jin_seok_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "jin_seok_attack_2_000.png",
+     0.1
+    ],
+    [
+     "jin_seok_attack_2_001.png",
+     0.085
+    ],
+    [
+     "jin_seok_attack_2_002.png",
+     0.06
+    ],
+    [
+     "jin_seok_attack_2_003.png",
+     0.06
+    ],
+    [
+     "jin_seok_attack_2_004.png",
+     0.065
+    ],
+    [
+     "jin_seok_attack_2_005.png",
+     0.075
+    ],
+    [
+     "jin_seok_attack_2_006.png",
+     0.11
+    ],
+    [
+     "jin_seok_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "jin_seok_ultimate_000.png",
+     0.11
+    ],
+    [
+     "jin_seok_ultimate_001.png",
+     0.11
+    ],
+    [
+     "jin_seok_ultimate_002.png",
+     0.1
+    ],
+    [
+     "jin_seok_ultimate_003.png",
+     0.075
+    ],
+    [
+     "jin_seok_ultimate_004.png",
+     0.085
+    ],
+    [
+     "jin_seok_ultimate_005.png",
+     0.1
+    ],
+    [
+     "jin_seok_ultimate_006.png",
+     0.11
+    ],
+    [
+     "jin_seok_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 3
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "jin_seok_skill_000.png",
+     0.1
+    ],
+    [
+     "jin_seok_skill_001.png",
+     0.1
+    ],
+    [
+     "jin_seok_skill_002.png",
+     0.1
+    ],
+    [
+     "jin_seok_skill_003.png",
+     0.07
+    ],
+    [
+     "jin_seok_skill_004.png",
+     0.08
+    ],
+    [
+     "jin_seok_skill_005.png",
+     0.085
+    ],
+    [
+     "jin_seok_skill_006.png",
+     0.1
+    ],
+    [
+     "jin_seok_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "jin_seok_dodge_000.png",
+     0.09
+    ],
+    [
+     "jin_seok_dodge_001.png",
+     0.065
+    ],
+    [
+     "jin_seok_dodge_002.png",
+     0.055
+    ],
+    [
+     "jin_seok_dodge_003.png",
+     0.055
+    ],
+    [
+     "jin_seok_dodge_004.png",
+     0.065
+    ],
+    [
+     "jin_seok_dodge_005.png",
+     0.075
+    ],
+    [
+     "jin_seok_dodge_006.png",
+     0.09
+    ],
+    [
+     "jin_seok_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "jin_seok_hurt_000.png",
+     0.085
+    ],
+    [
+     "jin_seok_hurt_001.png",
+     0.065
+    ],
+    [
+     "jin_seok_hurt_002.png",
+     0.075
+    ],
+    [
+     "jin_seok_hurt_003.png",
+     0.08
+    ],
+    [
+     "jin_seok_hurt_004.png",
+     0.085
+    ],
+    [
+     "jin_seok_hurt_005.png",
+     0.09
+    ],
+    [
+     "jin_seok_hurt_006.png",
+     0.1
+    ],
+    [
+     "jin_seok_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "jin_seok_death_000.png",
+     0.1
+    ],
+    [
+     "jin_seok_death_001.png",
+     0.1
+    ],
+    [
+     "jin_seok_death_002.png",
+     0.1
+    ],
+    [
+     "jin_seok_death_003.png",
+     0.1
+    ],
+    [
+     "jin_seok_death_004.png",
+     0.1
+    ],
+    [
+     "jin_seok_death_005.png",
+     0.1
+    ],
+    [
+     "jin_seok_death_006.png",
+     0.1
+    ],
+    [
+     "jin_seok_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }

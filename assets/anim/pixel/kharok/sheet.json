@@ -25,36 +25,188 @@
    "loop": true,
    "frames": [
     [
-     "kharok_idle_000.png",
-     0.3
+     "kharok_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       0,
+       0,
+       156,
+       153
+      ],
+      "anchor": [
+       78.29,
+       137
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       18,
+       7,
+       129,
+       130
+      ]
+     }
     ],
     [
-     "kharok_idle_001.png",
-     0.3
+     "kharok_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       156,
+       0,
+       149,
+       153
+      ],
+      "anchor": [
+       70.84,
+       137
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       10,
+       7,
+       129,
+       130
+      ]
+     }
     ],
     [
-     "kharok_idle_002.png",
-     0.3
+     "kharok_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       305,
+       0,
+       148,
+       153
+      ],
+      "anchor": [
+       68.15,
+       136
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       10,
+       6,
+       128,
+       130
+      ]
+     }
     ],
     [
-     "kharok_idle_003.png",
-     0.3
+     "kharok_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       453,
+       0,
+       147,
+       153
+      ],
+      "anchor": [
+       98.0,
+       153
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       10,
+       2,
+       127,
+       151
+      ]
+     }
     ],
     [
-     "kharok_idle_004.png",
-     0.3
+     "kharok_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       600,
+       0,
+       148,
+       153
+      ],
+      "anchor": [
+       69.48,
+       136
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       13,
+       6,
+       123,
+       130
+      ]
+     }
     ],
     [
-     "kharok_idle_005.png",
-     0.3
+     "kharok_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       748,
+       0,
+       147,
+       153
+      ],
+      "anchor": [
+       68.55,
+       136
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       10,
+       7,
+       126,
+       129
+      ]
+     }
     ],
     [
-     "kharok_idle_006.png",
-     0.3
+     "kharok_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       895,
+       0,
+       148,
+       153
+      ],
+      "anchor": [
+       69.27,
+       136
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       11,
+       7,
+       125,
+       129
+      ]
+     }
     ],
     [
-     "kharok_idle_007.png",
-     0.3
+     "kharok_redesign_atlas.png",
+     0.3,
+     {
+      "region": [
+       1043,
+       0,
+       139,
+       153
+      ],
+      "anchor": [
+       68.27,
+       136
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       11,
+       9,
+       126,
+       127
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -63,36 +215,188 @@
    "loop": true,
    "frames": [
     [
-     "kharok_walk_000.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       0,
+       153,
+       156,
+       144
+      ],
+      "anchor": [
+       76.88,
+       124
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       18,
+       0,
+       122,
+       124
+      ]
+     }
     ],
     [
-     "kharok_walk_001.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       156,
+       153,
+       149,
+       144
+      ],
+      "anchor": [
+       64.72,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       9,
+       0,
+       123,
+       125
+      ]
+     }
     ],
     [
-     "kharok_walk_002.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       305,
+       153,
+       148,
+       144
+      ],
+      "anchor": [
+       56.09,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       8,
+       0,
+       127,
+       125
+      ]
+     }
     ],
     [
-     "kharok_walk_003.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       453,
+       153,
+       147,
+       144
+      ],
+      "anchor": [
+       75.21,
+       124
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       6,
+       0,
+       131,
+       124
+      ]
+     }
     ],
     [
-     "kharok_walk_004.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       600,
+       153,
+       148,
+       144
+      ],
+      "anchor": [
+       70.39,
+       124
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       12,
+       2,
+       123,
+       122
+      ]
+     }
     ],
     [
-     "kharok_walk_005.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       748,
+       153,
+       147,
+       144
+      ],
+      "anchor": [
+       59.27,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       13,
+       0,
+       122,
+       125
+      ]
+     }
     ],
     [
-     "kharok_walk_006.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       895,
+       153,
+       148,
+       144
+      ],
+      "anchor": [
+       60.8,
+       124
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       13,
+       0,
+       123,
+       124
+      ]
+     }
     ],
     [
-     "kharok_walk_007.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1,
+     {
+      "region": [
+       1043,
+       153,
+       139,
+       144
+      ],
+      "anchor": [
+       70.14,
+       124
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       13,
+       1,
+       119,
+       123
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -101,74 +405,562 @@
    "loop": false,
    "frames": [
     [
-     "kharok_attack_1_000.png",
-     0.1
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       0,
+       322,
+       326
+      ],
+      "anchor": [
+       164.49,
+       257
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       77,
+       83,
+       175,
+       174
+      ]
+     }
     ],
     [
-     "kharok_attack_1_001.png",
-     0.1
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       322,
+       0,
+       314,
+       326
+      ],
+      "anchor": [
+       158.83,
+       257
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       69,
+       82,
+       176,
+       175
+      ]
+     }
     ],
     [
-     "kharok_attack_1_002.png",
-     0.08
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       636,
+       0,
+       314,
+       326
+      ],
+      "anchor": [
+       158.85,
+       257
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       70,
+       83,
+       176,
+       174
+      ]
+     }
     ],
     [
-     "kharok_attack_1_003.png",
-     0.05
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       950,
+       0,
+       311,
+       326
+      ],
+      "anchor": [
+       154.82,
+       258
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       64,
+       89,
+       186,
+       169
+      ]
+     }
     ],
     [
-     "kharok_attack_1_004.png",
-     0.065
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       326,
+       322,
+       307
+      ],
+      "anchor": [
+       163.0,
+       237
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       71,
+       67,
+       178,
+       170
+      ]
+     }
     ],
     [
-     "kharok_attack_1_005.png",
-     0.07
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       322,
+       326,
+       314,
+       307
+      ],
+      "anchor": [
+       152.35,
+       237
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       59,
+       69,
+       187,
+       168
+      ]
+     }
     ],
     [
-     "kharok_attack_1_006.png",
-     0.1
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       636,
+       326,
+       314,
+       307
+      ],
+      "anchor": [
+       151.13,
+       237
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       59,
+       69,
+       178,
+       168
+      ]
+     }
     ],
     [
-     "kharok_attack_1_007.png",
-     0.12
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       950,
+       326,
+       311,
+       307
+      ],
+      "anchor": [
+       140.95,
+       237
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       61,
+       74,
+       212,
+       163
+      ]
+     }
+    ],
+    [
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       633,
+       322,
+       303
+      ],
+      "anchor": [
+       151.27,
+       232
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       71,
+       71,
+       234,
+       161
+      ]
+     }
+    ],
+    [
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       322,
+       633,
+       314,
+       303
+      ],
+      "anchor": [
+       143.89,
+       232
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       62,
+       66,
+       213,
+       166
+      ]
+     }
+    ],
+    [
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       636,
+       633,
+       314,
+       303
+      ],
+      "anchor": [
+       148.77,
+       232
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       60,
+       64,
+       186,
+       168
+      ]
+     }
+    ],
+    [
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       950,
+       633,
+       311,
+       303
+      ],
+      "anchor": [
+       149.34,
+       232
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       60,
+       59,
+       172,
+       173
+      ]
+     }
+    ],
+    [
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       0,
+       936,
+       322,
+       311
+      ],
+      "anchor": [
+       157.41,
+       238
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       70,
+       60,
+       167,
+       178
+      ]
+     }
+    ],
+    [
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       322,
+       936,
+       314,
+       311
+      ],
+      "anchor": [
+       152.34,
+       238
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       66,
+       62,
+       170,
+       176
+      ]
+     }
+    ],
+    [
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       636,
+       936,
+       314,
+       311
+      ],
+      "anchor": [
+       157.73,
+       237
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       71,
+       62,
+       169,
+       175
+      ]
+     }
+    ],
+    [
+     "kharok_redesign_attack.png",
+     0.042813,
+     {
+      "region": [
+       950,
+       936,
+       311,
+       311
+      ],
+      "anchor": [
+       161.3,
+       237
+      ],
+      "scale": 1.622989,
+      "bounds": [
+       73,
+       62,
+       171,
+       175
+      ]
+     }
     ]
    ],
-   "hit_frame": 4
+   "hit_frame": 8
   },
   "attack_2": {
    "loop": false,
    "frames": [
     [
-     "kharok_attack_2_000.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       0,
+       445,
+       156,
+       149
+      ],
+      "anchor": [
+       72.86,
+       126
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       12,
+       4,
+       128,
+       122
+      ]
+     }
     ],
     [
-     "kharok_attack_2_001.png",
-     0.085
+     "kharok_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       156,
+       445,
+       149,
+       149
+      ],
+      "anchor": [
+       101.5,
+       149
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       9,
+       7,
+       120,
+       142
+      ]
+     }
     ],
     [
-     "kharok_attack_2_002.png",
-     0.06
+     "kharok_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       305,
+       445,
+       148,
+       149
+      ],
+      "anchor": [
+       98.0,
+       149
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       7,
+       1,
+       141,
+       148
+      ]
+     }
     ],
     [
-     "kharok_attack_2_003.png",
-     0.06
+     "kharok_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       453,
+       445,
+       147,
+       149
+      ],
+      "anchor": [
+       49.61,
+       126
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       0,
+       147,
+       126
+      ]
+     }
     ],
     [
-     "kharok_attack_2_004.png",
-     0.065
+     "kharok_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       600,
+       445,
+       148,
+       149
+      ],
+      "anchor": [
+       71.38,
+       149
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       3,
+       145,
+       146
+      ]
+     }
     ],
     [
-     "kharok_attack_2_005.png",
-     0.075
+     "kharok_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       748,
+       445,
+       147,
+       149
+      ],
+      "anchor": [
+       50.65,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       5,
+       10,
+       131,
+       115
+      ]
+     }
     ],
     [
-     "kharok_attack_2_006.png",
-     0.11
+     "kharok_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       895,
+       445,
+       148,
+       149
+      ],
+      "anchor": [
+       63.78,
+       126
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       6,
+       8,
+       129,
+       118
+      ]
+     }
     ],
     [
-     "kharok_attack_2_007.png",
-     0.12
+     "kharok_redesign_atlas.png",
+     0.084375,
+     {
+      "region": [
+       1043,
+       445,
+       139,
+       149
+      ],
+      "anchor": [
+       68.26,
+       126
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       10,
+       6,
+       121,
+       120
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -177,36 +969,188 @@
    "loop": false,
    "frames": [
     [
-     "kharok_ultimate_000.png",
-     0.11
+     "kharok_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       0,
+       594,
+       156,
+       147
+      ],
+      "anchor": [
+       75.05,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       15,
+       5,
+       127,
+       118
+      ]
+     }
     ],
     [
-     "kharok_ultimate_001.png",
-     0.11
+     "kharok_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       156,
+       594,
+       149,
+       147
+      ],
+      "anchor": [
+       62.28,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       8,
+       0,
+       141,
+       123
+      ]
+     }
     ],
     [
-     "kharok_ultimate_002.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       305,
+       594,
+       148,
+       147
+      ],
+      "anchor": [
+       98.0,
+       147
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       0,
+       148,
+       147
+      ]
+     }
     ],
     [
-     "kharok_ultimate_003.png",
-     0.075
+     "kharok_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       453,
+       594,
+       147,
+       147
+      ],
+      "anchor": [
+       59.5,
+       128
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       1,
+       147,
+       127
+      ]
+     }
     ],
     [
-     "kharok_ultimate_004.png",
-     0.085
+     "kharok_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       600,
+       594,
+       148,
+       147
+      ],
+      "anchor": [
+       88.31,
+       147
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       0,
+       141,
+       147
+      ]
+     }
     ],
     [
-     "kharok_ultimate_005.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       748,
+       594,
+       147,
+       147
+      ],
+      "anchor": [
+       62.19,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       4,
+       2,
+       132,
+       121
+      ]
+     }
     ],
     [
-     "kharok_ultimate_006.png",
-     0.11
+     "kharok_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       895,
+       594,
+       148,
+       147
+      ],
+      "anchor": [
+       72.4,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       12,
+       3,
+       123,
+       120
+      ]
+     }
     ],
     [
-     "kharok_ultimate_007.png",
-     0.13
+     "kharok_redesign_atlas.png",
+     0.1025,
+     {
+      "region": [
+       1043,
+       594,
+       139,
+       147
+      ],
+      "anchor": [
+       70.86,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       8,
+       4,
+       125,
+       119
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -215,36 +1159,188 @@
    "loop": false,
    "frames": [
     [
-     "kharok_skill_000.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       0,
+       741,
+       156,
+       145
+      ],
+      "anchor": [
+       76.22,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       19,
+       4,
+       122,
+       119
+      ]
+     }
     ],
     [
-     "kharok_skill_001.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       156,
+       741,
+       149,
+       145
+      ],
+      "anchor": [
+       70.01,
+       122
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       8,
+       0,
+       128,
+       122
+      ]
+     }
     ],
     [
-     "kharok_skill_002.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       305,
+       741,
+       148,
+       145
+      ],
+      "anchor": [
+       70.38,
+       121
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       1,
+       0,
+       147,
+       121
+      ]
+     }
     ],
     [
-     "kharok_skill_003.png",
-     0.07
+     "kharok_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       453,
+       741,
+       147,
+       145
+      ],
+      "anchor": [
+       70.14,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       2,
+       147,
+       121
+      ]
+     }
     ],
     [
-     "kharok_skill_004.png",
-     0.08
+     "kharok_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       600,
+       741,
+       148,
+       145
+      ],
+      "anchor": [
+       68.51,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       0,
+       136,
+       123
+      ]
+     }
     ],
     [
-     "kharok_skill_005.png",
-     0.085
+     "kharok_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       748,
+       741,
+       147,
+       145
+      ],
+      "anchor": [
+       75.73,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       2,
+       2,
+       133,
+       121
+      ]
+     }
     ],
     [
-     "kharok_skill_006.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       895,
+       741,
+       148,
+       145
+      ],
+      "anchor": [
+       72.05,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       13,
+       5,
+       121,
+       118
+      ]
+     }
     ],
     [
-     "kharok_skill_007.png",
-     0.12
+     "kharok_redesign_atlas.png",
+     0.094375,
+     {
+      "region": [
+       1043,
+       741,
+       139,
+       145
+      ],
+      "anchor": [
+       71.61,
+       123
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       12,
+       5,
+       121,
+       118
+      ]
+     }
     ]
    ],
    "hit_frame": 4
@@ -253,36 +1349,188 @@
    "loop": false,
    "frames": [
     [
-     "kharok_hurt_000.png",
-     0.085
+     "kharok_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       0,
+       1033,
+       156,
+       148
+      ],
+      "anchor": [
+       77.98,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       17,
+       3,
+       125,
+       122
+      ]
+     }
     ],
     [
-     "kharok_hurt_001.png",
-     0.065
+     "kharok_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       156,
+       1033,
+       149,
+       148
+      ],
+      "anchor": [
+       70.87,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       7,
+       2,
+       125,
+       123
+      ]
+     }
     ],
     [
-     "kharok_hurt_002.png",
-     0.075
+     "kharok_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       305,
+       1033,
+       148,
+       148
+      ],
+      "anchor": [
+       62.5,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       2,
+       0,
+       146,
+       125
+      ]
+     }
     ],
     [
-     "kharok_hurt_003.png",
-     0.08
+     "kharok_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       453,
+       1033,
+       147,
+       148
+      ],
+      "anchor": [
+       62.07,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       3,
+       119,
+       122
+      ]
+     }
     ],
     [
-     "kharok_hurt_004.png",
-     0.085
+     "kharok_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       600,
+       1033,
+       148,
+       148
+      ],
+      "anchor": [
+       60.28,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       1,
+       7,
+       127,
+       118
+      ]
+     }
     ],
     [
-     "kharok_hurt_005.png",
-     0.09
+     "kharok_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       748,
+       1033,
+       147,
+       148
+      ],
+      "anchor": [
+       62.55,
+       127
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       5,
+       7,
+       124,
+       120
+      ]
+     }
     ],
     [
-     "kharok_hurt_006.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       895,
+       1033,
+       148,
+       148
+      ],
+      "anchor": [
+       70.2,
+       127
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       10,
+       7,
+       127,
+       120
+      ]
+     }
     ],
     [
-     "kharok_hurt_007.png",
-     0.12
+     "kharok_redesign_atlas.png",
+     0.0875,
+     {
+      "region": [
+       1043,
+       1033,
+       139,
+       148
+      ],
+      "anchor": [
+       66.67,
+       128
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       12,
+       7,
+       119,
+       121
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -291,36 +1539,188 @@
    "loop": false,
    "frames": [
     [
-     "kharok_dodge_000.png",
-     0.09
+     "kharok_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       0,
+       886,
+       156,
+       147
+      ],
+      "anchor": [
+       72.98,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       17,
+       5,
+       122,
+       120
+      ]
+     }
     ],
     [
-     "kharok_dodge_001.png",
-     0.065
+     "kharok_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       156,
+       886,
+       149,
+       147
+      ],
+      "anchor": [
+       71.29,
+       127
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       7,
+       1,
+       142,
+       126
+      ]
+     }
     ],
     [
-     "kharok_dodge_002.png",
-     0.055
+     "kharok_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       305,
+       886,
+       148,
+       147
+      ],
+      "anchor": [
+       31.26,
+       128
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       14,
+       148,
+       114
+      ]
+     }
     ],
     [
-     "kharok_dodge_003.png",
-     0.055
+     "kharok_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       453,
+       886,
+       147,
+       147
+      ],
+      "anchor": [
+       51.93,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       32,
+       147,
+       93
+      ]
+     }
     ],
     [
-     "kharok_dodge_004.png",
-     0.065
+     "kharok_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       600,
+       886,
+       148,
+       147
+      ],
+      "anchor": [
+       65.17,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       14,
+       122,
+       111
+      ]
+     }
     ],
     [
-     "kharok_dodge_005.png",
-     0.075
+     "kharok_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       748,
+       886,
+       147,
+       147
+      ],
+      "anchor": [
+       61.1,
+       126
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       4,
+       17,
+       124,
+       109
+      ]
+     }
     ],
     [
-     "kharok_dodge_006.png",
-     0.09
+     "kharok_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       895,
+       886,
+       148,
+       147
+      ],
+      "anchor": [
+       69.27,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       11,
+       5,
+       125,
+       120
+      ]
+     }
     ],
     [
-     "kharok_dodge_007.png",
-     0.12
+     "kharok_redesign_atlas.png",
+     0.076875,
+     {
+      "region": [
+       1043,
+       886,
+       139,
+       147
+      ],
+      "anchor": [
+       71.73,
+       125
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       12,
+       6,
+       124,
+       119
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -329,36 +1729,188 @@
    "loop": false,
    "frames": [
     [
-     "kharok_death_000.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       0,
+       1181,
+       156,
+       149
+      ],
+      "anchor": [
+       71.87,
+       129
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       17,
+       0,
+       139,
+       129
+      ]
+     }
     ],
     [
-     "kharok_death_001.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       156,
+       1181,
+       149,
+       149
+      ],
+      "anchor": [
+       72.67,
+       130
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       5,
+       149,
+       125
+      ]
+     }
     ],
     [
-     "kharok_death_002.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       305,
+       1181,
+       148,
+       149
+      ],
+      "anchor": [
+       58.4,
+       129
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       10,
+       148,
+       119
+      ]
+     }
     ],
     [
-     "kharok_death_003.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       453,
+       1181,
+       147,
+       149
+      ],
+      "anchor": [
+       53.84,
+       130
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       27,
+       147,
+       103
+      ]
+     }
     ],
     [
-     "kharok_death_004.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       600,
+       1181,
+       148,
+       149
+      ],
+      "anchor": [
+       50.74,
+       131
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       44,
+       148,
+       87
+      ]
+     }
     ],
     [
-     "kharok_death_005.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       748,
+       1181,
+       147,
+       149
+      ],
+      "anchor": [
+       64.22,
+       131
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       67,
+       147,
+       64
+      ]
+     }
     ],
     [
-     "kharok_death_006.png",
-     0.1
+     "kharok_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       895,
+       1181,
+       148,
+       149
+      ],
+      "anchor": [
+       63.07,
+       131
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       69,
+       148,
+       62
+      ]
+     }
     ],
     [
-     "kharok_death_007.png",
-     0.45
+     "kharok_redesign_atlas.png",
+     0.14375,
+     {
+      "region": [
+       1043,
+       1181,
+       139,
+       149
+      ],
+      "anchor": [
+       61.9,
+       131
+      ],
+      "scale": 2.172308,
+      "bounds": [
+       0,
+       78,
+       134,
+       53
+      ]
+     }
     ]
    ],
    "hit_frame": null
@@ -400,6 +1952,349 @@
     ]
    ],
    "hit_frame": 4
+  },
+  "idle_original": {
+   "loop": true,
+   "frames": [
+    [
+     "kharok_idle_000.png",
+     0.3
+    ],
+    [
+     "kharok_idle_001.png",
+     0.3
+    ],
+    [
+     "kharok_idle_002.png",
+     0.3
+    ],
+    [
+     "kharok_idle_003.png",
+     0.3
+    ],
+    [
+     "kharok_idle_004.png",
+     0.3
+    ],
+    [
+     "kharok_idle_005.png",
+     0.3
+    ],
+    [
+     "kharok_idle_006.png",
+     0.3
+    ],
+    [
+     "kharok_idle_007.png",
+     0.3
+    ]
+   ],
+   "hit_frame": null
+  },
+  "walk_original": {
+   "loop": true,
+   "frames": [
+    [
+     "kharok_walk_000.png",
+     0.1
+    ],
+    [
+     "kharok_walk_001.png",
+     0.1
+    ],
+    [
+     "kharok_walk_002.png",
+     0.1
+    ],
+    [
+     "kharok_walk_003.png",
+     0.1
+    ],
+    [
+     "kharok_walk_004.png",
+     0.1
+    ],
+    [
+     "kharok_walk_005.png",
+     0.1
+    ],
+    [
+     "kharok_walk_006.png",
+     0.1
+    ],
+    [
+     "kharok_walk_007.png",
+     0.1
+    ]
+   ],
+   "hit_frame": null
+  },
+  "attack_1_original": {
+   "loop": false,
+   "frames": [
+    [
+     "kharok_attack_1_000.png",
+     0.1
+    ],
+    [
+     "kharok_attack_1_001.png",
+     0.1
+    ],
+    [
+     "kharok_attack_1_002.png",
+     0.08
+    ],
+    [
+     "kharok_attack_1_003.png",
+     0.05
+    ],
+    [
+     "kharok_attack_1_004.png",
+     0.065
+    ],
+    [
+     "kharok_attack_1_005.png",
+     0.07
+    ],
+    [
+     "kharok_attack_1_006.png",
+     0.1
+    ],
+    [
+     "kharok_attack_1_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "attack_2_original": {
+   "loop": false,
+   "frames": [
+    [
+     "kharok_attack_2_000.png",
+     0.1
+    ],
+    [
+     "kharok_attack_2_001.png",
+     0.085
+    ],
+    [
+     "kharok_attack_2_002.png",
+     0.06
+    ],
+    [
+     "kharok_attack_2_003.png",
+     0.06
+    ],
+    [
+     "kharok_attack_2_004.png",
+     0.065
+    ],
+    [
+     "kharok_attack_2_005.png",
+     0.075
+    ],
+    [
+     "kharok_attack_2_006.png",
+     0.11
+    ],
+    [
+     "kharok_attack_2_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "ultimate_original": {
+   "loop": false,
+   "frames": [
+    [
+     "kharok_ultimate_000.png",
+     0.11
+    ],
+    [
+     "kharok_ultimate_001.png",
+     0.11
+    ],
+    [
+     "kharok_ultimate_002.png",
+     0.1
+    ],
+    [
+     "kharok_ultimate_003.png",
+     0.075
+    ],
+    [
+     "kharok_ultimate_004.png",
+     0.085
+    ],
+    [
+     "kharok_ultimate_005.png",
+     0.1
+    ],
+    [
+     "kharok_ultimate_006.png",
+     0.11
+    ],
+    [
+     "kharok_ultimate_007.png",
+     0.13
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "skill_original": {
+   "loop": false,
+   "frames": [
+    [
+     "kharok_skill_000.png",
+     0.1
+    ],
+    [
+     "kharok_skill_001.png",
+     0.1
+    ],
+    [
+     "kharok_skill_002.png",
+     0.1
+    ],
+    [
+     "kharok_skill_003.png",
+     0.07
+    ],
+    [
+     "kharok_skill_004.png",
+     0.08
+    ],
+    [
+     "kharok_skill_005.png",
+     0.085
+    ],
+    [
+     "kharok_skill_006.png",
+     0.1
+    ],
+    [
+     "kharok_skill_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": 4
+  },
+  "dodge_original": {
+   "loop": false,
+   "frames": [
+    [
+     "kharok_dodge_000.png",
+     0.09
+    ],
+    [
+     "kharok_dodge_001.png",
+     0.065
+    ],
+    [
+     "kharok_dodge_002.png",
+     0.055
+    ],
+    [
+     "kharok_dodge_003.png",
+     0.055
+    ],
+    [
+     "kharok_dodge_004.png",
+     0.065
+    ],
+    [
+     "kharok_dodge_005.png",
+     0.075
+    ],
+    [
+     "kharok_dodge_006.png",
+     0.09
+    ],
+    [
+     "kharok_dodge_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "hurt_original": {
+   "loop": false,
+   "frames": [
+    [
+     "kharok_hurt_000.png",
+     0.085
+    ],
+    [
+     "kharok_hurt_001.png",
+     0.065
+    ],
+    [
+     "kharok_hurt_002.png",
+     0.075
+    ],
+    [
+     "kharok_hurt_003.png",
+     0.08
+    ],
+    [
+     "kharok_hurt_004.png",
+     0.085
+    ],
+    [
+     "kharok_hurt_005.png",
+     0.09
+    ],
+    [
+     "kharok_hurt_006.png",
+     0.1
+    ],
+    [
+     "kharok_hurt_007.png",
+     0.12
+    ]
+   ],
+   "hit_frame": null
+  },
+  "death_original": {
+   "loop": false,
+   "frames": [
+    [
+     "kharok_death_000.png",
+     0.1
+    ],
+    [
+     "kharok_death_001.png",
+     0.1
+    ],
+    [
+     "kharok_death_002.png",
+     0.1
+    ],
+    [
+     "kharok_death_003.png",
+     0.1
+    ],
+    [
+     "kharok_death_004.png",
+     0.1
+    ],
+    [
+     "kharok_death_005.png",
+     0.1
+    ],
+    [
+     "kharok_death_006.png",
+     0.1
+    ],
+    [
+     "kharok_death_007.png",
+     0.45
+    ]
+   ],
+   "hit_frame": null
   }
- }
+ },
+ "redesign": true
 }
