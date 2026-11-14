@@ -219,7 +219,9 @@ func _draw() -> void:
 			var tex := _pixel.frame_at(_pixel_anim, pt, float(_clip.dur), _clip_hit)
 			var s := _pixel.frame_scale(tex)
 			var dx := _pixel.lunge(_t, float(_clip.dur), _clip_hit) if _pixel_anim.begins_with("attack") or _pixel_anim == "skill" and _pixel.facing < 0.0 else 0.0
-			draw_set_transform(Vector2(dx, 0) - _pixel.frame_anchor(tex) * s, 0.0, Vector2(s, s))
+			var b := PixelSheet.breath(_t + _phase) if tex == _pixel.idle_still() else 1.0
+			var k := Vector2(s * (2.0 - b), s * b)  # pieds fixes : on s'étire en hauteur, on s'affine un peu
+			draw_set_transform(Vector2(dx, 0) - _pixel.frame_anchor(tex) * k, 0.0, k)
 			draw_texture(tex, Vector2.ZERO)
 			draw_set_transform(Vector2.ZERO)
 		return  # les effets sont dessinés dans les images pixel

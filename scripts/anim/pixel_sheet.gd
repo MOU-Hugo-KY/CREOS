@@ -99,6 +99,8 @@ func anim_for(clip: String) -> String:
 ## Image à montrer à l'instant `t` du clip. `clip_dur` et `clip_hit` (instant d'impact du clip, ou -1)
 ## servent à étirer l'animation : sa frappe tombe sur l'impact, puis elle finit avant la fin du clip.
 func frame_at(name: String, t: float, clip_dur: float, clip_hit: float) -> Texture2D:
+	if name == "idle":
+		return idle_still()
 	var a: Dictionary = anims[name]
 	var total: float = a.total
 	var p := t
@@ -118,10 +120,20 @@ func frame_at(name: String, t: float, clip_dur: float, clip_hit: float) -> Textu
 			k = minf(clip_dur / total, 1.25)
 		p = (t - start) / k
 		if (p < 0.0 or p >= total) and anims.has("idle") and name != "death":
-			var idle: Dictionary = anims.idle
-			return _frame_in(idle, fposmod(t, idle.total))
+			return idle_still()
 		p = clampf(p, 0.0, total - 0.001)
 	return _frame_in(a, p)
+
+
+## Repos : une seule pose, que `ClipPlayer` fait respirer (`breath`). Les poses de repos étant
+## redessinées une à une, les enchaîner faisait clignoter le personnage.
+func idle_still() -> Texture2D:
+	return anims.idle.frames[0][0]
+
+
+## Respiration du repos à l'instant `t` : 1 ± 1,8 % en hauteur, un souffle toutes les 2,4 s.
+static func breath(t: float) -> float:
+	return 1.0 + 0.018 * sin(t * TAU / 2.4)
 
 
 func _frame_in(a: Dictionary, p: float) -> Texture2D:
