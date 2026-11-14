@@ -31,6 +31,7 @@ func setup(hero: Dictionary, diameter: float, ring := 0.08) -> RoundPortrait:
 	stretch_mode = TextureRect.STRETCH_SCALE
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	texture = portrait_texture(hero)
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST if PixelSheet.enabled else CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	if _shader == null:
 		_shader = Shader.new()
 		_shader.code = SHADER

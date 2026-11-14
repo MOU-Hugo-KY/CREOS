@@ -164,13 +164,26 @@ func _build_walkers() -> void:
 	for id: String in ids:
 		if _walkers.size() >= MAX_WALKERS:
 			break
-		var frames := _hero_frames(id)
-		if frames == null:
-			continue
 		var node := Node2D.new()
 		node.position = spawn if _walkers.is_empty() else _nav.get_point_position(
 			_nearest_walkable(Vector2(randf_range(250, 1030), randf_range(320, 640))))
 		_world.add_child(node)
+		if not PixelSheet.enabled and Rig.for_actor(id):
+			var actor := ClipPlayer.new()
+			actor.bundle = "res://assets/anim/heroes/"
+			actor.idle_clip = id + "_idle"
+			actor.sound_enabled = false
+			actor.show_effects = false
+			node.add_child(actor)
+			actor.play(actor.idle_clip)
+			actor.scale = Vector2.ONE * 75.0 / maxf(1.0, actor.actor_rect().size.y)
+			_walkers.append({"id": id, "node": node, "player": actor, "path": PackedVector2Array(),
+				"rest": randf_range(0.5, 3.0), "facing": "down"})
+			continue
+		var frames := _hero_frames(id)
+		if frames == null:
+			node.queue_free()
+			continue
 		var sprite := AnimatedSprite2D.new()
 		sprite.sprite_frames = frames
 		sprite.centered = false
@@ -283,7 +296,7 @@ func _process(delta: float) -> void:
 
 func _walk(w: Dictionary, delta: float) -> void:
 	var node: Node2D = w.node
-	var sprite: AnimatedSprite2D = w.sprite
+	var sprite: AnimatedSprite2D = w.get("sprite")
 	var path: PackedVector2Array = w.path
 	var dir := Vector2.ZERO
 	if not path.is_empty():
@@ -304,9 +317,17 @@ func _walk(w: Dictionary, delta: float) -> void:
 			w.facing = "right" if dir.x > 0.0 else "left"
 		else:
 			w.facing = "down" if dir.y > 0.0 else "up"
-		_play_keep_phase(sprite, "walk_" + w.facing)
-	else:
+		if sprite:
+			_play_keep_phase(sprite, "walk_" + w.facing)
+	elif sprite:
 		sprite.play("idle_" + w.facing)
+	if w.has("player"):
+		var actor: ClipPlayer = w.player
+		if absf(dir.x) > 0.1:
+			actor.facing = signf(dir.x)
+		var clip: String = w.id + ("_walk" if dir.length() > 0.1 else "_idle")
+		if actor.clip_id != clip:
+			actor.play(clip)
 
 
 ## Change de direction de marche sans repartir de la première image.

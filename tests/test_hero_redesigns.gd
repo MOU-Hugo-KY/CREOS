@@ -10,6 +10,7 @@ func check(ok: bool, label: String) -> void:
 		printerr("FAIL : ", label)
 
 func _initialize() -> void:
+	PixelSheet.enabled = true  # ces tests vérifient les archives pixel, indépendamment du rendu actif
 	var heroes: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/heroes.json"))
 	check(heroes.size() == 19, "19 héros")
 	for id: String in heroes:

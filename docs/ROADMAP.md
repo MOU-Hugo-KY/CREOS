@@ -12,6 +12,8 @@
 ![Prototype](capture-prototype.png)
 
 ## 🎯 Étape 1 — Combat qui « claque » (en cours)
+- [x] Rendu actif en 2D illustrée HD : 19 héros articulés, portraits et port cohérents,
+      filtres et effets adaptés ([détails](animations/PERSONNAGES_HD.md))
 - [x] Refonte des 19 héros pixel : 9 mouvements redessinés chacun, attaque de base en 16 poses,
       portraits et port assortis ([détails](animations/REFONTE_19_HEROS.md))
 - [x] Pilote pixel Corbin : attaque de base enrichie de 8 à 16 poses, atlas avec pieds recalés,

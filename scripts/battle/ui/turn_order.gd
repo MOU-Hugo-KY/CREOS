@@ -16,7 +16,7 @@ static var _heads: Dictionary = {}  # def_id -> AtlasTexture
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST if PixelSheet.enabled else CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	var w := FIRST + (COUNT - 1) * (SIZE + GAP)
 	offset_left = -w / 2.0

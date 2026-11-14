@@ -28,6 +28,7 @@ func opaque_height(texture: Texture2D) -> int:
 
 
 func _initialize() -> void:
+	PixelSheet.enabled = true  # ces tests vérifient les archives pixel, indépendamment du rendu actif
 	var sheet := PixelSheet.for_actor("corbin")
 	check(sheet.anims.attack_1.frames.size() == 16, "16 nouvelles poses")
 	check(sheet.original_animation("attack_1").frames.size() == 8, "8 dessins originaux conservés")

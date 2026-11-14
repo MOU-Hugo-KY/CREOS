@@ -502,7 +502,7 @@ func _on_quartet(ev: Dictionary) -> float:
 	var clip := String(ev.get("clip", ""))
 	if clip == "":
 		return _on_small_combo(ev)
-	if FileAccess.file_exists("res://assets/anim/quatuors/%s/%s_quatuor.json" % [ev.id, ev.id]):
+	if PixelSheet.enabled and FileAccess.file_exists("res://assets/anim/quatuors/%s/%s_quatuor.json" % [ev.id, ev.id]):
 		return _on_pixel_quartet(ev)
 	var p := ClipPlayer.new()
 	p.bundle = "res://assets/anim/heroes/"
@@ -606,6 +606,8 @@ func _attack_data(uid: int, attack_id: String) -> Dictionary:
 ## Effet pixelfx de la dernière attaque de `src` sur `t` (data/pixelfx.json). Un coup qui part de l'attaquant
 ## (at = src) ne joue qu'une fois par attaque, même sur plusieurs cibles. Renvoie true si un effet a été joué.
 func _pixel_hit(src: UnitView, t: UnitView) -> bool:
+	if not PixelSheet.enabled:
+		return false  # utiliser les effets dessinés du combat en mode HD
 	if src == null or t == null:
 		return false
 	var aid := String(_last_attack.get(src.unit.uid, ""))
@@ -627,6 +629,8 @@ func _pixel_hit(src: UnitView, t: UnitView) -> bool:
 ## État en pixel art (data/pixelfx.json "statuses") : aux pieds de l'unité, en boucle tant que l'état dure
 ## (un nouvel envoi du même état remplace l'ancien). Renvoie false si l'état n'a pas d'effet pixelfx.
 func _pixel_status(t: UnitView, status: String, duration: float) -> bool:
+	if not PixelSheet.enabled:
+		return false
 	var e: Dictionary = PixelFx.data().get("statuses", {}).get(status, {})
 	if e.is_empty() or t.is_dead():
 		return false
@@ -650,6 +654,8 @@ func _pixel_status(t: UnitView, status: String, duration: float) -> bool:
 
 ## Mort en pixel art (data/pixelfx.json "deaths") selon l'élément, plus une pluie d'or pour un boss.
 func _pixel_death(t: UnitView) -> void:
+	if not PixelSheet.enabled:
+		return
 	for spr in _status_fx.get(t.unit.uid, {}).values():
 		if is_instance_valid(spr):
 			spr.queue_free()
